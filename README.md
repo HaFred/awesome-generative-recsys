@@ -297,6 +297,67 @@
      - **Impact: 5/10** — More niche; VAE-based generative rec is less prominent than LLM/RL approaches currently
      - **Opensource?: 7/10** — Repo (github.com/wwqq/R3-VAE), 14 ⭐, clean code structure, matches paper well, has training scripts
 
+## Papers Before April
+
+1. **OpenOneRec**
+   * Affiliation: Kuaishou
+   * TL;DR: Inference, Model, RL
+
+2. **OneMall: One Architecture, More Scenarios — End-to-End Generative Recommender Family at Kuaishou E-Commerce**
+   * Affiliation: Kuaishou
+   * TL;DR: MoE, RL
+
+3. **OneRec-Think / OneRecV2**
+   * Affiliation: Kuaishou
+   * TL;DR: RL
+
+4. **MiniOneRec**
+   * Affiliation: USTC
+   * TL;DR: Model, RL
+
+5. **UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization**
+   * Affiliation: USTC
+   * Link: [arxiv.org/pdf/2601.17438](https://arxiv.org/pdf/2601.17438)
+   * Key techniques:
+     - Annealed Inference Alignment
+     - Codeword Uniformity Regularization
+     - Dual Collaborative Distillation
+
+6. **Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning**
+   * Affiliation: UIUC Illinois
+   * TL;DR: RL
+
+7. **RelayGR: Scaling Long-Sequence Generative Recommendation via Cross-Stage Relay-Race Inference**
+   * Affiliation: Huawei Cloud
+   * Link: [arxiv.org/abs/2601.01712](https://arxiv.org/abs/2601.01712)
+   * TL;DR: P/D aggregation, avoid cross servers for long seq samples
+
+8. **Reasoning over Semantic IDs Enhances Generative Recommendation**
+   * Affiliation: NUS
+   * TL;DR: RL, SID
+
+9. **MuonRec**
+   * Affiliation: Shanghai JTU
+   * TL;DR: Optimizer
+
+10. **[STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators**
+    * Affiliation: Youtube
+    * Link: [arxiv.org/pdf/2602.22647](https://arxiv.org/pdf/2602.22647)
+    * TL;DR: Inference
+    * Key techniques:
+      - **Objective:** Developed **STATIC** (Sparse Transition Matrix-Accelerated Trie Index for Constrained Decoding) to overcome high latency of traditional trie-based constrained decoding on GPUs/TPUs.
+      - **Methods:** Flattens irregular prefix tree (Trie) into a static **Compressed Sparse Row (CSR)** matrix, enabling fully vectorized sparse matrix operations and branch-free decoding native to hardware accelerators.
+
+11. **Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization**
+    * Affiliation: Meituan
+    * Link: [arxiv.org/pdf/2508.02002](https://arxiv.org/pdf/2508.02002)
+    * TL;DR: Autobidding / GRAD
+    * Keywords: MoE, RL
+
+12. **Rank-GRPO**
+    * Affiliation: Netflix
+    * TL;DR: RL
+
 ---
 
 ## By Keyword
@@ -306,12 +367,21 @@
 - Generative Reasoning Re-ranker (GR2)
 - ReCast
 - Objective Shaping with Hard Negatives
+- OpenOneRec
+- OneMall
+- OneRec-Think / OneRecV2
+- MiniOneRec
+- Rec-R1
+- Reasoning over Semantic IDs Enhances Generative Recommendation
+- Rank-GRPO
+- Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
 
 ### Reasoning
 - ReRec
 - VRec (Verifiable Reasoning)
 - GR2
 - GraphRAG-IRL
+- Reasoning over Semantic IDs Enhances Generative Recommendation
 
 ### Generative Recommendation / VAE
 - R3-VAE
@@ -336,6 +406,7 @@
 ### Semantic / Structured IDs
 - GRLM
 - Deep Interest Mining (SemanticID)
+- Reasoning over Semantic IDs Enhances Generative Recommendation
 
 ### Retrieval / Representation
 - ResRank (retrieval + reranking)
@@ -359,6 +430,24 @@
 ### Denoising
 - DC4SR (Disagreement as Signals)
 
+### Inference
+- OpenOneRec
+- RelayGR
+- [STATIC] Vectorizing the Trie
+
+### Model / Architecture
+- OpenOneRec
+- OneMall
+- MiniOneRec
+- UniGRec
+
+### MoE
+- OneMall
+- Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
+
+### Optimizer
+- MuonRec
+
 ---
 
 ## By Affiliation
@@ -368,6 +457,15 @@
 | **Meta** | Generative Reasoning Re-ranker (GR2) |
 | **LinkedIn** | SIREN-RoPE (Learning to Rotate) |
 | **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions) |
+| **Kuaishou** | OpenOneRec · OneMall · OneRec-Think / OneRecV2 |
+| **USTC** | MiniOneRec · UniGRec |
+| **UIUC Illinois** | Rec-R1 |
+| **Huawei Cloud** | RelayGR |
+| **NUS** | Reasoning over Semantic IDs |
+| **Shanghai JTU** | MuonRec |
+| **Youtube** | [STATIC] Vectorizing the Trie |
+| **Meituan** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding |
+| **Netflix** | Rank-GRPO |
 | **ACL 2026** | ReRec, SAGE |
 | **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration |
 | **MLSys 2026** | FreeScale |
