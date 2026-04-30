@@ -2,6 +2,96 @@
 
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
+## Papers April 30:
+
+1. **CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation**
+   * Affiliation: University of Electronic Science and Technology of China; Southwestern University of Finance and Economics
+   * Link: [arxiv.org/abs/2604.26427](https://arxiv.org/abs/2604.26427)
+   * Venue: arXiv preprint, April 29, 2026
+   * TL;DR: CARD introduces visual semantic units to unify multi-modal signals for SID construction and proposes non-uniform quantization (NU-RQ-VAE) to address codeword imbalance in generative recommendation
+   * Key techniques:
+     - Visual Semantic Unit: unifies text, visual, and collaborative signals
+     - Non-Uniform Quantization (NU-RQ-VAE): learnable invertible non-uniform transformation
+     - Plug-and-play non-uniform transformation module
+     - End-to-end generative recommendation framework
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — GitHub: https://github.com/HAI-UESTC/CARD; code structure is clear but documentation is brief; no requirements.txt; depends on user to prepare data and tune parameters
+     - **Novelty: 8/10** — Novel visual semantic unit for unified multi-modal SID; non-uniform quantization for imbalanced semantic distribution is creative
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — NU-RQ-VAE is plug-and-play and robust across different quantization schemes
+     - **Impact: 8/10** — From UESTC; addresses key SID quality and codeword imbalance problems in generative recommendation
+
+2. **Factorized Latent Reasoning for LLM-based Recommendation (FLR)**
+   * Affiliation: Independent Researcher; Macquarie University; University of New South Wales; Meituan LongCat Interaction Team
+   * Link: [arxiv.org/abs/2604.26760](https://arxiv.org/abs/2604.26760)
+   * Venue: arXiv preprint, April 29, 2026
+   * TL;DR: FLR decomposes latent reasoning into multiple disentangled preference factors via a lightweight multi-factor attention module, combined with GRPO for stable alignment in latent space
+   * Key techniques:
+     - Factorized Latent Reasoning (FLR): multi-factor latent representation
+     - Multi-factor Attention Module: each factor attends to different aspects of user history
+     - Orthogonality, attention diversity, and sparsity regularization
+     - Dynamic aggregation of factor contributions
+     - GRPO (Group-relative Policy Optimization) for latent space alignment
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8.5/10** — GitHub: https://github.com/ToAdventure/FLR; 58 commits, complete training/evaluation pipeline, well-documented README, but no tests or CI/CD
+     - **Novelty: 8/10** — Factorized latent reasoning is a novel approach to LLM-based recommendation; addresses single latent vector limitation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Regularization objectives promote factor diversity; GRPO provides stable alignment
+     - **Impact: 8/10** — From Meituan/UNSW; novel latent reasoning paradigm for LLM-based recommendation
+
+3. **Generative Recommendation for Large-Scale Advertising (GR4AD)**
+   * Affiliation: Kuaishou Technology (快手科技), Beijing, China
+   * Link: [arxiv.org/abs/2602.22732](https://arxiv.org/abs/2602.22732)
+   * Venue: arXiv preprint, February 26, 2026 (v3 revised April 2026)
+   * TL;DR: Production-oriented generative recommender co-designed across architecture (UA-SID, LazyAR), learning (VSL, RSPO), and serving (dynamic beam search) for large-scale advertising
+   * Key techniques:
+     - UA-S-ID (Unified Advertisement Semantic ID): captures complex business information
+     - LazyAR: lazy autoregressive decoder for short-text, multi-candidate generation
+     - VSL (Value-Aware Supervised Learning)
+     - RSPO (Ranking-Guided Softmax Preference Optimization): listwise RL algorithm
+     - Dynamic beam search service: adaptive beam width adjustment
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (industrial deployment)
+     - **Novelty: 9/10** — Comprehensive co-design of architecture, learning, and serving for generative advertising; LazyAR and RSPO are novel
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Deployed at Kuaishou (400M+ users); A/B test shows 4.2% ad revenue lift; handles real-time serving under fixed budget
+     - **Impact: 10/10** — From Kuaishou; full industrial deployment; significant business impact (4.2% revenue lift)
+
+4. **Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)**
+   * Affiliation: National University of Singapore; University of Science and Technology of China (USTC); Renmin University of China; Meta AI
+   * Link: [arxiv.org/abs/2602.03692](https://arxiv.org/abs/2602.03692)
+   * Venue: WWW 2026
+   * TL;DR: CARE addresses bias amplification in generative recommendation via cascaded reasoning: progressive history encoding + query-anchored inference to introduce heterogeneous information and allocate more computation per token
+   * Key techniques:
+     - Cascaded Reasoning framework (CARE)
+     - Progressive History Encoding: gradually introduces finer-grained history information
+     - Query-Anchored Inference: parallel inference steps for deeper history understanding
+     - De-biasing via heterogeneous information integration
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 9/10** — GitHub: https://github.com/Linxyhaha/CARE; excellent documentation, complete training/evaluation pipeline, clear structure; only minor drawback is lack of requirements.txt
+     - **Novelty: 9/10** — Novel perspective: bias amplification in GR; cascaded reasoning is a creative solution
+     - **Fairness: 7/10** — Explicitly addresses bias amplification, a key fairness issue in generative recommendation
+     - **Robustness: 8/10** — Cascaded reasoning improves diversity and reduces bias; validated on 3 GR backbones and 4 datasets
+     - **Impact: 9/10** — WWW 2026; from NUS/USTC/Meta; addresses key limitation of existing GR models
+
+5. **Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)**
+   * Affiliation: Johannes Kepler University Linz, Austria (Institute of Computational Perception)
+   * Link: [arxiv.org/abs/2602.14706](https://arxiv.org/abs/2602.14706)
+   * Venue: arXiv preprint, February 16, 2026 (v2 revised April 2026)
+   * TL;DR: A2G-DiffRec incorporates adaptive autoguidance (main model guided by weaker version of itself) and fairness-aware regularization to balance accuracy and item-side fairness in diffusion recommenders
+   * Key techniques:
+     - Adaptive Autoguidance: learnable guidance weight (not fixed)
+     - Fairness-Aware Regularization: promotes balanced exposure across items with different popularity
+     - Diffusion Recommender framework
+     - Weak model guidance for stable training
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — GitHub: https://github.com/zihanlizi/A2G-DiffRec; MIT License; complete codebase with requirements.txt; uses older PyTorch (1.12.0) which may cause compatibility issues
+     - **Novelty: 7/10** — Adaptive autoguidance for diffusion rec is novel; fairness-aware regularization is a valuable addition
+     - **Fairness: 9/10** — Core contribution is item-side fairness; explicitly addresses popularity bias in diffusion recommenders
+     - **Robustness: 7/10** — Adaptive guidance is more robust than fixed-weight guidance; validated on 3 public datasets
+     - **Impact: 7/10** — From JKU Linz; novel fairness-aware diffusion rec; good empirical results
+
+---
 ## Papers April 29
 
 > **Note:** Only 3 new generative recommendation papers were found in the last 24 hours (less than the minimum 5 required).
@@ -16,12 +106,12 @@
      - Unified generative retrieval and ranking
      - Hierarchical semantic ID prediction
      - SIM-based ranking process
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 7/10** — Novel unified framework addressing the gap between generative retrieval and ranking
      - **Fairness: 5/10** — Not explicitly addressed
      - **Robustness: 7/10** — Unified framework improves training stability
      - **Impact: 7/10** — From NJUST/Kuaishou, provides unified generative recommendation solution
-     - **Opensource?: 0/10** — No public code found
 
 2. **From Local Indices to Global Identifiers: Generative Reranking for Recommender Systems via Global Action Space (GloRank)**
    * Affiliation: City University of Hong Kong; Kuaishou; UC San Diego; etc.
@@ -33,12 +123,12 @@
      - Generative reranking paradigm
      - Supervised pre-training + RL post-training
      - Cold-start robust design
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 8/10** — Novel global action space for reranking, addresses semantic inconsistency
      - **Fairness: 5/10** — Not explicitly addressed
      - **Robustness: 8/10** — Robust to cold-start scenarios, decouples scoring from input order
      - **Impact: 8/10** — From Kuaishou/CityU/UC San Diego, two-stage optimization
-     - **Opensource?: 0/10** — No public code found
 
 3. **Action-Aware Generative Sequence Modeling for Short Video Recommendation (A2Gen)**
    * Affiliation: Kuaishou Inc., Beihang University
@@ -50,12 +140,12 @@
      - Context-aware Attention Module (CAM)
      - Hierarchical Sequence Encoder (HSE)
      - Action-seq Autoregressive Generator (AAG)
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code (industrial deployment)
      - **Novelty: 8/10** — Novel action-aware generative sequence modeling for short video recommendation
      - **Fairness: 5/10** — Not explicitly addressed
      - **Robustness: 9/10** — Deployed at scale (400M+ users), significant online A/B test gains (+0.34% watch time, +8.1% interaction rate)
      - **Impact: 9/10** — SIGIR 2026, industrial deployment at Kuaishou
-     - **Opensource?: 0/10** — No public code (industrial deployment)
 
 ---
 
@@ -70,12 +160,12 @@
      - Rotary Position Embedding (RoPE) extended to learnable rotation manifold
      - Dual-branch Sinusoidal Representation Network (SIREN) for heterogeneous signal encoding
      - Temporal patterns, continuous timestamps, categorical metadata as rotation signals
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — Code available at https://github.com/hailingc/siren_rope; demo code provided but full training/eval pipeline completeness TBD
      - **Novelty: 8/10** — Novel perspective: treating rotation space as learnable (not fixed) for attention mechanisms; creative analogy to complex numbers
      - **Fairness: 5/10** — Not explicitly addressed; rotation encoding is neutral but could amplify biases if training data is biased
      - **Robustness: 7/10** — Negligible computational overhead; SIREN provides stable gradient flow for learning rotation weights
      - **Impact: 8/10** — From LinkedIn production team; evaluated on large-scale social network news feed dataset; applicable to any RoPE-based generative recommender
-     - **Opensource?: 7/10** — Code available at https://github.com/hailingc/siren_rope; demo code provided but full training/eval pipeline completeness TBD
 
 2. **Modeling Behavioral Intensity and Transitions for Generative Recommendation (BITRec)**
    * Affiliation: Ant Group; Fudan University
@@ -86,12 +176,12 @@
      - Hierarchical Behavior Aggregation (HBA): separated exploration and commitment pathways
      - Transition Relation Encoding (TRE): explicit learnable relation matrices for behavior transitions
      - Generative sequence modeling for multi-behavior recommendation
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 7/10** — Explicit intensity + transition modeling in generative recommendation is novel; HBA/TRE are sensible designs
      - **Fairness: 5/10** — Not explicitly addressed; multi-behavior modeling could help or hurt fairness depending on behavior definitions
      - **Robustness: 7/10** — Structured behavior modeling (HBA+TRE) is more robust than implicit attention; validated on 4 large-scale datasets
      - **Impact: 8/10** — From Ant Group (industrial relevance); 15-23% improvements on RetailRocket, Taobao, Tmall, Insurance Dataset
-     - **Opensource?: 0/10** — No public code found
 
 3. **FreeScale: Distributed Training for Sequence Recommendation Models with Minimal Scaling Cost**
    * Affiliation: — *(Chenhao Feng, Haoli Zhang, Shakhzod Ali-Zade, Yanli Zhao, Liang Luo, Jennifer Cao, Lisen Deng, Siqiao Chen, Chenyu Zhao, Tristan Rice, Daniel Johnson, Min Si, Tiantu Xu, Yi Zhang, Siqi Yan, Chuanhao Zhuge, Min Ni, Bi Xue, Qunshu Zhang, Shen Li — institutions TBD)*
@@ -102,12 +192,12 @@
      - Load balancing via careful input sample balancing to mitigate straggler effect
      - Prioritized embedding communication overlapping with computation
      - SM-Free technique to resolve GPU resource contention during communication-computation overlap
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 6/10** — Distributed training optimizations are incremental but well-engineered; SM-Free technique is a useful contribution
      - **Fairness: 4/10** — Not relevant to fairness; pure systems optimization work
      - **Robustness: 8/10** — Empirically validated on 256 H100 GPUs; significant compute bubble reduction (90.3%) improves training stability
      - **Impact: 8/10** — MLSys 2026; critical for industrial-scale sequence recommendation model training; 256 GPU scaling
-     - **Opensource?: 0/10** — No public code found
 
 4. **SAGE: Sparse Adaptive Guidance for Dependency-Aware Tabular Data Generation**
    * Affiliation: — *(Shuo Yang, Zheyu Zhang, Bardh Prenkaj, Gjergji Kasneci — institutions TBD)*
@@ -118,12 +208,12 @@
      - Feature discretization into value-aware pseudo-features
      - Mutual information-based sparse dependency graph construction
      - Adaptive guidance via explicit context selection or implicit logic correction
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (paper says code will be released, but not available yet)
      - **Novelty: 7/10** — Sparse + adaptive dependency guidance for tabular generation is novel; addresses key limitations of dense modeling and static dependencies
      - **Fairness: 6/10** — Synthetic data generation could help privacy but may also amplify biases present in training data; not explicitly addressed
      - **Robustness: 7/10** — Sparse graph reduces spurious correlations; 10% F1 improvement and reduced policy violations
      - **Impact: 7/10** — ACL 2026; tabular data generation is useful for recommendation (user/item feature synthesis); strong empirical results
-     - **Opensource?: 0/10** — No public code found (paper says code will be released, but not available yet)
 
 5. **Disagreement as Signals: Dual-view Calibration for Sequential Recommendation Denoising (DC4SR)**
    * Affiliation: — *(Sijia Li, Min Gao, Zongwei Wang, Zhiyi Liu, Xin Xia, Yi Zhang — institutions TBD)*
@@ -134,12 +224,12 @@
      - Dual-view calibration: LLM-based semantic prior + model-learned posterior
      - Disagreement-based denoising signal identification
      - Joint optimization of semantic understanding and model representation
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 7/10** — Using LLM-model disagreement as denoising signal is a creative idea; dual-view calibration is well-motivated
      - **Fairness: 5/10** — Not explicitly addressed; LLM semantic priors may carry biases
      - **Robustness: 7/10** — Denoising via disagreement signals improves robustness to noisy interactions; novel approach
      - **Impact: 7/10** — Sequential recommendation denoising is an important problem; LLM integration adds value
-     - **Opensource?: 0/10** — No public code found
 
 ---
 
@@ -154,12 +244,12 @@
      - Boundary-focused contrastive updates (hardest negatives + strongest positives)
      - Partial decoupling of rollout width and actor update width
    * Venue: arXiv preprint, April 24, 2026
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 7/10** — Identifies and fixes a real problem in group-based RL for sparse-hit rec
      - **Fairness: 5/10** — Not addressed
      - **Robustness: 7/10** — Min-learnability recovery stabilizes training on hard groups
      - **Impact: 7/10** — Practical fix for a common failure mode in RL-based generative rec
-     - **Opensource?: 0/10** — No public code found
 
 2. **Objective Shaping with Hard Negatives: Windowed Partial AUC Optimization for RL-based LLM Recommenders**
    * Affiliation: — *(Wentao Shi, Qifan Wang, Chen Chen, Fei Liu, Dongfang Liu, Xu Liu, Wanli Ma, Junfeng Pan, Linhong Zhu, Fuli Feng — institutions TBD)*
@@ -170,12 +260,12 @@
      - Beam-search negatives → partial AUC shaping
      - Threshold-Adjusted Window (TAWin) for explicit Top-K control
    * Venue: arXiv preprint, April 24, 2026
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 8/10** — Novel theoretical connection between GRPO and AUC; WPAUC is a creative solution
      - **Fairness: 5/10** — Not addressed
      - **Robustness: 7/10** — WPAUC shaping is more stable than raw GRPO for Top-K
      - **Impact: 8/10** — Strong theoretical backing; from Multi-Scenarios team (likely industry)
-     - **Opensource?: 0/10** — No public code found
 
 3. **GraphRAG-IRL: Personalized Recommendation with Graph-Grounded Inverse Reinforcement Learning and LLM Re-ranking**
    * Affiliation: — *(Siqi Liang, Xiawei Wang, Yudi Zhang, Jiaying Zhou — institutions TBD)*
@@ -186,12 +276,12 @@
      - Maximum-entropy IRL for calibrated pre-ranking
      - Persona-conditioned LLM fusion on short candidate lists
    * Venue: arXiv preprint, April 21, 2026
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 7/10** — Creative combination of GraphRAG + IRL + LLM re-ranking
      - **Fairness: 6/10** — Persona-guided re-ranking could help or hurt fairness depending on persona design
      - **Robustness: 6/10** — Hybrid approach; graph + IRL + LLM each add complexity
      - **Impact: 6/10** — Niche but interesting; persona-guided LLM fusion is a growing area
-     - **Opensource?: 0/10** — No public code found
 
 4. **Modular Representation Compression (MARC): Adapting LLMs for Efficient and Effective Recommendations**
    * Affiliation: — *(Yunjia Xi, Menghui Zhu, Jianghao Lin, Bo Chen, Ruiming Tang, Yong Yu, Weinan Zhang — institutions TBD)*
@@ -202,12 +292,12 @@
      - Module task decoupling (information constraints + divergent architectures)
      - Middle-layer representation extraction for compression
    * Venue: SIGIR 2026
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 8/10** — Identifies MRA phenomenon; modular compression is a clever fix
      - **Fairness: 5/10** — Not addressed
      - **Robustness: 7/10** — Explicit compression modules are more stable than end-to-end fine-tuning
      - **Impact: 8/10** — SIGIR 2026; addresses a key efficiency-effectiveness trade-off in LLM4Rec
-     - **Opensource?: 0/10** — No public code found
 
 5. **Multi-LLM Token Filtering and Routing for Sequential Recommendation (MLTFR)**
    * Affiliation: — *(Wuhan Chen, Min Gao, Xin Xia, Zongwei Wang, Wentao Li, Shane Culpepper — institutions TBD)*
@@ -218,12 +308,12 @@
      - Mixture-of-Experts (MoE) architecture for multi-LLM integration
      - Fisher-weighted semantic consensus expert (prevent dominant experts)
    * Venue: arXiv preprint, April 20, 2026
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 7/10** — Multi-LLM integration via MoE is interesting; corpus-free is a plus
      - **Fairness: 5/10** — Not addressed
      - **Robustness: 6/10** — MoE routing can be unstable; Fisher-weighted consensus helps
      - **Impact: 7/10** — Multi-LLM trend is growing; corpus-free is practical for industry
-     - **Opensource?: 0/10** — No public code found
 
 6. **ResRank: Unifying Retrieval and Listwise Reranking via End-to-End Joint Training with Residual Passage Compression**
    * Affiliation: — *(Xiaojie Ke, Shuai Zhang, Liansheng Sun, Yongjin Wang, Hengjun Jiang, Xiangkun Liu, Cunxin Gu, Jian Xu, Guanjun Jiang — institutions TBD)*
@@ -234,12 +324,12 @@
      - Residual connection (encoder embedding + reranker hidden states)
      - One-step cosine-similarity scoring (zero generated tokens)
    * Venue: arXiv preprint, April 24, 2026
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 8/10** — Residual compression for unified retrieval-reranking is novel
      - **Fairness: 5/10** — Not addressed
      - **Robustness: 7/10** — One-step scoring is efficient and stable
      - **Impact: 8/10** — Unified retrieval-reranking is a hot topic; efficient listwise reranking has high industrial value
-     - **Opensource?: 0/10** — No public code found
 
 7. **Rethinking Semantic Collaborative Integration: Why Alignment Is Not Enough**
    * Affiliation: — *(Maolin Wang, Dongze Wu, Jianing Zhou, Hongyu Chen, Beining Bao, Yu Jiang, Chenbin Zhang, Chang Wang, Jian Liu, Lei Sha — institutions TBD)*
@@ -250,12 +340,12 @@
      - Complementarity-aware diagnostics (overlap, unique hit contribution, fusion upper bound)
      - Controlled alignment probes (low-capacity mapping cannot recover full geometry)
    * Venue: SIGIR 2026
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 8/10** — Rigorous analysis of why alignment is insufficient; complementarity-aware fusion is novel
      - **Fairness: 6/10** — Deeper fusion could amplify biases; not explicitly addressed
      - **Robustness: 7/10** — Diagnostics help understand fusion quality; more robust than blind alignment
      - **Impact: 8/10** — SIGIR 2026; fundamental contribution to LLM4Rec representation learning
-     - **Opensource?: 0/10** — No public code found
 
 8. **Deep Interest Mining with Cross-Modal Alignment for SemanticID Generation in Generative Recommendation**
    * Affiliation: — *(Yagchen Zeng — institution TBD)*
@@ -267,12 +357,12 @@
      - Cross-Modal Semantic Alignment (CMSA)
      - Quality-Aware Reward Mechanism (QARM)
    * Venue: arXiv preprint, March 3, 2026
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
      - **Novelty: 7/10** — Cross-modal alignment for Semantic ID is novel; Deep Interest Mining is a solid addition
      - **Fairness: 5/10** — Not addressed
      - **Robustness: 6/10** — VLM alignment can be noisy; QARM helps but adds complexity
      - **Impact: 7/10** — Semantic ID quality is a key bottleneck; cross-modal approach is promising
-     - **Opensource?: 0/10** — No public code found
 
 ---
 
@@ -287,12 +377,12 @@
      - Dual-graph augmented reward shaping (NDCG@K + query alignment + preference alignment)
      - Reasoning-aware advantage estimation (penalize wrong reasoning steps)
      - Online curriculum scheduler (dynamic query difficulty assessment)
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code repository found
      - **Novelty: 8/10** — New "reason-then-recommend" + RL fine-tuning paradigm for recommendation assistants
      - **Fairness: 5/10** — Not explicitly addressed; may inherit LLM biases
      - **Robustness: 7/10** — Curriculum learning improves training stability; reasoning decomposition adds resilience
      - **Impact: 8/10** — ACL 2026, addresses a growing real-world need (complex query recommendation)
-     - **Opensource?: 0/10** — No public code repository found
 
 2. **Generative Reasoning Re-ranker (GR2)**
    * Affiliation: Meta *(Mingfu Liang et al.)*
@@ -302,12 +392,12 @@
      - Three-stage training: mid-training on semantic IDs → SFT on LLM-generated reasoning traces → DAPO RL
      - Decoupled clipping (separate upper/lower clip bounds)
      - Dynamic sampling (filter zero-advantage groups)
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Meta paper)
      - **Novelty: 8/10** — First to apply DAPO-style RL to generative re-ranking; reasoning-augmented re-ranking is novel
      - **Fairness: 5/10** — Not discussed; RL optimization may inadvertently introduce ranking bias
      - **Robustness: 7/10** — Dynamic sampling improves training stability; reasoning traces add interpretability
      - **Impact: 9/10** — Outperforms OneRec-Think; from Meta; high industrial relevance
-     - **Opensource?: 0/10** — No public code available (Meta paper)
 
 3. **Verifiable Reasoning for LLM-based Generative Recommendation (VRec)**
    * Affiliation: — *(Xinyu Lin, Hanchao Yu, Yinglong Xia, Jiang Zhang, Aashu Singh, Fei Liu, Wenjie Wang, Fuli Feng, Tat-Seng Chua, Qifan Wang — institutions TBD)*
@@ -317,12 +407,12 @@
      - Hybrid verifier (rule-based + model-based) for multi-dimensional assessment
      - Proxy prediction targets to improve verifier reliability
      - Reasoning chain decomposition with step-level verification
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 2/10** — Repo exists (github.com/Linxyhaha/Verifiable-Rec) but empty (1 ⭐, no code uploaded)
      - **Novelty: 9/10** — "Reason-verify-recommend" is a genuinely new paradigm; step-level verification for recommendation is novel
      - **Fairness: 6/10** — Verification may propagate existing biases; not explicitly mitigated
      - **Robustness: 8/10** — Verification mechanism catches reasoning errors before recommendation; strong resilience
      - **Impact: 8/10** — Addresses key LLM reasoning failure modes; from NUS/Meta team
-     - **Opensource?: 2/10** — Repo exists (github.com/Linxyhaha/Verifiable-Rec) but empty (1 ⭐, no code uploaded)
 
 4. **Unleashing the Native Recommendation Potential: LLM-Based Generative Recommendation via Structured Term Identifiers (GRLM)**
    * Affiliation: — *(Zhiyang Zhang, Junda She, Kuo Cai, Bo Chen, Shiyao Wang, Xinchen Luo, Qiang Luo, Ruiming Tang, Han Li, Kun Gai, Guorui Zhou — likely industry labs)*
@@ -332,12 +422,12 @@
      - Context-aware term generation (convert item metadata to canonical TIDs)
      - Hybrid instruction fine-tuning (co-optimizes term internalization and sequential recommendation)
      - Elastic identifier grounding (robust item mapping despite ID variations)
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — Official repo (github.com/ZY0025/GRLM), 36 ⭐, well-documented, complete implementation with training/eval scripts
      - **Novelty: 7/10** — TID is a middle ground between text and SID; idea is solid but incremental over existing Semantic ID work
      - **Fairness: 6/10** — Term standardization could introduce systematic bias from term vocabulary design
      - **Robustness: 7/10** — Elastic grounding handles ID variation; TIDs are more robust than pure SIDs
      - **Impact: 7/10** — Addresses a real industrial bottleneck (SID semantic gap); from Kuaishou/industry team
-     - **Opensource?: 8/10** — Official repo (github.com/ZY0025/GRLM), 36 ⭐, well-documented, complete implementation with training/eval scripts
 
 5. **R3-VAE: Reference Vector-Guided Rating Residual Quantization VAE for Generative Recommendation**
    * Affiliation: — *(Qiang Wan, Ze Yang, Dawei Yang, Ying Fan, Xin Yan, Siyang Liu)*
@@ -347,12 +437,12 @@
      - Reference vector guidance (anchors quantization centroids with collaborative filtering signals)
      - Rating residual quantization (explicitly models rating information in the latent space)
      - VAE generative framework for recommendation
-   * Scores (Novelty / Fairness / Robustness / Impact / Opensource?):
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — Repo (github.com/wwqq/R3-VAE), 14 ⭐, clean code structure, matches paper well, has training scripts
      - **Novelty: 6/10** — Residual quantization + reference guidance is a moderate extension of existing VAE rec work
      - **Fairness: 5/10** — Not addressed; standard VAE collaborative filtering may have popularity bias
      - **Robustness: 6/10** — VAEs are generally stable; residual quantization adds some robustness to rating noise
      - **Impact: 5/10** — More niche; VAE-based generative rec is less prominent than LLM/RL approaches currently
-     - **Opensource?: 7/10** — Repo (github.com/wwqq/R3-VAE), 14 ⭐, clean code structure, matches paper well, has training scripts
 
 ## Papers Before April
 
@@ -580,6 +670,7 @@
 ---
 
 ## By Keyword
+## By Keyword
 
 ### RL / Reinforcement Learning
 - ReRec: Reasoning-Augmented LLM-based Recommendation Assistant
@@ -595,9 +686,12 @@
 - Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner)
 - Rank-GRPO
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization (GRAD)
+- Factorized Latent Reasoning for LLM-based Recommendation (FLR)
+- Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
 
 ### Generative Retrieval / Ranking
 - Harmonizing Generative Retrieval and Ranking in Chain-of-Recommendation (RecoChain)
+- CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 
 ### Reasoning
 - ReRec
@@ -605,6 +699,8 @@
 - GR2
 - GraphRAG-IRL
 - Reasoning over Semantic IDs Enhances Generative Recommendation
+- Factorized Latent Reasoning for LLM-based Recommendation (FLR)
+- Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
 
 ### Generative Recommendation / VAE
 - R3-VAE
@@ -612,6 +708,8 @@
 - Deep Interest Mining (SemanticID)
 - BITRec (Modeling Behavioral Intensity and Transitions)
 - A2Gen (Action-Aware Generative Sequence Modeling)
+- CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
+- Generative Recommendation for Large-Scale Advertising (GR4AD)
 
 ### LLM-based Recommendation
 - ReRec
@@ -622,6 +720,8 @@
 - Rethinking Semantic Collaborative Integration
 - DC4SR (Disagreement as Signals)
 - A2Gen (Action-Aware Generative Sequence Modeling)
+- Factorized Latent Reasoning for LLM-based Recommendation (FLR)
+- Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
 
 ### Re-ranking
 - GR2
@@ -633,6 +733,7 @@
 - GRLM
 - Deep Interest Mining (SemanticID)
 - Reasoning over Semantic IDs Enhances Generative Recommendation
+- CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 
 ### Retrieval / Representation
 - ResRank (retrieval + reranking)
@@ -666,6 +767,7 @@
 - OneMall
 - MiniOneRec
 - UniGRec
+- Generative Recommendation for Large-Scale Advertising (GR4AD)
 
 ### MoE
 - OneMall
@@ -674,8 +776,16 @@
 ### Optimizer
 - MuonRec
 
+### Diffusion
+- Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
+
+### Fairness
+- Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
+
 ---
 
+
+## By Affiliation
 ## By Affiliation
 
 | Affiliation | Papers |
@@ -686,16 +796,23 @@
 | **NJUST / Nanjing** | Harmonizing Generative Retrieval (RecoChain) |
 | **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) |
 | **Beihang University** | A2Gen (Action-Aware Generative Sequence Modeling) |
-| **Kuaishou** | OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank |
+| **Kuaishou** | OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD |
 | **USTC** | MiniOneRec · UniGRec |
 | **UIUC Illinois** | Rec-R1 |
 | **Huawei Cloud** | RelayGR |
-| **NUS** | Reasoning over Semantic IDs |
+| **NUS** | Reasoning over Semantic IDs · CARE |
 | **Shanghai JTU** | MuonRec |
 | **Youtube** | [STATIC] Vectorizing the Trie |
-| **Meituan** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding |
+| **Meituan** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR |
 | **Netflix** | Rank-GRPO |
+| **University of Electronic Science and Technology of China** | CARD |
+| **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) |
+| **Johannes Kepler University Linz** | A2G-DiffRec |
 | **ACL 2026** | ReRec, SAGE |
-| **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen |
+| **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE |
 | **MLSys 2026** | FreeScale |
-| *(TBD)* | VRec, GRLM, R3-VAE, ReCast, Objective Shaping, GraphRAG-IRL, MLTFR, ResRank, Deep Interest Mining, DC4SR |
+| *(TBD)* | VRec, GRLM, R3-VAE, ReCast, Objective Shaping, GraphRAG-IRL, MLTFR, ResRank, Deep Interest Mining, DC4SR, FLR, GR4AD, A2G-DiffRec |
+
+---
+
+
