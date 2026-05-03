@@ -2,6 +2,100 @@
 
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
+## Papers May 03:
+
+> **Note:** Only 2 new generative recommendation papers were found in the last 24 hours (May 2-3, 2026). Following the fallback procedure, papers from March-April 2026 are also included to meet the minimum 5 papers requirement.
+
+1. **Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)**
+   * Affiliation: — *(Jiaju Chen, Chongming Gao, Chenxiao Fan, Haoyan Liu, Qingpeng Cai, Peng Jiang, Xiangnan He — institutions TBD)*
+   * Link: [arxiv.org/abs/2604.27747](https://arxiv.org/abs/2604.27747)
+   * Venue: arXiv preprint, April 30, 2026
+   * TL;DR: PAD-Rec introduces item position embeddings and step position embeddings to improve speculative decoding for LLM-based generative list-wise recommendation
+   * Key techniques:
+     - Position-Aware Drafting (PAD-Rec)
+     - Item position embeddings (encode within-item slot)
+     - Step position embeddings (encode draft step)
+     - Learnable gates for signal harmonization
+     - Speculative decoding acceleration
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel application of speculative decoding to generative recommendation with position-aware drafting
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Up to 3.1x wall-clock speedup with ~5% average gain; negligible accuracy loss
+     - **Impact: 8/10** — From Xiangnan He's team (likely USTC); addresses key inference efficiency bottleneck
+
+2. **One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank)**
+   * Affiliation: RMIT University, Melbourne, Australia
+   * Link: [arxiv.org/abs/2604.27599](https://arxiv.org/abs/2604.27599)
+   * Venue: SIGIR 2026
+   * TL;DR: InvariRank enables permutation-invariant listwise reranking with LLMs via structured attention mask and shared positional framing
+   * Key techniques:
+     - InvariRank (permutation-invariant listwise reranking)
+     - Structured attention mask (blocks cross-candidate attention)
+     - Shared positional framing under RoPE
+     - Listwise learning-to-rank objective
+     - Single forward pass scoring
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 9/10** — GitHub: https://github.com/ejbito/InvariRank; complete implementation; well-documented
+     - **Novelty: 8/10** — Novel permutation-invariant LLM reranking; addresses order sensitivity
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Stable rankings across candidate permutations; validated on benchmarks
+     - **Impact: 9/10** — SIGIR 2026; from RMIT; novel architectural solution
+
+3. **How Well Does Generative Recommendation Generalize?**
+   * Affiliation: — *(Yijie Ding, Zitian Guo, Jiachen Li, et al. — institutions TBD, likely UCSD/University of Illinois)*
+   * Link: [arxiv.org/abs/2603.19809](https://arxiv.org/abs/2603.19809)
+   * Venue: arXiv preprint, March 20, 2026
+   * TL;DR: Systematic analysis showing GR models generalize better on unseen item transitions, while item ID-based models excel at memorization
+   * Key techniques:
+     - Memorization vs. generalization categorization
+     - Token-level analysis of generalization
+     - Memorization-aware indicator for adaptive combination
+     - Complementary fusion of GR and item ID-based models
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 9/10** — First systematic analysis of generalization in generative recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Rigorous experimental analysis; token-level insights
+     - **Impact: 9/10** — From Julian McAuley's team (UCSD); fundamental contribution
+
+4. **GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation**
+   * Affiliation: JD.com (JD App team)
+   * Link: [arxiv.org/abs/2604.14878](https://arxiv.org/abs/2604.14878)
+   * Venue: SIGIR 2026 (Camera-Ready)
+   * TL;DR: GenRec is a production generative recommendation framework deployed on JD App, addressing pagination inconsistency, long sequence encoding, and preference alignment
+   * Key techniques:
+     - GenRec (generative recommendation framework)
+     - Page-wise NTP (Next-Token Prediction) task
+     - Asymmetric linear Token Merger (compresses multi-token Semantic IDs)
+     - GRPO-SR (Group Relative Policy Optimization with NLL regularization)
+     - Hybrid Rewards (dense reward model + relevance gate)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (industrial deployment)
+     - **Novelty: 8/10** — Novel page-wise NTP and token merger for industrial-scale generative recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Deployed on JD App; 9.5% click improvement, 8.7% transaction improvement
+     - **Impact: 9/10** — SIGIR 2026; from JD.com; significant industrial deployment
+
+5. **Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation**
+   * Affiliation: Tencent (Tencent Ads team)
+   * Link: [arxiv.org/abs/2604.04976](https://arxiv.org/abs/2604.04976)
+   * Venue: arXiv preprint, April 5, 2026 (competition paper)
+   * TL;DR: TencentGR datasets (1M/10M users) with all-modality data for industrial generative recommendation research
+   * Key techniques:
+     - TencentGR-1M dataset (1M users, 100 interactions each)
+     - TencentGR-10M dataset (10M users, click/conversion labels)
+     - Baseline generative recommendation model
+     - Weighted evaluation for high-value conversion events
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 9/10** — Datasets: https://huggingface.co/datasets/TAAC2025; Baseline: https://github.com/TencentAdvertisingAlgorithmCompetition/baseline_2025
+     - **Novelty: 7/10** — First large-scale all-modality dataset for generative recommendation in advertising
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Real de-identified Tencent Ads logs; realistic industrial data
+     - **Impact: 8/10** — From Tencent; enables research on all-modality generative recommendation
+
+---
+
 ## Papers April 30:
 
 1. **CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation**
@@ -710,6 +804,9 @@
 - A2Gen (Action-Aware Generative Sequence Modeling)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 - Generative Recommendation for Large-Scale Advertising (GR4AD)
+- How Well Does Generative Recommendation Generalize?
+- GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation
+- Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation
 
 ### LLM-based Recommendation
 - ReRec
@@ -728,6 +825,7 @@
 - ResRank
 - GraphRAG-IRL (LLM re-ranking)
 - GloRank (From Local Indices to Global Identifiers)
+- One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank)
 
 ### Semantic / Structured IDs
 - GRLM
@@ -761,6 +859,7 @@
 - OpenOneRec
 - RelayGR
 - [STATIC] Vectorizing the Trie
+- Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)
 
 ### Model / Architecture
 - OpenOneRec
@@ -768,6 +867,7 @@
 - MiniOneRec
 - UniGRec
 - Generative Recommendation for Large-Scale Advertising (GR4AD)
+- GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation
 
 ### MoE
 - OneMall
@@ -808,10 +908,13 @@
 | **University of Electronic Science and Technology of China** | CARD |
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) |
 | **Johannes Kepler University Linz** | A2G-DiffRec |
+| **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
+| **JD.com** | GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation |
+| **Tencent** | Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation |
 | **ACL 2026** | ReRec, SAGE |
-| **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE |
+| **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec |
 | **MLSys 2026** | FreeScale |
-| *(TBD)* | VRec, GRLM, R3-VAE, ReCast, Objective Shaping, GraphRAG-IRL, MLTFR, ResRank, Deep Interest Mining, DC4SR, FLR, GR4AD, A2G-DiffRec |
+| *(TBD)* | VRec, GRLM, R3-VAE, ReCast, Objective Shaping, GraphRAG-IRL, MLTFR, ResRank, Deep Interest Mining, DC4SR, FLR, GR4AD, A2G-DiffRec, How Well Does Generative Recommendation Generalize? |
 
 ---
 
