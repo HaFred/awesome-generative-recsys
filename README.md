@@ -2,6 +2,99 @@
 
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
+## Papers May 04:
+
+> **Note:** No new generative recommendation papers were found in the last 24 hours (May 3-4, 2026). Following the fallback procedure, papers from the last 3 months (April 2026) are included to meet the minimum 5 papers requirement.
+
+1. **ProMax: Exploring the Potential of LLM-derived Profiles with Distribution Shaping for Recommender Systems**
+   * Affiliation: Anhui University; University of Electronic Science and Technology of China (UESTC); The University of Queensland
+   * Link: [arxiv.org/abs/2604.26231](https://arxiv.org/abs/2604.26231)
+   * Venue: SIGIR 2026
+   * TL;DR: ProMax uses LLM-derived user/item profiles with distribution shaping to enhance recommendation, outperforming existing LLM-based approaches
+   * Key techniques:
+     - Dense retrieval to uncover collaborative relationships between profiles
+     - Dual distribution-reshaping process
+     - Profile distribution as guiding signal
+     - Distribution shaping for recommendation enhancement
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 7/10** — Novel application of LLM-derived profiles with distribution shaping for recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Validated on 3 public datasets; improves base model performance
+     - **Impact: 8/10** — SIGIR 2026; from Anhui University/UESTC/UQ; novel profile-based approach
+
+2. **Beyond Static Collision Handling: Adaptive Semantic ID Learning for Multimodal Recommendation at Industrial Scale (AdaSID)**
+   * Affiliation: University of Electronic Science and Technology of China (UESTC); Kuaishou Technology
+   * Link: [arxiv.org/abs/2604.23522](https://arxiv.org/abs/2604.23522)
+   * Venue: arXiv preprint, April 26, 2026
+   * TL;DR: AdaSID adapts Semantic ID learning by relaxing collision penalties for semantically compatible items, validated on Kuaishou e-commerce platform
+   * Key techniques:
+     - Adaptive Semantic ID Learning (AdaSID) framework
+     - Two-stage adaptive collision handling
+     - Stage 1: Relax penalties for semantically compatible items
+     - Stage 2: Adaptive regularization based on collision load and training progress
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (industrial collaboration with Kuaishou)
+     - **Novelty: 8/10** — Novel adaptive approach to Semantic ID collision handling; addresses key scalability issue
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Deployed on Kuaishou e-commerce; GMV +0.98%; significant online A/B test gains
+     - **Impact: 9/10** — From UESTC/Kuaishou; industrial-scale validation; addresses real-world multimodal recommendation challenge
+
+3. **MTServe: Efficient Serving for Generative Recommendation Models with Hierarchical Caches**
+   * Affiliation: Wuhan University; Meituan; NVIDIA
+   * Link: [arxiv.org/abs/2604.22881](https://arxiv.org/abs/2604.22881)
+   * Venue: arXiv preprint, April 24, 2026
+   * TL;DR: MTServe is a hierarchical cache management system for generative recommendation that virtualizes GPU memory using host RAM, achieving 3.1x speedup with >98.5% hit rate
+   * Key techniques:
+     - Hierarchical cache management system
+     - Host RAM as scalable backup storage for GPU memory virtualization
+     - Hybrid storage layout
+     - Asynchronous data transfer pipeline
+     - Locality-driven replacement policy
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel hierarchical caching system for generative recommendation serving; addresses key inference bottleneck
+     - **Fairness: 4/10** — Not relevant to fairness; systems optimization work
+     - **Robustness: 9/10** — 3.1x speedup on public and production datasets; >98.5% hit rate; robust architecture
+     - **Impact: 8/10** — From Wuhan University/Meituan/NVIDIA; significant engineering contribution for industrial GR deployment
+
+4. **UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute**
+   * Affiliation: Shopee
+   * Link: [arxiv.org/abs/2604.12234](https://arxiv.org/abs/2604.12234)
+   * Venue: arXiv preprint, April 2026 (v4 revised April 30, 2026)
+   * TL;DR: UniRec bridges the expressive gap between generative and discriminative recommendation via Chain-of-Attribute (CoA), achieving +22.6% HR@50 improvement and deployed on Shopee
+   * Key techniques:
+     - Chain-of-Attribute (CoA) mechanism
+     - Attribute token prefixing before SID decoding
+     - Capacity-constrained SID with exposure-weighted capacity penalty
+     - Conditional Decoding Context (CDC)
+     - Joint RFT and DPO framework
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (industrial deployment at Shopee)
+     - **Novelty: 9/10** — Novel approach to bridging generative and discriminative recommendation; CoA is a creative solution to the expressive gap
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Deployed on Shopee; PVCTR +5.37%, orders +4.76%, GMV +5.60%; rigorous online A/B testing
+     - **Impact: 9/10** — From Shopee; significant industrial deployment; bridges key gap in GR research
+
+5. **CRAB: Codebook Rebalancing for Bias Mitigation in Generative Recommendation**
+   * Affiliation: Walmart Global Tech; Stony Brook University
+   * Link: [arxiv.org/abs/2604.05113](https://arxiv.org/abs/2604.05113)
+   * Venue: arXiv preprint, April 6, 2026
+   * TL;DR: CRAB is a post-hoc debiasing strategy for generative recommendation that alleviates popularity bias by rebalancing the codebook based on semantic token frequencies
+   * Key techniques:
+     - Post-hoc debiasing strategy for GeneRec
+     - Codebook rebalancing by splitting over-popular tokens
+     - Preservation of hierarchical semantic structure
+     - Tree-structured regularizer for semantic consistency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel post-hoc debiasing for generative recommendation; addresses popularity bias amplification
+     - **Fairness: 9/10** — Core contribution is bias mitigation in generative recommendation; explicitly addresses popularity bias
+     - **Robustness: 7/10** — Validated on real-world datasets; improves recommendation performance while alleviating bias
+     - **Impact: 8/10** — From Walmart Global Tech/Stony Brook; addresses key fairness issue in generative recommendation
+
+---
+
 ## Papers May 03:
 
 > **Note:** Only 2 new generative recommendation papers were found in the last 24 hours (May 2-3, 2026). Following the fallback procedure, papers from March-April 2026 are also included to meet the minimum 5 papers requirement.
@@ -782,6 +875,7 @@
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization (GRAD)
 - Factorized Latent Reasoning for LLM-based Recommendation (FLR)
 - Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
+- ProMax: Exploring the Potential of LLM-derived Profiles
 
 ### Generative Retrieval / Ranking
 - Harmonizing Generative Retrieval and Ranking in Chain-of-Recommendation (RecoChain)
@@ -807,6 +901,10 @@
 - How Well Does Generative Recommendation Generalize?
 - GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation
 - Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation
+- Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
+- MTServe: Efficient Serving for Generative Recommendation Models
+- UniRec: Bridging the Expressive Gap via Chain-of-Attribute
+- CRAB: Codebook Rebalancing for Bias Mitigation in Generative Recommendation
 
 ### LLM-based Recommendation
 - ReRec
@@ -819,6 +917,7 @@
 - A2Gen (Action-Aware Generative Sequence Modeling)
 - Factorized Latent Reasoning for LLM-based Recommendation (FLR)
 - Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
+- ProMax: Exploring the Potential of LLM-derived Profiles
 
 ### Re-ranking
 - GR2
@@ -832,6 +931,8 @@
 - Deep Interest Mining (SemanticID)
 - Reasoning over Semantic IDs Enhances Generative Recommendation
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
+- Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
+- UniRec: Bridging the Expressive Gap via Chain-of-Attribute
 
 ### Retrieval / Representation
 - ResRank (retrieval + reranking)
@@ -860,6 +961,7 @@
 - RelayGR
 - [STATIC] Vectorizing the Trie
 - Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)
+- MTServe: Efficient Serving for Generative Recommendation Models
 
 ### Model / Architecture
 - OpenOneRec
@@ -868,6 +970,7 @@
 - UniGRec
 - Generative Recommendation for Large-Scale Advertising (GR4AD)
 - GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation
+- UniRec: Bridging the Expressive Gap via Chain-of-Attribute
 
 ### MoE
 - OneMall
@@ -881,6 +984,7 @@
 
 ### Fairness
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
+- CRAB: Codebook Rebalancing for Bias Mitigation in Generative Recommendation
 
 ---
 
@@ -896,16 +1000,16 @@
 | **NJUST / Nanjing** | Harmonizing Generative Retrieval (RecoChain) |
 | **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) |
 | **Beihang University** | A2Gen (Action-Aware Generative Sequence Modeling) |
-| **Kuaishou** | OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD |
+| **Kuaishou** | OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID |
 | **USTC** | MiniOneRec · UniGRec |
 | **UIUC Illinois** | Rec-R1 |
 | **Huawei Cloud** | RelayGR |
 | **NUS** | Reasoning over Semantic IDs · CARE |
 | **Shanghai JTU** | MuonRec |
 | **Youtube** | [STATIC] Vectorizing the Trie |
-| **Meituan** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR |
+| **Meituan** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe |
 | **Netflix** | Rank-GRPO |
-| **University of Electronic Science and Technology of China** | CARD |
+| **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID |
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) |
 | **Johannes Kepler University Linz** | A2G-DiffRec |
 | **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
@@ -914,6 +1018,13 @@
 | **ACL 2026** | ReRec, SAGE |
 | **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec |
 | **MLSys 2026** | FreeScale |
+| **Anhui University** | ProMax |
+| **The University of Queensland** | ProMax |
+| **Wuhan University** | MTServe |
+| **NVIDIA** | MTServe |
+| **Shopee** | UniRec |
+| **Walmart Global Tech** | CRAB |
+| **Stony Brook University** | CRAB |
 | *(TBD)* | VRec, GRLM, R3-VAE, ReCast, Objective Shaping, GraphRAG-IRL, MLTFR, ResRank, Deep Interest Mining, DC4SR, FLR, GR4AD, A2G-DiffRec, How Well Does Generative Recommendation Generalize? |
 
 ---
