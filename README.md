@@ -3,6 +3,11 @@
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
 
+## Quick Indexing
+- [By Opensource](#by-opensource)
+- [By Keyword](#by-keyword)
+- [By Affiliation](#by-affiliation)
+
 ## Papers May 05:
 
 > **Note:** Only 1 new generative recommendation paper was found in the last 24 hours (May 4-5, 2026). Following the fallback procedure, 4 additional papers from the last 3 months (February-May 2026) are included to meet the minimum 5 papers requirement.
@@ -965,7 +970,35 @@
 
 ---
 
-## By Keyword
+## By Opensource
+
+Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
+
+**Count:** 18 papers.
+
+| Score | Paper |
+| --- | --- |
+| 10/10 | MiniOneRec: An Open-Source Framework for Scaling Generative Recommendation |
+| 9/10 | Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE) |
+| 9/10 | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
+| 9/10 | OpenOneRec Technical Report |
+| 9/10 | Rank-GRPO: Training LLM-based Conversational Recommender Systems with Reinforcement Learning (ConvRec-R1) |
+| 9/10 | [STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators |
+| 9/10 | Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation |
+| 8.5/10 | Factorized Latent Reasoning for LLM-based Recommendation (FLR) |
+| 8/10 | Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec) |
+| 8/10 | MuonRec: Shifting the Optimizer Paradigm Beyond Adam in Scalable Generative Recommendation |
+| 8/10 | OneRec-Think: In-Text Reasoning for Generative Recommendation |
+| 8/10 | UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization |
+| 8/10 | Unleashing the Native Recommendation Potential: LLM-Based Generative Recommendation via Structured Term Identifiers (GRLM) |
+| 7/10 | Learning to Rotate: Temporal and Semantic Rotary Encoding for Sequential Modeling (SIREN-RoPE) |
+| 7/10 | R3-VAE: Reference Vector-Guided Rating Residual Quantization VAE for Generative Recommendation |
+| 7/10 | Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning |
+| 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |
+| 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
+
+---
+
 ## By Keyword
 
 ### RL / Reinforcement Learning
@@ -1111,7 +1144,6 @@
 ---
 
 
-## By Affiliation
 ## By Affiliation
 
 | Affiliation | Papers |
