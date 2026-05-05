@@ -2,6 +2,115 @@
 
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
+
+## Papers May 05:
+
+> **Note:** Only 1 new generative recommendation paper was found in the last 24 hours (May 4-5, 2026). Following the fallback procedure, 4 additional papers from the last 3 months (February-May 2026) are included to meet the minimum 5 papers requirement.
+
+1. **Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)**
+   * Affiliation: — *(Zhida Qin, Zemu Liu, Haoyan Fu, Chong Zhang, Tianyu Huang, Yidong Li, Gangyi Ding — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.02369](https://arxiv.org/abs/2605.02369)
+   * Venue: arXiv preprint, May 4, 2026
+   * TL;DR: BST-CDSR bridges behavioral and semantic preferences using LLMs with temporal counterfactual enhancement for cross-domain sequential recommendation
+   * Key techniques:
+     - Behavioral preference evolution module with neural ODE for continuous-time preference modeling
+     - Temporal counterfactual-enhanced semantic generator using LLMs
+     - Time-aware semantic preference capture with discretized temporal interval tokens
+     - Time-preference guided domain transfer module for adaptive transfer weight control
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 7/10** — Novel integration of LLMs with temporal semantics for cross-domain recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Validated on real-world datasets; handles domain transfer robustly
+     - **Impact: 7/10** — Novel approach to cross-domain sequential recommendation with LLM integration
+
+2. **Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP)**
+   * Affiliation: — *(Tianyu Zhan, Kairui Fu, Chengfei Lv, Zheqi Lv, Shengyu Zhang — institutions TBD)*
+   * Link: [arxiv.org/abs/2604.05329](https://arxiv.org/abs/2604.05329)
+   * Venue: arXiv preprint, April 7, 2026
+   * TL;DR: STAMP addresses the Semantic Dilution Effect in generative recommendation via semantic adaptive pruning and multi-step auxiliary prediction
+   * Key techniques:
+     - Semantic Adaptive Pruning (SAP) for dynamic redundancy filtering
+     - Multi-step Auxiliary Prediction (MAP) with multi-token objective
+     - Dual-end optimization strategy for training efficiency and representation capability
+     - Semantic dilution effect analysis and mitigation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel identification and solution to the Semantic Dilution Effect in generative recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — 1.23-1.38× speedup and 17.2%-54.7% VRAM reduction; validated on public and industrial datasets
+     - **Impact: 8/10** — Significant efficiency improvements for generative recommendation; practical industrial relevance
+
+3. **Multi-Business Prediction for Generative Recommendation at Meituan (MBGR)**
+   * Affiliation: Meituan (Changhao Li, Junwei Yin, Zhilin Zeng, et al., 9 authors total)
+   * Link: [arxiv.org/abs/2604.02684](https://arxiv.org/abs/2604.02684)
+   * Venue: arXiv preprint, April 3, 2026
+   * TL;DR: MBGR is the first generative recommendation framework tailored for multi-business scenarios, addressing seesaw phenomenon and representation confusion
+   * Key techniques:
+     - Business-aware Semantic ID (BID) module for domain-aware tokenization
+     - Multi-Business Prediction (MBP) structure for business-specific prediction
+     - Label Dynamic Routing (LDR) module for dense label transformation
+     - Unified Semantic ID space for multi-business scenarios
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (industrial deployment at Meituan)
+     - **Novelty: 8/10** — First framework for multi-business generative recommendation; novel BID and MBP designs
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Deployed on Meituan's food delivery platform; validated with offline and online experiments
+     - **Impact: 9/10** — From Meituan production team; addresses key multi-business challenge in generative recommendation
+
+4. **One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec)**
+   * Affiliation: — *(Yanchen Jiang, Zhe Feng, Christopher P. Mah, Aranyak Mehta, Di Wang — institutions TBD)*
+   * Link: [arxiv.org/abs/2603.22231](https://arxiv.org/abs/2603.22231)
+   * Venue: arXiv preprint, March 31, 2026
+   * TL;DR: GEM-Rec integrates commercial relevance and monetization objectives into generative recommendation via control tokens and bid-aware decoding
+   * Key techniques:
+     - Control tokens to decouple ad placement decision from item recommendation
+     - Bid-Aware Decoding mechanism for real-time pricing injection
+     - Unified generative sequence for semantic retrieval and monetization
+     - Allocation monotonicity guarantee for bidding consistency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 9/10** — Novel integration of commercial objectives (ads, bidding) into generative recommendation
+     - **Fairness: 5/10** — Not explicitly addressed; bidding mechanism may introduce fairness concerns
+     - **Robustness: 7/10** — Theoretical guarantee of allocation monotonicity; novel approach to commercial generative recommendation
+     - **Impact: 8/10** — Novel paradigm for commercial generative recommendation; bridges semantic retrieval and monetization
+
+5. **IntRR: A Framework for Integrating SID Redistribution and Length Reduction**
+   * Affiliation: — *(Zesheng Wang, Longfei Xu, Weidong Deng, Huimin Yan, Kaikui Liu, Xiangxiang Chu — institutions TBD)*
+   * Link: [arxiv.org/abs/2602.20704](https://arxiv.org/abs/2602.20704)
+   * Venue: arXiv preprint, February 28, 2026
+   * TL;DR: IntRR addresses objective misalignment and sequence length inflation in generative recommendation via SID redistribution and structural length reduction
+   * Key techniques:
+     - Objective-aligned SID Redistribution using item-specific Unique IDs (UIDs) as collaborative anchors
+     - Structural Length Reduction via recursive SID hierarchy handling
+     - Fixed cost of one token per item for efficient generation
+     - Dynamic semantic weight redistribution across codebook layers
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel approach to SID optimization and sequence length reduction in generative recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Fixed token cost per item; substantial improvements over generative baselines
+     - **Impact: 8/10** — Addresses key efficiency challenge in generative recommendation; strong empirical results
+
+6. **DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs for Generative Recommendation**
+   * Affiliation: — *(Yangchen Zeng — institution TBD)*
+   * Link: [arxiv.org/abs/2602.18907](https://arxiv.org/abs/2602.18907)
+   * Venue: arXiv preprint, February 21, 2026
+   * TL;DR: DeepInterestGR captures deep multi-interest representations from multi-modal LLMs via Chain-of-Thought prompting and reinforcement learning
+   * Key techniques:
+     - Multi-LLM Interest Mining (MLIM) with Chain-of-Thought prompting
+     - Reward-Labeled Deep Interest (RLDI) using lightweight binary classifier
+     - Interest-Enhanced Item Discretization (IEID) via RQ-VAE
+     - Two-stage training: supervised fine-tuning + GRPO with Interest-Aware Reward
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel deep interest mining from multi-modal LLMs for generative recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Validated on three Amazon Review benchmarks; GRPO optimization for stable training
+     - **Impact: 8/10** — Addresses Shallow Interest problem in generative recommendation; novel integration of multi-modal LLMs
+
+---
+
 ## Papers May 04:
 
 > **Note:** No new generative recommendation papers were found in the last 24 hours (May 3-4, 2026). Following the fallback procedure, papers from the last 3 months (April 2026) are included to meet the minimum 5 papers requirement.
@@ -889,6 +998,8 @@
 - Reasoning over Semantic IDs Enhances Generative Recommendation
 - Factorized Latent Reasoning for LLM-based Recommendation (FLR)
 - Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
+- Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)
+- DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
 
 ### Generative Recommendation / VAE
 - R3-VAE
@@ -905,6 +1016,9 @@
 - MTServe: Efficient Serving for Generative Recommendation Models
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
 - CRAB: Codebook Rebalancing for Bias Mitigation in Generative Recommendation
+- Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP)
+- Multi-Business Prediction for Generative Recommendation at Meituan (MBGR)
+- One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec)
 
 ### LLM-based Recommendation
 - ReRec
@@ -918,6 +1032,8 @@
 - Factorized Latent Reasoning for LLM-based Recommendation (FLR)
 - Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
 - ProMax: Exploring the Potential of LLM-derived Profiles
+- Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)
+- DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
 
 ### Re-ranking
 - GR2
@@ -933,6 +1049,7 @@
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 - Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
+- IntRR: A Framework for Integrating SID Redistribution and Length Reduction
 
 ### Retrieval / Representation
 - ResRank (retrieval + reranking)
@@ -962,6 +1079,7 @@
 - [STATIC] Vectorizing the Trie
 - Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)
 - MTServe: Efficient Serving for Generative Recommendation Models
+- Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP)
 
 ### Model / Architecture
 - OpenOneRec
@@ -971,6 +1089,10 @@
 - Generative Recommendation for Large-Scale Advertising (GR4AD)
 - GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
+- Multi-Business Prediction for Generative Recommendation at Meituan (MBGR)
+- One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec)
+- IntRR: A Framework for Integrating SID Redistribution and Length Reduction
+- DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
 
 ### MoE
 - OneMall
@@ -1007,7 +1129,7 @@
 | **NUS** | Reasoning over Semantic IDs · CARE |
 | **Shanghai JTU** | MuonRec |
 | **Youtube** | [STATIC] Vectorizing the Trie |
-| **Meituan** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe |
+| **Meituan** · MBGR | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe |
 | **Netflix** | Rank-GRPO |
 | **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID |
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) |
@@ -1025,7 +1147,7 @@
 | **Shopee** | UniRec |
 | **Walmart Global Tech** | CRAB |
 | **Stony Brook University** | CRAB |
-| *(TBD)* | VRec, GRLM, R3-VAE, ReCast, Objective Shaping, GraphRAG-IRL, MLTFR, ResRank, Deep Interest Mining, DC4SR, FLR, GR4AD, A2G-DiffRec, How Well Does Generative Recommendation Generalize? |
+| *(TBD)*, Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR), Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP), One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec), IntRR: A Framework for Integrating SID Redistribution and Length Reduction, DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs | VRec, GRLM, R3-VAE, ReCast, Objective Shaping, GraphRAG-IRL, MLTFR, ResRank, Deep Interest Mining, DC4SR, FLR, GR4AD, A2G-DiffRec, How Well Does Generative Recommendation Generalize? |
 
 ---
 
