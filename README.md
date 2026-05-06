@@ -2,11 +2,119 @@
 
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
-
 ## Quick Indexing
 - [By Opensource](#by-opensource)
 - [By Keyword](#by-keyword)
 - [By Affiliation](#by-affiliation)
+
+---
+
+## Papers May 06:
+
+> **Note:** Only 1 new generative recommendation paper was found in the last 24 hours (May 5-6, 2026). Following the fallback procedure, 5 additional papers from the last 3 months (April-May 2026) are included to meet the minimum 5 papers requirement.
+
+1. **On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation--A Short Note**
+   * Affiliation: — *(Yusheng Huang, Shuang Yang, Zhaojie Liu, Han Li — institutions TBD)*
+   * Link: [arxiv.org/abs/2604.15739](https://arxiv.org/abs/2604.15739)
+   * Venue: arXiv preprint, April 17, 2026
+   * TL;DR: First formal proof that auto-regressive next-token prediction is mathematically equivalent to full-item-vocabulary MLE in generative recommendation
+   * Key techniques:
+     - Formal mathematical proof of AR-NTP and FV-MLE equivalence
+     - Proof holds for both cascaded and parallel tokenizations
+     - Theoretical foundation for industrial GR systems
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (theoretical paper)
+     - **Novelty: 7/10** — First formal theoretical foundation for the dominant industrial GR paradigm
+     - **Fairness: 4/10** — Not relevant to fairness; theoretical contribution
+     - **Robustness: 6/10** — Theoretical proof; no empirical robustness evaluation
+     - **Impact: 7/10** — Provides principled guidance for future GR system optimization
+
+2. **SAGER: Self-Evolving User Policy Skills for Recommendation Agent**
+   * Affiliation: — *(Zhen Tao, Riwei Lai, Chenyun Yu, Weixin Chen, Li Chen, Beibei Kong, Leicheng, Chengxiang Zhuo, Zang Li, Qingqiang Sun — institutions TBD)*
+   * Link: [arxiv.org/abs/2604.14972](https://arxiv.org/abs/2604.14972)
+   * Venue: arXiv preprint, April 16, 2026 (v2 revised April 21, 2026)
+   * TL;DR: SAGER equips each user with a dedicated policy skill that evolves continuously through interaction, enabling personalized reasoning for recommendation agents
+   * Key techniques:
+     - Two-representation skill architecture (evolution substrate + inference-time injection)
+     - Incremental contrastive chain-of-thought engine for reasoning flaw diagnosis
+     - Skill-augmented listwise reasoning for fine-grained decision boundaries
+     - Self-evolving recommendation agent framework
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — First recommendation agent with self-evolving policy skills; novel paradigm
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — State-of-the-art performance; gains orthogonal to memory accumulation
+     - **Impact: 8/10** — Novel approach to personalizing reasoning process in recommendation agents
+
+3. **Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model**
+   * Affiliation: — *(Shiteng Cao, Xiaochong Lan, Yuwei Du, Jie Feng, Yinxing Liu, Xinlei Shi, Yong Li — institutions TBD)*
+   * Link: [arxiv.org/abs/2604.14051](https://arxiv.org/abs/2604.14051)
+   * Venue: arXiv preprint, April 15, 2026
+   * TL;DR: Novel LLM-based framework that jointly performs living need prediction and service recommendation, with behavioral clustering and curriculum learning + RL
+   * Key techniques:
+     - Joint modeling of need prediction and service recommendation
+     - Behavioral clustering for noise filtering in raw consumption data
+     - Curriculum learning strategy combined with reinforcement learning
+     - Sequential learning from need generation to category mapping to service selection
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 7/10** — Novel joint modeling of need prediction and service recommendation for local life scenarios
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Validated on local life service data; generalizes to long-tail scenarios
+     - **Impact: 7/10** — From Tsinghua (Yong Li); novel LLM-based local life service recommendation
+
+4. **Mitigating Collaborative Semantic ID Staleness in Generative Retrieval**
+   * Affiliation: — *(Vladimir Baikalov, Iskander Bagautdinov, Sergey Muravyov — institutions TBD)*
+   * Link: [arxiv.org/abs/2604.13273](https://arxiv.org/abs/2604.13273)
+   * Venue: SIGIR 2026
+   * TL;DR: Lightweight SID alignment update that mitigates SID staleness under temporal drift, enabling warm-start fine-tuning without full rebuild
+   * Key techniques:
+     - SID staleness analysis under strict chronological evaluation
+     - Lightweight, model-agnostic SID alignment update
+     - Aligning refreshed SIDs to existing SID vocabulary for compatibility
+     - Warm-start fine-tuning without full rebuild-and-retrain pipeline
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — First to explicitly study SID staleness under temporal drift; novel alignment update
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — 8-9x retriever-training compute reduction; validated on 3 public benchmarks
+     - **Impact: 9/10** — SIGIR 2026; addresses key practical problem in generative retrieval
+
+5. **DUET: Joint Exploration of User Item Profiles in Recommendation System**
+   * Affiliation: — *(Yue Chen, Yifei Sun, Lu Wang, Fangkai Yang, Pu Zhao, et al., 20 authors total — institutions TBD)*
+   * Link: [arxiv.org/abs/2604.13801](https://arxiv.org/abs/2604.13801)
+   * Venue: arXiv preprint, April 15, 2026
+   * TL;DR: Duet jointly generates user and item profiles conditioned on both history and evidence, with RL-based optimization using downstream recommendation performance as feedback
+   * Key techniques:
+     - Interaction-aware profile generator (joint user-item profile generation)
+     - Three-stage procedure: cue extraction → prompt expansion → profile generation
+     - RL-based generation policy optimization with downstream performance feedback
+     - Template-free profile exploration and semantic alignment
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel joint user-item profile generation; addresses semantic inconsistency
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Outperforms strong baselines on 3 real-world datasets
+     - **Impact: 8/10** — From Microsoft Research (hinted by author names); novel approach to profile-based recommendation
+
+6. **DynamicPO: Dynamic Preference Optimization for Recommendation**
+   * Affiliation: — *(Xingyu Hu, Kai Zhang, Jiancan Wu, Shuli Wang, Chi Wang, Wenshuai Chen, Yinhua Zhu, Haitao Wang, Xingxing Wang, Xiang Wang — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.00327](https://arxiv.org/abs/2605.00327)
+   * Venue: DASFAA 2026
+   * TL;DR: DynamicPO prevents preference optimization collapse in LLM-based recommendation via dynamic boundary negative selection and dual-margin beta adjustment
+   * Key techniques:
+     - Dynamic Boundary Negative Selection (prioritizes informative negatives near decision boundary)
+     - Dual-Margin Dynamic beta Adjustment (calibrates optimization strength per sample)
+     - Theoretical analysis of preference optimization collapse
+     - Lightweight and plug-and-play framework
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 9/10** — GitHub: https://github.com/xingyuHuxingyu/DynamicPO; complete codebase; well-documented
+     - **Novelty: 8/10** — Novel solution to preference optimization collapse; dynamic negative selection
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Prevents optimization collapse; negligible computational overhead; validated on 3 datasets
+     - **Impact: 8/10** — DASFAA 2026; from Xiang Wang's team (USTC); practical optimization for LLM-based recommendation
+
+---
 
 ## Papers May 05:
 
@@ -974,7 +1082,7 @@
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 18 papers.
+**Count:** 19 papers as of May 06.
 
 | Score | Paper |
 | --- | --- |
@@ -985,6 +1093,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 9/10 | Rank-GRPO: Training LLM-based Conversational Recommender Systems with Reinforcement Learning (ConvRec-R1) |
 | 9/10 | [STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators |
 | 9/10 | Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation |
+| 9/10 | DynamicPO: Dynamic Preference Optimization for Recommendation (DASFAA 2026) |
 | 8.5/10 | Factorized Latent Reasoning for LLM-based Recommendation (FLR) |
 | 8/10 | Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec) |
 | 8/10 | MuonRec: Shifting the Optimizer Paradigm Beyond Adam in Scalable Generative Recommendation |
@@ -1017,10 +1126,13 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization (GRAD)
 - Factorized Latent Reasoning for LLM-based Recommendation (FLR)
 - Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
+- SAGER: Self-Evolving User Policy Skills for Recommendation Agent
+- DynamicPO: Dynamic Preference Optimization for Recommendation
 - ProMax: Exploring the Potential of LLM-derived Profiles
 
 ### Generative Retrieval / Ranking
 - Harmonizing Generative Retrieval and Ranking in Chain-of-Recommendation (RecoChain)
+- Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 
 ### Reasoning
@@ -1032,6 +1144,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Factorized Latent Reasoning for LLM-based Recommendation (FLR)
 - Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
 - Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)
+- SAGER: Self-Evolving User Policy Skills for Recommendation Agent
 - DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
 
 ### Generative Recommendation / VAE
@@ -1066,6 +1179,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
 - ProMax: Exploring the Potential of LLM-derived Profiles
 - Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)
+- Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model
+- DUET: Joint Exploration of User Item Profiles in Recommendation System
 - DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
 
 ### Re-ranking
@@ -1082,6 +1197,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 - Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
+- Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
 - IntRR: A Framework for Integrating SID Redistribution and Length Reduction
 
 ### Retrieval / Representation
@@ -1179,8 +1295,6 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Shopee** | UniRec |
 | **Walmart Global Tech** | CRAB |
 | **Stony Brook University** | CRAB |
-| *(TBD)*, Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR), Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP), One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec), IntRR: A Framework for Integrating SID Redistribution and Length Reduction, DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs | VRec, GRLM, R3-VAE, ReCast, Objective Shaping, GraphRAG-IRL, MLTFR, ResRank, Deep Interest Mining, DC4SR, FLR, GR4AD, A2G-DiffRec, How Well Does Generative Recommendation Generalize? |
+ · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation--A Short Note | **(TBD)** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR), Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP), One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec), IntRR: A Framework for Integrating SID Redistribution and Length Reduction, DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation--A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation | VRec, GRLM, R3-VAE, ReCast, Objective Shaping, GraphRAG-IRL, MLTFR, ResRank, Deep Interest Mining, DC4SR, FLR, GR4AD, A2G-DiffRec, How Well Does Generative Recommendation Generalize? |
 
 ---
-
-
