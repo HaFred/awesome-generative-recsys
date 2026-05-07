@@ -8,6 +8,114 @@
 - [By Affiliation](#by-affiliation)
 
 ---
+## Papers May 07:
+
+> **Note:** 6 new generative recommendation papers found in the last 24 hours (May 6-7, 2026). All papers are newly published and not previously included.
+
+1. **CapsID: Soft-Routed Variable-Length Semantic IDs for Generative Recommendation**
+   * Affiliation: — *(Wenzhuo Cheng, Menghang Gong, Qixin Guo, Hang Zheng, Zhaobin Yang, Jianguo Lou, Zhengwei Zheng — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.05096](https://arxiv.org/abs/2605.05096)
+   * Venue: arXiv preprint, May 7, 2026
+   * TL;DR: CapsID replaces hard residual quantization with capsule routing for soft SID assignment, enabling variable-length Semantic IDs with confidence-driven termination
+   * Key techniques:
+     - Capsule routing: probabilistic routing to multiple semantic capsules (not hard nearest-neighbor)
+     - Residual updated by routed reconstruction (not single winning code)
+     - SEMANTICBPE: composes adjacent SID tokens into reusable subwords by co-occurrence + embedding compatibility
+     - Confidence-driven SID length (terminates when active capsule confidence is high)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Soft routing for SID is a novel alternative to hard RQ; addresses codeword collapse and boundary semantics
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — 9.6% Recall@10 improvement over ReSID; 51% inference latency of COBRA-style system; gains largest on tail items
+     - **Impact: 8/10** — Addresses key SID tokenizer bottleneck; validated on 35M-item industrial catalog
+
+2. **RecGPT-Mobile: On-Device Large Language Models for User Intent Understanding in Taobao Feed Recommendation**
+   * Affiliation: Alibaba Group (Taobao)
+   * Link: [arxiv.org/abs/2605.04726](https://arxiv.org/abs/2605.04726)
+   * Venue: arXiv preprint, May 7, 2026
+   * TL;DR: Deploys LLM directly on mobile devices for real-time user intent understanding and recommendation adjustment in Taobao feed
+   * Key techniques:
+     - On-device LLM deployment for mobile e-commerce
+     - Lightweight LLM-based intent understanding agent
+     - Real-time recommendation adjustment based on evolving user interests
+     - Next-query prediction with reduced inference cost
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (industrial deployment at Taobao)
+     - **Novelty: 8/10** — First on-device LLM deployment for recommendation; novel approach to reducing cloud inference cost
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — On-device deployment enables real-time adjustment; validated with offline analyses and online experiments
+     - **Impact: 9/10** — From Alibaba/Taobao; significant practical impact for mobile e-commerce recommendation
+
+3. **Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)**
+   * Affiliation: — *(Shereen Elsayed, Ngoc Son Le, Ahmed Rashed, Lars Schmidt-Thieme — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.04723](https://arxiv.org/abs/2605.04723)
+   * Venue: IJCAI-ECAI 2026
+   * TL;DR: ConvRec uses convolutional layers with linear complexity to replace attention for efficient sequential recommendation with long user histories
+   * Key techniques:
+     - Convolutional layers in hierarchical, down-scaled fashion
+     - Linear computational and memory complexity (vs. quadratic for attention)
+     - Gradual neighborhood aggregation for diverse sequential pattern capture
+     - Compact yet expressive sequence representation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — GitHub: https://github.com/ismll-research/ConvRec; complete implementation with datasets; well-documented
+     - **Novelty: 7/10** — Convolution for sequential recommendation is not entirely new, but efficient linear-complexity design is valuable
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Linear complexity enables processing longer user histories; validated on 4 real-world datasets
+     - **Impact: 7/10** — IJCAI-ECAI 2026; provides efficient alternative to attention-based sequential recommendation
+
+4. **Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE)**
+   * Affiliation: — *(Ruijun Chen, Chongming Gao, Jiawei Chen, Weiqin Yang, Xiangnan He — institutions TBD, likely USTC)*
+   * Link: [arxiv.org/abs/2605.04559](https://arxiv.org/abs/2605.04559)
+   * Venue: SIGIR 2026
+   * TL;DR: BLADE introduces a Bayesian framework that continuously updates the target distribution by fusing historical priors with dynamic evidence, breaking the static BoN performance upper bound
+   * Key techniques:
+     - Bayesian List-wise Alignment (BLADE)
+     - Dynamic target distribution update (fuses historical priors + current rollouts)
+     - Self-evolving target adapts to model's growing capabilities
+     - Addresses indiscriminate supervision and gradient decay in BoN Alignment
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 9/10** — GitHub: https://github.com/RegionCh/BLADE; complete implementation; well-documented; SIGIR 2026
+     - **Novelty: 9/10** — Bayesian framework for list-wise alignment is novel; breaks static BoN upper bound
+     - **Fairness: 6/10** — Explicitly optimizes fairness metrics (Fairness in list-wise metrics)
+     - **Robustness: 8/10** — Self-evolving target ensures sustained training signal; validated on 3 real-world datasets
+     - **Impact: 9/10** — SIGIR 2026; from Xiangnan He's team (likely USTC); addresses key limitation of BoN Alignment
+
+5. **Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)**
+   * Affiliation: — *(Yifang Qin, Zhaobin Li, Arisa Watanabe, Wei Ju, Zhiping Xiao, Ming Zhang — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.05165](https://arxiv.org/abs/2605.05165)
+   * Venue: arXiv preprint, May 7, 2026
+   * TL;DR: Proposes "interests burn-down process" as a diffusion scheme tailored for collaborative filtering, with StageCF method demonstrating superior performance over generative and diffusion baselines
+   * Key techniques:
+     - Interests burn-down process (forward process modeling interest decay)
+     - Reverse burn-up process (generates personalized recommendations)
+     - StageCF method illustrating the burn-down diffusion process
+     - Tailored diffusion scheme for interaction systems (not Gaussian noise)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 7/10** — Novel diffusion process tailored for CF; addresses incongruity between Gaussian noise and user interaction behavior
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 6/10** — Diffusion process is more aligned with CF tasks; validated on experiments against baselines
+     - **Impact: 6/10** — Novel application of diffusion to CF; empirical results demonstrate effectiveness
+
+6. **Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)**
+   * Affiliation: Tencent Map
+   * Link: [arxiv.org/abs/2605.03397](https://arxiv.org/abs/2605.03397)
+   * Venue: arXiv preprint, May 6, 2026
+   * TL;DR: GenPOI uses LLM for generative POI retrieval with geo-semantic tokenization and proximity-aware constrained generation, handling underspecified queries in map search
+   * Key techniques:
+     - GenPOI (Generative POI retrieval framework)
+     - Geo-Semantic POI Tokenization: encodes semantic and geographic context
+     - Proximity-aware constrained generation: restricts decoding space for geospatial relevance
+     - Heterogeneous context synergy for complex search intent inference
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (industrial dataset from Tencent Map)
+     - **Novelty: 7/10** — Novel generative paradigm for POI retrieval; addresses underspecified query challenge in map search
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Proximity-aware constrained generation ensures geospatial validity; validated on 10M+ POI scale
+     - **Impact: 7/10** — From Tencent Map; novel application of generative recommendation to POI retrieval
+
+---
+
 
 ## Papers May 06:
 
@@ -1082,7 +1190,7 @@
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 19 papers as of May 06.
+**Count:** 21 papers as of May 07.
 
 | Score | Paper |
 | --- | --- |
@@ -1105,6 +1213,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning |
 | 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
+| 9/10 | Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
+| 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
 
 ---
 
@@ -1129,11 +1239,14 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - SAGER: Self-Evolving User Policy Skills for Recommendation Agent
 - DynamicPO: Dynamic Preference Optimization for Recommendation
 - ProMax: Exploring the Potential of LLM-derived Profiles
+- Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE)
 
 ### Generative Retrieval / Ranking
 - Harmonizing Generative Retrieval and Ranking in Chain-of-Recommendation (RecoChain)
 - Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
+- CapsID: Soft-Routed Variable-Length Semantic IDs
+- Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)
 
 ### Reasoning
 - ReRec
@@ -1146,6 +1259,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)
 - SAGER: Self-Evolving User Policy Skills for Recommendation Agent
 - DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
+- Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)
 
 ### Generative Recommendation / VAE
 - R3-VAE
@@ -1182,6 +1296,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model
 - DUET: Joint Exploration of User Item Profiles in Recommendation System
 - DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
+- RecGPT-Mobile: On-Device Large Language Models
+- Beyond Static Best-of-N: Bayesian List-wise Alignment (BLADE)
 
 ### Re-ranking
 - GR2
@@ -1252,6 +1368,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 ### Diffusion
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
+- Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)
 
 ### Fairness
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
@@ -1295,6 +1412,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Shopee** | UniRec |
 | **Walmart Global Tech** | CRAB |
 | **Stony Brook University** | CRAB |
- · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation--A Short Note | **(TBD)** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR), Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP), One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec), IntRR: A Framework for Integrating SID Redistribution and Length Reduction, DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation--A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation | VRec, GRLM, R3-VAE, ReCast, Objective Shaping, GraphRAG-IRL, MLTFR, ResRank, Deep Interest Mining, DC4SR, FLR, GR4AD, A2G-DiffRec, How Well Does Generative Recommendation Generalize? |
+| **Alibaba** | RecGPT-Mobile: On-Device Large Language Models |
+| **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
+| **(TBD)** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE)
 
 ---
