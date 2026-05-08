@@ -8,6 +8,64 @@
 - [By Affiliation](#by-affiliation)
 
 ---
+## Papers May 08:
+
+> **Note:** 3 generative recommendation papers identified (submitted May 7, 2026). All papers are newly added to the repository.
+
+1. **Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)**
+   * Affiliation: — *(Yupeng Hou, Haven Kim, Clark Mingxuan Ju, Eduardo Escoto, Neil Shah, Julian McAuley — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.06331](https://arxiv.org/abs/2605.06331)
+   * Venue: arXiv preprint, May 7, 2026
+   * TL;DR: Identifies expressiveness limits in autoregressive semantic ID generation and proposes Latte, which injects latent tokens before each SID to reshape the decoding space
+   * Key techniques:
+     - Theoretical analysis of tree-induced structural correlation in autoregressive SID generation
+     - Latte: injects latent tokens before each semantic ID to create multiple latent-token-conditioned trees
+     - Reshapes decoding space from single tree to multiple latent-conditioned trees
+     - Addresses fundamental expressiveness limitation in generative recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 10/10** — GitHub: https://github.com/hyp1231/Latte; complete implementation available
+     - **Novelty: 8/10** — First to identify and address expressiveness limits of autoregressive SID generation; theoretical contribution is significant
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — 3.45% average relative improvement on NDCG@10; validated on multiple datasets
+     - **Impact: 8/10** — From Yupeng Hou, Neil Shah, Julian McAuley; significant theoretical contribution to generative recommendation
+
+2. **Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA)**
+   * Affiliation: Tencent (16 authors)
+   * Link: [arxiv.org/abs/2605.05803](https://arxiv.org/abs/2605.05803)
+   * Venue: arXiv preprint, May 7, 2026
+   * TL;DR: UniVA aligns commercial value with generative recommendation for industrial advertising, using commercial SID tokenizer and value-guided beam search
+   * Key techniques:
+     - Commercial SID tokenizer: injects value-related attributes into SID construction
+     - Generation-as-Ranking SID Decoder: supervised learning + eCPM-aware reinforcement learning
+     - Value-guided personalized beam search with personalized trie tree constraints
+     - Unified value alignment for generative recommendation in advertising
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (industrial deployment at Tencent WeChat Channels)
+     - **Novelty: 9/10** — First to address value alignment in generative recommendation for advertising; novel commercial SID tokenizer
+     - **Fairness: 6/10** — Value optimization may indirectly affect fairness; not explicitly addressed
+     - **Robustness: 9/10** — Deployed on Tencent WeChat Channels advertising platform; 37.04% Hit Rate@100 improvement; 1.5% GMV lift in online A/B tests
+     - **Impact: 9/10** — From Tencent; significant industrial impact for generative recommendation in advertising
+
+3. **Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)**
+   * Affiliation: — *(Yiqing Wu, Haoming Li, Guanyu Jiang, Jiahao Liang, Yongchun Zhu, Jingwu Chen, Feng Zhang — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.05855](https://arxiv.org/abs/2605.05855)
+   * Venue: SIGIR 2026
+   * TL;DR: PA-Bridge bridges passive recommendation and active user expressions using adversarial distribution alignment and semantic discretization for conversation starter recommendation
+   * Key techniques:
+     - Adversarial distribution aligner: bridges gap between passive recommendations and active expressions
+     - Semantic discretizer: enables popularity debiasing algorithms
+     - Harnesses user "free will" through active expressions (manually typed queries)
+     - Breaks harmful echo chamber effect in conversational search
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 7/10** — Novel application of LLMs to conversation starter recommendation; adversarial alignment is interesting
+     - **Fairness: 6/10** — Semantic discretizer enables popularity debiasing; addresses echo chamber effect
+     - **Robustness: 7/10** — Online A/B tests show +0.54% Feature Penetration Rate and improved User Active Days
+     - **Impact: 6/10** — SIGIR 2026; relevant to LLM-driven conversational recommendation but peripheral to core generative recommendation
+
+---
+
+
 ## Papers May 07:
 
 > **Note:** 6 new generative recommendation papers found in the last 24 hours (May 6-7, 2026). All papers are newly published and not previously included.
@@ -1190,10 +1248,11 @@
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 21 papers as of May 07.
+**Count:** 22 papers as of May 07.
 
 | Score | Paper |
 | --- | --- |
+| 10/10 | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) |
 | 10/10 | MiniOneRec: An Open-Source Framework for Scaling Generative Recommendation |
 | 9/10 | Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE) |
 | 9/10 | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
@@ -1221,16 +1280,19 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ## By Keyword
 
 ### RL / Reinforcement Learning
+- Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
 - ReRec: Reasoning-Augmented LLM-based Recommendation Assistant
 - Generative Reasoning Re-ranker (GR2)
 - ReCast
 - Objective Shaping with Hard Negatives
+- Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA)
 - OpenOneRec
 - OneMall
 - OneRec-Think
 - OneRec-V2
 - MiniOneRec
 - Rec-R1
+- Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner)
 - Rank-GRPO
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization (GRAD)
@@ -1244,15 +1306,19 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Generative Retrieval / Ranking
 - Harmonizing Generative Retrieval and Ranking in Chain-of-Recommendation (RecoChain)
 - Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
+- Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
+- Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - CapsID: Soft-Routed Variable-Length Semantic IDs
 - Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)
 
 ### Reasoning
+- Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
 - ReRec
 - VRec (Verifiable Reasoning)
 - GR2
 - GraphRAG-IRL
+- Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - Reasoning over Semantic IDs Enhances Generative Recommendation
 - Factorized Latent Reasoning for LLM-based Recommendation (FLR)
 - Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
@@ -1262,11 +1328,13 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)
 
 ### Generative Recommendation / VAE
+- Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA)
 - R3-VAE
 - ReCast
 - Deep Interest Mining (SemanticID)
 - BITRec (Modeling Behavioral Intensity and Transitions)
 - A2Gen (Action-Aware Generative Sequence Modeling)
+- Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 - Generative Recommendation for Large-Scale Advertising (GR4AD)
 - How Well Does Generative Recommendation Generalize?
@@ -1309,7 +1377,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Semantic / Structured IDs
 - GRLM
 - Deep Interest Mining (SemanticID)
+- Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - Reasoning over Semantic IDs Enhances Generative Recommendation
+- Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 - Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
@@ -1401,7 +1471,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Johannes Kepler University Linz** | A2G-DiffRec |
 | **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
 | **JD.com** | GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation |
-| **Tencent** | Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation |
+| **Tencent** | Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) |
 | **ACL 2026** | ReRec, SAGE |
 | **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec |
 | **MLSys 2026** | FreeScale |
@@ -1414,6 +1484,6 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Stony Brook University** | CRAB |
 | **Alibaba** | RecGPT-Mobile: On-Device Large Language Models |
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
-| **(TBD)** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE)
+| **(TBD)** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) · Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
 
 ---
