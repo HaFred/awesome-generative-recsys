@@ -8,6 +8,94 @@
 - [By Affiliation](#by-affiliation)
 
 ---
+## Papers May 09:
+
+> **Note:** No new generative recommendation papers were found in the last 24 hours (May 8-9, 2026). Following the fallback procedure, 5 papers from the last 3 months (October 2025 - May 2026) are included to meet the minimum 5 papers requirement.
+
+1. **TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation**
+   * Affiliation: Southeast University; Tsinghua University; Shenzhen University; Fudan University; Zhejiang University; Swinburne University of Technology
+   * Link: [arxiv.org/abs/2605.05249](https://arxiv.org/abs/2605.05249)
+   * Venue: arXiv preprint, May 5, 2026
+   * TL;DR: TriAlignGR is a unified multitask-multimodal framework that resolves SID Content Degradation and SID Semantic Opacity through cross-modal semantic alignment, multimodal deep interest mining, and triangular multitask learning
+   * Key techniques:
+     - Cross-Modal Semantic Alignment (CMSA): integrates visual content into SID construction
+     - Multimodal Deep Interest Mining (MDIM): leverages LLM Chain-of-Thought reasoning to extract latent user intents
+     - Triangular Multitask (TMT): jointly trains on eight complementary generation tasks under a single autoregressive loss
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Multimodal SID is novel; triangular multitask is a creative solution to SID Semantic Opacity
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Multimodal integration should improve robustness; validated on experiments
+     - **Impact: 8/10** — From multiple universities; multimodal generative recommendation is a growing area
+
+2. **One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving**
+   * Affiliation: — *(Wenjun Yu, Shuguang Han, Amelie Chi Zhou — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.04450](https://arxiv.org/abs/2605.04450)
+   * Venue: arXiv preprint, May 6, 2026
+   * TL;DR: HELM jointly manages HBM allocation and request routing for generative recommender inference, reducing P99 latency by 24-38% over static policies
+   * Key techniques:
+     - Adaptive Memory Allocation: three-layer PPO-based controller for dynamic EMB-KV allocation
+     - EMB-KV-Aware Scheduling: routes requests by jointly considering KV residency, embedding locality, and node load
+     - Online reallocation without H2D refill traffic on the critical path
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (systems paper)
+     - **Novelty: 7/10** — Novel adaptive HBM partitioning for generative recommender inference; addresses key latency bottleneck
+     - **Fairness: 4/10** — Not relevant to fairness; pure systems optimization work
+     - **Robustness: 9/10** — 24-38% P99 latency reduction; 93.5-99.6% SLO satisfaction; validated on 32-node A100 cluster
+     - **Impact: 8/10** — Addresses key serving bottleneck for industrial GR deployment; significant engineering contribution
+
+3. **PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation**
+   * Affiliation: — *(Dengzhao Fang, Jingtong Gao, Yu Li, Xiangyu Zhao, Yi Chang — institutions TBD)*
+   * Link: [arxiv.org/abs/2601.16556](https://arxiv.org/abs/2601.16556)
+   * Venue: arXiv preprint, January 23, 2026
+   * TL;DR: PRISM addresses impure semantic tokenization and lossy generation in generative sequential recommendation via purified representation and integrated semantic modeling
+   * Key techniques:
+     - Purified Semantic Quantizer: constructs robust codebook via adaptive collaborative denoising and hierarchical semantic anchoring
+     - Integrated Semantic Recommender: incorporates dynamic semantic integration and semantic structure alignment
+     - Two-stage approach: purified tokenization + integrated generation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5.5/10** — GitHub: https://github.com/DengzhaoFang/PRISM; code structure is clear but documentation is brief; 0 stars/forks; limited community engagement
+     - **Novelty: 8/10** — Purified quantization + integrated semantic modeling is a novel approach to GSR
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Outperforms SOTAs on 4 real-world datasets; substantial performance gains in high-sparsity scenarios
+     - **Impact: 8/10** — Addresses key GSR limitations; from CityU/Jilin University
+
+4. **Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)**
+   * Affiliation: — *(Zhefan Wang, Guokai Yan, Jinbei Yu, Siyu Gu, Jingyan Chen, Peng Jiang, Zhiqiang Guo, Min Zhang — institutions TBD)*
+   * Link: [arxiv.org/abs/2511.03155](https://arxiv.org/abs/2511.03155)
+   * Venue: arXiv preprint, November 5, 2025
+   * TL;DR: GAMER is a novel generative framework for multi-behavior sequential recommendation with cross-level interaction layer and sequential augmentation strategy
+   * Key techniques:
+     - Cross-Level Interaction Layer: captures hierarchical dependencies among behaviors
+     - Sequential Augmentation Strategy: enhances robustness in training
+     - ShortVideoAD Dataset: large-scale multi-behavior dataset from short-video platform
+     - Decoder-only backbone for generative recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7.5/10** — GitHub: https://github.com/wzf2000/GAMER; well-structured code with good documentation; 210 commits; 30 stars; no tests or CI/CD
+     - **Novelty: 7/10** — Hierarchical behavior modeling for generative rec is novel; cross-level interaction is creative
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Sequential augmentation enhances robustness; validated on multiple datasets
+     - **Impact: 7/10** — Releases ShortVideoAD dataset; novel approach to multi-behavior generative recommendation
+
+5. **On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)**
+   * Affiliation: — *(Wenyu Mao, Jiancan Wu, Guoqing Hu, Zhengyi Yang, Wei Ji, Xiang Wang — institutions TBD)*
+   * Link: [arxiv.org/abs/2510.17245](https://arxiv.org/abs/2510.17245)
+   * Venue: NeurIPS 2025
+   * TL;DR: TA-Rec achieves one-step generation for diffusion-based recommenders via temporal consistency regularization and adaptive preference alignment, mitigating the efficiency-effectiveness trade-off
+   * Key techniques:
+     - Temporal Consistency Regularization (TCR): enforces consistency between denoising results across adjacent steps
+     - Adaptive Preference Alignment (APA): aligns denoising process with user preference adaptively
+     - Two-stage objective: pretraining (efficiency) + fine-tuning (effectiveness)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6.5/10** — GitHub: https://github.com/maowenyu-11/TA-Rec; complete implementation but limited documentation; 9 commits; 9 stars
+     - **Novelty: 8/10** — One-step generation for diffusion rec is novel; addresses key trade-off in diffusion-based recommenders
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — TCR + APA for stable training; mitigates discretization errors
+     - **Impact: 7/10** — NeurIPS 2025; addresses efficiency-effectiveness trade-off in diffusion rec
+
+---
+
+
 ## Papers May 08:
 
 > **Note:** 3 generative recommendation papers identified (submitted May 7, 2026). All papers are newly added to the repository.
@@ -1248,7 +1336,7 @@
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 22 papers as of May 07.
+**Count:** 25 papers as of May 09.
 
 | Score | Paper |
 | --- | --- |
@@ -1267,10 +1355,13 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | OneRec-Think: In-Text Reasoning for Generative Recommendation |
 | 8/10 | UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization |
 | 8/10 | Unleashing the Native Recommendation Potential: LLM-Based Generative Recommendation via Structured Term Identifiers (GRLM) |
+| 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
 | 7/10 | Learning to Rotate: Temporal and Semantic Rotary Encoding for Sequential Modeling (SIREN-RoPE) |
 | 7/10 | R3-VAE: Reference Vector-Guided Rating Residual Quantization VAE for Generative Recommendation |
 | 7/10 | Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning |
+| 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |
+| 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 9/10 | Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
 | 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
@@ -1308,6 +1399,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
+- TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
+- PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation
+- Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
+- On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - CapsID: Soft-Routed Variable-Length Semantic IDs
 - Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)
@@ -1323,6 +1418,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Factorized Latent Reasoning for LLM-based Recommendation (FLR)
 - Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
 - Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)
+- TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
+- PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation
+- Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
+- On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 - SAGER: Self-Evolving User Policy Skills for Recommendation Agent
 - DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
 - Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)
@@ -1333,18 +1432,29 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - ReCast
 - Deep Interest Mining (SemanticID)
 - BITRec (Modeling Behavioral Intensity and Transitions)
+- Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
+- On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 - A2Gen (Action-Aware Generative Sequence Modeling)
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
+- TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
+- PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation
+- Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
+- On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 - Generative Recommendation for Large-Scale Advertising (GR4AD)
 - How Well Does Generative Recommendation Generalize?
 - GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation
 - Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation
 - Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
+- TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
+- PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation
+- Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
+- On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 - MTServe: Efficient Serving for Generative Recommendation Models
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
 - CRAB: Codebook Rebalancing for Bias Mitigation in Generative Recommendation
 - Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP)
+- One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
 - Multi-Business Prediction for Generative Recommendation at Meituan (MBGR)
 - One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec)
 
@@ -1361,6 +1471,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE)
 - ProMax: Exploring the Potential of LLM-derived Profiles
 - Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)
+- TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
+- PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation
+- Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
+- On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 - Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model
 - DUET: Joint Exploration of User Item Profiles in Recommendation System
 - DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
@@ -1381,10 +1495,19 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Reasoning over Semantic IDs Enhances Generative Recommendation
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
+- TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
+- PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation
+- Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
+- On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 - Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
+- TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
+- PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation
+- Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
+- On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
 - Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
 - IntRR: A Framework for Integrating SID Redistribution and Length Reduction
+- One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
 
 ### Retrieval / Representation
 - ResRank (retrieval + reranking)
@@ -1415,6 +1538,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)
 - MTServe: Efficient Serving for Generative Recommendation Models
 - Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP)
+- One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
 
 ### Model / Architecture
 - OpenOneRec
@@ -1427,6 +1551,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Multi-Business Prediction for Generative Recommendation at Meituan (MBGR)
 - One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec)
 - IntRR: A Framework for Integrating SID Redistribution and Length Reduction
+- One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
 - DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
 
 ### MoE
@@ -1439,6 +1564,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Diffusion
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
 - Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)
+- On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 
 ### Fairness
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
@@ -1486,4 +1612,4 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
 | **(TBD)** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) · Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
 
----
+ · TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation · One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving · PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation · Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) · On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)---
