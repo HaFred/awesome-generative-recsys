@@ -8,6 +8,100 @@
 - [By Affiliation](#by-affiliation)
 
 ---
+---
+
+## Papers May 10:
+
+> **Note:** No new generative recommendation papers were found in the last 24 hours (May 9-10, 2026). Following the fallback procedure, 5 papers from the last 3 months (February-October 2025 - May 2026) are included to meet the minimum 5 papers requirement.
+
+1. **HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning and Multi-Objective Preference Alignment**
+   * Affiliation: Tencent (Yunsheng Pang et al., 14 authors total)
+   * Link: [arxiv.org/abs/2512.24787](https://arxiv.org/abs/2512.24787)
+   * Venue: arXiv preprint, December 31, 2025 (v2 revised February 23, 2026)
+   * TL;DR: HiGR is a generative slate recommendation framework that decouples generation into hierarchical planning (list-level) and decoding (item-level), achieving 5× inference speedup and deployed at Tencent serving hundreds of millions of users
+   * Key techniques:
+     - Auto-encoder with residual quantization and contrastive constraints for semantic ID tokenization
+     - Hierarchical planning stage (list-level intent capture)
+     - Item-level decoding stage (specific item selection)
+     - Multi-objective and listwise preference alignment
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (industrial deployment at Tencent)
+     - **Novelty: 9/10** — Novel hierarchical planning + item-level decoding for generative slate recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Deployed at Tencent (hundreds of millions of users); online A/B tests show +1.22% watch time, +1.73% video plays
+     - **Impact: 10/10** — From Tencent; full industrial deployment; significant business impact
+
+2. **Variable-Length Semantic IDs for Recommender Systems**
+   * Affiliation: — *(Kirill Khryashchev — institution TBD)*
+   * Link: [arxiv.org/abs/2602.16375](https://arxiv.org/abs/2602.16375)
+   * Venue: arXiv preprint, February 18, 2026
+   * TL;DR: Proposes variable-length semantic IDs for recommender systems, learning adaptive item representation length under a principled probabilistic framework
+   * Key techniques:
+     - Variable-length semantic identifiers (adaptively assign length based on item frequency)
+     - Discrete variational autoencoder with Gumbel-Softmax reparameterization
+     - Probabilistic framework avoiding REINFORCE-based training instability
+     - Bridging recommender systems and emergent communication
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel variable-length semantic IDs; addresses fixed-length inefficiency
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Probabilistic framework avoids training instability; validated on experiments
+     - **Impact: 7/10** — Novel approach to semantic ID learning; bridges two research areas
+
+3. **PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations**
+   * Affiliation: Kuaishou Technology (Chengcheng Guo, Kun Gai, Guorui Zhou, et al.)
+   * Link: [arxiv.org/abs/2601.04674](https://arxiv.org/abs/2601.04674)
+   * Venue: arXiv preprint, January 8, 2026
+   * TL;DR: PROMISE integrates dense, step-by-step verification into generative recommendation via Process Reward Models, mitigating Semantic Drift and unlocking Test-Time Scaling Laws
+   * Key techniques:
+     - Process Reward Model (PRM) for step-by-step verification
+     - PRM-guided Beam Search for dynamic pruning of erroneous branches
+     - Test-Time Scaling Laws for recommender systems
+     - Mitigating Semantic Drift in generative recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (from Kuaishou)
+     - **Novelty: 9/10** — Novel application of PRMs to generative recommendation; Test-Time Scaling Laws
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Mitigates Semantic Drift; validated on offline experiments and online A/B tests
+     - **Impact: 9/10** — From Kuaishou; significant improvement in recommendation accuracy
+
+4. **Differentiable Semantic ID for Generative Recommendation (DIGER)**
+   * Affiliation: Leiden University; University of Glasgow (Junchen Fu, Zhaochun Ren, et al.)
+   * Link: [arxiv.org/abs/2601.19711](https://arxiv.org/abs/2601.19711)
+   * Venue: SIGIR 2026
+   * TL;DR: DIGER makes semantic IDs differentiable for generative recommendation via Gumbel noise and uncertainty decay, mitigating codebook collapse and improving code utilization
+   * Key techniques:
+     - Differentiable Semantic ID learning (DIGER)
+     - Gumbel noise for early-stage codebook exploration
+     - Uncertainty decay strategies for transition from exploration to exploitation
+     - End-to-end optimization of indexing and recommendation objectives
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — GitHub: https://github.com/junchen-fu/DIGER; complete implementation; well-documented; SIGIR 2026
+     - **Novelty: 9/10** — First step toward differentiable semantic IDs for generative recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Mitigates codebook collapse; extensive experiments on multiple public datasets
+     - **Impact: 9/10** — SIGIR 2026; addresses key objective mismatch in generative recommendation
+
+5. **LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation**
+   * Affiliation: Renmin University of China; Beijing University of Posts and Telecommunications (Teng Shi, Chongxuan Li, Jun Xu, et al.)
+   * Link: [arxiv.org/abs/2511.06254](https://arxiv.org/abs/2511.06254)
+   * Venue: arXiv preprint, November 9, 2025
+   * TL;DR: LLaDA-Rec reformulates generative recommendation as parallel semantic ID generation via discrete diffusion, addressing unidirectional constraints and error accumulation in autoregressive models
+   * Key techniques:
+     - Discrete diffusion framework for parallel semantic ID generation
+     - Bidirectional attention with adaptive generation order
+     - Parallel tokenization scheme for bidirectional modeling
+     - Two masking mechanisms (user-history and next-item levels)
+     - Adapted beam search for adaptive-order discrete diffusion decoding
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 9/10** — Novel discrete diffusion for parallel generation; addresses key limitations of autoregressive models
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Alleviates error accumulation; validated on 3 real-world datasets
+     - **Impact: 8/10** — Novel paradigm for generative recommendation; strong empirical results
+
+---
+
 ## Papers May 09:
 
 > **Note:** No new generative recommendation papers were found in the last 24 hours (May 8-9, 2026). Following the fallback procedure, 5 papers from the last 3 months (October 2025 - May 2026) are included to meet the minimum 5 papers requirement.
@@ -1336,7 +1430,7 @@
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 25 papers as of May 09.
+**Count:** 26 papers as of May 10.
 
 | Score | Paper |
 | --- | --- |
@@ -1364,6 +1458,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 9/10 | Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
+| 8/10 | Differentiable Semantic ID for Generative Recommendation (DIGER) |
 | 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
 
 ---
@@ -1427,6 +1522,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)
 
 ### Generative Recommendation / VAE
+- Differentiable Semantic ID for Generative Recommendation (DIGER)
 - Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA)
 - R3-VAE
 - ReCast
@@ -1562,6 +1658,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - MuonRec
 
 ### Diffusion
+- LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
 - Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)
 - On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
@@ -1583,7 +1680,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **NJUST / Nanjing** | Harmonizing Generative Retrieval (RecoChain) |
 | **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) |
 | **Beihang University** | A2Gen (Action-Aware Generative Sequence Modeling) |
-| **Kuaishou** | OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID |
+| **Kuaishou** | PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations · OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID |
 | **USTC** | MiniOneRec · UniGRec |
 | **UIUC Illinois** | Rec-R1 |
 | **Huawei Cloud** | RelayGR |
@@ -1594,10 +1691,12 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Netflix** | Rank-GRPO |
 | **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID |
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) |
+| **Leiden University / University of Glasgow** | Differentiable Semantic ID for Generative Recommendation (DIGER) |
 | **Johannes Kepler University Linz** | A2G-DiffRec |
+| **Renmin University of China / Beijing University of Posts and Telecommunications** | LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation |
 | **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
 | **JD.com** | GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation |
-| **Tencent** | Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) |
+| **Tencent** | HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning · Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) |
 | **ACL 2026** | ReRec, SAGE |
 | **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec |
 | **MLSys 2026** | FreeScale |
@@ -1610,6 +1709,6 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Stony Brook University** | CRAB |
 | **Alibaba** | RecGPT-Mobile: On-Device Large Language Models |
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
-| **(TBD)** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) · Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
+| **(TBD)** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems · | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) · Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
 
  · TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation · One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving · PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation · Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) · On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)---
