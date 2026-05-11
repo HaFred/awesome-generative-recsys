@@ -8,6 +8,95 @@
 - [By Affiliation](#by-affiliation)
 
 ---
+## Papers May 11:
+
+> **Note:** No new generative recommendation papers were found in the last 24 hours (May 10-11, 2026). Following the fallback procedure, 5 papers from the last 3 months (April-May 2026) are included to meet the minimum 5 papers requirement.
+
+1. **Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation**
+   * Affiliation: — *(Hongyang Su, Beibei Kong, Lei Cheng, Chengxiang Zhuo, Zang Li, Chenyun Yu — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.07613](https://arxiv.org/abs/2605.07613)
+   * Venue: arXiv preprint, May 8, 2026
+   * TL;DR: Conversational news recommendation with intent-driven Semantic ID generation under Generate-then-Match paradigm, achieving 0% hallucination
+   * Key techniques:
+     - Intent-driven Semantic ID (SID) generation under Generate-then-Match paradigm
+     - Multi-task SID alignment and GPT-4 Chain-of-Thought distillation
+     - Profile-Aware Dual-Signal Reasoning (PADR) for cold-start users
+     - Fuzzy matching to current news pool for grounded recommendations
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 7/10** — Intent-driven SID for conversational news recommendation is novel; Generate-then-Match ensures grounded recommendations
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — 0% hallucination achieved; 12.4% L1 match in 152K open-generation SID space; validated on production dialogues
+     - **Impact: 7/10** — Conversational news recommendation is a growing area; 0% hallucination is impressive for grounded generation
+
+2. **RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching**
+   * Affiliation: — *(Zhan Zhao, Yuxin Wang, Amelie Chi Zhou — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.07443](https://arxiv.org/abs/2605.07443)
+   * Venue: arXiv preprint, May 8, 2026
+   * TL;DR: RcLLM is a distributed inference system for generative recommendation with Beyond-Prefix KV Caching, reducing TTFT by 1.31x-9.51x
+   * Key techniques:
+     - Beyond-Prefix KV Caching for decomposed prompts into reusable blocks
+     - Stratified distributed storage design (user-history caches replicated, item caches sharded)
+     - Affinity-based global scheduler for improved data locality
+     - Selective attention mechanism to correct approximation errors
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Beyond-Prefix KV Caching is a novel approach to accelerating generative recommendation; addresses non-contiguous prefix reuse
+     - **Fairness: 4/10** — Not relevant to fairness; systems optimization work
+     - **Robustness: 9/10** — 1.31x-9.51x TTFT reduction compared with SOTA prefix caching systems; enables real-time serving
+     - **Impact: 8/10** — Addresses key inference latency bottleneck for industrial deployment of generative recommenders
+
+3. **An Embarrassingly Simple Graph Heuristic Reveals Shortcut-Solvable Benchmarks for Sequential Recommendation**
+   * Affiliation: — *(Haoyu Han, Li Ma, Hanbing Wang, Bingheng Li, Daochen Zha, Chun How Tan, Huiji Gao, Xin Liu, Stephanie Moyerman, Sanjeev Katariya, Hui Liu, Jiliang Tang — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.07125](https://arxiv.org/abs/2605.07125)
+   * Venue: arXiv preprint, May 8, 2026
+   * TL;DR: Benchmark audit showing simple graph heuristic matches or outperforms modern generative recommenders on standard benchmarks, revealing shortcut-solvable structures
+   * Key techniques:
+     - Graph heuristic using few-hop item-transition graph and item-feature similarity
+     - Shortcut structure identification (low-branching local transitions, feature-smooth transitions, limited dependence on long user histories)
+     - Benchmark audit methodology for sequential recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Important benchmark audit paper that questions current evaluation practices in generative recommendation; identifies shortcut-solvable benchmarks
+     - **Fairness: 5/10** — Not explicitly addressed, but benchmark quality affects fairness evaluation
+     - **Robustness: 7/10** — Rigorous benchmark analysis; identifies three shortcut structures that make next-item prediction easier than expected
+     - **Impact: 8/10** — Important call for better evaluation practices in the generative recommendation community; 38.10% and 44.18% relative NDCG@10 improvements over best baseline
+
+4. **LLM Biases**
+   * Affiliation: — *(Jinhui Han, Ming Hu, Xilin Zhang — institutions TBD)*
+   * Link: [arxiv.org/abs/2604.26960](https://arxiv.org/abs/2604.26960)
+   * Venue: arXiv preprint, April 7, 2026
+   * TL;DR: Theoretical analysis of four bias channels (positional bias, popularity amplification, latent driver bias, synthetic data bias) in transformer-based generative recommenders
+   * Key techniques:
+     - Theoretical analysis of transformer-based generative recommenders
+     - Four bias channels identification: (i) Positional bias, (ii) Popularity amplification, (iii) Latent driver bias, (iv) Synthetic data bias
+     - Mechanism-level reliability risk analysis
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (theoretical paper)
+     - **Novelty: 9/10** — First theoretical analysis of bias mechanisms in transformer-based generative recommenders; important contribution to understanding LLM biases
+     - **Fairness: 9/10** — Core contribution is identifying bias channels in generative recommenders; addresses fairness concerns in LLM-based systems
+     - **Robustness: 7/10** — Theoretical analysis; highlights mechanism-level reliability risks not visible in offline performance metrics
+     - **Impact: 8/10** — Important theoretical contribution to understanding biases in generative recommendation; relevant to industrial deployment
+
+5. **Birds of a Feather Cluster Nearby: A Proximity-Aware Geo-Codebook for Local Service Recommendation**
+   * Affiliation: — *(Tian He, Chen Yang, Jiawei Zhang, Lin Guo, Wei Lin, Zhuqing Jiang — institutions TBD)*
+   * Link: [arxiv.org/abs/2604.23156](https://arxiv.org/abs/2604.23156)
+   * Venue: arXiv preprint, April 2026
+   * TL;DR: Pro-GEO, a Proximity-aware GEO-codebook that incorporates geographic constraints into SID tokenization for local service recommendation
+   * Key techniques:
+     - Pro-GEO (Proximity-aware GEO-codebook)
+     - Geo-centroid local coordinate system to capture intra-cluster spatial relationships
+     - Geo-rotary position encoding mechanism that models geographic proximity as orthogonal rotational transformations
+     - Joint modeling of semantic and spatial signals
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Pro-GEO is a novel approach to incorporating geographic constraints into SID tokenization; addresses key limitation of existing semantic codebooks
+     - **Fairness: 6/10** — Geographic constraints may affect fairness for users in different locations; not explicitly addressed
+     - **Robustness: 8/10** — 45.60% reduction in average geographic clustering distance; 1.87% improvement in Hit@50; validated on large-scale industrial dataset
+     - **Impact: 8/10** — Local service recommendation is a practical application; geographic constraints are important for real-world deployment
+
+---
+
 ---
 
 ## Papers May 10:
@@ -1430,7 +1519,7 @@
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 26 papers as of May 10.
+**Count:** 26 papers as of May 11.
 
 | Score | Paper |
 | --- | --- |
@@ -1521,6 +1610,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
 - Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)
 
+- Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
+
 ### Generative Recommendation / VAE
 - Differentiable Semantic ID for Generative Recommendation (DIGER)
 - Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA)
@@ -1554,6 +1645,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Multi-Business Prediction for Generative Recommendation at Meituan (MBGR)
 - One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec)
 
+- Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
+
 ### LLM-based Recommendation
 - ReRec
 - VRec
@@ -1576,6 +1669,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
 - RecGPT-Mobile: On-Device Large Language Models
 - Beyond Static Best-of-N: Bayesian List-wise Alignment (BLADE)
+
+- Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
 
 ### Re-ranking
 - GR2
@@ -1605,6 +1700,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - IntRR: A Framework for Integrating SID Redistribution and Length Reduction
 - One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
 
+- Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
+
 ### Retrieval / Representation
 - ResRank (retrieval + reranking)
 - MARC (LLM representation compression)
@@ -1614,6 +1711,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 ### Distributed Training / Systems
 - FreeScale (Distributed Training for Sequence Recommendation)
+
+- RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching
 
 ### Sequential Modeling / RoPE
 - SIREN-RoPE (Learning to Rotate)
@@ -1635,6 +1734,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - MTServe: Efficient Serving for Generative Recommendation Models
 - Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP)
 - One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
+
+- RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching
+- Birds of a Feather Cluster Nearby: A Proximity-Aware Geo-Codebook for Local Service Recommendation
 
 ### Model / Architecture
 - OpenOneRec
@@ -1666,6 +1768,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Fairness
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
 - CRAB: Codebook Rebalancing for Bias Mitigation in Generative Recommendation
+
+- LLM Biases
 
 ---
 
