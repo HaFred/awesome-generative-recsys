@@ -8,6 +8,98 @@
 - [By Affiliation](#by-affiliation)
 
 ---
+## Papers May 12:
+
+> **Note:** Only 1 new generative recommendation paper was found in the last 24 hours (May 11-12, 2026). Following the fallback procedure, 4 additional papers from the last 3 months (April-May 2026) are included to meet the minimum 5 papers requirement.
+
+1. **LASAR: Latent Adaptive Semantic Aligned Reasoning for Generative Recommendation**
+   * Affiliation: — *(Yiwen Chen, Fuwei Zhang, Zehao Chen, Deqing Wang, Hehan Li, Peizhi Xu, Hanmeng Liu, Shuanglong Li, Xin Pei, Fuzhen Zhuang, Zhao Zhang — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.10207](https://arxiv.org/abs/2605.10207)
+   * Venue: arXiv preprint, May 11, 2026
+   * TL;DR: LASAR is a SFT-then-RL framework for latent adaptive semantic aligned reasoning in generative recommendation, reducing inference latency while improving quality
+   * Key techniques:
+     - Two-stage training: Stage 1 grounds SID semantics, Stage 2 introduces latent reasoning
+     - Explicit CoT semantic alignment with step-wise bidirectional KL divergence
+     - Policy Head predicts per-sample reasoning depth
+     - GRPO-based RL with terminal-only KL alignment
+     - REINFORCE optimizes Policy Head for dynamic step allocation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 9/10** — Novel application of latent reasoning to generative recommendation with adaptive depth
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — ~20x faster than generating explicit CoT; adds marginal inference latency
+     - **Impact: 8/10** — Addresses latency bottleneck in LLM-based generative recommendation
+
+2. **RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation**
+   * Affiliation: — *(Shijun Li, Wooseong Yang, Yu Wang, Tianxin Wei, Joydeep Ghosh — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.07129](https://arxiv.org/abs/2605.07129)
+   * Venue: arXiv preprint, May 7, 2026
+   * TL;DR: RRCM is a ranking-driven retrieval-and-reasoning framework over collaborative and metadata memories for LLM-based agentic recommendation
+   * Key techniques:
+     - Lightweight user-history context as starting point
+     - Learns whether to recommend directly, retrieve collaborative evidence, retrieve item metadata, or interleave both
+     - Both memories represented in natural language with unified retrieval interface
+     - Optimized with outcome-only ranking reward using group relative policy optimization
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel memory-reading policy for LLM-based recommendation; avoids handcrafted injection
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Optimized with ranking reward; flexible evidence acquisition
+     - **Impact: 7/10** — Significantly outperforms traditional baselines and diverse LLM-based approaches
+
+3. **Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)**
+   * Affiliation: — *(Yifang Qin, Zhaobin Li, Arisa Watanabe, Wei Ju, Zhiping Xiao, Ming Zhang — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.05165](https://arxiv.org/abs/2605.05165)
+   * Venue: arXiv preprint, May 6, 2026
+   * TL;DR: Proposes "interests burn-down process" as a diffusion scheme tailored for collaborative filtering, with StageCF method demonstrating superior performance
+   * Key techniques:
+     - Interests burn-down process (forward process modeling interest decay)
+     - Reverse burn-up process (generates personalized recommendations)
+     - StageCF method illustrating the burn-down diffusion process
+     - Tailored diffusion scheme for interaction systems (not Gaussian noise)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 7/10** — Novel diffusion process tailored for CF; addresses incongruity between Gaussian noise and user interaction behavior
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 6/10** — Diffusion process is more aligned with CF tasks; validated on experiments against baselines
+     - **Impact: 6/10** — Novel application of diffusion to CF; empirical results demonstrate effectiveness
+
+4. **RecGPT-Mobile: On-Device Large Language Models for User Intent Understanding in Taobao Feed Recommendation**
+   * Affiliation: Alibaba Group (Taobao)
+   * Link: [arxiv.org/abs/2605.04726](https://arxiv.org/abs/2605.04726)
+   * Venue: arXiv preprint, May 7, 2026
+   * TL;DR: Deploys LLM directly on mobile devices for real-time user intent understanding and recommendation adjustment in Taobao feed
+   * Key techniques:
+     - On-device LLM deployment for mobile e-commerce
+     - Lightweight LLM-based intent understanding agent
+     - Real-time recommendation adjustment based on evolving user interests
+     - Next-query prediction with reduced inference cost
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (industrial deployment at Taobao)
+     - **Novelty: 8/10** — First on-device LLM deployment for recommendation; novel approach to reducing cloud inference cost
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — On-device deployment enables real-time adjustment; validated with offline analyses and online experiments
+     - **Impact: 9/10** — From Alibaba/Taobao; significant practical impact for mobile e-commerce recommendation
+
+5. **Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)**
+   * Affiliation: — *(Jiaju Chen, Chongming Gao, Chenxiao Fan, Haoyan Liu, Qingpeng Cai, Peng Jiang, Xiangnan He — institutions TBD)*
+   * Link: [arxiv.org/abs/2604.27747](https://arxiv.org/abs/2604.27747)
+   * Venue: arXiv preprint, April 30, 2026
+   * TL;DR: PAD-Rec introduces position-aware drafting for speculative decoding in generative list-wise recommendation, achieving up to 3.1x wall-clock speedup
+   * Key techniques:
+     - Item position embeddings (encode within-item slot of each token)
+     - Step position embeddings (encode draft step for depth-dependent uncertainty)
+     - Learnable gates: learnable coefficient for item slots, context-driven gate for draft steps
+     - Lightweight module, easy to integrate with standard draft models
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel position-aware drafting for speculative decoding in generative recommendation
+     - **Fairness: 4/10** — Not relevant to fairness; systems optimization work
+     - **Robustness: 8/10** — Up to 3.1x wall-clock speedup; ~5% average wall-clock speedup gain over strong SD baselines
+     - **Impact: 8/10** — Addresses key inference latency bottleneck for LLM-based generative list-wise recommendation
+
+---
+
 ## Papers May 11:
 
 > **Note:** No new generative recommendation papers were found in the last 24 hours (May 10-11, 2026). Following the fallback procedure, 5 papers from the last 3 months (April-May 2026) are included to meet the minimum 5 papers requirement.
@@ -1644,10 +1736,18 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
 - Multi-Business Prediction for Generative Recommendation at Meituan (MBGR)
 - One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec)
+- LASAR: Latent Adaptive Semantic Aligned Reasoning for Generative Recommendation
+- RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation
+- Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)
+- Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)
+
 
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
 
 ### LLM-based Recommendation
+- LASAR: Latent Adaptive Semantic Aligned Reasoning for Generative Recommendation
+- RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation
+- RecGPT-Mobile: On-Device Large Language Models
 - ReRec
 - VRec
 - GRLM (Structured Term IDs)
@@ -1727,18 +1827,18 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DC4SR (Disagreement as Signals)
 
 ### Inference
+- Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)
 - OpenOneRec
 - RelayGR
 - [STATIC] Vectorizing the Trie
-- Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)
 - MTServe: Efficient Serving for Generative Recommendation Models
 - Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP)
 - One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
 
 - RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching
 - Birds of a Feather Cluster Nearby: A Proximity-Aware Geo-Codebook for Local Service Recommendation
-
 ### Model / Architecture
+- RecGPT-Mobile: On-Device Large Language Models
 - OpenOneRec
 - OneMall
 - MiniOneRec
@@ -1760,9 +1860,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - MuonRec
 
 ### Diffusion
+- Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)
 - LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
-- Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)
 - On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 
 ### Fairness
@@ -1811,8 +1911,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Shopee** | UniRec |
 | **Walmart Global Tech** | CRAB |
 | **Stony Brook University** | CRAB |
-| **Alibaba** | RecGPT-Mobile: On-Device Large Language Models |
+| **Alibaba** | RecGPT-Mobile: On-Device Large Language Models �� RecGPT-Mobile: On-Device Large Language Models |
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
-| **(TBD)** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems · | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) · Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
+| **(TBD)** | LASAR �� RRCM �� StageCF �� PAD-Rec �� Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems · | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) · Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
 
  · TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation · One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving · PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation · Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) · On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)---
