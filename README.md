@@ -8,6 +8,97 @@
 - [By Affiliation](#by-affiliation)
 
 ---
+## Papers May 13:
+
+> **Note:** 5 new generative recommendation papers found in the last 24 hours (May 12-13, 2026). All papers are newly added to the repository.
+
+1. **Why Users Go There: World Knowledge-Augmented Generative Next POI Recommendation**
+   * Affiliation: — *(Qiuyu Ding, Heng-Da Xu, Wei Zhang, Dongyi Lv, Changda Xia, Feng Xiong, Mu Xu — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.11807](https://arxiv.org/abs/2605.11807)
+   * Venue: arXiv preprint, May 12, 2026
+   * TL;DR: AWARE employs an LLM agent to generate location- and time-aware contextual narratives for generative POI recommendation, achieving up to 12.4% relative improvement
+   * Key techniques:
+     - LLM agent (AWARE) for contextual narrative generation
+     - Location- and time-aware contextual narratives capturing regional cultural characteristics, seasonal trends, and ongoing events
+     - Anchoring narratives in each user's behavioral context
+     - World knowledge augmentation grounded in personalized spatial-temporal patterns
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel augmentation of generative recommendation with world knowledge; addresses knowledge staleness in LLM-based models
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Validated on 3 real-world datasets; up to 12.4% relative improvement over baselines
+     - **Impact: 8/10** — Generative POI recommendation is a growing area; world knowledge augmentation is valuable for real-world deployment
+
+2. **TwiSTAR: Think Fast, Think Slow, Then Act, Generative Recommendation with Adaptive Reasoning**
+   * Affiliation: — *(Shiteng Cao, Kaian Jiang, Yunlong Gong, Zhiheng Li — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.11553](https://arxiv.org/abs/2605.11553)
+   * Venue: arXiv preprint, May 12, 2026
+   * TL;DR: TwiSTAR learns to adaptively allocate reasoning effort per user sequence, using a fast SID-based retriever, a lightweight candidate ranker, and a slow reasoning model
+   * Key techniques:
+     - Three complementary tools: fast SID-based retriever, lightweight candidate ranker, slow reasoning model
+     - Collaborative commonsense injection: transforms item-to-item knowledge into natural language explanations
+     - Adaptive planner with two-stage training (supervised warm-up + agentic reinforcement learning)
+     - Adaptive inference strategy: dynamically decides which tool to invoke
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 9/10** — Novel adaptive reasoning framework for generative recommendation; addresses the trade-off between fast and slow reasoning
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Outperforms strong baselines on 3 datasets; reduces inference latency compared to uniform slow reasoning
+     - **Impact: 9/10** — Adaptive reasoning for generative recommendation is a key challenge; novel solution with strong empirical results
+
+3. **Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)**
+   * Affiliation: — *(Ziwei Liu, Yejing Wang, Shengyu Zhou, Xinhang Li, Xiangyu Zhao — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.11447](https://arxiv.org/abs/2605.11447)
+   * Venue: arXiv preprint, May 12, 2026
+   * TL;DR: ComeIR reconstructs SID-token embeddings into item-aware inputs and restores token granularity during SID decoding, addressing the Identity-Structure Preservation Conflict and Input-Output Granularity Mismatch
+   * Key techniques:
+     - MM-guided token scoring: adaptively estimates the contribution of each code within the SID
+     - Dual-level Engram memory: captures intra-item code composition and inter-item transition patterns
+     - Memory-restoring prediction head: reuses the memories during SID decoding
+     - Conditional Memory enhanced Item Representation (ComeIR) framework
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel conditional memory enhancement for generative recommendation; addresses key representation bottleneck
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Extensive experiments demonstrate effectiveness and flexibility; scalable gains from enlarging conditional memory
+     - **Impact: 8/10** — Addresses underexplored bottleneck in generative recommendation; novel approach to item representation
+
+4. **A Cascaded Generative Approach for e-Commerce Recommendations**
+   * Affiliation: — *(Moein Hasani, Hamidreza Shahidi, Trace Levinson, Yuan Zhong, Guanghua Shu, Vinesh Gudla, Tejaswi Tenneti — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.11118](https://arxiv.org/abs/2605.11118)
+   * Venue: arXiv preprint, May 11, 2026
+   * TL;DR: Cascaded merchandising framework decomposes storefront construction into two generative tasks: placement-level theme generation and constrained keyword generation, achieving +2.7% lift in cart adds
+   * Key techniques:
+     - Cascaded merchandising framework with two generative tasks
+     - Teacher-student fine-tuning to improve scalability under production constraints
+     - AI-driven content evaluation and quality filtering frameworks
+     - Hybrid infrastructure: fuses generative output with traditional ranking models
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 7/10** — Novel cascaded generative approach for e-commerce merchandising; uses LLMs for theme and keyword generation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Online experiments show +2.7% lift in cart adds per page view over strong baseline
+     - **Impact: 7/10** — e-Commerce application is valuable; cascaded generative approach is practical for industrial deployment
+
+5. **ORBIT: Preserving Foundational Language Capabilities in GenRetrieval via Origin-Regulated Merging**
+   * Affiliation: — *(Neha Verma, Nikhil Mehta, Shao-Chuan Wang, Naijing Zhang, Alicia Tsai, Li Wei, Lukasz Heldt, Lichan Hong, Ed Chi, Xinyang Yi — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.12419](https://arxiv.org/abs/2605.12419)
+   * Venue: arXiv preprint, May 12, 2026
+   * TL;DR: ORBIT addresses catastrophic forgetting during LLM fine-tuning for Generative Retrieval by tracking distance between fine-tuned and original model weights
+   * Key techniques:
+     - Distance tracking mechanism: monitors distance between fine-tuned and original model parameters
+     - Weight averaging strategy: constrains model drift during GenRetrieval fine-tuning
+     - Origin-Regulated Merging (ORBIT) approach
+     - Balances task-specific performance with retention of foundational language capabilities
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel approach to addressing catastrophic forgetting in generative retrieval; ORBIT is a creative solution
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Outperforms common continual learning baselines and related regularization methods
+     - **Impact: 8/10** — From Google Research; addresses key challenge in deploying LLMs for generative retrieval
+
+---
+
 ## Papers May 12:
 
 > **Note:** Only 1 new generative recommendation paper was found in the last 24 hours (May 11-12, 2026). Following the fallback procedure, 4 additional papers from the last 3 months (April-May 2026) are included to meet the minimum 5 papers requirement.
@@ -1772,6 +1863,12 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
 
+- Why Users Go There: World Knowledge-Augmented Generative Next POI Recommendation
+- TwiSTAR: Think Fast, Think Slow, Then Act, Generative Recommendation with Adaptive Reasoning
+- Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
+- A Cascaded Generative Approach for e-Commerce Recommendations
+- ORBIT: Preserving Foundational Language Capabilities in GenRetrieval via Origin-Regulated Merging
+
 ### Re-ranking
 - GR2
 - ResRank
@@ -1801,6 +1898,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
 
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
+
+- TwiSTAR: Think Fast, Think Slow, Then Act, Generative Recommendation with Adaptive Reasoning
+- Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
 
 ### Retrieval / Representation
 - ResRank (retrieval + reranking)
@@ -1837,6 +1937,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 - RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching
 - Birds of a Feather Cluster Nearby: A Proximity-Aware Geo-Codebook for Local Service Recommendation
+- Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
+
 ### Model / Architecture
 - RecGPT-Mobile: On-Device Large Language Models
 - OpenOneRec
@@ -1913,6 +2015,6 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Stony Brook University** | CRAB |
 | **Alibaba** | RecGPT-Mobile: On-Device Large Language Models �� RecGPT-Mobile: On-Device Large Language Models |
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
-| **(TBD)** | LASAR �� RRCM �� StageCF �� PAD-Rec �� Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems · | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) · Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
+| **(TBD)** | LASAR �� RRCM �� StageCF �� PAD-Rec �� Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems · | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) · Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) · Why Users Go There · TwiSTAR · ComeIR · Cascaded Generative Approach · ORBIT
 
  · TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation · One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving · PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation · Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) · On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)---
