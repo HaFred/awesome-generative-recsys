@@ -14,7 +14,7 @@
 > **Note:** 6 new generative recommendation papers found (from May 12-14, 2026). These papers were not previously in the repository.
 
 1. **Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG)**
-   * Affiliation: — *(Shuli Wang, Junwei Yin, Changhao Li, Senjie Kou, Chi Wang, Yinqiu Huang, Yinhua Zhu, Haitao Wang, Xingxing Wang — institutions TBD)*
+   * Affiliation: — *(Shuli Wang, Junwei Yin, Changhao Li, Senjie Kou, Chi Wang, Yinqiu Huang, Yinhua Zhu, Haitao Wang, Xingxing Wang — Meituan)*
    * Link: [arxiv.org/abs/2605.14853](https://arxiv.org/abs/2605.14853)
    * Venue: arXiv preprint, May 14, 2026
    * TL;DR: DIG unifies discriminative ranking and generative retrieval by embedding tokenizer inside ranking model for end-to-end training, producing two models from a single run
@@ -31,7 +31,7 @@
      - **Impact: 9/10** — Fundamental insight: ranking and retrieval are same problem at different granularities; strong experimental results
 
 2. **Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec)**
-   * Affiliation: — *(Bin Huang, Xin Wang, Junwei Pan, Yongqi Zhou, Yifeng Zhou, Zhixiang Feng, Shudong Huang, Haijie Gu, Wenwu Zhu — institutions TBD)*
+   * Affiliation: — *(Bin Huang, Xin Wang, Junwei Pan, Yongqi Zhou, Yifeng Zhou, Zhixiang Feng, Shudong Huang, Haijie Gu, Wenwu Zhu — DCST, Tsinghua University)*
    * Link: [arxiv.org/abs/2605.14512](https://arxiv.org/abs/2605.14512)
    * Venue: arXiv preprint, May 14, 2026
    * TL;DR: AsymRec decouples input and output representations with MSP and MHQ to address dual-stage information bottleneck in generative recommendation
@@ -48,7 +48,7 @@
      - **Impact: 8/10** — Addresses fundamental information bottleneck in generative recommendation
 
 3. **Agentic Recommender System with Hierarchical Belief-State Memory (MARS)**
-   * Affiliation: — *(Xiang Shen, Yuhang Zhou, Yifan Wu, Zhuokai Zhao, Siyu Lin, Lei Huang, Qianqian Zhong, Lizhu Zhang, Benyu Zhang, Xiangjun Fan, Hong Yan — institutions TBD)*
+   * Affiliation: — *(Xiang Shen, Yuhang Zhou, Yifan Wu, Zhuokai Zhao, Siyu Lin, Lei Huang, Qianqian Zhong, Lizhu Zhang, Benyu Zhang, Xiangjun Fan, Hong Yan — Meta)*
    * Link: [arxiv.org/abs/2605.14401](https://arxiv.org/abs/2605.14401)
    * Venue: arXiv preprint, May 14, 2026
    * TL;DR: MARS maintains structured belief state with three-tier memory architecture for personalized recommendation as partially observable problem
@@ -65,7 +65,7 @@
      - **Impact: 9/10** — Memory-augmented LLM agents for recommendation; state-of-the-art performance
 
 4. **F-GRPO: Factorized Group-Relative Policy Optimization for Unified Candidate Generation and Ranking**
-   * Affiliation: — *(Rohan Surana, Gagan Mundada, Junda Wu, Xintong Li, Yizhu Jiao, Bowen Jin, Sizhe Zhou, Tong Yu, Ritwik Sinha, Jiawei Han, Jingbo Shang, Julian McAuley — institutions TBD)*
+   * Affiliation: — *(Rohan Surana, Gagan Mundada, Junda Wu, Xintong Li, Yizhu Jiao, Bowen Jin, Sizhe Zhou, Tong Yu, Ritwik Sinha, Jiawei Han, Jingbo Shang, Julian McAuley — UC San Diego)*
    * Link: [arxiv.org/abs/2605.12995](https://arxiv.org/abs/2605.12995)
    * Venue: arXiv preprint, May 13, 2026
    * TL;DR: F-GRPO factorizes policy into candidate generation and ranking, trained end-to-end with factorized group-relative policy optimization for LLM-based generative recommendation
@@ -82,7 +82,7 @@
      - **Impact: 9/10** — End-to-end optimization of generation and ranking with LLMs; strong results on sequential recommendation and multi-hop QA
 
 5. **RecRM-Bench: Benchmarking Multidimensional Reward Modeling for Agentic Recommender Systems**
-   * Affiliation: — *(Wenwen Zeng, Jinhui Zhang, Hao Chen, Zhaoyu Hu, Yongqi Liang, Jiajun Chai, Dengcan Liu, Zhenfeng Liu, Shurui Yan, Minglong Xue, Xiaohan Wang, Wei Lin, Guojun Yin — institutions TBD)*
+   * Affiliation: — *(Wenwen Zeng, Jinhui Zhang, Hao Chen, Zhaoyu Hu, Yongqi Liang, Jiajun Chai, Dengcan Liu, Zhenfeng Liu, Shurui Yan, Minglong Xue, Xiaohan Wang, Wei Lin, Guojun Yin — Meituan)*
    * Link: [arxiv.org/abs/2605.11874](https://arxiv.org/abs/2605.11874)
    * Venue: arXiv preprint, May 12, 2026
    * TL;DR: RecRM-Bench is the largest benchmark for multidimensional reward modeling in agentic recommender systems with 1M+ structured entries across 4 evaluation dimensions
@@ -99,7 +99,7 @@
      - **Impact: 9/10** — Critical for developing reliable agentic recommender systems; fills important benchmark gap
 
 6. **HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding and Group-Aware Alignment**
-   * Affiliation: — *(Guorui Li, Dugang Liu, Lei Li, Xing Tang, Zhong Ming — institutions TBD)*
+   * Affiliation: — *(Guorui Li, Dugang Liu, Lei Li, Xing Tang, Zhong Ming — College of Computer Science and Software Engineering)*
    * Link: [arxiv.org/abs/2605.11662](https://arxiv.org/abs/2605.11662)
    * Venue: Accepted by ACL 2026 Findings
    * TL;DR: HSUGA introduces hierarchical semantic understanding and group-aware alignment for LLM-enhanced sequential recommendation, adapting semantic utilization to user activity levels
@@ -122,7 +122,7 @@
 > **Note:** 5 new generative recommendation papers found in the last 24 hours (May 12-13, 2026). All papers are newly added to the repository.
 
 1. **Why Users Go There: World Knowledge-Augmented Generative Next POI Recommendation**
-   * Affiliation: — *(Qiuyu Ding, Heng-Da Xu, Wei Zhang, Dongyi Lv, Changda Xia, Feng Xiong, Mu Xu — institutions TBD)*
+   * Affiliation: — *(Qiuyu Ding, Heng-Da Xu, Wei Zhang, Dongyi Lv, Changda Xia, Feng Xiong, Mu Xu — Alibaba Group)*
    * Link: [arxiv.org/abs/2605.11807](https://arxiv.org/abs/2605.11807)
    * Venue: arXiv preprint, May 12, 2026
    * TL;DR: AWARE employs an LLM agent to generate location- and time-aware contextual narratives for generative POI recommendation, achieving up to 12.4% relative improvement
@@ -139,7 +139,7 @@
      - **Impact: 8/10** — Generative POI recommendation is a growing area; world knowledge augmentation is valuable for real-world deployment
 
 2. **TwiSTAR: Think Fast, Think Slow, Then Act, Generative Recommendation with Adaptive Reasoning**
-   * Affiliation: — *(Shiteng Cao, Kaian Jiang, Yunlong Gong, Zhiheng Li — institutions TBD)*
+   * Affiliation: — *(Shiteng Cao, Kaian Jiang, Yunlong Gong, Zhiheng Li — Shenzhen International Graduate School, Tsinghua University)*
    * Link: [arxiv.org/abs/2605.11553](https://arxiv.org/abs/2605.11553)
    * Venue: arXiv preprint, May 12, 2026
    * TL;DR: TwiSTAR learns to adaptively allocate reasoning effort per user sequence, using a fast SID-based retriever, a lightweight candidate ranker, and a slow reasoning model
@@ -156,7 +156,7 @@
      - **Impact: 9/10** — Adaptive reasoning for generative recommendation is a key challenge; novel solution with strong empirical results
 
 3. **Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)**
-   * Affiliation: — *(Ziwei Liu, Yejing Wang, Shengyu Zhou, Xinhang Li, Xiangyu Zhao — institutions TBD)*
+   * Affiliation: — *(Ziwei Liu, Yejing Wang, Shengyu Zhou, Xinhang Li, Xiangyu Zhao — City University of Hong Kong)*
    * Link: [arxiv.org/abs/2605.11447](https://arxiv.org/abs/2605.11447)
    * Venue: arXiv preprint, May 12, 2026
    * TL;DR: ComeIR reconstructs SID-token embeddings into item-aware inputs and restores token granularity during SID decoding, addressing the Identity-Structure Preservation Conflict and Input-Output Granularity Mismatch
@@ -173,7 +173,7 @@
      - **Impact: 8/10** — Addresses underexplored bottleneck in generative recommendation; novel approach to item representation
 
 4. **A Cascaded Generative Approach for e-Commerce Recommendations**
-   * Affiliation: — *(Moein Hasani, Hamidreza Shahidi, Trace Levinson, Yuan Zhong, Guanghua Shu, Vinesh Gudla, Tejaswi Tenneti — institutions TBD)*
+   * Affiliation: — *(Moein Hasani, Hamidreza Shahidi, Trace Levinson, Yuan Zhong, Guanghua Shu, Vinesh Gudla, Tejaswi Tenneti — Instacart)*
    * Link: [arxiv.org/abs/2605.11118](https://arxiv.org/abs/2605.11118)
    * Venue: arXiv preprint, May 11, 2026
    * TL;DR: Cascaded merchandising framework decomposes storefront construction into two generative tasks: placement-level theme generation and constrained keyword generation, achieving +2.7% lift in cart adds
@@ -190,7 +190,7 @@
      - **Impact: 7/10** — e-Commerce application is valuable; cascaded generative approach is practical for industrial deployment
 
 5. **ORBIT: Preserving Foundational Language Capabilities in GenRetrieval via Origin-Regulated Merging**
-   * Affiliation: — *(Neha Verma, Nikhil Mehta, Shao-Chuan Wang, Naijing Zhang, Alicia Tsai, Li Wei, Lukasz Heldt, Lichan Hong, Ed Chi, Xinyang Yi — institutions TBD)*
+   * Affiliation: — *(Neha Verma, Nikhil Mehta, Shao-Chuan Wang, Naijing Zhang, Alicia Tsai, Li Wei, Lukasz Heldt, Lichan Hong, Ed Chi, Xinyang Yi — Johns Hopkins University)*
    * Link: [arxiv.org/abs/2605.12419](https://arxiv.org/abs/2605.12419)
    * Venue: arXiv preprint, May 12, 2026
    * TL;DR: ORBIT addresses catastrophic forgetting during LLM fine-tuning for Generative Retrieval by tracking distance between fine-tuned and original model weights
@@ -213,7 +213,7 @@
 > **Note:** Only 1 new generative recommendation paper was found in the last 24 hours (May 11-12, 2026). Following the fallback procedure, 4 additional papers from the last 3 months (April-May 2026) are included to meet the minimum 5 papers requirement.
 
 1. **LASAR: Latent Adaptive Semantic Aligned Reasoning for Generative Recommendation**
-   * Affiliation: — *(Yiwen Chen, Fuwei Zhang, Zehao Chen, Deqing Wang, Hehan Li, Peizhi Xu, Hanmeng Liu, Shuanglong Li, Xin Pei, Fuzhen Zhuang, Zhao Zhang — institutions TBD)*
+   * Affiliation: — *(Yiwen Chen, Fuwei Zhang, Zehao Chen, Deqing Wang, Hehan Li, Peizhi Xu, Hanmeng Liu, Shuanglong Li, Xin Pei, Fuzhen Zhuang, Zhao Zhang — Beihang University)*
    * Link: [arxiv.org/abs/2605.10207](https://arxiv.org/abs/2605.10207)
    * Venue: arXiv preprint, May 11, 2026
    * TL;DR: LASAR is a SFT-then-RL framework for latent adaptive semantic aligned reasoning in generative recommendation, reducing inference latency while improving quality
@@ -231,7 +231,7 @@
      - **Impact: 8/10** — Addresses latency bottleneck in LLM-based generative recommendation
 
 2. **RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation**
-   * Affiliation: — *(Shijun Li, Wooseong Yang, Yu Wang, Tianxin Wei, Joydeep Ghosh — institutions TBD)*
+   * Affiliation: — *(Shijun Li, Wooseong Yang, Yu Wang, Tianxin Wei, Joydeep Ghosh — The University of Texas at Austin)*
    * Link: [arxiv.org/abs/2605.07129](https://arxiv.org/abs/2605.07129)
    * Venue: arXiv preprint, May 7, 2026
    * TL;DR: RRCM is a ranking-driven retrieval-and-reasoning framework over collaborative and metadata memories for LLM-based agentic recommendation
@@ -248,7 +248,7 @@
      - **Impact: 7/10** — Significantly outperforms traditional baselines and diverse LLM-based approaches
 
 3. **Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)**
-   * Affiliation: — *(Yifang Qin, Zhaobin Li, Arisa Watanabe, Wei Ju, Zhiping Xiao, Ming Zhang — institutions TBD)*
+   * Affiliation: — *(Yifang Qin, Zhaobin Li, Arisa Watanabe, Wei Ju, Zhiping Xiao, Ming Zhang — State Key Laboratory for Multimedia Information Processing, School of Computer Science, PKU-Anker LLM Lab, Peking University, Beijing)*
    * Link: [arxiv.org/abs/2605.05165](https://arxiv.org/abs/2605.05165)
    * Venue: arXiv preprint, May 6, 2026
    * TL;DR: Proposes "interests burn-down process" as a diffusion scheme tailored for collaborative filtering, with StageCF method demonstrating superior performance
@@ -282,7 +282,7 @@
      - **Impact: 9/10** — From Alibaba/Taobao; significant practical impact for mobile e-commerce recommendation
 
 5. **Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)**
-   * Affiliation: — *(Jiaju Chen, Chongming Gao, Chenxiao Fan, Haoyan Liu, Qingpeng Cai, Peng Jiang, Xiangnan He — institutions TBD)*
+   * Affiliation: — *(Jiaju Chen, Chongming Gao, Chenxiao Fan, Haoyan Liu, Qingpeng Cai, Peng Jiang, Xiangnan He — University of Science and Technology of China)*
    * Link: [arxiv.org/abs/2604.27747](https://arxiv.org/abs/2604.27747)
    * Venue: arXiv preprint, April 30, 2026
    * TL;DR: PAD-Rec introduces position-aware drafting for speculative decoding in generative list-wise recommendation, achieving up to 3.1x wall-clock speedup
@@ -305,7 +305,7 @@
 > **Note:** No new generative recommendation papers were found in the last 24 hours (May 10-11, 2026). Following the fallback procedure, 5 papers from the last 3 months (April-May 2026) are included to meet the minimum 5 papers requirement.
 
 1. **Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation**
-   * Affiliation: — *(Hongyang Su, Beibei Kong, Lei Cheng, Chengxiang Zhuo, Zang Li, Chenyun Yu — institutions TBD)*
+   * Affiliation: — *(Hongyang Su, Beibei Kong, Lei Cheng, Chengxiang Zhuo, Zang Li, Chenyun Yu — Tencent)*
    * Link: [arxiv.org/abs/2605.07613](https://arxiv.org/abs/2605.07613)
    * Venue: arXiv preprint, May 8, 2026
    * TL;DR: Conversational news recommendation with intent-driven Semantic ID generation under Generate-then-Match paradigm, achieving 0% hallucination
@@ -322,7 +322,7 @@
      - **Impact: 7/10** — Conversational news recommendation is a growing area; 0% hallucination is impressive for grounded generation
 
 2. **RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching**
-   * Affiliation: — *(Zhan Zhao, Yuxin Wang, Amelie Chi Zhou — institutions TBD)*
+   * Affiliation: — *(Zhan Zhao, Yuxin Wang, Amelie Chi Zhou — Hong Kong Baptist University)*
    * Link: [arxiv.org/abs/2605.07443](https://arxiv.org/abs/2605.07443)
    * Venue: arXiv preprint, May 8, 2026
    * TL;DR: RcLLM is a distributed inference system for generative recommendation with Beyond-Prefix KV Caching, reducing TTFT by 1.31x-9.51x
@@ -339,7 +339,7 @@
      - **Impact: 8/10** — Addresses key inference latency bottleneck for industrial deployment of generative recommenders
 
 3. **An Embarrassingly Simple Graph Heuristic Reveals Shortcut-Solvable Benchmarks for Sequential Recommendation**
-   * Affiliation: — *(Haoyu Han, Li Ma, Hanbing Wang, Bingheng Li, Daochen Zha, Chun How Tan, Huiji Gao, Xin Liu, Stephanie Moyerman, Sanjeev Katariya, Hui Liu, Jiliang Tang — institutions TBD)*
+   * Affiliation: — *(Haoyu Han, Li Ma, Hanbing Wang, Bingheng Li, Daochen Zha, Chun How Tan, Huiji Gao, Xin Liu, Stephanie Moyerman, Sanjeev Katariya, Hui Liu, Jiliang Tang — Michigan State University)*
    * Link: [arxiv.org/abs/2605.07125](https://arxiv.org/abs/2605.07125)
    * Venue: arXiv preprint, May 8, 2026
    * TL;DR: Benchmark audit showing simple graph heuristic matches or outperforms modern generative recommenders on standard benchmarks, revealing shortcut-solvable structures
@@ -355,7 +355,7 @@
      - **Impact: 8/10** — Important call for better evaluation practices in the generative recommendation community; 38.10% and 44.18% relative NDCG@10 improvements over best baseline
 
 4. **LLM Biases**
-   * Affiliation: — *(Jinhui Han, Ming Hu, Xilin Zhang — institutions TBD)*
+   * Affiliation: — *(Jinhui Han, Ming Hu, Xilin Zhang — Peking University)*
    * Link: [arxiv.org/abs/2604.26960](https://arxiv.org/abs/2604.26960)
    * Venue: arXiv preprint, April 7, 2026
    * TL;DR: Theoretical analysis of four bias channels (positional bias, popularity amplification, latent driver bias, synthetic data bias) in transformer-based generative recommenders
@@ -371,7 +371,7 @@
      - **Impact: 8/10** — Important theoretical contribution to understanding biases in generative recommendation; relevant to industrial deployment
 
 5. **Birds of a Feather Cluster Nearby: A Proximity-Aware Geo-Codebook for Local Service Recommendation**
-   * Affiliation: — *(Tian He, Chen Yang, Jiawei Zhang, Lin Guo, Wei Lin, Zhuqing Jiang — institutions TBD)*
+   * Affiliation: — *(Tian He, Chen Yang, Jiawei Zhang, Lin Guo, Wei Lin, Zhuqing Jiang — Beijing University of Posts and Telecommunications; Meituan)*
    * Link: [arxiv.org/abs/2604.23156](https://arxiv.org/abs/2604.23156)
    * Venue: arXiv preprint, April 2026
    * TL;DR: Pro-GEO, a Proximity-aware GEO-codebook that incorporates geographic constraints into SID tokenization for local service recommendation
@@ -413,7 +413,7 @@
      - **Impact: 10/10** — From Tencent; full industrial deployment; significant business impact
 
 2. **Variable-Length Semantic IDs for Recommender Systems**
-   * Affiliation: — *(Kirill Khryashchev — institution TBD)*
+   * Affiliation: — *(Kirill Khryashchev — HSE University)*
    * Link: [arxiv.org/abs/2602.16375](https://arxiv.org/abs/2602.16375)
    * Venue: arXiv preprint, February 18, 2026
    * TL;DR: Proposes variable-length semantic IDs for recommender systems, learning adaptive item representation length under a principled probabilistic framework
@@ -504,7 +504,7 @@
      - **Impact: 8/10** — From multiple universities; multimodal generative recommendation is a growing area
 
 2. **One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving**
-   * Affiliation: — *(Wenjun Yu, Shuguang Han, Amelie Chi Zhou — institutions TBD)*
+   * Affiliation: — *(Wenjun Yu, Shuguang Han, Amelie Chi Zhou — Hong Kong Baptist University)*
    * Link: [arxiv.org/abs/2605.04450](https://arxiv.org/abs/2605.04450)
    * Venue: arXiv preprint, May 6, 2026
    * TL;DR: HELM jointly manages HBM allocation and request routing for generative recommender inference, reducing P99 latency by 24-38% over static policies
@@ -520,7 +520,7 @@
      - **Impact: 8/10** — Addresses key serving bottleneck for industrial GR deployment; significant engineering contribution
 
 3. **PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation**
-   * Affiliation: — *(Dengzhao Fang, Jingtong Gao, Yu Li, Xiangyu Zhao, Yi Chang — institutions TBD)*
+   * Affiliation: — *(Dengzhao Fang, Jingtong Gao, Yu Li, Xiangyu Zhao, Yi Chang — Jilin University)*
    * Link: [arxiv.org/abs/2601.16556](https://arxiv.org/abs/2601.16556)
    * Venue: arXiv preprint, January 23, 2026
    * TL;DR: PRISM addresses impure semantic tokenization and lossy generation in generative sequential recommendation via purified representation and integrated semantic modeling
@@ -536,7 +536,7 @@
      - **Impact: 8/10** — Addresses key GSR limitations; from CityU/Jilin University
 
 4. **Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)**
-   * Affiliation: — *(Zhefan Wang, Guokai Yan, Jinbei Yu, Siyu Gu, Jingyan Chen, Peng Jiang, Zhiqiang Guo, Min Zhang — institutions TBD)*
+   * Affiliation: — *(Zhefan Wang, Guokai Yan, Jinbei Yu, Siyu Gu, Jingyan Chen, Peng Jiang, Zhiqiang Guo, Min Zhang — DCST, Tsinghua University)*
    * Link: [arxiv.org/abs/2511.03155](https://arxiv.org/abs/2511.03155)
    * Venue: arXiv preprint, November 5, 2025
    * TL;DR: GAMER is a novel generative framework for multi-behavior sequential recommendation with cross-level interaction layer and sequential augmentation strategy
@@ -553,7 +553,7 @@
      - **Impact: 7/10** — Releases ShortVideoAD dataset; novel approach to multi-behavior generative recommendation
 
 5. **On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)**
-   * Affiliation: — *(Wenyu Mao, Jiancan Wu, Guoqing Hu, Zhengyi Yang, Wei Ji, Xiang Wang — institutions TBD)*
+   * Affiliation: — *(Wenyu Mao, Jiancan Wu, Guoqing Hu, Zhengyi Yang, Wei Ji, Xiang Wang — University of Science and Technology of China)*
    * Link: [arxiv.org/abs/2510.17245](https://arxiv.org/abs/2510.17245)
    * Venue: NeurIPS 2025
    * TL;DR: TA-Rec achieves one-step generation for diffusion-based recommenders via temporal consistency regularization and adaptive preference alignment, mitigating the efficiency-effectiveness trade-off
@@ -576,7 +576,7 @@
 > **Note:** 3 generative recommendation papers identified (submitted May 7, 2026). All papers are newly added to the repository.
 
 1. **Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)**
-   * Affiliation: — *(Yupeng Hou, Haven Kim, Clark Mingxuan Ju, Eduardo Escoto, Neil Shah, Julian McAuley — institutions TBD)*
+   * Affiliation: — *(Yupeng Hou, Haven Kim, Clark Mingxuan Ju, Eduardo Escoto, Neil Shah, Julian McAuley — University of California)*
    * Link: [arxiv.org/abs/2605.06331](https://arxiv.org/abs/2605.06331)
    * Venue: arXiv preprint, May 7, 2026
    * TL;DR: Identifies expressiveness limits in autoregressive semantic ID generation and proposes Latte, which injects latent tokens before each SID to reshape the decoding space
@@ -610,7 +610,7 @@
      - **Impact: 9/10** — From Tencent; significant industrial impact for generative recommendation in advertising
 
 3. **Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)**
-   * Affiliation: — *(Yiqing Wu, Haoming Li, Guanyu Jiang, Jiahao Liang, Yongchun Zhu, Jingwu Chen, Feng Zhang — institutions TBD)*
+   * Affiliation: — *(Yiqing Wu, Haoming Li, Guanyu Jiang, Jiahao Liang, Yongchun Zhu, Jingwu Chen, Feng Zhang — Bytedance)*
    * Link: [arxiv.org/abs/2605.05855](https://arxiv.org/abs/2605.05855)
    * Venue: SIGIR 2026
    * TL;DR: PA-Bridge bridges passive recommendation and active user expressions using adversarial distribution alignment and semantic discretization for conversation starter recommendation
@@ -634,7 +634,7 @@
 > **Note:** 6 new generative recommendation papers found in the last 24 hours (May 6-7, 2026). All papers are newly published and not previously included.
 
 1. **CapsID: Soft-Routed Variable-Length Semantic IDs for Generative Recommendation**
-   * Affiliation: — *(Wenzhuo Cheng, Menghang Gong, Qixin Guo, Hang Zheng, Zhaobin Yang, Jianguo Lou, Zhengwei Zheng — institutions TBD)*
+   * Affiliation: — *(Wenzhuo Cheng, Menghang Gong, Qixin Guo, Hang Zheng, Zhaobin Yang, Jianguo Lou, Zhengwei Zheng — Microsoft)*
    * Link: [arxiv.org/abs/2605.05096](https://arxiv.org/abs/2605.05096)
    * Venue: arXiv preprint, May 7, 2026
    * TL;DR: CapsID replaces hard residual quantization with capsule routing for soft SID assignment, enabling variable-length Semantic IDs with confidence-driven termination
@@ -668,7 +668,7 @@
      - **Impact: 9/10** — From Alibaba/Taobao; significant practical impact for mobile e-commerce recommendation
 
 3. **Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)**
-   * Affiliation: — *(Shereen Elsayed, Ngoc Son Le, Ahmed Rashed, Lars Schmidt-Thieme — institutions TBD)*
+   * Affiliation: — *(Shereen Elsayed, Ngoc Son Le, Ahmed Rashed, Lars Schmidt-Thieme — VWFS Data Analytics Research Center)*
    * Link: [arxiv.org/abs/2605.04723](https://arxiv.org/abs/2605.04723)
    * Venue: IJCAI-ECAI 2026
    * TL;DR: ConvRec uses convolutional layers with linear complexity to replace attention for efficient sequential recommendation with long user histories
@@ -685,7 +685,7 @@
      - **Impact: 7/10** — IJCAI-ECAI 2026; provides efficient alternative to attention-based sequential recommendation
 
 4. **Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE)**
-   * Affiliation: — *(Ruijun Chen, Chongming Gao, Jiawei Chen, Weiqin Yang, Xiangnan He — institutions TBD, likely USTC)*
+   * Affiliation: — *(Ruijun Chen, Chongming Gao, Jiawei Chen, Weiqin Yang, Xiangnan He — University of Science and Technology of China, likely USTC)*
    * Link: [arxiv.org/abs/2605.04559](https://arxiv.org/abs/2605.04559)
    * Venue: SIGIR 2026
    * TL;DR: BLADE introduces a Bayesian framework that continuously updates the target distribution by fusing historical priors with dynamic evidence, breaking the static BoN performance upper bound
@@ -702,7 +702,7 @@
      - **Impact: 9/10** — SIGIR 2026; from Xiangnan He's team (likely USTC); addresses key limitation of BoN Alignment
 
 5. **Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)**
-   * Affiliation: — *(Yifang Qin, Zhaobin Li, Arisa Watanabe, Wei Ju, Zhiping Xiao, Ming Zhang — institutions TBD)*
+   * Affiliation: — *(Yifang Qin, Zhaobin Li, Arisa Watanabe, Wei Ju, Zhiping Xiao, Ming Zhang — State Key Laboratory for Multimedia Information Processing, School of Computer Science, PKU-Anker LLM Lab, Peking University, Beijing)*
    * Link: [arxiv.org/abs/2605.05165](https://arxiv.org/abs/2605.05165)
    * Venue: arXiv preprint, May 7, 2026
    * TL;DR: Proposes "interests burn-down process" as a diffusion scheme tailored for collaborative filtering, with StageCF method demonstrating superior performance over generative and diffusion baselines
@@ -743,7 +743,7 @@
 > **Note:** Only 1 new generative recommendation paper was found in the last 24 hours (May 5-6, 2026). Following the fallback procedure, 5 additional papers from the last 3 months (April-May 2026) are included to meet the minimum 5 papers requirement.
 
 1. **On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation--A Short Note**
-   * Affiliation: — *(Yusheng Huang, Shuang Yang, Zhaojie Liu, Han Li — institutions TBD)*
+   * Affiliation: — *(Yusheng Huang, Shuang Yang, Zhaojie Liu, Han Li — Kuaishou Technology)*
    * Link: [arxiv.org/abs/2604.15739](https://arxiv.org/abs/2604.15739)
    * Venue: arXiv preprint, April 17, 2026
    * TL;DR: First formal proof that auto-regressive next-token prediction is mathematically equivalent to full-item-vocabulary MLE in generative recommendation
@@ -759,7 +759,7 @@
      - **Impact: 7/10** — Provides principled guidance for future GR system optimization
 
 2. **SAGER: Self-Evolving User Policy Skills for Recommendation Agent**
-   * Affiliation: — *(Zhen Tao, Riwei Lai, Chenyun Yu, Weixin Chen, Li Chen, Beibei Kong, Leicheng, Chengxiang Zhuo, Zang Li, Qingqiang Sun — institutions TBD)*
+   * Affiliation: — *(Zhen Tao, Riwei Lai, Chenyun Yu, Weixin Chen, Li Chen, Beibei Kong, Leicheng, Chengxiang Zhuo, Zang Li, Qingqiang Sun — Bay University)*
    * Link: [arxiv.org/abs/2604.14972](https://arxiv.org/abs/2604.14972)
    * Venue: arXiv preprint, April 16, 2026 (v2 revised April 21, 2026)
    * TL;DR: SAGER equips each user with a dedicated policy skill that evolves continuously through interaction, enabling personalized reasoning for recommendation agents
@@ -776,7 +776,7 @@
      - **Impact: 8/10** — Novel approach to personalizing reasoning process in recommendation agents
 
 3. **Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model**
-   * Affiliation: — *(Shiteng Cao, Xiaochong Lan, Yuwei Du, Jie Feng, Yinxing Liu, Xinlei Shi, Yong Li — institutions TBD)*
+   * Affiliation: — *(Shiteng Cao, Xiaochong Lan, Yuwei Du, Jie Feng, Yinxing Liu, Xinlei Shi, Yong Li — Shenzhen International Graduate School)*
    * Link: [arxiv.org/abs/2604.14051](https://arxiv.org/abs/2604.14051)
    * Venue: arXiv preprint, April 15, 2026
    * TL;DR: Novel LLM-based framework that jointly performs living need prediction and service recommendation, with behavioral clustering and curriculum learning + RL
@@ -793,7 +793,7 @@
      - **Impact: 7/10** — From Tsinghua (Yong Li); novel LLM-based local life service recommendation
 
 4. **Mitigating Collaborative Semantic ID Staleness in Generative Retrieval**
-   * Affiliation: — *(Vladimir Baikalov, Iskander Bagautdinov, Sergey Muravyov — institutions TBD)*
+   * Affiliation: — *(Vladimir Baikalov, Iskander Bagautdinov, Sergey Muravyov — AI VK)*
    * Link: [arxiv.org/abs/2604.13273](https://arxiv.org/abs/2604.13273)
    * Venue: SIGIR 2026
    * TL;DR: Lightweight SID alignment update that mitigates SID staleness under temporal drift, enabling warm-start fine-tuning without full rebuild
@@ -810,7 +810,7 @@
      - **Impact: 9/10** — SIGIR 2026; addresses key practical problem in generative retrieval
 
 5. **DUET: Joint Exploration of User Item Profiles in Recommendation System**
-   * Affiliation: — *(Yue Chen, Yifei Sun, Lu Wang, Fangkai Yang, Pu Zhao, et al., 20 authors total — institutions TBD)*
+   * Affiliation: — *(Yue Chen, Yifei Sun, Lu Wang, Fangkai Yang, Pu Zhao, et al., 20 authors total — Peking University)*
    * Link: [arxiv.org/abs/2604.13801](https://arxiv.org/abs/2604.13801)
    * Venue: arXiv preprint, April 15, 2026
    * TL;DR: Duet jointly generates user and item profiles conditioned on both history and evidence, with RL-based optimization using downstream recommendation performance as feedback
@@ -827,7 +827,7 @@
      - **Impact: 8/10** — From Microsoft Research (hinted by author names); novel approach to profile-based recommendation
 
 6. **DynamicPO: Dynamic Preference Optimization for Recommendation**
-   * Affiliation: — *(Xingyu Hu, Kai Zhang, Jiancan Wu, Shuli Wang, Chi Wang, Wenshuai Chen, Yinhua Zhu, Haitao Wang, Xingxing Wang, Xiang Wang — institutions TBD)*
+   * Affiliation: — *(Xingyu Hu, Kai Zhang, Jiancan Wu, Shuli Wang, Chi Wang, Wenshuai Chen, Yinhua Zhu, Haitao Wang, Xingxing Wang, Xiang Wang — University of Science and Technology of China)*
    * Link: [arxiv.org/abs/2605.00327](https://arxiv.org/abs/2605.00327)
    * Venue: DASFAA 2026
    * TL;DR: DynamicPO prevents preference optimization collapse in LLM-based recommendation via dynamic boundary negative selection and dual-margin beta adjustment
@@ -850,7 +850,7 @@
 > **Note:** Only 1 new generative recommendation paper was found in the last 24 hours (May 4-5, 2026). Following the fallback procedure, 4 additional papers from the last 3 months (February-May 2026) are included to meet the minimum 5 papers requirement.
 
 1. **Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)**
-   * Affiliation: — *(Zhida Qin, Zemu Liu, Haoyan Fu, Chong Zhang, Tianyu Huang, Yidong Li, Gangyi Ding — institutions TBD)*
+   * Affiliation: — *(Zhida Qin, Zemu Liu, Haoyan Fu, Chong Zhang, Tianyu Huang, Yidong Li, Gangyi Ding — School of Computer Science, Beijing Institute of Technology)*
    * Link: [arxiv.org/abs/2605.02369](https://arxiv.org/abs/2605.02369)
    * Venue: arXiv preprint, May 4, 2026
    * TL;DR: BST-CDSR bridges behavioral and semantic preferences using LLMs with temporal counterfactual enhancement for cross-domain sequential recommendation
@@ -867,7 +867,7 @@
      - **Impact: 7/10** — Novel approach to cross-domain sequential recommendation with LLM integration
 
 2. **Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP)**
-   * Affiliation: — *(Tianyu Zhan, Kairui Fu, Chengfei Lv, Zheqi Lv, Shengyu Zhang — institutions TBD)*
+   * Affiliation: — *(Tianyu Zhan, Kairui Fu, Chengfei Lv, Zheqi Lv, Shengyu Zhang — Zhejiang University)*
    * Link: [arxiv.org/abs/2604.05329](https://arxiv.org/abs/2604.05329)
    * Venue: arXiv preprint, April 7, 2026
    * TL;DR: STAMP addresses the Semantic Dilution Effect in generative recommendation via semantic adaptive pruning and multi-step auxiliary prediction
@@ -901,7 +901,7 @@
      - **Impact: 9/10** — From Meituan production team; addresses key multi-business challenge in generative recommendation
 
 4. **One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec)**
-   * Affiliation: — *(Yanchen Jiang, Zhe Feng, Christopher P. Mah, Aranyak Mehta, Di Wang — institutions TBD)*
+   * Affiliation: — *(Yanchen Jiang, Zhe Feng, Christopher P. Mah, Aranyak Mehta, Di Wang — Harvard University)*
    * Link: [arxiv.org/abs/2603.22231](https://arxiv.org/abs/2603.22231)
    * Venue: arXiv preprint, March 31, 2026
    * TL;DR: GEM-Rec integrates commercial relevance and monetization objectives into generative recommendation via control tokens and bid-aware decoding
@@ -918,7 +918,7 @@
      - **Impact: 8/10** — Novel paradigm for commercial generative recommendation; bridges semantic retrieval and monetization
 
 5. **IntRR: A Framework for Integrating SID Redistribution and Length Reduction**
-   * Affiliation: — *(Zesheng Wang, Longfei Xu, Weidong Deng, Huimin Yan, Kaikui Liu, Xiangxiang Chu — institutions TBD)*
+   * Affiliation: — *(Zesheng Wang, Longfei Xu, Weidong Deng, Huimin Yan, Kaikui Liu, Xiangxiang Chu — Alibaba Group)*
    * Link: [arxiv.org/abs/2602.20704](https://arxiv.org/abs/2602.20704)
    * Venue: arXiv preprint, February 28, 2026
    * TL;DR: IntRR addresses objective misalignment and sequence length inflation in generative recommendation via SID redistribution and structural length reduction
@@ -935,7 +935,7 @@
      - **Impact: 8/10** — Addresses key efficiency challenge in generative recommendation; strong empirical results
 
 6. **DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs for Generative Recommendation**
-   * Affiliation: — *(Yangchen Zeng — institution TBD)*
+   * Affiliation: — *(Yangchen Zeng — Southeast University)*
    * Link: [arxiv.org/abs/2602.18907](https://arxiv.org/abs/2602.18907)
    * Venue: arXiv preprint, February 21, 2026
    * TL;DR: DeepInterestGR captures deep multi-interest representations from multi-modal LLMs via Chain-of-Thought prompting and reinforcement learning
@@ -1051,7 +1051,7 @@
 > **Note:** Only 2 new generative recommendation papers were found in the last 24 hours (May 2-3, 2026). Following the fallback procedure, papers from March-April 2026 are also included to meet the minimum 5 papers requirement.
 
 1. **Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)**
-   * Affiliation: — *(Jiaju Chen, Chongming Gao, Chenxiao Fan, Haoyan Liu, Qingpeng Cai, Peng Jiang, Xiangnan He — institutions TBD)*
+   * Affiliation: — *(Jiaju Chen, Chongming Gao, Chenxiao Fan, Haoyan Liu, Qingpeng Cai, Peng Jiang, Xiangnan He — University of Science and Technology of China)*
    * Link: [arxiv.org/abs/2604.27747](https://arxiv.org/abs/2604.27747)
    * Venue: arXiv preprint, April 30, 2026
    * TL;DR: PAD-Rec introduces item position embeddings and step position embeddings to improve speculative decoding for LLM-based generative list-wise recommendation
@@ -1087,7 +1087,7 @@
      - **Impact: 9/10** — SIGIR 2026; from RMIT; novel architectural solution
 
 3. **How Well Does Generative Recommendation Generalize?**
-   * Affiliation: — *(Yijie Ding, Zitian Guo, Jiachen Li, et al. — institutions TBD, likely UCSD/University of Illinois)*
+   * Affiliation: — *(Yijie Ding, Zitian Guo, Jiachen Li, et al. — UCSD (inferred from email), likely UCSD/University of Illinois)*
    * Link: [arxiv.org/abs/2603.19809](https://arxiv.org/abs/2603.19809)
    * Venue: arXiv preprint, March 20, 2026
    * TL;DR: Systematic analysis showing GR models generalize better on unseen item transitions, while item ID-based models excel at memorization
@@ -1322,7 +1322,7 @@
      - **Impact: 8/10** — From Ant Group (industrial relevance); 15-23% improvements on RetailRocket, Taobao, Tmall, Insurance Dataset
 
 3. **FreeScale: Distributed Training for Sequence Recommendation Models with Minimal Scaling Cost**
-   * Affiliation: — *(Chenhao Feng, Haoli Zhang, Shakhzod Ali-Zade, Yanli Zhao, Liang Luo, Jennifer Cao, Lisen Deng, Siqiao Chen, Chenyu Zhao, Tristan Rice, Daniel Johnson, Min Si, Tiantu Xu, Yi Zhang, Siqi Yan, Chuanhao Zhuge, Min Ni, Bi Xue, Qunshu Zhang, Shen Li — institutions TBD)*
+   * Affiliation: — *(Chenhao Feng, Haoli Zhang, Shakhzod Ali-Zade, Yanli Zhao, Liang Luo, Jennifer Cao, Lisen Deng, Siqiao Chen, Chenyu Zhao, Tristan Rice, Daniel Johnson, Min Si, Tiantu Xu, Yi Zhang, Siqi Yan, Chuanhao Zhuge, Min Ni, Bi Xue, Qunshu Zhang, Shen Li — Meta)*
    * Link: [arxiv.org/abs/2604.24073](https://arxiv.org/abs/2604.24073)
    * Venue: MLSys 2026 (9th Conference on Machine Learning and Systems)
    * TL;DR: FreeScale reduces compute bubble by 90.3% for distributed training of sequence recommendation models via load balancing and communication overlap
@@ -1338,7 +1338,7 @@
      - **Impact: 8/10** — MLSys 2026; critical for industrial-scale sequence recommendation model training; 256 GPU scaling
 
 4. **SAGE: Sparse Adaptive Guidance for Dependency-Aware Tabular Data Generation**
-   * Affiliation: — *(Shuo Yang, Zheyu Zhang, Bardh Prenkaj, Gjergji Kasneci — institutions TBD)*
+   * Affiliation: — *(Shuo Yang, Zheyu Zhang, Bardh Prenkaj, Gjergji Kasneci — Technical University of Munich)*
    * Link: [arxiv.org/abs/2604.24368](https://arxiv.org/abs/2604.24368)
    * Venue: ACL 2026
    * TL;DR: SAGE uses LLM with sparse, adaptive dependency guidance for high-fidelity tabular data generation; relevant to generative recommendation data synthesis
@@ -1354,7 +1354,7 @@
      - **Impact: 7/10** — ACL 2026; tabular data generation is useful for recommendation (user/item feature synthesis); strong empirical results
 
 5. **Disagreement as Signals: Dual-view Calibration for Sequential Recommendation Denoising (DC4SR)**
-   * Affiliation: — *(Sijia Li, Min Gao, Zongwei Wang, Zhiyi Liu, Xin Xia, Yi Zhang — institutions TBD)*
+   * Affiliation: — *(Sijia Li, Min Gao, Zongwei Wang, Zhiyi Liu, Xin Xia, Yi Zhang — School of Big Data and Software Engineering, Chongqing University)*
    * Link: [arxiv.org/abs/2604.24048](https://arxiv.org/abs/2604.24048)
    * Venue: arXiv preprint, April 27, 2026
    * TL;DR: DC4SR uses disagreement between LLM semantic priors and model-learned posteriors as signals for joint optimization and denoising in sequential recommendation
@@ -1374,7 +1374,7 @@
 ## Papers April 27
 
 1. **ReCast: Recasting Learning Signals for Reinforcement Learning in Generative Recommendation**
-   * Affiliation: — *(Peiyan Zhang, Hanmo Liu, Chengxuan Tong, Yuxia Wu, Wei Guo, Yong Liu — institutions TBD)*
+   * Affiliation: — *(Peiyan Zhang, Hanmo Liu, Chengxuan Tong, Yuxia Wu, Wei Guo, Yong Liu — Huawei)*
    * Link: [arxiv.org/abs/2604.22169](https://arxiv.org/abs/2604.22169)
    * TL;DR: "Fix-contrast" learning signal framework for sparse-hit generative recommendation
    * Key techniques:
@@ -1390,7 +1390,7 @@
      - **Impact: 7/10** — Practical fix for a common failure mode in RL-based generative rec
 
 2. **Objective Shaping with Hard Negatives: Windowed Partial AUC Optimization for RL-based LLM Recommenders**
-   * Affiliation: — *(Wentao Shi, Qifan Wang, Chen Chen, Fei Liu, Dongfang Liu, Xu Liu, Wanli Ma, Junfeng Pan, Linhong Zhu, Fuli Feng — institutions TBD)*
+   * Affiliation: — *(Wentao Shi, Qifan Wang, Chen Chen, Fei Liu, Dongfang Liu, Xu Liu, Wanli Ma, Junfeng Pan, Linhong Zhu, Fuli Feng — University of Science and Technology of China)*
    * Link: [arxiv.org/abs/2604.22504](https://arxiv.org/abs/2604.22504)
    * TL;DR: Windowed partial AUC (WPAUC) optimization for better Top-K alignment in RL-based LLM recommenders
    * Key techniques:
@@ -1406,7 +1406,7 @@
      - **Impact: 8/10** — Strong theoretical backing; from Multi-Scenarios team (likely industry)
 
 3. **GraphRAG-IRL: Personalized Recommendation with Graph-Grounded Inverse Reinforcement Learning and LLM Re-ranking**
-   * Affiliation: — *(Siqi Liang, Xiawei Wang, Yudi Zhang, Jiaying Zhou — institutions TBD)*
+   * Affiliation: — *(Siqi Liang, Xiawei Wang, Yudi Zhang, Jiaying Zhou — Purdue University)*
    * Link: [arxiv.org/abs/2604.19128](https://arxiv.org/abs/2604.19128)
    * TL;DR: Hybrid recommendation framework combining GraphRAG, Inverse RL, and persona-guided LLM re-ranking
    * Key techniques:
@@ -1422,7 +1422,7 @@
      - **Impact: 6/10** — Niche but interesting; persona-guided LLM fusion is a growing area
 
 4. **Modular Representation Compression (MARC): Adapting LLMs for Efficient and Effective Recommendations**
-   * Affiliation: — *(Yunjia Xi, Menghui Zhu, Jianghao Lin, Bo Chen, Ruiming Tang, Yong Yu, Weinan Zhang — institutions TBD)*
+   * Affiliation: — *(Yunjia Xi, Menghui Zhu, Jianghao Lin, Bo Chen, Ruiming Tang, Yong Yu, Weinan Zhang — Shanghai Jiao Tong University)*
    * Link: [arxiv.org/abs/2604.18146](https://arxiv.org/abs/2604.18146)
    * TL;DR: Modular representation compression to resolve mid-layer representation advantage (MRA) in LLM-based recommendation
    * Key techniques:
@@ -1438,7 +1438,7 @@
      - **Impact: 8/10** — SIGIR 2026; addresses a key efficiency-effectiveness trade-off in LLM4Rec
 
 5. **Multi-LLM Token Filtering and Routing for Sequential Recommendation (MLTFR)**
-   * Affiliation: — *(Wuhan Chen, Min Gao, Xin Xia, Zongwei Wang, Wentao Li, Shane Culpepper — institutions TBD)*
+   * Affiliation: — *(Wuhan Chen, Min Gao, Xin Xia, Zongwei Wang, Wentao Li, Shane Culpepper — School of Big Data &amp; Software Engineering, Chongqing University)*
    * Link: [arxiv.org/abs/2604.18200](https://arxiv.org/abs/2604.18200)
    * TL;DR: Multi-LLM token embedding filtering and routing for corpus-free sequential recommendation
    * Key techniques:
@@ -1454,7 +1454,7 @@
      - **Impact: 7/10** — Multi-LLM trend is growing; corpus-free is practical for industry
 
 6. **ResRank: Unifying Retrieval and Listwise Reranking via End-to-End Joint Training with Residual Passage Compression**
-   * Affiliation: — *(Xiaojie Ke, Shuai Zhang, Liansheng Sun, Yongjin Wang, Hengjun Jiang, Xiangkun Liu, Cunxin Gu, Jian Xu, Guanjun Jiang — institutions TBD)*
+   * Affiliation: — *(Xiaojie Ke, Shuai Zhang, Liansheng Sun, Yongjin Wang, Hengjun Jiang, Xiangkun Liu, Cunxin Gu, Jian Xu, Guanjun Jiang — Alibaba)*
    * Link: [arxiv.org/abs/2604.22180](https://arxiv.org/abs/2604.22180)
    * TL;DR: Unified retrieval-reranking with residual passage compression for efficient LLM-based listwise reranking
    * Key techniques:
@@ -1470,7 +1470,7 @@
      - **Impact: 8/10** — Unified retrieval-reranking is a hot topic; efficient listwise reranking has high industrial value
 
 7. **Rethinking Semantic Collaborative Integration: Why Alignment Is Not Enough**
-   * Affiliation: — *(Maolin Wang, Dongze Wu, Jianing Zhou, Hongyu Chen, Beining Bao, Yu Jiang, Chenbin Zhang, Chang Wang, Jian Liu, Lei Sha — institutions TBD)*
+   * Affiliation: — *(Maolin Wang, Dongze Wu, Jianing Zhou, Hongyu Chen, Beining Bao, Yu Jiang, Chenbin Zhang, Chang Wang, Jian Liu, Lei Sha — City University of Hong Kong)*
    * Link: [arxiv.org/abs/2604.22195](https://arxiv.org/abs/2604.22195)
    * TL;DR: Beyond alignment — complementary fusion of semantic and collaborative representations for recommendation
    * Key techniques:
@@ -1486,7 +1486,7 @@
      - **Impact: 8/10** — SIGIR 2026; fundamental contribution to LLM4Rec representation learning
 
 8. **Deep Interest Mining with Cross-Modal Alignment for SemanticID Generation in Generative Recommendation**
-   * Affiliation: — *(Yagchen Zeng — institution TBD)*
+   * Affiliation: — *(Yagchen Zeng — Southeast University)*
    * Link: [arxiv.org/abs/2604.20861](https://arxiv.org/abs/2604.20861)
    * TL;DR: Cross-modal alignment and deep interest mining for high-quality Semantic ID generation in generative recommendation
    * Key techniques:
@@ -1538,7 +1538,7 @@
      - **Impact: 9/10** — Outperforms OneRec-Think; from Meta; high industrial relevance
 
 3. **Verifiable Reasoning for LLM-based Generative Recommendation (VRec)**
-   * Affiliation: — *(Xinyu Lin, Hanchao Yu, Yinglong Xia, Jiang Zhang, Aashu Singh, Fei Liu, Wenjie Wang, Fuli Feng, Tat-Seng Chua, Qifan Wang — institutions TBD)*
+   * Affiliation: — *(Xinyu Lin, Hanchao Yu, Yinglong Xia, Jiang Zhang, Aashu Singh, Fei Liu, Wenjie Wang, Fuli Feng, Tat-Seng Chua, Qifan Wang — Meta)*
    * Link: [arxiv.org/abs/2603.07725](https://arxiv.org/abs/2603.07725)
    * TL;DR: "Reason-verify-recommend" paradigm with multi-dimensional verification to mitigate reasoning degradation
    * Key techniques:
