@@ -8,6 +8,115 @@
 - [By Affiliation](#by-affiliation)
 
 ---
+
+## Papers May 17:
+
+> **Note:** 6 new generative recommendation papers found (from May 12-14, 2026). These papers were not previously in the repository.
+
+1. **Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG)**
+   * Affiliation: — *(Shuli Wang, Junwei Yin, Changhao Li, Senjie Kou, Chi Wang, Yinqiu Huang, Yinhua Zhu, Haitao Wang, Xingxing Wang — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.14853](https://arxiv.org/abs/2605.14853)
+   * Venue: arXiv preprint, May 14, 2026
+   * TL;DR: DIG unifies discriminative ranking and generative retrieval by embedding tokenizer inside ranking model for end-to-end training, producing two models from a single run
+   * Key techniques:
+     - Feature assignment taxonomy: item-intrinsic static features encoded into SIDs
+     - User-item cross features (u2i) drive codebook boundaries toward recommendation decision boundaries
+     - MLP_u2t distillation module approximates u2i at token level for inference
+     - End-to-end training: ranker naturally becomes a retrieval model
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 9/10** — Novel unification of discriminative ranking and generative retrieval via tokenizer perspective
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Improves ranking, retrieval, and unified retrieval-ranking quality on 3 public benchmarks and 2 industrial datasets
+     - **Impact: 9/10** — Fundamental insight: ranking and retrieval are same problem at different granularities; strong experimental results
+
+2. **Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec)**
+   * Affiliation: — *(Bin Huang, Xin Wang, Junwei Pan, Yongqi Zhou, Yifeng Zhou, Zhixiang Feng, Shudong Huang, Haijie Gu, Wenwu Zhu — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.14512](https://arxiv.org/abs/2605.14512)
+   * Venue: arXiv preprint, May 14, 2026
+   * TL;DR: AsymRec decouples input and output representations with MSP and MHQ to address dual-stage information bottleneck in generative recommendation
+   * Key techniques:
+     - Multi-expert Semantic Projection (MSP): maps continuous embeddings via expert-specialized projections
+     - Multi-faceted Hierarchical Quantization (MHQ): constructs high-capacity discrete targets with multi-view and multi-level quantization
+     - Semantic regularization prevents dimensional collapse while retaining fine-grained distinctions
+     - Asymmetric continuous-discrete framework decouples input and output representations
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Code will be released (per abstract); not yet available
+     - **Novelty: 8/10** — Novel asymmetric framework addressing input and output bottlenecks in GenRec
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Outperforms SOTA generative recommenders by average 15.8%; extensive experiments
+     - **Impact: 8/10** — Addresses fundamental information bottleneck in generative recommendation
+
+3. **Agentic Recommender System with Hierarchical Belief-State Memory (MARS)**
+   * Affiliation: — *(Xiang Shen, Yuhang Zhou, Yifan Wu, Zhuokai Zhao, Siyu Lin, Lei Huang, Qianqian Zhong, Lizhu Zhang, Benyu Zhang, Xiangjun Fan, Hong Yan — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.14401](https://arxiv.org/abs/2605.14401)
+   * Venue: arXiv preprint, May 14, 2026
+   * TL;DR: MARS maintains structured belief state with three-tier memory architecture for personalized recommendation as partially observable problem
+   * Key techniques:
+     - Three-tier memory: Event Memory (raw signals), Preference Memory (fine-grained chunks), Profile Memory (coherent narrative)
+     - Complete memory lifecycle: Extraction, Reinforcement, Weakening, Consolidation, Forgetting, Resynthesis
+     - LLM-based planner adaptively schedules memory operations
+     - Structured belief state progressively abstracts noisy behavioral observations
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 9/10** — Novel hierarchical belief-state memory for agentic recommendation; complete memory lifecycle
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — 26.4% average improvement in HR@1, 10.3% in NDCG@10 across 4 InstructRec domains
+     - **Impact: 9/10** — Memory-augmented LLM agents for recommendation; state-of-the-art performance
+
+4. **F-GRPO: Factorized Group-Relative Policy Optimization for Unified Candidate Generation and Ranking**
+   * Affiliation: — *(Rohan Surana, Gagan Mundada, Junda Wu, Xintong Li, Yizhu Jiao, Bowen Jin, Sizhe Zhou, Tong Yu, Ritwik Sinha, Jiawei Han, Jingbo Shang, Julian McAuley — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.12995](https://arxiv.org/abs/2605.12995)
+   * Venue: arXiv preprint, May 13, 2026
+   * TL;DR: F-GRPO factorizes policy into candidate generation and ranking, trained end-to-end with factorized group-relative policy optimization for LLM-based generative recommendation
+   * Key techniques:
+     - Factorized GRPO: separate group-relative advantages for generation and ranking
+     - Order-invariant coverage reward and position-aware utility reward
+     - Two-phase sequence-level objective for credit assignment
+     - Unified autoregressive rollout for both candidate generation and ranking
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 9/10** — Novel factorized policy optimization for unified generation and ranking; addresses credit assignment gap
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Improves top-ranked performance over GRPO and decoupled baselines; competitive with strong zero-shot rerankers
+     - **Impact: 9/10** — End-to-end optimization of generation and ranking with LLMs; strong results on sequential recommendation and multi-hop QA
+
+5. **RecRM-Bench: Benchmarking Multidimensional Reward Modeling for Agentic Recommender Systems**
+   * Affiliation: — *(Wenwen Zeng, Jinhui Zhang, Hao Chen, Zhaoyu Hu, Yongqi Liang, Jiajun Chai, Dengcan Liu, Zhenfeng Liu, Shurui Yan, Minglong Xue, Xiaohan Wang, Wei Lin, Guojun Yin — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.11874](https://arxiv.org/abs/2605.11874)
+   * Venue: arXiv preprint, May 12, 2026
+   * TL;DR: RecRM-Bench is the largest benchmark for multidimensional reward modeling in agentic recommender systems with 1M+ structured entries across 4 evaluation dimensions
+   * Key techniques:
+     - Multidimensional reward modeling: instruction following, factual consistency, query-item relevance, fine-grained user behavior prediction
+     - Comprehensive assessment from syntactic compliance to complex intent grounding
+     - Hybrid reward function integration framework
+     - 1M+ structured entries for training sophisticated reward models
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 10/10** — Dataset publicly available at https://huggingface.co/datasets/wwzeng/RecRM-Bench (CC BY 4.0 license)
+     - **Novelty: 8/10** — First large-scale benchmark for multidimensional reward modeling in agentic recommenders
+     - **Fairness: 6/10** — Enables better reward modeling but fairness not explicitly addressed
+     - **Robustness: 8/10** — Comprehensive evaluation dimensions; supports training of reliable reward models
+     - **Impact: 9/10** — Critical for developing reliable agentic recommender systems; fills important benchmark gap
+
+6. **HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding and Group-Aware Alignment**
+   * Affiliation: — *(Guorui Li, Dugang Liu, Lei Li, Xing Tang, Zhong Ming — institutions TBD)*
+   * Link: [arxiv.org/abs/2605.11662](https://arxiv.org/abs/2605.11662)
+   * Venue: Accepted by ACL 2026 Findings
+   * TL;DR: HSUGA introduces hierarchical semantic understanding and group-aware alignment for LLM-enhanced sequential recommendation, adapting semantic utilization to user activity levels
+   * Key techniques:
+     - Hierarchical Semantic Understanding (HSU): staged two-phase preference mining with constrained editing operations
+     - Group-Aware Alignment (GAA): adjusts semantic utilization intensity based on user activity levels
+     - Weaker alignment for active users, stronger guidance for sparse-history users
+     - Plugin design for easy integration with existing methods
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel hierarchical semantic understanding and group-aware alignment for LLM-enhanced recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Extensive experiments on 3 benchmark datasets; demonstrates effectiveness and compatibility
+     - **Impact: 8/10** — Accepted at ACL 2026 Findings; addresses limitations in LLM-enhanced sequential recommendation
+
+---
+
 ## Papers May 13:
 
 > **Note:** 5 new generative recommendation papers found in the last 24 hours (May 12-13, 2026). All papers are newly added to the repository.
@@ -1702,11 +1811,12 @@
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 26 papers as of May 11.
+**Count:** 27 papers as of May 17.
 
 | Score | Paper |
 | --- | --- |
 | 10/10 | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) |
+| 10/10 | RecRM-Bench: Benchmarking Multidimensional Reward Modeling for Agentic Recommender Systems |
 | 10/10 | MiniOneRec: An Open-Source Framework for Scaling Generative Recommendation |
 | 9/10 | Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE) |
 | 9/10 | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
@@ -1762,6 +1872,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE)
 
 ### Generative Retrieval / Ranking
+- Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
 - Harmonizing Generative Retrieval and Ranking in Chain-of-Recommendation (RecoChain)
 - Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
@@ -1775,6 +1886,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)
 
 ### Reasoning
+- Discrimination Is Generation (DIG) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- Agentic Recommender System with Hierarchical Belief-State Memory (MARS) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- F-GRPO: Factorized Group-Relative Policy Optimization [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- RecRM-Bench: Benchmarking Multidimensional Reward Modeling [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
 - Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
 - ReRec
 - VRec (Verifiable Reasoning)
@@ -1796,6 +1911,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
 
 ### Generative Recommendation / VAE
+- Asymmetric Generative Recommendation via Multi-Expert Projection (AsymRec) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- F-GRPO: Factorized Group-Relative Policy Optimization [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
 - Differentiable Semantic ID for Generative Recommendation (DIGER)
 - Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA)
 - R3-VAE
@@ -1836,6 +1954,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
 
 ### LLM-based Recommendation
+- Discrimination Is Generation (DIG) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- Agentic Recommender System with Hierarchical Belief-State Memory (MARS) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- F-GRPO: Factorized Group-Relative Policy Optimization [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- RecRM-Bench: Benchmarking Multidimensional Reward Modeling [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
 - LASAR: Latent Adaptive Semantic Aligned Reasoning for Generative Recommendation
 - RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation
 - RecGPT-Mobile: On-Device Large Language Models
@@ -1877,6 +2000,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank)
 
 ### Semantic / Structured IDs
+- Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
 - GRLM
 - Deep Interest Mining (SemanticID)
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
@@ -1927,6 +2051,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DC4SR (Disagreement as Signals)
 
 ### Inference
+- Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
 - Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)
 - OpenOneRec
 - RelayGR
@@ -2015,6 +2140,6 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Stony Brook University** | CRAB |
 | **Alibaba** | RecGPT-Mobile: On-Device Large Language Models �� RecGPT-Mobile: On-Device Large Language Models |
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
-| **(TBD)** | LASAR �� RRCM �� StageCF �� PAD-Rec �� Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems · | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) · Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) · Why Users Go There · TwiSTAR · ComeIR · Cascaded Generative Approach · ORBIT
+| **(TBD)** | LASAR �� RRCM �� StageCF �� PAD-Rec �� Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems · | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) · Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) · Why Users Go There · TwiSTAR · ComeIR · Cascaded Generative Approach · ORBIT · DIG · AsymRec · MARS · F-GRPO · RecRM-Bench · HSUGA 
 
  · TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation · One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving · PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation · Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) · On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)---
