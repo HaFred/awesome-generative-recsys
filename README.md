@@ -2105,23 +2105,23 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 | Affiliation | Papers |
 |---|---|
-| **Meta** | Generative Reasoning Re-ranker (GR2) |
+| **Meta** | Generative Reasoning Re-ranker (GR2) · MARS |
 | **LinkedIn** | SIREN-RoPE (Learning to Rotate) |
 | **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions) |
 | **NJUST / Nanjing** | Harmonizing Generative Retrieval (RecoChain) |
-| **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) |
-| **Beihang University** | A2Gen (Action-Aware Generative Sequence Modeling) |
-| **Kuaishou** | PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations · OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID |
-| **USTC** | MiniOneRec · UniGRec |
+| **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) · ComeIR |
+| **Beihang University** | A2Gen (Action-Aware Generative Sequence Modeling) · LASAR |
+| **Kuaishou** | PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations · OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note |
+| **USTC** | MiniOneRec · UniGRec · PAD-Rec · DynamicPO: Dynamic Preference Optimization for Recommendation · Objective Shaping · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
 | **UIUC Illinois** | Rec-R1 |
 | **Huawei Cloud** | RelayGR |
 | **NUS** | Reasoning over Semantic IDs · CARE |
 | **Shanghai JTU** | MuonRec |
 | **Youtube** | [STATIC] Vectorizing the Trie |
-| **Meituan** · MBGR | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe |
+| **Meituan · MBGR** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench |
 | **Netflix** | Rank-GRPO |
 | **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID |
-| **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) |
+| **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR |
 | **Leiden University / University of Glasgow** | Differentiable Semantic ID for Generative Recommendation (DIGER) |
 | **Johannes Kepler University Linz** | A2G-DiffRec |
 | **Renmin University of China / Beijing University of Posts and Telecommunications** | LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation |
@@ -2138,8 +2138,25 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Shopee** | UniRec |
 | **Walmart Global Tech** | CRAB |
 | **Stony Brook University** | CRAB |
-| **Alibaba** | RecGPT-Mobile: On-Device Large Language Models �� RecGPT-Mobile: On-Device Large Language Models |
+| **Alibaba** | RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There |
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
-| **(TBD)** | LASAR �� RRCM �� StageCF �� PAD-Rec �� Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) · Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) · One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · SAGER: Self-Evolving User Policy Skills for Recommendation Agent · Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · Mitigating Collaborative Semantic ID Staleness in Generative Retrieval · DUET: Joint Exploration of User Item Profiles in Recommendation System · DynamicPO: Dynamic Preference Optimization for Recommendation · VRec · GRLM · R3-VAE · ReCast · Objective Shaping · GraphRAG-IRL · MLTFR · ResRank · Deep Interest Mining · DC4SR · FLR · GR4AD · A2G-DiffRec · How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems · | · CapsID: Soft-Routed Variable-Length Semantic IDs · Interests Burn-down Diffusion Process (StageCF) · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) · Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) · Why Users Go There · TwiSTAR · ComeIR · Cascaded Generative Approach · ORBIT · DIG · AsymRec · MARS · F-GRPO · RecRM-Bench · HSUGA 
-
- · TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation · One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving · PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation · Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) · On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)---
+| **UT Austin** | RRCM |
+| **Peking University** | StageCF · DUET: Joint Exploration of User Item Profiles in Recommendation System · Interests Burn-down Diffusion Process (StageCF) |
+| **Beijing Institute of Technology** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) |
+| **Zhejiang University** | Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) |
+| **Harvard University** | One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) |
+| **Southeast University** | DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · Deep Interest Mining |
+| **Bay University** | SAGER: Self-Evolving User Policy Skills for Recommendation Agent |
+| **Tsinghua University** | Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · TwiSTAR · AsymRec |
+| **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval |
+| **VWFS** | VRec · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
+| **Huawei** | ReCast |
+| **Purdue University** | GraphRAG-IRL |
+| **Chongqing University** | MLTFR · DC4SR |
+| **HSE University** | How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems |
+| **Microsoft** | CapsID: Soft-Routed Variable-Length Semantic IDs |
+| **UC San Diego** | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · F-GRPO |
+| **ByteDance** | Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) |
+| **Instacart** | Cascaded Generative Approach |
+| **Johns Hopkins University** | ORBIT |
+| **Shenzhen University** | HSUGA |
