@@ -9,6 +9,97 @@
 
 ---
 
+## Papers May 18:
+
+> **Note:** No new generative recommendation papers were found in the last 24 hours (May 17-18, 2026). Following the fallback procedure, 5 papers from May 12-15, 2026 are included to meet the minimum 5 papers requirement.
+
+1. **Generative Long-term User Interest Modeling for Click-Through Rate Prediction (GenLI)**
+   * Affiliation: — *(Jiangli Shao, Kaifu Zheng, Hao Fang, Huimu Ye, Zhiwei Liu, Bo Zhang, Shu Han, Xingxing Wang — Meituan)*
+   * Link: [arxiv.org/abs/2605.15905](https://arxiv.org/abs/2605.15905)
+   * Venue: arXiv preprint, May 15, 2026
+   * TL;DR: GenLI models long-term user interests with generative interest distributions and O(1) behavior retrieval for CTR prediction
+   * Key techniques:
+     - Interest Generation Module (IGM): generates multiple interest distributions (target-independent)
+     - Behavior Retrieval Module (BRM): O(1) lookup for relevant behaviors
+     - Interest Fusion Module (IFM): gating mechanisms for final interest features
+     - Avoids complex matching-based behavioral retrieval
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel application of generative modeling to long-term user interest modeling for CTR prediction
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Better accuracy-efficiency balance; avoids complex matching-based retrieval
+     - **Impact: 8/10** — From Meituan; practical significance for CTR prediction in advertising and recommendation
+
+2. **Fortress: A Case Study in Stabilizing Search Recommendations via Temporal Data Augmentation and Feature Pruning**
+   * Affiliation: — *(Milind Pandurang Jagre, Jia Huang, Dayvid V. R. Oliveira, Zhinan Cheng, Babak Seyyed Aghazadeh, Puja Das, Chris Alvino, Jinda Han, Kailash Thiyagarajan — Apple Inc.)*
+   * Link: [arxiv.org/abs/2605.15299](https://arxiv.org/abs/2605.15299)
+   * Venue: arXiv preprint, May 14, 2026
+   * TL;DR: Fortress identifies and prunes features causing temporal instability in search recommendation models, improving prediction stability
+   * Key techniques:
+     - Historical snapshot collection for capturing score fluctuations
+     - Identification and removal of instability-inducing features
+     - Balances semantic features (generalization) and engagement features (predictive power)
+     - Validated on large-scale app marketplace query-to-app relevance model
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 7/10** — Novel framework for enhancing temporal stability in recommendation models
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Improves prediction stability (Coefficient of Variation) and PR-AUC
+     - **Impact: 7/10** — From Apple; practical significance for industrial recommendation systems
+
+3. **TurboGR: An Accelerated Training System for Large-Scale Generative Recommendation**
+   * Affiliation: — *(Huichao Chai, Zhixin Wu, Xuemiao Li, Shiqing Fan, Hengfeng Wang, Maojun Peng, Lu Xu, Yaoyuan Wang, Yibo Jin, Wei Guo, Yongxiang Feng — Huawei Technologies)*
+   * Link: [arxiv.org/abs/2605.13433](https://arxiv.org/abs/2605.13433)
+   * Venue: arXiv preprint, May 13, 2026
+   * TL;DR: TurboGR is an Ascend-NPU-optimized training system for generative recommendation with system-level accelerations
+   * Key techniques:
+     - Ascend-affinity jagged acceleration (fusion operators, dynamic load balancing)
+     - Distributed communication optimization (hierarchical sparse parallelism, semi-asynchronous training)
+     - Negative sampling optimization (asynchronous offloading, jaggedness-aware FP16 quantization)
+     - Supports training at up to 0.2B parameters with 54.71% MFU
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel system-level optimizations for generative recommendation on Ascend NPUs
+     - **Fairness: 4/10** — Not relevant to fairness; systems optimization work
+     - **Robustness: 9/10** — Near-linear scalability (0.97); 94% NPU utilization
+     - **Impact: 8/10** — From Huawei; significant for deploying generative recommendation at scale on Ascend NPUs
+
+4. **MLPs are Efficient Distilled Generative Recommenders (SID-MLP)**
+   * Affiliation: — *(Zitian Guo, Yupeng Hou, Clark Mingxuan Ju, Neil Shah, Julian McAuley — University of California, San Diego / Snap Inc.)*
+   * Link: [arxiv.org/abs/2605.12617](https://arxiv.org/abs/2605.12617)
+   * Venue: arXiv preprint, May 12, 2026
+   * TL;DR: SID-MLP distills heavy Transformer decoders into position-specific MLP heads for 8.74x inference acceleration in generative recommendation
+   * Key techniques:
+     - Lightweight MLP-centric distillation framework
+     - Captures global user context in single operation (decoupled from sequential token prediction)
+     - Distills teacher into position-specific MLP heads (eliminates dense attention overhead)
+     - SID-MLP++: extends framework to replace Transformer encoder
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 9/10** — Novel insight: standard Transformers are structural overkill for SID prediction; MLP distillation is highly effective
+     - **Fairness: 4/10** — Not relevant to fairness; inference optimization work
+     - **Robustness: 9/10** — 8.74x inference acceleration while matching teacher accuracy; plug-and-play accelerator
+     - **Impact: 9/10** — From UC San Diego/Snap; significant for practical deployment of generative recommenders
+
+5. **Quality-Aware Collaborative Multi-Positive Contrastive Learning for Sequential Recommendation (QCMP-CL)**
+   * Affiliation: — *(Wei Wang — Qingdao University)*
+   * Link: [arxiv.org/abs/2605.11707](https://arxiv.org/abs/2605.11707)
+   * Venue: arXiv preprint, May 12, 2026
+   * TL;DR: QCMP-CL introduces learnable collaborative sequence augmentation and quality-aware weighting for robust contrastive learning in sequential recommendation
+   * Key techniques:
+     - Learnable collaborative sequence augmentation (same-target and similar sequences)
+     - Quality-aware mechanism: estimates view quality from augmentation confidence
+     - Adaptive weighting: high-confidence views contribute more supervision
+     - Addresses semantic drift and false-positive issues in CL
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel quality-aware mechanism for contrastive learning in sequential recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Outperforms SOTA CL-based sequential recommendation baselines
+     - **Impact: 7/10** — Addresses key limitations of existing CL-based sequential recommendation methods
+
+---
+
 ## Papers May 17:
 
 > **Note:** 6 new generative recommendation papers found (from May 12-14, 2026). These papers were not previously in the repository.
@@ -2101,12 +2192,30 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ---
 
 
+
+### CTR Prediction
+- Generative Long-term User Interest Modeling for Click-Through Rate Prediction (GenLI) [\&longrightarrow; May 18](*Details in Papers May 18 section*)
+
+### Temporal Stability / Feature Pruning
+- Fortress: A Case Study in Stabilizing Search Recommendations [\&longrightarrow; May 18](*Details in Papers May 18 section*)
+
+### Training Systems / NPU Optimization
+- TurboGR: An Accelerated Training System for Large-Scale Generative Recommendation [\&longrightarrow; May 18](*Details in Papers May 18 section*)
+
+### Inference Acceleration / Distillation
+- MLPs are Efficient Distilled Generative Recommenders (SID-MLP) [\&longrightarrow; May 18](*Details in Papers May 18 section*)
+
+### Contrastive Learning
+- Quality-Aware Collaborative Multi-Positive Contrastive Learning for Sequential Recommendation (QCMP-CL) [\&longrightarrow; May 18](*Details in Papers May 18 section*)
+
+
 ## By Affiliation
 
 | Affiliation | Papers |
 |---|---|
 | **ACL 2026** | ReRec, SAGE |
 | **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval |
+| **Apple Inc.** | Fortress [\&longrightarrow; May 18](*) |
 | **Alibaba** | RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There |
 | **Anhui University** | ProMax |
 | **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions) |
@@ -2118,7 +2227,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) · ComeIR |
 | **Harvard University** | One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) |
 | **HSE University** | How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems |
-| **Huawei** | ReCast |
+| **Huawei** | ReCast  · TurboGR (May 18) |
 | **Huawei Cloud** | RelayGR |
 | **Instacart** | Cascaded Generative Approach |
 | **JD.com** | GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation |
@@ -2128,7 +2237,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Leiden University / University of Glasgow** | Differentiable Semantic ID for Generative Recommendation (DIGER) |
 | **LinkedIn** | SIREN-RoPE (Learning to Rotate) |
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR |
-| **Meituan · MBGR** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench |
+| **Meituan · MBGR** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench  · GenLI (May 18) |
 | **Meta** | Generative Reasoning Re-ranker (GR2) · MARS |
 | **Microsoft** | CapsID: Soft-Routed Variable-Length Semantic IDs |
 | **MLSys 2026** | FreeScale |
@@ -2137,6 +2246,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **NUS** | Reasoning over Semantic IDs · CARE |
 | **NVIDIA** | MTServe |
 | **Peking University** | StageCF · DUET: Joint Exploration of User Item Profiles in Recommendation System · Interests Burn-down Diffusion Process (StageCF) |
+| **Qingdao University** | QCMP-CL [\&longrightarrow; May 18](*) |
 | **Purdue University** | GraphRAG-IRL |
 | **Renmin University of China / Beijing University of Posts and Telecommunications** | LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation |
 | **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
@@ -2150,7 +2260,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
 | **The University of Queensland** | ProMax |
 | **Tsinghua University** | Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · TwiSTAR · AsymRec |
-| **UC San Diego** | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · F-GRPO |
+| **UC San Diego** | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · F-GRPO  · SID-MLP (May 18) |
 | **UIUC Illinois** | Rec-R1 |
 | **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID |
 | **USTC** | MiniOneRec · UniGRec · PAD-Rec · DynamicPO: Dynamic Preference Optimization for Recommendation · Objective Shaping · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
