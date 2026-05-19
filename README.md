@@ -3,6 +3,24 @@
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
 ## Quick Indexing
+```mermaid
+mindmap
+  root((Awesome Generative RecSys))
+    Decision Layer: LLM in Recommendation Chain
+      CoT Reasoning
+        OneRec-Think -- Kuaishou
+        OneRec-V3 -- Kuaishou
+    Representation Layer: Generative Pre-training
+      Next Interest Flow Prediction
+        AMEN -- Alibaba
+      RL-based Alignment for Recall
+        GRPO for Vector Recall -- Alibaba Taobao Search
+    Feature Layer: LLM Semantic Features
+      Semantic Token and Embedding
+        PatchRec -- USTC and Tencent
+        PAD -- CityU and Tencent
+        RARE -- ByteDance
+```
 - [By Opensource](#by-opensource)
 - [By Keyword](#by-keyword)
 - [By Affiliation](#by-affiliation)
@@ -2072,7 +2090,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DC4SR (Disagreement as Signals)
 
 ### Diffusion
-- Dual-Diffusional Generative Fashion Recommendation (DualFashion) [\&rightarrow; May 19](*Details in Papers May 19 section*)
+- Dual-Diffusional Generative Fashion Recommendation (DualFashion)
 - Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)
 - LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
@@ -2084,19 +2102,19 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching
 
 ### Fairness
-- Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) [\&rightarrow; May 19](*Details in Papers May 19 section*)
+- Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost)
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
 - CRAB: Codebook Rebalancing for Bias Mitigation in Generative Recommendation
 
 - LLM Biases
 
 ### Generative Recommendation / VAE
-- RAGR: Review-Augmented Generative Recommendation [\&rightarrow; May 19](*Details in Papers May 19 section*)
-- Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) [\&rightarrow; May 19](*Details in Papers May 19 section*)
-- Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search (GrowthGR) [\&rightarrow; May 19](*Details in Papers May 19 section*)
-- Asymmetric Generative Recommendation via Multi-Expert Projection (AsymRec) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
-- F-GRPO: Factorized Group-Relative Policy Optimization [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
-- HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- RAGR: Review-Augmented Generative Recommendation
+- Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost)
+- Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search (GrowthGR)
+- Asymmetric Generative Recommendation via Multi-Expert Projection (AsymRec) 
+- F-GRPO: Factorized Group-Relative Policy Optimization 
+- HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding 
 - Differentiable Semantic ID for Generative Recommendation (DIGER)
 - Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA)
 - R3-VAE
@@ -2136,7 +2154,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale (QuaSID)
 
 ### Generative Retrieval / Ranking
-- Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG) 
 - Harmonizing Generative Retrieval and Ranking in Chain-of-Recommendation (RecoChain)
 - Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
@@ -2153,7 +2171,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - GraphRAG-IRL
 
 ### Inference
-- Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec) 
 - Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)
 - OpenOneRec
 - RelayGR
@@ -2168,14 +2186,14 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 ### LLM-based Recommendation
 ### Multimodal
-- Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL) [\&rightarrow; May 19](*Details in Papers May 19 section*)
-- Dual-Diffusional Generative Fashion Recommendation (DualFashion) [\&rightarrow; May 19](*Details in Papers May 19 section*)
+- Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL)
+- Dual-Diffusional Generative Fashion Recommendation (DualFashion)
 
-- Discrimination Is Generation (DIG) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
-- Agentic Recommender System with Hierarchical Belief-State Memory (MARS) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
-- F-GRPO: Factorized Group-Relative Policy Optimization [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
-- RecRM-Bench: Benchmarking Multidimensional Reward Modeling [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
-- HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- Discrimination Is Generation (DIG) 
+- Agentic Recommender System with Hierarchical Belief-State Memory (MARS) 
+- F-GRPO: Factorized Group-Relative Policy Optimization 
+- RecRM-Bench: Benchmarking Multidimensional Reward Modeling 
+- HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding 
 - LASAR: Latent Adaptive Semantic Aligned Reasoning for Generative Recommendation
 - RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation
 - RecGPT-Mobile: On-Device Large Language Models
@@ -2243,10 +2261,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank)
 
 ### Reasoning
-- Discrimination Is Generation (DIG) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
-- Agentic Recommender System with Hierarchical Belief-State Memory (MARS) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
-- F-GRPO: Factorized Group-Relative Policy Optimization [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
-- RecRM-Bench: Benchmarking Multidimensional Reward Modeling [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- Discrimination Is Generation (DIG) 
+- Agentic Recommender System with Hierarchical Belief-State Memory (MARS) 
+- F-GRPO: Factorized Group-Relative Policy Optimization 
+- RecRM-Bench: Benchmarking Multidimensional Reward Modeling 
 - Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
 - ReRec
 - VRec (Verifiable Reasoning)
@@ -2296,7 +2314,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE)
 
 ### Semantic / Structured IDs
-- Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
+- Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG) 
 - GRLM
 - Deep Interest Mining (SemanticID)
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
@@ -2353,28 +2371,27 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 | Affiliation | Papers |
 |---|---|
-
 | **ACL 2026** | ReRec, SAGE |
 | **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval |
 | **Alibaba** | RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There |
 | **Anhui University** | ProMax |
 | **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions) |
-| **Apple Inc.** | Fortress [\&longrightarrow; May 18](*) |
+| **Apple Inc.** | Fortress |
 | **Bay University** | SAGER: Self-Evolving User Policy Skills for Recommendation Agent |
 | **Beihang University** | A2Gen (Action-Aware Generative Sequence Modeling) · LASAR |
 | **Beijing Institute of Technology** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) |
 | **ByteDance** | Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) |
-| **Central South University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) [\&rightarrow; May 19](*Details in Papers May 19 section*) |
+| **Central South University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) |
 | **Chongqing University** | MLTFR · DC4SR |
 | **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) · ComeIR |
-| **Dalian University of Technology** | RAGR: Review-Augmented Generative Recommendation [\&rightarrow; May 19](*Details in Papers May 19 section*) |
-| **Griffith University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) [\&rightarrow; May 19](*Details in Papers May 19 section*) |
+| **Dalian University of Technology** | RAGR: Review-Augmented Generative Recommendation |
+| **Griffith University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) |
 | **Harvard University** | One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) |
-| **Hong Kong Polytechnic University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) [\&rightarrow; May 19](*Details in Papers May 19 section*) |
+| **Hong Kong Polytechnic University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) |
 | **HSE University** | How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems |
 | **Huawei** | ReCast  · TurboGR (May 18) |
 | **Huawei Cloud** | RelayGR |
-| **Hubei University** | Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL) [\&rightarrow; May 19](*Details in Papers May 19 section*) |
+| **Hubei University** | Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL) |
 | **Instacart** | Cascaded Generative Approach |
 | **JD.com** | GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation |
 | **Johannes Kepler University Linz** | A2G-DiffRec |
@@ -2393,14 +2410,14 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **NVIDIA** | MTServe |
 | **Peking University** | StageCF · DUET: Joint Exploration of User Item Profiles in Recommendation System · Interests Burn-down Diffusion Process (StageCF) |
 | **Purdue University** | GraphRAG-IRL |
-| **Qingdao University** | QCMP-CL [\&longrightarrow; May 18](*) |
+| **Qingdao University** | QCMP-CL |
 | **Renmin University of China / Beijing University of Posts and Telecommunications** | LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation |
 | **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
 | **Shanghai JTU** | MuonRec |
 | **Shenzhen University** | HSUGA |
 | **Shopee** | UniRec |
 | **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec |
-| **Singapore Management University** | Dual-Diffusional Generative Fashion Recommendation (DualFashion) [\&rightarrow; May 19](*Details in Papers May 19 section*) |
+| **Singapore Management University** | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
 | **Southeast University** | DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · Deep Interest Mining |
 | **Stony Brook University** | CRAB |
 | **Tencent** | HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning · Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) |
