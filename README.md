@@ -8,6 +8,98 @@
 - [By Affiliation](#by-affiliation)
 
 ---
+## Papers May 19
+
+> **Note:** 5 new generative recommendation papers found (from May 18-19, 2026). All papers are newly added to the repository.
+
+1. **Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL)**
+   * Affiliation: — *(Hongjian Ma, Wenxin Huang, Yan Zhang, Zhifei Li — Hubei University; Zheng Wang — Wuhan University)*
+   * Link: [arxiv.org/abs/2605.18044](https://arxiv.org/abs/2605.18044)
+   * Venue: arXiv preprint, May 18, 2026 (submitted to IEEE Transactions on Multimedia)
+   * TL;DR: MAIL constructs modality-aware identity representations and uses counterfactual structure learning to alleviate popularity bias in ID-free multimodal recommendation
+   * Key techniques:
+     - Modality-aware identity construction module with dynamic positional encoding modulation
+     - Counterfactual structure learning with popularity penalization for low-exposure semantic neighbors
+     - ID-free multimodal recommendation without collaborative ID embeddings
+     - Joint optimization of multimodal semantics and graph structure
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 4/10** — GitHub: https://github.com/HubuKG/MAIL; code exists but poor maintenance (2 commits, 0 stars); minimal documentation
+     - **Novelty: 7/10** — Novel modality-aware identity construction for ID-free multimodal recommendation
+     - **Fairness: 6/10** — Addresses popularity bias via counterfactual structure learning
+     - **Robustness: 8/10** — +7.81% Recall@10 and +12.81% NDCG@10 on five Amazon datasets
+     - **Impact: 7/10** — ID-free multimodal recommendation is a growing area; strong empirical results
+
+2. **Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search (GrowthGR)**
+   * Affiliation: — *(Yifan Wang, Yixuan Wang, Yidan Liang, Qiang Liu, Fei Xiao — Taobao & Tmall Group of Alibaba)*
+   * Link: [arxiv.org/abs/2605.17994](https://arxiv.org/abs/2605.17994)
+   * Venue: arXiv preprint, May 18, 2026
+   * TL;DR: GrowthGR is a multi-value-aware retrieval framework for e-commerce search that promotes new item growth via counterfactual inference and multi-value-aware policy optimization
+   * Key techniques:
+     - ItemLTV (Item Long-term Transaction Value Prediction) using counterfactual inference
+     - MultiGR (Multi-Value-Aware Generative Retrieval) with semantic ID-based architecture
+     - Multi-Value-Aware Policy Optimization (MoPO) for aligning with multi-stage online values
+     - Addresses the "Matthew effect" of popular item bias in e-commerce search
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found (industrial deployment at Taobao)
+     - **Novelty: 8/10** — Novel multi-value-aware retrieval framework for sustainable growth in e-commerce
+     - **Fairness: 6/10** — Promotes new item growth, addressing popularity bias in e-commerce search
+     - **Robustness: 8/10** — Deployed on Taobao production platform; +5.3% lift in new item GMV, +0.3% gain in overall search GMV
+     - **Impact: 9/10** — From Alibaba/Taobao; significant business impact for e-commerce ecosystems
+
+3. **Dual-Diffusional Generative Fashion Recommendation (DualFashion)**
+   * Affiliation: — *(Mingzhe Yu, Yunshan Ma — Singapore Management University; Lei Wu, Qianru Sun)*
+   * Link: [arxiv.org/abs/2605.17357](https://arxiv.org/abs/2605.17357)
+   * Venue: Accepted by SIGIR 2026
+   * TL;DR: DualFashion is a dual-diffusional generative architecture that jointly models image and text modalities for personalized and explainable fashion recommendation
+   * Key techniques:
+     - Dual-diffusion Transformer with image and text branches
+     - Structured attribute-level captions and visual outfit information as joint conditioning
+     - Generates both fashion item images and textual descriptions for interpretability
+     - Text-augmented fine-tuning strategy for generation diversity and cross-modal knowledge transfer
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — GitHub: https://github.com/LinkMingzhe/DualFashion; good documentation, complete pipeline, but early stage (13 commits, 0 stars, no releases)
+     - **Novelty: 8/10** — Novel dual-diffusional architecture for multimodal fashion recommendation with interpretability
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Strong performance on iFashion and Polyvore-U datasets for PFITB and GOR tasks
+     - **Impact: 8/10** — Accepted at SIGIR 2026; novel approach to generative fashion recommendation with interpretability
+
+4. **RAGR: Review-Augmented Generative Recommendation**
+   * Affiliation: — *(Yingyi Zhang — Dalian University of Technology; Yejing Wang, Junyi Li, Wenlin Zhang, Xiaowei Qian, Sheng Zhang, Xiangyu Zhao — City University of Hong Kong; Yue Feng, Yong Liu — Huawei Technologies; Xianneng Li — National Key Laboratory of Maritime Decision Intelligence)*
+   * Link: [arxiv.org/abs/2605.17267](https://arxiv.org/abs/2605.17267)
+   * Venue: arXiv preprint, May 17, 2026
+   * TL;DR: RAGR incorporates review feedback directly into the generative user sequence, addressing the structural bottleneck of item-only modeling in generative recommendation
+   * Key techniques:
+     - Review-Augmented User Sequence Modeling: interleaves item semantic IDs and review semantic IDs chronologically
+     - Item-Centric Task Generation Alignment via Direct Preference Optimization (DPO)
+     - Mixed behavioral-semantic sequence for review signals participating directly in autoregressive generation
+     - Favors item tokens over review tokens at prediction positions to preserve recommendation objective
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — GitHub: https://github.com/Zhang-Yingyi/TKDE_RAGR; research-grade implementation with complete pipeline, good documentation, but low community engagement (3 stars, 8 commits)
+     - **Novelty: 8/10** — Novel review-augmented approach addressing the structural bottleneck of item-only modeling
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Consistent and significant gains over strong GR backbones on three real-world datasets
+     - **Impact: 8/10** — Novel approach to incorporating review feedback into generative recommendation
+
+5. **Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost)**
+   * Affiliation: — *(Jun Yin, Chengqi Zhang — Hong Kong Polytechnic University; Bangguo Zhu, Ruochen Liu, Senzhang Wang — Central South University; Peng Huo — National Super Computing Center Tianjin; Hao Chen — City University of Macau; Shirui Pan — Griffith University)*
+   * Link: [arxiv.org/abs/2605.16825](https://arxiv.org/abs/2605.16825)
+   * Venue: arXiv preprint, May 16, 2026
+   * TL;DR: Ghost diagnoses and cures popularity bias in generative recommenders via asymmetric unlikelihood optimization and skeleton-founded tokenization
+   * Key techniques:
+     - Theoretical analysis identifying token-level optimization flaw and undifferentiated item tokenization as root causes of popularity bias
+     - Ghost system with asymmetric unlikelihood optimization
+     - Skeleton-founded tokenization for differentiating item representations
+     - Extensive empirical evaluation across three datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 9/10** — Novel theoretical analysis and solution for popularity bias in generative recommenders
+     - **Fairness: 9/10** — Core contribution is addressing popularity bias (filter bubble) in generative recommenders
+     - **Robustness: 8/10** — Substantially alleviates popularity bias while maintaining recommendation utility
+     - **Impact: 8/10** — Important contribution to fairness in generative recommendation; novel theoretical analysis
+
+---
+
+
 
 ## Papers May 18
 
@@ -1934,7 +2026,7 @@
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 27 papers as of May 17.
+**Count:** 29 papers as of May 19.
 
 | Score | Paper |
 | --- | --- |
@@ -1965,6 +2057,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 9/10 | Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
 | 8/10 | Differentiable Semantic ID for Generative Recommendation (DIGER) |
 | 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
+| 7/10 | RAGR: Review-Augmented Generative Recommendation |
+| 7/10 | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
 
 ---
 
@@ -1978,6 +2072,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DC4SR (Disagreement as Signals)
 
 ### Diffusion
+- Dual-Diffusional Generative Fashion Recommendation (DualFashion) [\&rightarrow; May 19](*Details in Papers May 19 section*)
 - Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)
 - LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
@@ -1989,12 +2084,16 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching
 
 ### Fairness
+- Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) [\&rightarrow; May 19](*Details in Papers May 19 section*)
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
 - CRAB: Codebook Rebalancing for Bias Mitigation in Generative Recommendation
 
 - LLM Biases
 
 ### Generative Recommendation / VAE
+- RAGR: Review-Augmented Generative Recommendation [\&rightarrow; May 19](*Details in Papers May 19 section*)
+- Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) [\&rightarrow; May 19](*Details in Papers May 19 section*)
+- Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search (GrowthGR) [\&rightarrow; May 19](*Details in Papers May 19 section*)
 - Asymmetric Generative Recommendation via Multi-Expert Projection (AsymRec) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
 - F-GRPO: Factorized Group-Relative Policy Optimization [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
 - HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
@@ -2068,6 +2167,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
 
 ### LLM-based Recommendation
+### Multimodal
+- Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL) [\&rightarrow; May 19](*Details in Papers May 19 section*)
+- Dual-Diffusional Generative Fashion Recommendation (DualFashion) [\&rightarrow; May 19](*Details in Papers May 19 section*)
+
 - Discrimination Is Generation (DIG) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS) [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
 - F-GRPO: Factorized Group-Relative Policy Optimization [\&longrightarrow; May 17](*Details in Papers May 17 section*) 
@@ -2250,22 +2353,28 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 | Affiliation | Papers |
 |---|---|
+
 | **ACL 2026** | ReRec, SAGE |
 | **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval |
-| **Apple Inc.** | Fortress [\&longrightarrow; May 18](*) |
 | **Alibaba** | RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There |
 | **Anhui University** | ProMax |
 | **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions) |
+| **Apple Inc.** | Fortress [\&longrightarrow; May 18](*) |
 | **Bay University** | SAGER: Self-Evolving User Policy Skills for Recommendation Agent |
 | **Beihang University** | A2Gen (Action-Aware Generative Sequence Modeling) · LASAR |
 | **Beijing Institute of Technology** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) |
 | **ByteDance** | Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) |
+| **Central South University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) [\&rightarrow; May 19](*Details in Papers May 19 section*) |
 | **Chongqing University** | MLTFR · DC4SR |
 | **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) · ComeIR |
+| **Dalian University of Technology** | RAGR: Review-Augmented Generative Recommendation [\&rightarrow; May 19](*Details in Papers May 19 section*) |
+| **Griffith University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) [\&rightarrow; May 19](*Details in Papers May 19 section*) |
 | **Harvard University** | One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) |
+| **Hong Kong Polytechnic University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) [\&rightarrow; May 19](*Details in Papers May 19 section*) |
 | **HSE University** | How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems |
 | **Huawei** | ReCast  · TurboGR (May 18) |
 | **Huawei Cloud** | RelayGR |
+| **Hubei University** | Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL) [\&rightarrow; May 19](*Details in Papers May 19 section*) |
 | **Instacart** | Cascaded Generative Approach |
 | **JD.com** | GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation |
 | **Johannes Kepler University Linz** | A2G-DiffRec |
@@ -2283,14 +2392,15 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **NUS** | Reasoning over Semantic IDs · CARE |
 | **NVIDIA** | MTServe |
 | **Peking University** | StageCF · DUET: Joint Exploration of User Item Profiles in Recommendation System · Interests Burn-down Diffusion Process (StageCF) |
-| **Qingdao University** | QCMP-CL [\&longrightarrow; May 18](*) |
 | **Purdue University** | GraphRAG-IRL |
+| **Qingdao University** | QCMP-CL [\&longrightarrow; May 18](*) |
 | **Renmin University of China / Beijing University of Posts and Telecommunications** | LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation |
 | **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
 | **Shanghai JTU** | MuonRec |
 | **Shenzhen University** | HSUGA |
 | **Shopee** | UniRec |
 | **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec |
+| **Singapore Management University** | Dual-Diffusional Generative Fashion Recommendation (DualFashion) [\&rightarrow; May 19](*Details in Papers May 19 section*) |
 | **Southeast University** | DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · Deep Interest Mining |
 | **Stony Brook University** | CRAB |
 | **Tencent** | HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning · Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) |
