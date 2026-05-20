@@ -26,6 +26,99 @@ mindmap
 - [By Affiliation](#by-affiliation)
 
 ---
+---
+
+## Papers May 20
+
+> **Note:** 5 new generative recommendation papers found (from May 17-20, 2026). All papers are newly added to the repository.
+
+1. **SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation**
+   * Affiliation: — *(Wei Chen, Xingyu Guo, Shuang Li, Fuwei Zhang, Meng Yuan, Jing Fan, Zhao Zhang, Deqing Wang, Fuzhen Zhuang — Beihang University)*
+   * Link: [arxiv.org/abs/2605.18920](https://arxiv.org/abs/2605.18920)
+   * Venue: Accepted by ICML 2026
+   * TL;DR: SynGR is a synergistic generative recommendation framework that explicitly encourages the exploitation of cross-modal dependencies during generation
+   * Key techniques:
+     - Cross-modal synergy modeling via constrained attention
+     - Capturing emergent item semantics beyond shared or modality-specific signals
+     - Preventing overreliance on dominant modalities
+     - Extensive experiments across three benchmark datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel cross-modal synergy framework for generative recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Strong performance across three benchmark datasets
+     - **Impact: 9/10** — Accepted at ICML 2026; novel approach to cross-modal generative recommendation
+
+2. **Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO)**
+   * Affiliation: — *(Taesan Kim, Hyeongjun Yun — SK Telecom; Jaegul Choo — KAIST; Chung Park — SK Telecom)*
+   * Link: [arxiv.org/abs/2605.18899](https://arxiv.org/abs/2605.18899)
+   * Venue: arXiv preprint, May 17, 2026
+   * TL;DR: ABPO is a framework for continual post-deployment updates for generative LLM-based recommenders, addressing exposure bias and feedback ambiguity
+   * Key techniques:
+     - Anchored Bandit Policy Optimization (ABPO)
+     - Group-Relative Policy Optimization (GRPO) with logged anchor insertion
+     - Self-Normalized Inverse Propensity Scoring (SNIPS)
+     - Asymmetric feedback treatment with self-certainty tempering
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel anchored bandit policy optimization for continual LLM-Rec updates
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Consistent post-update gains in recommendation accuracy across 5 domains
+     - **Impact: 8/10** — Addresses exposure bias and feedback ambiguity in deployed LLM-based recommenders
+
+3. **LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation**
+   * Affiliation: — *(Lingyu Mu, Zhitong Zhu, Zhengxiao Liu, Zheng Lin — Institute of Information Engineering, Chinese Academy of Sciences; Hao Deng, Kaican Lin, Yu Zhang, Jinxin Hu — Alibaba International Digital Commerce Group; Haibo Xing, Xiaoyi Zeng — Alibaba International Digital Commerce Group)*
+   * Link: [arxiv.org/abs/2605.18771](https://arxiv.org/abs/2605.18771)
+   * Venue: arXiv preprint, April 16, 2026
+   * TL;DR: LWGR uses Lagrangian constraints to transfer users' personalized world knowledge from LLMs into generative recommendation
+   * Key techniques:
+     - Personalized soft instructions for knowledge extraction
+     - Lagrangian primal-dual optimization for knowledge fusion
+     - Two training strategies for different LLM scales
+     - Nearline precomputation with lightweight online serving
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel Lagrangian-constrained framework for personalized world knowledge transfer
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Up to 11.23% improvement over 8 SOTA baselines; +1.35% revenue lift on large-scale advertising platform
+     - **Impact: 9/10** — From Institute of Information Engineering, CAS & Alibaba; significant industrial impact
+
+4. **Learning Variable-Length Tokenization for Generative Recommendation (VarLenRec)**
+   * Affiliation: — *(Minhao Wang, Bowen Wu, Wei Zhang — East China Normal University)*
+   * Link: [arxiv.org/abs/2605.17779](https://arxiv.org/abs/2605.17779)
+   * Venue: arXiv preprint, May 18, 2026
+   * TL;DR: VarLenRec learns variable-length tokenization for generative recommendation, addressing the Popularity-Length Paradox
+   * Key techniques:
+     - Popularity-Weighted Information Budget Allocation (PIBA)
+     - Hyperbolic Residual Quantization for exponential volume growth
+     - Soft Length Controller for differentiable length prediction
+     - Information-theoretic framework proving optimal ID length scales as negative power of popularity
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel variable-length tokenization addressing the Popularity-Length Paradox
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Significant improvements over SOTA methods in both recommendation accuracy and training/inference efficiency
+     - **Impact: 8/10** — Novel theoretical and technical contributions to tokenization in generative recommendation
+
+5. **SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation**
+   * Affiliation: — *(Zaiyi Zheng, Guanghui Min, Yaochen Zhu, Chen Chen, Jundong Li — University of Virginia; Liang Wu, Liangjie Hong — Nokia)*
+   * Link: [arxiv.org/abs/2605.17648](https://arxiv.org/abs/2605.17648)
+   * Venue: arXiv preprint, May 17, 2026
+   * TL;DR: SAPO computes a separate group-relative advantage for each reasoning step and applies it only to the corresponding thinking block and SID token
+   * Key techniques:
+     - Step-aligned policy optimization with step-level credit assignment
+     - Separate group-relative advantage computation for each reasoning step
+     - Application to corresponding thinking block and SID token only
+     - Stabilizes reinforcement-learning training for generative recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel step-aligned policy optimization for reasoning-based generative recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Stabilizes RL training; consistent improvements over existing generative recommendation baselines
+     - **Impact: 8/10** — Novel credit assignment approach for reasoning-based generative recommendation
+
+---
+
 ## Papers May 19
 
 > **Note:** 5 new generative recommendation papers found (from May 18-19, 2026). All papers are newly added to the repository.
@@ -2152,6 +2245,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Position-Aware Drafting for Inference Acceleration in LLM-Based Generative List-Wise Recommendation (PAD-Rec)
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
 - Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale (QuaSID)
+- SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation
+- Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO)
+- LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation
+- Learning Variable-Length Tokenization for Generative Recommendation (VarLenRec)
+- SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation
 
 ### Generative Retrieval / Ranking
 - Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG) 
@@ -2290,6 +2388,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - MARC (LLM representation compression)
 
 ### RL / Reinforcement Learning
+- Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO)
+- SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation
 - Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
 - ReRec: Reasoning-Augmented LLM-based Recommendation Assistant
 - Generative Reasoning Re-ranker (GR2)
@@ -2374,38 +2474,43 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **ACL 2026** | ReRec, SAGE |
 | **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval |
 | **Alibaba** | RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There |
+| **Alibaba International Digital Commerce Group** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation |
 | **Anhui University** | ProMax |
 | **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions) |
 | **Apple Inc.** | Fortress |
 | **Bay University** | SAGER: Self-Evolving User Policy Skills for Recommendation Agent |
-| **Beihang University** | A2Gen (Action-Aware Generative Sequence Modeling) · LASAR |
+| **Beihang University** | A2Gen (Action-Aware Generative Sequence Modeling) · LASAR · SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation |
 | **Beijing Institute of Technology** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) |
 | **ByteDance** | Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) |
 | **Central South University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) |
 | **Chongqing University** | MLTFR · DC4SR |
 | **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) · ComeIR |
 | **Dalian University of Technology** | RAGR: Review-Augmented Generative Recommendation |
+| **East China Normal University** | Learning Variable-Length Tokenization for Generative Recommendation (VarLenRec) |
 | **Griffith University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) |
 | **Harvard University** | One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) |
 | **Hong Kong Polytechnic University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) |
 | **HSE University** | How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems |
-| **Huawei** | ReCast  · TurboGR (May 18) |
+| **Huawei** | ReCast  · TurboGR |
 | **Huawei Cloud** | RelayGR |
 | **Hubei University** | Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL) |
 | **Instacart** | Cascaded Generative Approach |
+| **Institute of Information Engineering, Chinese Academy of Sciences** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation |
 | **JD.com** | GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation |
 | **Johannes Kepler University Linz** | A2G-DiffRec |
 | **Johns Hopkins University** | ORBIT |
+| **KAIST** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO) |
 | **Kuaishou** | PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations · OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence |
 | **Leiden University / University of Glasgow** | Differentiable Semantic ID for Generative Recommendation (DIGER) |
 | **LinkedIn** | SIREN-RoPE (Learning to Rotate) |
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR |
-| **Meituan · MBGR** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench  · GenLI (May 18) |
+| **Meituan · MBGR** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench  · GenLI |
 | **Meta** | Generative Reasoning Re-ranker (GR2) · MARS |
 | **Microsoft** | CapsID: Soft-Routed Variable-Length Semantic IDs |
 | **MLSys 2026** | FreeScale |
 | **Netflix** | Rank-GRPO |
 | **NJUST / Nanjing** | Harmonizing Generative Retrieval (RecoChain) |
+| **Nokia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation |
 | **NUS** | Reasoning over Semantic IDs · CARE |
 | **NVIDIA** | MTServe |
 | **Peking University** | StageCF · DUET: Joint Exploration of User Item Profiles in Recommendation System · Interests Burn-down Diffusion Process (StageCF) |
@@ -2418,15 +2523,17 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Shopee** | UniRec |
 | **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec |
 | **Singapore Management University** | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
+| **SK Telecom** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO) |
 | **Southeast University** | DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · Deep Interest Mining |
 | **Stony Brook University** | CRAB |
 | **Tencent** | HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning · Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) |
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
 | **The University of Queensland** | ProMax |
 | **Tsinghua University** | Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · TwiSTAR · AsymRec |
-| **UC San Diego** | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · F-GRPO  · SID-MLP (May 18) |
+| **UC San Diego** | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · F-GRPO  · SID-MLP |
 | **UIUC Illinois** | Rec-R1 |
 | **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID · QuaSID |
+| **University of Virginia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation |
 | **USTC** | MiniOneRec · UniGRec · PAD-Rec · DynamicPO: Dynamic Preference Optimization for Recommendation · Objective Shaping · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
 | **UT Austin** | RRCM |
 | **VWFS** | VRec · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
