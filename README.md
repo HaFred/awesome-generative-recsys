@@ -26,7 +26,93 @@ mindmap
 - [By Affiliation](#by-affiliation)
 
 ---
+## Papers May 21
+
+> **Note:** 5 new generative recommendation papers found (from May 14-21, 2026). All papers are newly added to the repository.
+
+1. **RecoAtlas: From Semantic Plausibility to Set-Level Utility in LLM Recommendation Agents**
+   * Affiliation: — *(Imad Aouali, Flavian Vasile, Otmane Sakhi, Alexandre Gilotte, Benjamin Heymann — Criteo)*
+   * Link: [arxiv.org/abs/2605.18805](https://arxiv.org/abs/2605.18805)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: RecoAtlas is a benchmark and toolkit for evaluating shopping agents with behavior-grounded metrics
+   * Key techniques:
+     - Behavior-grounded metrics (relevance, complementarity, diversity)
+     - Controlled tool environment with semantic, behavior-aligned, or faulty tools
+     - Diagnosis of reasoning, signals, and tool-use policies
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel benchmark for LLM recommendation agents with behavior-grounded metrics
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Shows key properties of meaningful benchmark; performance scales with model capacity
+     - **Impact: 8/10** — Important for developing and evaluating shopping assistants
+
+2. **A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation**
+   * Affiliation: — *(Aditya Tiwari — Ahmedabad University; Konduri Naga Lakshmi Rekha, Rajesh Kumar Mundotiya)*
+   * Link: [arxiv.org/abs/2605.18780](https://arxiv.org/abs/2605.18780)
+   * Venue: arXiv preprint, April 2026
+   * TL;DR: Reproducibility study of PO4ISR with a robustness-enhanced implementation (PO4ISR++) that integrates reflexive prompting and consistent rank detection
+   * Key techniques:
+     - Reproducibility analysis of reasoning-based LLM for session recommendation
+     - PO4ISR++ with reflexive prompting and consistent rank detection
+     - Dynamic adaptation to cross-domain cues
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — Open-source artifacts released with the paper
+     - **Novelty: 7/10** — Reproducibility analysis with enhanced implementation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Restores performance on semantically complex datasets (up to 54% on Games, 96% on Bundle)
+     - **Impact: 7/10** — Important for reproducible research in LLM-based recommendation
+
+3. **Stop Overthinking: Unlocking Efficient Listwise Reranking with Minimal Reasoning**
+   * Affiliation: — *(Danyang Liu, Kan Li)*
+   * Link: [arxiv.org/abs/2605.14450](https://arxiv.org/abs/2605.14450)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: Investigates overthinking in LLM-based listwise reranking and proposes Length-Regularized Self-Distillation framework
+   * Key techniques:
+     - Analysis of overthinking phenomenon in LLM reasoning
+     - Length-Regularized Self-Distillation framework
+     - Pareto-inspired filter to select concise, high-quality rationales
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel analysis of overthinking with practical distillation framework
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Reduces inference token consumption by 34%-37% while maintaining effectiveness
+     - **Impact: 8/10** — Practical solution for deploying reasoning-enhanced rerankers
+
+4. **Efficient Generative Retrieval for E-commerce Search with Semantic Cluster IDs and Expert-Guided RL**
+   * Affiliation: — *(Jianbo Zhu, Xing Fang, Jing Wang, Mingmin Jin, Bokang Wang, Guangxin Song, Zhenyu Xie, Junjie Bai)*
+   * Link: [arxiv.org/abs/2605.14434](https://arxiv.org/abs/2605.14434)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: CQ-SID and EG-GRPO for efficient generative retrieval in e-commerce search
+   * Key techniques:
+     - CQ-SID (Category-and-Query constrained Semantic ID) for hierarchical semantic cluster identifiers
+     - EG-GRPO (Expert-Guided Group Relative Policy Optimization) for aligning generative recall with downstream ranking
+     - Positioned as recall-stage supplement rather than end-to-end replacement
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel generative retrieval framework for industrial e-commerce search
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Online A/B tests show +1.15% GMV, +0.40% UCTCVR; substantial production contribution
+     - **Impact: 9/10** — Deployed in production with significant business impact
+
+5. **Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation**
+   * Affiliation: — *(Yuanzi Li, Xu Chen — Renmin University of China; Lingjie Wang, Jingyu Zhao, Zihang Tian, Yuhan Wang, Lei Wang)*
+   * Link: [arxiv.org/abs/2605.19651](https://arxiv.org/abs/2605.19651)
+   * Venue: Accepted by SIGIR 2026
+   * TL;DR: MDCNS (Multi-source Divergence-Consensus for Negative Sampling) framework for sequential recommendation
+   * Key techniques:
+     - Teacher-Peer-Self framework inspired by Vygotsky's Zone of Proximal Development (ZPD) theory
+     - Multi-source scoring with peer and ensemble teacher models
+     - Divergence re-ranking to enhance sampling diversity
+     - Consensus distillation via KL divergence
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — GitHub: https://github.com/Lyz103/SIGIR26-MDCNS; complete codebase with documentation
+     - **Novelty: 8/10** — Novel negative sampling framework for sequential recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Consistent improvements over SOTA methods on six datasets and five backbone models
+     - **Impact: 8/10** — Accepted at SIGIR 2026; strong generalization across backbones
+
 ---
+
 
 ## Papers May 20
 
@@ -2364,7 +2450,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - F-GRPO: Factorized Group-Relative Policy Optimization 
 - RecRM-Bench: Benchmarking Multidimensional Reward Modeling 
 - Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
-- ReRec
+- ReRec: Reasoning-Augmented LLM-based Recommendation Assistant
 - VRec (Verifiable Reasoning)
 - GR2
 - GraphRAG-IRL
@@ -2380,12 +2466,13 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - SAGER: Self-Evolving User Policy Skills for Recommendation Agent
 - DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
 - Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)
-
-- Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
+- Stop Overthinking: Unlocking Efficient Listwise Reranking with Minimal Reasoning
+- A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 
 ### Retrieval / Representation
 - ResRank (retrieval + reranking)
 - MARC (LLM representation compression)
+- Efficient Generative Retrieval for E-commerce Search with Semantic Cluster IDs and Expert-Guided RL
 
 ### RL / Reinforcement Learning
 - Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO)
@@ -2445,11 +2532,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Sequential Modeling / RoPE
 - SIREN-RoPE (Learning to Rotate)
 - UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence
-
-
----
-
-
+- Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation (MDCNS)
 
 ### CTR Prediction
 - Generative Long-term User Interest Modeling for Click-Through Rate Prediction (GenLI)
@@ -2483,6 +2566,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Beijing Institute of Technology** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) |
 | **ByteDance** | Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) |
 | **Central South University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) |
+| **Ahmedabad University** | A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation |
+| **Criteo** | RecoAtlas: From Semantic Plausibility to Set-Level Utility in LLM Recommendation Agents |
 | **Chongqing University** | MLTFR · DC4SR |
 | **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) · ComeIR |
 | **Dalian University of Technology** | RAGR: Review-Augmented Generative Recommendation |
@@ -2514,6 +2599,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **NUS** | Reasoning over Semantic IDs · CARE |
 | **NVIDIA** | MTServe |
 | **Peking University** | StageCF · DUET: Joint Exploration of User Item Profiles in Recommendation System · Interests Burn-down Diffusion Process (StageCF) |
+| **Renmin University of China** | Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation (MDCNS) |
 | **Purdue University** | GraphRAG-IRL |
 | **Qingdao University** | QCMP-CL |
 | **Renmin University of China / Beijing University of Posts and Telecommunications** | LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation |
