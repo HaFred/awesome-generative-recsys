@@ -43,6 +43,7 @@ mindmap
         GAMER -- BOSS Zhipin
         SIREN-RoPE -- LinkedIn
         ConvRec -- VWFS/Hildesheim
+        BRIDGE -- UCAS
       Optimization & Scaling
         MuonRec -- SJTU/Kuaishou
         R3-VAE
@@ -64,6 +65,96 @@ mindmap
 
 ---
 ## By Date
+### Papers May 22
+
+> **Note:** 5 new generative recommendation papers found (from May 21-22, 2026). All papers are newly added to the repository.
+
+1. **ThinkGR: Integrating Chain-of-Thought into Generative Retrieval**
+   * Affiliation: — *(Wenhao Zhang, Ruihao Yu, Yi Bai, Zhumin Chen, Pengjie Ren — Shandong University, Qingdao, China)*
+   * Link: [arxiv.org/abs/2605.22358](https://arxiv.org/abs/2605.22358)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: ThinkGR interleaves chain-of-thought reasoning with document identifier generation for multi-hop retrieval
+   * Key techniques:
+     - Hybrid decoding strategy (unconstrained thought + constrained docid)
+     - Two-phase training: SFT then KTO-based RL
+     - Iterative thinking and retrieval in a single generative process
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel integration of CoT into generative retrieval
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — +6.86% average improvement on four multi-hop retrieval benchmarks
+     - **Impact: 8/10** — Opens new avenues for enhancing generative retrieval with deliberation
+
+2. **BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation**
+   * Affiliation: — *(Zesheng Li, Chengchang Pan, Honggang Qi — University of the Chinese Academy of Sciences, China)*
+   * Link: [arxiv.org/abs/2605.22073](https://arxiv.org/abs/2605.22073)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: BRIDGE uses behavior-guided candidate calibration to improve multimodal recommendation
+   * Key techniques:
+     - Dual-frequency graph evidence from behavior data
+     - Signed candidate evidence based on co-user overlap
+     - Spectral analysis of cross-view agreement
+     - Shortlist calibration (backbone + behavior evidence)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — GitHub: https://github.com/LIZESHENG13/bridge; complete codebase
+     - **Novelty: 8/10** — Novel behavior-guided calibration for multimodal recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Consistent gains over strong baselines on three Amazon datasets
+     - **Impact: 8/10** — Effective approach for multimodal recommendation
+
+3. **GCRS: Generative Conversational Recommender System**
+   * Affiliation: — *(Sixiao Zhang, Mingrui Liu, Cheng Long — Nanyang Technological University, Singapore)*
+   * Link: [arxiv.org/abs/2605.21987](https://arxiv.org/abs/2605.21987)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: GCRS unifies recommendation and dialog generation in a single autoregressive framework
+   * Key techniques:
+     - Discrete semantic IDs for items
+     - Structured generation paradigm (intent → target → response)
+     - End-to-end optimization with constrained decoding
+     - Joint prediction of items and responses
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — GitHub repo mentioned but not yet available
+     - **Novelty: 9/10** — Fully generative conversational recommender with unified generation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Up to 29% improvement on Recall@1 over strong baselines
+     - **Impact: 9/10** — Novel unified framework for generative conversational recommendation
+
+4. **LLM Retrieval for Stable and Predictable Ad Recommendations**
+   * Affiliation: — *(Vinodh Kumar Sunkara, Satheeshkumar Karuppusamy, Hangjun Xu, Sai Deepika Regani, Kshitij Gupta, Gaby Nahum, Sneha Iyer, Jean-Baptiste Fiot, Yinglong Guo, Xiaowen Guo, Atul Jangra, Yucheng Liu, Jinghao Yan, Vijay Pappu, Benjamin Schulte, Deepak Chandra — Meta Platforms, Inc., USA)*
+   * Link: [arxiv.org/abs/2605.21969](https://arxiv.org/abs/2605.21969)
+   * Venue: ACM conference, July 2026
+   * TL;DR: LLM-powered semantic candidate generation for stable and predictable ads recommendation
+   * Key techniques:
+     - Hierarchical semantic attribute extraction from ad creatives
+     - LLM representations for graph-based expansion
+     - Semantic-awareness for prediction stability and predictability
+     - Evaluation framework for stability and predictability
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code (internal Meta infrastructure)
+     - **Novelty: 8/10** — Novel evaluation framework for stability/predictability in ads recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Significant improvements in offline and online A/B experiments
+     - **Impact: 9/10** — Deployed in large-scale industrial ads system
+
+5. **RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations**
+   * Affiliation: — *(Jingtong Gao, Xiaopeng Li, Derong Xu, Maolin Wang, Xiangyu Zhao — City University of Hong Kong; Zeyu Song, Chi Lu, Peng Jiang, Kun Gai, Qingpeng Cai — Kuaishou Technology)*
+   * Link: [arxiv.org/abs/2605.21967](https://arxiv.org/abs/2605.21967)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: RPORec unifies LLM reasoning with recommendation head via reinforced preference optimization
+   * Key techniques:
+     - Reasoning-Augmented Recommendation Modeling (CoT + Rechead)
+     - Advanced Reasoning Refinement and Alignment (RL fine-tuning)
+     - Verifiable rewards from trained Rechead
+     - End-to-end alignment of reasoning with recommendation objectives
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 9/10** — Novel reinforced preference optimization for reasoning-augmented recommendation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Consistent outperformance on public benchmarks and online deployment
+     - **Impact: 9/10** — Effective integration of LLM reasoning with recommendation systems
+
+---
+
 ### Papers May 21
 
 > **Note:** 5 new generative recommendation papers found (from May 14-21, 2026). All papers are newly added to the repository.
@@ -2278,6 +2369,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 9/10 | Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
 | 8.5/10 | Factorized Latent Reasoning for LLM-based Recommendation (FLR) |
 | 8/10 | Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec) |
+| 8/10 | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
 | 8/10 | MuonRec: Shifting the Optimizer Paradigm Beyond Adam in Scalable Generative Recommendation |
 | 8/10 | OneRec-Think: In-Text Reasoning for Generative Recommendation |
 | 8/10 | UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization |
@@ -2299,6 +2391,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 ## By Keyword
 ### Beam Search Decoding
+
+### Conversational
+- GCRS: Generative Conversational Recommender System
 
 ### Data Generation / Synthetic Data
 - SAGE (Tabular Data Generation)
@@ -2388,6 +2483,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - CapsID: Soft-Routed Variable-Length Semantic IDs
 - Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)
+- ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
 
 ### Graph-based Recommendation
 - GraphRAG-IRL
@@ -2406,9 +2502,18 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Birds of a Feather Cluster Nearby: A Proximity-Aware Geo-Codebook for Local Service Recommendation
 - Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
 
+### Industrial
+- LLM Retrieval for Stable and Predictable Ad Recommendations
+
 ### LLM-based Recommendation
+- BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation
+- GCRS: Generative Conversational Recommender System
+- LLM Retrieval for Stable and Predictable Ad Recommendations
+- RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations
+- ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
+
 ### Multimodal
-- Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL)
+- BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation- Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL)
 - Dual-Diffusional Generative Fashion Recommendation (DualFashion)
 
 - Discrimination Is Generation (DIG) 
@@ -2506,6 +2611,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)
 - Stop Overthinking: Unlocking Efficient Listwise Reranking with Minimal Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
+- ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
+- RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations
 
 ### Retrieval / Representation
 - ResRank (retrieval + reranking)
@@ -2517,6 +2624,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation
 - Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
 - ReRec: Reasoning-Augmented LLM-based Recommendation Assistant
+- RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations
 - Generative Reasoning Re-ranker (GR2)
 - ReCast
 - Objective Shaping with Hard Negatives
@@ -2607,7 +2715,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Ahmedabad University** | A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation |
 | **Criteo** | RecoAtlas: From Semantic Plausibility to Set-Level Utility in LLM Recommendation Agents |
 | **Chongqing University** | MLTFR · DC4SR |
-| **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) · ComeIR |
+| **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) · ComeIR · RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations |
 | **Dalian University of Technology** | RAGR: Review-Augmented Generative Recommendation |
 | **East China Normal University** | Learning Variable-Length Tokenization for Generative Recommendation (VarLenRec) |
 | **Griffith University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) |
@@ -2623,16 +2731,17 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Johannes Kepler University Linz** | A2G-DiffRec |
 | **Johns Hopkins University** | ORBIT |
 | **KAIST** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO) |
-| **Kuaishou** | PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations · OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence |
+| **Kuaishou** | PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations · OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence · RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations |
 | **Leiden University / University of Glasgow** | Differentiable Semantic ID for Generative Recommendation (DIGER) |
 | **LinkedIn** | SIREN-RoPE (Learning to Rotate) |
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR |
 | **Meituan · MBGR** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench  · GenLI |
-| **Meta** | Generative Reasoning Re-ranker (GR2) · MARS |
+| **Meta** | Generative Reasoning Re-ranker (GR2) · MARS · LLM Retrieval for Stable and Predictable Ad Recommendations |
 | **Microsoft** | CapsID: Soft-Routed Variable-Length Semantic IDs |
 | **MLSys 2026** | FreeScale |
 | **Netflix** | Rank-GRPO |
 | **NJUST / Nanjing** | Harmonizing Generative Retrieval (RecoChain) |
+| **Nanyang Technological University** | GCRS: Generative Conversational Recommender System |
 | **Nokia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation |
 | **NUS** | Reasoning over Semantic IDs · CARE |
 | **NVIDIA** | MTServe |
@@ -2642,6 +2751,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Qingdao University** | QCMP-CL |
 | **Renmin University of China / Beijing University of Posts and Telecommunications** | LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation |
 | **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
+| **Shandong University** | ThinkGR: Integrating Chain-of-Thought into Generative Retrieval |
 | **Shanghai JTU** | MuonRec |
 | **Shenzhen University** | HSUGA |
 | **Shopee** | UniRec |
@@ -2656,6 +2766,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Tsinghua University** | Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · TwiSTAR · AsymRec |
 | **UC San Diego** | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · F-GRPO  · SID-MLP |
 | **UIUC Illinois** | Rec-R1 |
+| **University of Chinese Academy of Sciences** | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
 | **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID · QuaSID |
 | **University of Virginia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation |
 | **USTC** | MiniOneRec · UniGRec · PAD-Rec · DynamicPO: Dynamic Preference Optimization for Recommendation · Objective Shaping · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
