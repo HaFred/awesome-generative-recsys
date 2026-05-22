@@ -2391,6 +2391,15 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 ## By Keyword
 ### Beam Search Decoding
+- GCRS: Generative Conversational Recommender System
+- Generative Recommendation for Large-Scale Advertising (GR4AD)
+- LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation
+- MiniOneRec: An Open-Source Framework for Scaling Generative Recommendation
+- Objective Shaping with Hard Negatives: Windowed Partial AUC Optimization for RL-based LLM Recommenders
+- PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations
+- [STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators
+- ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
+- Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA)
 
 ### Conversational
 - GCRS: Generative Conversational Recommender System
