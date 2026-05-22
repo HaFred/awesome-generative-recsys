@@ -10,23 +10,61 @@ mindmap
       CoT Reasoning
         OneRec-Think -- Kuaishou
         OneRec-V3 -- Kuaishou
+        FLR -- Macquarie/UNSW
+      RL-based Optimization
+        Rank-GRPO / ConvRec-R1 -- Netflix
+        Rec-R1 -- UIUC
+        DynamicPO -- USTC
+        RecRM-Bench -- Shenzhen U
+        BLADE -- USTC
+      Ranking & Reranking
+        CARE -- NUS & USTC
+        InvariRank -- RMIT
+      Frameworks & Benchmarks
+        OpenOneRec -- Kuaishou
+        MiniOneRec -- USTC
+      Efficient Decoding
+        Vectorizing the Trie -- Google
     Representation Layer: Generative Pre-training
+      Semantic ID & Tokenization
+        Latte -- UCSD
+        DIGER -- Leiden/Glasgow
+        UniGRec -- USTC
+        GRLM -- Kuaishou/Huawei
       Next Interest Flow Prediction
         AMEN -- Alibaba
       RL-based Alignment for Recall
         GRPO for Vector Recall -- Alibaba Taobao Search
+      Diffusion-based Generation
+        A2G-DiffRec -- JKU Linz
+        TA-Rec -- USTC
+        DualFashion -- SMU
+      Sequential & Behavioral Modeling
+        GAMER -- BOSS Zhipin
+        SIREN-RoPE -- LinkedIn
+        ConvRec -- VWFS/Hildesheim
+      Optimization & Scaling
+        MuonRec -- SJTU/Kuaishou
+        R3-VAE
+        Tencent Advertising -- Tencent
     Feature Layer: LLM Semantic Features
       Semantic Token and Embedding
         PatchRec -- USTC and Tencent
         PAD -- CityU and Tencent
         RARE -- ByteDance
+        CARD -- UESTC
+        PRISM -- Jilin U
+      Review-Augmented
+        RAGR -- Dalian UT
 ```
+- [By Date](#by-date)
 - [By Opensource](#by-opensource)
 - [By Keyword](#by-keyword)
 - [By Affiliation](#by-affiliation)
 
 ---
-## Papers May 21
+## By Date
+### Papers May 21
 
 > **Note:** 5 new generative recommendation papers found (from May 14-21, 2026). All papers are newly added to the repository.
 
@@ -114,7 +152,7 @@ mindmap
 ---
 
 
-## Papers May 20
+### Papers May 20
 
 > **Note:** 5 new generative recommendation papers found (from May 17-20, 2026). All papers are newly added to the repository.
 
@@ -205,7 +243,7 @@ mindmap
 
 ---
 
-## Papers May 19
+### Papers May 19
 
 > **Note:** 5 new generative recommendation papers found (from May 18-19, 2026). All papers are newly added to the repository.
 
@@ -298,7 +336,7 @@ mindmap
 
 
 
-## Papers May 18
+### Papers May 18
 
 > **Note:** No new generative recommendation papers were found in the last 24 hours (May 17-18, 2026). Following the fallback procedure, 5 papers from May 12-15, 2026 are included to meet the minimum 5 papers requirement. Additionally, 2 papers from Kuaishou are appended.
 
@@ -423,7 +461,7 @@ mindmap
 
 ---
 
-## Papers May 17
+### Papers May 17
 
 > **Note:** 6 new generative recommendation papers found (from May 12-14, 2026). These papers were not previously in the repository.
 
@@ -531,7 +569,7 @@ mindmap
 
 ---
 
-## Papers May 13
+### Papers May 13
 
 > **Note:** 5 new generative recommendation papers found in the last 24 hours (May 12-13, 2026). All papers are newly added to the repository.
 
@@ -622,7 +660,7 @@ mindmap
 
 ---
 
-## Papers May 12
+### Papers May 12
 
 > **Note:** Only 1 new generative recommendation paper was found in the last 24 hours (May 11-12, 2026). Following the fallback procedure, 4 additional papers from the last 3 months (April-May 2026) are included to meet the minimum 5 papers requirement.
 
@@ -714,7 +752,7 @@ mindmap
 
 ---
 
-## Papers May 11
+### Papers May 11
 
 > **Note:** No new generative recommendation papers were found in the last 24 hours (May 10-11, 2026). Following the fallback procedure, 5 papers from the last 3 months (April-May 2026) are included to meet the minimum 5 papers requirement.
 
@@ -803,7 +841,7 @@ mindmap
 
 ---
 
-## Papers May 10
+### Papers May 10
 
 > **Note:** No new generative recommendation papers were found in the last 24 hours (May 9-10, 2026). Following the fallback procedure, 5 papers from the last 3 months (February-October 2025 - May 2026) are included to meet the minimum 5 papers requirement.
 
@@ -895,7 +933,7 @@ mindmap
 
 ---
 
-## Papers May 09
+### Papers May 09
 
 > **Note:** No new generative recommendation papers were found in the last 24 hours (May 8-9, 2026). Following the fallback procedure, 5 papers from the last 3 months (October 2025 - May 2026) are included to meet the minimum 5 papers requirement.
 
@@ -983,7 +1021,7 @@ mindmap
 ---
 
 
-## Papers May 08
+### Papers May 08
 
 > **Note:** 3 generative recommendation papers identified (submitted May 7, 2026). All papers are newly added to the repository.
 
@@ -1041,7 +1079,7 @@ mindmap
 ---
 
 
-## Papers May 07
+### Papers May 07
 
 > **Note:** 6 new generative recommendation papers found in the last 24 hours (May 6-7, 2026). All papers are newly published and not previously included.
 
@@ -1150,7 +1188,7 @@ mindmap
 ---
 
 
-## Papers May 06
+### Papers May 06
 
 > **Note:** Only 1 new generative recommendation paper was found in the last 24 hours (May 5-6, 2026). Following the fallback procedure, 5 additional papers from the last 3 months (April-May 2026) are included to meet the minimum 5 papers requirement.
 
@@ -1257,7 +1295,7 @@ mindmap
 
 ---
 
-## Papers May 05
+### Papers May 05
 
 > **Note:** Only 1 new generative recommendation paper was found in the last 24 hours (May 4-5, 2026). Following the fallback procedure, 4 additional papers from the last 3 months (February-May 2026) are included to meet the minimum 5 papers requirement.
 
@@ -1365,7 +1403,7 @@ mindmap
 
 ---
 
-## Papers May 04
+### Papers May 04
 
 > **Note:** No new generative recommendation papers were found in the last 24 hours (May 3-4, 2026). Following the fallback procedure, papers from the last 3 months (April 2026) are included to meet the minimum 5 papers requirement.
 
@@ -1458,7 +1496,7 @@ mindmap
 
 ---
 
-## Papers May 03
+### Papers May 03
 
 > **Note:** Only 2 new generative recommendation papers were found in the last 24 hours (May 2-3, 2026). Following the fallback procedure, papers from March-April 2026 are also included to meet the minimum 5 papers requirement.
 
@@ -1552,7 +1590,7 @@ mindmap
 
 ---
 
-## Papers April 30
+### Papers April 30
 
 1. **CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation**
    * Affiliation: University of Electronic Science and Technology of China; Southwestern University of Finance and Economics
@@ -1642,7 +1680,7 @@ mindmap
      - **Impact: 7/10** — From JKU Linz; novel fairness-aware diffusion rec; good empirical results
 
 ---
-## Papers April 29
+### Papers April 29
 
 > **Note:** Only 3 new generative recommendation papers were found in the last 24 hours (less than the minimum 5 required).
 
@@ -1699,7 +1737,7 @@ mindmap
 
 ---
 
-## Papers April 28
+### Papers April 28
 
 1. **Learning to Rotate: Temporal and Semantic Rotary Encoding for Sequential Modeling (SIREN-RoPE)**
    * Affiliation: LinkedIn Inc., Mountain View, CA
@@ -1783,7 +1821,7 @@ mindmap
 
 ---
 
-## Papers April 27
+### Papers April 27
 
 1. **ReCast: Recasting Learning Signals for Reinforcement Learning in Generative Recommendation**
    * Affiliation: — *(Peiyan Zhang, Hanmo Liu, Chengxuan Tong, Yuxia Wu, Wei Guo, Yong Liu — Huawei)*
@@ -1916,7 +1954,7 @@ mindmap
 
 ---
 
-## Papers April 26
+### Papers April 26
 
 1. **ReRec: Reasoning-Augmented LLM-based Recommendation Assistant via Reinforcement Fine-Tuning**
    * Affiliation: — *(Jiani Huang, Shijie Wang, Liangbo Ning, Wenqi Fan, Qing Li — affiliation not listed on arxiv)*
@@ -1994,7 +2032,7 @@ mindmap
      - **Robustness: 6/10** — VAEs are generally stable; residual quantization adds some robustness to rating noise
      - **Impact: 5/10** — More niche; VAE-based generative rec is less prominent than LLM/RL approaches currently
 
-## Papers Before April
+### Papers Before April
 
 1. **OpenOneRec Technical Report**
    * Affiliation: Kuaishou (Guorui Zhou, Honghui Bao, Jiaming Huang, et al., 47 authors total)
@@ -2237,25 +2275,25 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 9/10 | [STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators |
 | 9/10 | Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation |
 | 9/10 | DynamicPO: Dynamic Preference Optimization for Recommendation (DASFAA 2026) |
+| 9/10 | Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
 | 8.5/10 | Factorized Latent Reasoning for LLM-based Recommendation (FLR) |
 | 8/10 | Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec) |
 | 8/10 | MuonRec: Shifting the Optimizer Paradigm Beyond Adam in Scalable Generative Recommendation |
 | 8/10 | OneRec-Think: In-Text Reasoning for Generative Recommendation |
 | 8/10 | UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization |
 | 8/10 | Unleashing the Native Recommendation Potential: LLM-Based Generative Recommendation via Structured Term Identifiers (GRLM) |
+| 8/10 | Differentiable Semantic ID for Generative Recommendation (DIGER) |
+| 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
 | 7/10 | Learning to Rotate: Temporal and Semantic Rotary Encoding for Sequential Modeling (SIREN-RoPE) |
 | 7/10 | R3-VAE: Reference Vector-Guided Rating Residual Quantization VAE for Generative Recommendation |
 | 7/10 | Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning |
+| 7/10 | RAGR: Review-Augmented Generative Recommendation |
+| 7/10 | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
-| 9/10 | Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
-| 8/10 | Differentiable Semantic ID for Generative Recommendation (DIGER) |
-| 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
-| 7/10 | RAGR: Review-Augmented Generative Recommendation |
-| 7/10 | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
 
 ---
 
