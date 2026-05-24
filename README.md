@@ -21,6 +21,7 @@ mindmap
         CARE -- NUS & USTC
         InvariRank -- RMIT
       Frameworks & Benchmarks
+        Standardized CRS Re-evaluation -- University of Stavanger
         OpenOneRec -- Kuaishou
         MiniOneRec -- USTC
       Efficient Decoding
@@ -65,6 +66,92 @@ mindmap
 
 ---
 ## By Date
+### Papers May 24
+
+> **Note:** 5 missed papers found (from May 11-13, 2026). Adding to repository.
+
+1. **Task-Aware Automated User Profile Generation for Recommendation Simulation Using Large Language Models (APG4RecSim)**
+   * Affiliation: — *(Xinye Wanyan, Chenglong Ma, Danula Hettiachchi, Ziqi Xu, Jeffrey Chan — RMIT University, Melbourne, VIC, Australia)*
+   * Link: [arxiv.org/abs/2605.13497](https://arxiv.org/abs/2605.13497)
+   * Venue: SIGIR 2026
+   * TL;DR: APG4RecSim automatically generates realistic user profiles for LLM-based recommendation agent simulations
+   * Key techniques:
+     - Task-aware profile generation with minimal supervision
+     - Aligns profile distribution with rating distributions
+     - Resilient to popularity and position biases
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel automated profile generation for recommendation simulation
+     - **Fairness: 6/10** — Addresses bias resilience (popularity and position bias)
+     - **Robustness: 8/10** — Up to 7% improvement in nDCG@10 over baselines
+     - **Impact: 8/10** — Accepted at SIGIR 2026, strong results
+
+2. **A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset**
+   * Affiliation: — *(Ivica Kostric, Krzysztof Balog — University of Stavanger, Stavanger, Norway)*
+   * Link: [arxiv.org/abs/2605.13053](https://arxiv.org/abs/2605.13053)
+   * Venue: SIGIR 2026
+   * TL;DR: Re-evaluates 7 CRS methods under standardized conditions, revealing "repetition shortcuts" and LLM backbone impact
+   * Key techniques:
+     - Standardized evaluation framework for CRS
+     - Granularity gap analysis (Recall@1 vs. higher cutoffs)
+     - Novelty-focused evaluation (removing repetition shortcuts)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — GitHub: https://github.com/iai-group/redial-reproducibility
+     - **Novelty: 9/10** — First standardized re-evaluation of CRS methods on ReDial
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Reveals key issues in CRS evaluation
+     - **Impact: 9/10** — Accepted at SIGIR 2026, sets new evaluation standards
+
+3. **Beyond Centralization: User-Controlled Federated Recommendations in Practice**
+   * Affiliation: — *(Manel Slokom — CWI, Netherlands; Alejandro Bellogin — Universidad Autónoma de Madrid, Spain)*
+   * Link: [arxiv.org/abs/2605.12527](https://arxiv.org/abs/2605.12527)
+   * Venue: arXiv preprint, April 2026
+   * TL;DR: Deploys a live federated recommender system with user-controlled personalization vs. diversity
+   * Key techniques:
+     - Federated learning with differential privacy (ε = 2.0)
+     - User-controlled ranking modes (personalization-only vs. diversity-enhanced)
+     - 53-day longitudinal study with 22 participants
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — GitHub: https://github.com/SlokomManel/federated-recommendations-participants; functional but research prototype
+     - **Novelty: 8/10** — Live deployment of user-controlled federated recommendation
+     - **Fairness: 9/10** — Gives users control over recommendation objectives
+     - **Robustness: 8/10** — 53-day deployment with real users
+     - **Impact: 8/10** — Demonstrates feasibility of privacy-preserving, user-controlled recommendation
+
+4. **AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation**
+   * Affiliation: — *(Yangtao Zhou, Wenbao You, Hua Chu, Shihao Guo, Jianan Li, Zhifu Zhao, Qingshan Li — Xidian University, Xi'an, China)*
+   * Link: [arxiv.org/abs/2605.10367](https://arxiv.org/abs/2605.10367)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: AgentGR uses LLM-driven agents to simulate group decision-making dynamics for group recommendation
+   * Key techniques:
+     - Semantic meta-path guided chain-of-preference reasoning
+     - Models group topic and leadership as influencing factors
+     - Two multi-agent simulation strategies (static workflow, dynamic dialogue)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel integration of LLM agents for group recommendation simulation
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Significantly outperforms SOTA baselines on two real-world datasets
+     - **Impact: 8/10** — Novel approach to group recommendation
+
+5. **Every Preference Has Its Strength: Injecting Ordinal Semantics into LLM-Based Recommenders (OSA)**
+   * Affiliation: — *(Jiwon Jeong, Donghee Han, Sungrae Hong, Woosung Kang, Mun Yong Yi — KAIST, Daejeon, Republic of Korea)*
+   * Link: [arxiv.org/abs/2605.10323](https://arxiv.org/abs/2605.10323)
+   * Venue: SIGIR 2026
+   * TL;DR: OSA injects ordinal rating semantics into LLM recommender systems via numeric textual tokens
+   * Key techniques:
+     - Ordinal Semantic Anchoring (OSA) framework
+     - Numeric textual tokens for preference levels
+     - Semantic anchors for user-item interaction alignment
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel injection of ordinal semantics into LLM-based recommenders
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Consistently outperforms baselines, particularly in pairwise preference evaluation
+     - **Impact: 9/10** — Accepted at SIGIR 2026, addresses key limitation of CF-LLM frameworks
+
+---
+
 ### Papers May 22
 
 > **Note:** 5 new generative recommendation papers found (from May 21-22, 2026). All papers are newly added to the repository.
@@ -2372,6 +2459,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
 | 8/10 | MuonRec: Shifting the Optimizer Paradigm Beyond Adam in Scalable Generative Recommendation |
 | 8/10 | OneRec-Think: In-Text Reasoning for Generative Recommendation |
+| 8/10 | A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset (APG4RecSim) |
 | 8/10 | UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization |
 | 8/10 | Unleashing the Native Recommendation Potential: LLM-Based Generative Recommendation via Structured Term Identifiers (GRLM) |
 | 8/10 | Differentiable Semantic ID for Generative Recommendation (DIGER) |
@@ -2383,6 +2471,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | RAGR: Review-Augmented Generative Recommendation |
 | 7/10 | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
+| 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
@@ -2402,6 +2491,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA)
 
 ### Conversational
+- A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset
 - GCRS: Generative Conversational Recommender System
 
 ### Data Generation / Synthetic Data
@@ -2494,6 +2584,14 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)
 - ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
 
+### Federated Recommendation
+- Beyond Centralization: User-Controlled Federated Recommendations in Practice
+
+
+### Group Recommendation
+- AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation
+
+
 ### Graph-based Recommendation
 - GraphRAG-IRL
 
@@ -2515,6 +2613,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - LLM Retrieval for Stable and Predictable Ad Recommendations
 
 ### LLM-based Recommendation
+- APG4RecSim: Task-Aware Automated User Profile Generation
+- Every Preference Has Its Strength: Injecting Ordinal Semantics into LLM-Based Recommenders (OSA)
 - BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation
 - GCRS: Generative Conversational Recommender System
 - LLM Retrieval for Stable and Predictable Ad Recommendations
@@ -2723,6 +2823,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Central South University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) |
 | **Ahmedabad University** | A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation |
 | **Criteo** | RecoAtlas: From Semantic Plausibility to Set-Level Utility in LLM Recommendation Agents |
+| **CWI** | Beyond Centralization: User-Controlled Federated Recommendations in Practice |
 | **Chongqing University** | MLTFR · DC4SR |
 | **City University of Hong Kong** | GloRank (From Local Indices to Global Identifiers) · ComeIR · RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations |
 | **Dalian University of Technology** | RAGR: Review-Augmented Generative Recommendation |
@@ -2759,7 +2860,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Purdue University** | GraphRAG-IRL |
 | **Qingdao University** | QCMP-CL |
 | **Renmin University of China / Beijing University of Posts and Telecommunications** | LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation |
-| **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
+| **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) | ‖ Task-Aware Automated User Profile Generation for Recommendation Simulation (APG4RecSim) |
 | **Shandong University** | ThinkGR: Integrating Chain-of-Thought into Generative Retrieval |
 | **Shanghai JTU** | MuonRec |
 | **Shenzhen University** | HSUGA |
@@ -2775,6 +2876,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Tsinghua University** | Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · TwiSTAR · AsymRec |
 | **UC San Diego** | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · F-GRPO  · SID-MLP |
 | **UIUC Illinois** | Rec-R1 |
+| **University of Stavanger** | A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset |
+| **Universidad Autónoma de Madrid** | Beyond Centralization: User-Controlled Federated Recommendations in Practice |
 | **University of Chinese Academy of Sciences** | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
 | **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID · QuaSID |
 | **University of Virginia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation |
@@ -2784,4 +2887,5 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Walmart Global Tech** | CRAB |
 | **Wuhan University** | MTServe |
 | **Youtube** | [STATIC] Vectorizing the Trie |
+| **Xidian University** | AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation |
 | **Zhejiang University** | Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) |
