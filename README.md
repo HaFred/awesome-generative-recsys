@@ -49,6 +49,7 @@ mindmap
         MuonRec -- SJTU/Kuaishou
         R3-VAE
         Tencent Advertising -- Tencent
+        RankElastor -- HKUST Guangzhou / Tencent
     Feature Layer: LLM Semantic Features
       Semantic Token and Embedding
         PatchRec -- USTC and Tencent
@@ -66,6 +67,97 @@ mindmap
 
 ---
 ## By Date
+### Papers May 25
+
+> **Note:** 5 new generative recommendation papers found (from May 25, 2026). All papers are newly added to the repository.
+
+1. **Towards Generalizable and Efficient Large-Scale Generative Recommenders**
+   * Affiliation: — *(Qiuling Xu, Ko-Jen Hsiao, Moumita Bhattacharya — Netflix Research)*
+   * Link: [arxiv.org/abs/2605.23312](https://arxiv.org/abs/2605.23312)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: Scaling a generative recommender from 2M to 1B parameters in production, addressing task headroom, training efficiency, serving latency, and item freshness
+   * Key techniques:
+     - Offset scaling-law fits as diagnostic for task transfer
+     - Multi-token prediction for serving-latency alignment
+     - Sampled softmax and projected decoding head for efficient training
+     - Semantic item towers with collaborative-embedding masking for cold-start
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 7/10** — Valuable industrial experience on scaling generative recommenders, not fundamentally novel but important practical insights
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Production-shadow evaluation over 1M users; 1B model achieves higher MRR than 2M baseline
+     - **Impact: 9/10** — From Netflix Research; important production-scale insights for generative recommenders
+
+2. **From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs**
+   * Affiliation: — *(Chenyi Yan, Ruocong Tang, Xing Fang, Yang Huang, Jing Wang — Alibaba Group; He Guo — Beijing University)*
+   * Link: [arxiv.org/abs/2605.23310](https://arxiv.org/abs/2605.23310)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: AKT-Rec uses LLM-generated semantic IDs with asymmetric knowledge transfer for long-tail recommendation in e-commerce
+   * Key techniques:
+     - Multimodal LLMs with supervised fine-tuning for content-collaborative alignment
+     - Residual-Quantized VAE (RQ-VAE) for semantic ID discretrization
+     - Cluster-Guided Adaptive Embedding with asymmetric contrastive objective
+     - Hierarchical Feature Aggregation with parallel feature views
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel asymmetric knowledge transfer mechanism for long-tail recommendation with generative semantic IDs
+     - **Fairness: 6/10** — Addresses long-tail item recommendation, which is related to fairness
+     - **Robustness: 8/10** — Extensive experiments on large-scale industrial dataset; online A/B testing on Alibaba Tmall
+     - **Impact: 9/10** — From Alibaba Tmall; +2.76% CTR and +3.47% GMV in online A/B testing
+
+3. **Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation**
+   * Affiliation: — *(Guoming Li, Menglin Yang — The Hong Kong University of Science and Technology Guangzhou; Shangyu Zhang, Junwei Pan, Wentao Ning, Jin Chen, Gengsheng Xue, Chao Zhou, Shudong Huang, Haijie Gu — Tencent Inc.)*
+   * Link: [arxiv.org/abs/2605.23191](https://arxiv.org/abs/2605.23191)
+   * Venue: Accepted by KDD 2026
+   * TL;DR: RankElastor addresses embedding collapse in RankMixer with parameterized full mixing and GLU-improved P-FFNs
+   * Key techniques:
+     - Theoretical analysis of embedding collapse via effective-rank dynamics
+     - Parameterized full mixing for expressive token mixing with spectral robustness
+     - GLU-improved P-FFNs for stabilizing representation spectra
+     - Provable collapse mitigation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — GitHub: https://github.com/vasile-paskardlgm/RankElastor; complete codebase with documentation
+     - **Novelty: 8/10** — Novel architecture addressing embedding collapse in dense recommendation models
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Theoretical analysis + extensive experiments on large-scale industrial datasets
+     - **Impact: 9/10** — Accepted at KDD 2026; code available for reproducibility
+
+4. **Building a privacy-preserving Federated Recommender system for mobile devices**
+   * Affiliation: — *(Aasheesh Singh — Université de Montréal, MILA, Lerna AI)*
+   * Link: [arxiv.org/abs/2605.22924](https://arxiv.org/abs/2605.22924)
+   * Venue: M.Sc. thesis, May 2026
+   * TL;DR: Two-stage federated recommendation pipeline for mobile devices with privacy-preserving on-device re-ranking
+   * Key techniques:
+     - Two-stage pipeline: cloud collaborative filtering → on-device re-ranking
+     - Non-sensitive user preference data vs. sensitive mobile context data separation
+     - Only model updates/gradients leave the device
+     - Kotlin Multiplatform library for Android and iOS deployment
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Implementation is Kotlin Multiplatform library, not publicly available
+     - **Novelty: 7/10** — Novel two-stage federated recommendation pipeline for mobile devices
+     - **Fairness: 8/10** — Privacy-preserving design; user data never leaves device
+     - **Robustness: 7/10** — Validated on MovieLens, UCI HAR, and proprietary pilot dataset
+     - **Impact: 7/10** — M.Sc. thesis; practical production-ready implementation
+
+5. **TubiFM: Unified Item, Carousel, and Search Ranking for Streaming Discovery**
+   * Affiliation: — *(Alexandre Salle, Chenglei Niu, Suchismit Mahapatra, Xiaoxiao Chen, Suvash Sedhain, Shervin Shahryari, Saurabh Agrawal, Qiang Chen, Michael Tamir — Tubi San Francisco; Yaqi Wang — Tubi Beijing)*
+   * Link: [arxiv.org/abs/2605.23702](https://arxiv.org/abs/2605.23702)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: TubiFM uses user stories (serialized cross-surface history) and a Llama 3.2 1B model to unify item, carousel, and search ranking
+   * Key techniques:
+     - User stories: serialized representation of cross-surface history (attributes, sessions, watch events, search events)
+     - Interleaving pretrained language tokens with domain-specific event tokens
+     - Prompted next-token prediction over shared grammar for multiple tasks
+     - Llama 3.2 1B-based model trained on user stories
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code found
+     - **Novelty: 8/10** — Novel unified user stories approach for cross-surface ranking tasks
+     - **Fairness: 5/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Online A/B tests show +3.9% search TVT, +0.30% carousel TVT; p99 latency reduced from 500ms to 200ms
+     - **Impact: 8/10** — From Tubi (Fox Corporation streaming service); deployed in production with significant improvements
+
+---
+
 ### Papers May 24
 
 > **Note:** 5 missed papers found (from May 11-13, 2026). Adding to repository.
@@ -2439,7 +2531,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 29 papers as of May 19.
+**Count:** 30 papers as of May 25.
 
 | Score | Paper |
 | --- | --- |
@@ -2463,6 +2555,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization |
 | 8/10 | Unleashing the Native Recommendation Potential: LLM-Based Generative Recommendation via Structured Term Identifiers (GRLM) |
 | 8/10 | Differentiable Semantic ID for Generative Recommendation (DIGER) |
+| 8/10 | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) |
 | 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
 | 7/10 | Learning to Rotate: Temporal and Semantic Rotary Encoding for Sequential Modeling (SIREN-RoPE) |
@@ -2508,11 +2601,14 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 
 ### Distributed Training / Systems
+- Building a privacy-preserving Federated Recommender system for mobile devices
+- Towards Generalizable and Efficient Large-Scale Generative Recommenders
 - FreeScale (Distributed Training for Sequence Recommendation)
 
 - RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching
 
 ### Fairness
+- From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs
 - Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost)
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
 - CRAB: Codebook Rebalancing for Bias Mitigation in Generative Recommendation
@@ -2520,6 +2616,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - LLM Biases
 
 ### Generative Recommendation / VAE
+- From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs
+- Towards Generalizable and Efficient Large-Scale Generative Recommenders
 - RAGR: Review-Augmented Generative Recommendation
 - Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost)
 - Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search (GrowthGR)
@@ -2585,6 +2683,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
 
 ### Federated Recommendation
+- Building a privacy-preserving Federated Recommender system for mobile devices
 - Beyond Centralization: User-Controlled Federated Recommendations in Practice
 
 
@@ -2811,8 +2910,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 |---|---|
 | **ACL 2026** | ReRec, SAGE |
 | **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval |
-| **Alibaba** | RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There |
+| **Alibaba** | From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs ‖ RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There |
 | **Alibaba International Digital Commerce Group** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation |
+| **Beijing University** | From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs |
 | **Anhui University** | ProMax |
 | **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions) |
 | **Apple Inc.** | Fortress |
@@ -2832,6 +2932,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Harvard University** | One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec) |
 | **Hong Kong Polytechnic University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) |
 | **HSE University** | How Well Does Generative Recommendation Generalize? Variable-Length Semantic IDs for Recommender Systems |
+| **Hong Kong University of Science and Technology (Guangzhou)** | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) |
 | **Huawei** | ReCast  · TurboGR |
 | **Huawei Cloud** | RelayGR |
 | **Hubei University** | Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL) |
@@ -2847,9 +2948,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR |
 | **Meituan · MBGR** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench  · GenLI |
 | **Meta** | Generative Reasoning Re-ranker (GR2) · MARS · LLM Retrieval for Stable and Predictable Ad Recommendations |
+| **MILA** | Building a privacy-preserving Federated Recommender system for mobile devices |
 | **Microsoft** | CapsID: Soft-Routed Variable-Length Semantic IDs |
 | **MLSys 2026** | FreeScale |
-| **Netflix** | Rank-GRPO |
+| **Netflix** | Towards Generalizable and Efficient Large-Scale Generative Recommenders ‖ Rank-GRPO |
 | **NJUST / Nanjing** | Harmonizing Generative Retrieval (RecoChain) |
 | **Nanyang Technological University** | GCRS: Generative Conversational Recommender System |
 | **Nokia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation |
@@ -2870,9 +2972,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **SK Telecom** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO) |
 | **Southeast University** | DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · Deep Interest Mining |
 | **Stony Brook University** | CRAB |
-| **Tencent** | HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning · Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) |
+| **Tencent** | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) ‖ HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning · Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) |
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
 | **The University of Queensland** | ProMax |
+| **Tubi** | TubiFM: Unified Item, Carousel, and Search Ranking for Streaming Discovery |
 | **Tsinghua University** | Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · TwiSTAR · AsymRec |
 | **UC San Diego** | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · F-GRPO  · SID-MLP |
 | **UIUC Illinois** | Rec-R1 |
@@ -2880,6 +2983,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Universidad Autónoma de Madrid** | Beyond Centralization: User-Controlled Federated Recommendations in Practice |
 | **University of Chinese Academy of Sciences** | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
 | **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID · QuaSID |
+| **Université de Montréal** | Building a privacy-preserving Federated Recommender system for mobile devices |
 | **University of Virginia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation |
 | **USTC** | MiniOneRec · UniGRec · PAD-Rec · DynamicPO: Dynamic Preference Optimization for Recommendation · Objective Shaping · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
 | **UT Austin** | RRCM |
