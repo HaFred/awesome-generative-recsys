@@ -17,9 +17,11 @@ mindmap
         DynamicPO -- USTC
         RecRM-Bench -- Shenzhen U
         BLADE -- USTC
+        CA-PG -- Meta / Cornell
       Ranking & Reranking
         CARE -- NUS & USTC
         InvariRank -- RMIT
+        RAGEAR -- Catania / CNR
       Frameworks & Benchmarks
         Standardized CRS Re-evaluation -- University of Stavanger
         OpenOneRec -- Kuaishou
@@ -265,6 +267,102 @@ mindmap
      - **Fairness: 5/10** — Not explicitly addressed
      - **Robustness: 9/10** — Online A/B tests show +3.9% search TVT, +0.30% carousel TVT; p99 latency reduced from 500ms to 200ms
      - **Impact: 8/10** — From Tubi (Fox Corporation streaming service); deployed in production with significant improvements
+
+---
+
+### Papers May 27
+
+> **Note:** 5 new generative recommendation papers found (from May 27, 2026). All papers are newly added to the repository.
+
+1. **L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation**
+   * Affiliation: — *(Pingjun Pan, Tingting Zhou, Peiyao Lu, Tingting Fei, Hongxiang Chen, Chuanjiang Luo — Netease Cloud Music, Hangzhou, China)*
+   * Link: [arxiv.org/abs/2605.26717](https://arxiv.org/abs/2605.26717)
+   * Venue: SIGIR 2026
+   * TL;DR: Parameter-level dual-view adaptation for LLM-based recommendation via Dual-view Personalized MoE — a frozen LLM backbone receives complementary behavioral and semantic adaptation pathways through LoRA-based experts with user-aware routing, deployed on Netease Cloud Music
+   * Key techniques:
+     - Dual-View Personalized Mixture-of-Experts (DPMoE) with shared + view-specific experts (DeepSeekMoE paradigm)
+     - Parameter-level adaptation via LoRA (rank=8), only 32M parameters updated (~5% of backbone)
+     - Three-signal personalized router (context, user, interaction) with Top-2 expert sparsification
+     - Adaptive Cross-View Fusion (ACF) with dynamic gating for unified preference
+     - Bidirectional Preference Contrastive (BPC) loss for cross-view consistency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Novel parameter-level dual-view adaptation paradigm as alternative to input/output fusion
+     - **Fairness: 4/10** — Not explicitly addressed
+     - **Robustness: 8/10** — Online A/B test on 1.5M DAU: +9.24% CTR, +3.15% reply rate (p<0.01)
+     - **Impact: 9/10** — SIGIR 2026; Netease Cloud Music production deployment
+
+2. **MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music**
+   * Affiliation: — *(Jiahao Liang, Linzhi Huang, Xuannan Liu, Xukai Wang, Xuanpu Luo, Yongchun Zhu, Jingwu Chen, Feng Zhang, Xiao Yang — ByteDance, Beijing, China)*
+   * Link: [arxiv.org/abs/2605.27103](https://arxiv.org/abs/2605.27103)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: Conversational Music LLM deployed on ByteDance Douyin Music enabling active natural-language music discovery, with three-stage music knowledge pre-training, context-aware instruction tuning, and GRPO-based preference alignment achieving +46.49% user active days
+   * Key techniques:
+     - Three-stage music knowledge pre-training (objective music knowledge → subjective music knowledge → personalized preferences)
+     - Automated synthesis pipeline for high-quality user-query-music triplets
+     - Hybrid Reward Model jointly modeling intent relevance, personalized preferences, and basic constraints
+     - GRPO-based reinforcement learning for preference alignment
+     - Deployed at ByteDance Douyin Music serving millions of daily users
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 8/10** — First conversational Music LLM for active music discovery; three-stage domain knowledge injection
+     - **Fairness: 3/10** — Not explicitly addressed
+     - **Robustness: 9/10** — Production A/B test: +46.49% user active days; outperforms Gemini-3-Pro
+     - **Impact: 9/10** — ByteDance production; novel MusicLLM paradigm for active discovery
+
+3. **RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender**
+   * Affiliation: — *(Francesco Granata, Lorenzo Lamazzi, Misael Mongiovi, Francesco Poggi, Valeria Secchini — University of Catania, Italy; CNR, Italy)*
+   * Link: [arxiv.org/abs/2605.26819](https://arxiv.org/abs/2605.26819)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: Neurosymbolic course recommendation combining dense retrieval over full lecture transcripts with symbolic Knowledge Graph filtering, using a graph-aware aggregation function for course-level ranking
+   * Key techniques:
+     - Dense retrieval (multilingual-e5-large) over full lecture transcripts at chunk level
+     - Symbolic Knowledge Graph modeling courses, credits, study plans, prerequisites
+     - Graph-aware aggregation: Global Evidence × Ranked Evidence × Lesson Coverage
+     - LLM-based evaluation (GPT-4.1 nano) + human evaluation on 152 student queries
+     - Full code available on GitHub
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — Full implementation released: [github.com/fpoggi/RAGEAR](https://github.com/fpoggi/RAGEAR)
+     - **Novelty: 7/10** — Novel neurosymbolic approach combining chunk-level dense retrieval with KG reasoning
+     - **Fairness: 5/10** — Graph-aware aggregation considers curriculum constraints for academic fairness
+     - **Robustness: 6/10** — Validated on 152 student queries with human + LLM evaluation
+     - **Impact: 6/10** — Opensource; practical for university course recommendation systems
+
+4. **Causal Representation Learning for Generalisable Recommendation**
+   * Affiliation: — *(Yorgos Felekis — University of Warwick; Michael O'Riordan, Oriol Corcoll, Ciarán M. Gilligan-Lee — Spotify; Ciarán M. Gilligan-Lee — University College London)*
+   * Link: [arxiv.org/abs/2605.27043](https://arxiv.org/abs/2605.27043)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: Information-theoretic disentanglement criterion for causal representation learning in recommendation, proven to discard non-causal treatment latents; validated with A/B test on Spotify playlist generation showing +0.75% track streams under distribution shift
+   * Key techniques:
+     - Info-theoretic objective: J(g) = I(g(T); Y|Z) - lambda * I(g(T); Z)
+     - Tractable variational bound via InfoNCE + NCE-CLUB with gradient reversal
+     - Three theoretical propositions proving causal purification and lossless regime
+     - Adds no inference-time cost; works with any standard supervised model
+     - Validated on synthetic SCM, KuaiRand, and Spotify A/B (millions of users)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 8/10** — Novel information-theoretic framework for causal representation learning in recsys
+     - **Fairness: 6/10** — Causal approach inherently addresses confounder bias and distribution shift
+     - **Robustness: 8/10** — Proven gains under distribution shift; offline parity + online uplift
+     - **Impact: 8/10** — Spotify production A/B test; principled causal approach applicable broadly
+
+5. **Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking**
+   * Affiliation: — *(Haruka Kiyohara — Cornell University / Meta; Mihaela Curmei; Ariel Evnine, Shankar Kalyanaraman, Israel Nir, Ana-Roxana Pop, Nitzan Razin, Udi Weinsberg — Meta; Sarah Dean, Thorsten Joachims — Cornell University)*
+   * Link: [arxiv.org/abs/2605.26385](https://arxiv.org/abs/2605.26385)
+   * Venue: ICML 2026
+   * TL;DR: Variance-reduced policy gradient for training early-stage retrievers by computing gradients w.r.t. marginal (not joint) item probabilities, reducing effective action space from |A|^K to |A|; open-sourced by Meta
+   * Key techniques:
+     - CA-PG: Credit-assigned policy gradient with marginal probability over candidate sets
+     - Theoretical guarantee: CA-PG component of V-PG with residual removed for variance reduction
+     - Theorem: learns optimally partitioned ESR policy under reasonably aligned LSR
+     - Efficient approximations: CA-PG-SwR (sampling with replacement) and TOP1-PG (O(L) complexity)
+     - ~3x faster convergence than V-PG at K=20; improved training stability
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — Full implementation released: [github.com/facebookresearch/early_stage_retrieval](https://github.com/facebookresearch/early_stage_retrieval)
+     - **Novelty: 8/10** — Novel credit-assigned policy gradient formulation with theoretical guarantees
+     - **Fairness: 4/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Significant variance reduction; improved training stability for large candidate sets
+     - **Impact: 9/10** — ICML 2026; Meta; applicable to recsys, search, and RAG pipelines
 
 ---
 
@@ -2641,7 +2739,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 32 papers as of May 26.
+**Count:** 34 papers as of May 27.
 
 | Score | Paper |
 | --- | --- |
@@ -2659,7 +2757,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8.5/10 | Factorized Latent Reasoning for LLM-based Recommendation (FLR) |
 | 8/10 | Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec) |
 | 8/10 | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
+| 8/10 | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) |
 | 8/10 | MuonRec: Shifting the Optimizer Paradigm Beyond Adam in Scalable Generative Recommendation |
+| 8/10 | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender |
 | 8/10 | How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation? |
 | 8/10 | OneRec-Think: In-Text Reasoning for Generative Recommendation |
 | 8/10 | A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset (APG4RecSim) |
@@ -2698,6 +2798,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Conversational
 - A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset
 - GCRS: Generative Conversational Recommender System
+- MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music
 
 ### Data Generation / Synthetic Data
 - SAGE (Tabular Data Generation)
@@ -2720,6 +2821,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching
 
 ### Fairness
+- Causal Representation Learning for Generalisable Recommendation
 - From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs
 - Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost)
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
@@ -2733,6 +2835,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
 - BITRec (Modeling Behavioral Intensity and Transitions)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
+- Causal Representation Learning for Generalisable Recommendation
 - CRAB: Codebook Rebalancing for Bias Mitigation in Generative Recommendation
 - Deep Interest Mining (SemanticID)
 - DeGRe: Dense-supervised Generative Reranking for Recommendation
@@ -2788,6 +2891,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Generative Retrieval / Ranking
 - CapsID: Soft-Routed Variable-Length Semantic IDs
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
+- Causal Representation Learning for Generalisable Recommendation
 - DeGRe: Dense-supervised Generative Reranking for Recommendation
 - Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG) 
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
@@ -2830,7 +2934,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
 
 ### Industrial
+- Causal Representation Learning for Generalisable Recommendation
+- Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG)
 - DeGRe: Dense-supervised Generative Reranking for Recommendation
+- L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
+- MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music
 - LLM Retrieval for Stable and Predictable Ad Recommendations
 - Memento: Personalized RAG-Style Long-Retention Data Scaling for META Ads Recommendation
 - Query-Conditioned Generative Search with QGS in Quark
@@ -2838,6 +2946,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 ### LLM-based Recommendation
 - APG4RecSim: Task-Aware Automated User Profile Generation
+- Causal Representation Learning for Generalisable Recommendation
 - BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation
 - DeGRe: Dense-supervised Generative Reranking for Recommendation
 - Every Preference Has Its Strength: Injecting Ordinal Semantics into LLM-Based Recommenders (OSA)
@@ -2845,6 +2954,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - LLM Retrieval for Stable and Predictable Ad Recommendations
 - Memento: Personalized RAG-Style Long-Retention Data Scaling for META Ads Recommendation
 - Query-Conditioned Generative Search with QGS in Quark
+- L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
+- MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music
+- RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender
 - RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations
 - ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
 
@@ -2892,6 +3004,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Why Users Go There: World Knowledge-Augmented Generative Next POI Recommendation
 
 ### Model / Architecture
+- Causal Representation Learning for Generalisable Recommendation
+- L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
 - RecGPT-Mobile: On-Device Large Language Models
 - OpenOneRec
 - OneMall
@@ -2908,6 +3022,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence
 
 ### MoE
+- L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
 - OneMall
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
 
@@ -2919,6 +3034,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - MuonRec
 
 ### Re-ranking
+- Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG)
 - DeGRe: Dense-supervised Generative Reranking for Recommendation
 - GloRank (From Local Indices to Global Identifiers)
 - GR2
@@ -2950,17 +3066,23 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)
 - Stop Overthinking: Unlocking Efficient Listwise Reranking with Minimal Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
+- MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music
+- Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG)
 - ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
 - RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations
 
 ### Retrieval / Representation
+- Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG)
 - Efficient Generative Retrieval for E-commerce Search with Semantic Cluster IDs and Expert-Guided RL
+- RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender
 - MARC (LLM representation compression)
 - Memento: Personalized RAG-Style Long-Retention Data Scaling for META Ads Recommendation
 - ResRank (retrieval + reranking)
 
 ### RL / Reinforcement Learning
+- Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG)
 - Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO)
+- MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music
 - SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation
 - Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge)
 - ReRec: Reasoning-Augmented LLM-based Recommendation Assistant
@@ -2991,6 +3113,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 - Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
+- Causal Representation Learning for Generalisable Recommendation
 - Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
 - Deep Interest Mining (SemanticID)
 - Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG) 
@@ -3054,9 +3177,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Bay University** | SAGER: Self-Evolving User Policy Skills for Recommendation Agent |
 | **Beihang University** | A2Gen (Action-Aware Generative Sequence Modeling) · LASAR · SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation |
 | **Beijing Institute of Technology** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) |
-| **ByteDance** | Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) |
+| **ByteDance** | Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) ‖ MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music |
 | **Central South University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) |
 | **Ahmedabad University** | A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation |
+| **Cornell University** | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) |
 | **Criteo** | RecoAtlas: From Semantic Plausibility to Set-Level Utility in LLM Recommendation Agents |
 | **CWI** | Beyond Centralization: User-Controlled Federated Recommendations in Practice |
 | **Chongqing University** | MLTFR · DC4SR |
@@ -3072,6 +3196,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Huawei Cloud** | RelayGR |
 | **Hubei University** | Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL) |
 | **Instacart** | Cascaded Generative Approach |
+| **ICML 2026** | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) |
 | **Institute of Information Engineering, Chinese Academy of Sciences** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation |
 | **JD.com** | GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation |
 | **Johannes Kepler University Linz** | A2G-DiffRec |
@@ -3082,10 +3207,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **LinkedIn** | SIREN-RoPE (Learning to Rotate) |
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR |
 | **Meituan · MBGR** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench  · GenLI |
-| **Meta** | Generative Reasoning Re-ranker (GR2) · MARS · LLM Retrieval for Stable and Predictable Ad Recommendations ‖ Memento: Personalized RAG-Style Long-Retention Data Scaling for META Ads Recommendation |
+| **Meta** | Generative Reasoning Re-ranker (GR2) · MARS · LLM Retrieval for Stable and Predictable Ad Recommendations ‖ Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) ‖ Memento: Personalized RAG-Style Long-Retention Data Scaling for META Ads Recommendation |
 | **MILA** | Building a privacy-preserving Federated Recommender system for mobile devices |
 | **Microsoft** | CapsID: Soft-Routed Variable-Length Semantic IDs |
 | **MLSys 2026** | FreeScale |
+| **Netease Cloud Music** | L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation |
 | **Netflix** | Towards Generalizable and Efficient Large-Scale Generative Recommenders ‖ Rank-GRPO |
 | **NJUST / Nanjing** | Harmonizing Generative Retrieval (RecoChain) |
 | **Nanyang Technological University** | GCRS: Generative Conversational Recommender System |
@@ -3102,7 +3228,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Shanghai JTU** | MuonRec |
 | **Shenzhen University** | HSUGA |
 | **Shopee** | UniRec |
-| **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec |
+| **Spotify / University of Warwick / University College London** | Causal Representation Learning for Generalisable Recommendation |
+| **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec, L2Rec |
 | **Singapore Management University** | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
 | **SK Telecom** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO) |
 | **Southeast University** | DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · Deep Interest Mining |
@@ -3120,6 +3247,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **University of Science and Technology of China** | QGS: Query-Conditioned Generative Search |
 | **University of Stavanger** | A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset |
 | **Universidad Autónoma de Madrid** | Beyond Centralization: User-Controlled Federated Recommendations in Practice |
+| **University of Catania / CNR** | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender |
 | **University of Chinese Academy of Sciences** | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
 | **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID · QuaSID |
 | **Université de Montréal** | Building a privacy-preserving Federated Recommender system for mobile devices |
