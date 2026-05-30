@@ -45,6 +45,7 @@ mindmap
         A2G-DiffRec -- JKU Linz
         TA-Rec -- USTC
         DualFashion -- SMU
+        FAVE -- UESTC
       Sequential & Behavioral Modeling
         GAMER -- BOSS Zhipin
         SIREN-RoPE -- LinkedIn
@@ -74,6 +75,81 @@ mindmap
 ---
 ## By Date
 
+### Papers May 30
+
+> **Note:** Saturday, May 30, 2026 — arxiv does not announce papers on weekends. Following fallback procedure, 4 missed papers from April 2-16, 2026 were found and added. Zhihu blog fallback was attempted but blocked by access restrictions.
+
+1. **Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM)**
+   * Affiliation: — *(Lei Guo — Shandong Normal University; Hongyun Yang, Pengjie Ren, Zhumin Chen — Shandong University; Tong Chen — The University of Queensland; Hui Liu — Shandong University of Finance and Economics)*
+   * Link: [arxiv.org/abs/2604.14833](https://arxiv.org/abs/2604.14833)
+   * Venue: arXiv preprint, April 16, 2026
+   * TL;DR: SF-UBM enables privacy-preserving cross-domain LLM recommendation via federated semantic learning with fact-counter knowledge distillation
+   * Key techniques:
+     - Semantic-enhanced federated architecture with natural language as universal bridge across domains
+     - Fact-counter Knowledge Distillation (FKD) integrating domain-agnostic text and domain-specific ID modalities
+     - Token-Space Knowledge Injector projecting user/item representations into LLM soft prompt space
+     - Two-layer privacy protection via Gaussian noise perturbation and similarity-based feature replacement
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 3/10** — GitHub: https://github.com/Nexus-Yang/SF-UBM_master; placeholder repo only, code will be released upon paper acceptance
+     - **Novelty: 8/10** — Novel federated approach for privacy-preserving LLM cross-domain recommendation
+     - **Fairness: 3/10** — Not explicitly addressed; focus is on privacy rather than recommendation fairness
+     - **Robustness: 7/10** — Evaluated across three domain pairs (Health-Beauty, Food-Kitchen, Books-Movielens) with perturbation sensitivity analysis
+     - **Impact: 7/10** — Addresses important privacy concerns in LLM-based cross-domain recommendation
+
+2. **Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP)**
+   * Affiliation: — *(Jaehyun Lee, Sanghwan Jang, Hwanjo Yu — POSTECH; SeongKu Kang — Korea University)*
+   * Link: [arxiv.org/abs/2604.07825](https://arxiv.org/abs/2604.07825)
+   * Venue: SIGIR 2026 (Full Paper)
+   * TL;DR: KnowSA_CKP selectively injects external item knowledge only for items the LLM lacks information about, avoiding wasteful uniform augmentation
+   * Key techniques:
+     - Knowledge-aware Selective Augmentation with Comparative Knowledge Probing
+     - Estimation of LLM internal knowledge via collaborative relationship evaluation
+     - Selective injection only for items truly needing external information, preserving context budget
+     - No fine-tuning required; works with frozen LLMs as training-free recommenders
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 1/10** — GitHub: https://github.com/nowhyun/KnowSA_CKP; placeholder repo only (license file, no code yet)
+     - **Novelty: 7/10** — Novel selective knowledge augmentation addressing the knowledge gap problem in LLM recommenders
+     - **Fairness: 4/10** — Not explicitly addressed
+     - **Robustness: 7/10** — Consistent improvements across four real-world datasets
+     - **Impact: 8/10** — SIGIR 2026 full paper; efficient context utilization for LLM-based recommendation
+
+3. **FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation**
+   * Affiliation: — *(Ke Shi, Yao Zhang, Feng Guo, Jinyuan Zhang, JunShuo Zhang, Shen Gao, Shuo Shang — University of Electronic Science and Technology of China; State Key Laboratory of Internet Architecture)*
+   * Link: [arxiv.org/abs/2604.04427](https://arxiv.org/abs/2604.04427)
+   * Venue: SIGIR 2026
+   * TL;DR: FAVE achieves one-step generative recommendation via flow-based average velocity estimation, with 20x+ inference speedup over multi-step generative baselines
+   * Key techniques:
+     - Two-stage training: basic manifold construction then single-step consolidation
+     - Dual-end semantic alignment preventing representation collapse at both source and target ends
+     - Semantic anchor prior replacing Gaussian noise initialization with masked user history embedding
+     - Global average velocity field compressing multi-step ODE trajectories into single displacement vector
+     - JVP-based flow consistency regularization for trajectory straightness
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — GitHub: https://github.com/Blue130/Fave; complete code with pretrained checkpoints for 3 datasets, good documentation, 6 stars, 10 commits
+     - **Novelty: 8/10** — Novel flow-based one-step generation framework for sequential recommendation
+     - **Fairness: 4/10** — Not explicitly addressed
+     - **Robustness: 8/10** — State-of-the-art on three datasets (ML-100k, Amazon Beauty, Steam) with 20x+ inference speedup
+     - **Impact: 8/10** — SIGIR 2026; significant efficiency breakthrough for generative sequential recommendation
+
+4. **Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)**
+   * Affiliation: — *(Daiwei Chen, Ramya Korlakai Vinayak — University of Wisconsin-Madison; Zhoutong Fu, Chengming Jiang, Ran Zhou, Tan Wang, Chunnan Yao, Guoyao Li, Yihan Cao, Ruijie Jiang, Fedor Borisyuk, Jianqiang Shen, Jingwei Wu — LinkedIn Corporation; Haichao Zhang — Northeastern University; Rui Cai — University of California, Davis)*
+   * Link: [arxiv.org/abs/2604.02324](https://arxiv.org/abs/2604.02324)
+   * Venue: arXiv preprint, April 2, 2026
+   * TL;DR: GTI linguistically grounds new Semantic-ID tokens in pretrained embedding space before fine-tuning, preventing dimensional collapse and improving generative recommendation by +21.6% P@5
+   * Key techniques:
+     - Grounded Token Initialization Hypothesis: linguistically grounding new tokens preserves semantic distinctions through fine-tuning
+     - Lightweight grounding stage training only new token embeddings with paired linguistic supervision (frozen LM backbone)
+     - RQ-VAE for discretizing item embeddings into multi-level Semantic IDs
+     - QLoRA for parameter-efficient fine-tuning on Qwen3-0.6B backbone
+     - Sinkhorn-Knopp trick for uniform codebook distribution; spectral diagnostics for collapse measurement
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available; industrial dataset from LinkedIn cannot be shared
+     - **Novelty: 7/10** — Novel analysis of token initialization problem with simple yet effective linguistic grounding solution
+     - **Fairness: 3/10** — Not explicitly addressed
+     - **Robustness: 7/10** — +26% Recall@20 on public Vibrent dataset; strong spectral diagnostics confirming reduced dimensional collapse
+     - **Impact: 7/10** — Practical token initialization method applicable to any LM-based generative recommendation system
+
+---
 ### Papers May 26
 
 > **Note:** 6 new generative recommendation papers found (from May 26, 2026). All papers are newly added to the repository.
@@ -2922,7 +2998,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 36 papers as of May 29.
+**Count:** 37 papers as of May 30.
 
 | Score | Paper |
 | --- | --- |
@@ -2955,6 +3031,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) |
 | 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
+| 7/10 | FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation |
 | 7/10 | Learning to Rotate: Temporal and Semantic Rotary Encoding for Sequential Modeling (SIREN-RoPE) |
 | 7/10 | R3-VAE: Reference Vector-Guided Rating Residual Quantization VAE for Generative Recommendation |
 | 7/10 | Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning |
@@ -2993,6 +3070,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 ### Diffusion
 - Dual-Diffusional Generative Fashion Recommendation (DualFashion)
+- FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation
 - Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)
 - LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
@@ -3070,7 +3148,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
 - Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA)
-
+- FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation
+- Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM)
+- Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP)
+- Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 
 ### Generative Retrieval / Ranking
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
@@ -3095,6 +3176,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Federated Recommendation
 - Building a privacy-preserving Federated Recommender system for mobile devices
 - Beyond Centralization: User-Controlled Federated Recommendations in Practice
+- Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM)
 
 
 ### Group Recommendation
@@ -3157,7 +3239,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
 - ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
 - Toward User Preference Alignment in LLM Recommendation via Explicit Context Feedback
-
+- Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM)
+- Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP)
+- Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 
 ### Multimodal
 
@@ -3348,6 +3432,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - TwiSTAR: Think Fast, Think Slow, Then Act, Generative Recommendation with Adaptive Reasoning
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
 - UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence
+- Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 
 ### Sequential Modeling / RoPE
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
@@ -3357,7 +3442,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
 - UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
 - UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence
-
+- FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation
 
 ### CTR Prediction
 - Fine-Tuned LLM as a Complementary Predictor Improving Ads System
@@ -3423,9 +3508,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Johannes Kepler University Linz** | A2G-DiffRec |
 | **Johns Hopkins University** | ORBIT |
 | **KAIST** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO) |
+| **Korea University** | Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP) |
 | **Kuaishou** | PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations · OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence · RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations |
 | **Leiden University / University of Glasgow** | Differentiable Semantic ID for Generative Recommendation (DIGER) |
-| **LinkedIn** | SIREN-RoPE (Learning to Rotate) |
+| **LinkedIn** | SIREN-RoPE (Learning to Rotate) ‖ Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI) |
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR |
 | **Meituan · MBGR** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench  · GenLI |
 | **Meta** | Generative Reasoning Re-ranker (GR2) · MARS · LLM Retrieval for Stable and Predictable Ad Recommendations ‖ Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) ‖ Memento: Personalized RAG-Style Long-Retention Data Scaling for META Ads Recommendation ‖ LoopFM: Learning frOm HistOrical RePresentations of Foundation Model for Recommendation ‖ Toward User Preference Alignment in LLM Recommendation via Explicit Context Feedback |
@@ -3437,22 +3523,26 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Netflix** | Towards Generalizable and Efficient Large-Scale Generative Recommenders ‖ Rank-GRPO |
 | **NJUST / Nanjing** | Harmonizing Generative Retrieval (RecoChain) |
 | **Nokia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation |
+| **Northeastern University** | Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI) |
 | **NUS** | Reasoning over Semantic IDs · CARE ‖ MixRAGRec: MoE KG-RAG for Multi-Agent LLM Recommendation |
 | **NVIDIA** | MTServe |
 | **Peking University** | StageCF · DUET: Joint Exploration of User Item Profiles in Recommendation System · Interests Burn-down Diffusion Process (StageCF) ‖ UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation |
 | **Pinterest** | Fine-Tuned LLM as a Complementary Predictor Improving Ads System |
+| **POSTECH** | Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP) |
 | **Purdue University** | GraphRAG-IRL |
 | **Qingdao University** | QCMP-CL |
 | **Renmin University of China** | Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation (MDCNS) |
 | **Renmin University of China / Beijing University of Posts and Telecommunications** | LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation |
 | **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
 | **Samsung** | Ocean4Rec: Offline LLM-Derived OCEAN Profiles for Request-Time VOD Reranking |
-| **Shandong University** | ThinkGR: Integrating Chain-of-Thought into Generative Retrieval |
+| **Shandong Normal University** | Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM) |
+| **Shandong University** | ThinkGR: Integrating Chain-of-Thought into Generative Retrieval ‖ Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM) |
+| **Shandong University of Finance and Economics** | Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM) |
 | **Shanghai JTU** | MuonRec |
 | **Shenzhen Technology University** | UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation |
 | **Shenzhen University** | HSUGA |
 | **Shopee** | UniRec |
-| **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec, L2Rec ‖ ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation |
+| **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec, L2Rec ‖ ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation ‖ FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation ‖ Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP) |
 | **Singapore Management University** | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
 | **SK Telecom** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO) |
 | **Southeast University** | DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · Deep Interest Mining |
@@ -3461,22 +3551,24 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Sungkyunkwan University** | ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation |
 | **Tencent** | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) ‖ HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning · Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) ‖ SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling |
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI) |
-| **The University of Queensland** | ProMax |
+| **The University of Queensland** | ProMax ‖ Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM) |
 | **Tianjin University** | GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation |
 | **Tsinghua University** | Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · TwiSTAR · AsymRec |
 | **Tubi** | TubiFM: Unified Item, Carousel, and Search Ranking for Streaming Discovery |
+| **UC Davis** | Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI) |
 | **UC San Diego** | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · F-GRPO  · SID-MLP |
 | **UIUC Illinois** | Rec-R1 ‖ LRanker: LLM Ranker for Massive Candidates |
 | **Universidad Autónoma de Madrid** | Beyond Centralization: User-Controlled Federated Recommendations in Practice |
 | **University of Catania / CNR** | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender |
 | **University of Chinese Academy of Sciences** | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
-| **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID · QuaSID |
+| **University of Electronic Science and Technology of China** | CARD · ProMax · AdaSID · QuaSID · FAVE |
 | **University of Illinois at Chicago** | Toward User Preference Alignment in LLM Recommendation via Explicit Context Feedback |
 | **University of New South Wales** | How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation? |
 | **University of Otago** | How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation? |
 | **University of Science and Technology of China** | QGS: Query-Conditioned Generative Search |
 | **University of Stavanger** | A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset |
 | **University of Virginia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation |
+| **University of Wisconsin-Madison** | Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI) |
 | **Université de Montréal** | Building a privacy-preserving Federated Recommender system for mobile devices |
 | **USTC** | MiniOneRec · UniGRec · PAD-Rec · DynamicPO: Dynamic Preference Optimization for Recommendation · Objective Shaping · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) ‖ QGS: Query-Conditioned Generative Search |
 | **UT Austin** | RRCM |
