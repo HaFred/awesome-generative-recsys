@@ -33,6 +33,7 @@ mindmap
         R3 / Skill-Routing -- Tencent
         OpenOneRec -- Kuaishou
         MiniOneRec -- USTC
+        COPF / Counterfactual Fairness -- Duke Kunshan
       Efficient Decoding
         Vectorizing the Trie -- Google
     Representation Layer: Generative Pre-training
@@ -87,6 +88,96 @@ mindmap
 
 ---
 ## By Date
+
+
+### Papers June 7 (Weekend Cross-Category Catch-up)
+
+*Discovered via cross-category search (cs.AI, cs.LG) during June 7 weekend fallback. Papers published May 29 -- June 3, missed in prior cs.IR-focused searches.*
+
+1. **Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)**
+   * Affiliation: Li Auto Inc. — *(Chenyu Zhang, Yiwen Liu, Yin Sun, Xinyuan Zhang, Yuji Cao, Junming Jiao, Juyi Qiao — Intelligent Business Team)*
+   * Link: [arxiv.org/abs/2606.04387](https://arxiv.org/abs/2606.04387)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: LLM-based discriminative framework for sales lead scoring with margin-aware Bradley-Terry hierarchical preference ranking, achieving SOTA AUC 0.8161 and +9.5% sales volume uplift in 132-day A/B test at Li Auto.
+   * Key techniques:
+     - Margin-aware Bradley-Terry formulation transforming sparse binary labels into dense funnel-aware preference pairs
+     - Joint modeling of structured CRM features and unstructured customer interactions
+     - Hierarchical preference ranking objective enabling both pointwise and pairwise supervision
+     - Deployed on large-scale NEV brand production data with 132-day online validation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Li Auto internal deployment)
+     - **Novelty: 6/10** — Novel Bradley-Terry formulation for hierarchical preference ranking in sales scoring
+     - **Fairness: 3/10** — Not addressed
+     - **Robustness: 8/10** — 132-day online A/B test with 9.5% sales volume uplift
+     - **Impact: 6/10** — Practical LLM-based ranking approach with real commercial impact
+
+2. **LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems**
+   * Affiliation: Bilibili Inc. — *(Yihong Huang, Chen Chu, Fei Chen, Yu Lin, Ruiduan Li, Zhihao Li)*
+   * Link: [arxiv.org/abs/2606.01111](https://arxiv.org/abs/2606.01111)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Model-agnostic plug-in transforming inefficient random permutation into learnable mechanism for feature selection; deployed at Bilibili on 2TB model with 12,000+ features, removing 3,600 redundant dimensions with zero performance degradation.
+   * Key techniques:
+     - Learnable adaptive permutation replacing random permutation for efficient feature importance evaluation
+     - Adaptive regularization tailored for heterogeneous dimensions and extreme sparsity (99%+ default values)
+     - Model-agnostic plug-in compatible with any recommendation architecture
+     - Deployed on Bilibili search ranking model serving 1B+ daily requests
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Bilibili internal deployment)
+     - **Novelty: 7/10** — First learnable permutation mechanism for heterogeneous feature selection in recsys
+     - **Fairness: 3/10** — Not addressed
+     - **Robustness: 9/10** — Production deployment at billion-request scale, removed 3,600+ features without degradation
+     - **Impact: 7/10** — Model-agnostic approach applicable to any large-scale industrial recommendation system
+
+3. **COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs**
+   * Affiliation: Duke Kunshan University / Duke University — *(Sheng'en Li, Dongmian Zou)*
+   * Link: [arxiv.org/abs/2606.00700](https://arxiv.org/abs/2606.00700)
+   * Venue: ICML 2026
+   * TL;DR: Decision-layer fairness framework for online link recommendation defining group-level opportunity gaps over exposure counterfactuals with graph-aware doubly robust estimators; reduces worst-case group disparities with modest ranking utility impact.
+   * Key techniques:
+     - Exposure-counterfactual group opportunity gaps via explicit exploration and propensity logging
+     - Residual outcome indistinguishability with graph-aware doubly robust (GA-DR) estimators
+     - Online multicalibration auditor with primal-dual controller
+     - Noisy transfer theorem relating GA-DR residuals to exposure-counterfactual group gaps
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — Code at [github.com/lsnnnnnnnn/COPF](https://github.com/lsnnnnnnnn/COPF)
+     - **Novelty: 7/10** — First counterfactual fairness framework for performative link recommendation on evolving graphs
+     - **Fairness: 9/10** — Core focus on deployment-stable fairness with group-level opportunity gap definitions
+     - **Robustness: 7/10** — Noisy transfer theorem, temporal mixing analysis, bounded local interference
+     - **Impact: 7/10** — ICML 2026; principled fairness framework for online recommendation systems
+
+4. **Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification**
+   * Affiliation: ShareChat / Aampe / Simulacra Research — *(Neeti Pokharna — ShareChat; Olivier Jeunen — Aampe; Yatharth Saraf — ShareChat; Aleksei Ustimenko — Simulacra Research)*
+   * Link: [arxiv.org/abs/2606.04110](https://arxiv.org/abs/2606.04110)
+   * Venue: SIGIR 2026 Industry Track
+   * TL;DR: Combines post-stratification with CUPED for variance reduction in heavy-tailed monetization A/B testing; deployed at ShareChat achieving ~45% traffic reduction for equivalent statistical confidence.
+   * Key techniques:
+     - Post-stratification combined with CUPED (Controlled-experiment Using Pre-Experiment Data)
+     - Heavy-tailed metric sensitivity improvement without additional traffic
+     - Practical guardrails and design choices for real-world ranking experiments
+     - Deployed at ShareChat across ranking-driven monetization experiments
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — Combines established techniques (post-stratification + CUPED) for heavy-tailed metrics
+     - **Fairness: 3/10** — Not addressed
+     - **Robustness: 8/10** — Production-deployed at ShareChat, ~45% traffic reduction
+     - **Impact: 6/10** — SIGIR 2026 Industry Track; practical methodology for ranking A/B experiments
+
+5. **Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS)**
+   * Affiliation: Radio Television Suisse / EPFL — *(Theo Maetz, Luc Guillet — RTS; Andrea Cavallaro — EPFL)*
+   * Link: [arxiv.org/abs/2605.31291](https://arxiv.org/abs/2605.31291)
+   * Venue: ICPR 2026
+   * TL;DR: Multi-objective contextual bandit that learns to weight objectives (audience reach, cultural values, public service mandate) as a function of context; evaluated on real programming data from Swiss national broadcaster RTS.
+   * Key techniques:
+     - Context-aware objective weighting via learnt contextual scalarisation
+     - Thompson Sampling for exploration-exploitation in multi-objective recommendation
+     - Evaluation on real public media programming data from RTS
+     - Improved contextual relevance and alignment with expert curation practices
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Context-aware scalarisation for multi-objective bandit recommendation
+     - **Fairness: 6/10** — Balances audience reach, cultural values, and public service mandate
+     - **Robustness: 6/10** — Evaluated on real RTS programming data
+     - **Impact: 5/10** — ICPR 2026; niche application for public service media
 
 
 ### Papers June 4
@@ -3829,7 +3920,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 49 papers as of June 4.
+**Count:** 50 papers as of June 7.
 
 | Score | Paper |
 | --- | --- |
@@ -3848,6 +3939,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec) |
 | 8/10 | ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation |
 | 8/10 | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
+| 8/10 | COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs |
 | 8/10 | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) |
 | 8/10 | MuonRec: Shifting the Optimizer Paradigm Beyond Adam in Scalable Generative Recommendation |
 | 8/10 | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender |
@@ -3971,6 +4063,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 ### Evaluation / Benchmark
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
+- Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026)
 
 
 
@@ -3992,6 +4085,12 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Uncertainty and Fairness Awareness in LLM-Based Recommendation Systems
 - Distributional Approximate Nearest Neighbour Search for Uncertainty-Aware Retrieval (DINOSAUR)
 - Whose Name Comes Up? III: Persona Prompting Effects in LLM-Based Scholar Recommendation
+- COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs
+- Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS)
+
+
+### Feature Selection
+- LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 
 
 ### Federated Recommendation
@@ -4098,6 +4197,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation
 - Quantizing Intent: Cross-Domain Semantic IDs from Organic Activity for Industrial Ranking
 - Query-Conditioned Generative Search with QGS in Quark
+- Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
 - Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)
 - ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
 - TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
@@ -4107,6 +4207,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 ### Graph-based Recommendation
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
+- COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs
 - GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation
 - Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation (HyRAG)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
@@ -4123,6 +4224,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
 - Bridging Short Videos and Live Streams: Reasoning-Guided Multimodal LLMs for Cross-Domain Representation Learning (RGCD-Rep)
 - Causal Representation Learning for Generalisable Recommendation
+- Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS)
 - Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG)
 - DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM)
 - Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP)
@@ -4131,6 +4233,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - Joint Optimization of Relevance and Engagement in Multi-Task Ranking for E-Commerce with Efficient LLM Supervision
+- LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 - L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
 - LLM Retrieval for Stable and Predictable Ad Recommendations
 - LLMs Need Encoders for Semantic IDs Too (PrefixMem)
@@ -4141,11 +4244,13 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Quantizing Intent: Cross-Domain Semantic IDs from Organic Activity for Industrial Ranking
 - Query-Conditioned Generative Search with QGS in Quark
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
+- Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
 - Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems (SCALR)
 - Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation (Taiji)
 - UniNote: A Unified Embedding Model for Multimodal Representation and Ranking
 - UniPinRec: Unifying Generative Retrieval and Ranking at Pinterest Scale
+- Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026)
 
 
 ### Inference
@@ -4210,6 +4315,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Query-Conditioned Generative Search with QGS in Quark
 - RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
+- Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
 - RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations
 - SAILRec: Steering LLM Attention to Dual-Side Semantically Aligned Collaborative Embeddings for Recommendation (SAILRec)
 - TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation
@@ -4514,6 +4620,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval |
 | **Adobe Research** | Multimodal Music Recommendation System using LLMs |
 | **African University of Science and Technology** | Rank-Constrained Deep Matrix Completion for Group Recommendation (Group RC-DMC) |
+| **Aampe** | Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026) |
 | **Ahmedabad University** | A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation |
 | **Alibaba** | From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs ‖ RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There ‖ DeGRe: Dense-supervised Generative Reranking ‖ QGS: Query-Conditioned Generative Search ‖ GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan) ‖ DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM) |
 | **Alibaba International Digital Commerce Group** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation |
@@ -4526,6 +4633,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Bay University** | SAGER: Self-Evolving User Policy Skills for Recommendation Agent |
 | **Baze University** | Rank-Constrained Deep Matrix Completion for Group Recommendation (Group RC-DMC) |
 | **Beihang University** | A2Gen (Action-Aware Generative Sequence Modeling) · LASAR · SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation |
+| **Bilibili Inc.** | LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP) |
 | **Beijing Institute for General Artificial Intelligence** | BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD) |
 | **Beijing Institute of Technology** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR) |
 | **Beijing University** | From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs |
@@ -4542,7 +4650,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Dalian University of Technology** | RAGR: Review-Augmented Generative Recommendation |
 | **Dolby Laboratories** | Multimodal Music Recommendation System using LLMs |
 | **DoorDash Inc.** | Joint Optimization of Relevance and Engagement in Multi-Task Ranking for E-Commerce with Efficient LLM Supervision |
+| **Duke Kunshan University / Duke University** | COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs |
 | **East China Normal University** | Learning Variable-Length Tokenization for Generative Recommendation (VarLenRec) |
+| **EPFL** | Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS) |
 | **Fudan University** | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) |
 | **Graz University of Technology** | Whose Name Comes Up? III: Persona Prompting Effects in LLM-Based Scholar Recommendation |
 | **Griffith University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) ‖ FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation |
@@ -4557,7 +4667,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Huawei Cloud** | RelayGR |
 | **Huazhong University of Science and Technology** | UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation |
 | **Hubei University** | Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL) |
-| **ICML 2026** | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) |
+| **ICML 2026** | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) ‖ COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs |
 | **Instacart** | Cascaded Generative Approach |
 | **Institute of Computing Technology, Chinese Academy of Sciences** | Can LLM Rerankers Predict Their Own Ranking Performance? |
 | **Institute of Information Engineering, Chinese Academy of Sciences** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation ‖ BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD) |
@@ -4572,6 +4682,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **LUCID Inc.** | Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS) |
 | **Leiden University** | Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges |
 | **Leiden University / University of Glasgow** | Differentiable Semantic ID for Generative Recommendation (DIGER) |
+| **Li Auto Inc.** | Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO) |
 | **LinkedIn** | SIREN-RoPE (Learning to Rotate) ‖ Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI) |
 | **MILA** | Building a privacy-preserving Federated Recommender system for mobile devices ‖ Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS) |
 | **MLSys 2026** | FreeScale |
@@ -4598,10 +4709,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Purdue University** | GraphRAG-IRL |
 | **Qingdao University** | QCMP-CL |
 | **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
+| **Radio Television Suisse (RTS)** | Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS) |
 | **Renmin University of China** | Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation (MDCNS) ‖ Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM) ‖ Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP) |
 | **Renmin University of China / Beijing University of Posts and Telecommunications** | LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation ‖ VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) |
 | **Rutgers University** | TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation |
-| **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec, L2Rec ‖ ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation ‖ FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation ‖ Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP) |
+| **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec, L2Rec ‖ ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation ‖ FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation ‖ Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP) ‖ Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026) |
 | **SK Telecom** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO) |
 | **Samsung** | Ocean4Rec: Offline LLM-Derived OCEAN Profiles for Request-Time VOD Reranking |
 | **Shandong Normal University** | Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM) |
@@ -4609,8 +4721,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Shandong University of Finance and Economics** | Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM) |
 | **Shanghai International Studies University** | TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER) |
 | **Shanghai JTU** | MuonRec |
-| **ShareChat** | Distributional Approximate Nearest Neighbour Search for Uncertainty-Aware Retrieval (DINOSAUR) |
+| **ShareChat** | Distributional Approximate Nearest Neighbour Search for Uncertainty-Aware Retrieval (DINOSAUR) ‖ Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026) |
 | **Shenzhen Technology University** | UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation |
+| **Simulacra Research** | Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026) |
 | **Shenzhen University** | HSUGA |
 | **Shopee** | UniRec ‖ Decoupled Residual Quantization for Robust Semantic IDs in Recommendation (DRQ) |
 | **Singapore Management University** | Dual-Diffusional Generative Fashion Recommendation (DualFashion) ‖ Dynamic Spectral Denoising with Global-Context Attention for Multi-Behavior Recommendation (SpectraMB) |
