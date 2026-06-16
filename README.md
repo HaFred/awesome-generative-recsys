@@ -87,6 +87,7 @@ mindmap
         CARD -- UESTC
         PRISM -- Jilin U
         REVEAL / Visual Adaptation -- Fudan / Imperial
+        ReaEmb -- Xi'an Jiaotong U
       Review-Augmented
         RAGR -- Dalian UT
 ```
@@ -195,6 +196,92 @@ mindmap
      - **Fairness: 5/10** — Semantic tokens may generalize better but no explicit fairness study
      - **Robustness: 6/10** — Consistent gains across model scales; A/B test validated in production
      - **Impact: 8/10** — Paradigm-shifting argument for industrial recommendation; deployed at ByteDance scale
+
+### Papers June 16
+
+1. **HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)**
+   * Affiliation: Institute of Information Engineering, Chinese Academy of Sciences / Beijing Normal University / JD.com — *(Shuqi Zhao, Jingsong Su, Xiang Liu, Xingzhi Yao, Yiming Qiu, Huimu Wang, Liang Lin, Pengbo Mo, Mingming Li, Jiao Dai, Jizhong Han, Songlin Hu — IIE/CAS; Jingsong Su — Beijing Normal University; Xingzhi Yao, Yiming Qiu, Huimu Wang — JD.com)*
+   * Link: [arxiv.org/abs/2606.15331](https://arxiv.org/abs/2606.15331)
+   * Venue: arXiv preprint, June 2026 (ACM-licensed, venue TBD)
+   * TL;DR: Proposes an endogenous chain-of-thought recommendation mechanism that unifies representation, reasoning, and generation; introduces multi-granularity hierarchical semantic encoding matrix with holistic reconstruction loss and interleaved reasoning that fuses coarse-to-fine semantics at each decoding step.
+   * Key techniques:
+     - Multi-granularity nested residual quantization producing an M×L hierarchical semantic encoding matrix (coarse-to-fine rows, residual-quantized columns)
+     - Holistic reconstruction loss providing multi-granularity self-supervised signals that mitigate CoT data scarcity
+     - Interleaved reasoning: at each decoding step, fine-grained hidden state predicts coarse semantic embedding, which is fused via gated injection to enhance final recommendation
+     - Thinking mode achieves better accuracy than non-thinking with modest overhead; consistent gains across public datasets, especially on sparse data
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Novel hierarchical multi-granularity encoding matrix + interleaved (not separate) CoT reasoning for generative recommendation
+     - **Fairness: 3/10** — Not addressing fairness explicitly
+     - **Robustness: 6/10** — Multi-dataset evaluation; sparse data gains suggest generalization
+     - **Impact: 6/10** — IIE/CAS + JD.com collaboration; introduces a new endogenous reasoning paradigm for generative rec
+
+2. **One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)**
+   * Affiliation: KAIST — *(Woosung Kang, Jiwon Jeong, Jonghyeok Shin, Jeongwhan Choi, Noseong Park — KAIST)*
+   * Link: [arxiv.org/abs/2606.15752](https://arxiv.org/abs/2606.15752)
+   * Venue: KDD 2026
+   * TL;DR: A Prior-data Fitted Network (PFN) for sequential recommendation — a single model pretrained entirely on synthetic priors that performs next-item prediction across multiple real-world datasets without gradient-based updates at inference; the first PFN approach validated in the recommendation domain.
+   * Key techniques:
+     - Synthetically generated prior data simulating diverse sequential interaction patterns for PFN pretraining
+     - Single model producing next-item predictions via in-context learning without fine-tuning or gradient updates
+     - Cross-dataset generalization: same pretrained model predicts on multiple unseen real-world sequential recommendation benchmarks
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First application of PFN paradigm to sequential recommendation; cross-dataset zero-shot prediction is novel
+     - **Fairness: 2/10** — Not addressing fairness
+     - **Robustness: 5/10** — Cross-dataset evaluation promising but synthetic-to-real gap needs more study
+     - **Impact: 7/10** — KDD 2026; opens PFN research direction for recommendation; KAIST
+
+3. **Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)**
+   * Affiliation: Xi'an Jiaotong University — *(Qidong Liu, Mingyao Huang, Moranxin Wang, Wenxuan Yang, Haiping Zhu)*
+   * Link: [arxiv.org/abs/2606.16703](https://arxiv.org/abs/2606.16703)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: A two-stage framework using LLMs as embedding generators for sequential recommendation — Latent Reasoning-enhanced Contrastive Learning (LRCL) exploits inner LLM reasoning via two-pass forward with implicit reasoning tokens, and Collaborative Reward RL (CRRL) explicitly injects collaborative signals using co-occurrence frequency as reward.
+   * Key techniques:
+     - LRCL: two-pass forward process with additional attention module generating implicit reasoning tokens combined with original tokens for final item representation
+     - Attribute-level in-batch contrastive learning capturing deep item semantics from LLM reasoning
+     - CRRL: tailored reinforcement learning injecting collaborative signals into LLM embeddings using co-occurrence frequency as reward
+     - Offline-cacheable embeddings: can substitute embedding layer of any SRS backbone with zero inference overhead
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — Code available at [github.com/mingyao-huang/ReaEmb](https://github.com/mingyao-huang/ReaEmb.git); explicitly released for reproducibility
+     - **Novelty: 7/10** — Novel two-stage design separating semantic reasoning (LRCL) from collaborative injection (CRRL); explicit RL for collaborative alignment is well-motivated
+     - **Fairness: 3/10** — Not addressing fairness, though long-tail benefits from collaborative RL
+     - **Robustness: 6/10** — Offline-cacheable design; two-stage training pipeline with explicit reward signals
+     - **Impact: 6/10** — Practical embedding generator for any SRS backbone; Xi'an Jiaotong University
+
+4. **OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)**
+   * Affiliation: Zhejiang University / Kuaishou Technology — *(Yao Tang, Jian Liu — Zhejiang University; Ying Yang, Ben Chen, Yufei Ma, Zihan Liang, Chenyi Lei, Wenwu Ou — Kuaishou)*
+   * Link: [arxiv.org/abs/2606.15330](https://arxiv.org/abs/2606.15330)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: First end-to-end generative query recommendation system deployed at industrial scale for short-video e-commerce feeds; replaces multi-stage cascade with a unified BART encoder-decoder using low-latency schema generation with abstention, progressive preference internalization via on-policy distillation; +16.91% query exposure, +20.36% guided orders in Kuaishou A/B.
+   * Key techniques:
+     - Collaborative-Multimodal Intent Grounding: fuses multimodal video understanding with behavior-derived collaborative anchors against noisy content metadata
+     - Low-Latency Unified Generation: compact `[SEP]`-delimited schema with BART encoder-decoder fitting ~20-30ms latency; `[REJECT]` token for safe abstention
+     - Progressive Preference Internalization: three-stage training (SFT → list-wise Softmax DPO → Preference-Internalized On-Policy Distillation / PIOPD)
+     - PIOPD distills posterior behavior signals directly into policy without separately trained reward model
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Kuaishou production system)
+     - **Novelty: 7/10** — First end-to-end generative query rec at industrial scale; on-policy distillation for preference internalization is elegant
+     - **Fairness: 2/10** — Not addressing fairness
+     - **Robustness: 8/10** — Deployed at Kuaishou main video feed; comprehensive online A/B with strong business metrics
+     - **Impact: 7/10** — Industrial deployment bridging search and recommendation; Zhejiang University + Kuaishou
+
+5. **Guiding Federated Graph Recommendation with LLM-Encoded Knowledge**
+   * Affiliation: Griffith University / International University, Vietnam National University HCMC / Universität Augsburg — *(Thi Minh Chau Nguyen, Hien Trang Nguyen, Duc Anh Nguyen, Thanh Trung Huynh — Griffith University; Van Ho-Long — International University, VNU HCMC; Zhao Ren — Universität Augsburg)*
+   * Link: [arxiv.org/abs/2606.15277](https://arxiv.org/abs/2606.15277)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Proposes using frozen LLM-encoded semantic vectors summarizing client interaction patterns to guide selective cross-client structural aggregation in federated graph recommendation; semantically-informed collaboration without exposing raw data.
+   * Key techniques:
+     - Clients summarize typical interaction patterns into compact semantic vectors via frozen LLM encoding
+     - Central server uses LLM-encoded semantic signals to discover related preference patterns across non-IID clients
+     - Semantically-guided selective aggregation of structural graph representations
+     - Privacy-preserving: semantic vectors enable cross-client collaboration without raw data exposure
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Novel combination of LLM semantic encoding with federated graph recommendation; semantic-guided aggregation is a fresh approach
+     - **Fairness: 4/10** — Privacy-preserving design addresses fairness indirectly via data protection
+     - **Robustness: 6/10** — Validated on standard benchmarks; frozen LLM avoids training instability
+     - **Impact: 5/10** — Addresses important federated rec challenge; multi-institution international collaboration
 
 ### Papers June 13 (Weekend Catch-up)
 
@@ -4989,6 +5076,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
 | 7/10 | FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation |
 | 7/10 | Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR) |
+| 7/10 | Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb) |
 | 7/10 | SIDInspector: A Mapping-First Diagnostic Resource for Semantic-ID Tokenizers |
 | 7/10 | Learning to Rotate: Temporal and Semantic Rotary Encoding for Sequential Modeling (SIREN-RoPE) |
 | 7/10 | OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework (OneSearch-V2) |
@@ -5060,6 +5148,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 ### Contrastive Learning
 - GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation
+- Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
 - Quality-Aware Collaborative Multi-Positive Contrastive Learning for Sequential Recommendation (QCMP-CL)
 - UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
 
@@ -5079,9 +5168,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Mind the Gap: Bridging Behavioral Silos with LLMs in Multi-Vertical Recommendations
 - Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations (AIR)
 - Quantizing Intent: Cross-Domain Semantic IDs from Organic Activity for Industrial Ranking
+- One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
 - Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems (SCALR)
 
 ### Data Generation / Synthetic Data
+- One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
 - SAGE (Tabular Data Generation)
 
 
@@ -5158,11 +5249,13 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Building a privacy-preserving Federated Recommender system for mobile devices
 - Beyond Centralization: User-Controlled Federated Recommendations in Practice
 - Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM)
+- Guiding Federated Graph Recommendation with LLM-encoded knowledge
 
 
 
 ### Foundation Models
 - Scaling Laws for Behavioral Foundation Models over User Event Sequences
+- One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
 
 
 
@@ -5203,6 +5296,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
 - How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation?
 - How Well Does Generative Recommendation Generalize?
+- HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 - HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding
 - Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
@@ -5216,6 +5310,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Multi-Business Prediction for Generative Recommendation at Meituan (MBGR)
 - On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 - One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec)
+- OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 - One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
 - OneFeed: A Unified Generative Framework for Feed Content Enhancement and Query Generation (OneFeed)
 - OneLive: Dynamically Unified Generative Framework for Live-Streaming Recommendation (OneLive)
@@ -5270,6 +5365,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
 - MERGE: Next-Generation Item Indexing Paradigm for Large-Scale Streaming Recommendation (MERGE)
 - On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
+- OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 - OneFeed: A Unified Generative Framework for Feed Content Enhancement and Query Generation (OneFeed)
 - OneLive: Dynamically Unified Generative Framework for Live-Streaming Recommendation (OneLive)
 - OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking System (OnePiece)
@@ -5293,6 +5389,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation (HyRAG)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - GraphRAG-IRL
+- Guiding Federated Graph Recommendation with LLM-encoded knowledge
 
 
 ### Group Recommendation
@@ -5333,6 +5430,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Mind the Gap: Bridging Behavioral Silos with LLMs in Multi-Vertical Recommendations
 - MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music
 - Ocean4Rec: Offline LLM-Derived OCEAN Profiles for Request-Time VOD Reranking
+- OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 - OneLive: Dynamically Unified Generative Framework for Live-Streaming Recommendation (OneLive)
 - OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking System (OnePiece)
 - OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework (OneSearch-V2)
@@ -5410,6 +5508,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
+- Guiding Federated Graph Recommendation with LLM-encoded knowledge
+- Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
+- HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 - Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
 - Joint Optimization of Relevance and Engagement in Multi-Task Ranking for E-Commerce with Efficient LLM Supervision
 - L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
@@ -5428,6 +5529,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Multimodal Music Recommendation System using LLMs
 - Ocean4Rec: Offline LLM-Derived OCEAN Profiles for Request-Time VOD Reranking
 - One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE)
+- OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 - OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking System (OnePiece)
 - PaperFlow: Profiling, Recommending, and Adapting Across Daily Paper Streams (PaperFlow)
 - Query-Conditioned Generative Search with QGS in Quark
@@ -5564,6 +5666,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization (GRAD)
 - Generative Reasoning Re-ranker (GR2)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
+- Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
 - Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation (Taiji)
 - MiniOneRec
 - MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music
@@ -5572,6 +5675,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - UniNote: A Unified Embedding Model for Multimodal Representation and Ranking
 - Objective Shaping with Hard Negatives
 - OneMall
+- OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 - OneRec-Think
 - OneRec-V2
 - OpenOneRec
@@ -5629,6 +5733,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - GR2
 - Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
 - GraphRAG-IRL
+- Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
+- HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 - Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
 - MixRAGRec: MoE KG-RAG for Multi-Agent LLM Recommendation
 - MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music
@@ -5702,6 +5808,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - GRLM
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
+- Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
 - How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation?
 - Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
@@ -5737,10 +5844,13 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR)
 - ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID)
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
+- Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
+- HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 - Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM)
 - MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS)
 - TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER)
 - PHKT: Personalized Dynamic Hypergraph-enhanced KAN-Transformer for Multi-behavior Sequential Recommendation (PHKT)
+- One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
 - SIREN-RoPE (Learning to Rotate)
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
 - SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive)
@@ -5760,6 +5870,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Training Systems / NPU Optimization
 - TurboGR: An Accelerated Training System for Large-Scale Generative Recommendation
 
+
+## By Affiliation
 
 | Affiliation | Papers |
 |---|---|
@@ -5785,6 +5897,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Beijing Information Science and Technology University** | Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
 | **Beijing Institute for General Artificial Intelligence** | BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
 | **Beijing Institute of Technology** | Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)
+| **Beijing Normal University** | HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 | **Beijing University** | From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs
 | **Bilibili Inc.** | LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 | **Brno University of Technology** | Do Neural Retrievers Prefer Certain Documents? Evidence of Learned Relevance Priors
@@ -5816,7 +5929,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Google** | Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling ‖ LLM-Based User Personas for Recommendations at Scale
 | **Google Cloud AI Research** | CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank) |
 | **Graz University of Technology** | Whose Name Comes Up? III: Persona Prompting Effects in LLM-Based Scholar Recommendation
-| **Griffith University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) ‖ FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation ‖ When Text-as-Vision Meets Semantic IDs in Generative Recommendation: An Empirical Study
+| **Griffith University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) ‖ FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation ‖ When Text-as-Vision Meets Semantic IDs in Generative Recommendation: An Empirical Study ‖ Guiding Federated Graph Recommendation with LLM-encoded knowledge
 | **Guilin University of Electronic Technology** | Beyond Instance-Level Alignment and Uniformity: Semantic Factor Learning for Collaborative Filtering (SaFeAU)
 | **Hangzhou Dianzi University** | PHKT: Personalized Dynamic Hypergraph-enhanced KAN-Transformer for Multi-behavior Sequential Recommendation (PHKT)
 | **Harvard University** | One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec)
@@ -5832,17 +5945,18 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Imperial College London** | Teach Multimodal Recommendation Model to See via Personalized Visual Extraction and Adaptive Learning (REVEAL)
 | **Instacart** | Cascaded Generative Approach
 | **Institute of Computing Technology, Chinese Academy of Sciences** | Can LLM Rerankers Predict Their Own Ranking Performance? ‖ PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation (PIT)
-| **Institute of Information Engineering, Chinese Academy of Sciences** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation ‖ BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
+| **Institute of Information Engineering, Chinese Academy of Sciences** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation ‖ BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD) ‖ HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 | **Institute of Science and Technology Austria** | TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
 | **Institute of Software, Chinese Academy of Sciences** | Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation (HyRAG)
 | **Independent Researcher** | OneFeed: A Unified Generative Framework for Feed Content Enhancement and Query Generation (OneFeed)
-| **JD.com** | GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation ‖ Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance  ‖ Adaptive Loss Balancing for Noise-Robust GRPO in Generative Recommendation (AdaGRPO)
+| **International University, Vietnam National University HCMC** | Guiding Federated Graph Recommendation with LLM-encoded knowledge
+| **JD.com** | GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation ‖ Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance  ‖ Adaptive Loss Balancing for Noise-Robust GRPO in Generative Recommendation (AdaGRPO) ‖ HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 | **Johannes Kepler University Linz** | A2G-DiffRec
 | **Johns Hopkins University** | ORBIT ‖ Beyond Instance-Level Alignment and Uniformity: Semantic Factor Learning for Collaborative Filtering (SaFeAU)
-| **KAIST** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO)
+| **KAIST** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO) ‖ One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
 | **KnowFM @ ACL 2026** | Test-Time Training for Zero-Resource Dense Retrieval Reranking (DART)
 | **Korea University** | Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP)
-| **Kuaishou** | OneRetrieval: Unifying Multi-Branch E-commerce Retrieval with an Editable Generative Model (OneRetrieval) ‖ PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations · OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence · RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations ‖ Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation (Taiji) ‖ Bridging Short Videos and Live Streams: Reasoning-Guided Multimodal LLMs for Cross-Domain Representation Learning (RGCD-Rep) ‖ OneReason Technical Report  ‖ DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes) ‖ Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations (AIR) (with HK PolyU) ‖ PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation (PIT) ‖ GEMs: Breaking the Long-Sequence Barrier in Generative Recommendation with a Multi-Stream Decoder (GEMs) ‖ OneLive: Dynamically Unified Generative Framework for Live-Streaming Recommendation (OneLive) ‖ OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework (OneSearch-V2)
+| **Kuaishou** | OneRetrieval: Unifying Multi-Branch E-commerce Retrieval with an Editable Generative Model (OneRetrieval) ‖ PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations · OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID · On the Equivalence Between Auto-Regressive Next Token Prediction and Full-Item-Vocabulary Maximum Likelihood Estimation in Generative Recommendation—A Short Note · UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence · RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations ‖ Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation (Taiji) ‖ Bridging Short Videos and Live Streams: Reasoning-Guided Multimodal LLMs for Cross-Domain Representation Learning (RGCD-Rep) ‖ OneReason Technical Report  ‖ DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes) ‖ Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations (AIR) (with HK PolyU) ‖ PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation (PIT) ‖ GEMs: Breaking the Long-Sequence Barrier in Generative Recommendation with a Multi-Stream Decoder (GEMs) ‖ OneLive: Dynamically Unified Generative Framework for Live-Streaming Recommendation (OneLive) ‖ OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework (OneSearch-V2) ‖ OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 | **Leiden University** | Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges ‖ Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO)
 | **Leiden University / University of Glasgow** | Differentiable Semantic ID for Generative Recommendation (DIGER)
 | **Li Auto Inc.** | Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
@@ -5946,6 +6060,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **University of Waterloo** | CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank) |
 | **University of Wisconsin-Madison** | Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 | **University of Zurich** | Attention Calibration for Position-Fair Dense Information Retrieval
+| **Universität Augsburg** | Guiding Federated Graph Recommendation with LLM-encoded knowledge
 | **Université de Montréal** | Building a privacy-preserving Federated Recommender system for mobile devices
 | **USTC** | MiniOneRec · UniGRec · PAD-Rec · DynamicPO: Dynamic Preference Optimization for Recommendation · Objective Shaping · Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) ‖ QGS: Query-Conditioned Generative Search
 | **UT Austin** | RRCM
@@ -5954,8 +6069,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Waseda University** | Adaptive Loss Balancing for Noise-Robust GRPO in Generative Recommendation (AdaGRPO)
 | **Wuhan University** | MTServe ‖ Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) ‖ MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR) |
 | **Xiaohongshu** | UniNote: A Unified Embedding Model for Multimodal Representation and Ranking ‖ DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation (DiffCold)
+| **Xi'an Jiaotong University** | Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
 | **Xidian University** | AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation ‖ EviRank: Evidence-Based Confidence Estimation for LLM-Based Ranking (EviRank) ‖ ANCHOR: Agentic Noise Creation Framework for Human Simulation and Denoising Recommendation (ANCHOR) ‖ Differentiable Geometric Indexing for End-to-End Generative Retrieval (DGI)
 | **Yandex** | Gated Bidirectional Linear Attention for Generative Retrieval (GBLA) ‖ Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
 | **Youtube** | [STATIC] Vectorizing the Trie
-| **Zhejiang University** | Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) ‖ DeGRe: Dense-supervised Generative Reranking for Recommendation ‖ TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER)
+| **Zhejiang University** | Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) ‖ DeGRe: Dense-supervised Generative Reranking for Recommendation ‖ TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER) ‖ OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 |
