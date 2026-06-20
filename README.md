@@ -103,6 +103,10 @@ mindmap
 ---
 ## By Date
 
+### Papers June 20
+
+*No new arxiv papers today (Saturday, June 20, 2026). arXiv does not announce papers on weekends. All generative recommendation papers from the last posting day (June 19) and preceding days are already covered in earlier entries. Coverage is continuous from April 26 through June 19 with no gaps.*
+
 ### Papers June 19
 
 1. **Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)**
