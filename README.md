@@ -107,6 +107,27 @@ mindmap
 
 *No new arxiv papers today (Saturday, June 20, 2026). arXiv does not announce papers on weekends. All generative recommendation papers from the last posting day (June 19) and preceding days are already covered in earlier entries. Coverage is continuous from April 26 through June 19 with no gaps.*
 
+### Papers June 21
+
+*No new arxiv papers today (Sunday, June 21, 2026). arXiv does not announce papers on weekends. Weekend fallback chain executed: arxiv search → Zhihu blogs (inaccessible) → comprehensive arXiv API search across cs.IR / cs.AI / cs.CL. One missed paper from the prior week identified and added below. Coverage verified continuous from April 26 through June 21.*
+
+1. **The Injection Paradox: Brand-Level Suppression in Safety-Trained LLM Recommendations via RAG Context Injection (Injection Paradox)**
+   * Affiliation: Independent Researcher — *(Hyunseok Paeng)*
+   * Link: [arxiv.org/abs/2606.09204](https://arxiv.org/abs/2606.09204)
+   * Venue: ICML 2026 Workshop on Failure Modes in Agentic AI (FAGEN), non-archival
+   * TL;DR: Discovers that safety-trained Claude LLMs paradoxically suppress brand recommendations when prompt injections are present in RAG context documents, causing brand recommendation rates to drop from 54% to 0% across all trials; GPT models exhibit the opposite behavior, suggesting model-family differences in injection-safety interaction.
+   * Key techniques:
+     - RAG-based LLM brand recommendation with prompt injection analysis
+     - Systematic evaluation across 7 models (4 GPT, 3 Claude) with 4,500+ trials
+     - Counterfactual experiments across three brands reproducing directional suppression
+     - Demonstration of reverse-attack scenario where competitor document injection suppresses target brand
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Code repository promised but not yet released at time of publication
+     - **Novelty: 7/10** — First identification of safety-training-induced brand suppression via RAG injection
+     - **Fairness: 7/10** — Directly addresses fairness in LLM recommendations through safety vs. fairness tension
+     - **Robustness: 6/10** — Reproduced across 3 brands, 7 models, counterfactual experiments; limited to wireless earbud domain
+     - **Impact: 5/10** — ICML FAGEN Workshop (non-archival); raises important questions about safety-fairness tradeoffs in LLM recommendation
+
 ### Papers June 19
 
 1. **Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)**
@@ -5445,6 +5466,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Trading Engagement for Sustainability: Carbon-Aware Re-ranking for E-commerce Recommendations
 - Representation Curriculum: Stagewise Training for Robust Ranking and Allocation
 - Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges
+- The Injection Paradox: Brand-Level Suppression in Safety-Trained LLM Recommendations via RAG Context Injection (Injection Paradox)
 - Whose Name Comes Up? III: Persona Prompting Effects in LLM-Based Scholar Recommendation
 - One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE)
 - When Recommendation Denoising Meets Popularity Bias: Understanding and Mitigating Their Interaction (PAD)
@@ -5542,6 +5564,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation
 - TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation
 - Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation
+- The Injection Paradox: Brand-Level Suppression in Safety-Trained LLM Recommendations via RAG Context Injection (Injection Paradox)
 - Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM)
 - Towards Generalizable and Efficient Large-Scale Generative Recommenders
 - Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search (GrowthGR)
@@ -5736,6 +5759,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
 - HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 - Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
+- Incumbent Advantage: Brand Bias and Cognitive Manipulation Dynamics in LLM Recommendation Systems
+- The Injection Paradox: Brand-Level Suppression in Safety-Trained LLM Recommendations via RAG Context Injection (Injection Paradox)
 - Joint Optimization of Relevance and Engagement in Multi-Task Ranking for E-Commerce with Efficient LLM Supervision
 - L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
 - LLM Retrieval for Stable and Predictable Ad Recommendations
@@ -6185,7 +6210,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Institute of Information Engineering, Chinese Academy of Sciences** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation ‖ BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD) ‖ HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 | **Institute of Science and Technology Austria** | TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
 | **Institute of Software, Chinese Academy of Sciences** | Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation (HyRAG)
-| **Independent Researcher** | OneFeed: A Unified Generative Framework for Feed Content Enhancement and Query Generation (OneFeed)
+| **Independent Researcher** | OneFeed: A Unified Generative Framework for Feed Content Enhancement and Query Generation (OneFeed) ‖ The Injection Paradox: Brand-Level Suppression in Safety-Trained LLM Recommendations via RAG Context Injection (Injection Paradox)
 | **International University, Vietnam National University HCMC** | Guiding Federated Graph Recommendation with LLM-encoded knowledge
 | **JD.com** | GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation ‖ Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance  ‖ Adaptive Loss Balancing for Noise-Robust GRPO in Generative Recommendation (AdaGRPO) ‖ HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 | **Johannes Kepler University Linz** | A2G-DiffRec
