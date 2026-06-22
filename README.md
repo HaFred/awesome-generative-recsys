@@ -103,6 +103,12 @@ mindmap
 ---
 ## By Date
 
+### Papers June 22
+
+*No new arxiv papers today (Monday, June 22, 2026). Arxiv's Monday paper listing has not yet been generated — papers submitted Friday–Sunday are announced Monday evening ET (Tuesday morning HKT). All generative recommendation papers from the last posting day (June 19) and all prior dates are already covered. Comprehensive cross-category search (cs.IR / cs.AI / cs.CL / cs.LG) confirmed zero missed genrec papers from June 1–19, 2026.*
+
+*Missing dates: June 6 (0 cs.IR papers on genrec topic, confirmed). Coverage is continuous from April 26 through June 21 with no gap.*
+
 ### Papers June 20
 
 *No new arxiv papers today (Saturday, June 20, 2026). arXiv does not announce papers on weekends. All generative recommendation papers from the last posting day (June 19) and preceding days are already covered in earlier entries. Coverage is continuous from April 26 through June 19 with no gaps.*
