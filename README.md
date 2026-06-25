@@ -2,6 +2,10 @@
 
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
+> [!IMPORTANT]
+> For those who are not familiar with GecRec, or not even the recommendation system, please checkout the kickstart posts [here](docs/kickstart.md).
+> These posts are in Chinese, for English simply do your browser's internal translation or turn to __Ask Gemini__ :shipit:
+
 ## Quick Indexing
 ```mermaid
 mindmap
