@@ -53,6 +53,8 @@ mindmap
         RecLoop -- Shandong U
         N-Gram Debugging -- WU Vienna
         SAERec -- U Georgia
+        SafeGEO / GEO Risks Benchmark -- U Toronto / UCSD
+        FACTER / Fairness Reproducibility -- U Amsterdam
       Efficient Decoding
         Vectorizing the Trie -- Google
     Representation Layer: Generative Pre-training
@@ -111,6 +113,143 @@ mindmap
 
 ---
 ## By Date
+
+### Papers June 30
+
+1. **Rethinking Fairness in LLM-Based Recommender Systems: A Survey**
+   * Affiliation: National Taiwan University — *(Song-Duo Ma, Chu-Yun Chen, Bang-An Li, Pin-Yu Chen, Shau-Yung Hsu, Yun-Nung Chen — National Taiwan University)*
+   * Link: [arxiv.org/abs/2606.28340](https://arxiv.org/abs/2606.28340)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: First systematic survey of fairness in LLM-based recommender systems, organizing existing studies through a two-dimensional view of bias mechanisms and fairness targets, with a structured overview of evaluation landscapes and mitigation strategies; connects fairness with broader trustworthy concerns including explainability, privacy, robustness, and controllability.
+   * Key techniques:
+     - Two-dimensional taxonomy: bias mechanisms (pretrained knowledge, prompts, generated explanations, decoding strategies, feedback loops) × fairness targets
+     - Structured overview of evaluation landscapes and mitigation strategies
+     - Connects fairness with explainability, privacy, robustness, and controllability in LLM4Rec
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First survey specifically focused on fairness in LLM-based recsys
+     - **Fairness: 10/10** — Core contribution is comprehensive fairness taxonomy and analysis
+     - **Robustness: 6/10** — Systematic review covering broad scope; not empirical
+     - **Impact: 7/10** — Foundational survey for fairness research in LLM4Rec; National Taiwan University
+
+2. **SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents**
+   * Affiliation: University of Toronto, University of California San Diego, ZBot Technology, Coolwei AI Lab — *(Qianfeng Wen, Difan Jiao, Zhenwei Tang — University of Toronto; Yifan Simon Liu — University of Toronto; Xin Liu — University of Toronto; Blair Yang — University of Toronto / Coolwei AI Lab; Junda Wu — University of California San Diego; Qianfeng Wen — ZBot Technology)*
+   * Link: [arxiv.org/abs/2606.28356](https://arxiv.org/abs/2606.28356)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: First systematic study of Generative Engine Optimization (GEO) risks in LLM-based recommendation agents; constructs SafeGEO benchmark with 22 attack variants across 600 recommendation cases, showing GEO attacks can push flawed products into top-3 at up to 90.9% rate; evaluates agent-side defenses reducing promotion by up to 39.2%.
+   * Key techniques:
+     - GEO attack taxonomy with 7 primitives across 3 loci composed into 22 attack packages
+     - SafeGEO benchmark: 40,800 instances across 600 cases, 6 product verticals, 3 target slots
+     - Agent-side mitigation study with 6 defense layers (L0-L5)
+     - Target@3, HCV@1, uNDCG@5 evaluation metrics
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/QianfengWen/SafeGEO](https://github.com/QianfengWen/SafeGEO) — full benchmark code, Hugging Face dataset, Apache 2.0 license, well-documented with reproduction guide
+     - **Novelty: 7/10** — First systematic study of GEO risks in recommendation agents
+     - **Fairness: 7/10** — Directly addresses manipulation risk undermining fair recommendations
+     - **Robustness: 7/10** — 40,800 instances, 600 cases, 6 verticals, 22 attack variants
+     - **Impact: 7/10** — Highlights critical security/fairness concern for LLM-based recommendation
+
+3. **ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation**
+   * Affiliation: Meta AI, Michigan State University, University of North Carolina at Chapel Hill — *(Yihua Zhang, Mingfu Liang, Jiyan Yang, Rong Jin, Wen-Yen Chen, Yiping Han, Huayu Li, Buyun Zhang, Liang Luo, Frank Shyu, Luke Simon, Xi Liu — Meta AI; Sijia Liu — Michigan State University; Tianlong Chen — University of North Carolina at Chapel Hill)*
+   * Link: [arxiv.org/abs/2606.28357](https://arxiv.org/abs/2606.28357)
+   * Venue: ACL 2026 Findings
+   * TL;DR: Reasoning-augmented multimodal VLM agent for unified recommendation with three-stage explicit reasoning pipeline; uses reasoning-aware visual instruction tuning, evidence-horizon curriculum, and uncertainty-guided delegation that dynamically assigns up to 35% of queries to efficient sub-models; achieves 30%+ relative improvement across 5 datasets and 4 tasks.
+   * Key techniques:
+     - Three-stage explicit reasoning pipeline: reasoning-aware visual instruction tuning, evidence-horizon curriculum, uncertainty-guided delegation
+     - Unified CoT prompting transforming diverse recommendation tasks into reasoning chains
+     - Uncertainty-guided delegation reducing inference latency by up to 35% without accuracy loss
+     - Addresses cold-start and long-tail scenarios via progressive reasoning complexity
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Meta internal)
+     - **Novelty: 8/10** — First multimodal VLM agent with explicit reasoning and uncertainty-aware planning for recsys
+     - **Fairness: 4/10** — Improves cold-start/long-tail but fairness not primary focus
+     - **Robustness: 8/10** — 5 datasets, 4 tasks, comprehensive ablation of each mechanism
+     - **Impact: 8/10** — ACL 2026 Findings; 30%+ relative improvement with efficiency gains
+
+4. **EvoRec: Self Evolving Agentic Recommender Systems**
+   * Affiliation: Alibaba International Digital Commerce Group — *(Lingyu Mu, Hao Deng, Jinxin Hu, Yu Zhang — Alibaba International, Beijing; Haibo Xing, Xiaoyi Zeng — Alibaba International, Hangzhou)*
+   * Link: [arxiv.org/abs/2606.28368](https://arxiv.org/abs/2606.28368)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Multi-agent framework that co-evolves the recommendation model and optimization methodology through four collaborating agents in a dual-track loop; Research Agent and Code Agent iterate the model each round, while Skill Evolver distills reusable methodology from persistent memory; online A/B shows +1.85% revenue lift and +1.02% CTR gain.
+   * Key techniques:
+     - Dual-track co-evolution: model optimization track + methodology evolution track
+     - Four-agent collaboration: Research Agent, Code Agent, Skill Evolver, persistent Memory
+     - Skill Evolver periodically distills reusable optimization methodology across rounds
+     - Online A/B validation with revenue and CTR improvements
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Alibaba internal)
+     - **Novelty: 7/10** — First framework co-evolving both model and optimization methodology across iterations
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Online A/B on industrial platform; 2 public benchmarks + 1 industrial dataset
+     - **Impact: 8/10** — Production-validated at Alibaba scale; practical self-evolving agentic recsys
+
+5. **CMSL: Constructive Multi-Sequence Learning for Recommendation Systems**
+   * Affiliation: Meta — *(Zikun Cui, Renzhi Wu, Junjie Yang, Li Sheng, Jijie Wei, Linfeng Liu, Tai Guo, Tao Jia, Xiaodong Wang, Hong Li, Li Yu, Sri Reddy, Hong Yan — Meta MRS / PyTorch / FB Monetization)*
+   * Link: [arxiv.org/abs/2606.28533](https://arxiv.org/abs/2606.28533)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Paradigm shift from passive single-sequence ingestion to active context engineering; proposes learnable Sequence Construction Module that disentangles user history into coherent thematic strands modeled via linear attention; deployed across 4 major Meta surfaces for both ranking and retrieval tasks.
+   * Key techniques:
+     - Constructive Multi-Sequence Learning: active context engineering vs. passive chronological ingestion
+     - Learnable Sequence Construction Module disentangling user history into pure thematic strands
+     - Linear attention mechanism efficiently modeling multiple coherent sequences at scale
+     - Production deployment across ranking and retrieval on 4 major Meta surfaces
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Meta internal production system)
+     - **Novelty: 7/10** — Novel paradigm from single-sequence to multi-sequence learning for recsys
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 9/10** — Deployed across 4 major Meta surfaces for ranking and retrieval
+     - **Impact: 8/10** — Meta-scale production deployment; paradigm shift in sequence learning for recsys
+
+6. **Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair**
+   * Affiliation: University of Amsterdam — *(Oscar Miró López-Feliu, Daimy van Loo, Xanthos Kekkos, Mikel Blom, Clara Rus — University of Amsterdam)*
+   * Link: [arxiv.org/abs/2606.28620](https://arxiv.org/abs/2606.28620)
+   * Venue: TMLR 2026
+   * TL;DR: Reproducibility study of the FACTER framework for fairness in LLM-based recommendation; finds that static fairness instructions achieve comparable outcomes to FACTER's dynamic prompt repair loop in constrained ranking, suggesting limited benefit from the online repair mechanism; introduces static Fair Zero-Shot baseline.
+   * Key techniques:
+     - Reproducibility study across diverse architectures and dataset sparsity levels
+     - Constrained re-ranking extension for systematic FACTER evaluation
+     - Static Fair Zero-Shot baseline isolating contribution of iterative prompt repair
+     - Finding: dynamic repair provides limited benefit over static fairness instructions
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/oscar-omlf/facter-repr](https://github.com/oscar-omlf/facter-repr) — full code and reproduction artifacts available
+     - **Novelty: 5/10** — Reproducibility study with novel baselines and insights
+     - **Fairness: 8/10** — Directly evaluates and challenges fairness mechanisms in LLM4Rec
+     - **Robustness: 6/10** — Multiple architectures, dataset sparsity levels, and evaluation settings
+     - **Impact: 5/10** — TMLR 2026; contributes methodological rigor to LLM4Rec fairness evaluation
+
+7. **Fairness Attacks on Recommender Systems**
+   * Affiliation: University of Texas at Arlington, University of Arizona — *(Yanan Wang — University of Texas at Arlington; Yong Ge — University of Arizona)*
+   * Link: [arxiv.org/abs/2606.29064](https://arxiv.org/abs/2606.29064)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: First structure-aware RL-based fairness attack method designed to exacerbate unfairness in recommender systems; jointly learns item selection and gender selection policies via graph-based structure encoding and sequential dependency modeling; effective against 4 types of target recommendation models on 2 real-world datasets.
+   * Key techniques:
+     - Structure-aware RL agent with graph-based encoding modeling structural dependencies among fake interactions
+     - Joint item selection policy and gender selection policy learned via RL
+     - Sequential dependency modeling of injected fake items via RNN
+     - Evaluated against 4 recommendation model types on 2 real-world datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First systematic study of fairness attacks on recommender systems
+     - **Fairness: 9/10** — Core contribution directly addresses understanding and exposing fairness vulnerabilities
+     - **Robustness: 7/10** — Effective across 4 model types on 2 datasets
+     - **Impact: 6/10** — Opens new security dimension for fairness in recsys; UTA + U Arizona
+
+8. **Monosemanticity in Recommender Systems**
+   * Affiliation: Tel Aviv University — *(Yagel Alfasi, Eden Rzezak, Eadan Schechter — School of Industrial & Intelligent Systems Engineering, Tel Aviv University)*
+   * Link: [arxiv.org/abs/2606.29341](https://arxiv.org/abs/2606.29341)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Applies Matryoshka Sparse Autoencoder (MSAE) to collaborative filtering embeddings to reveal interpretable latent structure; LLM-generated labeling confirms semantic coherence; demonstrates intervention on gender-associated latent neurons; shows CF embeddings contain recoverable hierarchical interpretable structure.
+   * Key techniques:
+     - Matryoshka Sparse Autoencoder (MSAE) applied to matrix factorization embeddings
+     - LLM-generated labeling for semantic coherence verification of extracted features
+     - Gender-associated neuron intervention demonstrating practical interpretability
+     - Analysis on Amazon Fashion dataset
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First application of MSAE to interpret CF embeddings in recsys
+     - **Fairness: 5/10** — Gender intervention demonstration shows potential for fairness analysis
+     - **Robustness: 5/10** — Single dataset evaluation; exploratory study
+     - **Impact: 5/10** — Opens interpretability direction for collaborative filtering; Tel Aviv University
 
 ### Papers June 29
 
@@ -5951,7 +6090,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 72 papers as of June 29.
+**Count:** 74 papers as of June 30.
 
 | Score | Paper |
 | --- | --- |
@@ -5979,6 +6118,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG) |
 | 8/10 | One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE) |
 | 8/10 | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender |
+| 8/10 | SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents |
 | 8/10 | How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation? |
 | 8/10 | Intuition-Guided Latent Reasoning for LLM-Based Recommendation (IntuRec) |
 | 8/10 | Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM) |
@@ -6009,6 +6149,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Popcorn: A Configurable Benchmark for Visual Evidence in Multimodal Movie Recommendation (Popcorn) |
 | 7/10 | R3-VAE: Reference Vector-Guided Rating Residual Quantization VAE for Generative Recommendation |
 | 7/10 | Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning |
+| 7/10 | Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair |
 | 7/10 | SAERec: Constructing Fine-grained Interpretable Intents Priors via Sparse Autoencoders for Recommendation (SAERec) |
 | 7/10 | Uncertainty and Fairness Awareness in LLM-Based Recommendation Systems |
 | 7/10 | URecJPQ: Memory-efficient Multimodal Recommendation Models through RecJPQ in Large-Scale Scenarios (URecJPQ) |
@@ -6046,6 +6187,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Self-Distilled Reinforcement Learning for Co-Evolving Agentic Recommender Systems (CoARS)
 - Let the Agent Steer: Closed-Loop Ranking Optimization via Influence Exchange (Sortify)
 - Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop)
+- EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
+- ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
+- SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
 
 ### Beam Search Decoding
 - Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO)
@@ -6158,6 +6302,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework (OneSearch-V2)
 - PaperFlow: Profiling, Recommending, and Adapting Across Daily Paper Streams (PaperFlow)
 - Popcorn: A Configurable Benchmark for Visual Evidence in Multimodal Movie Recommendation (Popcorn)
+- SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
 - SocialPersona: Benchmarking Personalized Profiling and Response with Multimodal Social-Media Context (SocialPersona)
 - SIDInspector: A Mapping-First Diagnostic Resource for Semantic-ID Tokenizers
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
@@ -6199,6 +6344,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Designing Trustworthy LLM-based Wellbeing Recommendation through Controllable Interaction
 - From Hidden Profiles to Governable Personalization: Recommender Systems in the Age of LLM Agents
 - Scoring Is Not Enough: Addressing Gaps in Utility-fairness Trade-offs for Ranking
+- Rethinking Fairness in LLM-Based Recommender Systems: A Survey
+- SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
+- Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair
+- Fairness Attacks on Recommender Systems
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -6241,6 +6390,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM)
 - DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM)
 - Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost)
+- EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - F-GRPO: Factorized Group-Relative Policy Optimization
 - FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation
@@ -6400,6 +6550,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging Short Videos and Live Streams: Reasoning-Guided Multimodal LLMs for Cross-Domain Representation Learning (RGCD-Rep)
 - Causal Representation Learning for Generalisable Recommendation
+- CMSL: Constructive Multi-Sequence Learning for Recommendation Systems (CMSL)
 - Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS)
 - Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG)
 - Decoupled Residual Quantization for Robust Semantic IDs in Recommendation (DRQ)
@@ -6409,6 +6560,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DOS: Dual-Flow Orthogonal Semantic IDs for Recommendation in Meituan (DOS)
 - DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM)
 - Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP)
+- EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
 - GEMs: Breaking the Long-Sequence Barrier in Generative Recommendation with a Multi-Stream Decoder (GEMs)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
@@ -6569,9 +6721,13 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - PaperFlow: Profiling, Recommending, and Adapting Across Daily Paper Streams (PaperFlow)
 - Query-Conditioned Generative Search with QGS in Quark
 - RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender
+- ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
 - Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale (RaG)
+- ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
+- Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair
 - Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
+- Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 - RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations
 - SAERec: Constructing Fine-grained Interpretable Intents Priors via Sparse Autoencoders for Recommendation (SAERec)
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
@@ -6721,6 +6877,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO)
 - DynamicPO: Dynamic Preference Optimization for Recommendation
 - Factorized Latent Reasoning for LLM-based Recommendation (FLR)
+- Fairness Attacks on Recommender Systems
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
 - Effective Reinforcement Learning for Agentic Search by Recycling Zero-Variance Queries During Training
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization (GRAD)
@@ -6909,6 +7066,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID)
+- CMSL: Constructive Multi-Sequence Learning for Recommendation Systems (CMSL)
 - Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation (MDCNS)
 - FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation
 - FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation
@@ -6935,6 +7093,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
 
 ### Survey
+- Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 - Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges
 
 
@@ -6954,13 +7113,13 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 |---|---|
 | **37 Interactive Entertainment** | Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) |
 | **Aampe** | Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026)
-| **ACL 2026** | ReRec, SAGE ‖ Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
+| **ACL 2026** | ReRec, SAGE ‖ Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE) ‖ ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
 | **Adobe Research** | Multimodal Music Recommendation System using LLMs ‖ Dialogue to Discovery: Attribute-Aware Preference Elicitation for Conversational Product Search Assistants (D2D)
 | **African University of Science and Technology** | Rank-Constrained Deep Matrix Completion for Group Recommendation (Group RC-DMC)
 | **Ahmedabad University** | A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 | **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
 | **Alibaba** | From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs ‖ RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There ‖ DeGRe: Dense-supervised Generative Reranking ‖ QGS: Query-Conditioned Generative Search ‖ GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan) ‖ DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM) ‖ SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive) ‖ Differentiable Geometric Indexing for End-to-End Generative Retrieval (DGI) ‖ Macro Graph of Experts for Billion-Scale Multi-Task Recommendation (MGOE) ‖ LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR)
-| **Alibaba International Digital Commerce Group** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation ‖ SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT) ‖ MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR) ‖ SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA)
+| **Alibaba International Digital Commerce Group** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation ‖ SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT) ‖ MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR) ‖ SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA) ‖ EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
 | **Amazon** | Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 | **Amazon International Machine Learning** | FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation
 | **Anhui University** | ProMax
@@ -6993,6 +7152,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **City University of Macau** | Segmentation-Supervised Complexity-Adaptive Recommendation (S2-CAR) ‖ TRUST: Item-Calibrated Interval Evidence for Temporal Session-Based Recommendation (TRUST)
 | **Columbia University** | TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
 | **Complexity Science Hub Vienna** | Whose Name Comes Up? III: Persona Prompting Effects in LLM-Based Scholar Recommendation
+| **Coolwei AI Lab** | SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
 | **Cornell University** | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) ‖ Mult-DPO: Multinomial Direct Preference Optimization for Recommender Systems (with UVA, Netflix)
 | **Criteo** | RecoAtlas: From Semantic Plausibility to Set-Level Utility in LLM Recommendation Agents
 | **CWI** | Beyond Centralization: User-Controlled Federated Recommendations in Practice
@@ -7055,7 +7215,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR
 | **McGill University** | Uncertainty and Fairness Awareness in LLM-Based Recommendation Systems ‖ Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR) (with CUHK, Tongji)
 | **Meituan · MBGR** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench  · GenLI ‖ Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR) ‖ DOS: Dual-Flow Orthogonal Semantic IDs for Recommendation in Meituan (DOS) ‖ Next-Scale Generative Reranking: A Tree-based Generative Rerank Method at Meituan (NSGR)
-| **Meta** | Generative Reasoning Re-ranker (GR2) · MARS · LLM Retrieval for Stable and Predictable Ad Recommendations ‖ Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) ‖ Memento: Personalized RAG-Style Long-Retention Data Scaling for META Ads Recommendation ‖ LoopFM: Learning frOm HistOrical RePresentations of Foundation Model for Recommendation ‖ Toward User Preference Alignment in LLM Recommendation via Explicit Context Feedback ‖ Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems (SCALR) ‖ ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID) ‖ Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec) ‖ Token Factory: Efficiently Integrating Diverse Signals into Large Recommendation Models (Token Factory) ‖ RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation (RankGraph-2) ‖ A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems (Multimodal LLM Rec) ‖ Intuition-Guided Latent Reasoning for LLM-Based Recommendation (IntuRec)
+| **Michigan State University** | ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
+| **Meta** | Generative Reasoning Re-ranker (GR2) · MARS · LLM Retrieval for Stable and Predictable Ad Recommendations ‖ Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) ‖ Memento: Personalized RAG-Style Long-Retention Data Scaling for META Ads Recommendation ‖ LoopFM: Learning frOm HistOrical RePresentations of Foundation Model for Recommendation ‖ Toward User Preference Alignment in LLM Recommendation via Explicit Context Feedback ‖ Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems (SCALR) ‖ ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID) ‖ Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec) ‖ Token Factory: Efficiently Integrating Diverse Signals into Large Recommendation Models (Token Factory) ‖ RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation (RankGraph-2) ‖ A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems (Multimodal LLM Rec) ‖ Intuition-Guided Latent Reasoning for LLM-Based Recommendation (IntuRec) ‖ CMSL: Constructive Multi-Sequence Learning for Recommendation Systems (CMSL) ‖ ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
 | **Microsoft** | CapsID: Soft-Routed Variable-Length Semantic IDs ‖ TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER)
 | **Microsoft Research** | Dialogue to Discovery: Attribute-Aware Preference Elicitation for Conversational Product Search Assistants (D2D)
 | **Microsoft Research Asia** | From Hidden Profiles to Governable Personalization: Recommender Systems in the Age of LLM Agents
@@ -7066,6 +7227,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Nankai University** | Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 | **Nanyang Technological University** | GCRS: Generative Conversational Recommender System
 | **National Super Computing Center Tianjin** | Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM)
+| **National Taiwan University** | Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 | **Netease Cloud Music** | L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
 | **NetEase Games (Fuxi AI Lab)** | PHKT: Personalized Dynamic Hypergraph-enhanced KAN-Transformer for Multi-behavior Sequential Recommendation (PHKT)
 | **Netflix** | Towards Generalizable and Efficient Large-Scale Generative Recommenders ‖ Rank-GRPO ‖ Mult-DPO: Multinomial Direct Preference Optimization for Recommender Systems (with UVA, Cornell)
@@ -7115,11 +7277,12 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Stony Brook University** | CRAB ‖ TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
 | **Sungkyunkwan University** | ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation ‖ On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG)
 | **Technical University of Munich** | TRACE: A Conversational Framework for Sustainable Tourism Recommendation with Agentic Counterfactual Explanations
-| **Tel Aviv University** | Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
+| **Tel Aviv University** | Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE) ‖ Monosemanticity in Recommender Systems
 | **Temple University** | Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
 | **Tencent** | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) ‖ HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning · Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) ‖ SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling ‖ Skill Is Not Document: A Query-Conditional Benchmark and Two-Stage Retriever for LLM Agent Skill Routing (R3) ‖ NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems (NOVA)
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)
 | **Texas A&M University** | Incumbent Advantage: Brand Bias and Cognitive Manipulation Dynamics in LLM Recommendation Systems
+| **TMLR 2026** | Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair
 | **The University of Queensland** | ProMax ‖ Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM) ‖ FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation ‖ Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd) ‖ When Text-as-Vision Meets Semantic IDs in Generative Recommendation: An Empirical Study ‖ Self-Distilled Reinforcement Learning for Co-Evolving Agentic Recommender Systems (CoARS)
 | **Tianjin University** | GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation
 | **Tongji University** | CFALR: Collaborative Filtering-Augmented Large Language Model for Personalized Fashion Outfit Recommendation (CFALR) ‖ Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR) (with CUHK, McGill) ‖ The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
@@ -7129,14 +7292,15 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Tubi** | TubiFM: Unified Item, Carousel, and Search Ranking for Streaming Discovery ‖ Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
 | **TU Wien** | VCG: A Multimodal Retrieval Framework for E-Commerce Video Feeds under Extreme Cold-Start Conditions (VCG)
 | **UC Davis** | Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
-| **UC San Diego** | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · F-GRPO  · SID-MLP · FusID: Modality-Fused Semantic IDs for Generative Music Recommendation (FusID)
+| **UC San Diego** | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) · F-GRPO  · SID-MLP · FusID: Modality-Fused Semantic IDs for Generative Music Recommendation (FusID) ‖ SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
 | **UCLA** | LLM-Assisted Reranking to Operationalize Nuanced Objectives in Recommender Systems
 | **UIUC Illinois** | Rec-R1 ‖ LRanker: LLM Ranker for Massive Candidates ‖ Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
 | **Unbox AI** | Scaling Laws for Behavioral Foundation Models over User Event Sequences
 | **Universidad Autónoma de Madrid** | Beyond Centralization: User-Controlled Federated Recommendations in Practice
 | **Universidad de Buenos Aires / CONICET** | Do Neural Retrievers Prefer Certain Documents? Evidence of Learned Relevance Priors
 | **University of Bari / University of Glasgow** | URecJPQ: Memory-efficient Multimodal Recommendation Models through RecJPQ in Large-Scale Scenarios (URecJPQ) |
-| **University of Amsterdam** | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO)
+| **University of Amsterdam** | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) ‖ Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair
+| **University of Arizona** | Fairness Attacks on Recommender Systems
 | **University of British Columbia** | CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank) |
 | **University of California, Berkeley** | Trading Engagement for Sustainability: Carbon-Aware Re-ranking for E-commerce Recommendations ‖ Dialogue to Discovery: Attribute-Aware Preference Elicitation for Conversational Product Search Assistants (D2D)
 | **University of Catania / CNR** | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender
@@ -7149,14 +7313,16 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **University of Massachusetts Amherst** | Multimodal Music Recommendation System using LLMs ‖ Adaptive Re-Ranking
 | **University of Massachusetts Lowell** | TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
 | **University of New South Wales** | How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation?
+| **University of North Carolina at Chapel Hill** | ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
 | **University of Otago** | How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation?
 | **University of Pennsylvania** | LLM-Assisted Reranking to Operationalize Nuanced Objectives in Recommender Systems
 | **University of Rochester** | ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID)
 | **University of Science and Technology of China** | QGS: Query-Conditioned Generative Search
 | **University of Stavanger** | A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset
 | **University of Technology Sydney** | When Recommendation Denoising Meets Popularity Bias: Understanding and Mitigating Their Interaction (PAD) ‖ Segmentation-Supervised Complexity-Adaptive Recommendation (S2-CAR) ‖ TRUST: Item-Calibrated Interval Evidence for Temporal Session-Based Recommendation (TRUST)
+| **University of Texas at Arlington** | Fairness Attacks on Recommender Systems
 | **University of Victoria** | Gender and Race Bias in Consumer Product Recommendations by Large Language Models
-| **University of Toronto** | Evaluating Scene-based In-Situ Item Labeling for Immersive Conversational Recommendation (ICRS)
+| **University of Toronto** | Evaluating Scene-based In-Situ Item Labeling for Immersive Conversational Recommendation (ICRS) ‖ SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
 | **University of Toronto / Microsoft Research** | From Noise to Order: Learning to Rank via Denoising Diffusion (DiffusionRank) |
 | **University of Virginia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation ‖ Mult-DPO: Multinomial Direct Preference Optimization for Recommender Systems (with Netflix, Cornell) ‖ Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
 | **University of Waterloo** | CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank) |
@@ -7178,4 +7344,5 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Youtube** | [STATIC] Vectorizing the Trie
 | **Zhejiang University** | The Pitfall of Scaling Up: Uncovering and Mitigating Popularity Bias Amplification in Scaling Transformer-based Recommenders (SPRINT) ‖ Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) ‖ DeGRe: Dense-supervised Generative Reranking for Recommendation ‖ TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER) ‖ OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 | **Zalando** | VCG: A Multimodal Retrieval Framework for E-Commerce Video Feeds under Extreme Cold-Start Conditions (VCG)
+| **ZBot Technology** | SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
 |
