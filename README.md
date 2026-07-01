@@ -95,6 +95,7 @@ mindmap
         RankElastor -- HKUST Guangzhou / Tencent
         GCIB -- Tianjin University
         VirtualMLE -- Tsinghua / BUPT
+        APAO -- Tsinghua
         DS-MLP / CTR Prediction -- Renmin U
         IIRG -- KAIST / Snap Inc.
         URecJPQ -- U Bari / U Glasgow
@@ -250,6 +251,93 @@ mindmap
      - **Fairness: 5/10** — Gender intervention demonstration shows potential for fairness analysis
      - **Robustness: 5/10** — Single dataset evaluation; exploratory study
      - **Impact: 5/10** — Opens interpretability direction for collaborative filtering; Tel Aviv University
+
+### Papers July 1
+
+1. **GenPage: Towards End-to-End Generative Homepage Construction at Netflix**
+   * Affiliation: Netflix, University of Alberta — *(Lequn Wang — Netflix, NYC; Jiangwei Pan, Linas Baltrunas — Netflix, Los Gatos; Fengdi Che — University of Alberta)*
+   * Link: [arxiv.org/abs/2606.31031](https://arxiv.org/abs/2606.31031)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: End-to-end generative approach replacing the traditional multi-stage recommender stack with a single transformer that autoregressively generates the entire structured multi-row Netflix homepage; WBC variant delivers +0.24% core engagement lift (p < 0.001) while reducing serving latency by 20%; RL post-training increases homepage diversity even without diversity objective.
+   * Key techniques:
+     - Single transformer autoregressively generating structured multi-row homepage from user/request context prompt
+     - LLM training recipe adapted: pretraining on production pages + post-training via weighted binary classification (WBC) or RL
+     - Industry-scale techniques: cold start handling, model freshness, business-rule enforcement, serving efficiency
+     - Prompt enrichment yields larger improvement than scaling model capacity; RL increases diversity organically
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Netflix internal production system)
+     - **Novelty: 9/10** — First end-to-end generative approach replacing entire multi-stage homepage recommender
+     - **Fairness: 3/10** — Not addressing fairness; RL increases diversity as side effect
+     - **Robustness: 9/10** — Online A/B at Netflix scale; statistically significant core engagement improvement
+     - **Impact: 9/10** — Netflix; paradigm-shifting approach to homepage construction; 20% latency reduction
+
+2. **ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping**
+   * Affiliation: Alibaba Group (Taobao & Tmall Group) — *(Jiacheng Chen, Tao Zhang, Manxi Lin, Dunxian Huang, Teng Shi, Honghao Fu, Mengyan Li, Xinming Zhang, Chenchi Zhang, Xuan Lu, Xiaoxiong Du, Haibin Chen, Shaolin Ye, Hao Chang, Xiaoqi Li, Shuwen Xiao, Yujin Yuan, Jingxuan Feng, Shaopan Xiong, Huimin Yi, Ju Huang, Qiu Shen, Ying Chen, Junjun Zheng, Xiangheng Kong, Yuning Jiang — Alibaba Group)*
+   * Link: [arxiv.org/abs/2606.31693](https://arxiv.org/abs/2606.31693)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Foundation model unifying intent understanding, execution planning, and flexible SID-native item-space operations (SID beam-search retrieval, listwise ranking, product bundling) for agentic shopping; deploys model-native fulfillment eliminating lossy hand-offs between LLM orchestration and item-space execution; evaluated on Taobao production logs.
+   * Key techniques:
+     - Semantically recoverable, LLM-operable SIDs for flexible multi-turn item-space fulfillment
+     - Model-native item-fulfillment framework with action protocol, context access, catalog grounding, and state management
+     - Composable SID-based operations: beam-search retrieval, listwise ranking, product bundling
+     - Training recipe equipping general LLM for flexible item-space fulfillment while retaining instruction-following
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Alibaba internal)
+     - **Novelty: 8/10** — First foundation model unifying intent understanding + SID-based item-space operations natively
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Evaluated on Taobao production logs across single/multi-turn tasks
+     - **Impact: 8/10** — Alibaba scale; new paradigm for agentic shopping with model-native fulfillment
+
+3. **GR2 Technical Report**
+   * Affiliation: Meta AI — *(Yufei Li, Zaiwei Zhang, Mingfu Liang, Kavosh Asadi, Jay Xu, Jimmy Kim, Chongyang Bai, Jieyi Zhang, Hongye Xie, Prachi Agrawal, Dian Yu, Tianyi Chen, Jean-Pascal Billaud, Garret Buell, YK Zhu, Sachin Patil, Brooke Bian, Zhou Fang, Kevin Huang, Shiva Sudanagunta, Yuzhen Huang, Emma Lu, Chris O'Brien, Yang Song, Lihong Li, Jacob Tao, Zhicheng Zhu, Chao Li, Gaoxiang Liu, Neil Wu, Zhongyin Hu, Li Han, Loki Chen, Ming Lei, Greg Rehm, Siyuan Song, Tianwei Zhang, Li Li, Ketan Singh, Yavuz Yetim, Ilyas Atishev, Satendra Gera, Ashkan Sadeghi, Rachel Yan, Nikko Mizutani, Shuaiwen Wang, Song Yang, Zhijing Li, Jiang Liu, Mengying Sun, Fei Tian, Xiaohan Wei, Chonglin Sun, Parish Aggarwal, Kaushik Rangadurai, Zhi Hua, Frank Shyu, Ruchit Sharma, Liyuan Li, Shike Mei, Wenlin Chen, Santanu Kolay, Ben Schulte, Deepak Chandra, Adam Song, Sandeep Pandey, Xi Liu, Hamed Firooz, Luke Simon — Meta AI; 69 authors total)*
+   * Link: [arxiv.org/abs/2606.31984](https://arxiv.org/abs/2606.31984)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: End-to-end Generative Reasoning Re-Ranker (GR2) for industrial recommendation combining mid-training on SIDs (≥99% uniqueness), reasoning-trace distillation from teacher LLM, and RL with verifiable rewards purpose-built for re-ranking; delivers +18.7% R@1, +9.6% N@3 on industrial-scale traffic; introduces On-Policy Distillation (OPD) as scalable SFT alternative and reasoning distillation for low-latency serving.
+   * Key techniques:
+     - Mid-training on semantic IDs with ≥99% uniqueness tokenizer for industry-scale catalog indexing
+     - Reasoning-trace distillation via targeted prompting and rejection sampling from stronger teacher
+     - RL with conditional verifiable rewards preventing reward hacking (order preservation, position bias exploitation)
+     - Context compressor + On-Policy Distillation (OPD) + reasoning distillation for training/serving efficiency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Meta internal); CC BY-NC-SA 4.0 license
+     - **Novelty: 8/10** — First end-to-end RL-based generative re-ranking with reasoning traces; OPD as scalable SFT alternative
+     - **Fairness: 4/10** — Conditional verifiable rewards address position bias; fairness not primary focus
+     - **Robustness: 9/10** — Industrial-scale traffic validation; +18.7% R@1; comprehensive ablation of each component
+     - **Impact: 9/10** — Meta; comprehensive generative re-ranking framework; 69-author technical report
+
+4. **APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization**
+   * Affiliation: Tsinghua University, Quancheng Laboratory — *(Yuanqing Yu — Tsinghua University / Quancheng Laboratory; Yifan Wang, Weizhi Ma, Zhiqiang Guo — Tsinghua University; Min Zhang — Tsinghua University / Quancheng Laboratory)*
+   * Link: [arxiv.org/abs/2603.02730](https://arxiv.org/abs/2603.02730)
+   * Venue: KDD 2026
+   * TL;DR: Addresses fundamental training-inference inconsistency in generative recommendation where beam search prunes low-probability branches, prematurely discarding correct items; proposes adaptive prefix-aware optimization with worst-prefix strategy dynamically focusing on vulnerable prefixes; consistently improves genrec backbones with theoretical analysis.
+   * Key techniques:
+     - Prefix-level optimization losses aligning training with beam search inference constraints
+     - Adaptive worst-prefix optimization dynamically focusing on most vulnerable prefixes during training
+     - Theoretical analysis proving effectiveness and efficiency of the framework
+     - Evaluated across multiple generative recommendation backbones
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/yuyq18/APAO](https://github.com/yuyq18/APAO) — full implementation available; well-documented KDD 2026 artifact
+     - **Novelty: 7/10** — Novel prefix-aware optimization addressing critical training-inference gap in genrec beam search
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Extensive experiments across genrec backbones with theoretical guarantees
+     - **Impact: 8/10** — KDD 2026; addresses fundamental bottleneck in generative recommendation inference
+
+5. **Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)**
+   * Affiliation: Macquarie University, Ant Group, Singapore University of Technology and Design — *(Jiajie Zhu, Yan Wang, Pengfei Ding, Hongyang Liu — Macquarie University; Feng Zhu — Ant Group; Zhu Sun — Singapore University of Technology and Design)*
+   * Link: [arxiv.org/abs/2505.16532](https://arxiv.org/abs/2505.16532)
+   * Venue: ACM Transactions on Information Systems (TOIS)
+   * TL;DR: Novel causal-invariant framework for cross-domain recommendation under OOD environments addressing both cross-domain and single-domain distribution shifts; learns dual-level causal structures and uses LLM-guided confounder discovery for effective deconfounding; superior accuracy across various OOD scenarios.
+   * Key techniques:
+     - Dual-level causal structure learning: domain-specific and domain-shared causal-invariant user preferences
+     - LLM-guided confounder discovery integrating LLMs with causal discovery for effective deconfounding
+     - Handles co-existing cross-domain distribution shifts (CDDS) and single-domain distribution shifts (SDDS)
+     - Extensive experiments on two real-world datasets across OOD scenarios
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First causal-invariant framework explicitly handling dual distribution shifts in CDR
+     - **Fairness: 5/10** — OOD robustness contributes to fairer cross-domain recommendation
+     - **Robustness: 7/10** — Comprehensive OOD scenario evaluation; LLM-guided confounder discovery
+     - **Impact: 7/10** — ACM TOIS; advances causal OOD recommendation for cross-domain settings
 
 ### Papers June 29
 
@@ -6090,7 +6178,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 74 papers as of June 30.
+**Count:** 75 papers as of July 1.
 
 | Score | Paper |
 | --- | --- |
@@ -6110,6 +6198,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8.5/10 | Factorized Latent Reasoning for LLM-based Recommendation (FLR) |
 | 8/10 | Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec) |
 | 8/10 | ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation |
+| 8/10 | APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO) |
 | 8/10 | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
 | 8/10 | COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs |
 | 8/10 | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) |
@@ -6190,6 +6279,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
 - ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
 - SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
+- ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 
 ### Beam Search Decoding
 - Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO)
@@ -6203,6 +6293,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations
 - [STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators
 - STORM: Stepwise Token Optimization with Reward-Guided Beam Search
+- APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
+- GR2 Technical Report (GR2)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -6256,6 +6348,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Quantizing Intent: Cross-Domain Semantic IDs from Organic Activity for Industrial Ranking
 - One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
 - Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems (SCALR)
+- Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
 
 ### Data Generation / Synthetic Data
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
@@ -6316,6 +6409,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
 - Attention Calibration for Position-Fair Dense Information Retrieval
+- Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
 - Causal Representation Learning for Generalisable Recommendation
 - Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS)
 - COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs
@@ -6364,12 +6458,14 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Foundation Models
 - Scaling Laws for Behavioral Foundation Models over User Event Sequences
 - One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
+- ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 
 
 
 ### Generative Recommendation / VAE
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - A2Gen (Action-Aware Generative Sequence Modeling)
+- APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
 - Adaptive Loss Balancing for Noise-Robust GRPO in Generative Recommendation (AdaGRPO)
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
 - AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems (AgentX)
@@ -6404,8 +6500,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - GEMs: Breaking the Long-Sequence Barrier in Generative Recommendation with a Multi-Stream Decoder (GEMs)
 - Generative Recommendation for Large-Scale Advertising (GR4AD)
 - Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
+- GenPage: Towards End-to-End Generative Homepage Construction at Netflix (GenPage)
 - GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
+- GR2 Technical Report (GR2)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
@@ -6447,6 +6545,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation
 - Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP)
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
+- ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale (QuaSID)
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
 - SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation
@@ -6491,8 +6590,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Next-Scale Generative Reranking: A Tree-based Generative Rerank Method at Meituan (NSGR)
 - From Noise to Order: Learning to Rank via Denoising Diffusion (DiffusionRank)
 - Gated Bidirectional Linear Attention for Generative Retrieval (GBLA)
+- Generative Reasoning Re-Ranker (GR2)
 - Generative Retrieval via Diffusion Transformer with Metric-Ordered Sequence Training and Hybrid-Policy Preference Optimization (MO-DiT+HPPO)
 - Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
+- GenPage: Towards End-to-End Generative Homepage Construction at Netflix (GenPage)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
@@ -6562,10 +6663,12 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP)
 - EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
 - GEMs: Breaking the Long-Sequence Barrier in Generative Recommendation with a Multi-Stream Decoder (GEMs)
+- GenPage: Towards End-to-End Generative Homepage Construction at Netflix (GenPage)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
+- GR2 Technical Report (GR2)
 - LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)
 - LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR)
 - Next-Scale Generative Reranking: A Tree-based Generative Rerank Method at Meituan (NSGR)
@@ -6600,6 +6703,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
 - Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
 - SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA)
+- ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
@@ -6655,12 +6759,14 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 ### LLM-based Recommendation
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
+- APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
 - APG4RecSim: Task-Aware Automated User Profile Generation
 - Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations (AIR)
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
 - BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation
 - Bridging Short Videos and Live Streams: Reasoning-Guided Multimodal LLMs for Cross-Domain Representation Learning (RGCD-Rep)
 - Can LLM Rerankers Predict Their Own Ranking Performance?
+- Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
 - Causal Representation Learning for Generalisable Recommendation
 - CFALR: Collaborative Filtering-Augmented Large Language Model for Personalized Fashion Outfit Recommendation (CFALR)
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -6683,6 +6789,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - GEMs: Breaking the Long-Sequence Barrier in Generative Recommendation with a Multi-Stream Decoder (GEMs)
 - Gender and Race Bias in Consumer Product Recommendations by Large Language Models
 - Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR)
+- Generative Reasoning Re-Ranker (GR2)
+- GenPage: Towards End-to-End Generative Homepage Construction at Netflix (GenPage)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
@@ -6733,6 +6841,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
 - SAILRec: Steering LLM Attention to Dual-Side Semantically Aligned Collaborative Embeddings for Recommendation (SAILRec)
 - SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA)
+- ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation (Taiji)
 - TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER)
 - TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation
@@ -7046,6 +7155,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - SAILRec: Steering LLM Attention to Dual-Side Semantically Aligned Collaborative Embeddings for Recommendation (SAILRec)
 - SIDInspector: A Mapping-First Diagnostic Resource for Semantic-ID Tokenizers
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
+- ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive)
 - Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale (QuaSID)
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
@@ -7063,6 +7173,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Sequential Modeling / RoPE
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
+- APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID)
@@ -7118,12 +7229,12 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **African University of Science and Technology** | Rank-Constrained Deep Matrix Completion for Group Recommendation (Group RC-DMC)
 | **Ahmedabad University** | A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 | **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
-| **Alibaba** | From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs ‖ RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There ‖ DeGRe: Dense-supervised Generative Reranking ‖ QGS: Query-Conditioned Generative Search ‖ GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan) ‖ DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM) ‖ SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive) ‖ Differentiable Geometric Indexing for End-to-End Generative Retrieval (DGI) ‖ Macro Graph of Experts for Billion-Scale Multi-Task Recommendation (MGOE) ‖ LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR)
+| **Alibaba** | From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs ‖ RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There ‖ DeGRe: Dense-supervised Generative Reranking ‖ QGS: Query-Conditioned Generative Search ‖ GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan) ‖ DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM) ‖ SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive) ‖ Differentiable Geometric Indexing for End-to-End Generative Retrieval (DGI) ‖ Macro Graph of Experts for Billion-Scale Multi-Task Recommendation (MGOE) ‖ LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR) ‖ ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 | **Alibaba International Digital Commerce Group** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation ‖ SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT) ‖ MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR) ‖ SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA) ‖ EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
 | **Amazon** | Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 | **Amazon International Machine Learning** | FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation
 | **Anhui University** | ProMax
-| **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions)
+| **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions) ‖ Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
 | **Apple Inc.** | Fortress
 | **Arizona State University** | MetaPlate: Counterfactual-Guided RAG-LLM Tool for Personalized Food Recommendation and Hyperglycemia Prevention
 | **Avito** | Fast and Feasible: Permutation-based Constrained Reranking for Revenue Maximization (PermR)
@@ -7212,7 +7323,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **LinkedIn** | SIREN-RoPE (Learning to Rotate) ‖ Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 | **LUCID Inc.** | Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
 | **MBZUAI** | ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID)
-| **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR
+| **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR ‖ Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
 | **McGill University** | Uncertainty and Fairness Awareness in LLM-Based Recommendation Systems ‖ Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR) (with CUHK, Tongji)
 | **Meituan · MBGR** | Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench  · GenLI ‖ Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR) ‖ DOS: Dual-Flow Orthogonal Semantic IDs for Recommendation in Meituan (DOS) ‖ Next-Scale Generative Reranking: A Tree-based Generative Rerank Method at Meituan (NSGR)
 | **Michigan State University** | ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
@@ -7230,7 +7341,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **National Taiwan University** | Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 | **Netease Cloud Music** | L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
 | **NetEase Games (Fuxi AI Lab)** | PHKT: Personalized Dynamic Hypergraph-enhanced KAN-Transformer for Multi-behavior Sequential Recommendation (PHKT)
-| **Netflix** | Towards Generalizable and Efficient Large-Scale Generative Recommenders ‖ Rank-GRPO ‖ Mult-DPO: Multinomial Direct Preference Optimization for Recommender Systems (with UVA, Cornell)
+| **Netflix** | Towards Generalizable and Efficient Large-Scale Generative Recommenders ‖ Rank-GRPO ‖ Mult-DPO: Multinomial Direct Preference Optimization for Recommender Systems (with UVA, Cornell) ‖ GenPage: Towards End-to-End Generative Homepage Construction at Netflix (GenPage)
 | **NJUST / Nanjing** | Harmonizing Generative Retrieval (RecoChain)
 | **Nokia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation
 | **Northeastern University** | Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI) ‖ SAILRec: Steering LLM Attention to Dual-Side Semantically Aligned Collaborative Embeddings for Recommendation (SAILRec)
@@ -7269,6 +7380,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Simulacra Research** | Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026)
 | **Snap Inc.** | Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec) ‖ On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG)
 | **Singapore Management University** | CFALR: Collaborative Filtering-Augmented Large Language Model for Personalized Fashion Outfit Recommendation (CFALR) ‖ Dual-Diffusional Generative Fashion Recommendation (DualFashion) ‖ Dynamic Spectral Denoising with Global-Context Attention for Multi-Behavior Recommendation (SpectraMB)
+| **Singapore University of Technology and Design** | Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
 | **SK Telecom** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO)
 | **Sorbonne** | STORM: Stepwise Token Optimization with Reward-Guided Beam Search (with MILA, Paris-Saclay, Air Liquide, Sapienza)
 | **Southeast University** | DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · Deep Interest Mining
@@ -7287,7 +7399,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Tianjin University** | GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation
 | **Tongji University** | CFALR: Collaborative Filtering-Augmented Large Language Model for Personalized Fashion Outfit Recommendation (CFALR) ‖ Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR) (with CUHK, McGill) ‖ The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
 | **Trine University** | Incumbent Advantage: Brand Bias and Cognitive Manipulation Dynamics in LLM Recommendation Systems
-| **Tsinghua University** | Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · TwiSTAR · AsymRec ‖ VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) ‖ Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation (HyRAG) ‖ The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
+| **Tsinghua University** | Enhancing Local Life Service Recommendation with Agentic Reasoning in Large Language Model · TwiSTAR · AsymRec ‖ VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) ‖ Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation (HyRAG) ‖ The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec) ‖ APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
 | **TU Delft** | Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard) |
 | **Tubi** | TubiFM: Unified Item, Carousel, and Search Ranking for Streaming Discovery ‖ Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
 | **TU Wien** | VCG: A Multimodal Retrieval Framework for E-Commerce Video Feeds under Extreme Cold-Start Conditions (VCG)
