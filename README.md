@@ -56,6 +56,7 @@ mindmap
         SafeGEO / GEO Risks Benchmark -- U Toronto / UCSD
         FACTER / Fairness Reproducibility -- U Amsterdam
         UserSimulator -- Monash
+        ExPerT / Expertise Personalization -- UNIST
       Efficient Decoding
         Vectorizing the Trie -- Google
     Representation Layer: Generative Pre-training
@@ -202,6 +203,93 @@ mindmap
      - **Fairness: 5/10** — User-aware personalization promotes individual-fair retrieval
      - **Robustness: 7/10** — Consistent gains over baselines on LoCoMo and LongMemEval-S
      - **Impact: 6/10** — Baidu; practical memory optimization for long-term conversational agents
+
+### Papers July 3
+
+1. **CoPersona: Collaborative Persona Graphs for Robust LLM Personalization**
+   * Affiliation: Yale University, Samsung — *(Yangtian Zhang, Leyao Wang, Hiren Madhu, Ngoc Bui, Rex Ying — Yale University; Walter Roznyatovskiy — Samsung)*
+   * Link: [arxiv.org/abs/2607.01485](https://arxiv.org/abs/2607.01485)
+   * Venue: KDD 2026
+   * TL;DR: Graph-based collaborative personalization framework that completes sparse user profiles via behaviorally similar peers, decomposing interaction histories into facet-level representations with a multiplex persona graph and dual-branch inference architecture.
+   * Key techniques:
+     - Multiplex persona graph decomposing interaction histories into multiple facet-level representations
+     - Dual-branch architecture combining non-parametric peer retrieval with parametric graph reasoning
+     - Peer-to-peer facet-level alignment for robust personalization under sparse user histories
+     - Facet decomposition addresses uneven coverage bias in unstructured global space
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First collaborative persona graph approach combining non-parametric and parametric personalization
+     - **Fairness: 6/10** — Explicitly addresses sparse/skewed user profiles causing brittle personalization for under-supported facets
+     - **Robustness: 8/10** — Consistent improvements across multiple domains and model scales; KDD 2026 peer-reviewed
+     - **Impact: 8/10** — KDD 2026; Yale/Samsung; strong results for robust LLM personalization with sparse data
+
+2. **Bi-NAS: Towards Effective and Personalized Explanation for Recommender Systems via Bi-Level Neural Architecture Search**
+   * Affiliation: Virginia Tech, Google, Amazon — *(Longfeng Wu, Tong Zeng, Lecheng Zheng, Dawei Zhou — Virginia Tech; Yao Zhou — Google; Zhimin Peng, Bhanu Pratap Singh Rawat, Giovanni Seni — Amazon)*
+   * Link: [arxiv.org/abs/2607.01387](https://arxiv.org/abs/2607.01387)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Bi-level NAS framework optimizing both intra-layer and inter-layer design spaces for personalized RecSys explanations, integrating LLM zero-shot prompting to produce justifications aligned with user preferences and item attributes.
+   * Key techniques:
+     - Bi-level NAS simultaneously refining cross-attention mechanisms and feature interaction functions
+     - LLM integration via zero-shot prompting for enhanced explanation generation
+     - Alignment of user feature preferences with item quality scores for transparency
+     - Evaluated on 4 real-world datasets for both accuracy and explanation quality
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First NAS-based approach for optimizing RecSys explanations with LLM integration
+     - **Fairness: 4/10** — Personalized explanations promote individual-fair transparency
+     - **Robustness: 6/10** — Evaluated on 4 datasets with ablation studies
+     - **Impact: 5/10** — Preprint only; practical framework for explainable RecSys
+
+3. **Planning over Matrix-Factorization MDPs for Candidate Generation**
+   * Affiliation: AI VK, Lomonosov Moscow State University — *(Mikhail Trapeznikov — AI VK / Lomonosov Moscow State University; Maksim Utushkin — AI VK)*
+   * Link: [arxiv.org/abs/2607.02115](https://arxiv.org/abs/2607.02115)
+   * Venue: 5th Workshop on End-to-End Customer Journey Optimization at KDD 2026
+   * TL;DR: Casts top-K retrieval as an MDP over implicit-ALS posteriors where items are actions and fold-in provides closed-form transitions; a single step of lookahead already captures most gains over static retrieval.
+   * Key techniques:
+     - MDP formulation over matrix-factorization posteriors with rank-one fold-in transitions
+     - Comparison of static retrieval, one-step planning, and horizon-K MCTS
+     - Cosine similarity (rather than inner product) prevents popularity entanglement
+     - Lightweight planning layer requiring no retraining or representation change
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Novel MDP formulation for MF-based candidate generation, though gains are mostly captured by one-step lookahead
+     - **Fairness: 3/10** — Cosine similarity reduces popularity entanglement but not a fairness focus
+     - **Robustness: 6/10** — Gains hold on ML-1M and VK-LSVD under global time split; consistent across 5 datasets
+     - **Impact: 5/10** — KDD 2026 Workshop; practical technique for improving retrieval without retraining
+
+4. **ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues**
+   * Affiliation: UNIST (Ulsan National Institute of Science and Technology) — *(Yeji Park, Jiwon Tark, Taesik Gong — UNIST)*
+   * Link: [arxiv.org/abs/2607.01242](https://arxiv.org/abs/2607.01242)
+   * Venue: ACL 2026 (Main, Long)
+   * TL;DR: Query-wise personalization framework adapting LLM responses to user expertise by combining semantic and keystroke behavioral cues via in-context prompting, achieving 65.7% reduction in expertise inference error and 17.5% improvement in response satisfaction.
+   * Key techniques:
+     - Semantic-behavioral expertise inference module combining query text and keystroke dynamics
+     - Expertise-conditioned response generation adapting detail, terminology, and complexity
+     - In-context LLM prompting for expertise inference without model fine-tuning
+     - User study with 40 participants and 1,270 queries
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5/10** — [github.com/unist-uai/ExPerT](https://github.com/unist-uai/ExPerT) — Preprocessing code with sample data and documentation; no license file; limited to preprocessing pipeline
+     - **Novelty: 7/10** — First framework combining keystroke behavioral cues with semantic signals for query-wise LLM personalization
+     - **Fairness: 5/10** — Expertise-adaptive personalization can mitigate one-size-fits-all bias
+     - **Robustness: 7/10** — 65.7% error reduction validated via user study; ACL 2026 peer-reviewed
+     - **Impact: 7/10** — ACL 2026 (Main); practical framework for expertise-aware LLM deployment
+
+5. **IntentTune: Using User Demand and Personalization to Resolve "Unknown" Query Intents for E-commerce Search**
+   * Affiliation: eBay Inc. — *(Rachith Aiyappa, Ishita Khan, Chester Palen-Michel, Jayanth Yetukuri, Samarth Agrawal, Mehran Elyasi, Shuang Zhou — eBay Inc.)*
+   * Link: [arxiv.org/abs/2607.01530](https://arxiv.org/abs/2607.01530)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Framework resolving ambiguous e-commerce query intents by leveraging user-specific behavioral signals (search history, browsing, profile) or population-level demand patterns; demonstrates user-specific signals significantly outperform population-level statistics.
+   * Key techniques:
+     - Dual-source intent inference: user-specific behavioral signals vs. population-level demand patterns
+     - Real-world e-commerce query intent classification for gender, age group, product category, size
+     - Prior search queries outperform both population statistics and static profiles for intent inference
+     - Empirical comparison of behavioral signal types for underspecified query resolution
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (eBay internal)
+     - **Novelty: 5/10** — Systematic comparison of behavioral signal types for query intent, but largely empirical
+     - **Fairness: 5/10** — Personalized intent inference can improve relevance equity across user groups
+     - **Robustness: 6/10** — Real-world e-commerce data evaluation with controlled experiments
+     - **Impact: 6/10** — eBay; practical framework for e-commerce search personalization
 
 ### Papers July 1
 
@@ -6266,7 +6354,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 76 papers as of July 2.
+**Count:** 77 papers as of July 3.
 
 | Score | Paper |
 | --- | --- |
@@ -6347,6 +6435,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | Understanding and Debugging Failures in N-Gram-Based Generative Retrieval |
 | 6/10 | VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
+| 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
 | 3/10 | STORM: Stepwise Token Optimization with Reward-Guided Beam Search |
 | 3/10 | Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
@@ -6370,6 +6459,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
 - SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
+- CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
+- ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT)
 
 ### Beam Search Decoding
 - Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO)
@@ -6719,6 +6810,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Understanding and Debugging Failures in N-Gram-Based Generative Retrieval
 - UniNote: A Unified Embedding Model for Multimodal Representation and Ranking
 - UniPinRec: Unifying Generative Retrieval and Ranking at Pinterest Scale
+- Planning over Matrix-Factorization MDPs for Candidate Generation (MF-MDP Planning)
 
 ### Graph-based Recommendation
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -6731,6 +6823,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Guiding Federated Graph Recommendation with LLM-encoded knowledge
 - RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation (RankGraph-2)
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
+- CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
 
 
 ### Group Recommendation
@@ -6822,6 +6915,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - From Bootstrapping to Sequence Modeling: A Unified Generative Framework for Personalized Landing-Page Modeling (GLAN)
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
 - NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems (NOVA)
+- IntentTune: Using User Demand and Personalization to Resolve "Unknown" Query Intents for E-commerce Search (IntentTune)
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec) 
@@ -6969,6 +7063,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
 - NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems (NOVA)
 - SocialPersona: Benchmarking Personalized Profiling and Response with Multimodal Social-Media Context (SocialPersona)
+- Bi-NAS: Towards Effective and Personalized Explanation for Recommender Systems via Bi-Level Neural Architecture Search (Bi-NAS)
+- CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
+- ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT)
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -7119,6 +7216,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - SAGER: Self-Evolving User Policy Skills for Recommendation Agent
 - SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
+- Planning over Matrix-Factorization MDPs for Candidate Generation (MF-MDP Planning)
 
 ### Re-ranking
 - Bradley-Terry Rankings for Recommender Systems Across Dataset Taxonomies
@@ -7333,10 +7431,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Adobe Research** | Multimodal Music Recommendation System using LLMs ‖ Dialogue to Discovery: Attribute-Aware Preference Elicitation for Conversational Product Search Assistants (D2D)
 | **African University of Science and Technology** | Rank-Constrained Deep Matrix Completion for Group Recommendation (Group RC-DMC)
 | **Ahmedabad University** | A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
-| **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
+| **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval ‖ Planning over Matrix-Factorization MDPs for Candidate Generation (MF-MDP Planning)
 | **Alibaba** | From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs ‖ RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There ‖ DeGRe: Dense-supervised Generative Reranking ‖ QGS: Query-Conditioned Generative Search ‖ GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan) ‖ DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM) ‖ SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive) ‖ Differentiable Geometric Indexing for End-to-End Generative Retrieval (DGI) ‖ Macro Graph of Experts for Billion-Scale Multi-Task Recommendation (MGOE) ‖ LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR) ‖ ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 | **Alibaba International Digital Commerce Group** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation ‖ SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT) ‖ MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR) ‖ SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA) ‖ EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
-| **Amazon** | Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
+| **Amazon** | Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE) ‖ Bi-NAS: Towards Effective and Personalized Explanation for Recommender Systems via Bi-Level Neural Architecture Search (Bi-NAS)
 | **Amazon International Machine Learning** | FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation
 | **Anhui University** | ProMax
 | **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions) ‖ Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
@@ -7381,13 +7479,13 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **East China Normal University** | Learning Variable-Length Tokenization for Generative Recommendation (VarLenRec)
 | **Eastern Institute of Technology Ningbo** | miniReranker: Efficient Multimodal Reranking through Visual Cache Reuse and Interaction Sparsity (with Netmind.ai, LMU Munich) ‖ CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 | **Education University of Hong Kong** | SAERec: Constructing Fine-grained Interpretable Intents Priors via Sparse Autoencoders for Recommendation (SAERec) ‖ Segmentation-Supervised Complexity-Adaptive Recommendation (S2-CAR) ‖ TRUST: Item-Calibrated Interval Evidence for Temporal Session-Based Recommendation (TRUST)
-| **eBay** | Representation Curriculum: Stagewise Training for Robust Ranking and Allocation
+| **eBay** | Representation Curriculum: Stagewise Training for Robust Ranking and Allocation ‖ IntentTune: Using User Demand and Personalization to Resolve "Unknown" Query Intents for E-commerce Search (IntentTune)
 | **Estonian Entrepreneurship University of Applied Sciences** | Who Owns the AI Recommendation? A Multi-Industry Empirical Map of Brand Category Ownership Across Large Language Models (LLM Brand) |
 | **EPFL** | Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS) ‖ Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
 | **Fudan University** | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) ‖ Teach Multimodal Recommendation Model to See via Personalized Visual Extraction and Adaptive Learning (REVEAL) ‖ From Hidden Profiles to Governable Personalization: Recommender Systems in the Age of LLM Agents
 | **Glasp Inc.** | Selection, Not Salience: The Shape and Limits of Personalization in Social Highlighting
 | **GNucleus AI** | LLM-Based User Personas for Recommendations at Scale |
-| **Google** | Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling ‖ LLM-Based User Personas for Recommendations at Scale ‖ TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems (TokenMinds)
+| **Google** | Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling ‖ LLM-Based User Personas for Recommendations at Scale ‖ TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems (TokenMinds) ‖ Bi-NAS: Towards Effective and Personalized Explanation for Recommender Systems via Bi-Level Neural Architecture Search (Bi-NAS)
 | **Google Cloud AI Research** | CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank) |
 | **Graz University of Technology** | Whose Name Comes Up? III: Persona Prompting Effects in LLM-Based Scholar Recommendation
 | **Griffith University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) ‖ FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation ‖ When Text-as-Vision Meets Semantic IDs in Generative Recommendation: An Empirical Study ‖ Guiding Federated Graph Recommendation with LLM-encoded knowledge ‖ Self-Distilled Reinforcement Learning for Co-Evolving Agentic Recommender Systems (CoARS)
@@ -7427,6 +7525,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Leiden University / University of Glasgow** | Differentiable Semantic ID for Generative Recommendation (DIGER)
 | **Li Auto Inc.** | Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
 | **LinkedIn** | SIREN-RoPE (Learning to Rotate) ‖ Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
+| **Lomonosov Moscow State University** | Planning over Matrix-Factorization MDPs for Candidate Generation (MF-MDP Planning)
 | **LUCID Inc.** | Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
 | **MBZUAI** | ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID)
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR ‖ Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
@@ -7471,7 +7570,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Rensselaer Polytechnic Institute** | From "Strings" to "Things" for Personal Knowledge Graphs (PKG-Rec)
 | **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank)
 | **Rutgers University** | TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation
-| **Samsung** | Ocean4Rec: Offline LLM-Derived OCEAN Profiles for Request-Time VOD Reranking
+| **Samsung** | Ocean4Rec: Offline LLM-Derived OCEAN Profiles for Request-Time VOD Reranking ‖ CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
 | **Scrunch AI** | From Prompt to Purchase: How AI Brand Recommendations Move Consumers on the Open Web |
 | **Sapienza University of Rome** | TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER) ‖ STORM: Stepwise Token Optimization with Reward-Guided Beam Search (with MILA, Paris-Saclay, CNRS, Sorbonne, Air Liquide)
 | **Shandong Normal University** | Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM)
@@ -7516,6 +7615,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **UCLA** | LLM-Assisted Reranking to Operationalize Nuanced Objectives in Recommender Systems
 | **UIUC Illinois** | Rec-R1 ‖ LRanker: LLM Ranker for Massive Candidates ‖ Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
 | **Unbox AI** | Scaling Laws for Behavioral Foundation Models over User Event Sequences
+| **UNIST (Ulsan National Institute of Science and Technology)** | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT)
 | **Universidad Autónoma de Madrid** | Beyond Centralization: User-Controlled Federated Recommendations in Practice
 | **Universidad de Buenos Aires / CONICET** | Do Neural Retrievers Prefer Certain Documents? Evidence of Learned Relevance Priors
 | **University of Bari / University of Glasgow** | URecJPQ: Memory-efficient Multimodal Recommendation Models through RecJPQ in Large-Scale Scenarios (URecJPQ) |
@@ -7554,12 +7654,14 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **UT Austin** | RRCM
 | **Vienna University of Economics and Business** | Understanding and Debugging Failures in N-Gram-Based Generative Retrieval
 | **VWFS** | VRec · Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)
+| **Virginia Tech** | Bi-NAS: Towards Effective and Personalized Explanation for Recommender Systems via Bi-Level Neural Architecture Search (Bi-NAS)
 | **Walmart Global Tech** | CRAB ‖ INSPIRE: Intent-aware Neural Sponsored Product Retrieval for E-commerce ‖ Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search ‖ Unified Multi-Task Relevance Modeling for E-Commerce: Comparing Task Routing Architectures Across LLMs and Cross-Encoders ‖ LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)
 | **Waseda University** | Adaptive Loss Balancing for Noise-Robust GRPO in Generative Recommendation (AdaGRPO)
 | **Wuhan University** | MTServe ‖ Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) ‖ MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR) |
 | **Xiaohongshu** | UniNote: A Unified Embedding Model for Multimodal Representation and Ranking ‖ DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation (DiffCold)
 | **Xi'an Jiaotong University** | Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb) ‖ The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
 | **Xidian University** | AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation ‖ EviRank: Evidence-Based Confidence Estimation for LLM-Based Ranking (EviRank) ‖ ANCHOR: Agentic Noise Creation Framework for Human Simulation and Denoising Recommendation (ANCHOR) ‖ Differentiable Geometric Indexing for End-to-End Generative Retrieval (DGI)
+| **Yale University** | CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
 | **Yandex** | Gated Bidirectional Linear Attention for Generative Retrieval (GBLA) ‖ Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
 | **Youtube** | [STATIC] Vectorizing the Trie
 | **Zhejiang University** | The Pitfall of Scaling Up: Uncovering and Mitigating Popularity Bias Amplification in Scaling Transformer-based Recommenders (SPRINT) ‖ Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP) ‖ DeGRe: Dense-supervised Generative Reranking for Recommendation ‖ TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER) ‖ OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
