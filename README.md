@@ -98,6 +98,8 @@ mindmap
         GCIB -- Tianjin University
         VirtualMLE -- Tsinghua / BUPT
         APAO -- Tsinghua
+        UniMixer -- Kuaishou
+        SSR -- Alibaba
         DS-MLP / CTR Prediction -- Renmin U
         IIRG -- KAIST / Snap Inc.
         URecJPQ -- U Bari / U Glasgow
@@ -116,6 +118,93 @@ mindmap
 
 ---
 ## By Date
+
+### Papers July 4 (Weekend Catch-up)
+
+1. **UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems**
+   * Affiliation: Kuaishou Technology — *(Mingming Ha, Guanchen Wang, Linxun Chen, Xuan Rao, Yuexin Shi, Tianbao Ma, Zhaojie Liu, Yunqian Fan, Zilong Lu, Yanan Niu, Han Li, Kun Gai — Kuaishou Technology, Beijing)*
+   * Link: [arxiv.org/abs/2604.00590](https://arxiv.org/abs/2604.00590)
+   * Venue: arXiv preprint, April 2026
+   * TL;DR: Unifies attention-based, TokenMixer-based, and FM-based scaling architectures under a generalized parameterized token mixing framework; proposes UniMixing-Lite for lightweight scaling with superior ROI.
+   * Key techniques:
+     - Generalized parameterized feature mixing module removing the head-count = token-count constraint in TokenMixer
+     - Unified theoretical framework bridging connections among three mainstream scaling architectures
+     - UniMixing-Lite compressing parameters and compute while improving performance
+     - Extensive offline and online experiments validating superior scaling abilities
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First unified theoretical framework connecting three distinct scaling architecture paradigms
+     - **Fairness: 2/10** — Not addressing fairness
+     - **Robustness: 8/10** — Extensive offline + online experiments at Kuaishou scale
+     - **Impact: 7/10** — Kuaishou; foundational theoretical contribution to recommendation scaling laws
+
+2. **RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems**
+   * Affiliation: Tencent Inc. — *(Jin Chen, Shangyu Zhang, Bin Hu, Chao Zhou, Junwei Pan, Gengsheng Xue, Wentao Ning, Gengyu Weng, Wang Zheng, Shaohua Liu, Zeen Xu, Chengyuan Mai, Shijie Quan, Tingyu Jiang, Lifeng Wang, Shudong Huang, Chengguo Yin, Haijie Gu, Jie Jiang — Tencent Inc.)*
+   * Link: [arxiv.org/abs/2604.17878](https://arxiv.org/abs/2604.17878)
+   * Venue: arXiv preprint, April 2026
+   * TL;DR: Addresses representation rank collapse in deep ranking models; proposes randomized permutation splitting, multi-embedding paradigm, and global token integration; deployed on WeChat Video Accounts (+3.41% GMV), Official Accounts (+4.81%), and Moments (+2.12%).
+   * Key techniques:
+     - Randomized permutation splitting over sparse features for diversity injection
+     - Multi-embedding paradigm with global token integration for representation expressiveness
+     - Crossed pretrained embedding tokens for enhanced feature interaction
+     - Full deployment across three WeChat platforms with verified GMV lifts
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Tencent proprietary)
+     - **Novelty: 7/10** — First systematic study of representation rank collapse in deep ranking models with practical remedies
+     - **Fairness: 2/10** — Not addressing fairness
+     - **Robustness: 9/10** — Deployed across three WeChat platforms; 2-5% GMV improvements
+     - **Impact: 9/10** — Tencent WeChat; massive industrial deployment across multiple platforms
+
+3. **SSR: Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation**
+   * Affiliation: Alibaba International Digital Commercial Group — *(Yantao Yu, Sen Qiao, Lei Shen, Bing Wang, Xiaoyi Zeng — Alibaba International Digital Commercial Group, Hangzhou)*
+   * Link: [arxiv.org/abs/2604.08011](https://arxiv.org/abs/2604.08011)
+   * Venue: SIGIR 2026
+   * TL;DR: Identifies implicit connection sparsity in dense recommendation models where most weights tend toward zero; proposes explicit sparsity via multi-view filter-then-fuse with bio-inspired iterative competitive sparse mechanism; accepted at SIGIR 2026.
+   * Key techniques:
+     - Multi-view filter-then-fuse mechanism decomposing inputs into parallel sparse-filtered views
+     - Static Random Filter achieving structural sparsity via fixed dimension subsets
+     - Iterative Competitive Sparse (ICS) using bio-inspired competition for adaptive dimension retention
+     - Billion-scale AliExpress evaluation with superior scalability over dense models
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/Atticus666/SSRNet](https://github.com/Atticus666/SSRNet) — Code available; modest documentation
+     - **Novelty: 7/10** — Novel explicit sparsity paradigm with bio-inspired competitive mechanism for scalable recommendation
+     - **Fairness: 2/10** — Not addressing fairness
+     - **Robustness: 7/10** — 3 public datasets + billion-scale industrial dataset; SIGIR 2026 peer-reviewed
+     - **Impact: 7/10** — SIGIR 2026; Alibaba AliExpress deployment; practical framework for scaling recommendation
+
+4. **IAT: Instance-As-Token Compression for Historical User Sequence Modeling**
+   * Affiliation: ByteDance — *(Xinchun Li, Ning Zhang, Qianqian Yang, Fei Teng, Wenlin Zhao, Huizhi Yang (co-first); Heng Shi, Linlan Chen, Yixin Wu, Zhen Wang, Daiye Hou, Fei Qin, Lele Yu, Yaocheng Tan — ByteDance)*
+   * Link: [arxiv.org/abs/2604.08933](https://arxiv.org/abs/2604.08933)
+   * Venue: arXiv preprint, April 2026
+   * TL;DR: Two-stage sequence modeling compressing each historical interaction instance into a unified token embedding, enabling standard sequence models to capture long-range patterns across e-commerce advertising, shopping mall marketing, and live-streaming e-commerce.
+   * Key techniques:
+     - Instance compression encoding all features per interaction into compact informative tokens
+     - Dual compression schemes: temporal-order and user-order, with user-order better aligning with downstream tasks
+     - Standard sequence modeling on compressed fixed-length instance tokens for long-range preferences
+     - Cross-domain transferability demonstrated across three industrial recommendation scenarios
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (ByteDance proprietary)
+     - **Novelty: 6/10** — Novel two-stage instance-as-token compression for scalable sequence modeling
+     - **Fairness: 2/10** — Not addressing fairness
+     - **Robustness: 8/10** — Deployed across three ByteDance business domains with significant metric improvements
+     - **Impact: 8/10** — ByteDance; multi-domain industrial deployment
+
+5. **IID-Nav: From Extraction to Navigation: Progressive Retrieval with Indirectly Infinite Depth**
+   * Affiliation: Kuaishou Technology — *(Linxiao Che, Shanshan Huang, Haitao Lu, Yijia Sun, Qiang Luo, Ruiming Tang, Han Li, Kun Gai, Guorui Zhou — Kuaishou Technology, Beijing)*
+   * Link: [arxiv.org/abs/2606.29970](https://arxiv.org/abs/2606.29970)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Reframes retrieval as stateful autonomous graph exploration with goal-aware navigation, recursive state evolution enabling unlimited-depth traversal without latency increase, and trajectory-aligned training on billion-level industrial datasets.
+   * Key techniques:
+     - Goal-aware navigation policy with target discriminator supervision replacing passive neighborhood expansion
+     - Recursive state evolution enabling indirectly infinite depth via cross-request state reuse
+     - Trajectory-aligned training with graph hard negative sampling for full-path optimization
+     - Billion-level industrial evaluation surpassing mainstream baselines under strict latency budgets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Novel retrieval-as-navigation paradigm with recursive unlimited-depth state evolution
+     - **Fairness: 2/10** — Not addressing fairness
+     - **Robustness: 7/10** — Billion-level industrial datasets; strict latency budget compliance
+     - **Impact: 7/10** — Kuaishou; new retrieval paradigm for industrial recommendation systems
 
 ### Papers July 2
 
@@ -6354,7 +6443,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 77 papers as of July 3.
+**Count:** 78 papers as of July 4.
 
 | Score | Paper |
 | --- | --- |
@@ -6428,6 +6517,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Teach Multimodal Recommendation Model to See via Personalized Visual Extraction and Adaptive Learning (REVEAL) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
+| 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
 | 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |
 | 6/10 | Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd) |
 | 6/10 | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) |
@@ -6642,6 +6732,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Scaling Laws for Behavioral Foundation Models over User Event Sequences
 - One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
+- UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 
 
 
@@ -6655,6 +6746,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Asymmetric Generative Recommendation via Multi-Expert Projection (AsymRec)
 - Beyond Instance-Level Alignment and Uniformity: Semantic Factor Learning for Collaborative Filtering (SaFeAU)
 - Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
+- Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR)
 - BITRec (Modeling Behavioral Intensity and Transitions)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 - Causal Representation Learning for Generalisable Recommendation
@@ -6697,6 +6789,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation?
 - How Well Does Generative Recommendation Generalize?
 - HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding
+- IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
 - Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
 - Interests Burn-down Diffusion Process for Personalized Collaborative Filtering (StageCF)
@@ -6755,6 +6848,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems (TokenMinds)
 - TRUST: Item-Calibrated Interval Evidence for Temporal Session-Based Recommendation (TRUST)
 - UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation (UniFormer)
+- UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 - LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)
 - Next-Scale Generative Reranking: A Tree-based Generative Rerank Method at Meituan (NSGR)
 
@@ -6785,6 +6879,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
 - Harmonizing Generative Retrieval and Ranking in Chain-of-Recommendation (RecoChain)
+- IID-Nav: From Extraction to Navigation: Progressive Retrieval with Indirectly Infinite Depth (IID-Nav)
 - LLMs Need Encoders for Semantic IDs Too (PrefixMem)
 - LRanker: LLM Ranker for Massive Candidates
 - Let the Agent Steer: Closed-Loop Ranking Optimization via Influence Exchange (Sortify)
@@ -6858,6 +6953,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
 - GR2 Technical Report (GR2)
+- IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
+- IID-Nav: From Extraction to Navigation: Progressive Retrieval with Indirectly Infinite Depth (IID-Nav)
 - LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)
 - LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR)
 - Next-Scale Generative Reranking: A Tree-based Generative Rerank Method at Meituan (NSGR)
@@ -6891,8 +6988,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Representation Curriculum: Stagewise Training for Robust Ranking and Allocation
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
 - Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
+- RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems (RankUp)
 - SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA)
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
+- SSR: Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR)
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
@@ -6905,6 +7004,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Fast and Feasible: Permutation-based Constrained Reranking for Revenue Maximization (PermR)
 - UniNote: A Unified Embedding Model for Multimodal Representation and Ranking
 - UniPinRec: Unifying Generative Retrieval and Ranking at Pinterest Scale
+- UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 - Unified Multi-Task Relevance Modeling for E-Commerce: Comparing Task Routing Architectures Across LLMs and Cross-Encoders
 - Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026)
 - DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM)
@@ -7313,6 +7413,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 ### Scaling Laws
 - Scaling Laws for Behavioral Foundation Models over User Event Sequences
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
+- RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems (RankUp)
+- SSR: Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR)
+- UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 
 
 
@@ -7388,6 +7491,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
 - Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
 - HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
+- IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
+- IID-Nav: From Extraction to Navigation: Progressive Retrieval with Indirectly Infinite Depth (IID-Nav)
 - MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS)
 - One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
 - PHKT: Personalized Dynamic Hypergraph-enhanced KAN-Transformer for Multi-behavior Sequential Recommendation (PHKT)
@@ -7433,7 +7538,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Ahmedabad University** | A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 | **AI VK** | Mitigating Collaborative Semantic ID Staleness in Generative Retrieval ‖ Planning over Matrix-Factorization MDPs for Candidate Generation (MF-MDP Planning)
 | **Alibaba** | From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs ‖ RecGPT-Mobile: On-Device Large Language Models · IntRR: A Framework for Integrating SID Redistribution and Length Reduction · ResRank · Why Users Go There ‖ DeGRe: Dense-supervised Generative Reranking ‖ QGS: Query-Conditioned Generative Search ‖ GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan) ‖ DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM) ‖ SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive) ‖ Differentiable Geometric Indexing for End-to-End Generative Retrieval (DGI) ‖ Macro Graph of Experts for Billion-Scale Multi-Task Recommendation (MGOE) ‖ LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR) ‖ ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
-| **Alibaba International Digital Commerce Group** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation ‖ SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT) ‖ MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR) ‖ SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA) ‖ EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
+| **Alibaba International Digital Commerce Group** | LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation ‖ SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT) ‖ MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR) ‖ SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA) ‖ EvoRec: Self Evolving Agentic Recommender Systems (EvoRec) ‖ SSR: Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR)
 | **Amazon** | Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE) ‖ Bi-NAS: Towards Effective and Personalized Explanation for Recommender Systems via Bi-Level Neural Architecture Search (Bi-NAS)
 | **Amazon International Machine Learning** | FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation
 | **Anhui University** | ProMax
@@ -7453,7 +7558,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Beijing University** | From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs
 | **Bilibili Inc.** | LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 | **Brno University of Technology** | Do Neural Retrievers Prefer Certain Documents? Evidence of Learned Relevance Priors
-| **ByteDance** | Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) ‖ MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music ‖ Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models ‖ MERGE: Next-Generation Item Indexing Paradigm for Large-Scale Streaming Recommendation (MERGE) ‖ Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
+| **ByteDance** | Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) ‖ MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music ‖ Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models ‖ MERGE: Next-Generation Item Indexing Paradigm for Large-Scale Streaming Recommendation (MERGE) ‖ Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM) ‖ IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
 | **Capital One** | From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
 | **Carnegie Mellon University** | Effective Reinforcement Learning for Agentic Search by Recycling Zero-Variance Queries During Training (with INESC-ID, NOVA Lisbon)
 | **Central South University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) ‖ Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM)
@@ -7519,7 +7624,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **KAIST** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO) ‖ One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN) ‖ On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG)
 | **KnowFM @ ACL 2026** | Test-Time Training for Zero-Resource Dense Retrieval Reranking (DART)
 | **Korea University** | Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP)
-| **Kuaishou** | OneRetrieval ‖ PROMISE · OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID · UxSID · RPORec ‖ Taiji ‖ RGCD-Rep ‖ OneReason Technical Report ‖ DeRes ‖ AIR ‖ PIT ‖ GEMs ‖ OneLive ‖ OneSearch-V2 ‖ OneBar ‖ DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM) ‖ Denoising Implicit Feedback for Cold-start Recommendation (DIF) ‖ Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale (RaG) ‖ UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation (UniFormer) ‖ AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems (AgentX) ‖ From Bootstrapping to Sequence Modeling: A Unified Generative Framework for Personalized Landing-Page Modeling (GLAN)
+| **Kuaishou** | OneRetrieval ‖ PROMISE · OpenOneRec · OneMall · OneRec-Think · OneRec-V2 · A2Gen · GloRank · GR4AD · AdaSID · UxSID · RPORec ‖ Taiji ‖ RGCD-Rep ‖ OneReason Technical Report ‖ DeRes ‖ AIR ‖ PIT ‖ GEMs ‖ OneLive ‖ OneSearch-V2 ‖ OneBar ‖ DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM) ‖ Denoising Implicit Feedback for Cold-start Recommendation (DIF) ‖ Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale (RaG) ‖ UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation (UniFormer) ‖ AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems (AgentX) ‖ From Bootstrapping to Sequence Modeling: A Unified Generative Framework for Personalized Landing-Page Modeling (GLAN) ‖ IID-Nav: From Extraction to Navigation: Progressive Retrieval with Indirectly Infinite Depth (IID-Nav) ‖ UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 | **KDD 2026** | The Pitfall of Scaling Up: Uncovering and Mitigating Popularity Bias Amplification in Scaling Transformer-based Recommenders (SPRINT) ‖ LLM-as-a-Judge for Reliable and Explainable Offline Evaluation in Top-K Recommendation (LLM Judge) |
 | **Leiden University** | Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges ‖ Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) ‖ Unifying Search and Recommendation in LLMs via Gradient Multi-Subspace Tuning (GEMS)
 | **Leiden University / University of Glasgow** | Differentiable Semantic ID for Generative Recommendation (DIGER)
@@ -7598,7 +7703,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | **Technical University of Munich** | TRACE: A Conversational Framework for Sustainable Tourism Recommendation with Agentic Counterfactual Explanations
 | **Tel Aviv University** | Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE) ‖ Monosemanticity in Recommender Systems
 | **Temple University** | Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
-| **Tencent** | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) ‖ HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning · Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) ‖ SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling ‖ Skill Is Not Document: A Query-Conditional Benchmark and Two-Stage Retriever for LLM Agent Skill Routing (R3) ‖ NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems (NOVA)
+| **Tencent** | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) ‖ HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning · Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation · Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA) ‖ SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling ‖ Skill Is Not Document: A Query-Conditional Benchmark and Two-Stage Retriever for LLM Agent Skill Routing (R3) ‖ NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems (NOVA) ‖ RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems (RankUp)
 | **Tencent Map** | Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)
 | **Texas A&M University** | Incumbent Advantage: Brand Bias and Cognitive Manipulation Dynamics in LLM Recommendation Systems
 | **TMLR 2026** | Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair
