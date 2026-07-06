@@ -11,6 +11,7 @@
 - [By Opensource](#by-opensource)
 - [By Keyword](#by-keyword)
 - [By Affiliation](#by-affiliation)
+
 ```mermaid
 mindmap
   root((Awesome Generative RecSys))
@@ -116,6 +117,9 @@ mindmap
       Review-Augmented
         RAGR -- Dalian UT
 ```
+<div align="center">
+  <i> Open-source Generative RecSys Map </i>
+</div>
 
 ---
 ## By Date
