@@ -18,6 +18,7 @@
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
 - ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT)
+- AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation (AgentSelect)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -132,6 +133,7 @@
 - Understanding and Debugging Failures in N-Gram-Based Generative Retrieval
 - Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026)
 - Who Owns the AI Recommendation? A Multi-Industry Empirical Map of Brand Category Ownership Across Large Language Models (LLM Brand)
+- AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation (AgentSelect)
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -249,6 +251,7 @@
 - How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation?
 - How Well Does Generative Recommendation Generalize?
 - HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding
+- Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec)
 - IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
 - Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
@@ -381,6 +384,7 @@
 - RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation (RankGraph-2)
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
 - CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
+- CCLRec: Consensus-driven Contrastive Learning for LLM-enhanced Graph Recommendation (CCLRec)
 
 
 ### Group Recommendation
@@ -604,6 +608,7 @@
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
 - SAILRec: Steering LLM Attention to Dual-Side Semantically Aligned Collaborative Embeddings for Recommendation (SAILRec)
 - SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA)
+- Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS)
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation (Taiji)
 - TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER)
@@ -625,6 +630,7 @@
 - Unifying Search and Recommendation in LLMs via Gradient Multi-Subspace Tuning (GEMS)
 - VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE)
 - Who Owns the AI Recommendation? A Multi-Industry Empirical Map of Brand Category Ownership Across Large Language Models (LLM Brand)
+- VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)
 - Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd)
 - Whose Name Comes Up? III: Persona Prompting Effects in LLM-Based Scholar Recommendation
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
@@ -869,6 +875,7 @@
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
 - Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
+- Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec)
 - How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation?
 - Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation
@@ -901,6 +908,11 @@
 - DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM)
 - Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop)
 - The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
+
+### Security / Adversarial
+- VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)
+- Fairness Attacks on Recommender Systems
+
 ### Sequential Modeling / RoPE
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
