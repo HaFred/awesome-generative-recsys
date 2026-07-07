@@ -33,6 +33,8 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         ProRL -- Fudan U
         SIRIUS / Reward Hacking -- USTC
+        LBR / Length Bias -- Zhejiang U / CUHK / USTC
+        Off-Policy REINFORCE -- AI VK / HSE
       Ranking & Reranking
         CARE -- NUS & USTC
         InvariRank -- RMIT
@@ -61,6 +63,8 @@ mindmap
         UserSimulator -- Monash
         ExPerT / Expertise Personalization -- UNIST
         AgentSelect -- UTS / Rutgers / Alibaba
+        Agentic RecSys Survey -- NUS / PoliBa / Renmin / USTC
+        HGenPush -- Kuaishou
       Efficient Decoding
         Vectorizing the Trie -- Google
     Representation Layer: Generative Pre-training
@@ -75,6 +79,8 @@ mindmap
         SID-Tokenizer-Bench -- Otago / UNSW
         ACE -- Sungkyunkwan University
         HG-Rec -- Nanjing U
+        UniSGR -- Alibaba
+        ChronoSID -- UNSW / Macquarie / CSIRO
       Next Interest Flow Prediction
         AMEN -- Alibaba
       RL-based Alignment for Recall
@@ -235,6 +241,113 @@ mindmap
      - **Fairness: 3/10** — Not addressing fairness
      - **Robustness: 6/10** — Multiple public benchmarks; ICML 2026 peer-reviewed
      - **Impact: 5/10** — ICML 2026; incremental improvement on LLM-enhanced graph recommendation
+
+### Papers July 7
+
+*Tuesday, July 7, 2026. Arxiv cs.IR new listing returned 6 relevant genrec papers. No fallback needed.*
+
+1. **LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation**
+   * Affiliation: Zhejiang University, The Chinese University of Hong Kong (CUHK), University of Science and Technology of China (USTC), Bangsun Technology — *(Hongchen Li, Bohao Wang, Weiqin Yang, Can Wang, Jiawei Chen — Zhejiang University; Jingbang Chen — CUHK; Hang Pan — USTC; Bingde Hu — Bangsun Technology)*
+   * Link: [arxiv.org/abs/2607.04270](https://arxiv.org/abs/2607.04270)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Identifies and mitigates dual length bias in LLM-based recommendation — input-side attention skew from longer item descriptions and output-side decoding bias against long items; proposes LBR framework with Length-Aware Attention Calibration and Effective Information Length Normalization; +16.82% avg NDCG@5.
+   * Key techniques:
+     - Length-Aware Attention Calibration: length-dependent offset injected into attention logits to neutralize input-side skew
+     - Effective Information Length Normalization: information-theoretic length surrogate from prefix tree branching structure replaces naive token count
+     - Model-agnostic lightweight framework with negligible training/inference overhead
+     - Thorough analysis of length bias mechanisms in both input context and autoregressive decoding
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5/10** — Paper claims code at github.com/Void-JackLee/LBR (repo not yet accessible, likely pending publication)
+     - **Novelty: 8/10** — First systematic identification and mitigation of dual length bias in LLM-based recommendation
+     - **Fairness: 7/10** — Directly addresses length-related fairness; length normalization improves item exposure equity
+     - **Robustness: 7/10** — 3 Amazon datasets, 2 LLM-based recommender backbones; consistent improvements
+     - **Impact: 7/10** — Addresses fundamental bias in LLM4Rec; Zhejiang/CUHK/USTC collaboration
+
+2. **UniSGR: Unified Framework for Semantic ID Generation and Ranking**
+   * Affiliation: Alibaba International Digital Commerce Group — *(Jiawei Sun, Jun Yang, Ziyue Guo, Dongyue Xu, Jianan Yan, Lifang Deng, Xiaoyi Zeng — Alibaba International)*
+   * Link: [arxiv.org/abs/2607.04068](https://arxiv.org/abs/2607.04068)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Two-stage framework unifying semantic ID generation and multi-objective ranking for e-commerce generative retrieval; introduces Task-Aware Tokens with Funnel-Aware Contrastive Learning and STARK inference strategy removing KV cache bottlenecks in beam search.
+   * Key techniques:
+     - Two-stage training: multi-scenario pre-training + scenario-specific alignment
+     - Value-Aware Parallel Multi-Token Prediction (VA-PMTP) for joint generation and ranking optimization
+     - Task-Aware Tokens (TAT) guided by Funnel-Aware Contrastive Learning for generation-ranking alignment
+     - Semantic Tree Attention with Reorganized KV cache (STARK) for efficient beam search inference
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Alibaba internal)
+     - **Novelty: 7/10** — First unified framework integrating SID generation with multi-objective ranking; STARK inference is novel
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Large-scale e-commerce platform offline evaluation
+     - **Impact: 7/10** — Alibaba International; practical framework bridging SID generation and ranking
+
+3. **Beyond Item Order: Temporal Gap Tokenization for Generative Recommendation with Semantic IDs (ChronoSID)**
+   * Affiliation: University of New South Wales (UNSW), Macquarie University, CSIRO's Data61 — *(Chengkai Huang — UNSW/Macquarie; Tianqi Gao — Independent; Hongtao Huang — UNSW; Quan Z. Sheng — Macquarie; Lina Yao — CSIRO Data61/UNSW)*
+   * Link: [arxiv.org/abs/2607.03918](https://arxiv.org/abs/2607.03918)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Lightweight temporal augmentation framework injecting inter-interaction gap signals into semantic-ID-based generative recommendation via time-aware masked auto-encoding and discretized gap token interleaving; consistent gains especially under long-gap scenarios.
+   * Key techniques:
+     - Time-Aware Field-Aware Masked Auto-Encoding (TA-FAMAE): auxiliary time-gap prediction objective for item representation learning
+     - Discretized log-scale gap tokens interleaved with SID tuples in encoder input
+     - Two complementary temporal signal injection perspectives preserving compact SID generation paradigm
+     - Diagnostic analysis showing stronger gains under long-gap (interest drift) scenarios
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First temporal augmentation framework specifically for semantic-ID-based generative recommendation
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — Amazon review benchmarks with ablation and diagnostic analyses
+     - **Impact: 6/10** — UNSW/Macquarie/CSIRO; addresses important temporal blindness limitation in SID-based genrec
+
+4. **HGenPush: A Heterogeneous Generative Recommendation Architecture for Industrial Push Notification Systems**
+   * Affiliation: Kuaishou Technology — *(Xiao Liang, Jiali Feng, Xin Feng, Yiqing Wang, Baolin Ye, Siyao Feng, Zhihui Deng, Cunyi Zhang, Huajin Sun, Xuanping Li, Kaiqiao Zhan, Yanan Niu, Kun Gai — Kuaishou Technology, Beijing)*
+   * Link: [arxiv.org/abs/2607.03362](https://arxiv.org/abs/2607.03362)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: End-to-end heterogeneous generative recommendation architecture generating dual-type content (videos + authors) for push notifications; replaces autoregressive paradigm with lightweight multi-token prediction; deployed on Kuaishou with +0.181% DAU lift.
+   * Key techniques:
+     - Hybrid user behavior understanding: multi-scenario and multi-perspective behavior integration
+     - Dual-branch heterogeneous generation unifying video and author recommendation
+     - Lightweight multi-token prediction discarding autoregressive paradigm for efficiency
+     - User consumption preference alignment module with reward-guided generation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Kuaishou internal production)
+     - **Novelty: 7/10** — First heterogeneous generative recommendation for push notifications unifying dual content types
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Deployed on Kuaishou push notification system; verified DAU improvement
+     - **Impact: 8/10** — Kuaishou; industrial deployment with measurable business metrics
+
+5. **Long-Term Optimization for Large-Scale Generative Retrieval with Off-Policy REINFORCE**
+   * Affiliation: AI VK, HSE University — *(Artem Matveev, Sergei Makeev, Aleksei Krasilnikov, Vladimir Baikalov, Sergei Liamaev — AI VK; Kirill Khrylchenko — HSE University)*
+   * Link: [arxiv.org/abs/2607.02818](https://arxiv.org/abs/2607.02818)
+   * Venue: 5th Workshop on End-to-End Customer Journey Optimization at KDD 2026
+   * TL;DR: Formulates generative retrieval as session-level sequential decision-making with off-policy REINFORCE and multi-step importance weighting; introduces feedback-model-based test-time scaling for predicting long-term returns; evaluated on Yambda-5B dataset.
+   * Key techniques:
+     - Multi-step importance weight approximation enabled by autoregressive formulation
+     - User feedback model simulating responses for offline evaluation
+     - Doubly robust off-policy evaluation adapted for sequential recommendation
+     - Test-time scaling: simulate future responses to select recommendations with highest predicted long-term returns
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First multi-step off-policy REINFORCE for generative retrieval with test-time scaling
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — Evaluated on public Yambda-5B dataset; KDD 2026 Workshop peer-reviewed
+     - **Impact: 6/10** — KDD 2026 Workshop; practical RL framework for long-term optimization in generative retrieval
+
+6. **Autonomous Information Seeking: A Roadmap for Agentic Recommender Systems**
+   * Affiliation: National University of Singapore (NUS), Polytechnic University of Bari, Renmin University of China, University of Science and Technology of China (USTC) — *(Xinyu Lin, Honghui Bao, Tat-Seng Chua — NUS; Yashar Deldjoo, Fatemeh Nazary, Tommaso Di Noia — Polytechnic University of Bari; Sunhao Dai, Xiaopeng Ye, Jun Xu — Renmin University of China; Wenjie Wang — USTC)*
+   * Link: [arxiv.org/abs/2607.04433](https://arxiv.org/abs/2607.04433)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Comprehensive survey establishing a unified taxonomy for agentic recommender systems grounded in three paradigms (agent-assisted, agent-as-recommender, agent-as-user-simulator) and autonomy levels; covers evaluation challenges including trajectory-level assessment and agent contribution analysis.
+   * Key techniques:
+     - Unified taxonomy: agent-assisted recommendation, agent-as-recommender, agent-as-user-simulator
+     - Autonomy framework organizing methods by proactivity, context awareness, interaction flexibility, and adaptivity
+     - Analysis of agent architectures: profiles, memory, tool use, workflows, optimization mechanisms
+     - Evaluation methodology survey: automated metrics, LLM judging, simulation-based assessment, trajectory-level evaluation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code (survey paper)
+     - **Novelty: 7/10** — First comprehensive survey unifying agentic recsys paradigms with autonomy-based taxonomy
+     - **Fairness: 5/10** — Discusses trustworthiness and controllability as fairness-related dimensions
+     - **Robustness: 6/10** — Systematic coverage across paradigms, architectures, and evaluation; survey quality
+     - **Impact: 8/10** — NUS/Renmin/PoliBa/USTC; foundational reference for the rapidly growing agentic recsys field
+
 
 ### Papers July 5 (Weekend Catch-up — ICML 2026)
 
@@ -1306,7 +1419,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 82 papers as of July 6.
+**Count:** 83 papers as of July 7.
 
 | Score | Paper |
 | --- | --- |
@@ -1392,6 +1505,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
 | 5/10 | Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec) |
+| 5/10 | LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation (LBR) |
 | 3/10 | Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS) |
 | 3/10 | STORM: Stepwise Token Optimization with Reward-Guided Beam Search |
 | 3/10 | Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) |
@@ -1415,6 +1529,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - STORM: Stepwise Token Optimization with Reward-Guided Beam Search
 - APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
 - GR2 Technical Report (GR2)
+- UniSGR: Unified Framework for Semantic ID Generation and Ranking (UniSGR)
 
 
 ### RL / Reinforcement Learning
@@ -1463,6 +1578,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Planning over Matrix-Factorization MDPs for Candidate Generation (MF-MDP Planning)
 - ProRL: Effective Reinforcement Learning for Proactive Recommendation via Rectified Policy Gradient Estimation (ProRL)
 - Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS)
+- Long-Term Optimization for Large-Scale Generative Retrieval with Off-Policy REINFORCE
+- LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation (LBR)
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.

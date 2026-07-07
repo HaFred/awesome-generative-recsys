@@ -19,6 +19,7 @@
 - CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
 - ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT)
 - AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation (AgentSelect)
+- Autonomous Information Seeking: A Roadmap for Agentic Recommender Systems
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
