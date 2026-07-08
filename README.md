@@ -65,6 +65,8 @@ mindmap
         AgentSelect -- UTS / Rutgers / Alibaba
         Agentic RecSys Survey -- NUS / PoliBa / Renmin / USTC
         HGenPush -- Kuaishou
+        ColdGenRec / Cold-Start Repro -- Shandong U / Leiden / Baidu / UvA
+        CRAMER / Request-Aware Masking -- Renmin / Dalhousie
       Efficient Decoding
         Vectorizing the Trie -- Google
     Representation Layer: Generative Pre-training
@@ -136,111 +138,94 @@ mindmap
 ---
 ## By Date
 
-### Papers July 6 (ICML 2026 Day 1)
+### Papers July 8
 
-*No new arxiv papers today (Monday, July 6, 2026). Arxiv new submissions not yet posted. ICML 2026 Day 1 kicks off in Seoul — cross-referenced ICML 2026 accepted papers list against existing README entries. Found 6 ICML 2026 GenRec/LLM4Rec papers not yet in the repository.*
+*Wednesday, July 8, 2026. Arxiv cs.IR new listing returned only 1 relevant genrec paper. Applied 3-month fallback → found 2 ICLR 2026 papers (PESO, VISTA), 1 ICML 2026 paper (CRAMER), and 1 SIGIR 2026 missed paper (ColdGenRec). Total: 5 papers.*
 
-1. **VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems**
-   * Affiliation: Nanyang Technological University (NTU), Beihang University, Alibaba — *(Guowei Guan, Yurong Hao, Jiaming Zhang, Tiantong Wu, Fuyao Zhang, Tianxiang Chen, Longtao Huang, Cyril Leung, Wei Yang Bryan Lim)*
-   * Link: [arxiv.org/abs/2602.06409](https://arxiv.org/abs/2602.06409)
-   * Venue: ICML 2026
-   * TL;DR: Formalizes and demonstrates cross-modal interactive poisoning — a new attack surface in MLLM-based recommender systems where synchronized multimodal perturbations steer fused representations along stable semantic directions during fine-tuning; VENOMREC achieves 0.73 mean ER@20, +0.52 over strongest baseline.
+1. **SCOReD: Student-Aware CoT Optimization for Recommendation Distillation**
+   * Affiliation: UC Riverside, Meta AI — *(Haz Sameen Shahgir, Yue Dong — UC Riverside; Yufei Li, Frank Shyu, Luke Simon, Sandeep Pandey, Xi Liu — Meta AI)*
+   * Link: [arxiv.org/abs/2607.05734](https://arxiv.org/abs/2607.05734)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Framework for distilling chain-of-thought reasoning from large LLM teachers to smaller student models for recommendation; parses teacher traces into typed segments, uses student attention to score importance, and dynamically selects KEEP/REWRITE/FUSE/PRUNE edits per segment; +1.56% NDCG, +1.9% Recall@5, 27.3% reasoning length reduction.
    * Key techniques:
-     - Exposure Alignment identifying high-exposure regions in the joint text-image embedding space
-     - Cross-modal Interactive Perturbation crafting attention-guided coupled token-patch edits
-     - Formalizes cross-modal interactive poisoning as a distinct threat category for MLLM RecSys
-     - Maintains comparable recommendation utility while achieving effective targeted promotion
+     - Student-aware CoT trace parsing into typed segments with dynamic per-segment editing
+     - Attention-based segment importance scoring using the student LLM's own attention
+     - Four editing operations (KEEP/REWRITE/FUSE/PRUNE) selected via output length and log-probability lift
+     - CoT distillation specifically tailored for the recommendation domain as pre-RL training
    * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
      - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First formalization of cross-modal interactive poisoning for MLLM RecSys
-     - **Fairness: 5/10** — Exposes fairness vulnerability; adversarial study informs robustness
-     - **Robustness: 7/10** — 3 datasets, 0.73 ER@20, +0.52 over strongest baseline; ICML 2026 peer-reviewed
-     - **Impact: 7/10** — ICML 2026; NTU/Beihang/Alibaba; opens security dimension for multimodal LLM RecSys
-
-2. **ProRL: Effective Reinforcement Learning for Proactive Recommendation via Rectified Policy Gradient Estimation**
-   * Affiliation: Fudan University — *(Hongru Hou, Tiehua Mei, Denghui Geng, Jinhui Huang, Ao Xu, Hengrui Chen, Jiaqing Liang, Deqing Yang — Fudan University)*
-   * Link: [arxiv.org/abs/2605.28293](https://arxiv.org/abs/2605.28293)
-   * Venue: ICML 2026
-   * TL;DR: Identifies two critical gradient estimation deficiencies in applying policy gradients to proactive recommendation — length-dependent bias and high gradient variance — and proposes Stepwise Reward Centering and Position-Specific Advantage Estimation to rectify them; significantly outperforms SOTA PRSs on 3 real-world datasets.
-   * Key techniques:
-     - Formal identification of length-dependent bias: path-level rewards decompose into positively-biased step-level rewards favoring path extension
-     - Stepwise Reward Centering subtracting expected rewards to neutralize length bias
-     - Position-Specific Advantage Estimation computing step-dependent baselines for variance reduction
-     - Semantic-ID item representations + T5 backbone for proactive path generation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/hongruhou89/ProRL](https://github.com/hongruhou89/ProRL) — 45⭐, well-documented README, clean modular code, shell scripts for reproduction, pinned dependencies; missing pretrained weights and datasets
-     - **Novelty: 7/10** — First to formally identify and fix two gradient estimation deficiencies in proactive recommendation RL
+     - **Novelty: 7/10** — First student-aware CoT optimization framework tailored specifically for recommendation distillation
      - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — 3 real-world datasets; consistent SOTA improvement; ICML 2026 peer-reviewed
-     - **Impact: 7/10** — ICML 2026; Fudan; practical RL framework for proactive recommendation with strong opensource
+     - **Robustness: 7/10** — 1.56% NDCG, 1.9% Recall@5 across recommendation benchmarks
+     - **Impact: 7/10** — Meta/UC Riverside; practical distillation framework for deploying LLM-based recsys
 
-3. **Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec)**
-   * Affiliation: Nanjing University, Nanjing University of Posts and Telecommunications — *(Aoran Zhang, Yu-Bin Yang, Yonghong Yu)*
-   * Link: [openreview.net/forum?id=BpVBWp3PZx](https://openreview.net/forum?id=BpVBWp3PZx)
-   * Venue: ICML 2026
-   * TL;DR: Enhances residual quantization for generative recommendation by embedding latent discrete representations into hyperbolic space to explicitly model tree-like item hierarchies, combined with a pyramidal differential-length codebook strategy leveraging hyperbolic volume growth; achieves lower collision rates, more uniform codebook usage, and reduced training time.
+2. **Cold-Starts in Generative Recommendation: A Reproducibility Study (ColdGenRec)**
+   * Affiliation: Shandong University, Leiden University, Baidu Inc., University of Amsterdam — *(Zhen Zhang, Xin Xin — Shandong University; Jujia Zhao, Zhaochun Ren — Leiden University; Xinyu Ma — Baidu Inc.; Maarten de Rijke — University of Amsterdam)*
+   * Link: [arxiv.org/abs/2603.29845](https://arxiv.org/abs/2603.29845)
+   * Venue: SIGIR 2026
+   * TL;DR: Systematic reproducibility study isolating the impact of model scale, identifier design, and RL training on cold-start performance of generative recommenders; reproduces multiple GR models under unified user/item cold-start protocols; released full code and data pipeline.
    * Key techniques:
-     - Hyperbolic RQ-VAE replacing Euclidean residual quantization to capture hierarchical item relationships
-     - Differential-length codebook strategy with pyramidal structure aligned to tree-like item taxonomy
-     - Exponential volume growth of hyperbolic space enabling compressed yet expressive codebooks
-     - Improved codebook utilization and collision reduction over Euclidean RQ-VAE baselines
+     - Unified suite of cold-start protocols for user cold-start and item cold-start evaluation
+     - Isolates impact of three core design choices: model scale, identifier design, and RL training
+     - Reproduces representative generative recommenders (OpenOneRec, MiniOneRec, etc.) under controlled settings
+     - Full code release with evaluation pipeline, dataset preprocessing, and configuration files
    * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 5/10** — [github.com/zar123123/HG-Rec](https://github.com/zar123123/HG-Rec) — minimal repo (2 commits, 1⭐), bare README, training scripts present but no documentation
-     - **Novelty: 8/10** — First hyperbolic RQ-VAE for genrec; differential-length codebook is novel and well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Multiple benchmark datasets; consistent SOTA; ICML 2026 peer-reviewed
-     - **Impact: 7/10** — ICML 2026; Nanjing University; advances SID-based genrec with hyperbolic geometry
+     - **Opensource?: 8/10** — [github.com/zhangzhen-research/ColdGenrec](https://github.com/zhangzhen-research/ColdGenrec) — complete pipeline with source code, evaluation scripts, dataset preprocessing; SIGIR 2026 artifact; well-documented
+     - **Novelty: 7/10** — First systematic reproducibility study isolating key design factors in generative recommendation cold-start
+     - **Fairness: 6/10** — Cold-start protocol explicitly addresses item/user fairness in sparse-data scenarios
+     - **Robustness: 8/10** — Multiple models, datasets (Amazon, MicroLens, Steam), unified protocols; SIGIR 2026 peer-reviewed
+     - **Impact: 7/10** — SIGIR 2026; Shandong/Leiden/Baidu/UvA; foundational benchmark for cold-start generative recommendation
 
-4. **Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS)**
-   * Affiliation: University of Science and Technology of China (USTC) — *(Heyu Chen, Junkang Wu, Guoqing Hu, Kexin Huang, Xiang Wang, Jiancan Wu — USTC)*
-   * Link: [openreview.net/forum?id=9chqEmpIZT](https://openreview.net/forum?id=9chqEmpIZT)
+3. **CRAMER: Control via Request-Aware Masking for Editing Recommenders**
+   * Affiliation: Renmin University of China, Dalhousie University — *(Zhiyuan Su, Naihe Feng, Zhen Qin — Renmin University; Ga Wu — Dalhousie University)*
+   * Link: ICML 2026 ([Poster 62968](https://icml.cc/virtual/2026/poster/62968))
    * Venue: ICML 2026
-   * TL;DR: Gradient-based analysis formalizing the ε-insensitive region where pairwise DPO updates have little influence on ordering, causing reward hacking; proposes SIRIUS introducing pseudo-negative samples to enrich contrastive signals and reduce ε-insensitive regions; consistent ranking quality improvement across 3 benchmarks.
+   * TL;DR: Treats natural-language user requests as control signals to modulate frozen sequential recommendation backbone parameters via masking, enabling instant adaptation without retraining or LLM prompting; outperforms 4 SOTA request-aware baselines with minimal overhead.
    * Key techniques:
-     - Gradient perspective analysis revealing the ε-insensitive region mechanism behind reward hacking in DPO-based LLM recsys
-     - Bradley-Terry model theoretical analysis showing ε-insensitive regions occupy substantial preference space
-     - SIRIUS framework: Simulated Preference Optimization with pseudo-negative samples enriching contrastive signals
-     - Reduces ε-insensitive regions to improve ranking quality without additional annotation cost
+     - Request-aware masking: user requests act as control signals modulating frozen backbone parameters
+     - Model control theory-inspired: avoids costly retraining or LLM-based prompt engineering
+     - Frozen backbone with learned masks enabling cross-domain adaptability
+     - Lightweight instant adaptation to diverse natural-language user requests
    * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 3/10** — [anonymous.4open.science/r/C557-id](https://anonymous.4open.science/r/C557-id) — anonymous review repository only; no proper public release
-     - **Novelty: 7/10** — Novel gradient-based analysis of reward hacking in LLM recsys; ε-insensitive region formalization
-     - **Fairness: 4/10** — Mitigating reward hacking improves training fairness in preference optimization
-     - **Robustness: 7/10** — 3 public benchmarks; consistent improvement; ICML 2026 peer-reviewed
-     - **Impact: 7/10** — ICML 2026; USTC; addresses fundamental training issue in LLM-based recommendation alignment
+     - **Opensource?: 7/10** — [github.com/zhiyuansu0326/CRAMER-ICML2026](https://github.com/zhiyuansu0326/CRAMER-ICML2026) — ICML 2026 code release; complete implementation with documentation
+     - **Novelty: 7/10** — Novel control-theory perspective on request-aware recommendation with masking-based adaptation
+     - **Fairness: 4/10** — Cross-domain adaptability promotes broader access; not primary focus
+     - **Robustness: 7/10** — Outperforms 4 SOTA baselines; ICML 2026 peer-reviewed; cross-domain generalization
+     - **Impact: 7/10** — ICML 2026; practical lightweight framework for real-time request adaptation
 
-5. **AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation**
-   * Affiliation: University of Technology Sydney (UTS), Rutgers University, Alibaba — *(Yunxiao Shi, Wujiang Xu, Tingwei Chen, Haoning Shang, Ling Yang, Yunfeng Wan, Zhuo Cao, Xing Zi, Dimitris N. Metaxas, Min Xu)*
-   * Link: [arxiv.org/abs/2603.03761](https://arxiv.org/abs/2603.03761)
-   * Venue: ICML 2026
-   * TL;DR: First unified benchmark reframing LLM agent selection as narrative query-to-agent recommendation; 111K queries, 107K agents, 251K interaction records from 40+ sources; reveals regime shift where traditional CF/GNN methods fail and content-aware capability matching is essential; transfers to real marketplace (MuleRun).
+4. **Continual Low-Rank Adapters for LLM-based Generative Recommender Systems (PESO)**
+   * Affiliation: University of Illinois Urbana-Champaign, Korea University, Amazon — *(Hyunsik Yoo, Ting-Wei Li, Zhining Liu, Hanghang Tong — UIUC; SeongKu Kang — Korea University; Charlie Xu, Qilin Qi — Amazon)*
+   * Link: [arxiv.org/abs/2510.25093](https://arxiv.org/abs/2510.25093)
+   * Venue: ICLR 2026
+   * TL;DR: Proposes PESO (Proximally rEgularized Single evolving lOra) for continual adaptation of LLM-based generative recommenders; uses proximal regularization anchoring current adapter to its most recent frozen state, enabling flexible balance between preserving old knowledge and absorbing new preferences.
    * Key techniques:
-     - Unified agent recommendation benchmark converting heterogeneous evaluation artifacts into positive-only interaction data
-     - Compositional agent synthesis inducing capability-sensitive behavior under counterfactual edits
-     - Cross-platform transfer learning to MuleRun marketplace demonstrating practical utility
-     - Analysis revealing dense head → long-tail regime shift in agent selection
+     - Single evolving LoRA replacing frozen adapter stacking for continual learning
+     - Proximal regularizer anchoring current adapter to most recent frozen state
+     - Data-aware, direction-wise guidance in LoRA subspace (theoretically analyzed)
+     - Challenges conventional continual learning goal of preserving past performance in recommendation
    * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
      - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First benchmark framing agent selection as query-to-agent recommendation; 111K queries at scale
-     - **Fairness: 4/10** — Addresses long-tail agent coverage; capability-aware matching promotes fair agent access
-     - **Robustness: 7/10** — 111K queries, 107K agents, 40+ sources, cross-platform transfer; ICML 2026 peer-reviewed
-     - **Impact: 6/10** — ICML 2026; UTS/Rutgers/Alibaba; foundational benchmark for emerging agent recommendation ecosystem
-
-6. **CCLRec: Consensus-driven Contrastive Learning for LLM-enhanced Graph Recommendation**
-   * Affiliation: North University of China, Harbin Institute of Technology (HIT), Penn State University — *(Ting Guo, Dongyu Pei, Litiao Qiu, Xiaoying Liao, KE LIANG, Peng Song, Pinle Qin)*
-   * Link: [openreview.net/forum?id=CCLRec_ICML2026](https://icml.cc/virtual/2026/poster/65594)
-   * Venue: ICML 2026
-   * TL;DR: Bridges the supervisory gap between GNN structural proximity and LLM semantic relevance by mining consensus signals from both modalities; consensus-centered contrastive learning with weight-aware reinforcement mechanism; consistently outperforms SOTA LLM-enhanced graph recommendation methods.
-   * Key techniques:
-     - LLM-based semantic sampling for candidate positive/negative sets in semantic space
-     - Structural-semantic consensus mining computing intersection between graph neighbors and semantic neighbors
-     - Consensus-centered contrastive learning on high-confidence pairs endorsed by both CF and LLM
-     - Weight-aware reinforcement amplifying high-quality consensus features during training
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Consensus-driven integration of structural and semantic signals is incremental but well-motivated
+     - **Novelty: 7/10** — Novel continual learning paradigm specifically designed for recommendation's unique preference evolution
      - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Multiple public benchmarks; ICML 2026 peer-reviewed
-     - **Impact: 5/10** — ICML 2026; incremental improvement on LLM-enhanced graph recommendation
+     - **Robustness: 7/10** — Consistently outperforms LoRA-based continual methods on 3 real-world datasets; ICLR 2026 peer-reviewed
+     - **Impact: 7/10** — ICLR 2026; UIUC/Amazon; practical continual learning framework for deployed LLM-based recsys
+
+5. **Massive Memorization with Hundreds of Trillions of Parameters for Sequential Transducer Generative Recommenders (VISTA)**
+   * Affiliation: Meta, Yale University — *(Zhimin Chen, Chenyu Zhao, Ka Chun Mo, Yunjiang Jiang, Khushhall Chandra Mahajan, Ning Jiang, Kai Ren, Jinhui Li, Wen-Yun Yang — Meta; Jane H. Lee — Yale University / Meta intern)*
+   * Link: [arxiv.org/abs/2510.22049](https://arxiv.org/abs/2510.22049)
+   * Venue: ICLR 2026
+   * TL;DR: Two-stage attention framework decomposing target attention into history summarization (into few hundred cached tokens) and lightweight candidate attention over those tokens; enables scaling to lifelong user histories of up to 1M items with fixed downstream cost; deployed on Meta's recommendation platform serving billions of users.
+   * Key techniques:
+     - VISTA (VIrtual Sequential Target Attention): two-stage decomposition of target attention
+     - Stage 1: user history summarization into a few hundred cached summary tokens
+     - Stage 2: lightweight candidate item attention over cached summary tokens
+     - Fixed downstream training/inference cost regardless of history length (up to 1M items)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Meta internal production)
+     - **Novelty: 8/10** — Novel two-stage attention paradigm enabling trillion-parameter-scale memorization for recsys
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 9/10** — Deployed on Meta platform serving billions of users; ICLR 2026 peer-reviewed
+     - **Impact: 9/10** — ICLR 2026; Meta; massive-scale industrial generative recommendation breakthrough
 
 ### Papers July 7
 
@@ -348,6 +333,112 @@ mindmap
      - **Robustness: 6/10** — Systematic coverage across paradigms, architectures, and evaluation; survey quality
      - **Impact: 8/10** — NUS/Renmin/PoliBa/USTC; foundational reference for the rapidly growing agentic recsys field
 
+
+### Papers July 6 (ICML 2026 Day 1)
+
+*No new arxiv papers today (Monday, July 6, 2026). Arxiv new submissions not yet posted. ICML 2026 Day 1 kicks off in Seoul — cross-referenced ICML 2026 accepted papers list against existing README entries. Found 6 ICML 2026 GenRec/LLM4Rec papers not yet in the repository.*
+
+1. **VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems**
+   * Affiliation: Nanyang Technological University (NTU), Beihang University, Alibaba — *(Guowei Guan, Yurong Hao, Jiaming Zhang, Tiantong Wu, Fuyao Zhang, Tianxiang Chen, Longtao Huang, Cyril Leung, Wei Yang Bryan Lim)*
+   * Link: [arxiv.org/abs/2602.06409](https://arxiv.org/abs/2602.06409)
+   * Venue: ICML 2026
+   * TL;DR: Formalizes and demonstrates cross-modal interactive poisoning — a new attack surface in MLLM-based recommender systems where synchronized multimodal perturbations steer fused representations along stable semantic directions during fine-tuning; VENOMREC achieves 0.73 mean ER@20, +0.52 over strongest baseline.
+   * Key techniques:
+     - Exposure Alignment identifying high-exposure regions in the joint text-image embedding space
+     - Cross-modal Interactive Perturbation crafting attention-guided coupled token-patch edits
+     - Formalizes cross-modal interactive poisoning as a distinct threat category for MLLM RecSys
+     - Maintains comparable recommendation utility while achieving effective targeted promotion
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First formalization of cross-modal interactive poisoning for MLLM RecSys
+     - **Fairness: 5/10** — Exposes fairness vulnerability; adversarial study informs robustness
+     - **Robustness: 7/10** — 3 datasets, 0.73 ER@20, +0.52 over strongest baseline; ICML 2026 peer-reviewed
+     - **Impact: 7/10** — ICML 2026; NTU/Beihang/Alibaba; opens security dimension for multimodal LLM RecSys
+
+2. **ProRL: Effective Reinforcement Learning for Proactive Recommendation via Rectified Policy Gradient Estimation**
+   * Affiliation: Fudan University — *(Hongru Hou, Tiehua Mei, Denghui Geng, Jinhui Huang, Ao Xu, Hengrui Chen, Jiaqing Liang, Deqing Yang — Fudan University)*
+   * Link: [arxiv.org/abs/2605.28293](https://arxiv.org/abs/2605.28293)
+   * Venue: ICML 2026
+   * TL;DR: Identifies two critical gradient estimation deficiencies in applying policy gradients to proactive recommendation — length-dependent bias and high gradient variance — and proposes Stepwise Reward Centering and Position-Specific Advantage Estimation to rectify them; significantly outperforms SOTA PRSs on 3 real-world datasets.
+   * Key techniques:
+     - Formal identification of length-dependent bias: path-level rewards decompose into positively-biased step-level rewards favoring path extension
+     - Stepwise Reward Centering subtracting expected rewards to neutralize length bias
+     - Position-Specific Advantage Estimation computing step-dependent baselines for variance reduction
+     - Semantic-ID item representations + T5 backbone for proactive path generation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/hongruhou89/ProRL](https://github.com/hongruhou89/ProRL) — 45⭐, well-documented README, clean modular code, shell scripts for reproduction, pinned dependencies; missing pretrained weights and datasets
+     - **Novelty: 7/10** — First to formally identify and fix two gradient estimation deficiencies in proactive recommendation RL
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — 3 real-world datasets; consistent SOTA improvement; ICML 2026 peer-reviewed
+     - **Impact: 7/10** — ICML 2026; Fudan; practical RL framework for proactive recommendation with strong opensource
+
+3. **Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec)**
+   * Affiliation: Nanjing University, Nanjing University of Posts and Telecommunications — *(Aoran Zhang, Yu-Bin Yang, Yonghong Yu)*
+   * Link: [openreview.net/forum?id=BpVBWp3PZx](https://openreview.net/forum?id=BpVBWp3PZx)
+   * Venue: ICML 2026
+   * TL;DR: Enhances residual quantization for generative recommendation by embedding latent discrete representations into hyperbolic space to explicitly model tree-like item hierarchies, combined with a pyramidal differential-length codebook strategy leveraging hyperbolic volume growth; achieves lower collision rates, more uniform codebook usage, and reduced training time.
+   * Key techniques:
+     - Hyperbolic RQ-VAE replacing Euclidean residual quantization to capture hierarchical item relationships
+     - Differential-length codebook strategy with pyramidal structure aligned to tree-like item taxonomy
+     - Exponential volume growth of hyperbolic space enabling compressed yet expressive codebooks
+     - Improved codebook utilization and collision reduction over Euclidean RQ-VAE baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5/10** — [github.com/zar123123/HG-Rec](https://github.com/zar123123/HG-Rec) — minimal repo (2 commits, 1⭐), bare README, training scripts present but no documentation
+     - **Novelty: 8/10** — First hyperbolic RQ-VAE for genrec; differential-length codebook is novel and well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Multiple benchmark datasets; consistent SOTA; ICML 2026 peer-reviewed
+     - **Impact: 7/10** — ICML 2026; Nanjing University; advances SID-based genrec with hyperbolic geometry
+
+4. **Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS)**
+   * Affiliation: University of Science and Technology of China (USTC) — *(Heyu Chen, Junkang Wu, Guoqing Hu, Kexin Huang, Xiang Wang, Jiancan Wu — USTC)*
+   * Link: [openreview.net/forum?id=9chqEmpIZT](https://openreview.net/forum?id=9chqEmpIZT)
+   * Venue: ICML 2026
+   * TL;DR: Gradient-based analysis formalizing the ε-insensitive region where pairwise DPO updates have little influence on ordering, causing reward hacking; proposes SIRIUS introducing pseudo-negative samples to enrich contrastive signals and reduce ε-insensitive regions; consistent ranking quality improvement across 3 benchmarks.
+   * Key techniques:
+     - Gradient perspective analysis revealing the ε-insensitive region mechanism behind reward hacking in DPO-based LLM recsys
+     - Bradley-Terry model theoretical analysis showing ε-insensitive regions occupy substantial preference space
+     - SIRIUS framework: Simulated Preference Optimization with pseudo-negative samples enriching contrastive signals
+     - Reduces ε-insensitive regions to improve ranking quality without additional annotation cost
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 3/10** — [anonymous.4open.science/r/C557-id](https://anonymous.4open.science/r/C557-id) — anonymous review repository only; no proper public release
+     - **Novelty: 7/10** — Novel gradient-based analysis of reward hacking in LLM recsys; ε-insensitive region formalization
+     - **Fairness: 4/10** — Mitigating reward hacking improves training fairness in preference optimization
+     - **Robustness: 7/10** — 3 public benchmarks; consistent improvement; ICML 2026 peer-reviewed
+     - **Impact: 7/10** — ICML 2026; USTC; addresses fundamental training issue in LLM-based recommendation alignment
+
+5. **AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation**
+   * Affiliation: University of Technology Sydney (UTS), Rutgers University, Alibaba — *(Yunxiao Shi, Wujiang Xu, Tingwei Chen, Haoning Shang, Ling Yang, Yunfeng Wan, Zhuo Cao, Xing Zi, Dimitris N. Metaxas, Min Xu)*
+   * Link: [arxiv.org/abs/2603.03761](https://arxiv.org/abs/2603.03761)
+   * Venue: ICML 2026
+   * TL;DR: First unified benchmark reframing LLM agent selection as narrative query-to-agent recommendation; 111K queries, 107K agents, 251K interaction records from 40+ sources; reveals regime shift where traditional CF/GNN methods fail and content-aware capability matching is essential; transfers to real marketplace (MuleRun).
+   * Key techniques:
+     - Unified agent recommendation benchmark converting heterogeneous evaluation artifacts into positive-only interaction data
+     - Compositional agent synthesis inducing capability-sensitive behavior under counterfactual edits
+     - Cross-platform transfer learning to MuleRun marketplace demonstrating practical utility
+     - Analysis revealing dense head → long-tail regime shift in agent selection
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First benchmark framing agent selection as query-to-agent recommendation; 111K queries at scale
+     - **Fairness: 4/10** — Addresses long-tail agent coverage; capability-aware matching promotes fair agent access
+     - **Robustness: 7/10** — 111K queries, 107K agents, 40+ sources, cross-platform transfer; ICML 2026 peer-reviewed
+     - **Impact: 6/10** — ICML 2026; UTS/Rutgers/Alibaba; foundational benchmark for emerging agent recommendation ecosystem
+
+6. **CCLRec: Consensus-driven Contrastive Learning for LLM-enhanced Graph Recommendation**
+   * Affiliation: North University of China, Harbin Institute of Technology (HIT), Penn State University — *(Ting Guo, Dongyu Pei, Litiao Qiu, Xiaoying Liao, KE LIANG, Peng Song, Pinle Qin)*
+   * Link: [openreview.net/forum?id=CCLRec_ICML2026](https://icml.cc/virtual/2026/poster/65594)
+   * Venue: ICML 2026
+   * TL;DR: Bridges the supervisory gap between GNN structural proximity and LLM semantic relevance by mining consensus signals from both modalities; consensus-centered contrastive learning with weight-aware reinforcement mechanism; consistently outperforms SOTA LLM-enhanced graph recommendation methods.
+   * Key techniques:
+     - LLM-based semantic sampling for candidate positive/negative sets in semantic space
+     - Structural-semantic consensus mining computing intersection between graph neighbors and semantic neighbors
+     - Consensus-centered contrastive learning on high-confidence pairs endorsed by both CF and LLM
+     - Weight-aware reinforcement amplifying high-quality consensus features during training
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Consensus-driven integration of structural and semantic signals is incremental but well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — Multiple public benchmarks; ICML 2026 peer-reviewed
+     - **Impact: 5/10** — ICML 2026; incremental improvement on LLM-enhanced graph recommendation
 
 ### Papers July 5 (Weekend Catch-up — ICML 2026)
 
@@ -1005,93 +1096,6 @@ mindmap
      - **Fairness: 3/10** — Not primarily addressing fairness
      - **Robustness: 7/10** — 1.15-53x latency reduction; tested across multiple datasets
      - **Impact: 5/10** — Practical efficiency solution for IR/recommendation systems
-
-### Papers June 28 (Weekend Catch-up)
-
-1. **LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)**
-   * Affiliation: Walmart Global Tech — *(Luyi Ma, Wanjia Sherry Zhang, Zezhong Fan, Shubham Thakur, Kai Zhao, Kehui Yao, Ayush Agarwal, Rahul Iyer, Jason Cho, Jianpeng Xu, Evren Korpeoglu, Sushant Kumar, Kannan Achan — Walmart Global Tech)*
-   * Link: [arxiv.org/abs/2604.12096](https://arxiv.org/abs/2604.12096)
-   * Venue: arXiv preprint, April 2026
-   * TL;DR: Treats LLMs as hypernetworks to directly generate CTR estimator parameters in a training-free manner for cold-start ads; uses few-shot CoT prompting over multimodal ad content with CLIP-based retrieval of similar campaigns, achieving 55.9% NDCG@10 improvement and deployed in production on a top U.S. e-commerce platform.
-   * Key techniques:
-     - LLM-as-Hypernetwork generating feature-wise model weights for linear CTR predictor
-     - Few-shot Chain-of-Thought prompting over multimodal ad content (text + images)
-     - CLIP-based semantic retrieval of similar past campaigns as prompt demonstrations
-     - Normalization and calibration techniques aligning generated weights with production CTR distributions
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Novel use of LLM as hypernetwork for training-free CTR parameter generation
-     - **Fairness: 3/10** — Not primarily addressing fairness
-     - **Robustness: 8/10** — Production-deployed with A/B test validation, 55.9% NDCG@10 improvement
-     - **Impact: 7/10** — Practical cold-start solution deployed on major e-commerce platform
-
-2. **Self-Distilled Reinforcement Learning for Co-Evolving Agentic Recommender Systems (CoARS)**
-   * Affiliation: Chongqing University, University of Queensland, Griffith University, Southwest Jiaotong University — *(Zongwei Wang, Min Gao — Chongqing University; Hongzhi Yin, Tong Chen — University of Queensland; Junliang Yu, Quoc Viet Hung Nguyen, Shazia Sadiq — Griffith University; Tianrui Li — Southwest Jiaotong University)*
-   * Link: [arxiv.org/abs/2604.10029](https://arxiv.org/abs/2604.10029)
-   * Venue: arXiv preprint, April 2026
-   * TL;DR: Proposes a self-distilled RL framework where recommender and user agents co-evolve through interaction reward and self-distilled credit assignment, internalizing multi-turn interaction experience into model parameters instead of relying on external textual memory.
-   * Key techniques:
-     - Interaction reward deriving coupled task-level supervision for both recommender and user agents from the same trajectory
-     - Self-distilled credit assignment converting historical trajectories into token-level credit signals under teacher-student conditioning
-     - Co-evolving agentic recommender system with mutual influence modeling
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 8/10** — First self-distilled RL framework for co-evolving agentic recsys; internalizing experience into parameters
-     - **Fairness: 3/10** — Not primarily addressing fairness
-     - **Robustness: 6/10** — Evaluated on multiple datasets against representative baselines
-     - **Impact: 7/10** — Advances agentic recsys paradigm beyond Reflexion-style memory
-
-3. **Let the Agent Steer: Closed-Loop Ranking Optimization via Influence Exchange (Sortify)**
-   * Affiliation: Shopee — *(Yin Cheng, Liao Zhou, Xiyu Liang, Dihao Luo, Tewei Lee, Kailun Zheng, Weiwei Zhang, Mingchen Cai, Jian Dong, Andy Zhang — Shopee)*
-   * Link: [arxiv.org/abs/2603.27765](https://arxiv.org/abs/2603.27765)
-   * Venue: arXiv preprint, March 2026
-   * TL;DR: First fully autonomous LLM-driven ranking optimization agent deployed in production; reframes ranking as continuous influence exchange with a dual-channel Belief/Preference architecture grounded in Subjective Expected Utility, achieving GMV +9.2% in Country A and +4.15% GMV/UU in Country B cold-start.
-   * Key techniques:
-     - Dual-channel framework: Belief channel (offline-online transfer correction) + Preference channel (constraint penalty adjustment)
-     - LLM meta-controller operating on framework-level parameters rather than low-level search variables
-     - Persistent Memory DB with 7 relational tables for cross-round learning
-     - Influence Share metric providing decomposable measure where factor contributions sum to 100%
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 8/10** — First fully autonomous ranking optimization agent; SEU-grounded dual-channel architecture
-     - **Fairness: 4/10** — Not primarily addressed, though dual-channel provides constraint mechanisms
-     - **Robustness: 9/10** — Deployed in two markets; 7-round convergence; full production rollout
-     - **Impact: 9/10** — Game-changing for industrial ranking optimization; eliminates human-in-the-loop tuning
-
-4. **Next-Scale Generative Reranking: A Tree-based Generative Rerank Method at Meituan (NSGR)**
-   * Affiliation: Meituan — *(Shuli Wang, Changhao Li, Ke Fan, Senjie Kou, Junwei Yin, Chi Wang, Yinhua Zhu, Haitao Wang, Xingxing Wang — Meituan)*
-   * Link: [arxiv.org/abs/2604.05314](https://arxiv.org/abs/2604.05314)
-   * Venue: arXiv preprint, April 2026
-   * TL;DR: Tree-based generative reranking framework with coarse-to-fine progressive list expansion from user interests, using a multi-scale evaluator providing scale-specific guidance; deployed on Meituan food delivery platform.
-   * Key techniques:
-     - Next-Scale Generator (NSG) progressively expanding recommendation list in coarse-to-fine manner
-     - Multi-Scale Evaluator (MSE) providing scale-specific guidance via tree structure
-     - Multi-scale neighbor loss aligning generator and evaluator at each scale
-     - Balancing global diversity with local precision in generative reranking
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Novel tree-based generative reranking with multi-scale evaluation
-     - **Fairness: 3/10** — Not primarily addressing fairness
-     - **Robustness: 8/10** — Validated on public and industrial datasets; deployed at Meituan
-     - **Impact: 7/10** — Practical generative reranking solution for industrial recommendation
-
-5. **LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR)**
-   * Affiliation: Renmin University of China, Alibaba Group — *(Jiakai Tang, Runfeng Zhang, Weiqiu Wang, Yifei Liu, Chuan Wang, Xu Chen, Yeqiu Yang — Renmin University of China; Jian Wu, Yuning Jiang, Bo Zheng — Alibaba Group)*
-   * Link: [arxiv.org/abs/2604.19550](https://arxiv.org/abs/2604.19550)
-   * Venue: arXiv preprint, April 2026
-   * TL;DR: Introduces loop scaling paradigm for CTR prediction that decouples computation from parameter growth via recursive layer reuse; train-multi-loop, infer-zero-loop strategy achieves SOTA with single forward pass, with oracle analysis revealing 0.02-0.04 AUC untapped headroom for adaptive inference.
-   * Key techniques:
-     - Loop scaling paradigm with recursive reuse of shared model layers during training
-     - Sandwich architecture with Hyper-Connected Residuals and Mixture-of-Experts
-     - Process supervision at every loop depth encoding multi-loop benefits into shared parameters
-     - Train-multi-loop, infer-zero-loop strategy eliminating inference overhead
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Novel loop scaling paradigm for CTR prediction; train-multi-loop, infer-zero-loop
-     - **Fairness: 3/10** — Not primarily addressing fairness
-     - **Robustness: 7/10** — Evaluated on 3 public benchmarks + 1 industrial dataset; SOTA results
-     - **Impact: 7/10** — Efficient scaling solution for industrial CTR deployment
-
 ### Papers Classic - Must Read
 
 1. **OpenOneRec Technical Report**
@@ -1329,7 +1333,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 83 papers as of July 7.
+**Count:** 85 papers as of July 8.
 
 | Score | Paper |
 | --- | --- |
@@ -1378,8 +1382,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) |
 | 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
 | 8/10 | Attention Calibration for Position-Fair Dense Information Retrieval |
+| 8/10 | Cold-Starts in Generative Recommendation: A Reproducibility Study (ColdGenRec) |
 | 8/10 | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
+| 7/10 | CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER) |
 | 7/10 | Fast and Feasible: Permutation-based Constrained Reranking for Revenue Maximization (PermR) |
 | 7/10 | FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation |
 | 7/10 | Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR) |
@@ -1435,6 +1441,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Unified Value Alignment for Generative Recommendation in Industrial Advertising (UniVA)
 - Objective Shaping with Hard Negatives: Windowed Partial AUC Optimization for RL-based LLM Recommenders
 - PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations
+- SCOReD: Student-Aware CoT Optimization for Recommendation Distillation (SCOReD)
 - [STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators
 - STORM: Stepwise Token Optimization with Reward-Guided Beam Search
 - APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
@@ -1482,6 +1489,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - ReRec: Reasoning-Augmented LLM-based Recommendation Assistant
 - RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations
 - RSIR: Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control (RSIR)
+- SCOReD: Student-Aware CoT Optimization for Recommendation Distillation (SCOReD)
 - SAGER: Self-Evolving User Policy Skills for Recommendation Agent
 - SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
