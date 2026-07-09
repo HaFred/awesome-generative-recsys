@@ -20,6 +20,7 @@
 - ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT)
 - AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation (AgentSelect)
 - Autonomous Information Seeking: A Roadmap for Agentic Recommender Systems
+- Seeing and Reflecting: Multimodal Memory-Enhanced Agent Collaboration for Recommendation (MMEACR)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -65,6 +66,7 @@
 - TRACE: A Conversational Framework for Sustainable Tourism Recommendation with Agentic Counterfactual Explanations
 - Dialogue to Discovery: Attribute-Aware Preference Elicitation for Conversational Product Search Assistants (D2D)
 - Evaluating Scene-based In-Situ Item Labeling for Immersive Conversational Recommendation (ICRS)
+- When and How to Ask: Dynamic Preference Elicitation Strategies for Conversational Recommendation (COPE)
 
 ### Cross-Domain
 - Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)

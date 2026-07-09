@@ -42,6 +42,7 @@ mindmap
         WP-Setwise -- UQ
         Attention Calibration -- UZH
         Carbon-Aware Reranking / Sustainability -- UC Berkeley
+        DeGRe / Dense GenReranking -- Zhejiang U / Alibaba
       Frameworks & Benchmarks
         TRACE -- TUM / Polytechnic University of Bari
         LLM Judge -- CityU HK
@@ -67,8 +68,10 @@ mindmap
         HGenPush -- Kuaishou
         ColdGenRec / Cold-Start Repro -- Shandong U / Leiden / Baidu / UvA
         CRAMER / Request-Aware Masking -- Renmin / Dalhousie
+        MMEACR / Multimodal Agent Collab -- Tsinghua / USTC / PKU / UNSW
       Efficient Decoding
         Vectorizing the Trie -- Google
+        PauseRec / Implicit Reasoning -- UVA / Snap
     Representation Layer: Generative Pre-training
       Semantic ID & Tokenization
         TCA4Rec -- USTC / Ant Group
@@ -83,6 +86,8 @@ mindmap
         HG-Rec -- Nanjing U
         UniSGR -- Alibaba
         ChronoSID -- UNSW / Macquarie / CSIRO
+        HoloRec / Hierarchical Encoding -- CAS IIE / BNU / JD.com
+        AsymRec / Asymmetric Framework -- Tsinghua / Tencent
       Next Interest Flow Prediction
         AMEN -- Alibaba
       RL-based Alignment for Recall
@@ -94,6 +99,7 @@ mindmap
         FAVE -- UESTC
         TDPM -- Central South U / Renmin / HK PolyU
         DiffusionRank -- U Toronto / Microsoft
+        DiffCold / Cold-Start Diffusion -- SJTU / Xiaohongshu
       Sequential & Behavioral Modeling
         GAMER -- BOSS Zhipin
         SIREN-RoPE -- LinkedIn
@@ -226,6 +232,129 @@ mindmap
      - **Fairness: 3/10** — Not addressing fairness
      - **Robustness: 9/10** — Deployed on Meta platform serving billions of users; ICLR 2026 peer-reviewed
      - **Impact: 9/10** — ICLR 2026; Meta; massive-scale industrial generative recommendation breakthrough
+
+### Papers July 9
+
+*Thursday, July 9, 2026. Arxiv cs.IR new listing returned only 2 relevant genrec papers (COPE + MMEACR). Applied 3-month fallback → found 5 additional papers (PauseRec, HoloRec, DiffCold, AsymRec, DeGRe). Total: 7 papers.*
+
+1. **When and How to Ask: Dynamic Preference Elicitation Strategies for Conversational Recommendation (COPE)**
+   * Affiliation: University of Sheffield, Bloomberg — *(Feng Xia, Xi Wang — University of Sheffield; Shuo Zhang — Bloomberg)*
+   * Link: [arxiv.org/abs/2607.06765](https://arxiv.org/abs/2607.06765)
+   * Venue: SIGIR 2026
+   * TL;DR: Systematic investigation of stage-dependent preference elicitation for conversational recommendation; proposes COPE (Mixture of Experts) and InPE dataset with fine-grained elicitation annotations; attribute-based inquiries effective early, item-based strategies superior later.
+   * Key techniques:
+     - Stage-aware preference elicitation: attribute-based in early stages, item-based in later stages
+     - InPE dataset with fine-grained annotations for elicitation necessity and strategy selection
+     - COPE architecture (COnversational Preference Elicitation via Mixture of Experts) for dynamic strategy modeling
+     - Empirical evidence of consistent stage-wise tendencies in dialogue progression
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 4/10** — [github.com/juanfacabian/InPE](https://github.com/juanfacabian/InPE) — dataset publicly available; no model code released
+     - **Novelty: 6/10** — First systematic stage-aware analysis of preference elicitation strategies in CRS
+     - **Fairness: 4/10** — Stage-dependent strategies may improve user experience equity
+     - **Robustness: 6/10** — Extensive offline evaluation; SIGIR 2026 peer-reviewed
+     - **Impact: 5/10** — SIGIR 2026; practical framework for conversational recommendation
+
+2. **Seeing and Reflecting: Multimodal Memory-Enhanced Agent Collaboration for Recommendation (MMEACR)**
+   * Affiliation: Tsinghua University, USTC, Peking University, UNSW, Macquarie University, CSIRO's Data61 — *(Hao Cong — Tsinghua; Huizu Lin — USTC; Zihan Wang — Peking; Chengkai Huang — UNSW/Macquarie; Quan Z. Sheng — Macquarie; Lina Yao — UNSW/CSIRO Data61)*
+   * Link: [arxiv.org/abs/2607.07108](https://arxiv.org/abs/2607.07108)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Dual-track memory architecture for LLM-based agentic recommendation; reasoning track with collaborative User/Item Memory Agents updated via attribute-guided reinforcement-and-reflection, matching track with decoupled multimodal embedding memory; integrated via weighted Reciprocal Rank Fusion.
+   * Key techniques:
+     - Dual-track memory: interpretable agent reasoning track + fine-grained multimodal matching track
+     - Collaborative User and Item Memory Agents with persistent multimodal memories
+     - Attribute-guided reinforcement-and-reflection mechanism for memory updates
+     - Decoupled multimodal embedding memory preserving cross-modal signals beyond structured updates
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Novel dual-track memory architecture separating reasoning from matching in agentic recsys
+     - **Fairness: 4/10** — Multimodal memory may improve representation fairness across modalities
+     - **Robustness: 6/10** — Three real-world domains; strong gains in visually grounded recommendation
+     - **Impact: 6/10** — Tsinghua/USTC/PKU/UNSW/Macquarie/CSIRO; advances LLM agent-based multimodal recommendation
+
+3. **Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)**
+   * Affiliation: University of Virginia, Snap Inc. — *(Yinhan He, Jundong Li — University of Virginia; Liam Collins, Bhuvesh Kumar, Neil Shah, Donald Loveland — Snap Inc.)*
+   * Link: [arxiv.org/abs/2606.14142](https://arxiv.org/abs/2606.14142)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Lightweight implicit reasoning paradigm replacing explicit CoT in LLM-based GR; uses trainable <pause> tokens for latent computation instead of explicit reasoning traces; +6.22% performance, -65% GPU hours training, -71.3% inference speedup.
+   * Key techniques:
+     - Implicit reasoning via trainable <pause> tokens enabling latent computation in LLMs
+     - Eliminates need for costly reasoning trace acquisition and alignment training
+     - Identifies three limitations of explicit CoT: weakened world-knowledge verbalization, SID-language misalignment, rationale quality sensitivity
+     - Dramatic training and inference efficiency gains over explicit CoT baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 8/10** — Novel implicit reasoning paradigm for LLM-based genrec; first to replace explicit CoT with latent tokens
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — +6.22% over explicit CoT baselines; 65% training cost reduction; comprehensive ablations
+     - **Impact: 7/10** — UVA/Snap; practical lightweight reasoning paradigm for deployed LLM-based recsys
+
+4. **HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation**
+   * Affiliation: Institute of Information Engineering (CAS), Beijing Normal University, JD.com — *(Shuqi Zhao, Xiang Liu, Liang Lin, Pengbo Mo, Mingming Li, Jiao Dai, Jizhong Han, Songlin Hu — CAS IIE; Jingsong Su — BNU; Xingzhi Yao, Yiming Qiu, Huimu Wang — JD.com)*
+   * Link: [arxiv.org/abs/2606.15331](https://arxiv.org/abs/2606.15331)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Endogenous CoT recommendation unifying representation, reasoning, and generation via multi-granularity nested residual quantization; two inference modes — non-thinking (lightweight alignment) and thinking (interleaved on-the-fly reasoning); consistent gains especially in sparse scenarios.
+   * Key techniques:
+     - Hierarchical semantic encoding matrix via multi-granularity nested residual quantization
+     - Holistic reconstruction loss jointly optimizing representation and generation
+     - Non-thinking mode: lightweight multi-granularity supervised alignment for fast prediction
+     - Thinking mode: interleaved reasoning generating CoT steps on-the-fly without external annotations
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Novel endogenous CoT for genrec unifying representation, reasoning, and generation
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Multiple public datasets; consistent gains with notable sparse-scenario improvements
+     - **Impact: 7/10** — CAS IIE/BNU/JD.com; advances hierarchical semantic encoding for generative recommendation
+
+5. **DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation**
+   * Affiliation: Shanghai Jiao Tong University, Xiaohongshu Inc. — *(Kangning Zhang, Jianghao Lin, Yingjie Qin, Weinan Zhang, Yong Yu — SJTU; Huanling — Xiaohongshu)*
+   * Link: [arxiv.org/abs/2606.12245](https://arxiv.org/abs/2606.12245)
+   * Venue: ECML-PKDD 2026
+   * TL;DR: Diffusion-based generative model resolving the cold-start "seesaw dilemma" where improving cold items degrades warm items; retrieval-enhanced aggregator initializes from warm neighbors, simulation-based alignment enforces distribution consistency; consistent SOTA across 3 benchmarks.
+   * Key techniques:
+     - Identifies seesaw dilemma: warm items on behavioral manifold vs. cold items on semantic manifold
+     - Retrieval-enhanced aggregator initializing generation from semantically similar warm items
+     - Simulation-based representation alignment via contrastive learning between generated and real embeddings
+     - Conditional diffusion unifying warm and cold representations without rigid manifold mapping
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Novel diffusion-based approach specifically targeting cold-start representation disparity
+     - **Fairness: 5/10** — Directly addresses cold-start item fairness; resolves warm-cold seesaw dilemma
+     - **Robustness: 7/10** — 3 benchmarks; consistent SOTA; ECML-PKDD 2026 peer-reviewed
+     - **Impact: 7/10** — ECML-PKDD 2026; SJTU/Xiaohongshu; practical cold-start solution with industrial backing
+
+6. **Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec)**
+   * Affiliation: Tsinghua University, Tencent — *(Bin Huang, Xin Wang, Wenwu Zhu — Tsinghua; Junwei Pan, Yongqi Zhou, Yifeng Zhou, Zhixiang Feng, Shudong Huang, Haijie Gu — Tencent)*
+   * Link: [arxiv.org/abs/2605.14512](https://arxiv.org/abs/2605.14512)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: Decouples input and output representations in generative recommendation to address dual-stage information bottleneck; Multi-expert Semantic Projection preserves semantic richness, Multi-faceted Hierarchical Quantization prevents dimensional collapse; +15.8% average improvement over SOTA.
+   * Key techniques:
+     - Asymmetric continuous-discrete framework decoupling input representations from discrete output targets
+     - Multi-expert Semantic Projection (MSP): expert-specialized projections improving infrequent item generalization
+     - Multi-faceted Hierarchical Quantization (MHQ): multi-view multi-level quantization with semantic regularization
+     - Identifies dual-stage information bottleneck: input lossy quantization bias + output imprecise discrete targets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (code promised but not yet released)
+     - **Novelty: 7/10** — Novel asymmetric framework explicitly addressing dual-stage information bottleneck in genrec
+     - **Fairness: 4/10** — MSP improves infrequent item generalization mitigating popularity bias
+     - **Robustness: 7/10** — +15.8% avg improvement; consistent across multiple datasets and baselines
+     - **Impact: 7/10** — Tsinghua/Tencent; strong empirical results advancing genrec representation design
+
+7. **DeGRe: Dense-supervised Generative Reranking for Recommendation**
+   * Affiliation: Zhejiang University, Alibaba Group — *(Chaotian Song, Jingyao Zhang, Chenghao Chen, Zisen Sang, Dehai Zhao, Guodong Cao, Boxi Wu, Deng Cai, Jia Jia — Zhejiang University / Alibaba Group)*
+   * Link: [arxiv.org/abs/2605.25749](https://arxiv.org/abs/2605.25749)
+   * Venue: KDD 2026 (ADS Track)
+   * TL;DR: Dense-supervised generative reranking with offline-online decoupled design; Lookahead Evaluator uses beam search to mine high-value sequences offline, dense step-wise supervision distilled to lightweight Online Generator for single-pass greedy decoding; deployed on Taobao Flash Shopping.
+   * Key techniques:
+     - Offline-online decoupled design: beam-search exploration offline → dense distillation → greedy online generation
+     - Lookahead Evaluator with cumulative regression actively mining high-value unexposed sequences
+     - Step-wise dense supervision bridging click-top heuristic label bias and credit assignment gap
+     - Lightweight Online Generator internalizing lookahead planning in single greedy decoding pass
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Novel dense-supervised paradigm for generative reranking with offline-online decoupling
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Public benchmarks + industrial dataset; deployed on Taobao Flash Shopping; KDD 2026
+     - **Impact: 8/10** — KDD 2026; Zhejiang/Alibaba; industrial deployment with verified online gains
 
 ### Papers July 7
 
@@ -1447,6 +1576,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
 - GR2 Technical Report (GR2)
 - UniSGR: Unified Framework for Semantic ID Generation and Ranking (UniSGR)
+- PauseRec: Implicit Reasoning for LLM-based Generative Recommendation (PauseRec)
+- HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
+- AsymRec: Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec)
+- DeGRe: Dense-supervised Generative Reranking for Recommendation (DeGRe)
 
 
 ### RL / Reinforcement Learning
@@ -1498,6 +1631,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS)
 - Long-Term Optimization for Large-Scale Generative Retrieval with Off-Policy REINFORCE
 - LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation (LBR)
+- DeGRe: Dense-supervised Generative Reranking for Recommendation (DeGRe)
+- PauseRec: Implicit Reasoning for LLM-based Generative Recommendation (PauseRec)
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
