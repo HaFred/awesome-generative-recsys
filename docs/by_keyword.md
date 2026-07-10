@@ -326,6 +326,7 @@
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 - Causal Representation Learning for Generalisable Recommendation
 - Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO)
+- DaV-Gen: End-to-End Generative Retrieval via Draft-and-Verify (DaV-Gen)
 - Decoupled Residual Quantization for Robust Semantic IDs in Recommendation (DRQ)
 - DeGRe: Dense-supervised Generative Reranking for Recommendation
 - Differentiable Geometric Indexing for End-to-End Generative Retrieval (DGI)
@@ -865,6 +866,7 @@
 - Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO)
 - Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
 - Decoupled Residual Quantization for Robust Semantic IDs in Recommendation (DRQ)
+- DECOR: Learning Decomposed Contextual Token Representations from Pretrained and Collaborative Signals for Generative Recommendation (DECOR)
 - Deep Interest Mining (SemanticID)
 - Discrimination Is Generation: Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG)
 - DOS: Dual-Flow Orthogonal Semantic IDs for Recommendation in Meituan (DOS)
