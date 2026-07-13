@@ -153,7 +153,7 @@
 | **Qilu University of Technology (Shandong Computer Science Center)** | PaperFlow: Profiling, Recommending, and Adapting Across Daily Paper Streams (PaperFlow)
 | **Qingdao University** | QCMP-CL
 | **Radio Television Suisse (RTS)** | Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS)
-| **Renmin University of China** | Towards Fast Domain Adaptation and Fine-Grained User Simulation for Evaluating Conversational Recommender Systems (AdaptSim) ‖ Divergence Meets Consensus (MDCNS) ‖ TDPM ‖ DS-MLP ‖ CaLIR ‖ Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop) ‖ LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR) ‖ Autonomous Information Seeking: A Roadmap for Agentic Recommender Systems ‖ CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER)
+| **Renmin University of China** | Towards Fast Domain Adaptation and Fine-Grained User Simulation for Evaluating Conversational Recommender Systems (AdaptSim) ‖ Divergence Meets Consensus (MDCNS) ‖ TDPM ‖ DS-MLP ‖ CaLIR ‖ Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop) ‖ LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR) ‖ Autonomous Information Seeking: A Roadmap for Agentic Recommender Systems ‖ CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER) ‖ GenRecEdit: Adapting Model Editing for Generative Recommendation with Cold-Start Items (GenRecEdit)
 | **Renmin University of China / Beijing University of Posts and Telecommunications** | LLaDA-Rec: Discrete Diffusion for Parallel Semantic ID Generation in Generative Recommendation ‖ VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) ‖ PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation (PIT)
 | **Rensselaer Polytechnic Institute** | From "Strings" to "Things" for Personal Knowledge Graphs (PKG-Rec)
 | **RMIT University** | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank)
@@ -170,7 +170,8 @@
 | **ShareChat** | Distributional Approximate Nearest Neighbour Search for Uncertainty-Aware Retrieval (DINOSAUR) ‖ Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026)
 | **Shenzhen Technology University** | UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
 | **Shenzhen University** | HSUGA
-| **Shopee** | UniRec ‖ Decoupled Residual Quantization for Robust Semantic IDs in Recommendation (DRQ) · OnePiece ‖ Let the Agent Steer: Closed-Loop Ranking Optimization via Influence Exchange (Sortify)
+| **Shopee** | UniRec ‖ Decoupled Residual Quantization for Robust Semantic IDs in Recommendation (DRQ) · OnePiece ‖ Let the Agent Steer: Closed-Loop Ranking Optimization via Influence Exchange (Sortify) ‖ ManCAR: Manifold-Constrained Latent Reasoning with Adaptive Test-Time Computation for Sequential Recommendation (ManCAR)
+| **Stanford University** | Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF) ‖ Do Recommendation Algorithms Work When Users Are LLM Agents? A Case Study on Moltbook (Moltbook)
 | **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec, L2Rec ‖ ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation ‖ FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation ‖ Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP) ‖ Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026) ‖ Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 | **Simulacra Research** | Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026)
 | **Snap Inc.** | Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec) ‖ On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG)
@@ -214,6 +215,7 @@
 | **University of Arizona** | Fairness Attacks on Recommender Systems
 | **University of British Columbia** | CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank) |
 | **University of California, Berkeley** | Trading Engagement for Sustainability: Carbon-Aware Re-ranking for E-commerce Recommendations ‖ Dialogue to Discovery: Attribute-Aware Preference Elicitation for Conversational Product Search Assistants (D2D)
+| **University College Dublin / Huawei Ireland Research Centre** | From Raw IDs to Semantic Planning: How Recommender Systems Utilize Information at Scale
 | **University of Catania / CNR** | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender
 | **University of Chinese Academy of Sciences** | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation ‖ BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD) ‖ Generalizing Graph Foundation Models via Hyperbolic Retrieval-Augmented Generation (HyRAG) ‖ Can LLM Rerankers Predict Their Own Ranking Performance? ‖ PaperFlow: Profiling, Recommending, and Adapting Across Daily Paper Streams (PaperFlow)
 | **University of Electronic Science and Technology of China** | CFALR: Collaborative Filtering-Augmented Large Language Model for Personalized Fashion Outfit Recommendation (CFALR) ‖ CARD · ProMax · AdaSID · QuaSID · FAVE ‖ Adaptive Loss Balancing for Noise-Robust GRPO in Generative Recommendation (AdaGRPO)
@@ -221,6 +223,7 @@
 | **University of Gothenburg** | Designing Trustworthy LLM-based Wellbeing Recommendation through Controllable Interaction
 | **University of Illinois at Chicago** | Toward User Preference Alignment in LLM Recommendation via Explicit Context Feedback ‖ Scoring Is Not Enough: Addressing Gaps in Utility-fairness Trade-offs for Ranking
 | **University of Luxembourg** | Popcorn: A Configurable Benchmark for Visual Evidence in Multimodal Movie Recommendation (Popcorn)
+| **University of Maine at Presque Isle** | Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF)
 | **University of Massachusetts Amherst** | Multimodal Music Recommendation System using LLMs ‖ Adaptive Re-Ranking
 | **University of Massachusetts Lowell** | TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
 | **University of New South Wales** | How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation? ‖ Beyond Item Order: Temporal Gap Tokenization for Generative Recommendation with Semantic IDs (ChronoSID)
@@ -238,7 +241,7 @@
 | **University of Toronto / Microsoft Research** | From Noise to Order: Learning to Rank via Denoising Diffusion (DiffusionRank) |
 | **University of Virginia** | SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation ‖ Mult-DPO: Multinomial Direct Preference Optimization for Recommender Systems (with Netflix, Cornell) ‖ Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
 | **University of Washington** | Cold-Start Personalization via Training-Free Priors from Structured World Models (PEP)
-| **University of Waterloo** | CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank) |
+| **University of Waterloo** | CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank) ‖ Do Recommendation Algorithms Work When Users Are LLM Agents? A Case Study on Moltbook (Moltbook) |
 | **University of Wisconsin-Madison** | Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 | **University of Zurich** | Attention Calibration for Position-Fair Dense Information Retrieval
 | **Universität Augsburg** | Guiding Federated Graph Recommendation with LLM-encoded knowledge
@@ -254,6 +257,7 @@
 | **Xiaohongshu** | UniNote: A Unified Embedding Model for Multimodal Representation and Ranking ‖ DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation (DiffCold)
 | **Xi'an Jiaotong University** | Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb) ‖ The Best of Both Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H²Rec)
 | **Xidian University** | AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation ‖ EviRank: Evidence-Based Confidence Estimation for LLM-Based Ranking (EviRank) ‖ ANCHOR: Agentic Noise Creation Framework for Human Simulation and Denoising Recommendation (ANCHOR) ‖ Differentiable Geometric Indexing for End-to-End Generative Retrieval (DGI)
+| **Xiamen University** | ManCAR: Manifold-Constrained Latent Reasoning with Adaptive Test-Time Computation for Sequential Recommendation (ManCAR)
 | **Yale University** | CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona) ‖ Massive Memorization with Hundreds of Trillions of Parameters (VISTA)
 | **Yandex** | Gated Bidirectional Linear Attention for Generative Retrieval (GBLA) ‖ Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
 | **Youtube** | [STATIC] Vectorizing the Trie

@@ -41,6 +41,8 @@
 - DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM)
 - Denoising Implicit Feedback for Cold-start Recommendation (DIF)
 - VCG: A Multimodal Retrieval Framework for E-Commerce Video Feeds under Extreme Cold-Start Conditions (VCG)
+- GenRecEdit: Adapting Model Editing for Generative Recommendation with Cold-Start Items (GenRecEdit)
+- Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF)
 
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)

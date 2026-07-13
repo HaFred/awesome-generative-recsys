@@ -1,18 +1,19 @@
 # Awesome Generative Recommendation System (RecSys)
 
 ```
-██████╗ ███████╗ ██████╗███████╗██╗   ██╗███████╗
-██╔══██╗██╔════╝██╔════╝██╔════╝╚██╗ ██╔╝██╔════╝
-██████╔╝█████╗  ██║     ███████╗ ╚████╔╝ ███████╗
-██╔══██╗██╔══╝  ██║     ╚════██║  ╚██╔╝  ╚════██║
-██║  ██║███████╗╚██████╗███████║   ██║   ███████║
-╚═╝  ╚═╝╚══════╝ ╚═════╝╚══════╝   ╚═╝   ╚══════╝
+ ██████╗                ██████╗                ███████╗                
+██╔════╝  ███╗  ███╗    ██╔══██╗ ███╗   ███╗   ██╔════╝██╗ ██╗ ██████╗ 
+██║      ██╔═██╗████╗   ██████╔╝██╔═██╗██╔═██╗ ███████╗╚██╗██║ ██╔═══╝ 
+██║  ███╗██████║██╔██╗  ██╔══██╗██████║██║ ╚═╝ ╚════██║ ╚███╔╝ ██████╗ 
+██║   ██║██║    ██║╚██╗ ██║  ██║██║    ██║ ██╗      ██║  ██╔╝      ██║
+╚██████╔╝╚████╗ ██║ ╚██╗██║  ██║╚████╗ ╚███╔╝  ███████║  ██║   ██████║
+ ╚═════╝  ╚═══╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═══╝  ╚══╝   ╚══════╝  ╚═╝   ╚═════╝
 ```
 ---
 
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
-RecSys is starting to adopt LLM for feature extraction, retrieval, and ranking/re-ranking! Although you can get some hands-on materials in either our [classics](#papers-classic-must-read) or some surveys, but since you're already interested in applying generative AI to industrial tasks, you probably wanna stay on the bleeding edge, right? That's exactly what this repo is for — automatically updated daily by agents with the latest generative RecSys papers fresh off arXiv, making sure that you never miss a beat.
+RecSys is starting to adopt LLM for feature extraction, retrieval, and ranking/re-ranking! Although you can get some hands-on materials in either the [classics](#papers-classic-must-read) or some surveys, but since you're already interested in applying generative AI to industrial tasks, you probably wanna stay on the bleeding edge, right? That's exactly what this repo is for — automatically updated daily by agents with the latest generative RecSys papers fresh off arXiv, making sure that you never miss a beat.
 
 > [!IMPORTANT]
 > For those who are not familiar with GenRec, or not even the recommendation system, please checkout the kickstart posts [here](docs/kickstart.md).
@@ -35,6 +36,7 @@ mindmap
         FLR -- Macquarie/UNSW
         IntuRec -- Beihang / USTC / CUHK / NUS / Meta
         LASAR / Latent Reasoning -- Beihang / Baidu
+        ManCAR / Manifold Reasoning -- Xiamen U / Shopee
       RL-based Optimization
         Rank-GRPO / ConvRec-R1 -- Netflix
         Rec-R1 -- UIUC
@@ -88,6 +90,8 @@ mindmap
         NEO / Unified Discovery -- Spotify
         MixRAGRec / KG-RAG Multi-Agent -- PolyU / CityU / NUS
         User-Governed Personalization -- UIUC / UT Austin / CMU
+        Moltbook / LLM Agent Rec -- Independent / Stanford
+        LHF / Retrieval Bottleneck -- U Maine / Stanford
       Efficient Decoding
         Vectorizing the Trie -- Google
         PauseRec / Implicit Reasoning -- UVA / Snap
@@ -110,6 +114,7 @@ mindmap
         DECOR -- UIUC / Miami U
         GateSID / Adaptive Gating -- Alibaba
         TriAlignGR / Multimodal Alignment -- Academic
+        GenRecEdit / Model Editing -- Renmin U
         H2Rec / Harmonized SID+HID -- CityU / Tongji / XJTU / JLU / Tsinghua
         FORGE / SID Construction -- Zhejiang U / Alibaba
         ComeIR / Memory Repr -- CityU / Tsinghua
@@ -168,6 +173,94 @@ mindmap
 
 ---
 ## By Date
+
+### Papers July 13
+
+*Monday, July 13, 2026. Arxiv cs.IR new listing returned only 1 relevant genrec paper (Semantic Planning) + 1 replacement (Moltbook). Applied 3-month fallback → found 3 additional missed papers (ManCAR KDD 2026, LHF retrieval bottleneck, GenRecEdit model editing). Total: 5 papers.*
+
+1. **From Raw IDs to Semantic Planning: How Recommender Systems Utilize Information at Scale**
+   * Affiliation: University College Dublin, Huawei Ireland Research Centre — *(Changhong Jin, Shiqiu Yang, Zheng Ju, Ruihai Dong, Barry Smyth — UCD; Roger Zhe Li, Yingjie Niu, Aghiles Salah, Mete Sertkan, Xingsheng Guo, Huifeng Guo — Huawei Ireland)*
+   * Link: [arxiv.org/abs/2607.09540](https://arxiv.org/abs/2607.09540)
+   * Venue: RecSys 2026
+   * TL;DR: Position paper tracing recommender systems' evolution through three stages of information utilization: Raw IDs → Semantic IDs → Semantic Planning; argues the next stage will predict the semantic target of the next exposure before instantiating it as a specific item or generated creative.
+   * Key techniques:
+     - Three-stage evolutionary framework: raw IDs (exact lookup, memorization) → semantic IDs (structured model-facing identity) → semantic planning (target-first, item-second)
+     - Multi-stakeholder perspective coordinating user, platform, and provider objectives
+     - Argues semantic planning requires changes in model design, evaluation methodology, and objective coordination
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (position/survey paper)
+     - **Novelty: 7/10** — First to formalize "semantic planning" as a distinct evolutionary stage beyond semantic retrieval
+     - **Fairness: 5/10** — Multi-stakeholder framing explicitly considers provider and platform fairness
+     - **Robustness: 6/10** — Conceptual framework supported by 2 decades of literature; RecSys 2026 peer-reviewed
+     - **Impact: 7/10** — RecSys 2026; UCD/Huawei; visionary roadmap for next-gen recommender architectures
+
+2. **Do Recommendation Algorithms Work When Users Are LLM Agents? A Case Study on Moltbook**
+   * Affiliation: Independent Researcher, Stanford University, University of Waterloo — *(Daming Li — Independent; Simeng Han — Stanford; Jialu Zhang — U Waterloo)*
+   * Link: [arxiv.org/abs/2606.29762](https://arxiv.org/abs/2606.29762)
+   * Venue: arXiv preprint, June 2026 (v2 July 2026)
+   * TL;DR: First empirical study on whether human-designed recommendation algorithms generalize to LLM agent users; on Moltbook (social media platform exclusively for AI agents), simple popularity rules and item-side CF outperform user-specific personalization, revealing that agent consumption patterns differ fundamentally from humans.
+   * Key techniques:
+     - Evaluation of 9 recommendation methods (heuristic, MF, ItemKNN, UserKNN, graph-based, sequential) on agent-populated platform
+     - Moltbook: large-scale social media platform exclusively for autonomous AI agents (OpenClaw framework)
+     - Finding: popularity baselines + item-side CF outperform personalization; static agent persona descriptions add no predictive value
+     - Platform-level and item-level structural signals dominate over individual preference modeling for agent users
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 8/10** — First empirical investigation of recommendation for LLM agent users; provocative findings challenging personalization assumptions
+     - **Fairness: 4/10** — Not addressing fairness
+     - **Robustness: 6/10** — 9 methods evaluated on real agent-populated platform; findings may not generalize beyond current agent behaviors
+     - **Impact: 7/10** — Opens critical question for the future agent-populated web; implications for recommender system design
+
+3. **ManCAR: Manifold-Constrained Latent Reasoning with Adaptive Test-Time Computation for Sequential Recommendation**
+   * Affiliation: Xiamen University, Shopee — *(Kun Yang, Yuxuan Zhu, Yazhe Chen, Siyao Zheng, Bangyang Hong, Kangle Wu, Yabo Ni, Anxiang Zeng, Cong Fu, Hui Li — Xiamen University / Shopee)*
+   * Link: [arxiv.org/abs/2602.20093](https://arxiv.org/abs/2602.20093)
+   * Venue: KDD 2026
+   * TL;DR: Principled latent reasoning framework constraining multi-step reasoning within the topology of a global interaction graph to prevent latent drift; local intent prior from collaborative neighborhood + adaptive test-time stopping; +46.88% NDCG@10 relative improvement over SOTA on 7 benchmarks.
+   * Key techniques:
+     - Manifold-constrained reasoning: local intent prior as distribution over item simplex from collaborative neighborhood
+     - Progressive alignment during training forcing reasoning trajectory within valid manifold
+     - Adaptive test-time stopping when predictive distribution stabilizes, preventing over-refinement
+     - Variational interpretation providing theoretical validation of drift-prevention and adaptive stopping mechanisms
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/FuCongResearchSquad/ManCAR](https://github.com/FuCongResearchSquad/ManCAR) — 18⭐, 14 commits, PyTorch implementation, KDD 2026 artifact with CITATION.cff and ARTIFACT.md; well-documented README with dataset processing scripts; clean modular code structure
+     - **Novelty: 8/10** — First principled manifold-constrained latent reasoning framework; drift-prevention via manifold navigation is novel and well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — 7 benchmarks with consistent SOTA outperformance; theoretical variational analysis; KDD 2026 peer-reviewed
+     - **Impact: 8/10** — KDD 2026; Xiamen/Shopee; 46.88% relative gain establishes manifold-constrained reasoning as new paradigm for latent reasoning in recommendation
+
+4. **Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF)**
+   * Affiliation: University of Maine at Presque Isle, Stanford University — *(Zhe Dong — U Maine at Presque Isle; Fang Qin — Stanford; Manish Shah, Yicheng Wang — Independent)*
+   * Link: [arxiv.org/abs/2606.29947](https://arxiv.org/abs/2606.29947)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Systematic diagnosis revealing that retrieval coverage, not reranking quality, is the critical bottleneck for LLM-based cold-start recommendation; standard retrievers find gold items only 4.6–22.9% of the time; proposes LHF (Learned Hybrid Fusion) recovering 17–61% of oracle coverage headroom.
+   * Key techniques:
+     - Five-domain benchmark separating reranking quality from retrieval coverage with positive-controlled and retrieval-realistic regimes
+     - LHF: validation-trained learned hybrid fusion layer over multi-retriever union pool using GBDT
+     - Finding: LLM rerankers fail to consistently outperform collaborative baselines even with ideal retrieval
+     - Coverage-aware training revealing inherent warm-cold retrieval trade-off
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [doi.org/10.5281/zenodo.20993306](https://doi.org/10.5281/zenodo.20993306) — full reproducibility artifacts (code, evaluation tooling, splits, prompts) archived on Zenodo; 17 pages, 6 figures, 13 tables
+     - **Novelty: 7/10** — First systematic diagnosis that retrieval is the primary bottleneck (not reranking) in LLM cold-start recommendation
+     - **Fairness: 4/10** — Coverage-aware training reveals fairness trade-offs; not primary focus
+     - **Robustness: 7/10** — 5 domains, benchmark protocol with splits publicly released; rigorous separation of retrieval and reranking effects
+     - **Impact: 7/10** — Reframes LLM cold-start recsys research toward retrieval-side improvements; practical LHF baseline for future work
+
+5. **GenRecEdit: Adapting Model Editing for Generative Recommendation with Cold-Start Items**
+   * Affiliation: Renmin University of China — *(Chenglei Shen, Teng Shi, Weijie Yu, Xiao Zhang, Jun Xu — Renmin University of China)*
+   * Link: [arxiv.org/abs/2603.14259](https://arxiv.org/abs/2603.14259)
+   * Venue: arXiv preprint, March 2026
+   * TL;DR: First framework adapting NLP model editing to generative recommendation for cold-start items; explicitly models context-to-token relationships, uses iterative token-level editing for multi-token item injection, and introduces one-to-one trigger mechanism to reduce inter-edit interference; achieves significant cold-start gains using only 9.5% of retraining time.
+   * Key techniques:
+     - Position-wise knowledge preparation explicitly modeling full sequence context to next-token generation relationship
+     - Iterative token-level editing injecting multi-token item representations (addressing SID co-occurrence instability)
+     - One-to-one trigger mechanism reducing interference among multiple edits during inference
+     - Training-free knowledge injection preserving original recommendation quality
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First adaptation of model editing paradigm to generative recommendation cold-start; addresses two GR-specific challenges
+     - **Fairness: 5/10** — Directly addresses cold-start item fairness by enabling efficient updates for new items
+     - **Robustness: 6/10** — Multiple Amazon datasets; preserves warm-item performance; 9.5% retraining cost
+     - **Impact: 6/10** — Renmin University; practical framework for efficient cold-start updates in generative recommendation
 
 ### Papers July 11
 
@@ -1413,7 +1506,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 91 papers as of July 12.
+**Count:** 93 papers as of July 13.
 
 | Score | Paper |
 | --- | --- |
@@ -1443,6 +1536,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG) |
 | 8/10 | One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE) |
 | 8/10 | On the Memorization and Generalization of Generative Recommendation (MemGen-GR) |
+| 8/10 | ManCAR: Manifold-Constrained Latent Reasoning with Adaptive Test-Time Computation for Sequential Recommendation |
 | 8/10 | ProRL: Effective Reinforcement Learning for Proactive Recommendation via Rectified Policy Gradient Estimation (ProRL) |
 | 8/10 | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender |
 | 8/10 | SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents |
@@ -1468,6 +1562,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
 | 7/10 | The Best of Both Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H²Rec) |
+| 7/10 | Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF) |
 | 7/10 | CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER) |
 | 7/10 | Fast and Feasible: Permutation-based Constrained Reranking for Revenue Maximization (PermR) |
 | 7/10 | FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation |
@@ -1549,6 +1644,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - The Best of Both Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H²Rec)
 
 
+- GenRecEdit: Adapting Model Editing for Generative Recommendation with Cold-Start Items (GenRecEdit)
+
 ### RL / Reinforcement Learning
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
 - Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE)
@@ -1606,6 +1703,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale (RaG)
 - GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation (GenRec)
 - LASAR: Latent Adaptive Semantic Aligned Reasoning for Generative Recommendation (LASAR)
+- ManCAR: Manifold-Constrained Latent Reasoning with Adaptive Test-Time Computation for Sequential Recommendation (ManCAR)
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
