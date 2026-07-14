@@ -21,6 +21,7 @@
 - AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation (AgentSelect)
 - Autonomous Information Seeking: A Roadmap for Agentic Recommender Systems
 - Seeing and Reflecting: Multimodal Memory-Enhanced Agent Collaboration for Recommendation (MMEACR)
+- An LLM-powered Agentic Recommendation System for Connected TV Content Discovery
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -43,6 +44,7 @@
 - VCG: A Multimodal Retrieval Framework for E-Commerce Video Feeds under Extreme Cold-Start Conditions (VCG)
 - GenRecEdit: Adapting Model Editing for Generative Recommendation with Cold-Start Items (GenRecEdit)
 - Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF)
+- Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces
 
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
@@ -377,6 +379,8 @@
 - UniNote: A Unified Embedding Model for Multimodal Representation and Ranking
 - UniPinRec: Unifying Generative Retrieval and Ranking at Pinterest Scale
 - Planning over Matrix-Factorization MDPs for Candidate Generation (MF-MDP Planning)
+- Prompt Generation Technical Report (PG)
+- Beyond Semantic IDs: Encoding Business-Value Ranking into Document Identifiers for Generative Retrieval (CRID)
 
 ### Graph-based Recommendation
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -488,6 +492,9 @@
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
 - NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems (NOVA)
 - IntentTune: Using User Demand and Personalization to Resolve "Unknown" Query Intents for E-commerce Search (IntentTune)
+- Prompt Generation Technical Report (PG)
+- An LLM-powered Agentic Recommendation System for Connected TV Content Discovery
+- Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec) 
@@ -645,6 +652,7 @@
 - Bi-NAS: Towards Effective and Personalized Explanation for Recommender Systems via Bi-Level Neural Architecture Search (Bi-NAS)
 - CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
 - ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT)
+- Tokenizing Numerical and Embedding Features for LLM RecSys
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -747,6 +755,7 @@
 - URecJPQ: Memory-efficient Multimodal Recommendation Models through RecJPQ in Large-Scale Scenarios (URecJPQ)
 - SocialPersona: Benchmarking Personalized Profiling and Response with Multimodal Social-Media Context (SocialPersona)
 - VCG: A Multimodal Retrieval Framework for E-Commerce Video Feeds under Extreme Cold-Start Conditions (VCG)
+- Stream-aware Side Adaptation for Large Pre-trained Multimodal Embedding Models in Sequential Recommendation (Stresa)
 - VRec
 - When Text-as-Vision Meets Semantic IDs in Generative Recommendation: An Empirical Study
 - Why Users Go There: World Knowledge-Augmented Generative Next POI Recommendation
@@ -844,6 +853,8 @@
 - Real-Time Hard Negative Sampling via LLM-based Clustering for Large-Scale Two-Tower Retrieval
 - ResRank (retrieval + reranking)
 - Skill Is Not Document: A Query-Conditional Benchmark and Two-Stage Retriever for LLM Agent Skill Routing (R3)
+- Tokenizing Numerical and Embedding Features for LLM RecSys
+- Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
 - STORM: Stepwise Token Optimization with Reward-Guided Beam Search
 
@@ -915,6 +926,7 @@
 - DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM)
 - Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop)
 - The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
+- Beyond Semantic IDs: Encoding Business-Value Ranking into Document Identifiers for Generative Retrieval (CRID)
 
 ### Security / Adversarial
 - VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)
@@ -953,6 +965,8 @@
 - UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence
 - VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE)
 - TRUST: Item-Calibrated Interval Evidence for Temporal Session-Based Recommendation (TRUST)
+- RecRec: Recursive Refinement for Sequential Recommendation
+- Stream-aware Side Adaptation for Large Pre-trained Multimodal Embedding Models in Sequential Recommendation (Stresa)
 - The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
 
 ### Survey

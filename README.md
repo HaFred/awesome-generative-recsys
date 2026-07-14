@@ -6,7 +6,7 @@
 ██║      ██╔═██╗████╗   ██████╔╝██╔═██╗██╔═██╗ ███████╗╚██╗██║ ██╔═══╝ 
 ██║  ███╗██████║██╔██╗  ██╔══██╗██████║██║ ╚═╝ ╚════██║ ╚███╔╝ ██████╗ 
 ██║   ██║██║    ██║╚██╗ ██║  ██║██║    ██║ ██╗      ██║  ██╔╝      ██║
-╚██████╔╝╚████╗ ██║ ╚██╗██║  ██║╚████╗ ╚███╔╝  ███████║  ██║   ██████║
+╚██████╔╝╚████╗ ██║ ╚██╗██║  ██║╚████╗ ╚███╔═╝ ███████║  ██║   ██████║
  ╚═════╝  ╚═══╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═══╝  ╚══╝   ╚══════╝  ╚═╝   ╚═════╝
 ```
 ---
@@ -137,6 +137,8 @@ mindmap
         BRIDGE -- UCAS
         MARS -- Fudan U
         GenAIR / Archetype-Grounded -- CUHK / McGill / Tongji
+        RecRec / Recursive Refinement -- Sony Research India
+        Stresa / Side Adaptation -- U Glasgow
       Multi-behavior
         SpectraMB -- NUS / SMU / HFUT / USTC
       Optimization & Scaling
@@ -173,6 +175,130 @@ mindmap
 
 ---
 ## By Date
+
+### Papers July 14
+
+*Tuesday, July 14, 2026. Arxiv cs.IR new listing returned 7 relevant genrec papers. No fallback needed.*
+
+1. **Prompt Generation Technical Report**
+   * Affiliation: Alibaba Group (Taobao Search) — *(Dan Ou, Gui Ling, Hao Wan, Hongbin Zhou, Jialiang Cheng, Jiangnan Pang, Silu Zhou, Wei Shi, Weichen Ye, Wenming Zhang, Yang Wang, Yu Li, Yuliang Yan, Zhan Fa, Zhihong Chen, Zongyuan Wu, Bo Zheng, Changfa Wu, Dunxian Huang, Haihong Tang, Jinlong Guo, Kaixuan Zhang, Kun Ma, Lin Qu, Longbo Zhong, Tao Lan, Tong Xiong, Zhibo Wu — Alibaba Group)*
+   * Link: [arxiv.org/abs/2607.11326](https://arxiv.org/abs/2607.11326)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Configuration-driven framework decoupling feature-processing logic from model architecture for industrial generative retrieval; two declarative JSON files serve as single source of truth for offline training and online serving; deployed on Taobao Search with +0.47% transactions, +0.51% GMV.
+   * Key techniques:
+     - Four feature types with three composable processing components for heterogeneous feature assembly and compression
+     - Declarative JSON configuration as single source of truth across offline training and online serving
+     - Built-in token compression for ultra-long sequences
+     - Universal pipeline enabling zero-engineering deployment across new scenarios
+     - Unified engine optimizations over standardized configuration for negligible inference overhead
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Alibaba internal production)
+     - **Novelty: 6/10** — Configuration-driven decoupling is a practical engineering contribution rather than algorithmic novelty
+     - **Fairness: 2/10** — Not addressing fairness
+     - **Robustness: 8/10** — Deployed on Taobao Search with statistically significant A/B results; applied across multiple Taobao search and recommendation teams
+     - **Impact: 8/10** — Alibaba Group; practical infrastructure framework accelerating generative retrieval iteration across Taobao
+
+2. **Beyond Semantic IDs: Encoding Business-Value Ranking into Document Identifiers for Generative Retrieval (CRID)**
+   * Affiliation: Alibaba Group (Taobao) — *(Gui Ling, Zhihong Chen, Yu Li, Tong Xiong, Kunhai Lin, Kaixuan Zhang, Yuliang Yan, Dan Ou, Haihong Tang, Bo Zheng — Alibaba Group)*
+   * Link: [arxiv.org/abs/2607.11392](https://arxiv.org/abs/2607.11392)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Collision-free DocID scheme (CRID) decoupling semantic clustering from business-value ranking for generative retrieval; analytical framework decomposing retrieval gains into personalization vs prior generalization; deployed on Taobao 300M-item corpus with +1.06% GMV.
+   * Key techniques:
+     - Cluster-Ranked Identifier (CRID): collision-free scheme with semantic clustering + business-value ranking decoupling
+     - Intra-cluster reranking supporting incremental updates without full re-indexing
+     - Analytical framework decomposing retrieval gains into personalized preference and statistical prior generalization
+     - Cluster size governs personalization-generalization trade-off; CRID beats strongest embedding-based retrieval baseline on Hitrate
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Alibaba internal production)
+     - **Novelty: 7/10** — First to explicitly decouple semantic and business-value objectives in DocID design; collision-free identifier is novel
+     - **Fairness: 3/10** — Business-value ranking may exacerbate popularity bias; not explicitly addressing fairness
+     - **Robustness: 8/10** — 300M-item production corpus; full-traffic deployment; +1.06% GMV
+     - **Impact: 9/10** — Alibaba Group; fundamental rethinking of DocID design in generative retrieval; production-validated at massive scale
+
+3. **Tokenizing Numerical and Embedding Features for LLM RecSys**
+   * Affiliation: Meta — *(Zhe Xu, Ankit Peshin, Chiyu Zhang, Feng Qi, Johnson Lui, Anil Ramakrishna, Justin Johnson, Carl Hu, Kaushik Rangadurai, Luke Simon — Meta)*
+   * Link: [arxiv.org/abs/2607.10016](https://arxiv.org/abs/2607.10016)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Soft-token fusion framework mapping continuous numerical and dense embedding features into LLM embedding space for recommendation; interaction-based fusion module refines heterogeneous soft tokens before LLM input; shared-parameter two-tower retrieval model; consistent improvements on 3 Amazon benchmarks.
+   * Key techniques:
+     - Soft-token fusion mapping numerical and embedding features into LLM embedding space via standard token interface
+     - Interaction-based fusion module refining embedding and numerical soft tokens before LLM input (more effective than direct concatenation)
+     - Shared-parameter LLM-based two-tower retrieval architecture
+     - Addresses fundamental mismatch between token-based LLM input and heterogeneous recsys features
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Soft-token fusion for LLM RecSys is a natural extension of prefix tuning; interaction-based fusion is incremental
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — 3 Amazon benchmarks with consistent improvement over LLM-based baselines
+     - **Impact: 7/10** — Meta; practical framework bridging non-textual features and LLM-based recommender systems
+
+4. **An LLM-powered Agentic Recommendation System for Connected TV Content Discovery**
+   * Affiliation: Samsung — *(Lei Shi, Di Wang, Harry Tran, Helsing Xu, Yuchen Lu, Dhara Ghodasara, Wilson Chaney, Xueting Liao, Jerry Yu, Huayu Ding, Mingze Gao, Shike Mei, Shuo Tang, Zhe Zhang, Jianming He, Abhishek Kumar, Haotian Wu, Hamed Firooz, Li Li — Samsung)*
+   * Link: [arxiv.org/abs/2607.09988](https://arxiv.org/abs/2607.09988)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: LLM-powered agentic architecture for Connected TV content discovery orchestrating specialized LLM and traditional ML components; processes heterogeneous contextual signals (trending topics, breaking news, cultural events) without bespoke feature engineering; main contribution is practical engineering for inference latency.
+   * Key techniques:
+     - Agentic architecture orchestrating LLM-based and traditional ML components per sub-task
+     - Natural processing of diverse unstructured contextual signals across varying schemas
+     - Hybrid system balancing LLM flexibility with established recommendation performance
+     - Engineering solutions for LLM inference latency in production recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Agentic architecture for CTV is a new domain application; hybrid orchestration is practical but incremental
+     - **Fairness: 4/10** — Contextual signal integration may improve content diversity
+     - **Robustness: 7/10** — Production system overcoming practical latency limitations; 13 pages with detailed trade-off analysis
+     - **Impact: 7/10** — Samsung; practical blueprint for LLM-powered agentic recommendation in resource-constrained CTV environments
+
+5. **Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces**
+   * Affiliation: Vrbo / Expedia Group — *(Syed Mohammed Arshad Zaidi, Eric Rincon, Shayan Hassantabar — Vrbo / Expedia Group)*
+   * Link: [arxiv.org/abs/2607.09877](https://arxiv.org/abs/2607.09877)
+   * Venue: KDD 2026 TSMO Workshop
+   * TL;DR: Training-free LLM candidate generation for cold-start/long-tail vacation rental properties; semantic query synthesis per property + ANN retrieval from 11.7M catalog; Union fusion preserves behavioral ordering on well-served properties while extending coverage to tens of thousands of previously unreachable listings.
+   * Key techniques:
+     - Off-the-shelf LLM synthesizing diverse semantic queries from static property metadata (no behavioral signals or fine-tuning)
+     - ANN retrieval at scale (11.7M-property catalog) via pre-trained text encoder
+     - Union fusion strategy preserving IBKNN behavioral ordering while adding LLM candidates — zero regression on head items
+     - Small 3B open-weights LLM matches frontier API models under Union fusion, enabling self-hosted deployment
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Training-free LLM candidate generation is practical; Union fusion preserving head performance is well-motivated
+     - **Fairness: 5/10** — Directly addresses long-tail supply-side imbalance; extends coverage to underserved properties
+     - **Robustness: 7/10** — 1.6M focal properties; KDD 2026 Workshop peer-reviewed; 3B model matches frontier API models
+     - **Impact: 6/10** — KDD 2026 Workshop; Vrbo/Expedia; practical long-tail solution for marketplace recommendation
+
+6. **RecRec: Recursive Refinement for Sequential Recommendation**
+   * Affiliation: Sony Research India — *(Pervez Shaik, Prosenjit Biswas, Abhinav Thorat, Ravi Kolla, Niranjan Pedanekar — Sony Research India)*
+   * Link: [arxiv.org/abs/2607.10541](https://arxiv.org/abs/2607.10541)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Recursive inference framework modeling user preferences as persistent latent state refined through shared recursive module; evidence-anchored correction mechanism prevents semantic drift during deep recursion; matches or outperforms SOTA sequential/graph/reasoning-enhanced recommenders with only 3.9M–14M parameters.
+   * Key techniques:
+     - Recursive latent state inference as alternative to single-pass encoding for sequential recommendation
+     - Shared recursive module updating compact latent state conditioned on interaction evidence
+     - Evidence-anchored correction mechanism grounding each update in original interaction context to prevent semantic drift
+     - 3.9M–14M parameters matching much larger architectures — scalable alternative to deeper or language-based models
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 4/10** — [anonymous.4open.science/r/RecRec-6B67](https://anonymous.4open.science/r/RecRec-6B67/README.md) — anonymous review repository; functional code but minimal documentation, no license, no model checkpoints
+     - **Novelty: 7/10** — Novel recursive inference perspective on sequential recommendation; evidence-anchored correction is well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — 3 benchmark datasets with standard evaluation protocols; comprehensive ablation studies
+     - **Impact: 6/10** — Sony Research India; lightweight alternative to deeper architectures with strong empirical results
+
+7. **Stream-aware Side Adaptation for Large Pre-trained Multimodal Embedding Models in Sequential Recommendation (Stresa)**
+   * Affiliation: University of Glasgow — *(Junchen Fu, Kaiwen Zheng, Ioannis Arapakis, Wenhao Deng, Xin Xin, Joemon M. Jose, Xuri Ge — University of Glasgow / Collaborators)*
+   * Link: [arxiv.org/abs/2607.10909](https://arxiv.org/abs/2607.10909)
+   * Venue: ACM MM 2026
+   * TL;DR: Stream-aware side-adaptation framework for frozen large pre-trained multimodal embedding models in sequential recommendation; SHAF preserves historical side memory during fusion, ReSA produces selective residual updates across layers; consistently outperforms standard side adapters and SOTA baselines.
+   * Key techniques:
+     - Stream-aware Hidden-Adapter Fusion (SHAF) preserving historical side memory during fusion
+     - Residual Stream Adapter (ReSA) producing selective residual updates across layers, preventing layer dropout in existing side adapters
+     - Designed for frozen large pre-trained multimodal embedding models (e.g., Qwen3-VL Embedding) to avoid full fine-tuning
+     - Consistently outperforms across multiple backbone embedding models and public datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/GAIR-Lab/Stresa](https://github.com/GAIR-Lab/Stresa) — public GitHub repo; code matches paper; well-structured; from established lab (GAIR-Lab)
+     - **Novelty: 7/10** — Novel stream-aware side adaptation addressing two specific failure modes of existing side adapters
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Multiple backbone models and public datasets; ACM MM 2026 peer-reviewed
+     - **Impact: 7/10** — ACM MM 2026; University of Glasgow; practical framework for adapting frozen multimodal embeddings in sequential recommendation
 
 ### Papers July 13
 
@@ -1058,93 +1184,6 @@ mindmap
      - **Robustness: 7/10** — Billion-level industrial datasets; strict latency budget compliance
      - **Impact: 7/10** — Kuaishou; new retrieval paradigm for industrial recommendation systems
 
-### Papers July 3
-
-1. **CoPersona: Collaborative Persona Graphs for Robust LLM Personalization**
-   * Affiliation: Yale University, Samsung — *(Yangtian Zhang, Leyao Wang, Hiren Madhu, Ngoc Bui, Rex Ying — Yale University; Walter Roznyatovskiy — Samsung)*
-   * Link: [arxiv.org/abs/2607.01485](https://arxiv.org/abs/2607.01485)
-   * Venue: KDD 2026
-   * TL;DR: Graph-based collaborative personalization framework that completes sparse user profiles via behaviorally similar peers, decomposing interaction histories into facet-level representations with a multiplex persona graph and dual-branch inference architecture.
-   * Key techniques:
-     - Multiplex persona graph decomposing interaction histories into multiple facet-level representations
-     - Dual-branch architecture combining non-parametric peer retrieval with parametric graph reasoning
-     - Peer-to-peer facet-level alignment for robust personalization under sparse user histories
-     - Facet decomposition addresses uneven coverage bias in unstructured global space
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First collaborative persona graph approach combining non-parametric and parametric personalization
-     - **Fairness: 6/10** — Explicitly addresses sparse/skewed user profiles causing brittle personalization for under-supported facets
-     - **Robustness: 8/10** — Consistent improvements across multiple domains and model scales; KDD 2026 peer-reviewed
-     - **Impact: 8/10** — KDD 2026; Yale/Samsung; strong results for robust LLM personalization with sparse data
-
-2. **Bi-NAS: Towards Effective and Personalized Explanation for Recommender Systems via Bi-Level Neural Architecture Search**
-   * Affiliation: Virginia Tech, Google, Amazon — *(Longfeng Wu, Tong Zeng, Lecheng Zheng, Dawei Zhou — Virginia Tech; Yao Zhou — Google; Zhimin Peng, Bhanu Pratap Singh Rawat, Giovanni Seni — Amazon)*
-   * Link: [arxiv.org/abs/2607.01387](https://arxiv.org/abs/2607.01387)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Bi-level NAS framework optimizing both intra-layer and inter-layer design spaces for personalized RecSys explanations, integrating LLM zero-shot prompting to produce justifications aligned with user preferences and item attributes.
-   * Key techniques:
-     - Bi-level NAS simultaneously refining cross-attention mechanisms and feature interaction functions
-     - LLM integration via zero-shot prompting for enhanced explanation generation
-     - Alignment of user feature preferences with item quality scores for transparency
-     - Evaluated on 4 real-world datasets for both accuracy and explanation quality
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First NAS-based approach for optimizing RecSys explanations with LLM integration
-     - **Fairness: 4/10** — Personalized explanations promote individual-fair transparency
-     - **Robustness: 6/10** — Evaluated on 4 datasets with ablation studies
-     - **Impact: 5/10** — Preprint only; practical framework for explainable RecSys
-
-3. **Planning over Matrix-Factorization MDPs for Candidate Generation**
-   * Affiliation: AI VK, Lomonosov Moscow State University — *(Mikhail Trapeznikov — AI VK / Lomonosov Moscow State University; Maksim Utushkin — AI VK)*
-   * Link: [arxiv.org/abs/2607.02115](https://arxiv.org/abs/2607.02115)
-   * Venue: 5th Workshop on End-to-End Customer Journey Optimization at KDD 2026
-   * TL;DR: Casts top-K retrieval as an MDP over implicit-ALS posteriors where items are actions and fold-in provides closed-form transitions; a single step of lookahead already captures most gains over static retrieval.
-   * Key techniques:
-     - MDP formulation over matrix-factorization posteriors with rank-one fold-in transitions
-     - Comparison of static retrieval, one-step planning, and horizon-K MCTS
-     - Cosine similarity (rather than inner product) prevents popularity entanglement
-     - Lightweight planning layer requiring no retraining or representation change
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Novel MDP formulation for MF-based candidate generation, though gains are mostly captured by one-step lookahead
-     - **Fairness: 3/10** — Cosine similarity reduces popularity entanglement but not a fairness focus
-     - **Robustness: 6/10** — Gains hold on ML-1M and VK-LSVD under global time split; consistent across 5 datasets
-     - **Impact: 5/10** — KDD 2026 Workshop; practical technique for improving retrieval without retraining
-
-4. **ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues**
-   * Affiliation: UNIST (Ulsan National Institute of Science and Technology) — *(Yeji Park, Jiwon Tark, Taesik Gong — UNIST)*
-   * Link: [arxiv.org/abs/2607.01242](https://arxiv.org/abs/2607.01242)
-   * Venue: ACL 2026 (Main, Long)
-   * TL;DR: Query-wise personalization framework adapting LLM responses to user expertise by combining semantic and keystroke behavioral cues via in-context prompting, achieving 65.7% reduction in expertise inference error and 17.5% improvement in response satisfaction.
-   * Key techniques:
-     - Semantic-behavioral expertise inference module combining query text and keystroke dynamics
-     - Expertise-conditioned response generation adapting detail, terminology, and complexity
-     - In-context LLM prompting for expertise inference without model fine-tuning
-     - User study with 40 participants and 1,270 queries
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 5/10** — [github.com/unist-uai/ExPerT](https://github.com/unist-uai/ExPerT) — Preprocessing code with sample data and documentation; no license file; limited to preprocessing pipeline
-     - **Novelty: 7/10** — First framework combining keystroke behavioral cues with semantic signals for query-wise LLM personalization
-     - **Fairness: 5/10** — Expertise-adaptive personalization can mitigate one-size-fits-all bias
-     - **Robustness: 7/10** — 65.7% error reduction validated via user study; ACL 2026 peer-reviewed
-     - **Impact: 7/10** — ACL 2026 (Main); practical framework for expertise-aware LLM deployment
-
-5. **IntentTune: Using User Demand and Personalization to Resolve "Unknown" Query Intents for E-commerce Search**
-   * Affiliation: eBay Inc. — *(Rachith Aiyappa, Ishita Khan, Chester Palen-Michel, Jayanth Yetukuri, Samarth Agrawal, Mehran Elyasi, Shuang Zhou — eBay Inc.)*
-   * Link: [arxiv.org/abs/2607.01530](https://arxiv.org/abs/2607.01530)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Framework resolving ambiguous e-commerce query intents by leveraging user-specific behavioral signals (search history, browsing, profile) or population-level demand patterns; demonstrates user-specific signals significantly outperform population-level statistics.
-   * Key techniques:
-     - Dual-source intent inference: user-specific behavioral signals vs. population-level demand patterns
-     - Real-world e-commerce query intent classification for gender, age group, product category, size
-     - Prior search queries outperform both population statistics and static profiles for intent inference
-     - Empirical comparison of behavioral signal types for underspecified query resolution
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (eBay internal)
-     - **Novelty: 5/10** — Systematic comparison of behavioral signal types for query intent, but largely empirical
-     - **Fairness: 5/10** — Personalized intent inference can improve relevance equity across user groups
-     - **Robustness: 6/10** — Real-world e-commerce data evaluation with controlled experiments
-     - **Impact: 6/10** — eBay; practical framework for e-commerce search personalization
-
 ### Papers July 12 (Weekend Catch-up — KDD 2026)
 
 *Sunday, July 12, 2026. Arxiv inactive (weekend). Cross-referenced KDD 2026 accepted papers against existing README entries; found 7 missed KDD 2026 GenRec papers. Total: 7 papers.*
@@ -1506,7 +1545,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 93 papers as of July 13.
+**Count:** 95 papers as of July 14.
 
 | Score | Paper |
 | --- | --- |
@@ -1580,6 +1619,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | RSIR: Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control (RSIR) |
 | 7/10 | Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair |
 | 7/10 | SAERec: Constructing Fine-grained Interpretable Intents Priors via Sparse Autoencoders for Recommendation (SAERec) |
+| 7/10 | Stream-aware Side Adaptation for Large Pre-trained Multimodal Embedding Models in Sequential Recommendation (Stresa) |
 | 7/10 | Uncertainty and Fairness Awareness in LLM-Based Recommendation Systems |
 | 7/10 | URecJPQ: Memory-efficient Multimodal Recommendation Models through RecJPQ in Large-Scale Scenarios (URecJPQ) |
 | 7/10 | Who Owns the AI Recommendation? A Multi-Industry Empirical Map of Brand Category Ownership Across Large Language Models (LLM Brand) |
@@ -1603,6 +1643,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 5/10 | Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec) |
 | 5/10 | LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation (LBR) |
 | 5/10 | OneReason Technical Report |
+| 4/10 | RecRec: Recursive Refinement for Sequential Recommendation |
 | 3/10 | Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS) |
 | 3/10 | STORM: Stepwise Token Optimization with Reward-Guided Beam Search |
 | 3/10 | Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) |
