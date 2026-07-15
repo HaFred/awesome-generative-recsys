@@ -92,6 +92,7 @@ mindmap
         User-Governed Personalization -- UIUC / UT Austin / CMU
         Moltbook / LLM Agent Rec -- Independent / Stanford
         LHF / Retrieval Bottleneck -- U Maine / Stanford
+        MESH / Retrieval Scaling -- Pinterest
       Efficient Decoding
         Vectorizing the Trie -- Google
         PauseRec / Implicit Reasoning -- UVA / Snap
@@ -118,6 +119,7 @@ mindmap
         H2Rec / Harmonized SID+HID -- CityU / Tongji / XJTU / JLU / Tsinghua
         FORGE / SID Construction -- Zhejiang U / Alibaba
         ComeIR / Memory Repr -- CityU / Tsinghua
+        IBA / IG Budget Allocation -- Chongqing U / Griffith U
       Next Interest Flow Prediction
         AMEN -- Alibaba
       RL-based Alignment for Recall
@@ -138,6 +140,7 @@ mindmap
         MARS -- Fudan U
         GenAIR / Archetype-Grounded -- CUHK / McGill / Tongji
         RecRec / Recursive Refinement -- Sony Research India
+        RecRec2 / Recursive Reasoning -- U Glasgow / Amazon / CMU / NUS
         Stresa / Side Adaptation -- U Glasgow
       Multi-behavior
         SpectraMB -- NUS / SMU / HFUT / USTC
@@ -155,6 +158,7 @@ mindmap
         DS-MLP / CTR Prediction -- Renmin U
         IIRG -- KAIST / Snap Inc.
         URecJPQ -- U Bari / U Glasgow
+        NONTP / NTP Training Signals -- Meituan
     Feature Layer: LLM Semantic Features
       Semantic Token and Embedding
         PatchRec -- USTC and Tencent
@@ -175,6 +179,95 @@ mindmap
 
 ---
 ## By Date
+
+### Papers July 15
+
+*Wednesday, July 15, 2026. Arxiv cs.IR new listing returned 5 relevant genrec papers. No fallback needed.*
+
+1. **Not Only NTP: Extending Training Signal Coverage for Generative Recommendation (NONTP)**
+   * Affiliation: Meituan — *(Changhao Li, Shuli Wang, Junwei Yin, Senjie Kou, Yinqiu Huang, Chi Wang, Yinhua Zhu, Haitao Wang, Xingxing Wang — Meituan, Chengdu/Beijing)*
+   * Link: [arxiv.org/abs/2607.12277](https://arxiv.org/abs/2607.12277)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Extends next-token prediction with temporal contrastive learning (TCL) and trans-domain learning (TDL) auxiliary objectives to address temporal/spatial locality in generative recommendation training; both discarded at inference for zero overhead; +34.3% HR@10 on Meituan dataset, +1.8% CTR online.
+   * Key techniques:
+     - TCL (Temporal Contrastive Learning): BYOL-style EMA teacher + InfoNCE to align hidden states against K-step future trajectory
+     - TDL (Trans-Domain Learning): mean-pools cross-domain hidden states through shared prediction head — zero extra parameters
+     - Both objectives discarded at inference → zero overhead
+     - Identifies two structural limitations of NTP: temporal locality (no long-range supervision) and spatial locality (no cross-domain gradient)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — TCL+TDL are well-motivated extensions but incremental over standard contrastive/multi-task learning
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Online A/B with +1.8% CTR, +2.1% GMV (p<0.01); multi-domain Meituan industrial dataset
+     - **Impact: 7/10** — Meituan; practical training signal augmentation for industrial generative recommendation
+
+2. **Where Reasoning Matters: Rethinking Latent Reasoning in Semantic ID-based Generative Recommendation (IBA)**
+   * Affiliation: Chongqing University, Griffith University — *(Shangxin Yang, Min Gao, Zongwei Wang — Chongqing University; Junliang Yu — Griffith University)*
+   * Link: [arxiv.org/abs/2607.12425](https://arxiv.org/abs/2607.12425)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Information-Gain Budget Allocation (IBA) framework strategically allocates latent reasoning steps across semantic ID token positions based on position-wise information gain; earlier SID positions get more refinement budget; achieves better accuracy-computation trade-off than uniform allocation.
+   * Key techniques:
+     - Position-wise information-gain (IG) analysis: earlier SID positions provide higher IG, later positions contribute less
+     - IBA: learns to allocate limited latent refinement budget unevenly across SID positions
+     - Treats latent reasoning steps as a computational resource to be allocated efficiently
+     - Consistent improvements over fixed-step allocation baselines on public datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First to study position-wise reasoning budget allocation problem in SID-based genrec; information-gain perspective is novel
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — Multiple public datasets; ablation showing budget allocation matters
+     - **Impact: 6/10** — Chongqing U/Griffith; practical efficiency insight for latent reasoning in SID generative recommendation
+
+3. **RecRec: Latent Interests Recursive Reasoning for Sequential Recommendation**
+   * Affiliation: University of Glasgow, Ohio State University, Amazon, Telefónica Scientific Research, Carnegie Mellon University, National University of Singapore — *(Wenhao Deng, Junchen Fu, Kaiwen Zheng, Joemon M. Jose — University of Glasgow; Hanwen Du — Ohio State University; Alexandros Karatzoglou — Amazon; Ioannis Arapakis — Telefónica Scientific Research; Hangjun Guo — Carnegie Mellon University; Yongxin Ni — National University of Singapore)*
+   * Link: [arxiv.org/abs/2607.12945](https://arxiv.org/abs/2607.12945)
+   * Venue: RecSys 2026
+   * TL;DR: RL-free recursive reasoning framework decoupling reasoning from prediction; Context Compressor distills backbone states into latent interests with diversity regularization, Recursive Reasoner refines them in separate latent space; deep supervision enables adjustable reasoning depth at inference without retraining.
+   * Key techniques:
+     - Context Compressor: distills backbone hidden states into compact latent interests with Interest Diversity Regularizer
+     - Recursive Reasoner: refines interests in a separate intermediate latent space — decouples reasoning from prediction
+     - RL-free: two supervised stages only, no reinforcement learning needed
+     - Deep supervision enabling adjustable reasoning depth at inference without retraining
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Novel decoupled reasoning architecture overcoming single d-dimensional state bottleneck; RL-free training is practical
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — 4 real-world datasets; outperforms SOTA reasoning-enhanced methods; RecSys 2026 peer-reviewed
+     - **Impact: 7/10** — RecSys 2026; multi-institution (U Glasgow/Ohio St/Amazon/Telefónica/CMU/NUS); practical recipe for recursive reasoning in seqrec
+
+4. **MESH: Scaling Up Retrieval with Heterogeneous Content Unification**
+   * Affiliation: Pinterest Inc. — *(Jiaxing Qu, Yilin Chen, Junpeng Hou, Jinfeng Rao, Olafur Gudmundsson, Sai Xiao, Huizhong Duan — Pinterest Inc., San Francisco)*
+   * Link: [arxiv.org/abs/2607.12392](https://arxiv.org/abs/2607.12392)
+   * Venue: RecSys 2026 Industry Track
+   * TL;DR: Unified retrieval scaling framework mitigating "Scaling Bias of Heterogeneity" where model capacity gains don't apply equally across content tiers; modularized architecture with gated bias correction and feature-space partitioning; 14× improvement in fresh-item scaling exponent, +5.5% fresh-item repins on Pinterest.
+   * Key techniques:
+     - Gated bias correction: modular architecture reducing interference between sparse-item signals and high-frequency engagement features
+     - Feature-space partitioning into independent domains as structural inductive bias
+     - Asynchronous serving strategy delivering 2.87× throughput improvement
+     - Protected gradient path improving sparse content scaling behavior (14× power-law exponent)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Pinterest internal production)
+     - **Novelty: 6/10** — Scaling bias of heterogeneity is a well-motivated problem; gated correction is practical but incremental
+     - **Fairness: 4/10** — Fresh/long-tail content coverage indirectly addresses supply-side fairness
+     - **Robustness: 8/10** — Billion-scale deployment on Pinterest Related Pins; +5.5% repins, +0.46% retention; RecSys 2026 Industry Track
+     - **Impact: 7/10** — RecSys 2026 Industry Track; Pinterest; practical paradigm for consolidating fragmented retrieval infrastructures
+
+5. **What Would You Click? Personalized Video Thumbnail Generation with Preference-aware Highlight Retrieval (PVTG)**
+   * Affiliation: Tsinghua University, University of Queensland — *(Zhiyu He, Yiqun Liu, Min Zhang — Tsinghua University; Zecheng Zhao, Tong Chen, Zi Huang — University of Queensland)*
+   * Link: [arxiv.org/abs/2607.12882](https://arxiv.org/abs/2607.12882)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Personalized video thumbnail generation via two-stage framework coupling preference-aware highlight retrieval with VLM-guided diffusion; personalized highlight retriever selects diverse visual anchors aligned with user preferences; VLM-guided diffusion pipeline transforms anchors into thumbnails preserving visual coherence.
+   * Key techniques:
+     - Personalized highlight retriever capturing fine-grained user-video interactions + video semantics via summarization
+     - VLM-guided diffusion pipeline extracting and injecting semantically grounded visual cues
+     - Verify-and-retry loop: VLM-as-judge ensures thumbnail fidelity with up to N retry attempts
+     - Novel task formulation: personalized video thumbnail generation balancing personalization and informativeness
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 3/10** — [github.com/hezy18/PVTG](https://github.com/hezy18/PVTG) — 0⭐, 12 commits, no README documentation, no license; functional code but minimal; Python+JS+HTML (ThumbnailGeneration + UserStudyPlatform)
+     - **Novelty: 6/10** — First to formulate personalized video thumbnail generation as a retrieve-then-generate task
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — Two public datasets (EEGSVRec, PHD2); user study demonstrates improved click preference
+     - **Impact: 5/10** — Tsinghua/UQ; novel task formulation bridging personalization and content generation
 
 ### Papers July 14
 
@@ -1008,96 +1101,9 @@ mindmap
      - **Robustness: 6/10** — Multiple public benchmarks; ICML 2026 peer-reviewed
      - **Impact: 5/10** — ICML 2026; incremental improvement on LLM-enhanced graph recommendation
 
-### Papers July 5 (Weekend Catch-up — ICML 2026)
-
-*No new arxiv papers today (Sunday, July 5, 2026). Weekend fallback chain executed: arxiv → Zhihu (inaccessible) → ICML 2026 accepted papers review. Found 5 ICML 2026 GenRec papers not yet in the repository.*
-
-1. **Principled Synthetic Data Enables the First Scaling Laws for LLMs in Recommendation**
-   * Affiliation: Meta — *(Benyu Zhang, Qiang Zhang, Jianpeng Cheng, Hong-You Chen, Qifei Wang, Wei Sun, Shen Li, Jia Li, Jiahao Wu, Qunshu Zhang, Neeraj Bhatia, Xiangjun Fan, Hong Yan — Meta)*
-   * Link: [arxiv.org/abs/2602.07298](https://arxiv.org/abs/2602.07298)
-   * Venue: ICML 2026
-   * TL;DR: First empirical demonstration of robust power-law scaling for LLMs continually pre-trained on high-quality synthetic recommendation data; standard sequential models trained on principled synthetic data outperform real-data-trained models by +130% recall@100; shifts focus from mitigating data deficiencies to leveraging structured information.
-   * Key techniques:
-     - Layered framework generating high-quality synthetic data as a curated pedagogical curriculum
-     - Hierarchical synthetic data circumventing noise, bias, and incompleteness in raw interaction data
-     - Continual pre-training on recommendation-specific synthetic data revealing predictable perplexity reduction
-     - Standard sequential models (SasRec) trained on synthetic data outperform real-data models significantly
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 8/10** — First robust scaling laws for LLM-based recommendation; principled synthetic data curriculum
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Consistent scaling behavior across multiple synthetic data modalities; ICML 2026 peer-reviewed
-     - **Impact: 9/10** — ICML 2026; Meta; foundational methodology enabling predictable scaling of LLM4Rec
-
-2. **RSIR: Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control**
-   * Affiliation: University of Science and Technology of China (USTC), Huawei — *(Luankang Zhang, Hao Wang, Zhongzhou Liu, Mingjia Yin, Yonghao Huang, Jiaqi Li, Defu Lian, Enhong Chen — USTC; Wei Guo, Yong Liu, Huifeng Guo — Huawei)*
-   * Link: [arxiv.org/abs/2602.15659](https://arxiv.org/abs/2602.15659)
-   * Venue: ICML 2026
-   * TL;DR: Closed-loop bootstrapping framework enabling recommender systems to self-improve without external data or teacher models; current model generates plausible user interaction sequences, fidelity control filters them, and successor models train on enriched data; theoretical analysis shows RSIR acts as a data-driven implicit regularizer smoothing optimization landscapes.
-   * Key techniques:
-     - Recursive self-improvement loop: model generates synthetic interactions → fidelity filtering → successor model training
-     - Fidelity-based quality control ensuring consistency with user preference manifolds
-     - Theoretical analysis proving RSIR as implicit regularizer for recommendation optimization landscapes
-     - Weak-to-strong generalization: weaker models generate effective curricula for stronger models
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/USTC-StarTeam/RSIR](https://github.com/USTC-StarTeam/RSIR) — Well-documented; ICML 2026 artifact
-     - **Novelty: 8/10** — First closed-loop self-improving paradigm for recommender systems with fidelity control
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Cumulative gains across benchmarks and architectures; theoretical guarantees
-     - **Impact: 8/10** — ICML 2026; USTC/Huawei; model-agnostic solution to recommendation data scarcity
-
-3. **Cold-Start Personalization via Training-Free Priors from Structured World Models (PEP)**
-   * Affiliation: University of Washington, Meta FAIR, Allen Institute for AI — *(Avinandan Bose — UW; Shuyue Stella Li, Faeze Brahman — UW; Pang Wei Koh — UW / Allen AI; Simon Shaolei Du — UW; Yulia Tsvetkov — UW / Allen AI; Maryam Fazel — UW; Lin Xiao — Meta FAIR; Asli Celikyilmaz — Meta FAIR)*
-   * Link: [arxiv.org/abs/2602.15012](https://arxiv.org/abs/2602.15012)
-   * Venue: ICML 2026
-   * TL;DR: Decomposes cold-start preference elicitation into offline structure learning and online Bayesian inference; Pep learns structured world models of preference correlations then performs training-free inference, achieving 80.8% alignment vs 68.5% for RL with 3-5x fewer interactions and ~10K parameters vs 8B.
-   * Key techniques:
-     - Offline structure learning of preference correlations from complete user profiles
-     - Training-free Bayesian inference online for adaptive question selection
-     - Factored per-criterion structure exploited for efficient preference profile prediction
-     - Modular across downstream solvers; dramatically more sample-efficient than RL baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 8/10** — Novel decomposition of cold-start elicitation into structure learning + Bayesian inference
-     - **Fairness: 5/10** — Personalized elicitation promotes individual-fair preference inference
-     - **Robustness: 8/10** — 80.8% alignment across medical, math, social, commonsense domains; 3-5x sample efficiency
-     - **Impact: 7/10** — ICML 2026; UW/Meta; paradigm shift for cold-start from RL to structured Bayesian inference
-
-4. **Causal Direct Preference Optimization for Distributionally Robust Generative Recommendation (CausalDPO)**
-   * Affiliation: Northeastern University (China) — *(Chu Zhao, Enneng Yang, Jianzhe Zhao, Guibing Guo — Northeastern University)*
-   * Link: [arxiv.org/abs/2603.22335](https://arxiv.org/abs/2603.22335)
-   * Venue: ICML 2026
-   * TL;DR: Extends DPO for generative recommendation with causal invariance learning to mitigate spurious correlation amplification from environmental confounders; integrates backdoor adjustment, soft environmental clustering, and invariance constraints; achieves 17.17% average improvement across four distribution shift settings.
-   * Key techniques:
-     - Causal invariance learning mechanism extended into DPO alignment framework
-     - Backdoor adjustment strategy eliminating interference from environmental confounders
-     - Soft clustering for latent environmental distribution modeling
-     - Invariance constraints enhancing robust consistency across diverse environments
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First causal-invariant extension of DPO for distributionally robust generative recommendation
-     - **Fairness: 5/10** — Distributional robustness addresses environmental bias in preference alignment
-     - **Robustness: 8/10** — 17.17% average improvement across four representative OOD settings; theoretical guarantees
-     - **Impact: 7/10** — ICML 2026; addresses fundamental robustness limitation in genrec preference optimization
-
-5. **Federated Variational Preference Alignment with Gumbel-Softmax Prior for Personalized User Preferences (FedVPA-GP)**
-   * Affiliation: POSTECH — *(Jabin Koo, Hoyoung Kim, Minwoo Jang, Jungseul Ok — POSTECH)*
-   * Link: [arxiv.org/abs/2605.30873](https://arxiv.org/abs/2605.30873)
-   * Venue: ICML 2026
-   * TL;DR: Federated framework disentangling diverse user preferences in LLM alignment without compromising privacy; introduces federated mixture prior addressing posterior collapse under sparse heterogeneous local data, and orthogonal loss separating preference prototypes; enables dynamic preference switching while preserving privacy.
-   * Key techniques:
-     - Federated mixture prior using aggregate population distribution as dynamic prior for variational inference
-     - Gumbel-Softmax prior stabilizing preference disentanglement against local data scarcity
-     - Orthogonal loss explicitly enforcing separation of preference prototypes in latent space
-     - Privacy-preserving federated preference alignment for personalized LLM recommenders
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First federated variational preference alignment framework with Gumbel-Softmax prior for personalized preferences
-     - **Fairness: 6/10** — Disentangles conflicting preference dimensions; promotes multi-dimensional preference expression
-     - **Robustness: 7/10** — Outperforms monolithic baselines on HH-RLHF; ICML 2026 peer-reviewed
-     - **Impact: 6/10** — ICML 2026; POSTECH; opens federated personalized alignment for privacy-preserving LLM recommendation
-
 ### Papers July 4 (Weekend Catch-up)
+
+1. **UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems**
 
 1. **UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems**
    * Affiliation: Kuaishou Technology — *(Mingming Ha, Guanchen Wang, Linxun Chen, Xuan Rao, Yuexin Shi, Tianbao Ma, Zhaojie Liu, Yunqian Fan, Zilong Lu, Yanan Niu, Han Li, Kun Gai — Kuaishou Technology, Beijing)*
@@ -1545,7 +1551,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 95 papers as of July 14.
+**Count:** 96 papers as of July 15.
 
 | Score | Paper |
 | --- | --- |
@@ -1645,6 +1651,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 5/10 | OneReason Technical Report |
 | 4/10 | RecRec: Recursive Refinement for Sequential Recommendation |
 | 3/10 | Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS) |
+| 3/10 | PVTG / Personalized Video Thumbnail Generation |
 | 3/10 | STORM: Stepwise Token Optimization with Reward-Guided Beam Search |
 | 3/10 | Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
@@ -1683,6 +1690,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - FORGE: Forming Semantic Identifiers for Generative Retrieval in Industrial Datasets (FORGE)
 - Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
 - The Best of Both Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H²Rec)
+- IBA / IG Budget Allocation -- Chongqing U / Griffith U
+- RecRec / Recursive Reasoning -- U Glasgow / Amazon / CMU / NUS
 
 
 - GenRecEdit: Adapting Model Editing for Generative Recommendation with Cold-Start Items (GenRecEdit)

@@ -495,6 +495,8 @@
 - Prompt Generation Technical Report (PG)
 - An LLM-powered Agentic Recommendation System for Connected TV Content Discovery
 - Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces
+- Not Only NTP: Extending Training Signal Coverage for Generative Recommendation (NONTP)
+- MESH: Scaling Up Retrieval with Heterogeneous Content Unification (MESH)
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec) 
@@ -759,6 +761,7 @@
 - VRec
 - When Text-as-Vision Meets Semantic IDs in Generative Recommendation: An Empirical Study
 - Why Users Go There: World Knowledge-Augmented Generative Next POI Recommendation
+- PVTG: Personalized Video Thumbnail Generation with Preference-aware Highlight Retrieval (PVTG)
 
 ### Optimizer
 - MuonRec
@@ -927,6 +930,7 @@
 - Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop)
 - The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
 - Beyond Semantic IDs: Encoding Business-Value Ranking into Document Identifiers for Generative Retrieval (CRID)
+- IBA: Where Reasoning Matters (IBA)
 
 ### Security / Adversarial
 - VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)
@@ -966,6 +970,7 @@
 - VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE)
 - TRUST: Item-Calibrated Interval Evidence for Temporal Session-Based Recommendation (TRUST)
 - RecRec: Recursive Refinement for Sequential Recommendation
+- RecRec: Latent Interests Recursive Reasoning for Sequential Recommendation (RecRec)
 - Stream-aware Side Adaptation for Large Pre-trained Multimodal Embedding Models in Sequential Recommendation (Stresa)
 - The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
 
@@ -981,5 +986,6 @@
 
 
 ### Training Systems / NPU Optimization
+- Not Only NTP: Extending Training Signal Coverage for Generative Recommendation (NONTP)
 - TurboGR: An Accelerated Training System for Large-Scale Generative Recommendation
 
