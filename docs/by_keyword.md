@@ -32,6 +32,7 @@
 - LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)
 - LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR)
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
+- TMallGS: Scaling Unified Feature and Sequence Modeling for Generative E-commerce Search (TMallGS)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -129,6 +130,7 @@
 - One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE)
 - OneRetrieval: Unifying Multi-Branch E-commerce Retrieval with an Editable Generative Model (OneRetrieval)
 - OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework (OneSearch-V2)
+- Can We Steer the Black-Box? Controllability-Centric Evaluation of Recommender Systems (CtrlBench-Rec)
 - PaperFlow: Profiling, Recommending, and Adapting Across Daily Paper Streams (PaperFlow)
 - Popcorn: A Configurable Benchmark for Visual Evidence in Multimodal Movie Recommendation (Popcorn)
 - SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
@@ -250,6 +252,7 @@
 - GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
 - GR2 Technical Report (GR2)
+- Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
