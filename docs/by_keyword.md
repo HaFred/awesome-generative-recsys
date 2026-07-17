@@ -164,6 +164,7 @@
 - LLM Biases
 - LLM-Assisted Reranking to Operationalize Nuanced Objectives in Recommender Systems
 - One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE)
+- CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
 - Representation Curriculum: Stagewise Training for Robust Ranking and Allocation
 - The Injection Paradox: Brand-Level Suppression in Safety-Trained LLM Recommendations via RAG Context Injection (Injection Paradox)
 - The Pitfall of Scaling Up: Uncovering and Mitigating Popularity Bias Amplification in Scaling Transformer-based Recommenders (SPRINT)
@@ -435,6 +436,10 @@
 - IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
 - IID-Nav: From Extraction to Navigation: Progressive Retrieval with Indirectly Infinite Depth (IID-Nav)
 - LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)
+- LLM-Based Re-Ranking for Real Estate Search
+- Long-term User Engagement Optimization through Model-agnostic Downstream Rewards Learning
+- Causal Retrieval Optimization for Efficient e-commerce Distribution (Pinterest)
+- SIF: Sample Is Feature — Beyond Item-Level, Toward Sample-Level Tokens for Unified Large Recommender Models (SIF)
 - LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR)
 - Next-Scale Generative Reranking: A Tree-based Generative Rerank Method at Meituan (NSGR)
 - Let the Agent Steer: Closed-Loop Ranking Optimization via Influence Exchange (Sortify)
@@ -562,6 +567,8 @@
 - Let the Agent Steer: Closed-Loop Ranking Optimization via Influence Exchange (Sortify)
 - Self-Distilled Reinforcement Learning for Co-Evolving Agentic Recommender Systems (CoARS)
 - Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP)
+- LLM-Based Re-Ranking for Real Estate Search
+- Think When Needed: Model-Aware Reasoning Routing for LLM-based Ranking
 - From Hidden Profiles to Governable Personalization: Recommender Systems in the Age of LLM Agents
 - From Prompt to Purchase: How AI Brand Recommendations Move Consumers on the Open Web
 - From "Strings" to "Things" for Personal Knowledge Graphs (PKG-Rec)
@@ -936,6 +943,7 @@
 - IBA: Where Reasoning Matters (IBA)
 
 ### Security / Adversarial
+- CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
 - VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)
 - Fairness Attacks on Recommender Systems
 

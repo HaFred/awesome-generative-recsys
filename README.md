@@ -60,6 +60,8 @@ mindmap
         Attention Calibration -- UZH
         Carbon-Aware Reranking / Sustainability -- UC Berkeley
         DeGRe / Dense GenReranking -- Zhejiang U / Alibaba
+        Think When Needed / Reasoning Routing -- ZJU / NTU / SUTD
+        LLM Re-Ranking / Real Estate -- QuintoAndar
       Frameworks & Benchmarks
         TRACE -- TUM / Polytechnic University of Bari
         LLM Judge -- CityU HK
@@ -94,6 +96,8 @@ mindmap
         LHF / Retrieval Bottleneck -- U Maine / Stanford
         MESH / Retrieval Scaling -- Pinterest
         CtrlBench-Rec / Controllability Eval -- CAS IIE
+        Causal Retrieval / Pinterest -- Pinterest
+        Long-term Engagement / Pinterest -- Pinterest
       Efficient Decoding
         Vectorizing the Trie -- Google
         PauseRec / Implicit Reasoning -- UVA / Snap
@@ -163,6 +167,7 @@ mindmap
         IIRG -- KAIST / Snap Inc.
         URecJPQ -- U Bari / U Glasgow
         NONTP / NTP Training Signals -- Meituan
+        SIF / Sample-Level Tokenization -- Meituan
     Feature Layer: LLM Semantic Features
       Semantic Token and Embedding
         PatchRec -- USTC and Tencent
@@ -177,6 +182,7 @@ mindmap
         RAGR -- Dalian UT
       Security & Robustness
         VENOMREC / Cross-Modal Poisoning -- NTU / Beihang / Alibaba
+        CoSimRec / Coordinated Content -- Academic
 ```
 <div align="center">
   <i> Open-source Generative RecSys Map </i>
@@ -184,6 +190,112 @@ mindmap
 
 ---
 ## By Date
+
+### Papers July 17
+
+*Friday, July 17, 2026. Arxiv cs.IR new listing returned 6 papers relevant to genrec/LLM-rec ecosystem (none directly generative-recommendation-specific — slow day). Total: 6 papers.*
+
+1. **Sample Is Feature: Beyond Item-Level, Toward Sample-Level Tokens for Unified Large Recommender Models (SIF)**
+   * Affiliation: Meituan — *(Shuli Wang, Junwei Yin, Changhao Li, Senjie Kou, Chi Wang, Yinqiu Huang, Yinhua Zhu, Haitao Wang, Xingxing Wang — Meituan)*
+   * Link: [arxiv.org/abs/2604.15650](https://arxiv.org/abs/2604.15650)
+   * Venue: RecSys 2026
+   * TL;DR: Upgrades historical sequence tokens from item-level to sample-level via hierarchical group-adaptive quantization (HGAQ); Sample Tokenizer + SIF-Mixer resolve heterogeneity between sequential and non-sequential features; deployed on Meituan food delivery platform with +2.03% CTR, +1.21% CVR, +1.35% GMV/session.
+   * Key techniques:
+     - Sample Tokenizer: hierarchical group-adaptive quantization (HGAQ) compressing raw samples into Token Samples (648 bits per sample)
+     - SIF-Mixer: token-level Mixer (intra-sample) + sample-level Mixer (inter-sample temporal) decomposing attention from O((LT)²) to O(L²T+LT²)
+     - Label-Supervised Codebook Training: pCTR auxiliary loss ensuring codebook organized by predictive relevance
+     - Alignment loss ensuring target token projection maps to same codebook space as historical tokens
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Meituan internal production)
+     - **Novelty: 8/10** — First to upgrade tokenization granularity from item-level to sample-level; resolves long-standing sequential vs. non-sequential heterogeneity
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Deployed on Meituan food delivery; +2.03% CTR, +1.21% CVR; RecSys 2026 peer-reviewed
+     - **Impact: 8/10** — RecSys 2026; Meituan; paradigm-shifting tokenization approach for industrial recommender scaling
+
+2. **Deep-learning Causal Retrieval Optimization for Efficient e-commerce Distribution in Pinterest**
+   * Affiliation: Pinterest Inc. — *(Junpeng Hou, XianXing Zhang, Sai Xiao, Derek Cheng, Darren Reger, Olafur Gudmundsson, Mehdi Ben Ayed, Zhiqing Rao, Huizhong Duan — Pinterest)*
+   * Link: [arxiv.org/abs/2607.14161](https://arxiv.org/abs/2607.14161)
+   * Venue: KDD 2026
+   * TL;DR: Causal decision-making framework for triggering shopping candidate generators in early retrieval; deep multi-task model with doubly-robust pseudo-outcome for uplift learning; deployed at Pinterest cutting shopping triggers by 85% with +0.26% total sessions, +1.10% Pin saves.
+   * Key techniques:
+     - Doubly-robust pseudo-outcome training with calibrated outcome losses for stable single-robust uplift learning
+     - Randomized data logging for counterfactual coverage; regular + reverse metrics for full assessment
+     - Linear-time offline replay selecting thresholds with high consistency to online results
+     - Parallel model execution without end-to-end latency regression
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Pinterest internal production)
+     - **Novelty: 6/10** — Causal uplift learning for retrieval triggering is practical but incremental over existing causal ML literature
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Deployed at Pinterest web scale; 85% trigger reduction; KDD 2026 peer-reviewed
+     - **Impact: 7/10** — KDD 2026; Pinterest; practical recipe for early-retrieval optimization in cascading recommenders
+
+3. **Long-term User Engagement Optimization through Model-agnostic Downstream Rewards Learning**
+   * Affiliation: Pinterest Inc. — *(Dingsu Wang, Filip Ryzner, Kelly He, Armando Ordorica, David Woo, Aditya Mantha, Liyao Lu, Usha Amrutha Nookala, Haoran Guo, Jiacong He, Olafur Gudmundsson, Matt Chun, Krystal Benitez, Dhruvil Deven Badani, Yijie Dylan Wang — Pinterest)*
+   * Link: [arxiv.org/abs/2607.14192](https://arxiv.org/abs/2607.14192)
+   * Venue: Recsys 2026
+   * TL;DR: Model-agnostic downstream reward framework optimizing long-term user retention in large-scale recommendation; offline screening identifies early-observable session behaviors predictive of future retention; deployed across Homefeed, Related Pins, Search, and Notifications at Pinterest.
+   * Key techniques:
+     - Offline screening framework identifying session-level behaviors both early-observable and retention-predictive
+     - Multiple model-agnostic downstream reward signals from observed user action patterns
+     - Productionized reward derivations addressing sparse/delayed return signals without RL overhead
+     - Unified framework deployed across multiple surfaces (Homefeed, Related Pins, Search, Notifications)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Pinterest internal production)
+     - **Novelty: 5/10** — Model-agnostic downstream reward learning is practical but conceptually incremental
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Multi-surface Pinterest deployment; Recsys 2026 peer-reviewed
+     - **Impact: 7/10** — Recsys 2026; Pinterest; practical framework for long-term engagement optimization at scale
+
+4. **Think When Needed: Model-Aware Reasoning Routing for LLM-based Ranking**
+   * Affiliation: Zhejiang University, Nanyang Technological University, Singapore University of Technology and Design — *(Huizhong Guo — Zhejiang University; Tianjun Wei, Yingpeng Du, Ziyan Wang, Jie Zhang — NTU; Dongxia Wang — Zhejiang University; Zhu Sun — SUTD)*
+   * Link: [arxiv.org/abs/2601.18146](https://arxiv.org/abs/2601.18146)
+   * Venue: SIGIR 2026
+   * TL;DR: Lightweight plug-and-play reasoning router for LLM-based ranking deciding Think/Non-Think per instance before generation; router uses ranking-aware features + model-aware difficulty signals; +6.3% NDCG@10 with -49.5% tokens on MovieLens with Qwen3-4B.
+   * Key techniques:
+     - Router head with compact ranking-aware features (candidate dispersion) + model-aware difficulty signals (diagnostic checklist)
+     - Controllable token determining Think vs. Non-Think mode before generation
+     - Adaptive policy selection along validation Pareto frontier for dynamic compute allocation
+     - Model-agnostic: works across different LLM scales and ranking datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First reasoning routing framework for LLM-based ranking; model-aware difficulty signals are well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — 3 public datasets with consistent improvements; SIGIR 2026 peer-reviewed
+     - **Impact: 7/10** — SIGIR 2026; ZJU/NTU/SUTD; practical accuracy-efficiency trade-off for LLM-based ranking
+
+5. **LLM-Based Re-Ranking for Real Estate Search**
+   * Affiliation: QuintoAndar Group — *(Nkateko Ntimane, Rafel Guedes, Tiago Cunha, Pedro Nogueira — QuintoAndar Group)*
+   * Link: [arxiv.org/abs/2607.14835](https://arxiv.org/abs/2607.14835)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: LLM-based re-ranker augmenting conversational real-estate recommendation by reordering candidates per multi-turn dialog intent; 960K query-item offline dataset with LLM-as-Judge + human validation; +5.3% CTR, +4.8% scheduled visits in production A/B.
+   * Key techniques:
+     - LLM re-ranker integrating multi-turn conversational context for nuanced intent understanding
+     - Large-scale offline evaluation dataset: 960K query-item pairs (synthetic + production queries)
+     - LLM-as-a-Judge annotation framework with human validation
+     - Production deployment on Latin America's largest housing marketplace
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — LLM re-ranking applied to real estate is a domain transfer; methodology is established
+     - **Fairness: 4/10** — Conversational context may improve access equity for non-expert users
+     - **Robustness: 7/10** — Production A/B with +5.3% CTR, +4.8% visits; offline+online validation
+     - **Impact: 5/10** — QuintoAndar; practical LLM re-ranking for conversational housing search in Latin America
+
+6. **CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops**
+   * Affiliation: Academic (Unknown) — *(Nan Li, Jiahong Shao, Jiuyang Lyu)*
+   * Link: [arxiv.org/abs/2607.15114](https://arxiv.org/abs/2607.15114)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Agent-based evaluation framework modeling coordinated accounts, dynamic ranking, and non-bot responses in closed-loop recommendation; introduces Algorithmic Penetration Rate (APR) metrics; finds popularity-based ranking significantly amplifies coordinated activity across all settings.
+   * Key techniques:
+     - CoSimRec: offline agent-based closed-loop framework (coordinated accounts + dynamic ranking + non-bot responses + interventions)
+     - APR metric family: share of non-bot exposure/engagement, lift vs matched no-attack baselines, exposure per coordinated interaction
+     - Ten-seed inference for primary analysis; population-scale experiments up to 1000 users
+     - Synchronization-aware ranking reduces APR in defense settings
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First closed-loop agent-based evaluation for coordinated content amplification in recommender feedback loops
+     - **Fairness: 7/10** — Directly addresses coordinated manipulation fairness; APR metrics enable auditing
+     - **Robustness: 6/10** — 3 datasets, 5 recommenders, population-scale experiments; comprehensive evaluation
+     - **Impact: 5/10** — Academic; provides metrics and methodology for recommender system robustness auditing
 
 ### Papers July 16
 
