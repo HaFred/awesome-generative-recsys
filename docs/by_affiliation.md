@@ -15,7 +15,7 @@
 | **Allen Institute for AI** | Cold-Start Personalization via Training-Free Priors from Structured World Models (PEP)
 | **Amazon** | RecRec: Latent Interests Recursive Reasoning for Sequential Recommendation (RecRec) ‖ Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE) ‖ Bi-NAS: Towards Effective and Personalized Explanation for Recommender Systems via Bi-Level Neural Architecture Search (Bi-NAS) ‖ Continual Low-Rank Adapters for LLM-based Generative Recommender Systems (PESO)
 | **Amazon International Machine Learning** | FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation
-| **Anhui University** | ProMax
+| **Anhui University** | ProMax ‖ GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation (GraphLoRA)
 | **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions) ‖ Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
 | **Apple Inc.** | Fortress
 | **Arizona State University** | MetaPlate: Counterfactual-Guided RAG-LLM Tool for Personalized Food Recommendation and Hyperglycemia Prevention
@@ -39,6 +39,7 @@
 | **Carnegie Mellon University** | RecRec: Latent Interests Recursive Reasoning for Sequential Recommendation (RecRec) ‖ Effective Reinforcement Learning for Agentic Search by Recycling Zero-Variance Queries During Training (with INESC-ID, NOVA Lisbon) ‖ On the Memorization and Generalization of Generative Recommendation (MemGen-GR) ‖ LLM Agents Enable User-Governed Personalization Beyond Platform Boundaries
 | **Central South University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) ‖ Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM)
 | **Central University of Finance and Economics** | An LLM-Powered Semantic Alignment Framework for Journal Recommendation
+| **Chinese Academy of Sciences** | BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD) |
 | **Chinese Academy of Sciences (IIE)** | Beyond Patches: Superpixel Token-based Transformers for Attribute-Specific Fashion Retrieval (SuperFashion) (with UCAS) ‖ HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec) ‖ Denoising Implicit Feedback for Cold-start Recommendation (DIF) ‖ Can We Steer the Black-Box? Controllability-Centric Evaluation of Recommender Systems (CtrlBench-Rec)
 | **Chinese University of Hong Kong (CUHK)** | One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE) ‖ Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR) (with McGill, Tongji) ‖ Intuition-Guided Latent Reasoning for LLM-Based Recommendation (IntuRec) ‖ LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation (LBR)
 | **Chongqing University** | IBA: Where Reasoning Matters (IBA) ‖ MLTFR · DC4SR ‖ Self-Distilled Reinforcement Learning for Co-Evolving Agentic Recommender Systems (CoARS)
@@ -111,6 +112,7 @@
 | **Lomonosov Moscow State University** | Planning over Matrix-Factorization MDPs for Candidate Generation (MF-MDP Planning)
 | **LUCID Inc.** | Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
 | **MBZUAI** | ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID)
+| **Maastricht University** | Consensus vs. Dissent: Dynamic LLM Modeling of Subjective Preferences in Group Recommenders |
 | **Macquarie University / UNSW** | FLR (Factorized Latent Reasoning) · FLR ‖ Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR) ‖ Beyond Item Order: Temporal Gap Tokenization for Generative Recommendation with Semantic IDs (ChronoSID) ‖ Seeing and Reflecting: Multimodal Memory-Enhanced Agent Collaboration for Recommendation (MMEACR)
 | **McGill University** | Uncertainty and Fairness Awareness in LLM-Based Recommendation Systems ‖ Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR) (with CUHK, Tongji)
 | **Meituan · MBGR** | SIF: Sample Is Feature — Beyond Item-Level, Toward Sample-Level Tokens for Unified Large Recommender Models (SIF) ‖ NONTP: Not Only NTP (NONTP) ‖ Generative Large-Scale Pre-trained Models for Automated Ad Bidding · FLR · MTServe · DIG · RecRM-Bench  · GenLI ‖ Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR) ‖ DOS: Dual-Flow Orthogonal Semantic IDs for Recommendation in Meituan (DOS) ‖ Next-Scale Generative Reranking: A Tree-based Generative Rerank Method at Meituan (NSGR)
@@ -215,6 +217,7 @@
 | **Universidad Autónoma de Madrid** | Beyond Centralization: User-Controlled Federated Recommendations in Practice
 | **Universidad de Buenos Aires / CONICET** | Do Neural Retrievers Prefer Certain Documents? Evidence of Learned Relevance Priors
 | **University of Bari / University of Glasgow** | URecJPQ: Memory-efficient Multimodal Recommendation Models through RecJPQ in Large-Scale Scenarios (URecJPQ) |
+| **University of Birmingham** | RouteRec: Strict Evaluation of Recommender-Agent Selection and Aggregation (RouteRec) |
 | **University of Amsterdam** | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) ‖ Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair ‖ Cold-Starts in Generative Recommendation: A Reproducibility Study (ColdGenRec)
 | **University of Arizona** | Fairness Attacks on Recommender Systems
 | **University of British Columbia** | CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank) |

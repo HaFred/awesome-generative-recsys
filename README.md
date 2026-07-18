@@ -98,6 +98,9 @@ mindmap
         CtrlBench-Rec / Controllability Eval -- CAS IIE
         Causal Retrieval / Pinterest -- Pinterest
         Long-term Engagement / Pinterest -- Pinterest
+        RouteRec / Agent Aggregation -- Birmingham
+        Consensus vs Dissent / Group Rec -- Maastricht U
+        UniPinRec / Retrieval+Ranking -- Pinterest
       Efficient Decoding
         Vectorizing the Trie -- Google
         PauseRec / Implicit Reasoning -- UVA / Snap
@@ -127,6 +130,8 @@ mindmap
         IBA / IG Budget Allocation -- Chongqing U / Griffith U
         Gryphon / Item-Level Scoring -- Yandex
         PrefixMem / SID Encoder -- Pinterest
+        ChronoID / Temporal SID -- U Rochester / Meta / MBZUAI
+        GraphLoRA / GNN-LoRA LLMRec -- Anhui U
       Next Interest Flow Prediction
         AMEN -- Alibaba
       RL-based Alignment for Recall
@@ -149,6 +154,7 @@ mindmap
         RecRec / Recursive Refinement -- Sony Research India
         RecRec2 / Recursive Reasoning -- U Glasgow / Amazon / CMU / NUS
         Stresa / Side Adaptation -- U Glasgow
+        BAHSD / Adaptive Distillation -- CAS / BIGAI
       Multi-behavior
         SpectraMB -- NUS / SMU / HFUT / USTC
       Optimization & Scaling
@@ -190,6 +196,117 @@ mindmap
 
 ---
 ## By Date
+
+### Papers July 18
+
+*Saturday, July 18, 2026. Arxiv inactive (weekend). Applied 3-month fallback strategy: searched missed April–June 2026 genrec papers from arxiv cs.IR listings, RecSys Frontier daily digests, and venue proceedings (ACL 2026, RecSys 2026). Total: 6 papers.*
+
+1. **RouteRec: Strict Evaluation of Recommender-Agent Selection and Aggregation**
+   * Affiliation: University of Birmingham — *(Kaiji Zhou, Vladimir Kalmykov, Yue Feng — University of Birmingham)*
+   * Link: [arxiv.org/abs/2607.09908](https://arxiv.org/abs/2607.09908)
+   * Venue: AgentSearch 2026 Workshop (co-located with SIGIR 2026)
+   * TL;DR: Compares request-level hard selection vs. item-level learned aggregation for combining heterogeneous recommender agents (CF, sequential, content-based, LLM reranker); finds item-level aggregation is more promising — gated all-agent aggregation reaches HR@10=0.295 with 70.2% LLM calls under strict leakage-free protocol.
+   * Key techniques:
+     - RouteRec framework comparing two paradigms: request-level hard selection (pick one agent) vs. item-level learned aggregation (combine outputs per item)
+     - Leakage-free 5-fold out-of-fold evaluation protocol preventing data leakage
+     - Gated all-agent aggregation: selectively invokes LLM reranker at 70.2% call rate
+     - Cheap-only variant: cost-conscious aggregation using only non-LLM agents matching BM25 in HR
+     - Full quality oracle upper-bound (HR@10=0.584) confirming substantial cross-agent signal
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — First systematic comparison of agent selection vs. aggregation under strict evaluation; findings are practical but methodology is incremental
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — Only MovieLens-1M evaluated; strict 5-fold protocol is rigorous but limited dataset coverage
+     - **Impact: 5/10** — AgentSearch Workshop @ SIGIR 2026; University of Birmingham; practical insights for agent-based recommendation architectures
+
+2. **Consensus vs. Dissent: Dynamic LLM Modeling of Subjective Preferences in Group Recommenders**
+   * Affiliation: Maastricht University — *(Cedric Waterschoot, Nava Tintarev, Francesco Barile — Maastricht University)*
+   * Link: [arxiv.org/abs/2607.10235](https://arxiv.org/abs/2607.10235)
+   * Venue: RecSys 2026
+   * TL;DR: Fine-tunes LLMs (Judgmental Llama + Judgmental OLMo) on human survey data as real-time judgmental models for dynamic aggregation strategy selection in group recommenders; reasoning dataset distilled from DeepSeek-V3.1; user study (n=284) validates highest satisfaction and consensus scores.
+   * Key techniques:
+     - Fine-tuned LLMs as judgmental models predicting human perceptions of fairness/satisfaction/consensus
+     - Reasoning dataset distilled from DeepSeek-V3.1 combined with human ground truth assessments
+     - Dynamic aggregation strategy selection based on within-group preference distributions (minority, coalition)
+     - Interaction effect modeling between LLM-based method and group configuration
+     - Social choice-based aggregation strategies with LLM-driven adaptive selection
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First to use fine-tuned LLMs as real-time judgmental models within group recsys pipeline; interaction effects with group configuration are novel
+     - **Fairness: 7/10** — Directly addresses fairness, satisfaction, and consensus in group recommendations; validated via human study
+     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; user study (n=284) with human evaluation; two LLM families validated
+     - **Impact: 6/10** — RecSys 2026; Maastricht University; practical LLM-based framework for group recommendation fairness
+
+3. **UniPinRec: Unifying Generative Retrieval and Ranking at Pinterest Scale**
+   * Affiliation: Pinterest Inc. — *(Hanyu Li, Yi-Ping Hsu, Aditya Mantha, Prabhat Agarwal, Laksh Bhasin, Jialu Wang, Hongtao Lin, Bella Huang, Yaxin Li, Xinyi Li, Chuxi Wang, Kousik Rajesh, Hooshmand Shokri Razaghi, Shunyao Li, Zongyue Qin, Jaewon Yang, James Li, Dhruvil Deven Badani, Jiajing Xu, Charles Rosenberg — Pinterest)*
+   * Link: [arxiv.org/abs/2606.00422](https://arxiv.org/abs/2606.00422)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: First full-stack unification of retrieval and ranking in a production recommendation system; shared transformer + Masked Action Modeling + blended training + cross-stage KV cache sharing; deployed on Pinterest core surfaces with +1% engagement, -11.1% latency, +63.6% QPS.
+   * Key techniques:
+     - Masked Action Modeling (MAM): eliminates interleaving between retrieval and ranking inputs, enabling weight sharing without doubling context length
+     - Blended training examples: pairs action sequences with feedview impression slates for joint objective satisfaction
+     - Cross-stage KV cache sharing: reuses user-history computation from retrieval for ranking, reducing total FLOPs
+     - Shared transformer encoding user action sequence into candidate-independent representations branched into ANN dot-product (retrieval) and cross-attention (ranking)
+     - Deployed within existing serving infrastructure — first full-stack unification (inputs, model, training, serving)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Pinterest internal production)
+     - **Novelty: 7/10** — First full-stack unification of retrieval and ranking in production; MAM is a novel solution to the interleaving problem
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Deployed on Pinterest core surfaces; +1% engagement, -11.1% latency, +63.6% QPS
+     - **Impact: 8/10** — Pinterest; first production full-stack retrieval+ranking unification; substantial engineering contribution
+
+4. **ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation**
+   * Affiliation: University of Rochester / Meta / MBZUAI — *(Dongdong Nian, Dongqi Fu, Chenliang Xu — University of Rochester; Yinglong Xia, Hong Li, Hong Yan — Meta; Jian Kang — MBZUAI)*
+   * Link: [arxiv.org/abs/2606.14260](https://arxiv.org/abs/2606.14260)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: First systematic framework for injecting explicit temporal signals into semantic IDs for generative recommendation; characterizes design space along three orthogonal dimensions (signal type, injection position, fusion architecture); contributes new time-explicit generation recommendation benchmark.
+   * Key techniques:
+     - Three-dimensional design space: temporal signal type (absolute vs. relative time), injection position (tokenizer vs. recommender), fusion architecture (concatenation vs. attention vs. gating)
+     - ChronoID unified framework for time-aware semantic ID learning
+     - Time-explicit generative recommendation benchmark for controlled evaluation
+     - Analysis of where performance gains originate: ID capacity expansion vs. temporal semantic enrichment
+     - Explicit high-level temporal semantics effectiveness analysis
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First systematic study of explicit temporal signals in SIDs; three-dimensional design space characterization is novel
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — New benchmark; systematic evaluation along three dimensions; multi-dataset analysis
+     - **Impact: 6/10** — U Rochester/Meta/MBZUAI; addresses fundamental limitation of time-agnostic SID learning in generative recommendation
+
+5. **GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation**
+   * Affiliation: Anhui University — *(Lin Mu, Guoji Wang, Li Ni, Lei Sang, Zhize Wu, Peiquan Jin, Yiwen Zhang — Anhui University)*
+   * Link: [arxiv.org/abs/2606.07526](https://arxiv.org/abs/2606.07526)
+   * Venue: ACL 2026 Findings
+   * TL;DR: Embeds trainable GNN message-passing network within LoRA adaptation pathway for LLM-based recommendation; collaborative topology explicitly guides parameter updates; outperforms SOTA LLMRec methods on MovieLens, Amazon, and Book-Crossing with superior generalization.
+   * Key techniques:
+     - Structure-aware LoRA: injects GNN-derived node representations into LoRA intermediate states via α·LoRA(A·x) + β·GNN(node_id) fusion
+     - Supports multiple GNN backbones (LightGCN, NGCF, GCN) with configurable injection layer
+     - Two-stage training: CF pre-training for collaborative embeddings → GraphLoRA tuning for LLM-based recommendation
+     - Captures high-order relational dependencies beyond static collaborative prompts or pre-trained embeddings
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/wgj15965/GraphLoRA](https://github.com/wgj15965/GraphLoRA) — 2⭐, 4 commits; complete training pipeline with configs, preprocessing scripts, evaluation; well-documented README with architecture diagram; no license; early-stage repo
+     - **Novelty: 6/10** — GNN injection into LoRA for LLMRec is creative but incremental over existing LoRA variants and graph-enhanced LLM methods
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Multiple benchmarks (MovieLens, Amazon, Book-Crossing); ACL 2026 Findings peer-reviewed; comprehensive ablation studies
+     - **Impact: 6/10** — ACL 2026 Findings; Anhui University; practical PEFT method for structure-aware LLM-based recommendation
+
+6. **BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation**
+   * Affiliation: Chinese Academy of Sciences / University of Chinese Academy of Sciences / Beijing Institute for General Artificial Intelligence — *(Xi Zhou, Famin Wu, Mingming Li, Hongyue Zhang, Jiao Dai, Jizhong Han, Tao Guo — CAS / UCAS / BIGAI)*
+   * Link: [arxiv.org/abs/2606.03091](https://arxiv.org/abs/2606.03091)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Adaptive distillation framework addressing signal heterogeneity in black-box sequential recommendation; multi-scale consistency probing quantifies reliability, adaptive hierarchical objective with dynamic-temperature KL + ranking consistency + InfoNCE for head vs. tail; +80% improvement on tail users, +4.98% over teacher.
+   * Key techniques:
+     - Multi-scale consistency probing mechanism implicitly quantifying signal reliability along head-tail distribution
+     - Adaptive hierarchical objective: dynamic-temperature KL divergence mitigates preference solidification for head signals
+     - Ranking consistency + InfoNCE contrastive learning for noise-robust enhancement of low-confidence tail signals
+     - Black-box model extraction setting: replicates capabilities of black-box sequential recommendation APIs
+     - Plug-and-play design for high-fidelity black-box recommendation extraction
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Multi-scale consistency probing for adaptive distillation is practical; addresses underexplored signal heterogeneity in black-box extraction
+     - **Fairness: 5/10** — Directly addresses long-tail user performance disparity; +80% improvement on tail users
+     - **Robustness: 6/10** — Consistent improvement over baselines; up to 4.98% over teacher model
+     - **Impact: 5/10** — CAS/UCAS/BIGAI; practical plug-and-play distillation method for black-box sequential recommendation
 
 ### Papers July 17
 
@@ -1221,218 +1338,6 @@ mindmap
      - **Robustness: 9/10** — Deployed on Meta platform serving billions of users; ICLR 2026 peer-reviewed
      - **Impact: 9/10** — ICLR 2026; Meta; massive-scale industrial generative recommendation breakthrough
 
-### Papers July 7
-
-*Tuesday, July 7, 2026. Arxiv cs.IR new listing returned 6 relevant genrec papers. No fallback needed.*
-
-1. **LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation**
-   * Affiliation: Zhejiang University, The Chinese University of Hong Kong (CUHK), University of Science and Technology of China (USTC), Bangsun Technology — *(Hongchen Li, Bohao Wang, Weiqin Yang, Can Wang, Jiawei Chen — Zhejiang University; Jingbang Chen — CUHK; Hang Pan — USTC; Bingde Hu — Bangsun Technology)*
-   * Link: [arxiv.org/abs/2607.04270](https://arxiv.org/abs/2607.04270)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Identifies and mitigates dual length bias in LLM-based recommendation — input-side attention skew from longer item descriptions and output-side decoding bias against long items; proposes LBR framework with Length-Aware Attention Calibration and Effective Information Length Normalization; +16.82% avg NDCG@5.
-   * Key techniques:
-     - Length-Aware Attention Calibration: length-dependent offset injected into attention logits to neutralize input-side skew
-     - Effective Information Length Normalization: information-theoretic length surrogate from prefix tree branching structure replaces naive token count
-     - Model-agnostic lightweight framework with negligible training/inference overhead
-     - Thorough analysis of length bias mechanisms in both input context and autoregressive decoding
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 5/10** — Paper claims code at github.com/Void-JackLee/LBR (repo not yet accessible, likely pending publication)
-     - **Novelty: 8/10** — First systematic identification and mitigation of dual length bias in LLM-based recommendation
-     - **Fairness: 7/10** — Directly addresses length-related fairness; length normalization improves item exposure equity
-     - **Robustness: 7/10** — 3 Amazon datasets, 2 LLM-based recommender backbones; consistent improvements
-     - **Impact: 7/10** — Addresses fundamental bias in LLM4Rec; Zhejiang/CUHK/USTC collaboration
-
-2. **UniSGR: Unified Framework for Semantic ID Generation and Ranking**
-   * Affiliation: Alibaba International Digital Commerce Group — *(Jiawei Sun, Jun Yang, Ziyue Guo, Dongyue Xu, Jianan Yan, Lifang Deng, Xiaoyi Zeng — Alibaba International)*
-   * Link: [arxiv.org/abs/2607.04068](https://arxiv.org/abs/2607.04068)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Two-stage framework unifying semantic ID generation and multi-objective ranking for e-commerce generative retrieval; introduces Task-Aware Tokens with Funnel-Aware Contrastive Learning and STARK inference strategy removing KV cache bottlenecks in beam search.
-   * Key techniques:
-     - Two-stage training: multi-scenario pre-training + scenario-specific alignment
-     - Value-Aware Parallel Multi-Token Prediction (VA-PMTP) for joint generation and ranking optimization
-     - Task-Aware Tokens (TAT) guided by Funnel-Aware Contrastive Learning for generation-ranking alignment
-     - Semantic Tree Attention with Reorganized KV cache (STARK) for efficient beam search inference
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (Alibaba internal)
-     - **Novelty: 7/10** — First unified framework integrating SID generation with multi-objective ranking; STARK inference is novel
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Large-scale e-commerce platform offline evaluation
-     - **Impact: 7/10** — Alibaba International; practical framework bridging SID generation and ranking
-
-3. **Beyond Item Order: Temporal Gap Tokenization for Generative Recommendation with Semantic IDs (ChronoSID)**
-   * Affiliation: University of New South Wales (UNSW), Macquarie University, CSIRO's Data61 — *(Chengkai Huang — UNSW/Macquarie; Tianqi Gao — Independent; Hongtao Huang — UNSW; Quan Z. Sheng — Macquarie; Lina Yao — CSIRO Data61/UNSW)*
-   * Link: [arxiv.org/abs/2607.03918](https://arxiv.org/abs/2607.03918)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Lightweight temporal augmentation framework injecting inter-interaction gap signals into semantic-ID-based generative recommendation via time-aware masked auto-encoding and discretized gap token interleaving; consistent gains especially under long-gap scenarios.
-   * Key techniques:
-     - Time-Aware Field-Aware Masked Auto-Encoding (TA-FAMAE): auxiliary time-gap prediction objective for item representation learning
-     - Discretized log-scale gap tokens interleaved with SID tuples in encoder input
-     - Two complementary temporal signal injection perspectives preserving compact SID generation paradigm
-     - Diagnostic analysis showing stronger gains under long-gap (interest drift) scenarios
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First temporal augmentation framework specifically for semantic-ID-based generative recommendation
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Amazon review benchmarks with ablation and diagnostic analyses
-     - **Impact: 6/10** — UNSW/Macquarie/CSIRO; addresses important temporal blindness limitation in SID-based genrec
-
-4. **HGenPush: A Heterogeneous Generative Recommendation Architecture for Industrial Push Notification Systems**
-   * Affiliation: Kuaishou Technology — *(Xiao Liang, Jiali Feng, Xin Feng, Yiqing Wang, Baolin Ye, Siyao Feng, Zhihui Deng, Cunyi Zhang, Huajin Sun, Xuanping Li, Kaiqiao Zhan, Yanan Niu, Kun Gai — Kuaishou Technology, Beijing)*
-   * Link: [arxiv.org/abs/2607.03362](https://arxiv.org/abs/2607.03362)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: End-to-end heterogeneous generative recommendation architecture generating dual-type content (videos + authors) for push notifications; replaces autoregressive paradigm with lightweight multi-token prediction; deployed on Kuaishou with +0.181% DAU lift.
-   * Key techniques:
-     - Hybrid user behavior understanding: multi-scenario and multi-perspective behavior integration
-     - Dual-branch heterogeneous generation unifying video and author recommendation
-     - Lightweight multi-token prediction discarding autoregressive paradigm for efficiency
-     - User consumption preference alignment module with reward-guided generation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (Kuaishou internal production)
-     - **Novelty: 7/10** — First heterogeneous generative recommendation for push notifications unifying dual content types
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Deployed on Kuaishou push notification system; verified DAU improvement
-     - **Impact: 8/10** — Kuaishou; industrial deployment with measurable business metrics
-
-5. **Long-Term Optimization for Large-Scale Generative Retrieval with Off-Policy REINFORCE**
-   * Affiliation: AI VK, HSE University — *(Artem Matveev, Sergei Makeev, Aleksei Krasilnikov, Vladimir Baikalov, Sergei Liamaev — AI VK; Kirill Khrylchenko — HSE University)*
-   * Link: [arxiv.org/abs/2607.02818](https://arxiv.org/abs/2607.02818)
-   * Venue: 5th Workshop on End-to-End Customer Journey Optimization at KDD 2026
-   * TL;DR: Formulates generative retrieval as session-level sequential decision-making with off-policy REINFORCE and multi-step importance weighting; introduces feedback-model-based test-time scaling for predicting long-term returns; evaluated on Yambda-5B dataset.
-   * Key techniques:
-     - Multi-step importance weight approximation enabled by autoregressive formulation
-     - User feedback model simulating responses for offline evaluation
-     - Doubly robust off-policy evaluation adapted for sequential recommendation
-     - Test-time scaling: simulate future responses to select recommendations with highest predicted long-term returns
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First multi-step off-policy REINFORCE for generative retrieval with test-time scaling
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Evaluated on public Yambda-5B dataset; KDD 2026 Workshop peer-reviewed
-     - **Impact: 6/10** — KDD 2026 Workshop; practical RL framework for long-term optimization in generative retrieval
-
-6. **Autonomous Information Seeking: A Roadmap for Agentic Recommender Systems**
-   * Affiliation: National University of Singapore (NUS), Polytechnic University of Bari, Renmin University of China, University of Science and Technology of China (USTC) — *(Xinyu Lin, Honghui Bao, Tat-Seng Chua — NUS; Yashar Deldjoo, Fatemeh Nazary, Tommaso Di Noia — Polytechnic University of Bari; Sunhao Dai, Xiaopeng Ye, Jun Xu — Renmin University of China; Wenjie Wang — USTC)*
-   * Link: [arxiv.org/abs/2607.04433](https://arxiv.org/abs/2607.04433)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Comprehensive survey establishing a unified taxonomy for agentic recommender systems grounded in three paradigms (agent-assisted, agent-as-recommender, agent-as-user-simulator) and autonomy levels; covers evaluation challenges including trajectory-level assessment and agent contribution analysis.
-   * Key techniques:
-     - Unified taxonomy: agent-assisted recommendation, agent-as-recommender, agent-as-user-simulator
-     - Autonomy framework organizing methods by proactivity, context awareness, interaction flexibility, and adaptivity
-     - Analysis of agent architectures: profiles, memory, tool use, workflows, optimization mechanisms
-     - Evaluation methodology survey: automated metrics, LLM judging, simulation-based assessment, trajectory-level evaluation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code (survey paper)
-     - **Novelty: 7/10** — First comprehensive survey unifying agentic recsys paradigms with autonomy-based taxonomy
-     - **Fairness: 5/10** — Discusses trustworthiness and controllability as fairness-related dimensions
-     - **Robustness: 6/10** — Systematic coverage across paradigms, architectures, and evaluation; survey quality
-     - **Impact: 8/10** — NUS/Renmin/PoliBa/USTC; foundational reference for the rapidly growing agentic recsys field
-
-
-### Papers July 6 (ICML 2026 Day 1)
-
-*No new arxiv papers today (Monday, July 6, 2026). Arxiv new submissions not yet posted. ICML 2026 Day 1 kicks off in Seoul — cross-referenced ICML 2026 accepted papers list against existing README entries. Found 6 ICML 2026 GenRec/LLM4Rec papers not yet in the repository.*
-
-1. **VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems**
-   * Affiliation: Nanyang Technological University (NTU), Beihang University, Alibaba — *(Guowei Guan, Yurong Hao, Jiaming Zhang, Tiantong Wu, Fuyao Zhang, Tianxiang Chen, Longtao Huang, Cyril Leung, Wei Yang Bryan Lim)*
-   * Link: [arxiv.org/abs/2602.06409](https://arxiv.org/abs/2602.06409)
-   * Venue: ICML 2026
-   * TL;DR: Formalizes and demonstrates cross-modal interactive poisoning — a new attack surface in MLLM-based recommender systems where synchronized multimodal perturbations steer fused representations along stable semantic directions during fine-tuning; VENOMREC achieves 0.73 mean ER@20, +0.52 over strongest baseline.
-   * Key techniques:
-     - Exposure Alignment identifying high-exposure regions in the joint text-image embedding space
-     - Cross-modal Interactive Perturbation crafting attention-guided coupled token-patch edits
-     - Formalizes cross-modal interactive poisoning as a distinct threat category for MLLM RecSys
-     - Maintains comparable recommendation utility while achieving effective targeted promotion
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First formalization of cross-modal interactive poisoning for MLLM RecSys
-     - **Fairness: 5/10** — Exposes fairness vulnerability; adversarial study informs robustness
-     - **Robustness: 7/10** — 3 datasets, 0.73 ER@20, +0.52 over strongest baseline; ICML 2026 peer-reviewed
-     - **Impact: 7/10** — ICML 2026; NTU/Beihang/Alibaba; opens security dimension for multimodal LLM RecSys
-
-2. **ProRL: Effective Reinforcement Learning for Proactive Recommendation via Rectified Policy Gradient Estimation**
-   * Affiliation: Fudan University — *(Hongru Hou, Tiehua Mei, Denghui Geng, Jinhui Huang, Ao Xu, Hengrui Chen, Jiaqing Liang, Deqing Yang — Fudan University)*
-   * Link: [arxiv.org/abs/2605.28293](https://arxiv.org/abs/2605.28293)
-   * Venue: ICML 2026
-   * TL;DR: Identifies two critical gradient estimation deficiencies in applying policy gradients to proactive recommendation — length-dependent bias and high gradient variance — and proposes Stepwise Reward Centering and Position-Specific Advantage Estimation to rectify them; significantly outperforms SOTA PRSs on 3 real-world datasets.
-   * Key techniques:
-     - Formal identification of length-dependent bias: path-level rewards decompose into positively-biased step-level rewards favoring path extension
-     - Stepwise Reward Centering subtracting expected rewards to neutralize length bias
-     - Position-Specific Advantage Estimation computing step-dependent baselines for variance reduction
-     - Semantic-ID item representations + T5 backbone for proactive path generation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/hongruhou89/ProRL](https://github.com/hongruhou89/ProRL) — 45⭐, well-documented README, clean modular code, shell scripts for reproduction, pinned dependencies; missing pretrained weights and datasets
-     - **Novelty: 7/10** — First to formally identify and fix two gradient estimation deficiencies in proactive recommendation RL
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — 3 real-world datasets; consistent SOTA improvement; ICML 2026 peer-reviewed
-     - **Impact: 7/10** — ICML 2026; Fudan; practical RL framework for proactive recommendation with strong opensource
-
-3. **Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec)**
-   * Affiliation: Nanjing University, Nanjing University of Posts and Telecommunications — *(Aoran Zhang, Yu-Bin Yang, Yonghong Yu)*
-   * Link: [openreview.net/forum?id=BpVBWp3PZx](https://openreview.net/forum?id=BpVBWp3PZx)
-   * Venue: ICML 2026
-   * TL;DR: Enhances residual quantization for generative recommendation by embedding latent discrete representations into hyperbolic space to explicitly model tree-like item hierarchies, combined with a pyramidal differential-length codebook strategy leveraging hyperbolic volume growth; achieves lower collision rates, more uniform codebook usage, and reduced training time.
-   * Key techniques:
-     - Hyperbolic RQ-VAE replacing Euclidean residual quantization to capture hierarchical item relationships
-     - Differential-length codebook strategy with pyramidal structure aligned to tree-like item taxonomy
-     - Exponential volume growth of hyperbolic space enabling compressed yet expressive codebooks
-     - Improved codebook utilization and collision reduction over Euclidean RQ-VAE baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 5/10** — [github.com/zar123123/HG-Rec](https://github.com/zar123123/HG-Rec) — minimal repo (2 commits, 1⭐), bare README, training scripts present but no documentation
-     - **Novelty: 8/10** — First hyperbolic RQ-VAE for genrec; differential-length codebook is novel and well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Multiple benchmark datasets; consistent SOTA; ICML 2026 peer-reviewed
-     - **Impact: 7/10** — ICML 2026; Nanjing University; advances SID-based genrec with hyperbolic geometry
-
-4. **Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS)**
-   * Affiliation: University of Science and Technology of China (USTC) — *(Heyu Chen, Junkang Wu, Guoqing Hu, Kexin Huang, Xiang Wang, Jiancan Wu — USTC)*
-   * Link: [openreview.net/forum?id=9chqEmpIZT](https://openreview.net/forum?id=9chqEmpIZT)
-   * Venue: ICML 2026
-   * TL;DR: Gradient-based analysis formalizing the ε-insensitive region where pairwise DPO updates have little influence on ordering, causing reward hacking; proposes SIRIUS introducing pseudo-negative samples to enrich contrastive signals and reduce ε-insensitive regions; consistent ranking quality improvement across 3 benchmarks.
-   * Key techniques:
-     - Gradient perspective analysis revealing the ε-insensitive region mechanism behind reward hacking in DPO-based LLM recsys
-     - Bradley-Terry model theoretical analysis showing ε-insensitive regions occupy substantial preference space
-     - SIRIUS framework: Simulated Preference Optimization with pseudo-negative samples enriching contrastive signals
-     - Reduces ε-insensitive regions to improve ranking quality without additional annotation cost
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 3/10** — [anonymous.4open.science/r/C557-id](https://anonymous.4open.science/r/C557-id) — anonymous review repository only; no proper public release
-     - **Novelty: 7/10** — Novel gradient-based analysis of reward hacking in LLM recsys; ε-insensitive region formalization
-     - **Fairness: 4/10** — Mitigating reward hacking improves training fairness in preference optimization
-     - **Robustness: 7/10** — 3 public benchmarks; consistent improvement; ICML 2026 peer-reviewed
-     - **Impact: 7/10** — ICML 2026; USTC; addresses fundamental training issue in LLM-based recommendation alignment
-
-5. **AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation**
-   * Affiliation: University of Technology Sydney (UTS), Rutgers University, Alibaba — *(Yunxiao Shi, Wujiang Xu, Tingwei Chen, Haoning Shang, Ling Yang, Yunfeng Wan, Zhuo Cao, Xing Zi, Dimitris N. Metaxas, Min Xu)*
-   * Link: [arxiv.org/abs/2603.03761](https://arxiv.org/abs/2603.03761)
-   * Venue: ICML 2026
-   * TL;DR: First unified benchmark reframing LLM agent selection as narrative query-to-agent recommendation; 111K queries, 107K agents, 251K interaction records from 40+ sources; reveals regime shift where traditional CF/GNN methods fail and content-aware capability matching is essential; transfers to real marketplace (MuleRun).
-   * Key techniques:
-     - Unified agent recommendation benchmark converting heterogeneous evaluation artifacts into positive-only interaction data
-     - Compositional agent synthesis inducing capability-sensitive behavior under counterfactual edits
-     - Cross-platform transfer learning to MuleRun marketplace demonstrating practical utility
-     - Analysis revealing dense head → long-tail regime shift in agent selection
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First benchmark framing agent selection as query-to-agent recommendation; 111K queries at scale
-     - **Fairness: 4/10** — Addresses long-tail agent coverage; capability-aware matching promotes fair agent access
-     - **Robustness: 7/10** — 111K queries, 107K agents, 40+ sources, cross-platform transfer; ICML 2026 peer-reviewed
-     - **Impact: 6/10** — ICML 2026; UTS/Rutgers/Alibaba; foundational benchmark for emerging agent recommendation ecosystem
-
-6. **CCLRec: Consensus-driven Contrastive Learning for LLM-enhanced Graph Recommendation**
-   * Affiliation: North University of China, Harbin Institute of Technology (HIT), Penn State University — *(Ting Guo, Dongyu Pei, Litiao Qiu, Xiaoying Liao, KE LIANG, Peng Song, Pinle Qin)*
-   * Link: [openreview.net/forum?id=CCLRec_ICML2026](https://icml.cc/virtual/2026/poster/65594)
-   * Venue: ICML 2026
-   * TL;DR: Bridges the supervisory gap between GNN structural proximity and LLM semantic relevance by mining consensus signals from both modalities; consensus-centered contrastive learning with weight-aware reinforcement mechanism; consistently outperforms SOTA LLM-enhanced graph recommendation methods.
-   * Key techniques:
-     - LLM-based semantic sampling for candidate positive/negative sets in semantic space
-     - Structural-semantic consensus mining computing intersection between graph neighbors and semantic neighbors
-     - Consensus-centered contrastive learning on high-confidence pairs endorsed by both CF and LLM
-     - Weight-aware reinforcement amplifying high-quality consensus features during training
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Consensus-driven integration of structural and semantic signals is incremental but well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Multiple public benchmarks; ICML 2026 peer-reviewed
-     - **Impact: 5/10** — ICML 2026; incremental improvement on LLM-enhanced graph recommendation
 
 ### Papers Classic Must Read
 
@@ -1671,7 +1576,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 97 papers as of July 16.
+**Count:** 98 papers as of July 18.
 
 | Score | Paper |
 | --- | --- |
@@ -1760,6 +1665,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
 | 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |
+| 6/10 | GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation |
 | 6/10 | Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd) |
 | 6/10 | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) |
 | 6/10 | Trading Engagement for Sustainability: Carbon-Aware Re-ranking for E-commerce Recommendations |

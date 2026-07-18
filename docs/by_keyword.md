@@ -14,6 +14,7 @@
 - Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop)
 - EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
 - ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
+- RouteRec: Strict Evaluation of Recommender-Agent Selection and Aggregation (RouteRec)
 - SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
@@ -151,6 +152,7 @@
 - Causal Direct Preference Optimization for Distributionally Robust Generative Recommendation (CausalDPO)
 - Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
 - Causal Representation Learning for Generalisable Recommendation
+- Consensus vs. Dissent: Dynamic LLM Modeling of Subjective Preferences in Group Recommenders
 - Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS)
 - COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs
 - CRAB: Codebook Rebalancing for Bias Mitigation in Generative Recommendation
@@ -333,6 +335,7 @@
 - CapsID: Soft-Routed Variable-Length Semantic IDs
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 - Causal Representation Learning for Generalisable Recommendation
+- ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID)
 - Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO)
 - DaV-Gen: End-to-End Generative Retrieval via Draft-and-Verify (DaV-Gen)
 - Decoupled Residual Quantization for Robust Semantic IDs in Recommendation (DRQ)
@@ -403,6 +406,7 @@
 
 ### Group Recommendation
 - AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation
+- Consensus vs. Dissent: Dynamic LLM Modeling of Subjective Preferences in Group Recommenders
 
 
 
@@ -412,6 +416,7 @@
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
 - AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems (AgentX)
 - Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations (AIR)
+- BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging Short Videos and Live Streams: Reasoning-Guided Multimodal LLMs for Cross-Domain Representation Learning (RGCD-Rep)
 - Causal Representation Learning for Generalisable Recommendation
@@ -532,6 +537,8 @@
 - MLPs are Efficient Distilled Generative Recommenders (SID-MLP)
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
+### Knowledge Distillation
+- BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 
@@ -552,6 +559,7 @@
 - CFALR: Collaborative Filtering-Augmented Large Language Model for Personalized Fashion Outfit Recommendation (CFALR)
 - Cold-Start Personalization via Training-Free Priors from Structured World Models (PEP)
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
+- Consensus vs. Dissent: Dynamic LLM Modeling of Subjective Preferences in Group Recommenders
 - DeGRe: Dense-supervised Generative Reranking for Recommendation
 - Designing Trustworthy LLM-based Wellbeing Recommendation through Controllable Interaction
 - Dialogue to Discovery: Attribute-Aware Preference Elicitation for Conversational Product Search Assistants (D2D)
@@ -580,6 +588,7 @@
 - GenPage: Towards End-to-End Generative Homepage Construction at Netflix (GenPage)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
+- GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation (GraphLoRA)
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 - Guiding Federated Graph Recommendation with LLM-encoded knowledge
 - Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
@@ -628,6 +637,7 @@
 - Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair
 - Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
+- RouteRec: Strict Evaluation of Recommender-Agent Selection and Aggregation (RouteRec)
 - RPORec: Reinforced Preference Optimization for Reasoning-Augmented Recommendations
 - SAERec: Constructing Fine-grained Interpretable Intents Priors via Sparse Autoencoders for Recommendation (SAERec)
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
