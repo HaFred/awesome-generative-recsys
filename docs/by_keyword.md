@@ -220,6 +220,7 @@
 - Beyond Instance-Level Alignment and Uniformity: Semantic Factor Learning for Collaborative Filtering (SaFeAU)
 - Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
 - Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR)
+- Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - BITRec (Modeling Behavioral Intensity and Transitions)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 - Causal Direct Preference Optimization for Distributionally Robust Generative Recommendation (CausalDPO)
@@ -248,6 +249,7 @@
 - From "Strings" to "Things" for Personal Knowledge Graphs (PKG-Rec)
 - FusID: Modality-Fused Semantic IDs for Generative Music Recommendation (FusID)
 - GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation
+- Gated Bidirectional Linear Attention for Generative Retrieval (GBLA)
 - GEMs: Breaking the Long-Sequence Barrier in Generative Recommendation with a Multi-Stream Decoder (GEMs)
 - Generative Recommendation for Large-Scale Advertising (GR4AD)
 - Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
@@ -293,6 +295,7 @@
 - Query-Conditioned Generative Search with QGS in Quark
 - R3-VAE
 - RAGR: Review-Augmented Generative Recommendation
+- RankGR: Rank-Enhanced Generative Retrieval with Listwise Direct Preference Optimization in Recommendation (RankGR)
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
 - RSIR: Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control (RSIR)
 - ReCast
@@ -310,6 +313,7 @@
 - The Injection Paradox: Brand-Level Suppression in Safety-Trained LLM Recommendations via RAG Context Injection (Injection Paradox)
 - The Pitfall of Scaling Up: Uncovering and Mitigating Popularity Bias Amplification in Scaling Transformer-based Recommenders (SPRINT)
 - Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM)
+- TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems (TokenMinds)
 - Towards Fast Domain Adaptation and Fine-Grained User Simulation for Evaluating Conversational Recommender Systems (AdaptSim)
 - Towards Generalizable and Efficient Large-Scale Generative Recommenders
 - Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search (GrowthGR)
@@ -377,6 +381,7 @@
 - PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation
 - Quantizing Intent: Cross-Domain Semantic IDs from Organic Activity for Industrial Ranking
 - Query-Conditioned Generative Search with QGS in Quark
+- RankGR: Rank-Enhanced Generative Retrieval with Listwise Direct Preference Optimization in Recommendation (RankGR)
 - Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
 - Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)
 - SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive)
@@ -628,6 +633,7 @@
 - Principled Synthetic Data Enables the First Scaling Laws for LLMs in Recommendation (Scaling Laws)
 - Query-Conditioned Generative Search with QGS in Quark
 - RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender
+- RankGR: Rank-Enhanced Generative Retrieval with Listwise Direct Preference Optimization in Recommendation (RankGR)
 - Real-Time Hard Negative Sampling via LLM-based Clustering for Large-Scale Two-Tower Retrieval
 - RSIR: Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control (RSIR)
 - ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)

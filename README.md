@@ -52,6 +52,7 @@ mindmap
         Off-Policy REINFORCE -- AI VK / HSE
         GenRec / GRPO-SR -- JD.com
         Taiji / POPO -- Kuaishou
+        RankGR / Listwise DPO GenRetrieval -- Zhejiang U / Alibaba
       Ranking & Reranking
         CARE -- NUS & USTC
         InvariRank -- RMIT
@@ -101,9 +102,12 @@ mindmap
         RouteRec / Agent Aggregation -- Birmingham
         Consensus vs Dissent / Group Rec -- Maastricht U
         UniPinRec / Retrieval+Ranking -- Pinterest
+        OneBar / Generative Query Rec -- Zhejiang U / Kuaishou
+        TokenMinds / SID User Tokens -- Google DeepMind / YouTube
       Efficient Decoding
         Vectorizing the Trie -- Google
         PauseRec / Implicit Reasoning -- UVA / Snap
+        GBLA / Bidirectional Linear Attention -- Yandex
     Representation Layer: Generative Pre-training
       Semantic ID & Tokenization
         TCA4Rec -- USTC / Ant Group
@@ -132,6 +136,8 @@ mindmap
         PrefixMem / SID Encoder -- Pinterest
         ChronoID / Temporal SID -- U Rochester / Meta / MBZUAI
         GraphLoRA / GNN-LoRA LLMRec -- Anhui U
+        Beyond Item IDs / Semantic Video Rec -- Google
+        RankGR / Listwise DPO GenRetrieval -- Zhejiang U / Alibaba
       Next Interest Flow Prediction
         AMEN -- Alibaba
       RL-based Alignment for Recall
@@ -196,6 +202,100 @@ mindmap
 
 ---
 ## By Date
+
+### Papers July 19
+
+*Sunday, July 19, 2026. Arxiv inactive (weekend). Applied 3-month fallback strategy: searched missed May–June 2026 genrec papers from arxiv cs.IR listings and venue proceedings (SIGIR 2026). Total: 5 papers.*
+
+1. **Gated Bidirectional Linear Attention for Generative Retrieval (GBLA)**
+   * Affiliation: Yandex — *(Artem Matveev, Vladislav Tytskiy, Sergei Makeev, Sergei Liamaev — Yandex)*
+   * Link: [arxiv.org/abs/2606.07317](https://arxiv.org/abs/2606.07317)
+   * Venue: SIGIR 2026
+   * TL;DR: Extends kernelized linear attention with three lightweight components (local causal mixing, key gating, gated RMSNorm) for bidirectional encoder in generative retrieval; hybrid encoder interleaving SA and GBLA 1:2 matches full self-attention quality with 8.2× speedup at 32K sequence length on H100.
+   * Key techniques:
+     - GBLA: linear-time bidirectional attention with local causal mixing (Conv1D) for local patterns
+     - Sequence-level key gating for soft forgetting of less relevant past information
+     - Gated RMSNorm output for stabilized linear attention
+     - Hybrid encoder design: interleave 1 self-attention + 2 GBLA blocks — matches full SA quality
+     - Generalizes beyond proprietary Yandex Music dataset to public Amazon benchmarks
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Extends kernelized linear attention with practical gating mechanisms for GR; well-engineered but incremental
+     - **Fairness: 2/10** — Not addressing fairness
+     - **Robustness: 7/10** — Yandex Music large-scale + Amazon public benchmarks; SIGIR 2026 peer-reviewed; 8.2× speedup validated on H100
+     - **Impact: 7/10** — SIGIR 2026; Yandex; practical attention mechanism for long-sequence generative retrieval latency bottleneck
+
+2. **Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling**
+   * Affiliation: Google — *(Ruixiao Sun, Diego Uribe Mora, Zhimeng Jiang, Yuanzhen Lin, Jiarui Wang, Yuening Li, Danfeng Guo, Zhizhong Chen, Chuan He, Liang Liu — Google, Mountain View)*
+   * Link: [arxiv.org/abs/2606.07546](https://arxiv.org/abs/2606.07546)
+   * Venue: SIGIR 2026
+   * TL;DR: Production-deployed framework replacing atomic Video IDs with depth-truncated coarse-grained Semantic IDs for short-video recommendation at billion-user scale; Global-Aware Compression Transformer with temporal folding + global query integration reduces memory by >90%; +1.42% satisfied watch time, +1.08% satisfied views.
+   * Key techniques:
+     - Content-native Semantic IDs via RQ-VAE replacing orthogonal Video IDs — shrinks embedding table from corpus cardinality
+     - Depth-truncated, coarse-grained SIDs enabling cold-start generalization via shared semantic prefixes
+     - Global-Aware Compression Transformer: non-parametric temporal folding + unified global query integration
+     - Order-of-magnitude reduction in peak memory footprint and computational overhead
+     - Validated on billion-user short-video platform with online A/B gains in satisfied engagement
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Google internal production)
+     - **Novelty: 6/10** — Production-scale SID adoption for short-video; compression transformer is practical but incremental
+     - **Fairness: 3/10** — Cold-start generalization addresses supply-side bias indirectly
+     - **Robustness: 8/10** — Billion-user deployment; >90% memory reduction; SIGIR 2026 peer-reviewed; online A/B validated
+     - **Impact: 8/10** — SIGIR 2026; Google; industrial-scale semantic ID deployment for short-video recommendation
+
+3. **RankGR: Rank-Enhanced Generative Retrieval with Listwise Direct Preference Optimization in Recommendation**
+   * Affiliation: Zhejiang University / Alibaba Group — *(Kairui Fu, Kun Kuang — Zhejiang University; Changfa Wu, Kun Yuan, Binbin Cao, Dunxian Huang, Yuliang Yan, Junjun Zheng, Jianning Zhang, Silu Zhou, Jian Wu — Alibaba Group)*
+   * Link: [arxiv.org/abs/2602.08575](https://arxiv.org/abs/2602.08575)
+   * Venue: arXiv preprint, February 2026
+   * TL;DR: Two-phase generative retrieval with listwise DPO capturing hierarchical user preferences; Initial Assessment Phase generates candidates via DPO-enhanced GR, Refined Scoring Phase re-ranks top-λ with lightweight interaction-based scoring; deployed on Taobao "Guess You Like" handling ~10K QPS.
+   * Key techniques:
+     - Listwise Direct Preference Optimization (DPO) incorporated into GR for partial-order modeling of user preferences
+     - Two-phase decomposition: IAP (Initial Assessment Phase) for candidate generation + RSP (Refined Scoring Phase) for precision re-scoring
+     - Lightweight scoring module in RSP capturing deep interaction between decoded identifiers and user behavior sequences
+     - Joint optimization of both phases under unified GR model for consistency
+     - Production deployment optimizations: RTP-LLM inference engine, ~10,000 QPS real-time serving
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No dedicated code; uses RTP-LLM ([github.com/alibaba/rtp-llm](https://github.com/alibaba/rtp-llm)) for inference
+     - **Novelty: 7/10** — First listwise DPO application to generative retrieval; two-phase decomposition is well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Taobao "Guess You Like" deployment; 10K QPS; offline + online validation on industrial + academic datasets
+     - **Impact: 8/10** — Alibaba/Zhejiang University; deployed on Taobao; practical DPO-enhanced genrec at production scale
+
+4. **OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds**
+   * Affiliation: Zhejiang University / Kuaishou Technology — *(Yao Tang, Jian Liu — Zhejiang University; Ying Yang, Ben Chen, Yufei Ma, Zihan Liang, Chenyi Lei, Wenwu Ou — Kuaishou Technology)*
+   * Link: [arxiv.org/abs/2606.15330](https://arxiv.org/abs/2606.15330)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: End-to-end generative query recommendation for e-commerce short-video feeds; fuses multimodal video understanding with collaborative anchors; progressive preference learning eliminates separate reward model; deployed with +16.91% query exposure, +18.68% query click, +21.67% GMV.
+   * Key techniques:
+     - Collaborative-multimodal intent grounding: fuses multimodal video understanding with behavior-derived collaborative anchors
+     - Unified end-to-end architecture with prompt-compression mechanism for efficient online serving
+     - Progressive preference learning: internalizes hierarchical behavior preferences into generative policy without separate reward model
+     - Real-time query generation triggered by video-induced search intent
+     - Addresses noisy content-side metadata and preference drift in short-video query recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Generative query recommendation for e-commerce video is a novel application; progressive preference learning is practical
+     - **Fairness: 3/10** — Not directly addressing fairness
+     - **Robustness: 7/10** — Production-deployed with significant business metrics (+16.91% query exposure, +21.67% GMV)
+     - **Impact: 7/10** — Kuaishou/Zhejiang University; industrial generative framework bridging video content and e-commerce search
+
+5. **TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems**
+   * Affiliation: Google DeepMind / YouTube — *(Qingyun Liu, Yuji Roh, Min-hsuan Tsai, Yuan Hao, Lichan Hong, Xinyang Yi — Google DeepMind; Bo Yan, Yang Liu, Ekansh Sharma, Likang Yin, Emma Olowo, Yuxuan Li, Diego Uribe, Saksham Aggarwal, Siqi Wu, Vikas Kedigehalli, Lukasz Heldt, Li Wei — YouTube)*
+   * Link: [arxiv.org/abs/2606.25147](https://arxiv.org/abs/2606.25147)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: First industrial-scale system generating discrete SID-based user tokens alongside dense embeddings via encoder-decoder adapted from pre-trained LLMs; dual-output design bridges discrete semantic representations with existing dense-embedding pipelines; deployed on multiple YouTube surfaces serving billions of users.
+   * Key techniques:
+     - Extends PLUM framework from item retrieval to user modeling: generates SID-based user tokens
+     - Dual-output encoder-decoder architecture: discrete SID tokens + dense user embeddings
+     - Shared SID vocabulary unifying long-form and short-form video behaviors in single model
+     - Asynchronous serving infrastructure decoupling representation generation from downstream scoring
+     - Cross-scenario modeling reducing training/serving costs through unified SID vocabulary
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Google/YouTube internal production)
+     - **Novelty: 7/10** — First SID-based user tokenization at industrial scale; dual-output design bridging discrete+dense paradigms is novel
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 9/10** — Billions of users; multiple YouTube surfaces; live deployment with complementary value verified across ranking systems
+     - **Impact: 8/10** — Google DeepMind/YouTube; extends SID paradigm from items to users at YouTube scale; dual-output design bridges semantic and collaborative paradigms
 
 ### Papers July 18
 
@@ -1249,96 +1349,6 @@ mindmap
      - **Robustness: 8/10** — Public benchmarks + industrial dataset; deployed on Taobao Flash Shopping; KDD 2026
      - **Impact: 8/10** — KDD 2026; Zhejiang/Alibaba; industrial deployment with verified online gains
 
-### Papers July 8
-
-*Wednesday, July 8, 2026. Arxiv cs.IR new listing returned only 1 relevant genrec paper. Applied 3-month fallback → found 2 ICLR 2026 papers (PESO, VISTA), 1 ICML 2026 paper (CRAMER), and 1 SIGIR 2026 missed paper (ColdGenRec). Total: 5 papers.*
-
-1. **SCOReD: Student-Aware CoT Optimization for Recommendation Distillation**
-   * Affiliation: UC Riverside, Meta AI — *(Haz Sameen Shahgir, Yue Dong — UC Riverside; Yufei Li, Frank Shyu, Luke Simon, Sandeep Pandey, Xi Liu — Meta AI)*
-   * Link: [arxiv.org/abs/2607.05734](https://arxiv.org/abs/2607.05734)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Framework for distilling chain-of-thought reasoning from large LLM teachers to smaller student models for recommendation; parses teacher traces into typed segments, uses student attention to score importance, and dynamically selects KEEP/REWRITE/FUSE/PRUNE edits per segment; +1.56% NDCG, +1.9% Recall@5, 27.3% reasoning length reduction.
-   * Key techniques:
-     - Student-aware CoT trace parsing into typed segments with dynamic per-segment editing
-     - Attention-based segment importance scoring using the student LLM's own attention
-     - Four editing operations (KEEP/REWRITE/FUSE/PRUNE) selected via output length and log-probability lift
-     - CoT distillation specifically tailored for the recommendation domain as pre-RL training
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First student-aware CoT optimization framework tailored specifically for recommendation distillation
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — 1.56% NDCG, 1.9% Recall@5 across recommendation benchmarks
-     - **Impact: 7/10** — Meta/UC Riverside; practical distillation framework for deploying LLM-based recsys
-
-2. **Cold-Starts in Generative Recommendation: A Reproducibility Study (ColdGenRec)**
-   * Affiliation: Shandong University, Leiden University, Baidu Inc., University of Amsterdam — *(Zhen Zhang, Xin Xin — Shandong University; Jujia Zhao, Zhaochun Ren — Leiden University; Xinyu Ma — Baidu Inc.; Maarten de Rijke — University of Amsterdam)*
-   * Link: [arxiv.org/abs/2603.29845](https://arxiv.org/abs/2603.29845)
-   * Venue: SIGIR 2026
-   * TL;DR: Systematic reproducibility study isolating the impact of model scale, identifier design, and RL training on cold-start performance of generative recommenders; reproduces multiple GR models under unified user/item cold-start protocols; released full code and data pipeline.
-   * Key techniques:
-     - Unified suite of cold-start protocols for user cold-start and item cold-start evaluation
-     - Isolates impact of three core design choices: model scale, identifier design, and RL training
-     - Reproduces representative generative recommenders (OpenOneRec, MiniOneRec, etc.) under controlled settings
-     - Full code release with evaluation pipeline, dataset preprocessing, and configuration files
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/zhangzhen-research/ColdGenrec](https://github.com/zhangzhen-research/ColdGenrec) — complete pipeline with source code, evaluation scripts, dataset preprocessing; SIGIR 2026 artifact; well-documented
-     - **Novelty: 7/10** — First systematic reproducibility study isolating key design factors in generative recommendation cold-start
-     - **Fairness: 6/10** — Cold-start protocol explicitly addresses item/user fairness in sparse-data scenarios
-     - **Robustness: 8/10** — Multiple models, datasets (Amazon, MicroLens, Steam), unified protocols; SIGIR 2026 peer-reviewed
-     - **Impact: 7/10** — SIGIR 2026; Shandong/Leiden/Baidu/UvA; foundational benchmark for cold-start generative recommendation
-
-3. **CRAMER: Control via Request-Aware Masking for Editing Recommenders**
-   * Affiliation: Renmin University of China, Dalhousie University — *(Zhiyuan Su, Naihe Feng, Zhen Qin — Renmin University; Ga Wu — Dalhousie University)*
-   * Link: ICML 2026 ([Poster 62968](https://icml.cc/virtual/2026/poster/62968))
-   * Venue: ICML 2026
-   * TL;DR: Treats natural-language user requests as control signals to modulate frozen sequential recommendation backbone parameters via masking, enabling instant adaptation without retraining or LLM prompting; outperforms 4 SOTA request-aware baselines with minimal overhead.
-   * Key techniques:
-     - Request-aware masking: user requests act as control signals modulating frozen backbone parameters
-     - Model control theory-inspired: avoids costly retraining or LLM-based prompt engineering
-     - Frozen backbone with learned masks enabling cross-domain adaptability
-     - Lightweight instant adaptation to diverse natural-language user requests
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/zhiyuansu0326/CRAMER-ICML2026](https://github.com/zhiyuansu0326/CRAMER-ICML2026) — ICML 2026 code release; complete implementation with documentation
-     - **Novelty: 7/10** — Novel control-theory perspective on request-aware recommendation with masking-based adaptation
-     - **Fairness: 4/10** — Cross-domain adaptability promotes broader access; not primary focus
-     - **Robustness: 7/10** — Outperforms 4 SOTA baselines; ICML 2026 peer-reviewed; cross-domain generalization
-     - **Impact: 7/10** — ICML 2026; practical lightweight framework for real-time request adaptation
-
-4. **Continual Low-Rank Adapters for LLM-based Generative Recommender Systems (PESO)**
-   * Affiliation: University of Illinois Urbana-Champaign, Korea University, Amazon — *(Hyunsik Yoo, Ting-Wei Li, Zhining Liu, Hanghang Tong — UIUC; SeongKu Kang — Korea University; Charlie Xu, Qilin Qi — Amazon)*
-   * Link: [arxiv.org/abs/2510.25093](https://arxiv.org/abs/2510.25093)
-   * Venue: ICLR 2026
-   * TL;DR: Proposes PESO (Proximally rEgularized Single evolving lOra) for continual adaptation of LLM-based generative recommenders; uses proximal regularization anchoring current adapter to its most recent frozen state, enabling flexible balance between preserving old knowledge and absorbing new preferences.
-   * Key techniques:
-     - Single evolving LoRA replacing frozen adapter stacking for continual learning
-     - Proximal regularizer anchoring current adapter to most recent frozen state
-     - Data-aware, direction-wise guidance in LoRA subspace (theoretically analyzed)
-     - Challenges conventional continual learning goal of preserving past performance in recommendation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Novel continual learning paradigm specifically designed for recommendation's unique preference evolution
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Consistently outperforms LoRA-based continual methods on 3 real-world datasets; ICLR 2026 peer-reviewed
-     - **Impact: 7/10** — ICLR 2026; UIUC/Amazon; practical continual learning framework for deployed LLM-based recsys
-
-5. **Massive Memorization with Hundreds of Trillions of Parameters for Sequential Transducer Generative Recommenders (VISTA)**
-   * Affiliation: Meta, Yale University — *(Zhimin Chen, Chenyu Zhao, Ka Chun Mo, Yunjiang Jiang, Khushhall Chandra Mahajan, Ning Jiang, Kai Ren, Jinhui Li, Wen-Yun Yang — Meta; Jane H. Lee — Yale University / Meta intern)*
-   * Link: [arxiv.org/abs/2510.22049](https://arxiv.org/abs/2510.22049)
-   * Venue: ICLR 2026
-   * TL;DR: Two-stage attention framework decomposing target attention into history summarization (into few hundred cached tokens) and lightweight candidate attention over those tokens; enables scaling to lifelong user histories of up to 1M items with fixed downstream cost; deployed on Meta's recommendation platform serving billions of users.
-   * Key techniques:
-     - VISTA (VIrtual Sequential Target Attention): two-stage decomposition of target attention
-     - Stage 1: user history summarization into a few hundred cached summary tokens
-     - Stage 2: lightweight candidate item attention over cached summary tokens
-     - Fixed downstream training/inference cost regardless of history length (up to 1M items)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (Meta internal production)
-     - **Novelty: 8/10** — Novel two-stage attention paradigm enabling trillion-parameter-scale memorization for recsys
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 9/10** — Deployed on Meta platform serving billions of users; ICLR 2026 peer-reviewed
-     - **Impact: 9/10** — ICLR 2026; Meta; massive-scale industrial generative recommendation breakthrough
-
-
 ### Papers Classic Must Read
 
 1. **OpenOneRec Technical Report**
@@ -1724,6 +1734,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 
 - GenRecEdit: Adapting Model Editing for Generative Recommendation with Cold-Start Items (GenRecEdit)
+- GBLA: Gated Bidirectional Linear Attention for Generative Retrieval (GBLA)
+- Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
+- RankGR: Rank-Enhanced Generative Retrieval with Listwise Direct Preference Optimization in Recommendation (RankGR)
+- OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
+- TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems (TokenMinds)
 
 ### RL / Reinforcement Learning
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -1783,6 +1798,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation (GenRec)
 - LASAR: Latent Adaptive Semantic Aligned Reasoning for Generative Recommendation (LASAR)
 - ManCAR: Manifold-Constrained Latent Reasoning with Adaptive Test-Time Computation for Sequential Recommendation (ManCAR)
+- RankGR: Rank-Enhanced Generative Retrieval with Listwise Direct Preference Optimization in Recommendation (RankGR)
+- OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
