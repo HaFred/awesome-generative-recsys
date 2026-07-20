@@ -34,6 +34,7 @@
 - LoopCTR: Unlocking the Loop Scaling Power for Click-Through Rate Prediction (LoopCTR)
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
 - TMallGS: Scaling Unified Feature and Sequence Modeling for Generative E-commerce Search (TMallGS)
+- Cheaper is Better: A Discount-Aware Network for Conversion Rate Prediction in E-commerce Recommendation System (DANet)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -425,6 +426,7 @@
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging Short Videos and Live Streams: Reasoning-Guided Multimodal LLMs for Cross-Domain Representation Learning (RGCD-Rep)
 - Causal Representation Learning for Generalisable Recommendation
+- Cheaper is Better: A Discount-Aware Network for Conversion Rate Prediction in E-commerce Recommendation System (DANet)
 - CMSL: Constructive Multi-Sequence Learning for Recommendation Systems (CMSL)
 - Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS)
 - Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG)
@@ -637,7 +639,9 @@
 - Real-Time Hard Negative Sampling via LLM-based Clustering for Large-Scale Two-Tower Retrieval
 - RSIR: Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control (RSIR)
 - ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
+- RECAP: Feedback-Driven Streaming Semantic User Profiles for Short-Video Recommendation (RECAP)
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
+- RecGPT-V3 Technical Report (RecGPT-V3)
 - Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale (RaG)
 - ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
 - Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair
@@ -980,6 +984,7 @@
 - HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 - IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
 - IID-Nav: From Extraction to Navigation: Progressive Retrieval with Indirectly Infinite Depth (IID-Nav)
+- Learning to Forget: Satiation-Aware Long-Sequence Transducers for Mitigating Post-Purchase Redundancy (SAM)
 - MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS)
 - One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
 - PHKT: Personalized Dynamic Hypergraph-enhanced KAN-Transformer for Multi-behavior Sequential Recommendation (PHKT)
