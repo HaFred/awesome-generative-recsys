@@ -1322,7 +1322,26 @@ mindmap
 
 ### Papers Classic Must Read
 
-1. **OpenOneRec Technical Report**
+The list's in no particular order.
+
+1. **OneTrans: Unified Feature Interaction and Sequence Modeling with One Transformer in Industrial Recommender**
+   * Affiliation: Alibaba Group (Taobao/Tmall) — (Zhaoqi Zhang, Haolei Pei, Jun Guo, Tianyu Wang, Yufei Feng, Hui Sun, Shaowei Liu, Aixin Sun — Alibaba Group)
+   * Link: [arxiv.org/abs/2510.26104](https://arxiv.org/abs/2510.26104)
+   * Venue: WWW 2026
+   * TL;DR: Unified Transformer backbone replacing the traditional encode-then-interaction pipeline; one tokenizer converts both sequential (user behavior) and non-sequential (user/item attributes) features into a single token sequence with shared params for S-tokens and token-specific params for NS-tokens; cross-request KV caching enables efficient serving; +5.68% per-user GMV in online A/B.
+   * Key techniques:
+     - Unified Tokenizer: converts sequential S-tokens and non-sequential NS-tokens into a single token sequence for joint processing
+     - Mixed Transformer Blocks: shared parameters across homogeneous sequential tokens + token-specific parameters for heterogeneous non-sequential tokens
+     - Cross-Request KV Caching: precomputes and caches intermediate representations, reducing costs during both training and inference
+     - Causal Attention + Pyramid Stacking: maintains temporal ordering with efficient autoregressive-style processing amenable to FlashAttention
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Alibaba internal production)
+     - **Novelty: 8/10** — First to unify feature interaction and sequence modeling under a single Transformer backbone; breaks the encode-then-interaction paradigm
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — WWW 2026 peer-reviewed; deployed at Alibaba scale with +5.68% per-user GMV in online A/B tests
+     - **Impact: 8/10** — WWW 2026; Alibaba; foundational architecture for unified recommendation Transformers; enables scaling and unified optimization
+  
+2. **OpenOneRec Technical Report**
    * Affiliation: Kuaishou (Guorui Zhou, Honghui Bao, Jiaming Huang, et al., 47 authors total)
    * Link: [arxiv.org/abs/2512.24762](https://arxiv.org/abs/2512.24762)
    * Venue: arXiv preprint, December 2025 (v2 revised February 2026)
@@ -1340,7 +1359,7 @@ mindmap
      - **Robustness: 8/10** — Comprehensive evaluation on 8 diverse tasks; demonstrated scaling behavior
      - **Impact: 9/10** — From Kuaishou production team; 26.8% avg Recall@10 improvement on Amazon transfer learning; high open-source value for community
 
-2. **OneMall: One Architecture, More Scenarios — End-to-End Generative Recommender Family at Kuaishou E-Commerce**
+3. **OneMall: One Architecture, More Scenarios — End-to-End Generative Recommender Family at Kuaishou E-Commerce**
    * Affiliation: Kuaishou (Kun Zhang, Jingming Zhang, Wei Cheng, et al., 32 authors total)
    * Link: [arxiv.org/abs/2601.21770](https://arxiv.org/abs/2601.21770)
    * Venue: arXiv preprint, January 2026 (v2 revised February 2026)
@@ -1356,7 +1375,7 @@ mindmap
      - **Robustness: 8/10** — Deployed on 400M+ DAU; consistent improvements across all e-commerce scenarios (GMV +13.01%, order volume +15.32%/+2.78%)
      - **Impact: 9/10** — Deployed at Kuaishou scale; significant business metrics improvements; high industrial relevance
 
-3. **OneRec-Think: In-Text Reasoning for Generative Recommendation**
+4. **OneRec-Think: In-Text Reasoning for Generative Recommendation**
    * Affiliation: Kuaishou (Zhanyu Liu, Shiyao Wang, Xingmei Wang, et al., 26 authors total)
    * Link: [arxiv.org/abs/2510.11639](https://arxiv.org/abs/2510.11639)
    * Venue: arXiv preprint, October 2025 (v2 revised November 2025)
@@ -1373,7 +1392,7 @@ mindmap
      - **Robustness: 8/10** — Explicit reasoning improves interpretability; validated on Kuaishou with +0.159% App Stay Time
      - **Impact: 9/10** — From Kuaishou; SOTA on public benchmarks; successful industrial deployment
 
-4. **OneRec-V2 Technical Report**
+5. **OneRec-V2 Technical Report**
    * Affiliation: Kuaishou (Guorui Zhou, Hengrui Hu, Hongtao Cheng, et al., 75 authors total)
    * Link: [arxiv.org/abs/2508.20900](https://arxiv.org/abs/2508.20900)
    * Venue: arXiv preprint, August 2025 (v4 revised October 2025)
@@ -1390,7 +1409,7 @@ mindmap
      - **Robustness: 8/10** — Extensive A/B testing on Kuaishou; +0.467%/+0.741% App Stay Time
      - **Impact: 9/10** — From Kuaishou; significant engineering contribution; deployed at scale
 
-5. **MiniOneRec: An Open-Source Framework for Scaling Generative Recommendation**
+6. **MiniOneRec: An Open-Source Framework for Scaling Generative Recommendation**
    * Affiliation: USTC (Xiaoyu Kong, Leheng Sheng, Junfei Tan, Yuxin Chen, Jiancan Wu, An Zhang, Xiang Wang, Xiangnan He)
    * Link: [arxiv.org/abs/2510.24431](https://arxiv.org/abs/2510.24431)
    * Venue: arXiv preprint, October 2025
@@ -1409,7 +1428,7 @@ mindmap
      - **Robustness: 7/10** — Validated scaling behavior; hybrid rewards improve ranking accuracy and candidate diversity
      - **Impact: 8/10** — From USTC (Xiangnan He's team); high open-source value; enables reproducible research
 
-6. **UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization**
+7. **UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization**
    * Affiliation: USTC (Jialei Li, Yang Zhang, Yimeng Bai, Shuai Zhu, Ziqi Xue, Xiaoyan Zhao, Dingxian Wang, Frank Yang, Andrew Rabinovich, Xiangnan He)
    * Link: [arxiv.org/abs/2601.17438](https://arxiv.org/abs/2601.17438)
    * Venue: arXiv preprint, January 2026
@@ -1426,7 +1445,7 @@ mindmap
      - **Robustness: 7/10** — Codeword uniformity regularization prevents collapse; dual distillation improves stability
      - **Impact: 7/10** — From USTC (Xiangnan He's team); novel technical approach; strong empirical results
 
-7. **Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning**
+8. **Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning**
    * Affiliation: UIUC Illinois (Jiacheng Lin, Tian Wang, Kun Qian)
    * Link: [arxiv.org/abs/2503.24289](https://arxiv.org/abs/2503.24289)
    * Venue: arXiv preprint, March 2025 (v4 revised January 2026)
@@ -1443,7 +1462,7 @@ mindmap
      - **Robustness: 8/10** — Preserves LLM general capabilities; outperforms prompting and SFT baselines
      - **Impact: 8/10** — From UIUC; novel RL framework for LLM-recsys bridging; strong empirical results
 
-8. **RelayGR: Scaling Long-Sequence Generative Recommendation via Cross-Stage Relay-Race Inference**
+9.  **RelayGR: Scaling Long-Sequence Generative Recommendation via Cross-Stage Relay-Race Inference**
    * Affiliation: Huawei Cloud (Jiarui Wang, Huichao Chai, Yuanhang Zhang, et al., 41 authors total)
    * Link: [arxiv.org/abs/2601.01712](https://arxiv.org/abs/2601.01712)
    * Venue: arXiv preprint, January 2026
@@ -1460,7 +1479,7 @@ mindmap
      - **Robustness: 9/10** — Deployed on Huawei Ascend NPUs; 1.5x sequence length increase, 3.6x SLO-compliant throughput improvement
      - **Impact: 8/10** — Huawei Cloud production system; significant engineering contribution for industrial GR deployment
 
-9. **Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner)**
+10. **Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner)**
    * Affiliation: NUS (Yingzhi He, Yan Sun, Junfei Tan, Yuxin Chen, Xiaoyu Kong, Chunxu Shen, Xiang Wang, An Zhang, Tat-Seng Chua)
    * Link: [arxiv.org/abs/2603.23183](https://arxiv.org/abs/2603.23183)
    * Venue: arXiv preprint, March 2026
@@ -1476,7 +1495,7 @@ mindmap
      - **Robustness: 8/10** — Outcome-driven RL avoids reliance on reasoning annotations; strong empirical results on 3 datasets
      - **Impact: 8/10** — From NUS (Tat-Seng Chua's team); addresses key challenge in SID-based generative recommendation
 
-10. **MuonRec: Shifting the Optimizer Paradigm Beyond Adam in Scalable Generative Recommendation**
+11. **MuonRec: Shifting the Optimizer Paradigm Beyond Adam in Scalable Generative Recommendation**
     * Affiliation: Shanghai JTU / Kuaishou (Rong Shan, Aofan Yu, Bo Chen, Kuo Cai, Qiang Luo, Ruiming Tang, Han Li, Weiwen Liu, Weinan Zhang, Jianghao Lin)
     * Link: [arxiv.org/abs/2603.00416](https://arxiv.org/abs/2603.00416)
     * Venue: arXiv preprint, February 2026
@@ -1492,7 +1511,7 @@ mindmap
       - **Robustness: 8/10** — Consistent improvement over Adam/AdamW baselines; 32.4% training step reduction
       - **Impact: 8/10** — From Shanghai JTU/Kuaishou; practical optimization contribution with significant efficiency gains
 
-11. **[STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators**
+12. **[STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators**
     * Affiliation: Youtube / Google Research (Zhengyang Su, Isay Katsman, Yueqi Wang, Ruining He, et al., 13 authors total)
     * Link: [arxiv.org/abs/2602.22647](https://arxiv.org/abs/2602.22647)
     * Venue: arXiv preprint, February 2026
@@ -1509,7 +1528,7 @@ mindmap
       - **Robustness: 9/10** — Deployed on large-scale industrial video recommendation platform; 948x speedup over CPU Trie; 0.25% inference time overhead
       - **Impact: 9/10** — From Youtube/Google Research; first production-scale constrained generative retrieval deployment; significant engineering contribution
 
-12. **Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization (GRAD)**
+13. **Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization (GRAD)**
     * Affiliation: Meituan (Yu Lei, Jiayang Zhao, Yilei Zhao, Zhaoqi Zhang, Linyou Cai, Qianlong Xie, Xingxing Wang)
     * Link: [arxiv.org/abs/2508.02002](https://arxiv.org/abs/2508.02002)
     * Venue: KDD 2026
@@ -1526,7 +1545,7 @@ mindmap
       - **Robustness: 8/10** — Deployed at Meituan; GMV +2.18%, ROI +10.68%; handles CPM and ROI constraints
       - **Impact: 8/10** — KDD 2026; from Meituan; significant business impact; novel approach to ad bidding
 
-13. **Rank-GRPO: Training LLM-based Conversational Recommender Systems with Reinforcement Learning (ConvRec-R1)**
+14. **Rank-GRPO: Training LLM-based Conversational Recommender Systems with Reinforcement Learning (ConvRec-R1)**
     * Affiliation: Netflix (Yaochen Zhu, Harald Steck, Dawen Liang, et al.)
     * Link: [arxiv.org/abs/2510.20150](https://arxiv.org/abs/2510.20150)
     * Venue: ICLR 2026
