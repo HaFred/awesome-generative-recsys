@@ -23,6 +23,7 @@
 - Autonomous Information Seeking: A Roadmap for Agentic Recommender Systems
 - Seeing and Reflecting: Multimodal Memory-Enhanced Agent Collaboration for Recommendation (MMEACR)
 - An LLM-powered Agentic Recommendation System for Connected TV Content Discovery
+- HyCoRec: Hypergraph-Enhanced Multi-Preference Learning for Alleviating Matthew Effect in Conversational Recommendation (HyCoRec)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -48,6 +49,7 @@
 - GenRecEdit: Adapting Model Editing for Generative Recommendation with Cold-Start Items (GenRecEdit)
 - Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF)
 - Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces
+- Learning Sparse Representations of Multimodal Content for Enhanced Cold Item Recommendation (QMUL, RecSys 2026)
 
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
