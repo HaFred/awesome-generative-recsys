@@ -108,6 +108,7 @@ mindmap
         OneBar / Generative Query Rec -- Zhejiang U / Kuaishou
         TokenMinds / SID User Tokens -- Google DeepMind / YouTube
         HyCoRec / Matthew Effect CRS -- SYSU / NTU
+        HiCore / Multi-Hypergraph CRS -- NTU / SYSU / SCAU
       Efficient Decoding
         Vectorizing the Trie -- Google
         PauseRec / Implicit Reasoning -- UVA / Snap
@@ -139,6 +140,8 @@ mindmap
         Gryphon / Item-Level Scoring -- Yandex
         PrefixMem / SID Encoder -- Pinterest
         BONSAI / Decoding Trie Opt -- MSU / Snap
+        TopoTok / Topology-Aware Tokenization -- UIUC
+        TSGR / Value-Aware GenRetrieval -- Zhejiang U / Alibaba
         ChronoID / Temporal SID -- U Rochester / Meta / MBZUAI
         GraphLoRA / GNN-LoRA LLMRec -- Anhui U
         Beyond Item IDs / Semantic Video Rec -- Google
@@ -168,6 +171,7 @@ mindmap
         Stresa / Side Adaptation -- U Glasgow
         BAHSD / Adaptive Distillation -- CAS / BIGAI
         SAM / Satiation-Aware -- Alibaba
+        DDMSR / Dual-Level Denoising Multi-modal SR -- USTC
       Multi-behavior
         SpectraMB -- NUS / SMU / HFUT / USTC
       Optimization & Scaling
@@ -213,6 +217,78 @@ mindmap
 
 ---
 ## By Date
+
+### Papers July 22
+
+*Wednesday, July 22, 2026. Arxiv cs.IR new listing returned only 4 genrec papers (light day). No fallback needed.*
+
+1. **Topology-Aware Tokenization for Generative Recommendation (TopoTok)**
+   * Affiliation: University of Illinois Urbana-Champaign — *(Yaokun Liu, Yifan Liu, Zhenrui Yue, Gyuseok Lee, Zelin Li, Ruichen Yao, Dong Wang — UIUC)*
+   * Link: [arxiv.org/abs/2607.18600](https://arxiv.org/abs/2607.18600)
+   * Venue: RecSys 2026
+   * TL;DR: Identifies topology distortion as critical bottleneck in generative recommendation tokenization; multi-level distillation (inter-group, intra-group, inter-item) preserves item relational structure through quantization hierarchy; +9.42% Recall@5 SOTA.
+   * Key techniques:
+     - Inter-Group Distillation: captures global cluster-wise relations in semantic embedding space
+     - Intra-Group Distillation: refines local structures within semantic clusters
+     - Inter-Item Distillation: enforces fine-grained alignment at individual item level
+     - Multi-level progressive topology recovery throughout the quantization hierarchy
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First to systematically identify and address topology distortion in GR tokenization; multi-level distillation is well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — 3 benchmark datasets; RecSys 2026 peer-reviewed; consistent SOTA gains
+     - **Impact: 7/10** — RecSys 2026; UIUC; addresses fundamental tokenization bottleneck in generative recommendation
+
+2. **Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore)**
+   * Affiliation: Nanyang Technological University / Sun Yat-sen University / South China Agricultural University — *(Yongsen Zheng, Kwok-Yan Lam — NTU; Ruilin Xu, Liang Lin — SYSU; Guohua Wang — SCAU)*
+   * Link: [arxiv.org/abs/2607.18609](https://arxiv.org/abs/2607.18609)
+   * Venue: EMNLP 2024 (arxiv upload July 2026)
+   * TL;DR: Multi-hypergraph boosted multi-interest self-supervised learning addressing Matthew effect in conversational recommendation with dynamic user-system feedback loop; item/entity/word-oriented multi-channel hypergraphs for multi-level user interest learning; SOTA on 4 CRS datasets.
+   * Key techniques:
+     - Multi-channel hypergraph construction: item-, entity-, word-oriented hypergraphs
+     - Multi-interest self-supervised learning capturing multi-level user preferences
+     - Dynamic user-system feedback loop modeling in conversational recommendation
+     - Matthew effect mitigation through hypergraph-based interest diversification
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/zysensmile/HiCore](https://github.com/zysensmile/HiCore) — same org as HyCoRec (12⭐); EMNLP 2024 artifact; well-documented CRSLab integration
+     - **Novelty: 6/10** — Multi-channel hypergraph for multi-interest SSL in CRS is practical; Matthew effect framing is well-motivated
+     - **Fairness: 7/10** — Directly addresses Matthew effect and popularity bias in conversational recommendation
+     - **Robustness: 7/10** — 4 CRS datasets; EMNLP 2024 peer-reviewed; consistent SOTA
+     - **Impact: 5/10** — EMNLP 2024; NTU/SYSU/SCAU; practical framework for fair conversational recommendation
+
+3. **Beyond Noisy Signals: Dual-Level Denoising for Multi-modal Sequential Recommendation (DDMSR)**
+   * Affiliation: University of Science and Technology of China — *(Jie Luo, Qi Jin, Xinming Zhang — USTC)*
+   * Link: [arxiv.org/abs/2607.18786](https://arxiv.org/abs/2607.18786)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Dual-noise dilemma (feature-level redundancy + sequence-level stochasticity) addressed via graph-based Laplacian smoothing as low-pass filter + frequency-domain FFT adaptive denoising; multi-modal contrastive alignment bridges heterogeneity gap; SOTA on 4 benchmarks.
+   * Key techniques:
+     - Graph-based Feature Denoising: sparse item-item semantic graphs + Laplacian smoothing as structural low-pass filter
+     - Frequency-domain Sequence Denoising: FFT + learnable complex-valued filter for adaptive spectral modulation
+     - Gating network for adaptive fusion between filtered and original features
+     - Multi-modal contrastive alignment (InfoNCE) enforcing cross-modal semantic consistency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/jluo00/DDMSR](https://github.com/jluo00/DDMSR) — code available; RecBole-based implementation; 4 datasets; clean modular structure
+     - **Novelty: 7/10** — Dual-level denoising (graph + frequency) is novel; first to apply FFT-based sequence purification in multimodal SR
+     - **Fairness: 4/10** — Denoising may help long-tail items by reducing feature-level redundancy; not primary focus
+     - **Robustness: 7/10** — 4 public datasets; consistent SOTA gains up to +19.33% Recall@20; comprehensive ablations
+     - **Impact: 6/10** — USTC; practical dual-denoising framework for multimodal sequential recommendation
+
+4. **TSGR: Taobao Search Generative Retrieval**
+   * Affiliation: Zhejiang University / Alibaba Group (Taobao & Tmall) — *(Tianyu Zhan, Shengyu Zhang — Zhejiang University; Gui Ling, Tong Xiong, Kunhai Lin, Yang Wang, Kaixuan Zhang, Zhihong Chen, Yuliang Yan, Dan Ou, Haihong Tang, Bo Zheng — Alibaba)*
+   * Link: [arxiv.org/abs/2607.18796](https://arxiv.org/abs/2607.18796)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Value-aware generative retrieval for Taobao Search unifying retrieval and pre-ranking; Query-aware Parallel SID encodes business value + query relevance into SID construction; Value-aware Ranking Module enables single model as retriever + pre-ranker; deployed +0.43% IPV, +1.12% Transactions, +1.64% GMV.
+   * Key techniques:
+     - Query-aware Parallel SID (QP-SID): multiple parallel orderings per cluster encoding value + query-conditioned relevance
+     - Value-aware Ranking Module (VRM): cross-attention fusing backbone user repr with item side-info for business-aligned scoring
+     - Progressive training pipeline: semantic relevance → user preferences → business objectives
+     - Single autoregressive model replacing separate retrieval + pre-ranking stages
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Alibaba internal production)
+     - **Novelty: 7/10** — First value-aware generative retrieval framework for industrial search; QP-SID + VRM co-design is novel
+     - **Fairness: 3/10** — Value-awareness may favor high-GMV items; not explicitly addressing fairness
+     - **Robustness: 8/10** — 38-day online A/B on Taobao Search; 200M interactions; +1.64% GMV validated
+     - **Impact: 8/10** — Alibaba/Zhejiang University; production-deployed value-aware GR; practical blueprint for industrial e-commerce search
 
 ### Papers July 21
 
@@ -1583,7 +1659,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 101 papers as of July 21.
+**Count:** 103 papers as of July 22.
 
 | Score | Paper |
 | --- | --- |
@@ -1640,6 +1716,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
 | 7/10 | Can We Steer the Black-Box? Towards Controllability-Centric Evaluation of Recommender Systems with Collaborative Agents (CtrlBench-Rec) |
 | 7/10 | The Best of Both Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H²Rec) |
+| 7/10 | Beyond Noisy Signals: Dual-Level Denoising for Multi-modal Sequential Recommendation (DDMSR) |
 | 7/10 | Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF) |
 | 7/10 | CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER) |
 | 7/10 | Fast and Feasible: Permutation-based Constrained Reranking for Revenue Maximization (PermR) |
@@ -1677,6 +1754,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation |
 | 6/10 | Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd) |
 | 6/10 | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) |
+| 6/10 | Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore) |
 | 6/10 | Trading Engagement for Sustainability: Carbon-Aware Re-ranking for E-commerce Recommendations |
 | 6/10 | Understanding and Debugging Failures in N-Gram-Based Generative Retrieval |
 | 6/10 | VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) |
@@ -1741,6 +1819,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 - TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems (TokenMinds)
 - RecGPT-V3 Technical Report (RecGPT-V3)
+- Topology-Aware Tokenization for Generative Recommendation (TopoTok)
+- TSGR: Taobao Search Generative Retrieval (TSGR)
 
 ### RL / Reinforcement Learning
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)

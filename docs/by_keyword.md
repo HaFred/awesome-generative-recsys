@@ -24,6 +24,7 @@
 - Seeing and Reflecting: Multimodal Memory-Enhanced Agent Collaboration for Recommendation (MMEACR)
 - An LLM-powered Agentic Recommendation System for Connected TV Content Discovery
 - HyCoRec: Hypergraph-Enhanced Multi-Preference Learning for Alleviating Matthew Effect in Conversational Recommendation (HyCoRec)
+- Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
