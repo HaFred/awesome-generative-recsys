@@ -109,6 +109,8 @@ mindmap
         TokenMinds / SID User Tokens -- Google DeepMind / YouTube
         HyCoRec / Matthew Effect CRS -- SYSU / NTU
         HiCore / Multi-Hypergraph CRS -- NTU / SYSU / SCAU
+        PRTA / Tool-Learning Agent -- UIC / Microsoft / Beihang
+        UniRank / Ranking Benchmark -- Anhui U / USTC / Tencent
       Efficient Decoding
         Vectorizing the Trie -- Google
         PauseRec / Implicit Reasoning -- UVA / Snap
@@ -146,6 +148,8 @@ mindmap
         GraphLoRA / GNN-LoRA LLMRec -- Anhui U
         Beyond Item IDs / Semantic Video Rec -- Google
         RankGR / Listwise DPO GenRetrieval -- Zhejiang U / Alibaba
+        DRQ / SID Tokenizer Diagnostics -- Shopee
+        HiSAC / Hierarchical Sparse Activation -- Alibaba
       Next Interest Flow Prediction
         AMEN -- Alibaba
       RL-based Alignment for Recall
@@ -172,6 +176,7 @@ mindmap
         BAHSD / Adaptive Distillation -- CAS / BIGAI
         SAM / Satiation-Aware -- Alibaba
         DDMSR / Dual-Level Denoising Multi-modal SR -- USTC
+        DeltaGate / Zero-Observation Reactivation -- Fudan / Huawei
       Multi-behavior
         SpectraMB -- NUS / SMU / HFUT / USTC
       Optimization & Scaling
@@ -217,6 +222,95 @@ mindmap
 
 ---
 ## By Date
+
+### Papers July 23
+
+*Thursday, July 23, 2026. Arxiv cs.IR new listing returned only 3 genrec papers (light day). Applied 3-month fallback to reach minimum 5 → found 2 additional papers (DRQ from Shopee, HiSAC from Alibaba). Total: 5 papers.*
+
+1. **Personalized Recommendation Tool Learning via Autonomous Language Agents (PRTA)**
+   * Affiliation: University of Illinois Chicago / Microsoft / Beihang University — *(Mingdai Yang, Weizhi Zhang, Yibo Wang, Philip Yu — UIC; Zhiwei Liu — Microsoft; Hao Peng — Beihang University)*
+   * Link: [arxiv.org/abs/2607.19739](https://arxiv.org/abs/2607.19739)
+   * Venue: RecSys 2026 (Short Paper)
+   * TL;DR: LLM-based agent framework for full-ranking recommendation using multiple traditional recsys models as tools; LLM acts as central planner for personalized tool selection via reflection mechanisms; circumvents LLM hallucination and context-length limitations through architectural design rather than model modification.
+   * Key techniques:
+     - LLM as central planner: high-level reasoning + personalized tool selection
+     - Traditional recommendation models as tools performing full-ranking scoring
+     - Reflection mechanisms evaluating and comparing tools per user based on user profiles and candidate ranked lists
+     - Memory-based personalized tool learning separating reasoning (LLM) from scoring (traditional models)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — LLM-as-tool-planner architecture is creative; reflection mechanisms for personalized tool selection are practical
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — RecSys 2026 peer-reviewed; 3 public datasets evaluated
+     - **Impact: 6/10** — RecSys 2026; UIC/Microsoft/Beihang; practical approach bridging LLM reasoning with traditional recsys scalability
+
+2. **Zero-Observation User Reactivation with Gap-Driven Dimensional Gating (DeltaGate)**
+   * Affiliation: Fudan University / Huawei Technologies — *(Jiandong Ding — Fudan University; Tianying Liu, Fuyuan Liu, Huijie Qin, Tiandeng Wu — Huawei Technologies)*
+   * Link: [arxiv.org/abs/2607.19802](https://arxiv.org/abs/2607.19802)
+   * Venue: RecSys 2026
+   * TL;DR: Lightweight output-layer plugin for sequential recommendation addressing zero-observation user reactivation; gap-conditioned gating routes each representation dimension between personalized history and learned global prior; Hit@10 decreases monotonically with gap duration; DeltaGate achieves 0.047 vs 0.031 SASRec in >365d bucket with 66K parameters (2–4% overhead).
+   * Key techniques:
+     - DeltaGate: frozen-backbone plugin routing dimensions between personalized history and zero-initialized global prior
+     - Gap-conditioned gating jointly conditioned on time gap Δt and personalized representation
+     - Chronologically aligned Gap-Synthesize Protocol on three Amazon datasets
+     - 40× fewer trainable parameters than end-to-end retraining with zero backbone drift
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 1/10** — github.com/jdding/DeltaGate claimed but repo returns 404; code not accessible
+     - **Novelty: 5/10** — Lightweight plugin for reactivation is practical but incremental; gap-conditioned gating is sensible
+     - **Fairness: 4/10** — Indirectly helps returning/dormant users receive better recommendations
+     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; 3 Amazon datasets with systematic gap-bucket evaluation
+     - **Impact: 5/10** — RecSys 2026; Fudan/Huawei; addresses practical reactivation problem in real-world recommender systems
+
+3. **UniRank: Benchmarking Ranking Models for Unified Sequential Modeling and Feature Interaction**
+   * Affiliation: Anhui University / University of Science and Technology of China / Tencent — *(Honghao Li, Yi Zhang, Yiwen Zhang — Anhui University; Xianquan Wang — USTC; Zibin Zhang, Kangyi Lin — Tencent)*
+   * Link: [arxiv.org/abs/2607.19987](https://arxiv.org/abs/2607.19987)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Open benchmark for unified ranking models (sequential modeling + feature interaction); 15 representative models on 5 large-scale public datasets (700M+ instances, 10^5+ behavior sequences); standardized chronological pointwise autoregressive evaluation; PyTorch toolkit with DDP, mixed-precision, Flash Attention.
+   * Key techniques:
+     - Chronological pointwise autoregressive supervision unifying training paradigm across models
+     - Standardized evaluation across feedback tasks (CTR, CVR, etc.)
+     - 15 implemented architectures from Google/ByteDance/Meta/Alibaba/Kuaishou/Tencent published at KDD/SIGIR/WWW/RecSys
+     - Production-grade engineering: DDP, mixed precision, torch.compile, Flash Attention, activation checkpointing
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/salmon1802/UniRank](https://github.com/salmon1802/UniRank) — 55⭐, 21 commits, Apache 2.0; exceptionally well-documented with architecture taxonomy, evaluation protocols, extension guides; 5 preprocessed datasets on HuggingFace; comprehensive model zoo of 15 architectures
+     - **Novelty: 5/10** — Benchmark contribution; standardized evaluation protocol is valuable but not algorithmically novel
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — 5 large-scale datasets (700M+ instances); 15 models from top venues; thorough reproducibility practices
+     - **Impact: 7/10** — Anhui U/USTC/Tencent; fills critical gap in reproducible ranking model research; practical toolkit for academic and industrial researchers
+
+4. **Understanding and Diagnosing Failures in Semantic-ID Tokenization via Decoupled Residual Quantization (DRQ)**
+   * Affiliation: Shopee — *(Xuesi Wang, Junjie Wang, Ziliang Wang, Weijie Bian, Guanxing Zhang — Shopee)*
+   * Link: [arxiv.org/abs/2606.01844](https://arxiv.org/abs/2606.01844)
+   * Venue: ACM Conference 2026
+   * TL;DR: Quantitative diagnostic framework for SID tokenizer failures via expected codeword overlap and effective codebook capacity; decoupled residual quantization (DRQ) separates continuous geometry reconstruction from discrete distribution matching; identifies multi-objective nature of SID quality (symbolic robustness, reconstruction fidelity, behavior-aware soft matching).
+   * Key techniques:
+     - Expected Codeword Overlap: measures codeword confusion under retrieval-time perturbation
+     - Effective Codebook Capacity: converts confusion into effective number of usable, well-separated codes
+     - DRQ: decoupled residual quantization separating geometry reconstruction from distribution matching
+     - Links semantic boundary confusion to both code usage imbalance and Euclidean geometric constraints
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First quantitative diagnostic framework for SID tokenizer failures; formalized metrics are novel
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — Proprietary industrial dataset only; case study scope limits generalizability
+     - **Impact: 5/10** — Shopee; practical diagnostic tools for SID construction evaluation in generative recommendation
+
+5. **HiSAC: Hierarchical Sparse Activation Compression for Ultra-long Sequence Modeling in Recommenders**
+   * Affiliation: Alibaba Group (Taobao) — *(Kun Yuan, Junyu Bi, Daixuan Cheng, Changfa Wu, Shuwen Xiao, Binbin Cao, Jian Wu, Yuning Jiang — Alibaba Group)*
+   * Link: [arxiv.org/abs/2602.21009](https://arxiv.org/abs/2602.21009)
+   * Venue: arXiv preprint, February 2026 (revised July 2026)
+   * TL;DR: Hierarchical sparse activation framework for ultra-long behavior sequence genrec; multi-level semantic ID encoding + global hierarchical codebook; hierarchical voting sparsely activates personalized interest-agents as fine-grained preference centers; Soft-Routing Attention aggregates by similarity to minimize quantization error; deployed on Taobao homepage with +1.65% CTR.
+   * Key techniques:
+     - Multi-level semantic ID encoding of user interactions
+     - Global hierarchical codebook with personalized interest-agent activation via hierarchical voting
+     - Soft-Routing Attention: aggregates historical signals in semantic space weighted by similarity
+     - Minimizes quantization error while retaining long-tail behavior patterns
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (Alibaba internal production)
+     - **Novelty: 6/10** — Hierarchical sparse activation with interest agents for ultra-long genrec is creative; soft-routing attention is practical
+     - **Fairness: 4/10** — Retains long-tail preferences through similarity-weighted aggregation
+     - **Robustness: 7/10** — Deployed on Taobao "Guess What You Like"; +1.65% CTR in online A/B; significant compression for production
+     - **Impact: 7/10** — Alibaba Group; industrial-scale deployment on Taobao homepage; practical framework for compressing long user sequences in genrec
 
 ### Papers July 22
 
@@ -1570,7 +1664,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 103 papers as of July 22.
+**Count:** 105 papers as of July 23.
 
 | Score | Paper |
 | --- | --- |
@@ -1613,6 +1707,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation |
 | 8/10 | UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization |
 | 8/10 | Unleashing the Native Recommendation Potential: LLM-Based Generative Recommendation via Structured Term Identifiers (GRLM) |
+| 8/10 | UniRank: Benchmarking Ranking Models for Unified Sequential Modeling and Feature Interaction |
 | 8/10 | Dynamic Spectral Denoising with Global-Context Attention for Multi-Behavior Recommendation (SpectraMB) |
 | 8/10 | Differentiable Semantic ID for Generative Recommendation (DIGER) |
 | 8/10 | Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop) |
@@ -1725,6 +1820,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 - GenRecEdit: Adapting Model Editing for Generative Recommendation with Cold-Start Items (GenRecEdit)
 - GBLA: Gated Bidirectional Linear Attention for Generative Retrieval (GBLA)
+- DRQ: Understanding SID Tokenizer Failures via Decoupled Residual Quantization (DRQ)
+- HiSAC: Hierarchical Sparse Activation Compression for Recommenders (HiSAC)
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - RankGR: Rank-Enhanced Generative Retrieval with Listwise Direct Preference Optimization in Recommendation (RankGR)
 - OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
