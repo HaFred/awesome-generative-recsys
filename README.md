@@ -87,6 +87,7 @@ mindmap
         UserSimulator -- Monash
         ExPerT / Expertise Personalization -- UNIST
         AgentSelect -- UTS / Rutgers / Alibaba
+        ItemRAG / Item-Level RAG -- KAIST / SNU
         Agentic RecSys Survey -- NUS / PoliBa / Renmin / USTC
         HGenPush -- Kuaishou
         ColdGenRec / Cold-Start Repro -- Shandong U / Leiden / Baidu / UvA
@@ -150,6 +151,9 @@ mindmap
         RankGR / Listwise DPO GenRetrieval -- Zhejiang U / Alibaba
         DRQ / SID Tokenizer Diagnostics -- Shopee
         HiSAC / Hierarchical Sparse Activation -- Alibaba
+        BARGE / Structural Gap Bridging -- Tencent
+        CapsID / Capsule-Routed Variable-Length SID -- Unknown (Industrial)
+        ColdSID / Cold-Item SID Reachability -- Alibaba
       Next Interest Flow Prediction
         AMEN -- Alibaba
       RL-based Alignment for Recall
@@ -163,6 +167,7 @@ mindmap
         DiffusionRank -- U Toronto / Microsoft
         DiffCold / Cold-Start Diffusion -- SJTU / Xiaohongshu
         SparseColdRec / Sparse Cold-Start -- QMUL
+        DLMRec / Diffusion Language Model Rec -- PolyU
       Sequential & Behavioral Modeling
         GAMER -- BOSS Zhipin
         SIREN-RoPE -- LinkedIn
@@ -311,6 +316,97 @@ mindmap
      - **Fairness: 4/10** — Retains long-tail preferences through similarity-weighted aggregation
      - **Robustness: 7/10** — Deployed on Taobao "Guess What You Like"; +1.65% CTR in online A/B; significant compression for production
      - **Impact: 7/10** — Alibaba Group; industrial-scale deployment on Taobao homepage; practical framework for compressing long user sequences in genrec
+
+### Papers July 24
+
+*Friday, July 24, 2026. Arxiv cs.IR new listing returned 3 genrec papers from July 23 submissions. Applied 3-month fallback → found 2 additional missed papers (CapsID from May 2026, ItemRAG from SIGIR 2026). Total: 5 papers.*
+
+1. **BARGE: Bridging the Structural Gap — Adapting Autoregressive Generation for Recommendation**
+   * Affiliation: Tencent — *(Junchao Zeng, Junzhang Zhu, Junyang Chen, Yudong Li, Wei Liu, Chengxiang Zhuo, Zang Li — Tencent)*
+   * Link: [arxiv.org/abs/2607.21028](https://arxiv.org/abs/2607.21028)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Bridges two structural gaps in generative recommendation (item-level structure destruction from flattening multi-token IDs + semantic drift from train-inference codebook inconsistency); ICA restores item-level structure during encoding, HPR+DPD suppress semantic drift during decoding; deployed on Tencent platform with +0.60% CTR, +1.34% click UV, +1.70% total reading time.
+   * Key techniques:
+     - Item Context-Aware Attention (ICA): restores item-level structure during encoding by preventing multi-token flattening information loss
+     - Hierarchical Path Reranking (HPR): suppresses semantic drift from hierarchical codebook inconsistency during decoding
+     - Dual-Path Decoding (DPD): complementary angle to HPR providing additional drift suppression
+     - Jointly addresses two structural gaps that degrade autoregressive SID-based generative recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Structural gap framing is well-motivated; ICA+HPR+DPD are practical but conceptually incremental
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Public benchmarks + Tencent online A/B; real business metrics validated
+     - **Impact: 7/10** — Tencent; practical framework deployed on commercial platform with verified CTR/UV/time gains
+
+2. **Diffusion Language Model for Recommendation (DLMRec)**
+   * Affiliation: The Hong Kong Polytechnic University — *(Chengyi Liu, Yongqi Zhou, Junwei Pan, Zhixiang Feng, Chengguo Yin, Haijie Gu, Jie Jiang, Yinghao Liu, Yujuan Ding, Qing Li, Wenqi Fan — PolyU)*
+   * Link: [arxiv.org/abs/2607.21519](https://arxiv.org/abs/2607.21519)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: First discrete diffusion language model tailored for recommendation as alternative to autoregressive generation; collaborative-aware stochastic tokenizer encodes multi-hop CF signals into diffusion-compatible discrete tokens; curriculum-driven training aligns denoising with preference recovery; stability-aware voting aggregates iterative predictions for robustness.
+   * Key techniques:
+     - Collaborative-aware stochastic tokenizer: encodes multi-hop collaborative signals into expressive discrete tokens compatible with diffusion modeling
+     - Curriculum-driven training: progressive item- and token-level learning aligning denoising process with preference recovery
+     - Stability-aware voting mechanism: aggregates iterative predictions to improve generation consistency and robustness
+     - First framework to replace autoregressive paradigm with diffusion language modeling in generative recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 8/10** — First diffusion language model for recommendation; shifts genrec paradigm from AR to diffusion; three novel components
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Comprehensive methodology (30 pages); well-established DLM paradigm from NLP; iterative refinement with stability voting
+     - **Impact: 8/10** — PolyU; opens new research direction for non-autoregressive generative recommendation with diffusion-based token generation
+
+3. **Can Generative Recommendation Reach Cold Items? A Temporal Perspective on Semantic-ID Generation**
+   * Affiliation: Alibaba Group — *(Jie Peng, Yanping Zheng, Zhewei Zhe, Bin Tong, Guan Wang, Bo Zheng — Alibaba Group)*
+   * Link: [arxiv.org/abs/2607.21101](https://arxiv.org/abs/2607.21101)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Diagnostic analysis of SID-based genrec cold item reachability under absolute-time temporal protocol; reveals SID generation is compositional but not fully open-ended — models reach future items with observed tokens/prefixes but fail on unseen atomic tokens/unsupported SID paths; interprets SID generation as hierarchical semantic bucketing.
+   * Key techniques:
+     - Absolute-time temporal protocol separating seen/unseen targets for cold item diagnosis
+     - Token-level coldness taxonomy: seen/unseen-hit analysis categorizing cold-start failure modes
+     - Oracle-prefix probing empirically testing reachability under ideal prefix conditions
+     - Hierarchical semantic bucketing interpretation: early tokens select coarse regions, later tokens refine item-specific paths
+     - Boundary identification: SID generation is compositional (token recombination) but not fully open-ended (fails on unseen atoms)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First systematic cold item reachability analysis in SID genrec; temporal protocol + coldness taxonomy are novel
+     - **Fairness: 6/10** — Directly addresses cold-start item reachability which is a fairness concern for new/niche items
+     - **Robustness: 6/10** — Diagnostic analysis with strong empirical findings; not a method paper but important foundational work
+     - **Impact: 6/10** — Alibaba Group; important diagnostic work revealing fundamental SID cold-start limitations; guides future research directions
+
+4. **CapsID: Soft-Routed Variable-Length Semantic IDs for Generative Recommendation**
+   * Affiliation: Unknown (Industrial) — *(Wenzhuo Cheng, Menghang Gong, Qixin Guo, Hang Zheng, Zhaobin Yang, Jianguo Lou, Zhengwei Zheng)*
+   * Link: [arxiv.org/abs/2605.05096](https://arxiv.org/abs/2605.05096)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: Capsule routing replaces hard residual quantization in SID tokenizer; probabilistic soft assignment to multiple semantic capsules preserves multi-faceted item semantics; confidence-driven variable-length SIDs adapt to item complexity; SemanticBPE composes tokens into reusable subwords; +9.6% Recall@10 over ReSID, matches COBRA at 51% latency on 35M-item industrial catalog.
+   * Key techniques:
+     - Capsule routing: probabilistic soft assignment replacing winner-take-all nearest-neighbor in RQ-VAE
+     - Iterative agreement mechanism for refined capsule assignment across routing iterations
+     - Confidence-driven variable SID length: terminates when capsule confidence exceeds threshold or residual norm drops
+     - SemanticBPE: subword composition combining co-occurrence frequency with embedding cosine compatibility
+     - Single-representation solution matching sparse-dense hybrid systems (COBRA) without dense vector overhead
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 8/10** — First capsule routing application to SID tokenization; soft routing + variable length + SemanticBPE are three novel contributions
+     - **Fairness: 5/10** — Largest recall gains on tail items where boundary semantics dominate; long-tail fairness improvement
+     - **Robustness: 7/10** — 3 Amazon datasets + 35M-item industrial catalog; thorough ablations confirming each component; theoretical analysis of routing convergence
+     - **Impact: 7/10** — Important SID tokenizer advancement; competes with COBRA-style hybrid systems while being purely tokenizer-centric; practical for industrial deployment
+
+5. **ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation**
+   * Affiliation: KAIST / Seoul National University — *(Sunwoo Kim, Geon Lee, Kyungho Kim — KAIST; Jaemin Yoo — SNU; Kijung Shin — KAIST)*
+   * Link: [arxiv.org/abs/2511.15141](https://arxiv.org/abs/2511.15141)
+   * Venue: SIGIR 2026 (Short Paper)
+   * TL;DR: Shifts RAG for LLM recommendation from coarse user-history retrieval to fine-grained item-level retrieval; augments each item description with co-purchase + semantically relevant items; prioritizes informative retrievals benefiting cold-start items; consistently outperforms user-based RAG baselines.
+   * Key techniques:
+     - Item-level RAG: retrieves relevant items per each item in user history or candidate set (not per user)
+     - Dual retrieval signals: co-purchase information combined with semantic similarity for recommendation-informative (not just similar) retrieval
+     - Cold-start benefit: item-level augmentation provides richer signal for items with limited interaction history
+     - Careful combination mechanism balancing semantic and co-purchase signals
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/kswoo97/ItemRAG](https://github.com/kswoo97/ItemRAG) — SIGIR 2026 artifact; code + datasets provided; clean implementation with comprehensive README
+     - **Novelty: 6/10** — Item-level RAG is a practical shift from user-level; conceptually incremental but well-executed
+     - **Fairness: 5/10** — Cold-start item improvement directly addresses item-side fairness
+     - **Robustness: 7/10** — SIGIR 2026 peer-reviewed; consistent outperformance across standard and cold-start settings
+     - **Impact: 6/10** — SIGIR 2026; KAIST/SNU; practical RAG enhancement for LLM-based recommendation with open-source reproducibility
 
 ### Papers July 22
 
@@ -1195,95 +1291,6 @@ mindmap
      - **Robustness: 7/10** — Multiple backbone models and public datasets; ACM MM 2026 peer-reviewed
      - **Impact: 7/10** — ACM MM 2026; University of Glasgow; practical framework for adapting frozen multimodal embeddings in sequential recommendation
 
-### Papers July 13
-
-*Monday, July 13, 2026. Arxiv cs.IR new listing returned only 1 relevant genrec paper (Semantic Planning) + 1 replacement (Moltbook). Applied 3-month fallback → found 3 additional missed papers (ManCAR KDD 2026, LHF retrieval bottleneck, GenRecEdit model editing). Total: 5 papers.*
-
-1. **From Raw IDs to Semantic Planning: How Recommender Systems Utilize Information at Scale**
-   * Affiliation: University College Dublin, Huawei Ireland Research Centre — *(Changhong Jin, Shiqiu Yang, Zheng Ju, Ruihai Dong, Barry Smyth — UCD; Roger Zhe Li, Yingjie Niu, Aghiles Salah, Mete Sertkan, Xingsheng Guo, Huifeng Guo — Huawei Ireland)*
-   * Link: [arxiv.org/abs/2607.09540](https://arxiv.org/abs/2607.09540)
-   * Venue: RecSys 2026
-   * TL;DR: Position paper tracing recommender systems' evolution through three stages of information utilization: Raw IDs → Semantic IDs → Semantic Planning; argues the next stage will predict the semantic target of the next exposure before instantiating it as a specific item or generated creative.
-   * Key techniques:
-     - Three-stage evolutionary framework: raw IDs (exact lookup, memorization) → semantic IDs (structured model-facing identity) → semantic planning (target-first, item-second)
-     - Multi-stakeholder perspective coordinating user, platform, and provider objectives
-     - Argues semantic planning requires changes in model design, evaluation methodology, and objective coordination
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (position/survey paper)
-     - **Novelty: 7/10** — First to formalize "semantic planning" as a distinct evolutionary stage beyond semantic retrieval
-     - **Fairness: 5/10** — Multi-stakeholder framing explicitly considers provider and platform fairness
-     - **Robustness: 6/10** — Conceptual framework supported by 2 decades of literature; RecSys 2026 peer-reviewed
-     - **Impact: 7/10** — RecSys 2026; UCD/Huawei; visionary roadmap for next-gen recommender architectures
-
-2. **Do Recommendation Algorithms Work When Users Are LLM Agents? A Case Study on Moltbook**
-   * Affiliation: Independent Researcher, Stanford University, University of Waterloo — *(Daming Li — Independent; Simeng Han — Stanford; Jialu Zhang — U Waterloo)*
-   * Link: [arxiv.org/abs/2606.29762](https://arxiv.org/abs/2606.29762)
-   * Venue: arXiv preprint, June 2026 (v2 July 2026)
-   * TL;DR: First empirical study on whether human-designed recommendation algorithms generalize to LLM agent users; on Moltbook (social media platform exclusively for AI agents), simple popularity rules and item-side CF outperform user-specific personalization, revealing that agent consumption patterns differ fundamentally from humans.
-   * Key techniques:
-     - Evaluation of 9 recommendation methods (heuristic, MF, ItemKNN, UserKNN, graph-based, sequential) on agent-populated platform
-     - Moltbook: large-scale social media platform exclusively for autonomous AI agents (OpenClaw framework)
-     - Finding: popularity baselines + item-side CF outperform personalization; static agent persona descriptions add no predictive value
-     - Platform-level and item-level structural signals dominate over individual preference modeling for agent users
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 8/10** — First empirical investigation of recommendation for LLM agent users; provocative findings challenging personalization assumptions
-     - **Fairness: 4/10** — Not addressing fairness
-     - **Robustness: 6/10** — 9 methods evaluated on real agent-populated platform; findings may not generalize beyond current agent behaviors
-     - **Impact: 7/10** — Opens critical question for the future agent-populated web; implications for recommender system design
-
-3. **ManCAR: Manifold-Constrained Latent Reasoning with Adaptive Test-Time Computation for Sequential Recommendation**
-   * Affiliation: Xiamen University, Shopee — *(Kun Yang, Yuxuan Zhu, Yazhe Chen, Siyao Zheng, Bangyang Hong, Kangle Wu, Yabo Ni, Anxiang Zeng, Cong Fu, Hui Li — Xiamen University / Shopee)*
-   * Link: [arxiv.org/abs/2602.20093](https://arxiv.org/abs/2602.20093)
-   * Venue: KDD 2026
-   * TL;DR: Principled latent reasoning framework constraining multi-step reasoning within the topology of a global interaction graph to prevent latent drift; local intent prior from collaborative neighborhood + adaptive test-time stopping; +46.88% NDCG@10 relative improvement over SOTA on 7 benchmarks.
-   * Key techniques:
-     - Manifold-constrained reasoning: local intent prior as distribution over item simplex from collaborative neighborhood
-     - Progressive alignment during training forcing reasoning trajectory within valid manifold
-     - Adaptive test-time stopping when predictive distribution stabilizes, preventing over-refinement
-     - Variational interpretation providing theoretical validation of drift-prevention and adaptive stopping mechanisms
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/FuCongResearchSquad/ManCAR](https://github.com/FuCongResearchSquad/ManCAR) — 18⭐, 14 commits, PyTorch implementation, KDD 2026 artifact with CITATION.cff and ARTIFACT.md; well-documented README with dataset processing scripts; clean modular code structure
-     - **Novelty: 8/10** — First principled manifold-constrained latent reasoning framework; drift-prevention via manifold navigation is novel and well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — 7 benchmarks with consistent SOTA outperformance; theoretical variational analysis; KDD 2026 peer-reviewed
-     - **Impact: 8/10** — KDD 2026; Xiamen/Shopee; 46.88% relative gain establishes manifold-constrained reasoning as new paradigm for latent reasoning in recommendation
-
-4. **Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF)**
-   * Affiliation: University of Maine at Presque Isle, Stanford University — *(Zhe Dong — U Maine at Presque Isle; Fang Qin — Stanford; Manish Shah, Yicheng Wang — Independent)*
-   * Link: [arxiv.org/abs/2606.29947](https://arxiv.org/abs/2606.29947)
-   * Venue: arXiv preprint, June 2026
-   * TL;DR: Systematic diagnosis revealing that retrieval coverage, not reranking quality, is the critical bottleneck for LLM-based cold-start recommendation; standard retrievers find gold items only 4.6–22.9% of the time; proposes LHF (Learned Hybrid Fusion) recovering 17–61% of oracle coverage headroom.
-   * Key techniques:
-     - Five-domain benchmark separating reranking quality from retrieval coverage with positive-controlled and retrieval-realistic regimes
-     - LHF: validation-trained learned hybrid fusion layer over multi-retriever union pool using GBDT
-     - Finding: LLM rerankers fail to consistently outperform collaborative baselines even with ideal retrieval
-     - Coverage-aware training revealing inherent warm-cold retrieval trade-off
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [doi.org/10.5281/zenodo.20993306](https://doi.org/10.5281/zenodo.20993306) — full reproducibility artifacts (code, evaluation tooling, splits, prompts) archived on Zenodo; 17 pages, 6 figures, 13 tables
-     - **Novelty: 7/10** — First systematic diagnosis that retrieval is the primary bottleneck (not reranking) in LLM cold-start recommendation
-     - **Fairness: 4/10** — Coverage-aware training reveals fairness trade-offs; not primary focus
-     - **Robustness: 7/10** — 5 domains, benchmark protocol with splits publicly released; rigorous separation of retrieval and reranking effects
-     - **Impact: 7/10** — Reframes LLM cold-start recsys research toward retrieval-side improvements; practical LHF baseline for future work
-
-5. **GenRecEdit: Adapting Model Editing for Generative Recommendation with Cold-Start Items**
-   * Affiliation: Renmin University of China — *(Chenglei Shen, Teng Shi, Weijie Yu, Xiao Zhang, Jun Xu — Renmin University of China)*
-   * Link: [arxiv.org/abs/2603.14259](https://arxiv.org/abs/2603.14259)
-   * Venue: arXiv preprint, March 2026
-   * TL;DR: First framework adapting NLP model editing to generative recommendation for cold-start items; explicitly models context-to-token relationships, uses iterative token-level editing for multi-token item injection, and introduces one-to-one trigger mechanism to reduce inter-edit interference; achieves significant cold-start gains using only 9.5% of retraining time.
-   * Key techniques:
-     - Position-wise knowledge preparation explicitly modeling full sequence context to next-token generation relationship
-     - Iterative token-level editing injecting multi-token item representations (addressing SID co-occurrence instability)
-     - One-to-one trigger mechanism reducing interference among multiple edits during inference
-     - Training-free knowledge injection preserving original recommendation quality
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First adaptation of model editing paradigm to generative recommendation cold-start; addresses two GR-specific challenges
-     - **Fairness: 5/10** — Directly addresses cold-start item fairness by enabling efficient updates for new items
-     - **Robustness: 6/10** — Multiple Amazon datasets; preserves warm-item performance; 9.5% retraining cost
-     - **Impact: 6/10** — Renmin University; practical framework for efficient cold-start updates in generative recommendation
-
-
 ### Papers July 12 (Weekend Catch-up — KDD 2026)
 
 *Sunday, July 12, 2026. Arxiv inactive (weekend). Cross-referenced KDD 2026 accepted papers against existing README entries; found 7 missed KDD 2026 GenRec papers. Total: 7 papers.*
@@ -1664,7 +1671,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 105 papers as of July 23.
+**Count:** 106 papers as of July 24.
 
 | Score | Paper |
 | --- | --- |
@@ -1753,6 +1760,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Skill Is Not Document: A Query-Conditional Benchmark and Two-Stage Retriever for LLM Agent Skill Routing (R3) |
 | 7/10 | tau-Rec: A Verifiable Benchmark for Agentic Recommender Systems |
 | 7/10 | Teach Multimodal Recommendation Model to See via Personalized Visual Extraction and Adaptive Learning (REVEAL) |
+| 7/10 | ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
@@ -1829,6 +1837,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - RecGPT-V3 Technical Report (RecGPT-V3)
 - Topology-Aware Tokenization for Generative Recommendation (TopoTok)
 - TSGR: Taobao Search Generative Retrieval (TSGR)
+- BARGE: Bridging the Structural Gap — Adapting Autoregressive Generation for Recommendation (BARGE)
+- DLMRec: Diffusion Language Model for Recommendation (DLMRec)
+- CapsID: Soft-Routed Variable-Length Semantic IDs for Generative Recommendation (CapsID)
 
 ### RL / Reinforcement Learning
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -1892,6 +1903,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 - RECAP: Feedback-Driven Streaming Semantic User Profiles for Short-Video Recommendation (RECAP)
 - Long-History User Transformers for Real-Time Ad Ranking
+- DLMRec: Diffusion Language Model for Recommendation (DLMRec)
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.

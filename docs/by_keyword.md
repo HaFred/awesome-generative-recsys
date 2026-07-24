@@ -25,6 +25,7 @@
 - An LLM-powered Agentic Recommendation System for Connected TV Content Discovery
 - HyCoRec: Hypergraph-Enhanced Multi-Preference Learning for Alleviating Matthew Effect in Conversational Recommendation (HyCoRec)
 - Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore)
+- ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation (ItemRAG)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -51,6 +52,8 @@
 - Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF)
 - Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces
 - Learning Sparse Representations of Multimodal Content for Enhanced Cold Item Recommendation (QMUL, RecSys 2026)
+- Can Generative Recommendation Reach Cold Items? A Temporal Perspective on Semantic-ID Generation (ColdSID)
+- ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation (ItemRAG)
 
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
@@ -117,6 +120,7 @@
 - MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR)
 - On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 - Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM)
+- Diffusion Language Model for Recommendation (DLMRec)
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
