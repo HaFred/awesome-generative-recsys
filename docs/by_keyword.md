@@ -438,6 +438,7 @@
 - Contextual Scalarisation Thompson Sampling for Multi-Objective Decisions in Public Media (CSTS)
 - Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG)
 - Decoupled Residual Quantization for Robust Semantic IDs in Recommendation (DRQ)
+- DIG: Discrimination Is Generation — Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG)
 - DeGRe: Dense-supervised Generative Reranking for Recommendation
 - Denoising Implicit Feedback for Cold-start Recommendation (DIF)
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -747,6 +748,7 @@
 - A2Gen (Action-Aware Generative Sequence Modeling)
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS)
 - Beyond Patches: Superpixel Token-based Transformers for Attribute-Specific Fashion Retrieval (SuperFashion)
+- Beyond Unimodal Boundaries: Generative Recommendation with Multimodal Semantics (MGR-LF++)
 - Beyond Static Best-of-N: Bayesian List-wise Alignment (BLADE)
 - BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation- Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL)
 - Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)
@@ -903,6 +905,8 @@
 - Principled Synthetic Data Enables the First Scaling Laws for LLMs in Recommendation (Scaling Laws)
 - RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems (RankUp)
 - SSR: Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR)
+- Towards Generalizable and Efficient Large-Scale Generative Recommenders (Netflix GenRec Scaling)
+- Understanding Generative Recommendation with Semantic IDs from a Model-scaling View (SID Scaling)
 - UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 
 
@@ -929,6 +933,7 @@
 - FusID: Modality-Fused Semantic IDs for Generative Music Recommendation (FusID)
 - Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
+- GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation (GLASS)
 - GRLM
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
