@@ -26,6 +26,7 @@
 - HyCoRec: Hypergraph-Enhanced Multi-Preference Learning for Alleviating Matthew Effect in Conversational Recommendation (HyCoRec)
 - Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore)
 - ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation (ItemRAG)
+- SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -313,6 +314,7 @@
 - Semantic Trimming and Auxiliary Multi-step Prediction for Generative Recommendation (STAMP)
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
+- SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
 - Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale (QuaSID)
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
 - SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation
@@ -663,6 +665,7 @@
 - SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA)
 - Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS)
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
+- SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
 - Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation (Taiji)
 - TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER)
 - TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation

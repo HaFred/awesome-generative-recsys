@@ -38,6 +38,7 @@ mindmap
         LASAR / Latent Reasoning -- Beihang / Baidu
         ManCAR / Manifold Reasoning -- Xiamen U / Shopee
         RecGPT-V3 / Latent Intent Reasoning -- Alibaba
+        CaLIR / Category-Guided Latent Reasoning -- Beihang / Meituan / Renmin
       RL-based Optimization
         Rank-GRPO / ConvRec-R1 -- Netflix
         Rec-R1 -- UIUC
@@ -107,6 +108,7 @@ mindmap
         Consensus vs Dissent / Group Rec -- Maastricht U
         UniPinRec / Retrieval+Ranking -- Pinterest
         OneBar / Generative Query Rec -- Zhejiang U / Kuaishou
+        OneFeed / Feed-Query Unified GR -- Independent (Guo Xun)
         TokenMinds / SID User Tokens -- Google DeepMind / YouTube
         HyCoRec / Matthew Effect CRS -- SYSU / NTU
         HiCore / Multi-Hypergraph CRS -- NTU / SYSU / SCAU
@@ -158,6 +160,9 @@ mindmap
         SID Scaling Bottleneck / Model-Scaling View -- MSU / Snap
         MGR-LF++ / Multimodal GR -- UMich / Snap
         DIG / Unified Ranking-Retrieval Tokenizer -- Meituan
+        SynGR / Cross-Modal Synergy GR -- Beihang
+        DREAM / Dynamic SID Refinement -- Kuaishou
+        SimGR / Latent-Space GenRec -- Central South U / PolyU
       Next Interest Flow Prediction
         AMEN -- Alibaba
       RL-based Alignment for Recall
@@ -232,6 +237,95 @@ mindmap
 
 ---
 ## By Date
+
+### Papers July 26
+
+*Sunday, July 26, 2026. Arxiv inactive (weekend). Applied 3-month fallback strategy → found 5 missed papers from February–June 2026 (CaLIR Beihang/Meituan/Renmin latent reasoning GR, SynGR Beihang ICML 2026 cross-modal GR opensource, OneFeed unified feed-query GR, DREAM Kuaishou CIKM 2026 cold-start SID refinement, SimGR Central South U/PolyU latent-space genrec opensource). Total: 5 papers.*
+
+1. **Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)**
+   * Affiliation: Beihang University / Meituan / Renmin University of China / Beijing Information Science and Technology University — *(Fuwei Zhang, Xiaoyu Liu, Jiajie Jin, Jiale Mao, Wei Chen, Dongbo Xi, Yifan Yang, Peng Yan — Beihang/Meituan; Zichao Hao — BISTU; Zhao Zhang, Fuzhen Zhuang — Beihang)*
+   * Link: [arxiv.org/abs/2606.07075](https://arxiv.org/abs/2606.07075)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Replaces explicit CoT reasoning in e-commerce generative retrieval with continuous latent intent states guided by product category hierarchies; achieves better retrieval-inference efficiency trade-off while maintaining robustness across hierarchies and generative backbones.
+   * Key techniques:
+     - Hierarchical Semantic Reasoning (HSR): aligns latent states with category-level shopping intent using product category hierarchies as coarse-to-fine scaffold
+     - Query-wise Reasoning Enhancement (QRE): multi-positive InfoNCE loss regularizing latent states to model diverse intent paths
+     - Query-specific dynamic prefix trie: assembled from pre-indexed category-level tries with reasoning-aware constrained decoding
+     - Latent intent reasoning: learns continuous hidden states before SID decoding, avoiding explicit CoT generation cost
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First to replace explicit CoT with category-guided latent reasoning for generative retrieval; hierarchical reasoning scaffold is well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Multilingual e-commerce datasets; transferability demonstrated across induced hierarchies and different generative backbones (Qwen3 included)
+     - **Impact: 7/10** — Beihang/Meituan/Renmin; practical framework for efficient e-commerce generative retrieval balancing accuracy and latency
+
+2. **SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation**
+   * Affiliation: Beihang University — *(Wei Chen, Xingyu Guo, Shuang Li, Fuwei Zhang, Meng Yuan, Jing Fan, Zhao Zhang, Deqing Wang, Fuzhen Zhuang — Beihang)*
+   * Link: [arxiv.org/abs/2605.18920](https://arxiv.org/abs/2605.18920)
+   * Venue: ICML 2026
+   * TL;DR: Enforces cross-modal synergistic dependencies by constraining overreliance on dominant modalities during generative recommendation; captures emergent item properties beyond shared or modality-specific signals; +9.01% average improvement on 3 benchmarks.
+   * Key techniques:
+     - Dominant modality masking: identifies and masks top salient tokens in the dominant modality to force cross-modal synergy exploitation
+     - Synergistic-aware contrastive learning: triplet loss (masked anchor, original positive, unimodal negatives) promoting cross-modal interaction
+     - PID-inspired performance decomposition quantifying synergistic, redundant, and unique information across modalities
+     - Mask ratio tuning controlling the balance between unimodal sufficiency and cross-modal dependency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/gxingyu/SynGR](https://github.com/gxingyu/SynGR) — 7 commits, ICML 2026 artifact; complete training pipeline (data processing, indexing, pretrain, finetune); well-documented README with hyperparameter space; based on MQL4GRec; no license
+     - **Novelty: 7/10** — First to explicitly model and exploit cross-modal synergistic information in generative recommendation; PID-inspired decomposition is novel
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — ICML 2026 peer-reviewed; 3 benchmark datasets (Amazon categories); consistent 9.01% average improvement
+     - **Impact: 7/10** — ICML 2026; Beihang (Fuzhen Zhuang's group); opens new direction for multimodal synergy in generative recommendation
+
+3. **OneFeed: A Unified Generative Framework for Feed Content Enhancement and Query Generation**
+   * Affiliation: Independent (Guo Xun — industry practitioner, ex-Huawei/Alibaba/Baidu) — *(Guo Xun)*
+   * Link: [arxiv.org/abs/2606.07972](https://arxiv.org/abs/2606.07972)
+   * Venue: arXiv preprint, June 2026
+   * TL;DR: Unified generative framework jointly modeling feed SID generation and search query generation from shared behavior encoder; SID-Query alignment objective bridges semantic gap; closed-loop self-enhancement paradigm leverages implicit feedback.
+   * Key techniques:
+     - Shared behavior encoder processing heterogeneous user behavior sequences (action type, SID, query, temporal, interaction strength)
+     - Dual generative heads: Feed Semantic ID Generator (recommendation retrieval) + Intent Query Generator (search expansion)
+     - SID-Query alignment objective learning shared semantic space for content SIDs and query representations
+     - Closed-loop self-enhancement paradigm using implicit user feedback to improve both generation tasks
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available (torch-free prototype mentioned but not released)
+     - **Novelty: 6/10** — First to unify feed recommendation and search query generation in a single generative framework; closed-loop self-enhancement is practical
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 4/10** — Single-author paper; experimental protocol provided but results are expected/estimated rather than fully empirical; minimal local prototype validates executability
+     - **Impact: 5/10** — Independent (Guo Xun); provides extensible direction for search-recommendation unification; design paper with practical blueprint
+
+4. **DREAM: Dynamic Refinement of Early Assignment Mappings**
+   * Affiliation: Kuaishou Technology — *(Liwei Guan, Huanjie Wang, Hongwei Zhang, Linxun Chen, Zhaojie Liu — Kuaishou)*
+   * Link: [arxiv.org/abs/2606.06947](https://arxiv.org/abs/2606.06947)
+   * Venue: CIKM 2026
+   * TL;DR: Identifies early static SID commitment as the fundamental cold-start bottleneck in generative recommendation (not model capacity); three-stage progressive refinement: intent-aware tokenizer → backbone evaluator → dynamic beam mechanism maintaining multiple weighted SID hypotheses.
+   * Key techniques:
+     - Intent-aware tokenizer: counterfactual contrastive learning rebuilding SID space to generate diverse behavior-aligned candidates per cold-start item
+     - Frozen backbone evaluator: selects most reliable SID candidate based on multi-context user support without retraining
+     - Dynamic beam mechanism: maintains multiple weighted SID hypotheses throughout training and inference, preventing premature collapse
+     - Decomposes cold-start bottleneck into: unsupported assignment, premature commitment, and inference-time single-path constraint
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First to identify early static commitment as fundamental cold-start bottleneck distinct from model capacity; three-stage refinement framework is well-motivated
+     - **Fairness: 5/10** — Directly targets cold-start item reachability which is a fairness concern; benefits tail/cold items
+     - **Robustness: 7/10** — CIKM 2026 peer-reviewed; 3 Amazon benchmarks with consistent cold-start metric improvements
+     - **Impact: 7/10** — CIKM 2026; Kuaishou; addresses critical cold-start limitation in SID-based generative recommendation with practical refinement framework
+
+5. **SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation**
+   * Affiliation: Central South University / Hong Kong Polytechnic University / National University of Defense Technology / City University of Macau / Griffith University — *(Yuanbo Zhao, Ruochen Liu, Senzhang Wang, Jun Yin — Central South U; Yuxin Dong — PolyU; Huan Gong — NUDT; Hao Chen — City U Macau; Shirui Pan — Griffith; Chengqi Zhang — UTS)*
+   * Link: [arxiv.org/abs/2602.07847](https://arxiv.org/abs/2602.07847)
+   * Venue: arXiv preprint, February 2026
+   * TL;DR: Identifies systematic bias in LLM-based genrec from token-level generation approximation; proposes directly modeling item-level preference distributions in shared latent space and ranking by similarity; achieves higher accuracy, diversity, and coverage with better scaling behavior.
+   * Key techniques:
+     - Theoretical analysis proving token-level generation cannot faithfully substitute item-level generation (beam search pruning → incomplete coverage; parallel generation → token independence distortion)
+     - SimGR framework: directly models item-level preference distributions in shared latent space, ranks by similarity
+     - Mean pooling aggregation of SID token embeddings into item representations
+     - Higher Entropy@K and item coverage (22.04% vs 11.50% LC-Rec, 18.71% RPG) indicating more balanced exposure distribution
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5/10** — [anonymous.4open.science/r/SimGR-C408](https://anonymous.4open.science/r/SimGR-C408) — anonymous review repo; code available but no documentation, no license, anonymous submission; functional implementation
+     - **Novelty: 7/10** — First theoretical analysis of token-level generation bias in LLM-based genrec; latent-space item-level modeling is a principled alternative
+     - **Fairness: 5/10** — Higher item coverage and Entropy@K suggests more equitable item exposure; diversity analysis included
+     - **Robustness: 7/10** — Multiple datasets and LLM backbones; consistent outperformance; scaling behavior analysis; Entropy@K diversity metrics
+     - **Impact: 6/10** — Central South U/PolyU/NUDT/Griffith; principled critique of token-level generation paradigm; latent-space alternative direction
 
 ### Papers July 25
 
@@ -1176,96 +1270,6 @@ mindmap
      - **Robustness: 7/10** — Billion-scale Pinterest data; consistent gains across multiple LLM families; hard-example concentration validates encoder need
      - **Impact: 8/10** — Pinterest; fundamental insight that could reshape SID tokenization in all LLM-based genrec; 46% accuracy improvement on hardest cases
 
-### Papers July 15
-
-*Wednesday, July 15, 2026. Arxiv cs.IR new listing returned 5 relevant genrec papers. No fallback needed.*
-
-1. **Not Only NTP: Extending Training Signal Coverage for Generative Recommendation (NONTP)**
-   * Affiliation: Meituan — *(Changhao Li, Shuli Wang, Junwei Yin, Senjie Kou, Yinqiu Huang, Chi Wang, Yinhua Zhu, Haitao Wang, Xingxing Wang — Meituan, Chengdu/Beijing)*
-   * Link: [arxiv.org/abs/2607.12277](https://arxiv.org/abs/2607.12277)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Extends next-token prediction with temporal contrastive learning (TCL) and trans-domain learning (TDL) auxiliary objectives to address temporal/spatial locality in generative recommendation training; both discarded at inference for zero overhead; +34.3% HR@10 on Meituan dataset, +1.8% CTR online.
-   * Key techniques:
-     - TCL (Temporal Contrastive Learning): BYOL-style EMA teacher + InfoNCE to align hidden states against K-step future trajectory
-     - TDL (Trans-Domain Learning): mean-pools cross-domain hidden states through shared prediction head — zero extra parameters
-     - Both objectives discarded at inference → zero overhead
-     - Identifies two structural limitations of NTP: temporal locality (no long-range supervision) and spatial locality (no cross-domain gradient)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — TCL+TDL are well-motivated extensions but incremental over standard contrastive/multi-task learning
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Online A/B with +1.8% CTR, +2.1% GMV (p<0.01); multi-domain Meituan industrial dataset
-     - **Impact: 7/10** — Meituan; practical training signal augmentation for industrial generative recommendation
-
-2. **Where Reasoning Matters: Rethinking Latent Reasoning in Semantic ID-based Generative Recommendation (IBA)**
-   * Affiliation: Chongqing University, Griffith University — *(Shangxin Yang, Min Gao, Zongwei Wang — Chongqing University; Junliang Yu — Griffith University)*
-   * Link: [arxiv.org/abs/2607.12425](https://arxiv.org/abs/2607.12425)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Information-Gain Budget Allocation (IBA) framework strategically allocates latent reasoning steps across semantic ID token positions based on position-wise information gain; earlier SID positions get more refinement budget; achieves better accuracy-computation trade-off than uniform allocation.
-   * Key techniques:
-     - Position-wise information-gain (IG) analysis: earlier SID positions provide higher IG, later positions contribute less
-     - IBA: learns to allocate limited latent refinement budget unevenly across SID positions
-     - Treats latent reasoning steps as a computational resource to be allocated efficiently
-     - Consistent improvements over fixed-step allocation baselines on public datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to study position-wise reasoning budget allocation problem in SID-based genrec; information-gain perspective is novel
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Multiple public datasets; ablation showing budget allocation matters
-     - **Impact: 6/10** — Chongqing U/Griffith; practical efficiency insight for latent reasoning in SID generative recommendation
-
-3. **RecRec: Latent Interests Recursive Reasoning for Sequential Recommendation**
-   * Affiliation: University of Glasgow, Ohio State University, Amazon, Telefónica Scientific Research, Carnegie Mellon University, National University of Singapore — *(Wenhao Deng, Junchen Fu, Kaiwen Zheng, Joemon M. Jose — University of Glasgow; Hanwen Du — Ohio State University; Alexandros Karatzoglou — Amazon; Ioannis Arapakis — Telefónica Scientific Research; Hangjun Guo — Carnegie Mellon University; Yongxin Ni — National University of Singapore)*
-   * Link: [arxiv.org/abs/2607.12945](https://arxiv.org/abs/2607.12945)
-   * Venue: RecSys 2026
-   * TL;DR: RL-free recursive reasoning framework decoupling reasoning from prediction; Context Compressor distills backbone states into latent interests with diversity regularization, Recursive Reasoner refines them in separate latent space; deep supervision enables adjustable reasoning depth at inference without retraining.
-   * Key techniques:
-     - Context Compressor: distills backbone hidden states into compact latent interests with Interest Diversity Regularizer
-     - Recursive Reasoner: refines interests in a separate intermediate latent space — decouples reasoning from prediction
-     - RL-free: two supervised stages only, no reinforcement learning needed
-     - Deep supervision enabling adjustable reasoning depth at inference without retraining
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Novel decoupled reasoning architecture overcoming single d-dimensional state bottleneck; RL-free training is practical
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — 4 real-world datasets; outperforms SOTA reasoning-enhanced methods; RecSys 2026 peer-reviewed
-     - **Impact: 7/10** — RecSys 2026; multi-institution (U Glasgow/Ohio St/Amazon/Telefónica/CMU/NUS); practical recipe for recursive reasoning in seqrec
-
-4. **MESH: Scaling Up Retrieval with Heterogeneous Content Unification**
-   * Affiliation: Pinterest Inc. — *(Jiaxing Qu, Yilin Chen, Junpeng Hou, Jinfeng Rao, Olafur Gudmundsson, Sai Xiao, Huizhong Duan — Pinterest Inc., San Francisco)*
-   * Link: [arxiv.org/abs/2607.12392](https://arxiv.org/abs/2607.12392)
-   * Venue: RecSys 2026 Industry Track
-   * TL;DR: Unified retrieval scaling framework mitigating "Scaling Bias of Heterogeneity" where model capacity gains don't apply equally across content tiers; modularized architecture with gated bias correction and feature-space partitioning; 14× improvement in fresh-item scaling exponent, +5.5% fresh-item repins on Pinterest.
-   * Key techniques:
-     - Gated bias correction: modular architecture reducing interference between sparse-item signals and high-frequency engagement features
-     - Feature-space partitioning into independent domains as structural inductive bias
-     - Asynchronous serving strategy delivering 2.87× throughput improvement
-     - Protected gradient path improving sparse content scaling behavior (14× power-law exponent)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (Pinterest internal production)
-     - **Novelty: 6/10** — Scaling bias of heterogeneity is a well-motivated problem; gated correction is practical but incremental
-     - **Fairness: 4/10** — Fresh/long-tail content coverage indirectly addresses supply-side fairness
-     - **Robustness: 8/10** — Billion-scale deployment on Pinterest Related Pins; +5.5% repins, +0.46% retention; RecSys 2026 Industry Track
-     - **Impact: 7/10** — RecSys 2026 Industry Track; Pinterest; practical paradigm for consolidating fragmented retrieval infrastructures
-
-5. **What Would You Click? Personalized Video Thumbnail Generation with Preference-aware Highlight Retrieval (PVTG)**
-   * Affiliation: Tsinghua University, University of Queensland — *(Zhiyu He, Yiqun Liu, Min Zhang — Tsinghua University; Zecheng Zhao, Tong Chen, Zi Huang — University of Queensland)*
-   * Link: [arxiv.org/abs/2607.12882](https://arxiv.org/abs/2607.12882)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Personalized video thumbnail generation via two-stage framework coupling preference-aware highlight retrieval with VLM-guided diffusion; personalized highlight retriever selects diverse visual anchors aligned with user preferences; VLM-guided diffusion pipeline transforms anchors into thumbnails preserving visual coherence.
-   * Key techniques:
-     - Personalized highlight retriever capturing fine-grained user-video interactions + video semantics via summarization
-     - VLM-guided diffusion pipeline extracting and injecting semantically grounded visual cues
-     - Verify-and-retry loop: VLM-as-judge ensures thumbnail fidelity with up to N retry attempts
-     - Novel task formulation: personalized video thumbnail generation balancing personalization and informativeness
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 3/10** — [github.com/hezy18/PVTG](https://github.com/hezy18/PVTG) — 0⭐, 12 commits, no README documentation, no license; functional code but minimal; Python+JS+HTML (ThumbnailGeneration + UserStudyPlatform)
-     - **Novelty: 6/10** — First to formulate personalized video thumbnail generation as a retrieve-then-generate task
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Two public datasets (EEGSVRec, PHD2); user study demonstrates improved click preference
-     - **Impact: 5/10** — Tsinghua/UQ; novel task formulation bridging personalization and content generation
-
-
 ### Papers Classic Must Read
 
 The list's in no particular order.
@@ -1522,7 +1526,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 107 papers as of July 25.
+**Count:** 109 papers as of July 26.
 
 | Score | Paper |
 | --- | --- |
@@ -1602,6 +1606,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair |
 | 7/10 | SAERec: Constructing Fine-grained Interpretable Intents Priors via Sparse Autoencoders for Recommendation (SAERec) |
 | 7/10 | Stream-aware Side Adaptation for Large Pre-trained Multimodal Embedding Models in Sequential Recommendation (Stresa) |
+| 7/10 | SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation (SynGR) |
 | 7/10 | Uncertainty and Fairness Awareness in LLM-Based Recommendation Systems |
 | 7/10 | URecJPQ: Memory-efficient Multimodal Recommendation Models through RecJPQ in Large-Scale Scenarios (URecJPQ) |
 | 7/10 | Who Owns the AI Recommendation? A Multi-Industry Empirical Map of Brand Category Ownership Across Large Language Models (LLM Brand) |
@@ -1628,6 +1633,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 5/10 | Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec) |
 | 5/10 | LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation (LBR) |
 | 5/10 | OneReason Technical Report |
+| 5/10 | SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR) |
 | 4/10 | GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation |
 | 4/10 | RecRec: Recursive Refinement for Sequential Recommendation |
 | 3/10 | Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS) |
@@ -1694,6 +1700,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - CapsID: Soft-Routed Variable-Length Semantic IDs for Generative Recommendation (CapsID)
 - GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation (GLASS)
 - DIG: Discrimination Is Generation — Unifying Ranking and Retrieval from a Tokenizer Perspective (DIG)
+- CaLIR: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
+- SynGR: Cross-Modal Synergy for Generative Recommendation (SynGR)
+- DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM)
+- SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
+- OneFeed: A Unified Generative Framework for Feed Content Enhancement and Query Generation (OneFeed)
 
 ### RL / Reinforcement Learning
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -1758,6 +1769,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - RECAP: Feedback-Driven Streaming Semantic User Profiles for Short-Video Recommendation (RECAP)
 - Long-History User Transformers for Real-Time Ad Ranking
 - DLMRec: Diffusion Language Model for Recommendation (DLMRec)
+- DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM)
+- SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
