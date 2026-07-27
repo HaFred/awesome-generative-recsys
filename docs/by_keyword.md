@@ -55,6 +55,7 @@
 - Learning Sparse Representations of Multimodal Content for Enhanced Cold Item Recommendation (QMUL, RecSys 2026)
 - Can Generative Recommendation Reach Cold Items? A Temporal Perspective on Semantic-ID Generation (ColdSID)
 - ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation (ItemRAG)
+- PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest (PinEqualizer)
 
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
@@ -195,6 +196,8 @@
 - Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair
 - Fairness Attacks on Recommender Systems
 - Federated Variational Preference Alignment with Gumbel-Softmax Prior for Personalized User Preferences (FedVPA-GP)
+- PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest (PinEqualizer)
+- GRACE: Bringing GRACE to Recommendation: Fine-Tuning for Sustainable and Accurate Personalization (GRACE)
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -527,6 +530,10 @@
 - Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces
 - Not Only NTP: Extending Training Signal Coverage for Generative Recommendation (NONTP)
 - MESH: Scaling Up Retrieval with Heterogeneous Content Unification (MESH)
+- PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest (PinEqualizer)
+- Probabilistic Residual Learning for Online Recommendations (PRL)
+- RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation (RankGraph-2)
+- GRACE: Bringing GRACE to Recommendation: Fine-Tuning for Sustainable and Accurate Personalization (GRACE)
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec) 
@@ -614,6 +621,7 @@
 - INSPIRE: Intent-aware Neural Sponsored Product Retrieval for E-commerce
 - Incumbent Advantage: Brand Bias and Cognitive Manipulation Dynamics in LLM Recommendation Systems
 - Incumbent Advantage: Brand Bias and Cognitive Manipulation Dynamics in LLM Recommendation Systems
+- SIREN (Luring LLMs onto the Rocks): PAIR-Driven Preference Manipulation in Web-RAG Recommenders (SIREN)
 - Intuition-Guided Latent Reasoning for LLM-Based Recommendation (IntuRec)
 - Joint Optimization of Relevance and Engagement in Multi-Task Ranking for E-Commerce with Efficient LLM Supervision
 - L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
@@ -981,6 +989,7 @@
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
 - VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)
 - Fairness Attacks on Recommender Systems
+- SIREN (Luring LLMs onto the Rocks): PAIR-Driven Preference Manipulation in Web-RAG Recommenders (SIREN)
 
 ### Sequential Modeling / RoPE
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
