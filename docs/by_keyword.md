@@ -110,6 +110,7 @@
 
 
 ### Diffusion
+- MIRAGE: Escaping the Euclidean Void (Manifold-Informed Flow Matching for Sequential Recommendation)
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
 - DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation (DiffCold)
 - Diffusion-GR2: Diffusion Generative Reasoning Re-ranker (Diffusion-GR2)
@@ -429,6 +430,9 @@
 
 
 ### Industrial
+- EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
+- OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
+- LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems (Multimodal LLM Rec)
 - Adaptive Re-Ranking
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
@@ -569,6 +573,10 @@
 
 
 ### LLM-based Recommendation
+- CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
+- EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
+- LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
+- OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
 - APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
 - APG4RecSim: Task-Aware Automated User Profile Generation
@@ -923,6 +931,8 @@
 
 
 ### Semantic / Structured IDs
+- CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
+- OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
 - Beyond Instance-Level Alignment and Uniformity: Semantic Factor Learning for Collaborative Filtering (SaFeAU)
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
@@ -992,6 +1002,7 @@
 - SIREN (Luring LLMs onto the Rocks): PAIR-Driven Preference Manipulation in Web-RAG Recommenders (SIREN)
 
 ### Sequential Modeling / RoPE
+- MIRAGE: Escaping the Euclidean Void (Manifold-Informed Flow Matching for Sequential Recommendation)
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
 - APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
