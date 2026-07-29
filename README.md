@@ -38,13 +38,12 @@ mindmap
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
         Rec-R1 -- UIUC
-        FLR -- Macquarie / UNSW
         ManCAR -- Xiamen U / Shopee
         CARE -- NUS / USTC
+        RecoReward -- Nankai / Kuaishou
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
-        RAGEAR -- Catania / CNR
       Frameworks & Benchmarks
         MiniOneRec -- USTC
         OpenOneRec -- Kuaishou
@@ -52,7 +51,7 @@ mindmap
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
         FORGE Web Pollution -- CUHK
-        COPF -- Duke Kunshan
+        Case Against Gen -- Microsoft
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
@@ -62,9 +61,11 @@ mindmap
         FORGE SID -- Zhejiang U / Alibaba
         ACE -- Sungkyunkwan U
         CogRec -- CAS IIE / JD.com
+        Grevo -- Kuaishou
+        VaLiDRec -- UQ / Griffith
+        TopoGR -- Xidian / Alibaba
       Diffusion & Sequential
         A2G-DiffRec -- JKU Linz
-        ConvRec -- VWFS/Hildesheim
         BRIDGE -- UCAS
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
@@ -78,6 +79,99 @@ mindmap
 
 ---
 ## By Date
+
+### Papers July 29
+
+*Wednesday, July 29, 2026. Arxiv cs.IR new listing returned 5 genrec papers from July 28 submission window. Total: 5 papers.*
+
+1. **Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing**
+   * Affiliation: Kuaishou Technology — *(Huanjie Wang, Liwei Guan, Zekai Sun, Hongwei Zhang, Honghui Bao — Kuaishou)*
+   * Link: [arxiv.org/abs/2607.25329](https://arxiv.org/abs/2607.25329)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Treats SID assignment as an evolvable discrete variable that adapts to behavioral feedback; single multitask recommender unifies SID generation + semantic grounding, eliminating the need for separate tokenizer, alignment losses, or alternating-optimization schedules.
+   * Key techniques:
+     - Evolutionary Item Indexing: SID assignment as a budgeted feedback-driven search using trained recommender as posterior evaluator
+     - Single multitask recommender absorbing tokenizer's role: behavioral SID generation + semantic SID grounding in one model
+     - Fixed vocabulary and length; no second learnable model, no alignment losses, no alternating-optimization
+     - Stable identifier evolution under closed-world SID vocabulary constraints
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First to frame SID assignment as evolutionary search rather than learning; unified single-model approach eliminates tokenizer-as-separate-entity
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — Multiple real-world datasets; consistent outperformance over SOTA genrec methods; no industrial deployment reported
+     - **Impact: 7/10** — Kuaishou; practical alternative to end-to-end SID-recommender co-training with simpler architecture
+
+2. **VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation**
+   * Affiliation: University of Queensland / Griffith University — *(Shutong Qiao, Wei Yuan, Tong Chen, Hao Wang, Quoc Viet Hung Nguyen, Hongzhi Yin — UQ/Griffith)*
+   * Link: [arxiv.org/abs/2607.25209](https://arxiv.org/abs/2607.25209)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Constructs variable-length SIDs from native LLM vocabulary tokens via importance estimation + pruning + collision refinement; graph-aware soft prompts + token-set prediction eliminate autoregressive decoding with 87.49× faster inference than LC-Rec.
+   * Key techniques:
+     - LLM-native SID construction: token importance estimation → semantic-quality-aware pruning → collision-aware refinement
+     - Variable-length identifiers adapting to item semantic complexity (no fixed-length overhead)
+     - Token-set prediction with token-level item scoring replacing autoregressive SID generation and beam search
+     - Graph-aware soft prompts for user preference encoding
+     - Zero-shot cold-start: superior performance without retraining on completely new items
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First to construct LLM-native variable-length SIDs directly from vocabulary tokens; token-set prediction paradigm is a clean break from autoregressive genrec
+     - **Fairness: 4/10** — Zero-shot cold-start evaluation benefits new/niche items
+     - **Robustness: 7/10** — 4 real-world datasets; 87.49× faster inference; consistent SOTA outperformance
+     - **Impact: 7/10** — UQ (Hongzhi Yin); paradigm-shifting: eliminates beam search and autoregressive decoding for genrec, opens new efficient genrec direction
+
+3. **TopoGR: Revealing and Preserving Latent Structure of Semantic ID in Generative Recommendation**
+   * Affiliation: Xidian University / Alibaba Group — *(Ziyu Zheng, Zhengshun Du, Yaming Yang, Bin Tong, Guan Wang, Meng Yan, Ziyu Guan, Wei Zhao — Xidian U/Alibaba)*
+   * Link: [arxiv.org/abs/2607.25216](https://arxiv.org/abs/2607.25216)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Identifies structural mismatch between SID tokenizer (structured code space) and generator (independent categorical symbols); proposes Bit-decomposable Binary SIDs with explicit Hamming geometry preserved through input, training, and inference stages.
+   * Key techniques:
+     - Bit-decomposable Semantic ID (Binary SID): deterministically convertible to integer SID with explicit Hamming geometry
+     - Three-stage topology preservation: binary SID features at input layer preserve Hamming proximity; Hamming soft targets inject topology-aware supervision; Hamming-consistent reranking at inference
+     - Captures item relatedness beyond exact SID overlap through Hamming distance
+     - Standard SID generator consumes Binary SID tokens as regular categorical inputs (zero architecture change)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First to expose and exploit SID topology through Hamming geometry; Binary SID is a simple but effective intervention
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — 4 benchmark datasets; consistent SOTA; Hamming topology is theoretically grounded
+     - **Impact: 6/10** — Xidian U/Alibaba; practical topology-preserving approach for improving SID-based genrec quality
+
+4. **RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation**
+   * Affiliation: Nankai University / Kuaishou Technology — *(Guohong Mu, Yueyang Liu, Jiangxia Cao, Changxin Lao, Zijie Zhuang, Yuhui Zhang, Jiaqi Feng, Ruochen Yang, Shuang Yang, Zhaojie Liu, Qibin Hou — Nankai/Kuaishou)*
+   * Link: [arxiv.org/abs/2607.25901](https://arxiv.org/abs/2607.25901)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Trains MLLMs to generate recommendation-optimized item descriptions using behavior-derived RL rewards during training while preserving content-only inference; Recommender Affinity Score contrasts engaged vs. non-target users; deployed on Kuaishou live-stream with online A/B gains.
+   * Key techniques:
+     - Recommender Affinity Score (RAS): contrasts historically engaged users vs. observational non-target users to estimate shared affinity
+     - Reinforcement learning with RAS as reward: trains MLLM to emphasize rec-relevant semantics without user-conditioning
+     - Content-only inference after RL training: generates single shared description without user inputs at serving
+     - Proxy user strategy: historically engaged users as proxy for future targets
+     - RecoReward-9B built on Qwen3.5-9B; deployed on live-stream recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First RL-trained MLLM for recommendation-optimized item description; content-only inference after behavior-derived training is novel
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Offline benchmark (7 recall metrics) + online A/B testing; Qwen3.5-9B as strong baseline
+     - **Impact: 7/10** — Nankai/Kuaishou; bridges MLLM content generation with recommendation optimization; practical for industrial multimodal rec
+
+5. **The Case Against Generation for Retrieval: Discriminative Language Models as Effective Retrievers**
+   * Affiliation: Microsoft — *(Zhe Xu, Prachi Agrawal, Kavosh Asadi, Tianyi Chen, Carl Hu, Justin Johnson, Wuwei Lan, Mingfu Liang, Xi Liu, Tik On Lui, Oladipo Ositelu, Sandeep Pandey, Ankit Peshin, Feng Qi, Anil Ramakrishna, Kaushik Rangadurai, Frank Shyu, Luke Simon, Yang Yang, Chiyu Zhang — Microsoft)*
+   * Link: [arxiv.org/abs/2607.25346](https://arxiv.org/abs/2607.25346)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: Argues against generative retrieval at web-scale; revitalizes two-tower architecture with LLM backbone + EOS token pooling + knowledge distillation + latent reasoning; matches genrec SOTA with far lower latency on production systems.
+   * Key techniques:
+     - Shared LLM encoder for joint user-item representation learning
+     - End-of-Sentence (EOS) token pooling for compact sequence embedding
+     - Knowledge distillation from cross-encoder teachers into two-tower student
+     - Cross-dataset transfer learning + latent reasoning within user tower
+     - Production evaluation: high resilience to model staleness, superior data scaling
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Takes a principled stand against generative retrieval, making the case for discriminative efficiency; LLM-native two-tower is a compelling counterpoint
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — 3 public benchmarks + internal production; staleness resilience + data scaling analysis; large author team
+     - **Impact: 8/10** — Microsoft; important counterpoint to the genrec paradigm; practical for web-scale retrieval where generation overhead is prohibitive
+
 
 ### Papers July 28
 
@@ -980,123 +1074,11 @@ mindmap
      - **Robustness: 9/10** — Billions of users; multiple YouTube surfaces; live deployment with complementary value verified across ranking systems
      - **Impact: 8/10** — Google DeepMind/YouTube; extends SID paradigm from items to users at YouTube scale; dual-output design bridges semantic and collaborative paradigms
 
-### Papers July 18
-
-*Saturday, July 18, 2026. Arxiv inactive (weekend). Applied 3-month fallback strategy: searched missed April–June 2026 genrec papers from arxiv cs.IR listings, RecSys Frontier daily digests, and venue proceedings (ACL 2026, RecSys 2026). Total: 6 papers.*
-
-1. **RouteRec: Strict Evaluation of Recommender-Agent Selection and Aggregation**
-   * Affiliation: University of Birmingham — *(Kaiji Zhou, Vladimir Kalmykov, Yue Feng — University of Birmingham)*
-   * Link: [arxiv.org/abs/2607.09908](https://arxiv.org/abs/2607.09908)
-   * Venue: AgentSearch 2026 Workshop (co-located with SIGIR 2026)
-   * TL;DR: Compares request-level hard selection vs. item-level learned aggregation for combining heterogeneous recommender agents (CF, sequential, content-based, LLM reranker); finds item-level aggregation is more promising — gated all-agent aggregation reaches HR@10=0.295 with 70.2% LLM calls under strict leakage-free protocol.
-   * Key techniques:
-     - RouteRec framework comparing two paradigms: request-level hard selection (pick one agent) vs. item-level learned aggregation (combine outputs per item)
-     - Leakage-free 5-fold out-of-fold evaluation protocol preventing data leakage
-     - Gated all-agent aggregation: selectively invokes LLM reranker at 70.2% call rate
-     - Cheap-only variant: cost-conscious aggregation using only non-LLM agents matching BM25 in HR
-     - Full quality oracle upper-bound (HR@10=0.584) confirming substantial cross-agent signal
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — First systematic comparison of agent selection vs. aggregation under strict evaluation; findings are practical but methodology is incremental
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — Only MovieLens-1M evaluated; strict 5-fold protocol is rigorous but limited dataset coverage
-     - **Impact: 5/10** — AgentSearch Workshop @ SIGIR 2026; University of Birmingham; practical insights for agent-based recommendation architectures
-
-2. **Consensus vs. Dissent: Dynamic LLM Modeling of Subjective Preferences in Group Recommenders**
-   * Affiliation: Maastricht University — *(Cedric Waterschoot, Nava Tintarev, Francesco Barile — Maastricht University)*
-   * Link: [arxiv.org/abs/2607.10235](https://arxiv.org/abs/2607.10235)
-   * Venue: RecSys 2026
-   * TL;DR: Fine-tunes LLMs (Judgmental Llama + Judgmental OLMo) on human survey data as real-time judgmental models for dynamic aggregation strategy selection in group recommenders; reasoning dataset distilled from DeepSeek-V3.1; user study (n=284) validates highest satisfaction and consensus scores.
-   * Key techniques:
-     - Fine-tuned LLMs as judgmental models predicting human perceptions of fairness/satisfaction/consensus
-     - Reasoning dataset distilled from DeepSeek-V3.1 combined with human ground truth assessments
-     - Dynamic aggregation strategy selection based on within-group preference distributions (minority, coalition)
-     - Interaction effect modeling between LLM-based method and group configuration
-     - Social choice-based aggregation strategies with LLM-driven adaptive selection
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to use fine-tuned LLMs as real-time judgmental models within group recsys pipeline; interaction effects with group configuration are novel
-     - **Fairness: 7/10** — Directly addresses fairness, satisfaction, and consensus in group recommendations; validated via human study
-     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; user study (n=284) with human evaluation; two LLM families validated
-     - **Impact: 6/10** — RecSys 2026; Maastricht University; practical LLM-based framework for group recommendation fairness
-
-3. **UniPinRec: Unifying Generative Retrieval and Ranking at Pinterest Scale**
-   * Affiliation: Pinterest Inc. — *(Hanyu Li, Yi-Ping Hsu, Aditya Mantha, Prabhat Agarwal, Laksh Bhasin, Jialu Wang, Hongtao Lin, Bella Huang, Yaxin Li, Xinyi Li, Chuxi Wang, Kousik Rajesh, Hooshmand Shokri Razaghi, Shunyao Li, Zongyue Qin, Jaewon Yang, James Li, Dhruvil Deven Badani, Jiajing Xu, Charles Rosenberg — Pinterest)*
-   * Link: [arxiv.org/abs/2606.00422](https://arxiv.org/abs/2606.00422)
-   * Venue: arXiv preprint, May 2026
-   * TL;DR: First full-stack unification of retrieval and ranking in a production recommendation system; shared transformer + Masked Action Modeling + blended training + cross-stage KV cache sharing; deployed on Pinterest core surfaces with +1% engagement, -11.1% latency, +63.6% QPS.
-   * Key techniques:
-     - Masked Action Modeling (MAM): eliminates interleaving between retrieval and ranking inputs, enabling weight sharing without doubling context length
-     - Blended training examples: pairs action sequences with feedview impression slates for joint objective satisfaction
-     - Cross-stage KV cache sharing: reuses user-history computation from retrieval for ranking, reducing total FLOPs
-     - Shared transformer encoding user action sequence into candidate-independent representations branched into ANN dot-product (retrieval) and cross-attention (ranking)
-     - Deployed within existing serving infrastructure — first full-stack unification (inputs, model, training, serving)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (Pinterest internal production)
-     - **Novelty: 7/10** — First full-stack unification of retrieval and ranking in production; MAM is a novel solution to the interleaving problem
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Deployed on Pinterest core surfaces; +1% engagement, -11.1% latency, +63.6% QPS
-     - **Impact: 8/10** — Pinterest; first production full-stack retrieval+ranking unification; substantial engineering contribution
-
-4. **ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation**
-   * Affiliation: University of Rochester / Meta / MBZUAI — *(Dongdong Nian, Dongqi Fu, Chenliang Xu — University of Rochester; Yinglong Xia, Hong Li, Hong Yan — Meta; Jian Kang — MBZUAI)*
-   * Link: [arxiv.org/abs/2606.14260](https://arxiv.org/abs/2606.14260)
-   * Venue: arXiv preprint, June 2026
-   * TL;DR: First systematic framework for injecting explicit temporal signals into semantic IDs for generative recommendation; characterizes design space along three orthogonal dimensions (signal type, injection position, fusion architecture); contributes new time-explicit generation recommendation benchmark.
-   * Key techniques:
-     - Three-dimensional design space: temporal signal type (absolute vs. relative time), injection position (tokenizer vs. recommender), fusion architecture (concatenation vs. attention vs. gating)
-     - ChronoID unified framework for time-aware semantic ID learning
-     - Time-explicit generative recommendation benchmark for controlled evaluation
-     - Analysis of where performance gains originate: ID capacity expansion vs. temporal semantic enrichment
-     - Explicit high-level temporal semantics effectiveness analysis
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First systematic study of explicit temporal signals in SIDs; three-dimensional design space characterization is novel
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — New benchmark; systematic evaluation along three dimensions; multi-dataset analysis
-     - **Impact: 6/10** — U Rochester/Meta/MBZUAI; addresses fundamental limitation of time-agnostic SID learning in generative recommendation
-
-5. **GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation**
-   * Affiliation: Anhui University — *(Lin Mu, Guoji Wang, Li Ni, Lei Sang, Zhize Wu, Peiquan Jin, Yiwen Zhang — Anhui University)*
-   * Link: [arxiv.org/abs/2606.07526](https://arxiv.org/abs/2606.07526)
-   * Venue: ACL 2026 Findings
-   * TL;DR: Embeds trainable GNN message-passing network within LoRA adaptation pathway for LLM-based recommendation; collaborative topology explicitly guides parameter updates; outperforms SOTA LLMRec methods on MovieLens, Amazon, and Book-Crossing with superior generalization.
-   * Key techniques:
-     - Structure-aware LoRA: injects GNN-derived node representations into LoRA intermediate states via α·LoRA(A·x) + β·GNN(node_id) fusion
-     - Supports multiple GNN backbones (LightGCN, NGCF, GCN) with configurable injection layer
-     - Two-stage training: CF pre-training for collaborative embeddings → GraphLoRA tuning for LLM-based recommendation
-     - Captures high-order relational dependencies beyond static collaborative prompts or pre-trained embeddings
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/wgj15965/GraphLoRA](https://github.com/wgj15965/GraphLoRA) — 2⭐, 4 commits; complete training pipeline with configs, preprocessing scripts, evaluation; well-documented README with architecture diagram; no license; early-stage repo
-     - **Novelty: 6/10** — GNN injection into LoRA for LLMRec is creative but incremental over existing LoRA variants and graph-enhanced LLM methods
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Multiple benchmarks (MovieLens, Amazon, Book-Crossing); ACL 2026 Findings peer-reviewed; comprehensive ablation studies
-     - **Impact: 6/10** — ACL 2026 Findings; Anhui University; practical PEFT method for structure-aware LLM-based recommendation
-
-6. **BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation**
-   * Affiliation: Chinese Academy of Sciences / University of Chinese Academy of Sciences / Beijing Institute for General Artificial Intelligence — *(Xi Zhou, Famin Wu, Mingming Li, Hongyue Zhang, Jiao Dai, Jizhong Han, Tao Guo — CAS / UCAS / BIGAI)*
-   * Link: [arxiv.org/abs/2606.03091](https://arxiv.org/abs/2606.03091)
-   * Venue: arXiv preprint, June 2026
-   * TL;DR: Adaptive distillation framework addressing signal heterogeneity in black-box sequential recommendation; multi-scale consistency probing quantifies reliability, adaptive hierarchical objective with dynamic-temperature KL + ranking consistency + InfoNCE for head vs. tail; +80% improvement on tail users, +4.98% over teacher.
-   * Key techniques:
-     - Multi-scale consistency probing mechanism implicitly quantifying signal reliability along head-tail distribution
-     - Adaptive hierarchical objective: dynamic-temperature KL divergence mitigates preference solidification for head signals
-     - Ranking consistency + InfoNCE contrastive learning for noise-robust enhancement of low-confidence tail signals
-     - Black-box model extraction setting: replicates capabilities of black-box sequential recommendation APIs
-     - Plug-and-play design for high-fidelity black-box recommendation extraction
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Multi-scale consistency probing for adaptive distillation is practical; addresses underexplored signal heterogeneity in black-box extraction
-     - **Fairness: 5/10** — Directly addresses long-tail user performance disparity; +80% improvement on tail users
-     - **Robustness: 6/10** — Consistent improvement over baselines; up to 4.98% over teacher model
-     - **Impact: 5/10** — CAS/UCAS/BIGAI; practical plug-and-play distillation method for black-box sequential recommendation
-
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 110 papers as of July 28.
+**Count:** 110 papers as of July 29.
 
 | Score | Paper |
 | --- | --- |
@@ -1280,6 +1262,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
 - EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
+- Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
+- VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation (VaLiDRec)
+- TopoGR: Revealing and Preserving Latent Structure of Semantic ID in Generative Recommendation (TopoGR)
+- The Case Against Generation for Retrieval: Discriminative Language Models as Effective Retrievers (Discriminative Retrieval)
 
 ### RL / Reinforcement Learning
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -1348,6 +1334,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
+- RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.

@@ -56,6 +56,7 @@
 - Can Generative Recommendation Reach Cold Items? A Temporal Perspective on Semantic-ID Generation (ColdSID)
 - ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation (ItemRAG)
 - PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest (PinEqualizer)
+- VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation (VaLiDRec)
 
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
@@ -430,8 +431,11 @@
 
 
 ### Industrial
+- Discriminative Language Models as Effective Retrievers (Discriminative Retrieval)
 - EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
+- Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
+- RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems (Multimodal LLM Rec)
 - Adaptive Re-Ranking
@@ -460,6 +464,7 @@
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
+- Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
 - GR2 Technical Report (GR2)
 - IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
@@ -497,6 +502,7 @@
 - Quantizing Intent: Cross-Domain Semantic IDs from Organic Activity for Industrial Ranking
 - Query-Conditioned Generative Search with QGS in Quark
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
+- RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation (RankGraph-2)
 - Representation Curriculum: Stagewise Training for Robust Ranking and Allocation
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
@@ -511,6 +517,7 @@
 - SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive)
 - Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems (SCALR)
 - Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation (Taiji)
+- The Case Against Generation for Retrieval: Discriminative Language Models as Effective Retrievers (Discriminative Retrieval)
 - Token Factory: Efficiently Integrating Diverse Signals into Large Recommendation Models (Token Factory)
 - ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants (ToolRec)
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -574,9 +581,14 @@
 
 ### LLM-based Recommendation
 - CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
+- Discriminative Language Models as Effective Retrievers (Discriminative Retrieval / Case Against GenRec)
 - EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
+- Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
+- RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
+- TopoGR: Revealing and Preserving Latent Structure of Semantic ID in Generative Recommendation (TopoGR)
+- VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation (VaLiDRec)
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
 - APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
 - APG4RecSim: Task-Aware Automated User Profile Generation
@@ -621,6 +633,7 @@
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation (GraphLoRA)
+- Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 - Guiding Federated Graph Recommendation with LLM-encoded knowledge
 - Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
@@ -668,6 +681,7 @@
 - RECAP: Feedback-Driven Streaming Semantic User Profiles for Short-Video Recommendation (RECAP)
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
 - RecGPT-V3 Technical Report (RecGPT-V3)
+- RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale (RaG)
 - ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
 - Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair
@@ -685,8 +699,10 @@
 - Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation (Taiji)
 - TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER)
 - TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation
+- The Case Against Generation for Retrieval: Discriminative Language Models as Effective Retrievers (Discriminative Retrieval)
 - The Injection Paradox: Brand-Level Suppression in Safety-Trained LLM Recommendations via RAG Context Injection (Injection Paradox)
 - ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
+- TopoGR: Revealing and Preserving Latent Structure of Semantic ID in Generative Recommendation (TopoGR)
 - TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems (TokenMinds)
 - ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants (ToolRec)
 - Toward User Preference Alignment in LLM Recommendation via Explicit Context Feedback
@@ -700,6 +716,7 @@
 - UniNote: A Unified Embedding Model for Multimodal Representation and Ranking
 - UniPinRec: Unifying Generative Retrieval and Ranking at Pinterest Scale
 - Unifying Search and Recommendation in LLMs via Gradient Multi-Subspace Tuning (GEMS)
+- VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation (VaLiDRec)
 - VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE)
 - Who Owns the AI Recommendation? A Multi-Industry Empirical Map of Brand Category Ownership Across Large Language Models (LLM Brand)
 - VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)
@@ -762,6 +779,7 @@
 
 
 ### Multimodal
+- RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - A Cascaded Generative Approach for e-Commerce Recommendations
 - A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems (Multimodal LLM Rec)
 - A2Gen (Action-Aware Generative Sequence Modeling)
@@ -802,6 +820,7 @@
 - ProMax: Exploring the Potential of LLM-derived Profiles
 - RecGPT-Mobile: On-Device Large Language Models
 - RecRM-Bench: Benchmarking Multidimensional Reward Modeling
+- RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale (RaG)
 - ReRec
 - Rethinking Semantic Collaborative Integration
@@ -891,6 +910,8 @@
 - VRec (Verifiable Reasoning)
 
 
+### Reinforcement Learning
+- RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -914,6 +935,7 @@
 - Real-Time Hard Negative Sampling via LLM-based Clustering for Large-Scale Two-Tower Retrieval
 - ResRank (retrieval + reranking)
 - Skill Is Not Document: A Query-Conditional Benchmark and Two-Stage Retriever for LLM Agent Skill Routing (R3)
+- The Case Against Generation for Retrieval: Discriminative Language Models as Effective Retrievers (Discriminative Retrieval)
 - Tokenizing Numerical and Embedding Features for LLM RecSys
 - Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
@@ -955,6 +977,7 @@
 - Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation (GLASS)
+- Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - GRLM
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
@@ -982,12 +1005,14 @@
 - Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale (QuaSID)
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
 - TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation
+- TopoGR: Revealing and Preserving Latent Structure of Semantic ID in Generative Recommendation (TopoGR)
 - TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
 - TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems (TokenMinds)
 - TwiSTAR: Think Fast, Think Slow, Then Act, Generative Recommendation with Adaptive Reasoning
 - UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation (UniFormer)
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
 - UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence
+- VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation (VaLiDRec)
 - When Text-as-Vision Meets Semantic IDs in Generative Recommendation: An Empirical Study
 - DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM)
 - Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop)
