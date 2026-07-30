@@ -224,6 +224,8 @@
 
 
 ### Generative Recommendation / VAE
+- Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation (Multi-Decoder OneRec)
+- WhisperRec: Latent Reasoning for Efficient Foundation Recommendation Models (WhisperRec)
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - A2Gen (Action-Aware Generative Sequence Modeling)
 - APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
@@ -356,6 +358,9 @@
 - Causal Representation Learning for Generalisable Recommendation
 - ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID)
 - Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO)
+- DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval (DIRECTOR)
+- Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation (Multi-Decoder OneRec)
+- PSG: Pair-Space Generation for Efficient Generative Reranking (PSG)
 - DaV-Gen: End-to-End Generative Retrieval via Draft-and-Verify (DaV-Gen)
 - Decoupled Residual Quantization for Robust Semantic IDs in Recommendation (DRQ)
 - DeGRe: Dense-supervised Generative Reranking for Recommendation
@@ -432,10 +437,14 @@
 
 ### Industrial
 - Discriminative Language Models as Effective Retrievers (Discriminative Retrieval)
+- DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval (DIRECTOR)
 - EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
 - Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
+- Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation (Multi-Decoder OneRec)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
+- PSG: Pair-Space Generation for Efficient Generative Reranking (PSG)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
+- WhisperRec: Latent Reasoning for Efficient Foundation Recommendation Models (WhisperRec)
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems (Multimodal LLM Rec)
 - Adaptive Re-Ranking
@@ -1027,6 +1036,7 @@
 - SIREN (Luring LLMs onto the Rocks): PAIR-Driven Preference Manipulation in Web-RAG Recommenders (SIREN)
 
 ### Sequential Modeling / RoPE
+- Learning from the Future: Privileged Self-Distillation for Sequential Recommendation (PSD)
 - MIRAGE: Escaping the Euclidean Void (Manifold-Informed Flow Matching for Sequential Recommendation)
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
