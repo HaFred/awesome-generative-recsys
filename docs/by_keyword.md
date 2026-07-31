@@ -257,6 +257,7 @@
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - F-GRPO: Factorized Group-Relative Policy Optimization
 - FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation
+- Feedback-Grounded Policy Discovery for Generative Recommendation (Feedback-Grounded)
 - Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM)
 - Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP)
 - From Bootstrapping to Sequence Modeling: A Unified Generative Framework for Personalized Landing-Page Modeling (GLAN)
@@ -292,6 +293,7 @@
 - Learning Variable-Length Tokenization for Generative Recommendation (VarLenRec)
 - LLM-as-a-Judge for Reliable and Explainable Offline Evaluation in Top-K Recommendation (LLM Judge)
 - LoopFM: Learning frOm HistOrical RePresentations of Foundation Model for Recommendation
+- LoopMemGR: From Behavior Logs to Evolving Memory for Generative Recommendation (LoopMemGR)
 - LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation
 - Memento: Personalized RAG-Style Long-Retention Data Scaling for META Ads Recommendation
 - MTServe: Efficient Serving for Generative Recommendation Models
@@ -315,6 +317,7 @@
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
 - RSIR: Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control (RSIR)
 - ReCast
+- Restoring Collaborative Signals in Semantic-ID Generative Recommendation via Personalized Natural Language (Restoring Collaborative)
 - RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation
 - SAERec: Constructing Fine-grained Interpretable Intents Priors via Sparse Autoencoders for Recommendation (SAERec)
 - SAPO: Step-Aligned Policy Optimization for Reasoning-Based Generative Recommendation
@@ -322,6 +325,7 @@
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
+- SPARC: Sequence-aware Progressive Attribute Routing and Compression Framework for Generative Recommendation (SPARC)
 - Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale (QuaSID)
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
 - SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation
@@ -371,6 +375,7 @@
 - DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM)
 - EviRank: Evidence-Based Confidence Estimation for LLM-Based Ranking (EviRank)
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
+- Feedback-Grounded Policy Discovery for Generative Recommendation (Feedback-Grounded)
 - Next-Scale Generative Reranking: A Tree-based Generative Rerank Method at Meituan (NSGR)
 - From Noise to Order: Learning to Rank via Denoising Diffusion (DiffusionRank)
 - Gated Bidirectional Linear Attention for Generative Retrieval (GBLA)
@@ -404,6 +409,7 @@
 - RankGR: Rank-Enhanced Generative Retrieval with Listwise Direct Preference Optimization in Recommendation (RankGR)
 - Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
 - Revisiting General Map Search via Generative Point-of-Interest Retrieval (GenPOI)
+- RGD: Reward Guided Decoding for Generative Recommendation (RGD)
 - SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive)
 - ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
 - TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
@@ -476,6 +482,7 @@
 - Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
 - GR2 Technical Report (GR2)
+- HiLaR: Hierarchical Latent Reasoning for LLM-based Recommendation (HiLaR)
 - IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
 - IID-Nav: From Extraction to Navigation: Progressive Retrieval with Indirectly Infinite Depth (IID-Nav)
 - LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)
@@ -495,6 +502,7 @@
 - Macro Graph of Experts for Billion-Scale Multi-Task Recommendation (MGOE)
 - LLMs Need Encoders for Semantic IDs Too (PrefixMem)
 - LoopFM: Learning frOm HistOrical RePresentations of Foundation Model for Recommendation
+- LoopMemGR: From Behavior Logs to Evolving Memory for Generative Recommendation (LoopMemGR)
 - MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR)
 - Memento: Personalized RAG-Style Long-Retention Data Scaling for META Ads Recommendation
 - MERGE: Next-Generation Item Indexing Paradigm for Large-Scale Streaming Recommendation (MERGE)
@@ -511,17 +519,20 @@
 - Quantizing Intent: Cross-Domain Semantic IDs from Organic Activity for Industrial Ranking
 - Query-Conditioned Generative Search with QGS in Quark
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
+- Restoring Collaborative Signals in Semantic-ID Generative Recommendation via Personalized Natural Language (Restoring Collaborative)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation (RankGraph-2)
 - Representation Curriculum: Stagewise Training for Robust Ranking and Allocation
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
 - Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
+- RGD: Reward Guided Decoding for Generative Recommendation (RGD)
 - RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems (RankUp)
 - SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress (SIGMA)
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - SSR: Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR)
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
+- SPARC: Sequence-aware Progressive Attribute Routing and Compression Framework for Generative Recommendation (SPARC)
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
 - SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive)
 - Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems (SCALR)
@@ -531,6 +542,7 @@
 - ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants (ToolRec)
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
 - Fast and Feasible: Permutation-based Constrained Reranking for Revenue Maximization (PermR)
+- Feedback-Grounded Policy Discovery for Generative Recommendation (Feedback-Grounded)
 - UniNote: A Unified Embedding Model for Multimodal Representation and Ranking
 - UniPinRec: Unifying Generative Retrieval and Ranking at Pinterest Scale
 - UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
