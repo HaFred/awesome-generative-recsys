@@ -27,6 +27,7 @@
 - Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore)
 - ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation (ItemRAG)
 - SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
+- TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -83,6 +84,7 @@
 - Dialogue to Discovery: Attribute-Aware Preference Elicitation for Conversational Product Search Assistants (D2D)
 - Evaluating Scene-based In-Situ Item Labeling for Immersive Conversational Recommendation (ICRS)
 - When and How to Ask: Dynamic Preference Elicitation Strategies for Conversational Recommendation (COPE)
+- Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation (Tencent/ACL 2026)
 
 ### Cross-Domain
 - Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
@@ -354,6 +356,10 @@
 - UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 - LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)
 - Next-Scale Generative Reranking: A Tree-based Generative Rerank Method at Meituan (NSGR)
+- MLPs are Efficient Distilled Generative Recommenders (SID-MLP)
+- TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
+- Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation (Tencent/ACL 2026)
+- Interpretable Representation via LLM-Driven Generative Disentanglement for Local-Life Service Recommendation (LGRID)
 
 ### Generative Retrieval / Ranking
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
@@ -586,6 +592,7 @@
 
 ### Inference Acceleration / Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
+- MLPs are Efficient Distilled Generative Recommenders (SID-MLP)
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation
 - LoopFM: Learning frOm HistOrical RePresentations of Foundation Model for Recommendation
@@ -636,6 +643,7 @@
 - EviRank: Evidence-Based Confidence Estimation for LLM-Based Ranking (EviRank)
 - Federated Variational Preference Alignment with Gumbel-Softmax Prior for Personalized User Preferences (FedVPA-GP)
 - Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM)
+- Feedback-Grounded Policy Discovery for Generative Recommendation (Feedback-Grounded)
 - LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)
 - Let the Agent Steer: Closed-Loop Ranking Optimization via Influence Exchange (Sortify)
 - Self-Distilled Reinforcement Learning for Co-Evolving Agentic Recommender Systems (CoARS)
@@ -658,6 +666,7 @@
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 - Guiding Federated Graph Recommendation with LLM-encoded knowledge
 - Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
+- HiLaR: Hierarchical Latent Reasoning for LLM-based Recommendation (HiLaR)
 - HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 - Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
 - INSPIRE: Intent-aware Neural Sponsored Product Retrieval for E-commerce
@@ -706,6 +715,7 @@
 - Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale (RaG)
 - ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
 - Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair
+- Restoring Collaborative Signals in Semantic-ID Generative Recommendation via Personalized Natural Language (Restoring Collaborative)
 - Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 - RouteRec: Strict Evaluation of Recommender-Agent Selection and Aggregation (RouteRec)
@@ -909,6 +919,7 @@
 - Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
 - GraphRAG-IRL
 - Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
+- HiLaR: Hierarchical Latent Reasoning for LLM-based Recommendation (HiLaR)
 - HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 - Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
 - MixRAGRec: MoE KG-RAG for Multi-Agent LLM Recommendation
@@ -922,6 +933,7 @@
 - ReRec: Reasoning-Augmented LLM-based Recommendation Assistant
 - Reasoning over Semantic IDs Enhances Generative Recommendation
 - RecRM-Bench: Benchmarking Multidimensional Reward Modeling
+- Restoring Collaborative Signals in Semantic-ID Generative Recommendation via Personalized Natural Language (Restoring Collaborative)
 - Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec)
 - SAGER: Self-Evolving User Policy Skills for Recommendation Agent
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
@@ -932,7 +944,10 @@
 
 
 ### Reinforcement Learning
+- Feedback-Grounded Policy Discovery for Generative Recommendation (Feedback-Grounded)
+- HiLaR: Hierarchical Latent Reasoning for LLM-based Recommendation (HiLaR)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
+- RGD: Reward Guided Decoding for Generative Recommendation (RGD)
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1018,7 +1033,10 @@
 - Quantizing Intent: Cross-Domain Semantic IDs from Organic Activity for Industrial Ranking
 - Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale (RaG)
 - Reasoning over Semantic IDs Enhances Generative Recommendation
+- Restoring Collaborative Signals in Semantic-ID Generative Recommendation via Personalized Natural Language (Restoring Collaborative)
+- RGD: Reward Guided Decoding for Generative Recommendation (RGD)
 - SAILRec: Steering LLM Attention to Dual-Side Semantically Aligned Collaborative Embeddings for Recommendation (SAILRec)
+- SPARC: Sequence-aware Progressive Attribute Routing and Compression Framework for Generative Recommendation (SPARC)
 - SIDInspector: A Mapping-First Diagnostic Resource for Semantic-ID Tokenizers
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
@@ -1040,6 +1058,10 @@
 - The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
 - Beyond Semantic IDs: Encoding Business-Value Ranking into Document Identifiers for Generative Retrieval (CRID)
 - IBA: Where Reasoning Matters (IBA)
+- Interpretable Representation via LLM-Driven Generative Disentanglement for Local-Life Service Recommendation (LGRID)
+- Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation (Tencent/ACL 2026)
+- MLPs are Efficient Distilled Generative Recommenders (SID-MLP)
+- TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1067,6 +1089,7 @@
 - IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
 - IID-Nav: From Extraction to Navigation: Progressive Retrieval with Indirectly Infinite Depth (IID-Nav)
 - Learning to Forget: Satiation-Aware Long-Sequence Transducers for Mitigating Post-Purchase Redundancy (SAM)
+- LoopMemGR: From Behavior Logs to Evolving Memory for Generative Recommendation (LoopMemGR)
 - MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS)
 - One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
 - PHKT: Personalized Dynamic Hypergraph-enhanced KAN-Transformer for Multi-behavior Sequential Recommendation (PHKT)
@@ -1074,9 +1097,11 @@
 - Segmentation-Supervised Complexity-Adaptive Recommendation (S2-CAR)
 - SIREN-RoPE (Learning to Rotate)
 - SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling
+- SPARC: Sequence-aware Progressive Attribute Routing and Compression Framework for Generative Recommendation (SPARC)
 - SSRLive: Live Streaming Recommendation with Dynamic Semantic ID (SSRLive)
 - TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER)
 - The Pitfall of Scaling Up: Uncovering and Mitigating Popularity Bias Amplification in Scaling Transformer-based Recommenders (SPRINT)
+- IMFuse: Instance-Aware Multi-Layer Fusion for LLM-Enhanced Sequential Recommendation (IMFuse)
 - Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM)
 - UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
 - UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation (UniFormer)
