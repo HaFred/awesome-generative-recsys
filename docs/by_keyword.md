@@ -948,6 +948,7 @@
 - HiLaR: Hierarchical Latent Reasoning for LLM-based Recommendation (HiLaR)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - RGD: Reward Guided Decoding for Generative Recommendation (RGD)
+- Uncertainty-aware Generative Recommendation (UGR)
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1047,6 +1048,7 @@
 - TopoGR: Revealing and Preserving Latent Structure of Semantic ID in Generative Recommendation (TopoGR)
 - TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
 - TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems (TokenMinds)
+- Tokens are All You Need: Dual-purpose Semantic IDs for Achieving LLM-Level I/O Efficiency in Recommendation Systems
 - TwiSTAR: Think Fast, Think Slow, Then Act, Generative Recommendation with Adaptive Reasoning
 - UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation (UniFormer)
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
