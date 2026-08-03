@@ -15,6 +15,7 @@
 - EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
 - ReasonRec: A Reasoning-Augmented Multimodal Agent for Unified Recommendation (ReasonRec)
 - RouteRec: Strict Evaluation of Recommender-Agent Selection and Aggregation (RouteRec)
+- RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems (RecHarness)
 - SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents (SafeGEO)
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
@@ -944,10 +945,14 @@
 
 
 ### Reinforcement Learning
+- EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation (EvoReason)
 - Feedback-Grounded Policy Discovery for Generative Recommendation (Feedback-Grounded)
+- GALA: Generative Aligned Learning for Adaptive Multimodal Representation (GALA)
 - HiLaR: Hierarchical Latent Reasoning for LLM-based Recommendation (HiLaR)
+- RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems (RecHarness)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - RGD: Reward Guided Decoding for Generative Recommendation (RGD)
+- Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go)
 - Uncertainty-aware Generative Recommendation (UGR)
 
 ### Retrieval / Representation
@@ -992,6 +997,9 @@
 ### Semantic / Structured IDs
 - CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
+- PaletteID: Prototype-Composed Semantic Identifiers for Multimodal CTR Prediction (PaletteID)
+- SnapLGR: LLM-Based Generative Retrieval for Snapchat Content Recommendation (SnapLGR)
+- Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go)
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
 - Beyond Instance-Level Alignment and Uniformity: Semantic Factor Learning for Collaborative Filtering (SaFeAU)
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling

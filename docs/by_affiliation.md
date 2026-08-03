@@ -18,6 +18,7 @@
 | **Anhui University** | ProMax ‖ GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation (GraphLoRA)
 | **Ant Group** | BITRec (Modeling Behavioral Intensity and Transitions) ‖ Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
 | **Apple Inc.** | Fortress
+| **A*STAR** | Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go)
 | **Arizona State University** | MetaPlate: Counterfactual-Guided RAG-LLM Tool for Personalized Food Recommendation and Hyperglycemia Prevention
 | **Avito** | Fast and Feasible: Permutation-based Constrained Reranking for Revenue Maximization (PermR)
 | **Babes-Bolyai University** | Rank-Constrained Deep Matrix Completion for Group Recommendation (Group RC-DMC)
@@ -38,6 +39,7 @@
 | **ByteDance** | Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling (PA-Bridge) ‖ MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music ‖ Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models ‖ MERGE: Next-Generation Item Indexing Paradigm for Large-Scale Streaming Recommendation (MERGE) ‖ Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM) ‖ IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
 | **Capital One** | From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
 | **Carnegie Mellon University** | RecRec: Latent Interests Recursive Reasoning for Sequential Recommendation (RecRec) ‖ Effective Reinforcement Learning for Agentic Search by Recycling Zero-Variance Queries During Training (with INESC-ID, NOVA Lisbon) ‖ On the Memorization and Generalization of Generative Recommendation (MemGen-GR) ‖ LLM Agents Enable User-Governed Personalization Beyond Platform Boundaries
+| **Central China Normal University** | PaletteID: Prototype-Composed Semantic Identifiers for Multimodal CTR Prediction (PaletteID)
 | **Central South University** | Echoes in Filter Bubble: Diagnosing and Curing Popularity Bias in Generative Recommenders (Ghost) ‖ Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM) ‖ SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
 | **Central University of Finance and Economics** | An LLM-Powered Semantic Alignment Framework for Journal Recommendation
 | **Chinese Academy of Sciences** | BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD) |
@@ -55,7 +57,7 @@
 | **Cornell University** | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) ‖ Mult-DPO: Multinomial Direct Preference Optimization for Recommender Systems (with UVA, Netflix)
 | **Criteo** | RecoAtlas: From Semantic Plausibility to Set-Level Utility in LLM Recommendation Agents
 | **CWI** | Beyond Centralization: User-Controlled Federated Recommendations in Practice
-| **Dalian University of Technology** | RAGR: Review-Augmented Generative Recommendation
+| **Dalian University of Technology** | Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go) ‖ RAGR: Review-Augmented Generative Recommendation
 | **Dalhousie University** | CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER)
 | **Deezer** | Music Playlist Captioning at Scale with Large Language Models |
 | **Dolby Laboratories** | Multimodal Music Recommendation System using LLMs
@@ -86,7 +88,7 @@
 | **Harbin Institute of Technology** | SocialPersona: Benchmarking Personalized Profiling and Response with Multimodal Social-Media Context (SocialPersona) ‖ CCLRec: Consensus-driven Contrastive Learning for LLM-enhanced Graph Recommendation (CCLRec)
 | **Huawei** | Towards Fast Domain Adaptation and Fine-Grained User Simulation for Evaluating Conversational Recommender Systems (AdaptSim) ‖ ReCast  · TurboGR ‖ SIDInspector: A Mapping-First Diagnostic Resource for Semantic-ID Tokenizers ‖ RSIR: Can Recommender Systems Teach Themselves? (RSIR)
 | **Huawei Cloud** | RelayGR
-| **Huazhong University of Science and Technology** | UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
+| **Huazhong University of Science and Technology** | PaletteID: Prototype-Composed Semantic Identifiers for Multimodal CTR Prediction (PaletteID) ‖ UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
 | **Hubei University** | Modality-Aware Identity Construction and Counterfactual Structure Learning for ID-Free Multimodal Recommendation (MAIL)
 | **ICML 2026** | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) ‖ COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs
 | **Imperial College London** | Teach Multimodal Recommendation Model to See via Personalized Visual Extraction and Adaptive Learning (REVEAL)
@@ -110,7 +112,7 @@
 | **Leiden University** | Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges ‖ Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) ‖ Unifying Search and Recommendation in LLMs via Gradient Multi-Subspace Tuning (GEMS) ‖ Cold-Starts in Generative Recommendation: A Reproducibility Study (ColdGenRec)
 | **Leiden University / University of Glasgow** | Differentiable Semantic ID for Generative Recommendation (DIGER)
 | **Li Auto Inc.** | Rethinking Sales Lead Scoring with LLM-based Hierarchical Preference Ranking (HPRO)
-| **LinkedIn** | SIREN-RoPE (Learning to Rotate) ‖ Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
+| **LinkedIn** | TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings (TransX) ‖ SIREN-RoPE (Learning to Rotate) ‖ Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 | **Lomonosov Moscow State University** | Planning over Matrix-Factorization MDPs for Candidate Generation (MF-MDP Planning)
 | **LUCID Inc.** | Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
 | **MBZUAI** | ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID)
@@ -179,18 +181,19 @@
 | **Shanghai JTU** | MuonRec ‖ DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation (DiffCold) ‖ CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 | **ShareChat** | Distributional Approximate Nearest Neighbour Search for Uncertainty-Aware Retrieval (DINOSAUR) ‖ Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026)
 | **Shenzhen Technology University** | UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
-| **Shenzhen University** | HSUGA
+| **Shenzhen University** | EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation (EvoReason) ‖ HSUGA
 | **Shopee** | UniRec ‖ Decoupled Residual Quantization for Robust Semantic IDs in Recommendation (DRQ) · OnePiece ‖ Let the Agent Steer: Closed-Loop Ranking Optimization via Influence Exchange (Sortify) ‖ ManCAR: Manifold-Constrained Latent Reasoning with Adaptive Test-Time Computation for Sequential Recommendation (ManCAR)
 | **Stanford University** | Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF) ‖ Do Recommendation Algorithms Work When Users Are LLM Agents? A Case Study on Moltbook (Moltbook)
 | **SIGIR 2026** | MARC, Rethinking Semantic Collaborative Integration, A2Gen, CARE, PAD-Rec, InvariRank, GenRec, L2Rec ‖ ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation ‖ FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation ‖ Filling the Gaps: Selective Knowledge Augmentation for LLM Recommenders (KnowSA_CKP) ‖ Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026) ‖ Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 | **Simulacra Research** | Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026)
-| **Snap Inc.** | Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec) ‖ On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG) ‖ BONSAI: Beyond Fixed Depths and Widths: Optimizing Textual Decoding Tries in LLM-based Generative Recommendation (BONSAI)
+| **Snap Inc.** | SnapLGR: LLM-Based Generative Retrieval for Snapchat Content Recommendation (SnapLGR) ‖ Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec) ‖ On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG) ‖ BONSAI: Beyond Fixed Depths and Widths: Optimizing Textual Decoding Tries in LLM-based Generative Recommendation (BONSAI)
 | **Singapore Management University** | CFALR: Collaborative Filtering-Augmented Large Language Model for Personalized Fashion Outfit Recommendation (CFALR) ‖ Dual-Diffusional Generative Fashion Recommendation (DualFashion) ‖ Dynamic Spectral Denoising with Global-Context Attention for Multi-Behavior Recommendation (SpectraMB)
 | **Singapore University of Technology and Design** | Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR) ‖ Think When Needed: Model-Aware Reasoning Routing for LLM-based Ranking
 | **SK Telecom** | Don't Let Bandit Feedback Pull Continual LLM-Recommender Updates Off Target (ABPO)
 | **Sorbonne** | STORM: Stepwise Token Optimization with Reward-Guided Beam Search (with MILA, Paris-Saclay, Air Liquide, Sapienza)
 | **Sony Research India** | RecRec: Recursive Refinement for Sequential Recommendation
 | **South China Agricultural University** | Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore)
+| **South China University of Technology** | Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go)
 | **Southeast University** | DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs · Deep Interest Mining
 | **Southwest Jiaotong University** | Self-Distilled Reinforcement Learning for Co-Evolving Agentic Recommender Systems (CoARS)
 | **Spotify** | Causal Representation Learning for Generalisable Recommendation ‖ GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE) ‖ NEO: A Unified Language Model for Large Scale Search, Recommendation, and Reasoning (NEO)
@@ -271,7 +274,7 @@
 | **Vrbo / Expedia Group** | Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces
 | **Walmart Global Tech** | CRAB ‖ INSPIRE: Intent-aware Neural Sponsored Product Retrieval for E-commerce ‖ Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search ‖ Unified Multi-Task Relevance Modeling for E-Commerce: Comparing Task Routing Architectures Across LLMs and Cross-Encoders ‖ LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)
 | **Waseda University** | Adaptive Loss Balancing for Noise-Robust GRPO in Generative Recommendation (AdaGRPO)
-| **Wuhan University** | MTServe ‖ Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) ‖ MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR) |
+| **Wuhan University** | Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go) ‖ MTServe ‖ Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) ‖ MDGR: A Masked Diffusion Generative Recommendation Framework (MDGR) |
 | **Xiaohongshu** | UniNote: A Unified Embedding Model for Multimodal Representation and Ranking ‖ DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation (DiffCold) ‖ LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec) ‖ HiLaR: Hierarchical Latent Reasoning for LLM-based Recommendation (HiLaR) |
 | **Xi'an Jiaotong University** | Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb) ‖ The Best of Both Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H²Rec)
 | **Xi'an Jiaotong-Liverpool University** | HiLaR: Hierarchical Latent Reasoning for LLM-based Recommendation (HiLaR)
