@@ -30,6 +30,10 @@
 - SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
 - TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
 
+### Beam Search / Constrained Decoding
+- GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
+- HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations (HRPO)
+
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
 - Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP)
@@ -111,6 +115,10 @@
 - DC4SR (Disagreement as Signals)
 - Denoising Implicit Feedback for Cold-start Recommendation (DIF)
 - When Recommendation Denoising Meets Popularity Bias: Understanding and Mitigating Their Interaction (PAD)
+
+
+### Diagnostics / Analysis
+- LIME-Rec: Auditing Semantic Gains in Sequential Recommendation (LIME-Rec)
 
 
 ### Diffusion
@@ -285,6 +293,7 @@
 - HoloRec: Holistic Encoding and Interleaved Reasoning for Generative Recommendation (HoloRec)
 - How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation?
 - How Well Does Generative Recommendation Generalize?
+- HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations (HRPO)
 - HSUGA: LLM-Enhanced Recommendation with Hierarchical Semantic Understanding
 - Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec)
 - IAT: Instance-As-Token Compression for Historical User Sequence Modeling (IAT)
@@ -303,6 +312,7 @@
 - Multi-Business Prediction for Generative Recommendation at Meituan (MBGR)
 - Music Playlist Captioning at Scale with Large Language Models
 - On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
+- OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG)
 - One Model, Two Markets: Bid-Aware Generative Recommendation (GEM-Rec)
 - One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
@@ -481,10 +491,12 @@
 - DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM)
 - Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP)
 - EvoRec: Self Evolving Agentic Recommender Systems (EvoRec)
+- Exp-RSFT: Exponential Reward Weighting for Fine-Tuning Generative Recommenders under Sparse and Noisy Feedback (Exp-RSFT)
 - GEMs: Breaking the Long-Sequence Barrier in Generative Recommendation with a Multi-Stream Decoder (GEMs)
 - GenPage: Towards End-to-End Generative Homepage Construction at Netflix (GenPage)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
+- GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
@@ -573,6 +585,10 @@
 - Probabilistic Residual Learning for Online Recommendations (PRL)
 - RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation (RankGraph-2)
 - GRACE: Bringing GRACE to Recommendation: Fine-Tuning for Sustainable and Accurate Personalization (GRACE)
+
+### Infrastructure / Serving
+- GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
+
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec) 
@@ -654,6 +670,7 @@
 - From Hidden Profiles to Governable Personalization: Recommender Systems in the Age of LLM Agents
 - From Prompt to Purchase: How AI Brand Recommendations Move Consumers on the Open Web
 - From "Strings" to "Things" for Personal Knowledge Graphs (PKG-Rec)
+- GARDRec: Decision-Level Graph Grounding for LLM Recommendation (GARDRec)
 - GCRS: Generative Conversational Recommender System
 - GEMs: Breaking the Long-Sequence Barrier in Generative Recommendation with a Multi-Stream Decoder (GEMs)
 - Gender and Race Bias in Consumer Product Recommendations by Large Language Models
@@ -696,6 +713,7 @@
 - Multimodal Music Recommendation System using LLMs
 - Music Playlist Captioning at Scale with Large Language Models
 - Ocean4Rec: Offline LLM-Derived OCEAN Profiles for Request-Time VOD Reranking
+- OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG)
 - One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE)
 - OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
@@ -761,6 +779,9 @@
 - CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
 - ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT)
 - Tokenizing Numerical and Embedding Features for LLM RecSys
+
+### Memory Augmentation
+- OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -946,8 +967,10 @@
 
 ### Reinforcement Learning
 - EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation (EvoReason)
+- Exp-RSFT: Exponential Reward Weighting for Fine-Tuning Generative Recommenders under Sparse and Noisy Feedback (Exp-RSFT)
 - Feedback-Grounded Policy Discovery for Generative Recommendation (Feedback-Grounded)
 - GALA: Generative Aligned Learning for Adaptive Multimodal Representation (GALA)
+- HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations (HRPO)
 - HiLaR: Hierarchical Latent Reasoning for LLM-based Recommendation (HiLaR)
 - RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems (RecHarness)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
@@ -1022,11 +1045,13 @@
 - Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation (GLASS)
+- GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
 - Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - GRLM
 - Grounded Token Initialization for New Vocabulary in LMs for Generative Recommendation (GTI)
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
 - Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
+- HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations (HRPO)
 - Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec)
 - How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation?
 - Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)
