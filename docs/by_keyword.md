@@ -28,11 +28,15 @@
 - Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore)
 - ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation (ItemRAG)
 - SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
+- STEPS: A Self-Triggered Agentic Push Recommendation System (STEPS)
 - TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
 
 ### Beam Search / Constrained Decoding
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
 - HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations (HRPO)
+- SITA: Semantic Interest Tokens for Target-Aware Compression in Long-Sequence Recommendation (SITA)
+- SmartGR: Hierarchy and Beam-Aware Knowledge Distillation for Generative Recommendation (SmartGR)
+- UniR²: Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence (UniR²)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -401,6 +405,8 @@
 - Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
 - GenPage: Towards End-to-End Generative Homepage Construction at Netflix (GenPage)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
+- SmartGR: Hierarchy and Beam-Aware Knowledge Distillation for Generative Recommendation (SmartGR)
+- UniR²: Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence (UniR²)
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations (Gryphon)
@@ -467,6 +473,9 @@
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
 - PSG: Pair-Space Generation for Efficient Generative Reranking (PSG)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
+- SITA: Semantic Interest Tokens for Target-Aware Compression in Long-Sequence Recommendation (SITA)
+- STEPS: A Self-Triggered Agentic Push Recommendation System (STEPS)
+- UniR²: Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence (UniR²)
 - WhisperRec: Latent Reasoning for Efficient Foundation Recommendation Models (WhisperRec)
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems (Multimodal LLM Rec)
@@ -619,6 +628,7 @@
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
+- SmartGR: Hierarchy and Beam-Aware Knowledge Distillation for Generative Recommendation (SmartGR)
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 
@@ -833,6 +843,7 @@
 
 ### Multimodal
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
+- UnpairGR: Unpaired Modality-Agnostic Generative Recommendation (UnpairGR)
 - A Cascaded Generative Approach for e-Commerce Recommendations
 - A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems (Multimodal LLM Rec)
 - A2Gen (Action-Aware Generative Sequence Modeling)
@@ -1012,6 +1023,9 @@
 - RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems (RankUp)
 - SSR: Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR)
 - Towards Generalizable and Efficient Large-Scale Generative Recommenders (Netflix GenRec Scaling)
+- SITA: Semantic Interest Tokens for Target-Aware Compression in Long-Sequence Recommendation (SITA)
+- SmartGR: Hierarchy and Beam-Aware Knowledge Distillation for Generative Recommendation (SmartGR)
+- UnpairGR: Unpaired Modality-Agnostic Generative Recommendation (UnpairGR)
 - Understanding Generative Recommendation with Semantic IDs from a Model-scaling View (SID Scaling)
 - UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 
@@ -1107,6 +1121,7 @@
 ### Sequential Modeling / RoPE
 - Learning from the Future: Privileged Self-Distillation for Sequential Recommendation (PSD)
 - MIRAGE: Escaping the Euclidean Void (Manifold-Informed Flow Matching for Sequential Recommendation)
+- SITA: Semantic Interest Tokens for Target-Aware Compression in Long-Sequence Recommendation (SITA)
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
 - APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
