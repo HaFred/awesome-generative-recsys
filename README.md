@@ -40,6 +40,7 @@ mindmap
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
         ManCAR -- Xiamen U / Shopee
+        SIDReasoner -- NUS / USTC / Tencent
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -60,6 +61,8 @@ mindmap
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
+        DIGER -- U Glasgow / Shandong / Amazon
+        CARD -- UESTC / SWUFE
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -72,6 +75,95 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 6
+
+*Thursday, August 6, 2026. Arxiv active. cs.IR listing returned 1 new genrec paper (DEGR) from Aug 5 submission window + 4 missed papers from Jan–Apr 2026 3-month fallback (SIDReasoner NUS/USTC/Tencent KDD 2026, CARD UESTC/SWUFE SIGIR 2026, DIGER SIGIR 2026, S2GR Kuaishou KDD 2026). Total: 5 papers.*
+
+1. **DEGR: Dual Exploration-Driven Generative Re-Ranking for Adaptive Cross-Request Context Bridging**
+   * Affiliation: JD.com — *(Binglei Zhao, Xuanhua Yang, Xiwei Zhao, Sulong Xu — JD.com)*
+   * Link: [arxiv.org/abs/2608.04809](https://arxiv.org/abs/2608.04809)
+   * Venue: KDD 2026 ADS Track
+   * TL;DR: Generative re-ranking with hybrid supervised-RL exploration; exploratory reward model adaptively balances immediate vs. exploratory value per supply quality; deployed at JD.com with +1.22% UCTR, +0.20% PV.
+   * Key techniques:
+     - Dual exploration: immediate value exploitation + exploratory exposure driven by supply quality assessment
+     - Hybrid supervised-reinforcement optimization with exploration diversity constraint
+     - Adaptive reward-weighted ORPO for preference optimization under cross-request context
+     - Generator as adaptive cross-request contextual bridge
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First generative re-ranking with dual exploration bridging cross-request context; hybrid ORPO is practical
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — KDD 2026 ADS; production deployment at JD.com; +1.22% UCTR, +0.20% PV
+     - **Impact: 7/10** — KDD 2026 ADS; JD.com; practical generative re-ranking paradigm for industrial recommendation
+
+2. **SIDReasoner: Reasoning over Semantic IDs Enhances Generative Recommendation**
+   * Affiliation: National University of Singapore / University of Science and Technology of China / Tencent — *(Yingzhi He, Yuxin Chen, Tat-Seng Chua — NUS; Yan Sun, Junfei Tan, Xiaoyu Kong, Xiang Wang, An Zhang — USTC; Chunxu Shen — Tencent)*
+   * Link: [arxiv.org/abs/2603.23183](https://arxiv.org/abs/2603.23183)
+   * Venue: KDD 2026
+   * TL;DR: Two-stage framework for reasoning over SIDs via SID-language alignment + outcome-driven RL; enriched SID-centered corpus synthesized by teacher model grounds itemic tokens in diverse contexts; no recommendation-specific reasoning traces needed.
+   * Key techniques:
+     - SID-language alignment via multi-task training on enriched SID-centered corpus synthesized by stronger teacher model
+     - Outcome-driven reinforced optimization guiding model toward effective reasoning trajectories without explicit annotations
+     - Two-stage framework: alignment pretraining → RL-based reasoning activation
+     - Improved cross-domain generalization and interpretability beyond accuracy gains
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/HappyPointer/SIDReasoner](https://github.com/HappyPointer/SIDReasoner) — 29⭐, 10 commits; three-stage pipeline (SFT→Reasoning→RL); Zenodo DOI artifact; well-documented README with reproduction instructions; built on MiniOneRec
+     - **Novelty: 7/10** — First to enable reasoning over SIDs by strengthening SID-language alignment; outcome-driven RL for reasoning is well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — KDD 2026 peer-reviewed; 3 real-world datasets; cross-domain generalization analysis; interpretability evaluation
+     - **Impact: 7/10** — KDD 2026; NUS/USTC/Tencent; opens new direction for reasoning-augmented SID-based generative recommendation
+
+3. **CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation**
+   * Affiliation: University of Electronic Science and Technology of China / Southwestern University of Finance and Economics — *(Yibiao Wei, Jie Zou, Xiao Ao, Pengfei Zhang, Zeyu Ma, Yang Yang — UESTC; Weikang Guo — SWUFE)*
+   * Link: [arxiv.org/abs/2604.26427](https://arxiv.org/abs/2604.26427)
+   * Venue: SIGIR 2026
+   * TL;DR: Visual semantic unit unifying text+visual+collab signals into structured representation; NU-RQ-VAE with learnable non-uniform transformation maps skewed embedding distributions to balanced latent space for improved codebook utilization.
+   * Key techniques:
+     - Visual semantic unit: unifies textual, visual, and collaborative signals into structured visual representation prior to encoding
+     - NU-RQ-VAE: learnable and invertible non-uniform transformation handling skewed semantic distributions
+     - Plug-and-play non-uniform transformation module robust across different quantization schemes
+     - Reduced supervision signal dependency for heterogeneous fusion in SID learning
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/HAI-UESTC/CARD](https://github.com/HAI-UESTC/CARD) — 19⭐, 49 commits; functional codebase with training pipeline; sparse README lacking paper link, results, license; built on TIGER/SASRec
+     - **Novelty: 7/10** — First to address non-uniform embedding distributions in SID quantization; visual semantic unit + NU-RQ-VAE is novel
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — SIGIR 2026 peer-reviewed; multiple datasets; plug-and-play module across quantization schemes
+     - **Impact: 6/10** — SIGIR 2026; UESTC; practical non-uniform quantization framework improving codebook utilization for genrec
+
+4. **DIGER: Differentiable Semantic ID for Generative Recommendation**
+   * Affiliation: University of Glasgow / Shandong University / Amazon / Telefónica / Leiden University — *(Junchen Fu, Joemon M. Jose — U Glasgow; Xuri Ge — Shandong U; Alexandros Karatzoglou — Amazon; Ioannis Arapakis — Telefónica; Suzan Verberne, Zhaochun Ren — Leiden U)*
+   * Link: [arxiv.org/abs/2601.19711](https://arxiv.org/abs/2601.19711)
+   * Venue: SIGIR 2026
+   * TL;DR: First differentiable SID joint optimization; Gumbel noise + uncertainty decay strategies prevent codebook collapse while aligning indexing and recommendation objectives end-to-end.
+   * Key techniques:
+     - Differentiable semantic indexing: recommendation gradients directly influence SID learning
+     - Gumbel noise injection encouraging early codebook exploration to prevent collapse
+     - Two uncertainty decay strategies: gradual noise reduction transitioning from exploration to exploitation
+     - Joint optimization closing the objective mismatch between content reconstruction and recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/junchen-fu/DIGER](https://github.com/junchen-fu/DIGER) — SIGIR 2026 artifact; clean implementation with clear modular structure; well-documented; reproducible pipeline
+     - **Novelty: 7/10** — First to enable differentiable SID optimization for GR; Gumbel-based codebook collapse mitigation is principled
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — SIGIR 2026 peer-reviewed; multiple public datasets; consistent improvements across benchmark settings
+     - **Impact: 7/10** — SIGIR 2026; Glasgow/Shandong/Amazon; addresses fundamental objective-mismatch problem in genrec; opens differentiable SID research direction
+
+5. **S²GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation**
+   * Affiliation: Kuaishou Technology — *(Zihao Guo, Jian Wang, Ruxin Zhou, Youhua Liu, Jiawei Guo, Jun Zhao, Xiaoxiao Xu, Yongqi Liu, Kaiqiao Zhan — Kuaishou)*
+   * Link: [arxiv.org/abs/2601.18664](https://arxiv.org/abs/2601.18664)
+   * Venue: KDD 2026
+   * TL;DR: Inserts thinking tokens before each SID generation step with contrastive supervision against codebook cluster distributions; CoBa RQ-VAE integrates co-occurrence + load balancing for robust codebooks; online A/B at Kuaishou: +0.092% app usage time, +0.091% video views.
+   * Key techniques:
+     - CoBa RQ-VAE: item co-occurrence + load balancing + uniformity objectives for robust semantic codebooks
+     - Stepwise reasoning: thinking tokens interleaved before each SID code step with explicit semantic supervision
+     - Contrastive learning against ground-truth codebook cluster distributions for interpretable reasoning paths
+     - Balanced computational focus across all hierarchical SID codes vs. sequential separation approaches
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First stepwise latent reasoning for SID generation; CoBa RQ-VAE with co-occurrence is novel; thinking token supervision is well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — KDD 2026 peer-reviewed; public + industrial datasets; online A/B at Kuaishou with +0.092% usage time
+     - **Impact: 7/10** — KDD 2026; Kuaishou; practical stepwise reasoning framework for genrec deployed on large-scale short-video platform
 
 ### Papers August 5
 
@@ -1135,7 +1227,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 116 papers as of August 4.
+**Count:** 117 papers as of August 6.
 
 | Score | Paper |
 | --- | --- |
@@ -1192,6 +1284,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Cold-Starts in Generative Recommendation: A Reproducibility Study (ColdGenRec) |
 | 8/10 | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
+| 7/10 | Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner) |
 | 7/10 | Can We Steer the Black-Box? Towards Controllability-Centric Evaluation of Recommender Systems with Collaborative Agents (CtrlBench-Rec) |
 | 7/10 | The Best of Both Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H²Rec) |
 | 7/10 | Beyond Noisy Signals: Dual-Level Denoising for Multi-modal Sequential Recommendation (DDMSR) |
@@ -1359,6 +1452,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - LIME-Rec / Auditing Semantic Gains -- Hunan U
 - SmartGR / Hierarchy-Aware KD for GR -- Zhejiang U
 - UniR² / Unifying Genrec Recall + Ranking -- Kuaishou / CAS IIE
+- DEGR / Dual Exploration Generative Re-Ranking -- JD.com / KDD 2026
+- SIDReasoner / Reasoning over SIDs -- NUS / USTC / Tencent / KDD 2026
+- CARD / Non-Uniform Quantization Visual SID -- UESTC / SWUFE / SIGIR 2026
+- DIGER / Differentiable Semantic ID -- U Glasgow / Shandong / Amazon / SIGIR 2026
+- S2GR / Stepwise Semantic-Guided Reasoning -- Kuaishou / KDD 2026
 
 ### RL / Reinforcement Learning
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -1446,6 +1544,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - RecHarness / Bandit Agentic Harness -- Kuaishou
 - HRPO / Hierarchical Residual Policy Optimization -- CityU / Kuaishou / KDD 2026
 - Exp-RSFT / Exponential Reward-Weighted Fine-Tuning -- Netflix
+- DEGR / Dual Exploration Generative Re-Ranking -- JD.com / KDD 2026
+- SIDReasoner / Reasoning over SIDs -- NUS / USTC / Tencent / KDD 2026
+- S2GR / Stepwise Semantic-Guided Reasoning -- Kuaishou / KDD 2026
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
