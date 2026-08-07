@@ -37,6 +37,11 @@
 - SITA: Semantic Interest Tokens for Target-Aware Compression in Long-Sequence Recommendation (SITA)
 - SmartGR: Hierarchy and Beam-Aware Knowledge Distillation for Generative Recommendation (SmartGR)
 - UniR²: Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence (UniR²)
+- Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation (Gryphon-v2)
+- UniGD: A Unified Generative-Discriminative Framework for Industrial Retrieval (UniGD)
+- PinRec: Unified Generative Retrieval for Pinterest Recommender Systems (PinRec)
+- SA²CRQ: Towards Efficient and Generalizable Retrieval — Adaptive Semantic Quantization and Residual Knowledge Transfer (SA²CRQ)
+- OneLive: Dynamically Unified Generative Framework for Live-Streaming Recommendation (OneLive)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -469,6 +474,7 @@
 - DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval (DIRECTOR)
 - EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
 - Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
+- Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation (Gryphon-v2)
 - Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation (Multi-Decoder OneRec)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
 - PSG: Pair-Space Generation for Efficient Generative Reranking (PSG)
@@ -478,6 +484,10 @@
 - UniR²: Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence (UniR²)
 - WhisperRec: Latent Reasoning for Efficient Foundation Recommendation Models (WhisperRec)
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
+- OneLive: Dynamically Unified Generative Framework for Live-Streaming Recommendation (OneLive)
+- PinRec: Unified Generative Retrieval for Pinterest Recommender Systems (PinRec)
+- SA²CRQ: Towards Efficient and Generalizable Retrieval — Adaptive Semantic Quantization and Residual Knowledge Transfer (SA²CRQ)
+- UniGD: A Unified Generative-Discriminative Framework for Industrial Retrieval (UniGD)
 - A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems (Multimodal LLM Rec)
 - Adaptive Re-Ranking
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)

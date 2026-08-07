@@ -76,6 +76,95 @@ mindmap
 ---
 ## By Date
 
+### Papers August 7
+
+*Friday, August 7, 2026. Arxiv active. cs.IR Aug 7 listing returned 1 new genrec paper (Gryphon-v2) + 1 missed paper from Aug 4 submission (UniGD) + 3 missed KDD/SIGIR 2026 papers from 3-month fallback (PinRec Pinterest KDD 2026, SA2CRQ JD.com/HIT/PKU/CAS IIE SIGIR 2026, OneLive Kuaishou). Total: 5 papers.*
+
+1. **Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation**
+   * Affiliation: Yandex — *(Anna Lipkina, Daria Tikhonovich, Viktor Yanush, Mariia Ulianova, Oleg Sorokin, Vladislav Dodonov, Ilya Murzin, Denis Burshtein, Nikolay Savushkin — Yandex)*
+   * Link: [arxiv.org/abs/2608.06213](https://arxiv.org/abs/2608.06213)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Unified generate-and-rank architecture replacing multi-stage cascade with single model; Rollout Distillation transfers production ranking preferences from Teacher Ranker to Ranking Module without second serving model; deployed at Yandex Music replacing 15+ candidate generators + pre-ranking + final ranking; +1.41% active users at comparable latency.
+   * Key techniques:
+     - Unified generate-and-rank: shared encoder processes user history once for both SID generation and item-level ranking
+     - Rollout Distillation: teacher scores as sole ranking supervision over decoder rollouts + logged impressions for complementary coverage
+     - Shared encoder reuse between autoregressive decoder and item-level Ranking Module
+     - End-to-end deployment replacing production cascade with single model
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Extends Gryphon with rollout distillation for end-to-end cascade replacement; deployment validation is strong
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Production deployment at Yandex Music; +1.41% active users; comparable latency to production cascade
+     - **Impact: 7/10** — Yandex; practical blueprint for end-to-end generative retrieval replacing multi-stage cascade in music streaming
+
+2. **UniGD: A Unified Generative-Discriminative Framework for Industrial Retrieval**
+   * Affiliation: Kuaishou Technology — *(Shujie Ji, Yawei Kong, Yilin Zhao, Li Wang, Xialong Liu, Peng Jiang — Kuaishou)*
+   * Link: [arxiv.org/abs/2608.03150](https://arxiv.org/abs/2608.03150)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Unified decoder-only framework integrating SID-based generation and query-ad relevance scoring in single model; CAGE coordinates conflicting gradients between generation and discrimination objectives; CAM anchors ad representations to frozen hierarchical codebooks; deployed at Kuaishou search ads: +5.78% revenue, -33% latency.
+   * Key techniques:
+     - Conflict-Aware Gradient Enhancement (CAGE): adaptive gradient coordination via orthogonal projection when generation and discrimination objectives conflict
+     - Codebook-Anchored Representation Module (CAM): anchors items to frozen hierarchical codebooks from multimodal pretrained model for rich semantic priors
+     - Heterogeneous Ad-material Modeling (HAM): shared backbone + type-specific capacity for short-video, product, and live-stream ads
+     - Unified decoder-only architecture eliminating external online relevance model
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Unified generative-discriminative with CAGE gradient coordination is practical; CAM+HAM are well-engineered for industrial ads
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Production A/B at Kuaishou; +5.78% revenue, -33% latency; NQ320K + MS300K public benchmarks
+     - **Impact: 7/10** — Kuaishou; practical unified framework bridging generation and relevance for industrial search advertising
+
+3. **PinRec: Unified Generative Retrieval for Pinterest Recommender Systems**
+   * Affiliation: Pinterest Inc. — *(Edoardo Botta, Jaewon Yang, Yi-Ping Hsu, Laksh Bhasin, Yilin Chen, Prabhat Agarwal, Anirudhan Badrinath, Jiajing Xu, Charles Rosenberg — Pinterest)*
+   * Link: [arxiv.org/abs/2504.10507](https://arxiv.org/abs/2504.10507)
+   * Venue: KDD 2026
+   * TL;DR: First unified generative retrieval model serving all Pinterest surfaces (home feed, search, related pins) with single pretrained-finetuned architecture; outcome-conditioned generation targets surface-specific business goals; +4% increase in search saves at Pinterest scale.
+   * Key techniques:
+     - Cross-surface pretraining + surface-specific fine-tuning: single model serves all recommendation surfaces
+     - Outcome-conditioned generation mechanism: targets different business outcomes per surface (saves, clicks, etc.)
+     - Unified token sequence combining heterogeneous inputs (query text + user history) across surfaces
+     - First rigorous study of unified generative retrieval deployed at Pinterest scale (600M+ MAU)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First multi-surface unified GR at production scale; outcome-conditioned generation is practical
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — KDD 2026; deployed at Pinterest (600M+ MAU); +4% search saves; cross-surface validation
+     - **Impact: 8/10** — KDD 2026; Pinterest; milestone for unified generative retrieval at internet-scale visual discovery platform
+
+4. **SA²CRQ: Towards Efficient and Generalizable Retrieval — Adaptive Semantic Quantization and Residual Knowledge Transfer**
+   * Affiliation: JD.com / Harbin Institute of Technology / Peking University / CAS IIE — *(Huimu Wang, Xingzhi Yao, Yiming Qiu, Qinghong Zhang, Songlin Wang, Sulong Xu — JD.com; Haotian Wang — HIT; Yufan Cui — PKU; Mingming Li — CAS IIE)*
+   * Link: [arxiv.org/abs/2602.23978](https://arxiv.org/abs/2602.23978)
+   * Venue: SIGIR 2026
+   * TL;DR: Addresses SID head-tail asymmetry — head items suffer ID collisions, tail items suffer semantic fragmentation; SARQ dynamically allocates code lengths based on item path entropy; ACRQ uses frozen head-item manifold to regularize tail-item representation learning; consistent improvements especially in cold-start.
+   * Key techniques:
+     - Sequential Adaptive Residual Quantization (SARQ): variable-length SID allocation — longer discriminative IDs for head items, shorter generalizable IDs for tail items
+     - Anchored Curriculum Residual Quantization (ACRQ): frozen semantic manifold from head items regularizes tail-item learning
+     - Path-entropy-based code length allocation adapting to item popularity
+     - Large-scale industrial search validation + public datasets; cold-start scenario emphasis
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First to address SID head-tail asymmetry via adaptive code-length allocation; frozen manifold knowledge transfer is principled
+     - **Fairness: 4/10** — Explicitly improves tail/cold-start item retrieval; addresses data-imbalance fairness
+     - **Robustness: 6/10** — SIGIR 2026 peer-reviewed; industrial + public datasets; consistent cold-start gains
+     - **Impact: 6/10** — SIGIR 2026; JD.com/HIT/PKU/CAS IIE; practical adaptive SID framework for imbalanced industrial item corpora
+
+5. **OneLive: Dynamically Unified Generative Framework for Live-Streaming Recommendation**
+   * Affiliation: Kuaishou Technology — *(Shen Wang, Yusheng Huang, Ruochen Yang, Shuang Wen, Pengbo Xu, Jiangxia Cao, Yueyang Liu, Kuo Cai, Chengcheng Guo, Shiyao Wang, Xinchen Luo, Qiang Luo, Ruiming Tang, Shuang Yang, Zhaojie Liu, Guorui Zhou, Han Li, Kun Gai — Kuaishou)*
+   * Link: [arxiv.org/abs/2602.08612](https://arxiv.org/abs/2602.08612)
+   * Venue: arXiv preprint, February 2026
+   * TL;DR: First generative recommendation framework tailored for live-streaming; Dynamic Tokenizer with residual quantization handles continuously evolving live content; Time-Aware Gated Attention for temporal dynamics; Unified Multi-Objective Alignment for heterogeneous objectives; decoder-only architecture with Sequential MTP.
+   * Key techniques:
+     - Dynamic Tokenizer: continuous residual quantization encoding evolving real-time live content fused with behavior signals
+     - Time-Aware Gated Attention: explicit temporal dynamics modeling for timely decision-making in fast-changing live environments
+     - Sequential Multi-Token Prediction (MTP) + QK Norm for stable training and accelerated inference
+     - Unified Multi-Objective Alignment Framework: policy optimization balancing heterogeneous objectives (engagement, retention, revenue)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First generative recommendation specifically for live-streaming; dynamic tokenization for evolving content is well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — Work in progress; no public benchmark or industrial A/B reported; decoder-only architecture is sound
+     - **Impact: 6/10** — Kuaishou; opens new direction for generative recommendation in live-streaming domain; practical for short-video/live platforms
+
 ### Papers August 6
 
 *Thursday, August 6, 2026. Arxiv active. cs.IR listing returned 1 new genrec paper (DEGR) from Aug 5 submission window + 4 missed papers from Jan–Apr 2026 3-month fallback (SIDReasoner NUS/USTC/Tencent KDD 2026, CARD UESTC/SWUFE SIGIR 2026, DIGER SIGIR 2026, S2GR Kuaishou KDD 2026). Total: 5 papers.*
@@ -1045,94 +1134,6 @@ mindmap
      - **Robustness: 6/10** — 4 real-world datasets; consistent SOTA improvements; topology regularization is theoretically grounded
      - **Impact: 5/10** — Jilin University/CityU HK; opens new direction for geometric awareness in continuous generative recommendation
 
-### Papers July 27
-
-*Monday, July 27, 2026. Arxiv cs.IR new listing returned 5 relevant genrec/recsys papers (light day for generative recommendation — most papers are general recsys/systems). No fallback needed.*
-
-1. **PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest**
-   * Affiliation: Pinterest Inc. — *(Olafur Gudmundsson, Bo Zhao, Huayi Liao, Anna Kiyantseva, Sai Xiao, Heath Vinicombe, Mostafa Keikha, Luke DeLuccia, Zihao Chen, Junpeng Hou, Weijie Jiang, Bhawna Juneja, Andreanne Lemay, Wei-Ting Lin, Keyvan Moghadam, Jiaxing Qu, Zhiqing Rao, Zhihua Zhang — Pinterest)*
-   * Link: [arxiv.org/abs/2607.22518](https://arxiv.org/abs/2607.22518)
-   * Venue: KDD 2026
-   * TL;DR: Full-funnel content cold-start debiasing system spanning multi-stage recommendation/search at Pinterest; reduces popularity bias favoring existing content; scalable measurement framework enabling fast experimentation while validating long-term impact; deployed over 2 years with significant engagement gains.
-   * Key techniques:
-     - Full-funnel coverage: spans entire multi-stage pipeline for both search and recommendation surfaces
-     - Bias reduction: reduces bias favoring existing/popular content allowing more accurate prediction for new content
-     - Scalable measurement framework: fast short-term experimentation + long-term impact validation
-     - Production-deployed over 2 years with verified improvements in fresh content exploration and overall engagement
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (Pinterest internal production)
-     - **Novelty: 5/10** — Full-funnel debiasing approach is practical but systems contribution; measurement framework is well-designed
-     - **Fairness: 7/10** — Directly addresses content cold-start fairness and popularity bias in industrial recommendation
-     - **Robustness: 8/10** — KDD 2026 peer-reviewed; deployed for 2 years at Pinterest scale with verified engagement gains
-     - **Impact: 8/10** — KDD 2026; Pinterest; practical full-funnel debiasing blueprint for industrial content platforms
-
-2. **SIREN (Luring LLMs onto the Rocks): PAIR-Driven Preference Manipulation in Web-RAG Recommenders**
-   * Affiliation: University of Queensland — *(Evan Caville, Siamak Layeghy, Billy Sung, Sara Dolnicar, Marius Portmann — UQ)*
-   * Link: [arxiv.org/abs/2607.21951](https://arxiv.org/abs/2607.21951)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: First controlled study of competitive rank manipulation in production LLM-based Web-RAG recommenders; adapts PAIR jailbreaking loop with 23 content-poisoning techniques; achieves rank-1 across 62/124 technique trials with 80.5% reproduction success rate; fixed-source replay isolates content effects from retrieval differences.
-   * Key techniques:
-     - Automated attacker-judge method adapting PAIR jailbreaking loop to competitive rank manipulation
-     - Taxonomy of 23 content-poisoning techniques (declarative ranking claims, seeded lists, directive injections)
-     - Custom RAG replay platform keeping same sources in same order for controlled experiments
-     - Cross-session reproduction testing at 80.5% mean success rate on production Claude models
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First controlled rank manipulation study in Web-RAG recommenders; 23-technique taxonomy is systematic
-     - **Fairness: 5/10** — Addresses adversarial fairness and manipulation risks in LLM-based recommendation
-     - **Robustness: 6/10** — Two production Claude models; cross-session reproduction validation; 124 technique trials
-     - **Impact: 6/10** — U Queensland; important security contribution for emerging Web-RAG recommendation paradigm
-
-3. **Probabilistic Residual Learning for Online Recommendations (PRL)**
-   * Affiliation: Rutgers University / Meta / National University of Singapore / Columbia University — *(Wenyuan Wang, Yusong Zhao, Zihao Xu, Hengyi Wang, Qi Xu — Rutgers; Zhigang Hua, Yan Xie, Yi Wang, Zihao Zhao, Bo Long, Shuang Yang — Meta; Hengguan Huang — NUS; Chengzhi Mao — Columbia; Hao Wang — Rutgers)*
-   * Link: [arxiv.org/abs/2607.20863](https://arxiv.org/abs/2607.20863)
-   * Venue: RecSys 2026
-   * TL;DR: Causal Bayesian plug-and-play framework for systematically enhancing existing deep learning recommender systems by modeling residual between ground-truth and base predictions; probabilistic user clustering + domain-level confounder modeling via do-calculus; compatible with various base recommenders.
-   * Key techniques:
-     - Probabilistic user grouping for localized residual modeling
-     - Domain-level confounder modeling influencing user and item representations
-     - Causal intervention via do-calculus aggregating cluster-specific residual predictions
-     - Plug-and-play: compatible with various base deep learning recommender systems
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Causal residual learning for recsys is a practical extension; do-calculus integration is well-motivated
-     - **Fairness: 4/10** — Probabilistic clustering may help fairness through localized modeling; not primary focus
-     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; compatible with multiple base recommender architectures
-     - **Impact: 6/10** — RecSys 2026; Rutgers/Meta/NUS/Columbia; practical plug-and-play framework for recommendation enhancement
-
-4. **RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation**
-   * Affiliation: Meta — *(Renzhi Wu, Zikun Cui, Junjie Yang, Tai Guo, Hong Li, Xian Chen, Li Yu, Ke Pan, Sri Reddy, Mahesh Srinivasan, Nipun Mathur, Haomin Yu, Hong Yan — Meta)*
-   * Link: [arxiv.org/abs/2606.18379](https://arxiv.org/abs/2606.18379)
-   * Venue: arXiv preprint, June 2026 (v4 July 2026)
-   * TL;DR: Lifecycle co-design of graph construction, representation learning, and real-time serving for billion-node recommendation retrieval at Meta; popularity-bias-corrected subsampling compresses trillions→hundreds of billions of edges; co-learned residual-quantization cluster index reduces serving cost 83%; powers 20+ retrieval launches with +0.96% CTR, +2.75% CVR.
-   * Key techniques:
-     - Lifecycle co-design: graph construction + representation learning + serving jointly optimized
-     - Popularity-bias-corrected subsampling: reduces hundreds of trillions to hundreds of billions of edges
-     - Co-learned residual-quantization cluster index for 83% serving cost reduction
-     - Pre-computed multi-hop neighborhoods via personalized PageRank eliminating online graph infrastructure
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (Meta internal production)
-     - **Novelty: 6/10** — Lifecycle co-design is practical; co-learned cluster index for similarity-based retrieval is well-engineered
-     - **Fairness: 5/10** — Popularity bias correction in subsampling addresses graph construction fairness
-     - **Robustness: 8/10** — Deployed at Meta; 20+ retrieval launches; verified CTR/CVR gains at billion-node scale
-     - **Impact: 7/10** — Meta; important infrastructure contribution for graph-based recommendation at unprecedented scale
-
-5. **Bringing GRACE to Recommendation: Fine-Tuning for Sustainable and Accurate Personalization**
-   * Affiliation: Shandong University / Nanyang Technological University — *(Yibowen Zhao, Yinan Zhang, Ning Liu, Lizhen Cui — Shandong U; Chunyan Miao — NTU)*
-   * Link: [arxiv.org/abs/2607.22341](https://arxiv.org/abs/2607.22341)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Fine-tuning framework integrating sustainability signals (eco-scores, health indices) into pretrained recommendation models via differentiable approximation and gradient projection; avoids training from scratch or inference-time reranking; balances green objectives with personalization accuracy via preference-anchored updates.
-   * Key techniques:
-     - Differentiable approximation of discrete sustainability values enabling direct gradient-based optimization
-     - Gradient projection mechanism mitigating conflicts between green objective and accuracy objective
-     - Controllable preference-anchored update mechanism balancing sustainability and personalization
-     - Fine-tuning paradigm avoiding costly retraining or inference-time reranking
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Differentiable green optimization + gradient projection is a practical approach for sustainable recsys
-     - **Fairness: 6/10** — Directly addresses sustainability/health fairness through green recommendation
-     - **Robustness: 5/10** — Real-world datasets; gradient projection mechanism provides theoretical grounding
-     - **Impact: 5/10** — Shandong U/NTU; practical contribution to emerging green recommendation paradigm
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
@@ -1367,6 +1368,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - CARD / Non-Uniform Quantization Visual SID -- UESTC / SWUFE / SIGIR 2026
 - DIGER / Differentiable Semantic ID -- U Glasgow / Shandong / Amazon / SIGIR 2026
 - S2GR / Stepwise Semantic-Guided Reasoning -- Kuaishou / KDD 2026
+- Gryphon-v2 / Generate-and-Rank with Rollout Distillation -- Yandex
+- UniGD / Unified Generative-Discriminative Framework -- Kuaishou
+- PinRec / Unified Generative Retrieval for Pinterest -- Pinterest (KDD 2026)
+- SA2CRQ / Adaptive Semantic Quantization -- JD.com / HIT / PKU / CAS IIE (SIGIR 2026)
+- OneLive / Dynamically Unified Generative Live-Streaming -- Kuaishou
 
 ### RL / Reinforcement Learning
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -1457,6 +1463,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DEGR / Dual Exploration Generative Re-Ranking -- JD.com / KDD 2026
 - SIDReasoner / Reasoning over SIDs -- NUS / USTC / Tencent / KDD 2026
 - S2GR / Stepwise Semantic-Guided Reasoning -- Kuaishou / KDD 2026
+- Gryphon-v2 / Rollout Distillation GenRec -- Yandex
+- UniGD / CAGE Gradient Coordination -- Kuaishou
+- PinRec / Outcome-Conditioned Generation -- Pinterest (KDD 2026)
+- OneLive / Multi-Objective Policy Optimization -- Kuaishou
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
