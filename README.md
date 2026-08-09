@@ -62,7 +62,7 @@ mindmap
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
-        CARD -- UESTC / SWUFE
+        MaskGR -- Snap Inc.
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -75,6 +75,95 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 9
+
+*Sunday, August 9, 2026. Arxiv inactive (weekend). Applied 3-month fallback strategy → found 5 missed genrec papers from Nov 2025–Apr 2026: DualGR USTC/Kuaishou WWW 2026, GRC Alibaba/Wuhan U KDD 2026, SID Staleness ITMO/AI VK SIGIR 2026, MDGR Alibaba International, MaskGR Snap Inc. opensource 8/10. Total: 5 papers.*
+
+1. **DualGR: Generative Retrieval with Long and Short-Term Interests Modeling**
+   * Affiliation: University of Science and Technology of China / Kuaishou Technology — *(Zhongchao Yi, Zhengyang Zhou, Yang Wang — USTC; Kai Feng, Xiaojian Ma, Yalong Wang, Yongqi Liu, Han Li — Kuaishou)*
+   * Link: [arxiv.org/abs/2511.12518](https://arxiv.org/abs/2511.12518)
+   * Venue: WWW 2026
+   * TL;DR: Generative retrieval with explicit dual-branch long/short-term router + search-based SID decoding for noise control + exposure-aware NTP loss treating unclicked items as hard negatives; deployed at Kuaishou short-video: +0.527% video views, +0.432% watch time.
+   * Key techniques:
+     - Dual-Branch Long/Short-Term Router (DBR): selective activation covering stable preferences (long window ~1000) and transient intents (short window ~64)
+     - Search-based SID Decoding (S2D): constrains fine-level decoding within current coarse bucket for noise control and efficiency
+     - Exposure-aware Next-Token Prediction Loss (ENTP-Loss): treats exposed-but-unclicked items as coarse-level hard negatives for timely interest fade-out
+     - Encoder-free decoder-only backbone with step-wise target-aware cross-attention
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First to explicitly model dual time-scale interests in GR via selective routing; ENTP-Loss exploits negative feedback
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — WWW 2026 peer-reviewed; online A/B at Kuaishou; +0.527% video views, +0.432% watch time
+     - **Impact: 7/10** — WWW 2026; USTC/Kuaishou; practical GR for industrial short-video with explicit interest time-scale modeling
+
+2. **GRC: Learning to Reflect and Correct — Towards Better Decoding Trajectories for Large-Scale Generative Recommendation**
+   * Affiliation: Alibaba International Digital Commerce Group / Wuhan University — *(Haibo Xing, Hao Deng, Lingyu Mu, Jinxin Hu, Yu Zhang, Xiaoyi Zeng — Alibaba; Jing Zhang — Wuhan U)*
+   * Link: [arxiv.org/abs/2602.23639](https://arxiv.org/abs/2602.23639)
+   * Venue: KDD 2026
+   * TL;DR: First structured reflection-correction framework for GR extending decoding into Generation→Reflection→Correction process; GRPO-based RL optimizes full trajectory; Entropy-Guided Reflection Scheduling dynamically allocates correction budget; +15.74% Recall, +1.79% ad revenue.
+   * Key techniques:
+     - Structured reflection-correction template: token-level localization + semantic consistency checking in discrete SID token space
+     - GRPO-based RL optimization: combined task reward (final token) + correction reward (error localization + quality improvement)
+     - Entropy-Guided Reflection Scheduling (EGRS): dynamically allocates correction budget to high-uncertainty beams
+     - Multi-granular reflection decomposing decoding into draft generation, reflection, reflection-guided correction
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First structured reflection-correction for GR; EGRS for inference efficiency is clever; GRPO in discrete SID space is well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — KDD 2026 peer-reviewed; public + industrial datasets; online A/B +1.79% revenue; up to 15.74% Recall gain
+     - **Impact: 7/10** — KDD 2026; Alibaba/Wuhan U; opens reflection-correction paradigm for generative recommendation
+
+3. **Mitigating Collaborative Semantic ID Staleness in Generative Retrieval**
+   * Affiliation: ITMO University / AI VK — *(Vladimir Baikalov, Iskander Bagautdinov, Sergey Muravyov — ITMO/VK)*
+   * Link: [arxiv.org/abs/2604.13273](https://arxiv.org/abs/2604.13273)
+   * Venue: SIGIR 2026
+   * TL;DR: First systematic study of SID staleness under temporal distribution drift; lightweight model-agnostic SID alignment via bipartite matching between old and new codebooks; 8-9× training compute reduction while matching full-retrain recall.
+   * Key techniques:
+     - SID staleness diagnosis: interaction-informed SIDs degrade as collaborative patterns drift over time
+     - Bipartite token matching: aligns refreshed SIDs to existing vocabulary via codebook-wise assignment (Greedy/Hungarian)
+     - Warm-start fine-tuning: checkpoint-compatible adaptation without full rebuild-and-retrain pipeline
+     - Multi-step continual adaptation stability across consecutive refresh cycles
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First to formalize SID staleness in GR; bipartite alignment is simple but effective
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — SIGIR 2026 peer-reviewed; 3 benchmarks; multi-step adaptation analysis
+     - **Impact: 6/10** — SIGIR 2026; ITMO/VK; practical SID maintenance for continual GR deployment
+
+4. **MDGR: Masked Diffusion Generative Recommendation**
+   * Affiliation: Alibaba International Digital Commerce Group — *(Lingyu Mu, Hao Deng, Haibo Xing, Jinxin Hu, Yu Zhang, Xiaoyi Zeng — Alibaba)*
+   * Link: [arxiv.org/abs/2601.19501](https://arxiv.org/abs/2601.19501)
+   * Venue: arXiv preprint, January 2026
+   * TL;DR: Replaces autoregressive SID decoding with masked diffusion; parallel codebook + adaptive masking + warm-up two-stage parallel decoding; +10.78% over SOTA, +1.20% ad revenue in online deployment.
+   * Key techniques:
+     - Parallel codebook: structural foundation for diffusion-based GR (positions conditionally independent given unmasked tokens)
+     - Adaptive masking along temporal + sample dimensions for difficulty-aware training
+     - Warm-up two-stage parallel decoding: efficient inference generating multiple SID positions simultaneously
+     - Addresses three AR limitations: global dependency capture, fixed decoding path, inference efficiency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Code stated "will be released upon acceptance"; not yet available
+     - **Novelty: 7/10** — First to apply masked diffusion to SID-based GR; parallel codebook + adaptive masking is well-designed
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Public + industrial-scale datasets; +1.20% online revenue; 10-SOTA-baseline comparison
+     - **Impact: 7/10** — Alibaba; practical diffusion-based alternative to autoregressive GR; production-verified
+
+5. **Masked Diffusion for Generative Recommendation (MaskGR)**
+   * Affiliation: Snap Inc. — *(Kulin Shah, Bhuvesh Kumar, Neil Shah, Liam Collins — Snap Inc.)*
+   * Link: [arxiv.org/abs/2511.23021](https://arxiv.org/abs/2511.23021)
+   * Venue: arXiv preprint, November 2025
+   * TL;DR: Masked diffusion as alternative to autoregressive modeling for SID-based GR; conditional independence enables parallel decoding; consistently outperforms AR especially in data-constrained settings; code open-sourced.
+   * Key techniques:
+     - Masked diffusion on SID sequences: discrete masking noise with conditional independence assumption
+     - Parallel decoding: predicts multiple masked SID positions simultaneously during inference
+     - Better data efficiency: performance gap widens in data-constrained settings
+     - Superior coarse-grained recall: diffusion better captures global token relationships vs. local AR bias
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/snap-research/MaskGR](https://github.com/snap-research/MaskGR) — well-structured repo with Hydra configs, Makefile targets, GRID pipeline integration; training/inference/eval scripts
+     - **Novelty: 6/10** — Applies masked diffusion to SID-based GR; conceptually clean but builds on known diffusion techniques
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — Thorough experiments; consistent outperformance especially data-constrained regimes
+     - **Impact: 7/10** — Snap Inc.; opens diffusion-based GR paradigm with strong open-source implementation
 
 ### Papers August 7
 
@@ -953,192 +1042,11 @@ mindmap
      - **Robustness: 7/10** — Multiple public benchmarks + diverse backbones (SASRec, BERT4Rec); single-stage training with consistent improvements
      - **Impact: 6/10** — Alibaba/NUS/Renmin; broadly applicable training technique for sequential recommendation; simple integration with existing models
 
-### Papers July 29
-
-*Wednesday, July 29, 2026. Arxiv cs.IR new listing returned 5 genrec papers from July 28 submission window. Total: 5 papers.*
-
-1. **Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing**
-   * Affiliation: Kuaishou Technology — *(Huanjie Wang, Liwei Guan, Zekai Sun, Hongwei Zhang, Honghui Bao — Kuaishou)*
-   * Link: [arxiv.org/abs/2607.25329](https://arxiv.org/abs/2607.25329)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Treats SID assignment as an evolvable discrete variable that adapts to behavioral feedback; single multitask recommender unifies SID generation + semantic grounding, eliminating the need for separate tokenizer, alignment losses, or alternating-optimization schedules.
-   * Key techniques:
-     - Evolutionary Item Indexing: SID assignment as a budgeted feedback-driven search using trained recommender as posterior evaluator
-     - Single multitask recommender absorbing tokenizer's role: behavioral SID generation + semantic SID grounding in one model
-     - Fixed vocabulary and length; no second learnable model, no alignment losses, no alternating-optimization
-     - Stable identifier evolution under closed-world SID vocabulary constraints
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to frame SID assignment as evolutionary search rather than learning; unified single-model approach eliminates tokenizer-as-separate-entity
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Multiple real-world datasets; consistent outperformance over SOTA genrec methods; no industrial deployment reported
-     - **Impact: 7/10** — Kuaishou; practical alternative to end-to-end SID-recommender co-training with simpler architecture
-
-2. **VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation**
-   * Affiliation: University of Queensland / Griffith University — *(Shutong Qiao, Wei Yuan, Tong Chen, Hao Wang, Quoc Viet Hung Nguyen, Hongzhi Yin — UQ/Griffith)*
-   * Link: [arxiv.org/abs/2607.25209](https://arxiv.org/abs/2607.25209)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Constructs variable-length SIDs from native LLM vocabulary tokens via importance estimation + pruning + collision refinement; graph-aware soft prompts + token-set prediction eliminate autoregressive decoding with 87.49× faster inference than LC-Rec.
-   * Key techniques:
-     - LLM-native SID construction: token importance estimation → semantic-quality-aware pruning → collision-aware refinement
-     - Variable-length identifiers adapting to item semantic complexity (no fixed-length overhead)
-     - Token-set prediction with token-level item scoring replacing autoregressive SID generation and beam search
-     - Graph-aware soft prompts for user preference encoding
-     - Zero-shot cold-start: superior performance without retraining on completely new items
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to construct LLM-native variable-length SIDs directly from vocabulary tokens; token-set prediction paradigm is a clean break from autoregressive genrec
-     - **Fairness: 4/10** — Zero-shot cold-start evaluation benefits new/niche items
-     - **Robustness: 7/10** — 4 real-world datasets; 87.49× faster inference; consistent SOTA outperformance
-     - **Impact: 7/10** — UQ (Hongzhi Yin); paradigm-shifting: eliminates beam search and autoregressive decoding for genrec, opens new efficient genrec direction
-
-3. **TopoGR: Revealing and Preserving Latent Structure of Semantic ID in Generative Recommendation**
-   * Affiliation: Xidian University / Alibaba Group — *(Ziyu Zheng, Zhengshun Du, Yaming Yang, Bin Tong, Guan Wang, Meng Yan, Ziyu Guan, Wei Zhao — Xidian U/Alibaba)*
-   * Link: [arxiv.org/abs/2607.25216](https://arxiv.org/abs/2607.25216)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Identifies structural mismatch between SID tokenizer (structured code space) and generator (independent categorical symbols); proposes Bit-decomposable Binary SIDs with explicit Hamming geometry preserved through input, training, and inference stages.
-   * Key techniques:
-     - Bit-decomposable Semantic ID (Binary SID): deterministically convertible to integer SID with explicit Hamming geometry
-     - Three-stage topology preservation: binary SID features at input layer preserve Hamming proximity; Hamming soft targets inject topology-aware supervision; Hamming-consistent reranking at inference
-     - Captures item relatedness beyond exact SID overlap through Hamming distance
-     - Standard SID generator consumes Binary SID tokens as regular categorical inputs (zero architecture change)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to expose and exploit SID topology through Hamming geometry; Binary SID is a simple but effective intervention
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — 4 benchmark datasets; consistent SOTA; Hamming topology is theoretically grounded
-     - **Impact: 6/10** — Xidian U/Alibaba; practical topology-preserving approach for improving SID-based genrec quality
-
-4. **RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation**
-   * Affiliation: Nankai University / Kuaishou Technology — *(Guohong Mu, Yueyang Liu, Jiangxia Cao, Changxin Lao, Zijie Zhuang, Yuhui Zhang, Jiaqi Feng, Ruochen Yang, Shuang Yang, Zhaojie Liu, Qibin Hou — Nankai/Kuaishou)*
-   * Link: [arxiv.org/abs/2607.25901](https://arxiv.org/abs/2607.25901)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Trains MLLMs to generate recommendation-optimized item descriptions using behavior-derived RL rewards during training while preserving content-only inference; Recommender Affinity Score contrasts engaged vs. non-target users; deployed on Kuaishou live-stream with online A/B gains.
-   * Key techniques:
-     - Recommender Affinity Score (RAS): contrasts historically engaged users vs. observational non-target users to estimate shared affinity
-     - Reinforcement learning with RAS as reward: trains MLLM to emphasize rec-relevant semantics without user-conditioning
-     - Content-only inference after RL training: generates single shared description without user inputs at serving
-     - Proxy user strategy: historically engaged users as proxy for future targets
-     - RecoReward-9B built on Qwen3.5-9B; deployed on live-stream recommendation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First RL-trained MLLM for recommendation-optimized item description; content-only inference after behavior-derived training is novel
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Offline benchmark (7 recall metrics) + online A/B testing; Qwen3.5-9B as strong baseline
-     - **Impact: 7/10** — Nankai/Kuaishou; bridges MLLM content generation with recommendation optimization; practical for industrial multimodal rec
-
-5. **The Case Against Generation for Retrieval: Discriminative Language Models as Effective Retrievers**
-   * Affiliation: Microsoft — *(Zhe Xu, Prachi Agrawal, Kavosh Asadi, Tianyi Chen, Carl Hu, Justin Johnson, Wuwei Lan, Mingfu Liang, Xi Liu, Tik On Lui, Oladipo Ositelu, Sandeep Pandey, Ankit Peshin, Feng Qi, Anil Ramakrishna, Kaushik Rangadurai, Frank Shyu, Luke Simon, Yang Yang, Chiyu Zhang — Microsoft)*
-   * Link: [arxiv.org/abs/2607.25346](https://arxiv.org/abs/2607.25346)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Argues against generative retrieval at web-scale; revitalizes two-tower architecture with LLM backbone + EOS token pooling + knowledge distillation + latent reasoning; matches genrec SOTA with far lower latency on production systems.
-   * Key techniques:
-     - Shared LLM encoder for joint user-item representation learning
-     - End-of-Sentence (EOS) token pooling for compact sequence embedding
-     - Knowledge distillation from cross-encoder teachers into two-tower student
-     - Cross-dataset transfer learning + latent reasoning within user tower
-     - Production evaluation: high resilience to model staleness, superior data scaling
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Takes a principled stand against generative retrieval, making the case for discriminative efficiency; LLM-native two-tower is a compelling counterpoint
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — 3 public benchmarks + internal production; staleness resilience + data scaling analysis; large author team
-     - **Impact: 8/10** — Microsoft; important counterpoint to the genrec paradigm; practical for web-scale retrieval where generation overhead is prohibitive
-
-
-### Papers July 28
-
-*Tuesday, July 28, 2026. Arxiv cs.IR new listing returned 5 genrec papers from July 27 submission window. Total: 5 papers.*
-
-1. **LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation**
-   * Affiliation: University of Chinese Academy of Sciences / Xiaohongshu — *(Yu Xia — UCAS; Zihan Lin, Wei Yang, Rui Zhong, Cheng Chen, Huan Ren, Yao Hu — Xiaohongshu)*
-   * Link: [arxiv.org/abs/2607.24617](https://arxiv.org/abs/2607.24617)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Latent reasoning framework for LLM-based generative recommendation with personalized Gaussian Mixture Distribution RL-tuning; addresses fine-grained supervision gap and single reasoning path limitations without explicit CoT overhead.
-   * Key techniques:
-     - Latent Pre-training: step-level alignment + process direction alignment for rich latent reasoning supervision
-     - Personalized RL-tuning: constructs per-user Gaussian Mixture Distribution from historical interests, samples diverse reasoning paths
-     - Two-stage framework balancing latent reasoning efficiency with multi-faceted user interest exploration
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Personalized multi-path latent reasoning via Gaussian Mixture Model is novel; addresses two fundamental latent reasoning challenges
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Multiple datasets; comparable efficiency baselines validated; ablation on both stages
-     - **Impact: 7/10** — UCAS/Xiaohongshu; practical latent reasoning framework bridging efficiency and exploration for industrial LLM-based genrec
-
-2. **OxygenREC-v2: Internalizing Discrimination into Generative Recommendation**
-   * Affiliation: JD.com — *(Guo Tang, Hanye Wu, Changjiang Han, Qingyang Li, Ming Zhang, Xiangyu Qian, Yanchen Qiao, Huanjie Wang, Zhi Ma, Zhen Li, Yaqiang Zang, Pinghua Gong — JD.com)*
-   * Link: [arxiv.org/abs/2607.24255](https://arxiv.org/abs/2607.24255)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Internalizes behavior discrimination into generative recommendation via behavior-conditioned generation + entropy-aware trajectory optimization; 3B MoE deployed at JD.com with +1.6–4.4% UCTCVR, +2.8–6.8% GMV over v1; reward-model-free policy optimization.
-   * Key techniques:
-     - IDGR (Internalized Discrimination into Generative Recommendation): behavior instruction conditions generation from first decoder step
-     - Entropy-aware trajectory optimization self-distillation: uses future interactions as privileged knowledge
-     - Reward-model-free policy optimization: removes proxy reward model, eliminating reward hacking risk
-     - Single unified backbone across both pre-training and post-training stages; 3B-parameter, 1B-activated MoE
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (JD.com internal production)
-     - **Novelty: 7/10** — Internalizing discrimination via behavior conditioning is a clean alternative to co-training and RL-reward paradigms
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — 3B MoE deployed at JD.com scale; multiple online A/B with consistent gains; UCTCVR +4.4%, GMV +6.8%
-     - **Impact: 8/10** — JD.com; OxygenREC series established as major industrial genrec framework; practical behavior integration paradigm
-
-3. **CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation**
-   * Affiliation: Chinese Academy of Sciences (Institute of Information Engineering) / University of Chinese Academy of Sciences / Beijing Normal University / JD.com — *(Xiang Liu, Shuqi Zhao, Pengbo Mo, Mingming Li, Jiao Dai, Jizhong Han, Songlin Hu — CAS IIE/UCAS; Jingsong Su — BNU; Yiming Qiu, Huimu Wang — JD.com)*
-   * Link: [arxiv.org/abs/2607.24402](https://arxiv.org/abs/2607.24402)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Grounds intermediate reasoning in SID topology via SID Routing (Match/LateralJump/Explore); augments vertical SID hierarchy with intra-layer graphs + item neighborhoods; supervised multi-stage pipeline with shared trie-constrained output.
-   * Key techniques:
-     - SID Routing: layer-wise Match (fast localization), LateralJump (cross-layer navigation), Explore (slower structural search)
-     - Augmented SID topology: intra-layer semantic graphs + item-level neighborhoods beyond vertical hierarchy
-     - Multi-stage supervised pipeline: SID token alignment → direct generation → NL + SID-routing branches from shared checkpoint
-     - Structure-grounded reasoning most useful when prefix matching insufficient but learnable SID-space transitions available
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/caskcsg/CogRec](https://github.com/caskcsg/CogRec) — 3 commits, 0⭐; well-documented README with full reproduction protocol; clean modular structure (config/data/model/train/test); no license; anonymized release with visualization/GRPO code excluded; functional and reproducible
-     - **Novelty: 7/10** — First to ground fast-and-slow reasoning in SID topology; SID Routing operations are conceptually clean and well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — 3 public Amazon benchmarks; consistent SID Routing improvement over direct generation; analysis of when reasoning helps vs. hurts (weak routes → accumulated errors)
-     - **Impact: 6/10** — CAS IIE; opens new direction for structure-grounded reasoning in SID-based generative recommendation with interpretable routing operations
-
-4. **EGR: Embedding-Native Generative Retrieval with a Shared LLM**
-   * Affiliation: Snap Inc. — *(Xiaodong Liu, Congfei Zhang, Hsiang-wei Chao, Siman Wang, Tong Zhao, Xiao Bai, Vincent Zhang, Jingxiao Ma, Zhe Liu, Wenfeng Zhuo, Zichu Li, Jitin Krishnan, Yunzhi Zhou, Yajun Wang, Jinchao Li, Yu Zhang — Snap Inc.)*
-   * Link: [arxiv.org/abs/2607.23038](https://arxiv.org/abs/2607.23038)
-   * Venue: RecSys 2026
-   * TL;DR: Single shared LLM learns item+user representations in one embedding space with joint contrastive training; items indexed as dense vectors eliminating SID quantization; deployed on Snap DPA with +2.91% conversion-rate lift.
-   * Key techniques:
-     - Shared LLM encoding both item metadata and user interaction histories into unified embedding space
-     - Dense vector indexing bypassing SID quantization and mutable identifier vocabularies
-     - Joint contrastive training grouping related items and aligning queries with target items
-     - Handles cold-start items natively; benefits from multimodal input; scales with data
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (Snap Inc. internal production)
-     - **Novelty: 7/10** — Embedding-native GR paradigm avoids quantization artifacts; shared LLM for both sides is novel compared to separate encoder-generator designs
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — RecSys 2026 peer-reviewed; public benchmarks + industrial data + live Snap DPA deployment; +2.91% CVR
-     - **Impact: 8/10** — RecSys 2026; Snap Inc.; practical alternative to SID-based generative retrieval for large-scale advertising
-
-5. **MIRAGE: Escaping the Euclidean Void — Manifold-Informed Flow Matching for Sequential Recommendation**
-   * Affiliation: Jilin University / City University of Hong Kong — *(Dengzhao Fang, Yu Li, Yi Chang — Jilin University; Jingtong Gao, Xiangyu Zhao — CityU HK)*
-   * Link: [arxiv.org/abs/2607.23762](https://arxiv.org/abs/2607.23762)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Identifies "Euclidean void" in flow matching for sequential recommendation — straight paths crossing unsupported embedding regions; rectifies geometry via item co-occurrence graph topology regularization; enables accurate one-step inference.
-   * Key techniques:
-     - Euclidean void formalization: straight probability paths crossing regions with no valid item semantics
-     - MIRAGE manifold-informed rectification: reorganizes item embeddings via co-occurrence graph anchors without changing probability path
-     - Training-time topology regularization with zero inference overhead (graph used only during training)
-     - One-step inference preserving flow matching efficiency while boosting sparse target performance
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available (will be released upon publication)
-     - **Novelty: 7/10** — First to identify and formalize Euclidean void in generative SR flow matching; manifold-informed rectification is principled
-     - **Fairness: 4/10** — Boosted performance on sparsely observed targets benefits long-tail items
-     - **Robustness: 6/10** — 4 real-world datasets; consistent SOTA improvements; topology regularization is theoretically grounded
-     - **Impact: 5/10** — Jilin University/CityU HK; opens new direction for geometric awareness in continuous generative recommendation
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 117 papers as of August 6.
+**Count:** 118 papers as of August 9.
 
 | Score | Paper |
 | --- | --- |
@@ -1194,6 +1102,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Attention Calibration for Position-Fair Dense Information Retrieval |
 | 8/10 | Cold-Starts in Generative Recommendation: A Reproducibility Study (ColdGenRec) |
 | 8/10 | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) |
+| 8/10 | Masked Diffusion for Generative Recommendation (MaskGR) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
 | 7/10 | Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner) |
 | 7/10 | Can We Steer the Black-Box? Towards Controllability-Centric Evaluation of Recommender Systems with Collaborative Agents (CtrlBench-Rec) |
@@ -1373,6 +1282,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - PinRec / Unified Generative Retrieval for Pinterest -- Pinterest (KDD 2026)
 - SA2CRQ / Adaptive Semantic Quantization -- JD.com / HIT / PKU / CAS IIE (SIGIR 2026)
 - OneLive / Dynamically Unified Generative Live-Streaming -- Kuaishou
+- DualGR / Long+Short Interest GR -- USTC / Kuaishou (WWW 2026)
+- GRC / Generation-Reflection-Correction -- Alibaba / Wuhan U (KDD 2026)
+- SID Staleness / Mitigating Collaborative SID Staleness -- ITMO / VK (SIGIR 2026)
+- MDGR / Masked Diffusion GR -- Alibaba International
+- MaskGR / Masked Diffusion GR -- Snap Inc.
 
 ### RL / Reinforcement Learning
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -1467,6 +1381,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - UniGD / CAGE Gradient Coordination -- Kuaishou
 - PinRec / Outcome-Conditioned Generation -- Pinterest (KDD 2026)
 - OneLive / Multi-Objective Policy Optimization -- Kuaishou
+- DualGR / Long+Short Interest GR -- USTC / Kuaishou (WWW 2026)
+- GRC / Generation-Reflection-Correction GRPO -- Alibaba / Wuhan U (KDD 2026)
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
