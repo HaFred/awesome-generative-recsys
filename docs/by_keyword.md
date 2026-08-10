@@ -42,6 +42,9 @@
 - PinRec: Unified Generative Retrieval for Pinterest Recommender Systems (PinRec)
 - SA²CRQ: Towards Efficient and Generalizable Retrieval — Adaptive Semantic Quantization and Residual Knowledge Transfer (SA²CRQ)
 - OneLive: Dynamically Unified Generative Framework for Live-Streaming Recommendation (OneLive)
+- SID Understanding: Understanding Semantic IDs — From Item Representation to Item Selection in Generative Recommendation (SID Understanding)
+- HD-Rec: Hierarchical Quantization with Domain-Adaptive Sparse Routing for Generative Cross-Domain Recommendation (HD-Rec)
+- TM20K: Teacher Retains Full Tokens, Student Merges Efficiently — E-Commerce Sequence Modeling in Ad Recommendation (TM20K)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -110,6 +113,7 @@
 - One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
 - Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems (SCALR)
 - Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
+- HD-Rec: Hierarchical Quantization with Domain-Adaptive Sparse Routing for Generative Cross-Domain Recommendation (HD-Rec)
 
 ### Data Generation / Synthetic Data
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
@@ -989,6 +993,7 @@
 ### Reinforcement Learning
 - EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation (EvoReason)
 - Exp-RSFT: Exponential Reward Weighting for Fine-Tuning Generative Recommenders under Sparse and Noisy Feedback (Exp-RSFT)
+- Progressive FM Post-Training: Progressive Alignment of Recommender Foundation Model through Multi-Phase Post-Training (Progressive FM Post-Training)
 - Feedback-Grounded Policy Discovery for Generative Recommendation (Feedback-Grounded)
 - GALA: Generative Aligned Learning for Adaptive Multimodal Representation (GALA)
 - HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations (HRPO)

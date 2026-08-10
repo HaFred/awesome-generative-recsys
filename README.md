@@ -56,7 +56,7 @@ mindmap
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
-        IIRG -- KAIST / Snap Inc.
+        Progressive FM Post-Training -- Webtoon
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -164,6 +164,95 @@ mindmap
      - **Fairness: 3/10** — Not addressing fairness
      - **Robustness: 6/10** — Thorough experiments; consistent outperformance especially data-constrained regimes
      - **Impact: 7/10** — Snap Inc.; opens diffusion-based GR paradigm with strong open-source implementation
+
+### Papers August 10
+
+*Monday, August 10, 2026. Arxiv active. cs.IR Aug 10 listing returned 4 genrec papers (light day) + 1 missed July 27 paper from 3-month fallback (SID Understanding, UIUC). Total: 5 papers.*
+
+1. **Progressive Alignment of Recommender Foundation Model through Multi-Phase Post-Training**
+   * Affiliation: Webtoon (NAVER WEBTOON) — *(Oseong Choi, Hoeinn Kim, Jihoon Lee, Byungsoo Kang, Taeyeong Jang — Webtoon)*
+   * Link: [arxiv.org/abs/2608.06792](https://arxiv.org/abs/2608.06792)
+   * Venue: RecSys 2026 Industry Track
+   * TL;DR: Three-phase progressive post-training (LP→FFT→RFT) decoupling downstream adaptation from business-metric alignment for recommender foundation models; reward-based RL fine-tuning uses learned reward model with dense implicit feedback; large-scale online A/B validated; code open-sourced.
+   * Key techniques:
+     - Three-phase framework: Linear Probing stabilizes heads in frozen FM space, Full Fine-Tuning jointly specializes, Reinforcement Fine-Tuning aligns with business objectives
+     - Decoupled alignment: business-metric supervision used only for reward modeling — policy optimized on dense implicit feedback
+     - Learned reward model avoids directly optimizing serving policy on sparse/noisy business targets
+     - Reference implementation at github.com/webtoon/rec-fm-progressive-alignment (Apache 2.0)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5/10** — [github.com/webtoon/rec-fm-progressive-alignment](https://github.com/webtoon/rec-fm-progressive-alignment) — 3⭐, 1 commit, Apache 2.0; functional ref impl with clean modular structure (recfm/); runs on synthetic data; no pretrained weights or real dataset
+     - **Novelty: 5/10** — Three-phase alignment is a practical methodology but conceptually incremental; decoupling adaptation from alignment is sensible engineering
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; large-scale online A/B; production deployment validation
+     - **Impact: 6/10** — RecSys 2026 Industry; Webtoon; practical post-training blueprint for FM-based recommendation systems
+
+2. **From Classification to Recommendation: Empirical Analysis of Audio Embedding Models Application for Content-Based Music Recommendation**
+   * Affiliation: Macquarie University — *(Qingrui Li, Haowei Lou, Chengkai Huang, Quan Z. Sheng, Lina Yao — Macquarie/UNSW)*
+   * Link: [arxiv.org/abs/2608.06928](https://arxiv.org/abs/2608.06928)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: First systematic evaluation of audio embeddings across 3 recommendation paradigms (content-based, sequential, SID-based generative); increasing SID capacity does not consistently improve genrec and may introduce instability; practical guidance for audio encoder selection.
+   * Key techniques:
+     - Six representative audio encoders evaluated across three recommendation paradigms
+     - Residual-quantization analysis: codebook width, quantization depth, retained SID prefixes
+     - Key finding: audio-text-aligned and music-domain representations best when embedding geometry used directly; interaction-based training narrows encoder differences
+     - Key finding: increased SID capacity does not consistently improve generative rec performance
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First systematic audio embedding evaluation across SID-based genrec; capacity-instability finding is practically important
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — 6 encoders × 3 paradigms on 2 music datasets; comprehensive but no venue/peer review yet
+     - **Impact: 5/10** — Macquarie/UNSW; practical empirical guidance for music rec adopting genrec
+
+3. **HD-Rec: Hierarchical Quantization with Domain-Adaptive Sparse Routing for Generative Cross-Domain Recommendation**
+   * Affiliation: City University of Hong Kong / Kuaishou Technology — *(Haiying He, Kuo Cai, Bo Chen, Jingtong Gao, Yejing Wang, Ruiming Tang, Guorui Zhou, Han Li — Kuaishou; Xiaopeng Li, Yuchen Gu, Derong Xu, Xiangyu Zhao — CityU)*
+   * Link: [arxiv.org/abs/2608.06997](https://arxiv.org/abs/2608.06997)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: First generative cross-domain recommendation framework; hierarchical domain-aware quantizer with shared coarse + adaptively routed fine codebooks; domain-adaptive sparse MoE combining shared + specialized experts; cross-granularity routing consistency objective.
+   * Key techniques:
+     - Hierarchical Domain-Aware Quantizer: globally shared coarse-level codebooks + adaptively routed fine-level codebooks for domain-specific granularity
+     - Domain-Adaptive Sparse MoE: continuously activated shared expert + dynamically selected specialized expert per domain
+     - Cross-Granularity Routing Consistency: regularizes token-level routing toward item-level consensus for coherent multi-token representations
+     - Unified generative framework handling heterogeneous item semantics and behavioral patterns across domains
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First generative cross-domain rec with hierarchical domain-aware SID construction; MoE + routing consistency is well-designed
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — 3 public cross-domain benchmarks; consistent gains over sequential, generative, and cross-domain baselines
+     - **Impact: 6/10** — CityU/Kuaishou (Xiangyu Zhao, Ruiming Tang); opens generative cross-domain recommendation direction
+
+4. **TM20K: Teacher Retains Full Tokens, Student Merges Efficiently — E-Commerce Sequence Modeling in Ad Recommendation**
+   * Affiliation: ByteDance — *(Xinchun Li, Duoru Zheng, Wenlin Zhao, Ziyi Zhou, Jingxuan Tan, Huizhi Yang, Linlan Chen, Dongjian Wang, Dongyue Wang, Xiaosong Li, Hongyue Mao, Yaocheng Tan — ByteDance)*
+   * Link: [arxiv.org/abs/2608.07055](https://arxiv.org/abs/2608.07055)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Ultra-long 20K-token e-commerce sequence modeling with full Transformer attention + teacher-student KD; student uses token merge for compression; deployed at ByteDance ads: +1.036% ADSS, only +5.6% serving latency.
+   * Key techniques:
+     - Full Transformer attention (not target-sequence attention) for effective ultra-long sequence feature extraction
+     - Token merge: simple yet well-motivated compression for student model maintaining acceptable performance
+     - Two-stage KD: one-time heavy teacher trained on full 20K tokens; student distilled with merged tokens
+     - Production deployment: extends sequence to 20K with near-identical training/serving cost as online SOTA
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Full-attention + token-merge KD for 20K sequences is practical; production-scale validation is strong
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Production A/B at ByteDance e-commerce ads; +1.036% ADSS with minimal latency overhead
+     - **Impact: 7/10** — ByteDance; practical ultra-long sequence scaling blueprint for industrial ad recommendation
+
+5. **Understanding Semantic IDs: From Item Representation to Item Selection in Generative Recommendation**
+   * Affiliation: University of Illinois at Urbana-Champaign — *(Junting Wang, Xinrui He, Yunzhe Li, Hari Sundaram — UIUC)*
+   * Link: [arxiv.org/abs/2607.24995](https://arxiv.org/abs/2607.24995)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: First systematic empirical analysis of SID construction→generation pipeline; SIDs recover only 32.2% of encoder neighbors, TIGER retains only 29.9% of plausible targets after final token; proposes Item-Supported Decoding (ISD) with up to 31.2% NDCG gain, zero retraining.
+   * Key techniques:
+     - Systematic SID pipeline analysis: item encoding → SID construction → autoregressive generation → recommendation
+     - 8 SID constructions × 3 Amazon domains: SID neighborhoods recover only 32.2% of encoder's 10 nearest neighbors
+     - Item-Supported Decoding (ISD): lightweight inference-time method using user-specific item ranking to support SID prefixes before beam search discards them
+     - No additional parameters or retraining required; relative NDCG@10 gains up to 31.2%
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First systematic diagnostic of SID construction-to-generation pipeline; ISD is a clever lightweight fix
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — 3 domains × 8 constructions; comprehensive analysis; no peer review yet
+     - **Impact: 7/10** — UIUC (Hari Sundaram lab); important diagnostic work questioning SID fine-boundary assumptions; ISD practical for any SID-based genrec
 
 ### Papers August 7
 
@@ -949,104 +1038,11 @@ mindmap
      - **Robustness: 7/10** — Deployed on Kuaishou; consistent offline + online improvements; closed-form solution is principled
      - **Impact: 7/10** — Kuaishou/CAS IIE; practical value-aligned genrec decoding framework deployed at industrial scale
 
-### Papers July 30
-
-*Thursday, July 30, 2026. Arxiv cs.IR new listing returned 5 genrec papers from July 29 submission window. Total: 5 papers.*
-
-1. **Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation**
-   * Affiliation: Kuaishou Technology — *(You Wang, Zhao Liu, Guoping Tang, Yiqing Yang, Shuo Su, Jing Liu, Naifu Zhou, Xiaoyou Zhou, Wei Jiang, Jian Liang, Xiao Lv, Ruiming Tang, Liyin Hong, Wenwu Ou — Kuaishou)*
-   * Link: [arxiv.org/abs/2607.26500](https://arxiv.org/abs/2607.26500)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Controllable multi-objective generative retrieval with shared representations + per-objective LoRA experts + multi-decoder constrained beam search; releases Kwai26 benchmark with 1.31B records; deployed at Kuaishou with +0.37% app time, +2.09% cold-start.
-   * Key techniques:
-     - Multi-decoder architecture: shared user-context module + General Decoder, with isolated parameter-efficient LoRA experts per objective
-     - Three training regimes: exposure-sample NTP (shared base), target-filtered NTP (event experts), KL-regularized policy optimization (watch-time expert)
-     - Gradient routing isolating shared vs. objective-specific updates; General Decoder supplies stop-gradient reference
-     - Multi-Decoder Constrained Beam Search reducing cross-route overlap at inference with explicit route quotas
-     - Kwai26: publicly released large-scale multi-objective benchmark (1.31B records, 31.85M Item-IDs, 25.03M items with SIDs)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 4/10** — Kwai26 benchmark publicly released (1.31B records, predefined splits, evaluation protocol); no model training code
-     - **Novelty: 7/10** — First multi-decoder genrec with LoRA experts for controllable multi-objective retrieval; gradient routing + constrained beam search are well-motivated
-     - **Fairness: 4/10** — Addresses cold-start content (+2.09%); multi-objective control enables balanced candidate composition
-     - **Robustness: 8/10** — Production A/B at Kuaishou with consistent gains; 1.69-5.62% Recall improvement; cold-start improvements validated
-     - **Impact: 8/10** — Kuaishou OneRec family; production-proven multi-objective genrec; Kwai26 fills benchmark gap for multi-objective evaluation
-
-2. **WhisperRec: Latent Reasoning for Efficient Foundation Recommendation Models**
-   * Affiliation: Kuaishou Technology — *(Hao Jiang, Peiru Du, Pengfei Yao, Mengting Li, Siyuan Lou, Kuo Cai, Sheng Yu, Qiang Luo, Jian Liang, Ruiming Tang, Fei Pan, Peng Jiang, Wenwu Ou — Kuaishou)*
-   * Link: [arxiv.org/abs/2607.26621](https://arxiv.org/abs/2607.26621)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Compresses explicit CoT reasoning into learnable latent tokens for foundation rec models; Multi-View Adaptive CoT adapts reasoning complexity per instance; +17.44% SID@64 over explicit CoT Think, 10x+ inference throughput.
-   * Key techniques:
-     - Latent-Reason-then-Answer paradigm: compresses teacher CoT into latent reasoning tokens, avoiding autoregressive rationale generation
-     - Multi-View Adaptive CoT (MV-ACoT): constructs diverse CoT from complementary perspectives, adapts complexity (lightweight for clear cases, multi-factor for challenging ones)
-     - Three-stage Latent Reasoning Alignment: progressively internalizes teacher CoT into latent representations
-     - Curriculum-based post-training activating latent-token reasoning while preserving standard rec capability
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Code will be released upon publication (stated in paper)
-     - **Novelty: 7/10** — First to compress CoT into latent tokens for foundation rec models; adaptive reasoning complexity per instance is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Industrial Kuaishou dataset + public LLM-Rec benchmark; +17.44% SID@64, 10x throughput; three-stage training validated
-     - **Impact: 7/10** — Kuaishou; bridges LLM reasoning capability with recsys efficiency constraints; practical for industrial FRM deployment
-
-3. **PSG: Pair-Space Generation for Efficient Generative Reranking**
-   * Affiliation: Kuaishou Technology — *(Chao Feng, Li Ma, Xiancheng Gao, Chenghao Zhang, Yuanhao Pu, Xiang Li — Kuaishou)*
-   * Link: [arxiv.org/abs/2607.26427](https://arxiv.org/abs/2607.26427)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Elevates generative reranking atom from items to ordered item pairs; bijective mapping preserves expressiveness while halving generation steps; three theoretical guarantees (bijection, 2-4× speedup, 4× tighter suboptimality bound); deployed on Kuaishou with 1.83× speedup and +0.178% stay-time.
-   * Key techniques:
-     - Pair-Space Generation (PSG): treats ordered item pairs as generation tokens, generating L/2 tokens instead of L items
-     - On-the-fly pair-token representations via pretrained pair encoder, eliminating data sparsity of quadratic vocabulary
-     - Dynamic-vocabulary decoder scoring via inner product with encoder output, serving arbitrary candidate sets
-     - Three theoretical guarantees: bijective expressiveness, 2-4× speedup, ~4× tighter suboptimality bound O((L/2)²ε̄)
-     - Pair-space RL with action-mask constraints for item non-repetition
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 8/10** — Elevating generation atom to ordered pairs is a fundamental reformulation; three theoretical guarantees with practical industrial validation
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Production-deployed on Kuaishou (400M DAU); 1.83× speedup; +0.178% stay-time lift; theoretical proofs provided
-     - **Impact: 8/10** — Kuaishou; fundamentally new approach to generative reranking efficiency; applicable to any AR-based genrec system
-
-4. **DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval**
-   * Affiliation: University of Science and Technology of China / Kuaishou Technology — *(Yuanhao Pu, Chenghao Zhang, Chao Feng, Xiang Li — Kuaishou; Defu Lian — USTC)*
-   * Link: [arxiv.org/abs/2607.26418](https://arxiv.org/abs/2607.26418)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Transport-guided parallel reranking combining optimal transport with non-autoregressive generation; entropy-regularized OT provides conflict-aware supervision; prefix-anchored credit assignment aligns opaque list-wise evaluator with position-specific training; achieves duplicate-free slates without iterative transport.
-   * Key techniques:
-     - Transport-guided parallel reranking: maps candidates to continuous latent space, generates dynamic retrieval indices for all positions in parallel
-     - Entropy-regularized Optimal Transport for conflict-aware training supervision
-     - Global hard matching at inference: produces duplicate-free slates without iterative transport
-     - Prefix-anchored credit assignment: converts opaque list-wise scalar reward into position-specific training signals
-     - Retains parallel NAR efficiency while introducing global structural coordination via OT guidance
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to combine optimal transport with NAR generation for reranking; prefix-anchored credit assignment is novel for list-wise reward alignment
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Industrial-scale deployment; consistent offline+online gains; OT framework provides theoretical grounding
-     - **Impact: 7/10** — USTC/Kuaishou; practical parallel generative reranking with theoretical grounding in optimal transport
-
-5. **Learning from the Future: Privileged Self-Distillation for Sequential Recommendation**
-   * Affiliation: Alibaba Group / National University of Singapore / Renmin University of China — *(Jiakai Tang, Wen Chen, Jian Wu, Han Zhu — Alibaba; Yang Zhang; See-Kiong Ng — NUS; Xu Chen — Renmin U)*
-   * Link: [arxiv.org/abs/2607.27055](https://arxiv.org/abs/2607.27055)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Future interactions as training-only privileged information via dual-attention-mask self-distillation; shared backbone removes need for separate teacher; advantage-reachability gate focuses on prefix-supported signals; zero inference cost change.
-   * Key techniques:
-     - Privileged Self-Distillation (PSD): future-aware teacher view (past+future) distills into prefix-only student view (past only)
-     - Dual attention masks on shared backbone: teacher advantage is purely informational, not architectural
-     - Advantage-reachability gate: focuses distillation on teacher signals likely supported by observed prefix
-     - Momentum-averaged teacher for stable targets; single-stage end-to-end training
-     - Zero change to deployed model or inference cost
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Privileged self-distillation using future interactions is a clean training technique; advantage-reachability gate is practical
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Multiple public benchmarks + diverse backbones (SASRec, BERT4Rec); single-stage training with consistent improvements
-     - **Impact: 6/10** — Alibaba/NUS/Renmin; broadly applicable training technique for sequential recommendation; simple integration with existing models
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 118 papers as of August 9.
+**Count:** 119 papers as of August 10.
 
 | Score | Paper |
 | --- | --- |
@@ -1160,6 +1156,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 5/10 | Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec) |
 | 5/10 | LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation (LBR) |
 | 5/10 | OneReason Technical Report |
+| 5/10 | Progressive Alignment of Recommender Foundation Model through Multi-Phase Post-Training (Progressive FM Post-Training) |
 | 5/10 | SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR) |
 | 5/10 | Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go) |
 | 4/10 | Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation |
@@ -1287,6 +1284,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - SID Staleness / Mitigating Collaborative SID Staleness -- ITMO / VK (SIGIR 2026)
 - MDGR / Masked Diffusion GR -- Alibaba International
 - MaskGR / Masked Diffusion GR -- Snap Inc.
+- Progressive FM Post-Training -- Webtoon (RecSys 2026)
+- HD-Rec / Generative Cross-Domain Rec -- CityU / Kuaishou
+- SID Understanding / Item-Supported Decoding -- UIUC
+- TM20K / 20K Sequence Modeling -- ByteDance
 
 ### RL / Reinforcement Learning
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -1383,6 +1384,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - OneLive / Multi-Objective Policy Optimization -- Kuaishou
 - DualGR / Long+Short Interest GR -- USTC / Kuaishou (WWW 2026)
 - GRC / Generation-Reflection-Correction GRPO -- Alibaba / Wuhan U (KDD 2026)
+- Progressive FM Post-Training / Three-Phase RL Alignment -- Webtoon (RecSys 2026)
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
