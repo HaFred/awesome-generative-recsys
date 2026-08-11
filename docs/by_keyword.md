@@ -45,6 +45,12 @@
 - SID Understanding: Understanding Semantic IDs — From Item Representation to Item Selection in Generative Recommendation (SID Understanding)
 - HD-Rec: Hierarchical Quantization with Domain-Adaptive Sparse Routing for Generative Cross-Domain Recommendation (HD-Rec)
 - TM20K: Teacher Retains Full Tokens, Student Merges Efficiently — E-Commerce Sequence Modeling in Ad Recommendation (TM20K)
+- Preserving Item Semantics for Free: Rethinking Token Initialization in LLM-Based Generative Recommendation (Snap/UMich)
+- PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation (Kuaishou)
+- MetaStrategy: Generative Ranking with Executable LLM Strategies (Alibaba Taobao)
+- TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (ZJU/ByteDance)
+- IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for GenRec (Amap/Alibaba)
+- InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation (UCAS/CASIA)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
