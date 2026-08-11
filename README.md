@@ -76,6 +76,113 @@ mindmap
 ---
 ## By Date
 
+### Papers August 11
+
+*Tuesday, August 11, 2026. Arxiv active. cs.IR Aug 10-11 new listing returned 6 genrec papers. Total: 6 papers.*
+
+1. **Preserving Item Semantics for Free: Rethinking Token Initialization in LLM-Based Generative Recommendation**
+   * Affiliation: Snap Inc. / University of Michigan — *(Donald Loveland, Liam Collins, Bhuvesh Kumar, Neil Shah — Snap Inc.; Danai Koutra — UMich)*
+   * Link: [arxiv.org/abs/2608.07816](https://arxiv.org/abs/2608.07816)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Simple parameter-free centroid initialization for SID tokens eliminates random Gaussian init; shows random init causes embeddings to organize around popularity instead of semantics; centroid init improves Recall@5 up to 16%, cold-item Recall@5 up to 60%, reaches peak with 40% fewer SFT steps.
+   * Key techniques:
+     - Centroid Initialization: initializes SID token embeddings directly from k-means centroids in semantic embedding space; parameter-free, drop-in replacement
+     - Diagnostic probes: Neighborhood Purity, Spectral Scale, Latent Signal Encoding quantifying popularity vs. semantic organization
+     - Matryoshka-compatible: exploits MRL for dimension matching via truncation to leading dimensions
+     - Residual k-means quantization for SID construction (not RQ-VAE)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First systematic diagnosis of random SID init failure mode; centroid init is elegantly simple and effective
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — 3 datasets; consistent gains across SFT + CPT regimes; gradient analysis provides theoretical grounding
+     - **Impact: 6/10** — Snap Inc./UMich; simple practical fix for any LLM-based GR; cold-item improvement especially valuable
+
+2. **PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation**
+   * Affiliation: Kuaishou Technology — *(Manjia Lin, Da Li, Yan Wang, Yong Jin, Zheming Ding, Wei Yuan, Lei Yan, Yanan Xia, Lu Zhang, Fan Yang, Xuanping Li, Yanan Niu — Kuaishou)*
+   * Link: [arxiv.org/abs/2608.07989](https://arxiv.org/abs/2608.07989)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Lightweight LLM (Qwen3-0.6B) generates SIDs first then skippable interpretable copy for push recommendation; deployed at Kuaishou with +8.50% effective play rate, -37.70% dissatisfaction rate; long-tail video exposure improved.
+   * Key techniques:
+     - Parallel Semantic ID encoding: 8 parallel embedding slots with K-means quantization (M=8, K=512) using Qwen2.5-Omni-3B compression tokens
+     - Scenario-Aware SID Adaptation: fine-tunes LLM with Text2SID + SID2Text tasks; multi-token binding merges frequent n-grams
+     - Token Freeze: freezes original vocabulary during SID token training for stability
+     - Representation Fusion: LLM-generated SID preference signals fused with user features for ANN search
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First to deploy LLM-based SID generation for push recommendation with interpretable copy; parallel SID construction is practical
+     - **Fairness: 4/10** — Long-tail video exposure improved (indirect provider fairness)
+     - **Robustness: 8/10** — Production A/B at Kuaishou (1B+ users); +8.50% effective play rate; -37.70% dissatisfaction
+     - **Impact: 7/10** — Kuaishou; practical LLM-based push genrec with verified business impact; interpretability is key differentiator
+
+3. **MetaStrategy: Generative Ranking with Executable LLM Strategies**
+   * Affiliation: Alibaba Group (Taobao) — *(Chengyu Lai, Jiuning Lin, Zhibo Xiao, Xiaodong Zhu, Ruiquan Lan, Bin Zhang, Zihong Huang, Wendong Zhang, Chuxin Chen, Yinjiang Cai, Shuai Zhong, Lingqing Zhang, Dimin Wang, Jialin Zhu, Han Zhu — Alibaba)*
+   * Link: [arxiv.org/abs/2608.09440](https://arxiv.org/abs/2608.09440)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: LLM generates structured JSON ranking strategy (objective weights, category preferences, position policies) instead of item sequences; deterministic validator compiles into isolated Generator competing under list-level Evaluator; deployed on Taobao Homepage: +2.11% click PV, +3.12% IPV, +2.83% transaction amount, zero RT increase.
+   * Key techniques:
+     - Generative strategy paradigm: LLM emits typed JSON bundle (objective weights, content/category/experience constraints, position policies) rather than item sequences
+     - Generator-Evaluator (GE) architecture: compiled strategy competes atomically with incumbents under list-level Evaluator
+     - Production-path replay environment: trains on re-executed logged requests without user exposure
+     - Evaluator-routed reward-augmented on-policy distillation: 4B Teachers → 0.8B Student
+     - Self-competitive curriculum + selection/relative-rank/baseline-lift rewards
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Novel paradigm: generate strategy not items; GE architecture with self-competitive curriculum is well-designed
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — 7-day A/B at Taobao; +2.11%/3.12%/2.83% on PV/IPV/transaction; zero RT increase via diff-triggered nearline
+     - **Impact: 8/10** — Alibaba Taobao; new paradigm for generative ranking applicable to any multi-objective industrial recommender
+
+4. **TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation**
+   * Affiliation: Zhejiang University / ByteDance — *(Wenqiao Zhu, Chao Xu, Haipang Wu, Ji Liu — ZJU/ByteDance)*
+   * Link: [arxiv.org/abs/2608.09605](https://arxiv.org/abs/2608.09605)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Pinpoints informative tokens from full item descriptions instead of truncating to first few; three-stage selection pipeline with proxy reward; +31.25% performance, +63.4% efficiency over 6 baselines.
+   * Key techniques:
+     - Token selection via preference optimization: identifies informative tokens across entire textual content
+     - Three-stage pipeline for systematic token selection and filtering
+     - Novel proxy reward mechanism guiding token selection process
+     - Balances recommendation quality with computational efficiency without truncation-induced information loss
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 1/10** — [github.com/WNQzhu/TSPORec](https://github.com/WNQzhu/TSPORec) — empty repo (0 stars, 0 commits); placeholder only
+     - **Novelty: 6/10** — Token selection over truncation is practical; proxy reward for preference optimization is clean
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — 2 models × 2 datasets; consistent gains; no peer review or industrial validation
+     - **Impact: 5/10** — ZJU/ByteDance; practical efficiency solution for LLM-based sequential rec
+
+5. **IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation**
+   * Affiliation: Amap / Alibaba Group — *(Junjie Sun, Longfei Xu, Huimin Yan, Wei Luo, Kaikui Liu, Xiangxiang Chu — Amap/Alibaba)*
+   * Link: [arxiv.org/abs/2608.09634](https://arxiv.org/abs/2608.09634)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: First multi-task generative recommender identifying threefold collapse (source/relational/hierarchical); Dual-Stream Decoupling + Task-Interactive Modeling + Hierarchical Querying; deployed on Amap serving hundreds of millions of users: +1.60% UVCTR.
+   * Key techniques:
+     - Dual-Stream Decoupling (DSD): injects task identity early, separates shared context from task-specific stream alleviating signal dilution
+     - Task-Interactive Modeling (TIM): replaces predefined funnel with explicit cross-task interaction; each task conditions on predecessors' outcomes with learned input-adaptive strength
+     - Hierarchical Querying (HQ): each task gathers multi-scale information across different layers at different training stages
+     - Threefold collapse diagnosis: source collapse (late signal injection), relational collapse (static funnel), hierarchical collapse (scale-stage mismatch)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — First systematic diagnosis of multi-task collapse in genrec; three-component design is well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — 4 task-head configurations; production deployment at Amap with hundreds of millions of users
+     - **Impact: 7/10** — Amap/Alibaba; practical multi-task generative recommendation with production validation
+
+6. **InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation**
+   * Affiliation: University of Chinese Academy of Sciences / Institute of Automation, CAS — *(Chenxi Li, Yuchen Lu, Xu Yang — UCAS/CASIA)*
+   * Link: [arxiv.org/abs/2608.09685](https://arxiv.org/abs/2608.09685)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Identifies homogeneous SID structures waste capacity; adaptive allocation of fixed capacity budget across semantic slots jointly determines ID length + slot-specific codebook sizes; improved accuracy under comparable budgets with one-step parallel prediction.
+   * Key techniques:
+     - Adaptive semantic target construction: allocates fixed capacity budget across candidate semantic slots
+     - Joint optimization of effective ID length and slot-specific codebook sizes
+     - Demonstrates uniformly expanding semantic slots provides limited gains → capacity redundancy in homogeneous SIDs
+     - One-step parallel prediction preserved; lightweight framework for parallel genrec
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 3/10** — [anonymous.4open.science/r/inforID-F582](https://anonymous.4open.science/r/inforID-F582) — anonymous repo; not a permanent public release
+     - **Novelty: 6/10** — First to address heterogeneous capacity demands across semantic subspaces; adaptive allocation is practical
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — Multiple datasets; comparable capacity budget comparison; no peer review yet
+     - **Impact: 5/10** — UCAS/CASIA; practical contribution to parallel genrec but limited industrial validation
+
 ### Papers August 9
 
 *Sunday, August 9, 2026. Arxiv inactive (weekend). Applied 3-month fallback strategy → found 5 missed genrec papers from Nov 2025–Apr 2026: DualGR USTC/Kuaishou WWW 2026, GRC Alibaba/Wuhan U KDD 2026, SID Staleness ITMO/AI VK SIGIR 2026, MDGR Alibaba International, MaskGR Snap Inc. opensource 8/10. Total: 5 papers.*
@@ -931,118 +1038,11 @@ mindmap
      - **Fairness: 3/10** — Not addressing fairness
      - **Robustness: 6/10** — 4 real-world datasets; consistent 6.72% average improvement; comprehensive ablation
      - **Impact: 5/10** — Zhejiang U; practical LLM-enhanced sequential rec framework
-
-### Papers July 31
-
-*Friday, July 31, 2026. Arxiv cs.IR new listing returned 4 genrec papers from July 30 submission window + 2 missed papers from July 28 submission. Total: 6 papers.*
-
-1. **From Understanding to Action: Feedback-Grounded Policy Discovery for Generative Recommendation**
-   * Affiliation: Tianjin University / Kuaishou Technology / HKUST(GZ) — *(Zhi Chen, Minmao Wang, Xingchen Liu, Haoqiang Liang, Huihuang Lin, Likang Wu — HKUST(GZ); Hongke Zhao — Tianjin U; Yulong Wang, Shijie Yi, Fei Pan, Peng Jiang — Kuaishou)*
-   * Link: [arxiv.org/abs/2607.27789](https://arxiv.org/abs/2607.27789)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Identifies Understanding-Action Gap — linguistically plausible LLM reasoning ≠ effective rec decisions; feedback-driven agent discovers policies through outcome-derived incremental utility; dual-space relational distillation into latent tokens for LLM-free inference; +4.506% Revenue, +4.621% ADVV in A/B.
-   * Key techniques:
-     - Understanding-Action Gap: distinguishes intent knowledge (user demand) from policy knowledge (recommendation direction + rejection boundary)
-     - Feedback-driven agent: evaluates/refines candidate policies via outcome-derived feedback not linguistic plausibility
-     - Dual-space relational distillation: transfers intent + policy knowledge into two latent tokens of lightweight SID generator
-     - LLM-free online inference after distillation; public benchmarks + industrial A/B validation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Understanding-Action Gap is a novel diagnostic framing; dual-space distillation for LLM-free inference is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Large-scale online A/B with +4.506% Revenue, +4.621% ADVV; public benchmark + industrial validation
-     - **Impact: 7/10** — Tianjin U/Kuaishou/HKUST(GZ); practical bridge between LLM reasoning and genrec decisions; feedback-driven paradigm
-
-2. **LoopMemGR: From Behavior Logs to Evolving Memory for Generative Recommendation**
-   * Affiliation: Alibaba Group (Taobao) — *(Hui Qian, Changfa Wu, Chang Liu, Binbin Cao, Jian Wu, Yuliang Yan, Han Zhu, Bo Zheng — Alibaba)*
-   * Link: [arxiv.org/abs/2607.27647](https://arxiv.org/abs/2607.27647)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Closed-loop genrec maintaining recommendation experience log alongside behavior log; three-view extraction (recency/frequency/global) compresses past rec-feedback trajectories into experience tokens; identifies asymmetric memory problem where system forgets its own past recommendations.
-   * Key techniques:
-     - Recommendation experience log: records past recommendation-feedback trajectories alongside behavior log
-     - Three-view evidence extraction: recency (short-term dynamics), frequency (recurring patterns), global (transferable regularities)
-     - Experience tokens: compress multi-view evidence into fixed-token budget conditioning the generative backbone
-     - Closed-loop memory: system remembers what it recommended + the resulting feedback across requests
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First closed-loop recommendation experience memory for genrec; asymmetric memory diagnosis is insightful
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Industrial Taobao dataset only; three-view ablation; no public benchmark results
-     - **Impact: 6/10** — Alibaba; practical closed-loop memory paradigm for genrec; experience-aware generation direction
-
-3. **Restoring Collaborative Signals in Semantic-ID Generative Recommendation via Personalized Natural Language**
-   * Affiliation: JD.com / McGill University — *(Changjiang Han, Qingyang Li, Yaqiang Zang, Pinghua Gong — JD.com; Jikun Kang, Xue Liu — McGill; Bowei He)*
-   * Link: [arxiv.org/abs/2607.27682](https://arxiv.org/abs/2607.27682)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Diagnoses SID content-collaboration competition — compact SIDs lose collaborative signal to content reconstruction; personalized natural language injects hierarchical collaborative cues at inference without backbone change or SID retraining.
-   * Key techniques:
-     - SID competition diagnosis: compact SID cannot hold both content and collaborative signal → collaboration loses → accuracy capped
-     - Personalized NL-guided collaborative injection: language attaches analyzable links between collaborative patterns and their audiences
-     - Hierarchical collaborative cues: added progressively as model generates SIDs at inference time
-     - No backbone alteration, no SID retraining, no multi-round training; purely inference-time enhancement
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to diagnose and address SID content-vs-collaboration competition; inference-time NL-guided collaborative restoration is novel
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Consistent gains without training changes; diagnostic framing is strong
-     - **Impact: 6/10** — JD.com/McGill; addresses fundamental SID limitation; practical inference-time solution
-
-4. **HiLaR: Hierarchical Latent Reasoning for LLM-based Recommendation**
-   * Affiliation: Xi'an Jiaotong-Liverpool University / Xiaohongshu / Peking University / Beijing Jiaotong University — *(Peiyu Hu, Jia Wang — XJTLU; Siying Gu, Yuntian Tang, Jiahao Liang, Yiying Xie, Jiang Rong, Zhaokai Luo, Zhiyong Wang — Xiaohongshu; Weihai Lu — PKU; Zhuodong Liu — BJTU)*
-   * Link: [arxiv.org/abs/2607.27760](https://arxiv.org/abs/2607.27760)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Temporal-guided hierarchical user preference representations aligned with LLM latent reasoning states from broad→fine-grained; layer-aware process rewards from marginal target-likelihood gain optimize reasoning trajectory; 4 Amazon benchmarks outperforming sequential/generative/LLM baselines.
-   * Key techniques:
-     - Temporal-guided hierarchical preference: constructs multi-granularity user representations from broad to current intent
-     - Layer-aware alignment: matches hierarchical preferences with specific LLM latent reasoning layers
-     - Process rewards: marginal target-likelihood gain per latent state as layer-aware optimization signal
-     - Combined final recommendation feedback + process-level rewards for trajectory optimization
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 1/10** — [github.com/hupeiyu21/HiLaR](https://github.com/hupeiyu21/HiLaR) — 2 commits, 0⭐; placeholder "Coming Soon"; no code, no license, no documentation
-     - **Novelty: 7/10** — Layer-aware process rewards for latent reasoning is novel; hierarchical preference-to-LLM-state alignment is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — 4 Amazon benchmarks; comprehensive ablation on all components (hierarchical, alignment, process optimization)
-     - **Impact: 6/10** — XJTLU/Xiaohongshu/PKU/BJTU; practical latent reasoning framework with layer-aware optimization for LLM-based rec
-
-5. **SPARC: Sequence-aware Progressive Attribute Routing and Compression Framework for Generative Recommendation**
-   * Affiliation: Alibaba Group (Taobao) — *(Chang Liu, Changfa Wu, Hui Qian, Binbin Cao, Jian Wu, Yuliang Yan, Han Zhu, Bo Zheng — Alibaba)*
-   * Link: [arxiv.org/abs/2607.25339](https://arxiv.org/abs/2607.25339)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Contextualizes heterogeneous behavior attributes (category/brand/price/behavior type/timestamp) before compressing; progressive field-level routing preserves complementary info under fixed capacity; light cross-item interaction compresses each item to single token without increasing genrec input length.
-   * Key techniques:
-     - Contextualize-before-compression: first models per-field sequential dependencies, then compresses
-     - Multi-slot routing: routes original, contextual, and identity representations of different fields into slots
-     - Lightweight cross-item interaction: integrates intermediate tokens and compresses each historical item into single token
-     - Fixed input budget to genrec backbone; improvement from context-conditioned retention not expressiveness inflation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Contextualize-before-compression is a clean principle; field-level routing is practical but incremental
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Industrial Taobao + public Amazon; controlled comparison with static compression variants
-     - **Impact: 6/10** — Alibaba; practical attribute compression for genrec deployed on Taobao
-
-6. **Reward Guided Decoding for Generative Recommendation (RGD)**
-   * Affiliation: Kuaishou Technology / Institute of Information Engineering, CAS — *(Ruochen Yang, Yusheng Huang, Youfeng Zheng, Shuang Wen, Liangliang Chen, Pengbo Xu, Xiaoyu Zhang, Shijun Wang, Shuang Yang, Zhaojie Liu, Lantao Hu, Wenwu Ou — Kuaishou; Jiawei Sheng, Tingwen Liu — CAS IIE)*
-   * Link: [arxiv.org/abs/2607.25344](https://arxiv.org/abs/2607.25344)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: KL-regularized reward maximization derives closed-form value-guided decoding distribution for genrec; reward model as test-time controller injects business value at each beam-search step without retraining; deployed on Kuaishou with consistent online gains.
-   * Key techniques:
-     - Value-guided decoding as KL-regularized reward maximization with closed-form decoding distribution
-     - Base generator as reference policy + reward model as test-time controller; no retraining when business preferences change
-     - Principled combination of generation probability with reward signals at each decoding step
-     - Reshapes beam search trajectory to align personalization with business objectives
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — KL-regularized reward-guided decoding is a principled approach; test-time controllability without retraining is practical
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Deployed on Kuaishou; consistent offline + online improvements; closed-form solution is principled
-     - **Impact: 7/10** — Kuaishou/CAS IIE; practical value-aligned genrec decoding framework deployed at industrial scale
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 119 papers as of August 10.
+**Count:** 121 papers as of August 11.
 
 | Score | Paper |
 | --- | --- |
@@ -1167,7 +1167,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 3/10 | STORM: Stepwise Token Optimization with Reward-Guided Beam Search |
 | 3/10 | Cheaper is Better: A Discount-Aware Network for Conversion Rate Prediction in E-commerce Recommendation System (DANet) |
 | 3/10 | Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) |
+| 3/10 | InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation (InforID) |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
+| 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
 ---
 
@@ -1288,6 +1290,12 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - HD-Rec / Generative Cross-Domain Rec -- CityU / Kuaishou
 - SID Understanding / Item-Supported Decoding -- UIUC
 - TM20K / 20K Sequence Modeling -- ByteDance
+- Preserving Item Semantics for Free / Centroid SID Init -- Snap Inc. / UMich
+- PushDualGen / LLM SID Push Rec -- Kuaishou
+- MetaStrategy / Generative LLM Ranking Strategy -- Alibaba (Taobao)
+- TSPORec / Token Selection SeqRec -- ZJU / ByteDance
+- IntHQ / Multi-Task Generative Rec -- Amap / Alibaba
+- InforID / Adaptive SID Capacity Allocation -- UCAS / CASIA
 
 ### RL / Reinforcement Learning
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -1385,6 +1393,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DualGR / Long+Short Interest GR -- USTC / Kuaishou (WWW 2026)
 - GRC / Generation-Reflection-Correction GRPO -- Alibaba / Wuhan U (KDD 2026)
 - Progressive FM Post-Training / Three-Phase RL Alignment -- Webtoon (RecSys 2026)
+- MetaStrategy / Generative LLM Ranking Strategy -- Alibaba (Taobao)
+- TSPORec / Token Selection SeqRec -- ZJU / ByteDance
+- PushDualGen / LLM SID Push Rec -- Kuaishou
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
