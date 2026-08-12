@@ -30,8 +30,11 @@
 - SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
 - STEPS: A Self-Triggered Agentic Push Recommendation System (STEPS)
 - TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
+- Personalized Communication Skills for Agentic Recommender Systems (AgentCom)
 
 ### Beam Search / Constrained Decoding
+- FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
+- GenRec: An LLM-Backed Recommendation Ranker at Netflix (GenRec)
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
 - HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations (HRPO)
 - SITA: Semantic Interest Tokens for Target-Aware Compression in Long-Sequence Recommendation (SITA)
@@ -120,6 +123,7 @@
 - Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems (SCALR)
 - Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
 - HD-Rec: Hierarchical Quantization with Domain-Adaptive Sparse Routing for Generative Cross-Domain Recommendation (HD-Rec)
+- FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 
 ### Data Generation / Synthetic Data
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
@@ -241,6 +245,7 @@
 - Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation (SF-UBM)
 - Federated Variational Preference Alignment with Gumbel-Softmax Prior for Personalized User Preferences (FedVPA-GP)
 - Guiding Federated Graph Recommendation with LLM-encoded knowledge
+- FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 
 
 
