@@ -76,6 +76,95 @@ mindmap
 ---
 ## By Date
 
+### Papers August 13
+
+*Thursday, August 13, 2026. Arxiv active. cs.IR Aug 12 listing returned 5 genrec/recsys papers. Total: 5 papers.*
+
+1. **HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs**
+   * Affiliation: Shanghai Jiao Tong University / Huawei Noah's Ark Lab — *(Kangning Zhang, Haotian Fang, Xukun Luo, Hao Yin, Yang Gao, Peng Yan, Weiwen Liu, Weinan Zhang, Yong Yu)*
+   * Link: [arxiv.org/abs/2608.11980](https://arxiv.org/abs/2608.11980)
+   * Venue: CIKM 2026
+   * TL;DR: Diagnoses the "zero-advantage" bottleneck in reward-based post-training of SID genrec — when an early semantic token enters the wrong branch, rollout groups miss the ground-truth item and receive identical zero rewards; supplies minimal target-prefix hints only for hard instances, then uses hint-aware credit decomposition (supervised for hinted tokens, GRPO for sampled suffix).
+   * Key techniques:
+     - Checkpoint-rollout diagnosis: supplies a minimal target-prefix hint only when the current generator cannot reach the correct item
+     - Hint-aware credit decomposition: supervised learning preserves item-semantic/prefix-structure alignment for hinted tokens; GRPO optimizes the sampled suffix
+     - Turns zero-reward groups into informative comparisons over item-token completions
+     - Reduces zero-advantage training samples from over 70% to below 20%
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 1/10** — [github.com/WncFht/GRec](https://github.com/WncFht/GRec) — code link provided in paper but repo returns 404 (not yet public)
+     - **Novelty: 7/10** — First to diagnose and treat the zero-advantage training failure in SID genrec; hint-conditioned generation is a clean, well-motivated fix
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; sequential recommendation benchmarks; consistent gains over SFT + vanilla reward-based post-training
+     - **Impact: 6/10** — CIKM 2026; SJTU (Weinan Zhang); practical post-training fix applicable to any SID-based genrec
+
+2. **Token-Level Credit Assignment Optimization for Generative Document Retrieval**
+   * Affiliation: Shandong University — *(Xinpeng Zhao, Yang Liu, Ran Chen, Xinyu Ma, Daiting Shi, Pengjie Ren, Zhumin Chen, Zhaochun Ren, Xin Xin)*
+   * Link: [arxiv.org/abs/2608.12049](https://arxiv.org/abs/2608.12049)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Fine-grained RL framework replacing sequence-level rewards with token-level relevance rewards for generative (DocID) retrieval; estimates step-wise rewards by measuring how each token decision changes the expected retrieval quality of the generation trajectory.
+   * Key techniques:
+     - Token-level relevance rewards: step-wise reward estimation measuring per-token impact on expected retrieval quality
+     - Precise credit assignment favoring token decisions that contribute directly to document-level relevance
+     - Practical reward-estimation strategies tailored to the autoregressive DocID generation process
+     - Policy optimization integrating fine-grained supervision to align decoding with retrieval objectives
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Token-level (vs sequence-level) RL rewards for generative retrieval is a clean, under-explored idea
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — Retrieval benchmarks; consistently outperforms sequence-level reward baselines; no venue/peer review yet
+     - **Impact: 5/10** — Shandong U; practical RL credit-assignment improvement for generative retrieval
+
+3. **Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation (GALLM)**
+   * Affiliation: Zhejiang University — *(Fenglin Yan, Bohao Wang, Jian Zhang, Yu Cui, Tongya Zheng, Ye Feng, Can Wang, Jiawei Chen)*
+   * Link: [arxiv.org/abs/2608.12184](https://arxiv.org/abs/2608.12184)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Graph-aware LLM framework building a collaborative graph over text tokens + item tokens with three relation types (Text-Text, Item-Text, Item-Item), turned into lightweight learnable attention biases — no additional graph encoder needed.
+   * Key techniques:
+     - Collaborative graph over text tokens + item tokens modeling three relation types
+     - Lightweight learnable attention biases injected into the LLM attention mechanism for collaborative-aware token interactions
+     - Item-Item relations derived from global item co-occurrence patterns across users
+     - No additional graph encoder; +9.76% average HR@5 over strongest baseline on 4 benchmarks
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — Graph-aware attention biases for LLM seqrec are practical; conceptually incremental
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — 4 real-world benchmarks; consistent gains; no venue/peer review yet
+     - **Impact: 5/10** — Zhejiang U; practical integration of collaborative signals into LLM-based sequential rec
+
+4. **From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM)**
+   * Affiliation: POSTECH — *(Junyoung Kim, Wonbin Kweon, Woojoo Kim, Jaehyung Lim, Dongha Kim, Hwanjo Yu)*
+   * Link: [arxiv.org/abs/2608.11846](https://arxiv.org/abs/2608.11846)
+   * Venue: CIKM 2026
+   * TL;DR: Diagnoses similarity bias in transformer sequential rec (dot-product attention over-favors similar items, overlooking heterogeneous relations with meaningful preference signals); proposes PRISM with K Perspective Lenses combining an Affinity View (homogeneous) and a Contrast View (heterogeneous) to calibrate attention.
+   * Key techniques:
+     - Similarity-bias diagnosis: dot-product attention scores disproportionately favor similar items across transformer-based SR models
+     - K Perspective Lenses calibrating attention from distinct viewpoints
+     - Affinity View (homogeneous relations) + Contrast View (heterogeneous relations suppressed by bias)
+     - 7 real-world benchmarks; consistently outperforms SOTA baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/327aem/PRISM](https://github.com/327aem/PRISM) — 1⭐, 9 commits; functional code (train/trainer/dataset/metrics) with training scripts; minimal README, no license
+     - **Novelty: 5/10** — Multi-perspective attention calibration is practical; conceptually incremental
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; 7 benchmarks; consistent SOTA
+     - **Impact: 5/10** — CIKM 2026; POSTECH; practical attention fix for sequential recommendation
+
+5. **Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion**
+   * Affiliation: National Taiwan University — *(Song-Duo Ma, Pu-Jen Cheng)*
+   * Link: [arxiv.org/abs/2608.11190](https://arxiv.org/abs/2608.11190)
+   * Venue: RecSys 2026
+   * TL;DR: Shows recent group rec improvements are inflated by a systematic evaluation bias from training-time score compression + deterministic tie-breaking; proposes tie-aware evaluation computing the exact expectation of HR@K/NDCG@K under uniform random tie-breaking; finds many reported gains shrink substantially.
+   * Key techniques:
+     - Tie-breaking bias diagnosis: sigmoid-before-BPR inflates tied top scores, making HR@K/NDCG@K highly sensitive to tie resolution
+     - Tie-aware protocol: exact expectation of HR@K/NDCG@K under uniform random tie-breaking
+     - Re-evaluation of 5 recent methods + 6 baselines on CAMRa2011 and Mafengwo (group + user settings)
+     - Temperature-scaled BPR (τ-BPR) retains smoothing benefit without severe tie inflation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/songduoma/TieAwareGroupRec](https://github.com/songduoma/TieAwareGroupRec) — 0⭐, 18 commits; publication-grade README with full reproduction for 5 methods + 6 baselines
+     - **Novelty: 6/10** — First to isolate tie-breaking as a systematic evaluation confound in group rec; tie-aware protocol is an important diagnostic
+     - **Fairness: 4/10** — Establishes reliable, unbiased evaluation for group rec benchmarks (indirect fairness)
+     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; tie-aware protocol; multiple methods + datasets
+     - **Impact: 6/10** — RecSys 2026; NTU; important diagnostic for reliable group recommendation evaluation
+
 ### Papers August 12
 
 *Wednesday, August 12, 2026. Arxiv active. cs.IR Aug 11-12 listing returned 7 genrec papers. Total: 7 papers.*
@@ -982,101 +1071,12 @@ mindmap
      - **Robustness: 8/10** — 7-day online A/B at Kuaishou with +2.084% ADVV; multiple tasks/datasets/backbones; limited trial budget efficiency
      - **Impact: 7/10** — Kuaishou; agentic recsys optimization with production-proven gains; practical framework for automated model iteration
 
-### Papers August 2
-
-*Sunday, August 2, 2026. Arxiv inactive (weekend). Applied 3-month fallback strategy → found 5 missed genrec papers: 1 from July 26 listing (Dual-purpose SIDs, YouTube/Google, RecSys 2026) + 4 from Feb–June 2026 3-month fallback (UGR USTC KDD 2026, RAGR Dalian/CityU/Huawei TOIS 2026, PauseRec UVA/Snap, Gryphon Yandex). Total: 5 papers.*
-
-1. **Tokens are All You Need: Dual-purpose Semantic IDs for Achieving LLM-Level I/O Efficiency in Recommendation Systems**
-   * Affiliation: YouTube / Google — *(Baolei Li, Yiping Yuan, Yilin Zheng, Likang Yin, Ling Liu, Fabio Soldo, Romer Rosales, Xinyang Yi, Lichan Hong — YouTube/Google)*
-   * Link: [arxiv.org/abs/2607.24865](https://arxiv.org/abs/2607.24865)
-   * Venue: RecSys 2026
-   * TL;DR: Dual-purpose SIDs serving as both collaborative identity (via learnable embedding table) and content reconstruction (via lightweight Semantic Decoder for on-the-fly embedding approximation); replaces massive embedding storage with on-demand reconstruction; deployed on production-scale ranking + retrieval at major video platform.
-   * Key techniques:
-     - Dual-purpose Semantic IDs: hierarchical quantization condenses continuous embeddings into discrete tokens with two concurrent roles
-     - Collaborative Identity: models user-item interactions via learnable embedding table lookup
-     - Content Reconstruction: lightweight Semantic Decoder reconstructs embeddings on-the-fly, eliminating massive vector storage
-     - On-demand reconstruction replacing persistent dense embedding tables for I/O efficiency
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Dual-purpose SID concept combining collaborative and content roles is novel; bridges traditional embedding and generative paradigms
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; production deployment at major video platform; offline + online validation
-     - **Impact: 7/10** — RecSys 2026; YouTube/Google; practical I/O efficiency paradigm for industrial-scale recommendation
-
-2. **Uncertainty-aware Generative Recommendation (UGR)**
-   * Affiliation: University of Science and Technology of China — *(Chenxiao Fan, Chongming Gao, Yaxin Gong, Haoyan Liu, Fuli Feng, Xiangnan He — USTC)*
-   * Link: [arxiv.org/abs/2602.11719](https://arxiv.org/abs/2602.11719)
-   * Venue: KDD 2026
-   * TL;DR: Identifies "uncertainty blindness" in genrec — existing preference optimization relies solely on binary outcome correctness ignoring model confidence; proposes uncertainty-weighted reward penalizing confident errors + difficulty-aware optimization + explicit confidence alignment via confidence tokens; stabilizes training preventing performance degradation.
-   * Key techniques:
-     - Uncertainty-weighted reward: adaptive penalties distinguishing confident hallucinations from tentative explorations
-     - Difficulty-aware optimization dynamics: prevents premature convergence by focusing on hard samples
-     - Explicit confidence alignment: augments vocabulary with confidence tokens, jointly generates recommendation + confidence
-     - Uncertainty-aware RL objective for preference optimization with confidence expression
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/cxfann/UGR](https://github.com/cxfann/UGR) — KDD 2026 artifact; 4 commits; clean modular structure (data/train/eval); well-documented README with full reproduction pipeline; built on LETTER/MiniOneRec; Zenodo DOI available
-     - **Novelty: 7/10** — First to formalize uncertainty blindness in GR; confidence tokens as explicit signal for generative recommendation is novel
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — KDD 2026 peer-reviewed; training stabilization demonstrated; learned confidence enables risk-aware downstream applications
-     - **Impact: 7/10** — KDD 2026; USTC (Xiangnan He); addresses fundamental training issue in generative recommendation with practical confidence modeling
-
-3. **Review-Augmented Generative Recommendation (RAGR)**
-   * Affiliation: Dalian University of Technology / City University of Hong Kong / Huawei Noah's Ark Lab — *(Yingyi Zhang, Junyi Li, Yejing Wang, Wenlin Zhang, Xiaowei Qian, Sheng Zhang, Yue Feng — Dalian/CityU; Yichao Wang, Yong Liu — Huawei; Xiangyu Zhao — CityU; Xianneng Li — Dalian)*
-   * Link: [arxiv.org/abs/2605.17267](https://arxiv.org/abs/2605.17267)
-   * Venue: ACM TOIS 2026
-   * TL;DR: Identifies item-only modeling as structural bottleneck in GR — review feedback explains why users choose items; interleaves item SIDs and review SIDs in chronological autoregressive sequence; DPO-based alignment ensures item tokens prioritized over review tokens at prediction positions.
-   * Key techniques:
-     - Review-Augmented User Sequence Modeling: interleaves item SIDs + review SIDs chronologically in mixed behavioral-semantic sequence
-     - Item-Centric Task Generation Alignment: DPO favoring item tokens over review tokens at prediction positions
-     - Review SID construction parallel to item SID via RQ-VAE tokenizer
-     - Review feedback directly participating in autoregressive next-token generation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/Zhang-Yingyi/RAGR](https://github.com/Zhang-Yingyi/RAGR) — 6⭐, 8 commits; well-structured README with diagrams and full 7-step pipeline; modular code (data_process/RQ-VAE/TIGER); sample Beauty dataset provided; ACM TOIS artifact
-     - **Novelty: 7/10** — First to incorporate review feedback directly into generative user sequence via interleaved SIDs; DPO-based preference alignment for task focus is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — 3 real-world datasets; consistent gains over strong GR backbones; ACM TOIS peer-reviewed
-     - **Impact: 6/10** — Dalian/CityU/Huawei; practical augmentation paradigm for generative recommendation bridging behavioral and semantic signals
-
-4. **Implicit Reasoning for Large Language Model-based Generative Recommendation (PauseRec)**
-   * Affiliation: University of Virginia / Snap Inc. — *(Yinhan He, Liam Collins, Bhuvesh Kumar, Jundong Li — UVA; Neil Shah, Donald Loveland — Snap Inc.)*
-   * Link: [arxiv.org/abs/2606.14142](https://arxiv.org/abs/2606.14142)
-   * Venue: arXiv preprint, June 2026
-   * TL;DR: Systematically decomposes explicit CoT reasoning pipelines for LLM-based GR, revealing 3 limitations (weakened world-knowledge verbalization, SID-NL embedding misalignment, rationale quality sensitivity); proposes lightweight implicit reasoning avoiding costly reasoning trace acquisition; +6.22% over CoT, -65% training GPU hours, -71.3% inference time.
-   * Key techniques:
-     - Systematic decomposition of explicit reasoning pipelines revealing 3 failure modes in LLM-based GR
-     - Implicit reasoning paradigm: avoids reasoning trace acquisition and reasoning alignment training entirely
-     - Lightweight alternative to explicit rationale generation for LLM-based generative recommendation
-     - Empirical analysis showing when and why each stage of explicit reasoning is unnecessary
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Systematic decomposition of explicit reasoning is valuable diagnostics; implicit reasoning for LLM GR is a practical insight
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — 3 datasets; consistent improvements; comprehensive ablation on reasoning pipeline stages
-     - **Impact: 6/10** — UVA/Snap (Neil Shah); practical lightweight alternative to costly explicit CoT for LLM-based generative recommendation
-
-5. **Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations**
-   * Affiliation: Yandex — *(Daria Tikhonovich, Oleg Sorokin, Vladislav Dodonov, Mariia Ulianova, Ilya Murzin — Yandex)*
-   * Link: [arxiv.org/abs/2606.08604](https://arxiv.org/abs/2606.08604)
-   * Venue: arXiv preprint, June 2026
-   * TL;DR: Unified encoder-decoder adding jointly trained item-level scoring alongside SID generation; resolves beam-likelihood miscalibration and SID collision by re-scoring resolved items directly; deployed as sole candidate source replacing 15+ candidate generators + preranking stage; +3.7% Recall@1000 over vanilla GR, +4.2% gain over beam-likelihood ranking.
-   * Key techniques:
-     - Jointly trained item-level scoring component reusing encoder's user representation from single forward pass
-     - Item-level re-scoring: resolves generated SIDs to concrete items, avoids miscalibrated sequence scores
-     - SID collision resolution: separates items collapsed on same identifier via direct item scoring
-     - System simplification: single GR model replaces 15+ candidate generators + separate preranking stage
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Item-level scoring alongside SID generation is a practical architectural improvement; production validation of system simplification is valuable
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Industrial music service deployment; 7-day A/B test; no regression in listening time while substantially simplifying system
-     - **Impact: 6/10** — Yandex; practical blueprint for simplifying industrial candidate generation via unified GR with item-level scoring
-
 
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 122 papers as of August 12.
+**Count:** 125 papers as of August 13.
 
 | Score | Paper |
 | --- | --- |
@@ -1173,6 +1173,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | tau-Rec: A Verifiable Benchmark for Agentic Recommender Systems |
 | 7/10 | Teach Multimodal Recommendation Model to See via Personalized Visual Extraction and Adaptive Learning (REVEAL) |
 | 7/10 | ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation |
+| 7/10 | Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
@@ -1185,6 +1186,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | Understanding and Debugging Failures in N-Gram-Based Generative Retrieval |
 | 6/10 | CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec) |
 | 6/10 | VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) |
+| 6/10 | From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM) |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
 | 5/10 | Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec) |
@@ -1205,6 +1207,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 3/10 | InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation (InforID) |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
+| 1/10 | HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec) |
 
 ---
 
@@ -1333,6 +1336,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - TSPORec / Token Selection SeqRec -- ZJU / ByteDance
 - IntHQ / Multi-Task Generative Rec -- Amap / Alibaba
 - InforID / Adaptive SID Capacity Allocation -- UCAS / CASIA
+- HCGRec / Hint-Conditioned GenRec -- SJTU / Huawei Noah's Ark Lab (CIKM 2026)
+- Token-Level Credit Assignment / Generative Document Retrieval -- Shandong U
 
 ### RL / Reinforcement Learning
 - ConnectionMind / Social Graph LLM Rec — Meta / MSU
@@ -1434,6 +1439,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - MetaStrategy / Generative LLM Ranking Strategy -- Alibaba (Taobao)
 - TSPORec / Token Selection SeqRec -- ZJU / ByteDance
 - PushDualGen / LLM SID Push Rec -- Kuaishou
+- HCGRec / Hint-Conditioned GenRec -- SJTU / Huawei Noah's Ark Lab (CIKM 2026)
+- Token-Level Credit Assignment / Generative Document Retrieval -- Shandong U
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.

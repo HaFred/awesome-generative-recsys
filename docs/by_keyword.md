@@ -54,6 +54,8 @@
 - TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (ZJU/ByteDance)
 - IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for GenRec (Amap/Alibaba)
 - InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation (UCAS/CASIA)
+- HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
+- Token-Level Credit Assignment Optimization for Generative Document Retrieval
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -190,6 +192,7 @@
 - Variance Reduction for Heavy-Tailed Monetization Metrics in Ranking Experiments via Post-Stratification (ShareChat/SIGIR 2026)
 - Who Owns the AI Recommendation? A Multi-Industry Empirical Map of Brand Category Ownership Across Large Language Models (LLM Brand)
 - AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation (AgentSelect)
+- Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking)
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -395,6 +398,7 @@
 - TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation (Tencent/ACL 2026)
 - Interpretable Representation via LLM-Driven Generative Disentanglement for Local-Life Service Recommendation (LGRID)
+- HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
 
 ### Generative Retrieval / Ranking
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
@@ -462,6 +466,7 @@
 - Planning over Matrix-Factorization MDPs for Candidate Generation (MF-MDP Planning)
 - Prompt Generation Technical Report (PG)
 - Beyond Semantic IDs: Encoding Business-Value Ranking into Document Identifiers for Generative Retrieval (CRID)
+- Token-Level Credit Assignment Optimization for Generative Document Retrieval
 
 ### Graph-based Recommendation
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -476,11 +481,13 @@
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
 - CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
 - CCLRec: Consensus-driven Contrastive Learning for LLM-enhanced Graph Recommendation (CCLRec)
+- Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation (GALLM)
 
 
 ### Group Recommendation
 - AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation
 - Consensus vs. Dissent: Dynamic LLM Modeling of Subjective Preferences in Group Recommenders
+- Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking)
 
 
 
@@ -814,6 +821,7 @@
 - CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
 - ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT)
 - Tokenizing Numerical and Embedding Features for LLM RecSys
+- Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation (GALLM)
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1014,6 +1022,8 @@
 - RGD: Reward Guided Decoding for Generative Recommendation (RGD)
 - Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go)
 - Uncertainty-aware Generative Recommendation (UGR)
+- HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
+- Token-Level Credit Assignment Optimization for Generative Document Retrieval
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1137,6 +1147,7 @@
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation (Tencent/ACL 2026)
 - MLPs are Efficient Distilled Generative Recommenders (SID-MLP)
 - TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
+- HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1188,6 +1199,8 @@
 - RecRec: Latent Interests Recursive Reasoning for Sequential Recommendation (RecRec)
 - Stream-aware Side Adaptation for Large Pre-trained Multimodal Embedding Models in Sequential Recommendation (Stresa)
 - The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
+- Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation (GALLM)
+- From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
