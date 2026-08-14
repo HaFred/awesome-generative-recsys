@@ -76,6 +76,95 @@ mindmap
 ---
 ## By Date
 
+### Papers August 14
+
+*Friday, August 14, 2026. Arxiv active. cs.IR Aug 13 listing returned 5 genrec/recsys papers. Total: 5 papers.*
+
+1. **FSGR: Mitigating Token Frequency Bias for Fair SID-Based Generative Recommendation**
+   * Affiliation: Nankai University — *(Yuchen Zheng, Sihan Xu, Jingwen Yang, Xiangrui Cai, Haiwei Zhang, Xiaojie Yuan)*
+   * Link: [arxiv.org/abs/2608.12845](https://arxiv.org/abs/2608.12845)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Diagnoses "Token Frequency Bias" in SID genrec — high-frequency SID tokens are systematically over-predicted while low-frequency tokens are under-predicted; FSGR rebalances the SID representation space (OT-based assignment + dual-criteria re-anchor) and adds two-stage training with hierarchical frequency calibration, achieving >20% Gini fairness improvement while maintaining accuracy.
+   * Key techniques:
+     - Token Frequency Bias diagnosis: over/under-prediction of high/low-frequency SID tokens from imbalanced codebooks + popularity bias + MLE objective
+     - OT-based Assignment Optimization + Dual-Criteria Re-anchor for a balanced SID representation space during construction
+     - Two-stage training + Hierarchical Frequency Calibration for layer-specific fairness fine-tuning
+     - >20% average Gini fairness improvement across 3 datasets and 3 backbones while maintaining competitive accuracy
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First to diagnose token frequency bias in SID genrec; OT-based re-anchor + hierarchical frequency calibration is principled
+     - **Fairness: 8/10** — Directly targets fairness (token frequency bias → item-category exposure fairness) with quantified Gini gains
+     - **Robustness: 5/10** — 3 public datasets × 3 backbone models; no venue/peer review yet
+     - **Impact: 6/10** — Nankai (Xiaojie Yuan); opens fairness direction for SID-based genrec
+
+2. **STAR: Structured Tokenization and Target-Aware Interest Representation for PCVR Prediction**
+   * Affiliation: Tsinghua University / Peking University — *(Yimeng Xu, Yingqi Song, Ying Jiang, Lan Ma — Tsinghua; Ruihao Zhang — Peking University)*
+   * Link: [arxiv.org/abs/2608.12986](https://arxiv.org/abs/2608.12986)
+   * Venue: KDD Cup 2026 Tencent UniRec Challenge (workshop)
+   * TL;DR: Practical PCVR ranking framework combining structured feature tokenization with target-aware interest representation on a HyFormer-style multi-sequence backbone; high-cardinality signal recovery, explicit user-item interaction tokens, target-aware sequence decoding, and InfoNCE-inspired contrastive objective; identifies temporal context as the largest contributor to ranking AUC.
+   * Key techniques:
+     - Structured feature tokenization on a HyFormer-style multi-sequence backbone unifying sequence modeling + feature interaction
+     - High-cardinality signal recovery + explicit user-item interaction tokens for sparse features
+     - Target-aware sequence decoding + weighted user-item contrastive auxiliary objective (InfoNCE-inspired)
+     - Train-inference pipeline alignment via reconstruction of feature remapping tables from saved config
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — Practical challenge solution; tokenization + target-aware interest representation is incremental
+     - **Fairness: 3/10** — Not addressing fairness (ethics note flags monitoring before production)
+     - **Robustness: 5/10** — Challenge leaderboard-style offline evaluation; no online A/B
+     - **Impact: 5/10** — KDD Cup 2026 Tencent UniRec; Tsinghua/PKU; practical PCVR ranking blueprint
+
+3. **Generative Universal Multimodal Retrieval with Dual-role Identifiers (DrIG)**
+   * Affiliation: University of Tsukuba — *(Kaipeng Li, Haitao Yu, Xuanchen Zhou)*
+   * Link: [arxiv.org/abs/2608.12987](https://arxiv.org/abs/2608.12987)
+   * Venue: arXiv preprint, August 2026 (under review)
+   * TL;DR: Generative multimodal retrieval where each candidate gets one residual-quantized identifier playing a sequential role (autoregressive decode; first token = modality) and a set-based role (unordered set providing a prefix-independent relevance prior that guides beam search); outperforms SOTA generative multimodal baselines on M-BEIR.
+   * Key techniques:
+     - Dual-role identifiers: sequential role (AR decoding with modality token + progressive semantics) + set-based role (prefix-independent relevance prior)
+     - Set-based prior guides constrained beam search to alleviate prefix-level/local-optimum errors
+     - Hybrid reranking for efficiency-effectiveness tradeoff vs. dense retrievers
+     - Scaling/ablation analysis over base LMM, beam size, reranking depth, fusion strategy
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Dual-role identifier with set-based prefix-independent prior is a clean, novel idea
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — M-BEIR + text-to-image benchmarks; under review
+     - **Impact: 6/10** — U Tsukuba (Haitao Yu); advances generative multimodal retrieval
+
+4. **DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation**
+   * Affiliation: Shenzhen University / Kuaishou Technology — *(Canwei Huang, Tiantian He, Xiaoxiao Xu, Jun Zhang, Ziran Deng, Weike Pan, Chunjie Chen, Kaiqiao Zhan)*
+   * Link: [arxiv.org/abs/2608.12778](https://arxiv.org/abs/2608.12778)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Addresses prediction noise in multi-task pxtr signals used for ensemble ranking; risk-denoising robust loss corrects empirical risk using estimated preference flip probability (supervision side) + perturbation sampling with a preference-preserving ranking consistency regularizer (feature side); theoretical robustness proof + online A/B.
+   * Key techniques:
+     - Risk-denoising robust loss: corrects empirical risk using estimated preference flip probability
+     - Preference-preserving ranking consistency regularizer for feature-side output stability
+     - Perturbation sampling from the prediction-noise distribution
+     - Theoretical proof of robustness under flip-probability estimation error
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Dual-side (supervision + feature) noise handling in ensemble ranking is novel
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Theoretical analysis + offline experiments + large-scale online A/B
+     - **Impact: 6/10** — Kuaishou/SZU; practical robust ensemble ranking for industrial video rec
+
+5. **TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation**
+   * Affiliation: University of Amsterdam / University of Hong Kong / Aarhus University — *(Pengyu Zhang, Congfeng Cao, Paul Groth — UvA; Yangqin Jiang — HKU; Klim Zaporojets — Aarhus)*
+   * Link: [arxiv.org/abs/2608.10983](https://arxiv.org/abs/2608.10983)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Modality usefulness drifts over time at different rates (e.g., text→visual cues around holidays); temporal-aware modal router maps behavioral features to a personalized modality distribution, and a diffusion-based graph reconstructor conditioned via FiLM with dual-stream long/short-term denoising heads suppresses outdated modality edges; up to 9.8% improvement.
+   * Key techniques:
+     - Temporal-aware modal router: personalized modality distribution replacing globally shared fusion weights
+     - Diffusion-based graph reconstructor with Feature-wise Linear Modulation (FiLM) + dual-stream long/short-term denoising heads
+     - Suppresses outdated modality edges before they enter the propagation graph
+     - 10-seed paired tests; up to 9.8% Recall/Precision/NDCG gains
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 3/10** — [anonymous.4open.science/r/TimeRoute](https://anonymous.4open.science/r/TimeRoute) — anonymous repo for double-blind review; not a permanent public release
+     - **Novelty: 6/10** — Time-aware modality routing + diffusion for multimodal rec is well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — TikTok + Amazon datasets; 10-seed paired tests; preprint
+     - **Impact: 5/10** — UvA (Paul Groth); practical multimodal rec with temporal modality dynamics
+
 ### Papers August 13
 
 *Thursday, August 13, 2026. Arxiv active. cs.IR Aug 12 listing returned 5 genrec/recsys papers. Total: 5 papers.*
@@ -947,136 +1036,11 @@ mindmap
      - **Robustness: 7/10** — 3 Amazon benchmarks + Yelp; multi-seed; controlled perturbations; three-expert isolation
      - **Impact: 7/10** — Hunan U; important diagnostic contribution suggesting lightweight representations may explain much of semantic rec gains; challenges the need for complex semantic architectures
 
-### Papers August 3
-
-*Monday, August 3, 2026. Arxiv active. cs.IR listing returned 7 new genrec papers from July 31–Aug 1 submission window. Total: 7 papers.*
-
-1. **SnapLGR: LLM-Based Generative Retrieval for Snapchat Content Recommendation**
-   * Affiliation: Snap Inc. — *(Liam Collins, Jiwen Ren, Donald Loveland, Bhuvesh Kumar, Clark Mingxuan Ju, Xuan Guo, Mo Li, Alvin Hou, Yi Cui, Peng Yang, Jian Wang, Saud Afzal Shafi, Nga Than, Ruiming Lu, Wenfeng Zhuo, Dongheng Li, Lili Zhang, Mingtao Zhang, Jinchao Ye, Vincent Xue, Chunhui Zhu, Neil Shah — Snap Inc.)*
-   * Link: [arxiv.org/abs/2607.28895](https://arxiv.org/abs/2607.28895)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Production LLM-based GR system at Snapchat with PPR-enhanced SIDs + continued pretraining for vocabulary grounding + TensorRT-LLM beam search; live A/B: +0.37% View Time, +0.18% Deep Sessions over TIGER baseline.
-   * Key techniques:
-     - PPR-based co-engagement contrastive learning for collaborative-enhanced SIDs (improved codebook utilization + reduced collisions)
-     - Continued Pretraining (CPT) grounding SID tokens before supervised fine-tuning on user interaction sequences
-     - TensorRT-LLM CUDA-backed beam search + decentralized worker-loop serving architecture
-     - Joint design across representation learning, vocabulary grounding, and efficient training/serving
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — PPR-enhanced SID construction and CPT-based vocabulary grounding are practical advances; joint design perspective is valuable
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Live A/B at Snapchat with 4 significant metrics; joint optimization across representation/vocabulary/serving
-     - **Impact: 8/10** — Snap Inc.; production-proven LLM-based GR at Snapchat scale; practical blueprint for industrial GR deployment
-
-2. **TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings**
-   * Affiliation: LinkedIn — *(Da Xu, Liyan Fang, Divya Venugopalan, Sunny Hsu, Xukai Wang, Rishav Roy Chowdhury, Cindy Liang, Nishant Satya Lakshmikanth — LinkedIn)*
-   * Link: [arxiv.org/abs/2607.28940](https://arxiv.org/abs/2607.28940)
-   * Venue: KDD 2026 (DOI: 10.1145/3770855.3818497)
-   * TL;DR: Encoder-decoder separating behavior-stream encoding from serving-event decoding with cross-attention conditioning; amortized serving with incremental encoding + per-request KV cache reduces online compute 80%; +6.0% CTR, +4.4% CVR on LinkedIn.
-   * Key techniques:
-     - Sequence-to-sequence action transduction paradigm: decouples long-term behavior (nearline) from real-time serving (online)
-     - Scalable cross-attention between behavior encodings and serving representations
-     - Amortized serving: incremental behavior encoding + per-request key-value caching → latency insensitive to behavior length
-     - 80% online compute reduction with comparable serving cost to existing production models
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Stream decoupling for recommendation is practical; amortized serving co-design is well-engineered
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — KDD 2026; production A/B at LinkedIn; strong business metrics + compute efficiency
-     - **Impact: 7/10** — KDD 2026; LinkedIn; practical scaling blueprint for Transformer-based industrial recommendation
-
-3. **Think2Go: Generative Next POI Recommendation with LLM Reasoning**
-   * Affiliation: Dalian University of Technology / Wuhan University / A*STAR / South China University of Technology — *(Zhuang Zhuang, Heng Qi, Yanming Shen, Baocai Yin — Dalian UT; Shanshan Feng — Wuhan U; Hangwei Qian — A*STAR; Mingqi Yang — SCUT)*
-   * Link: [arxiv.org/abs/2607.28997](https://arxiv.org/abs/2607.28997)
-   * Venue: KDD 2026 Research Track (Oral)
-   * TL;DR: First generative POI recommendation framework unifying SFT + RL reasoning for SID-based generation; epistemic uncertainty from kernel density + reward-informed advantage scaling for calibrated policy optimization; implicit curriculum preventing entropy collapse.
-   * Key techniques:
-     - Unified SFT + RL reasoning architecture for generative POI rec over SIDs
-     - Prompt epistemic uncertainty via kernel density estimation measuring spatial-temporal pattern alignment
-     - Reward-informed advantage scaling normalizing rewards against maxima for stable training
-     - Implicit curriculum learning: instance-aware policy updates preventing entropy collapse
-     - Test-time computational scaling exploring diverse spatial-temporal patterns
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 5/10** — [github.com/zhuang999/Think2Go](https://github.com/zhuang999/Think2Go) — 3⭐, 9 commits functional code (SFT training, eval, vLLM inference); no license; minimal documentation but runnable with dataset; KDD 2026 Oral artifact
-     - **Novelty: 7/10** — First generative POI rec with LLM reasoning + SIDs; epistemic uncertainty-driven exploration is novel for genrec
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — KDD 2026 Oral; 3 real-world POI datasets; implicit curriculum learning stabilizes training
-     - **Impact: 7/10** — KDD 2026 Oral; Dalian UT; opens new direction for generative POI recommendation with reasoning
-
-4. **PaletteID: Prototype-Composed Semantic Identifiers for Multimodal CTR Prediction**
-   * Affiliation: Huazhong University of Science and Technology / Central China Normal University — *(Huanyu Liu, Baining Chen, Hui Liu, Ziyi Huang — HUST; Zengyang Li — CCNU)*
-   * Link: [arxiv.org/abs/2607.29000](https://arxiv.org/abs/2607.29000)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Palette-inspired SID construction using prototype items as semantic anchors; SQ-DPP selects representative prototypes balancing local density + global diversity; prototype-aggregated PID representation preserves fine-grained semantics; larger gains on long-tail items.
-   * Key techniques:
-     - Prototype palette: compact set of representative items as semantic anchors bridging content space and rec models
-     - Semantic Quality-Aware Determinantal Point Process (SQ-DPP): joint local density + global diversity optimization
-     - PID representation: retrieves and aggregates semantically related prototypes into informative item representation
-     - More robust SID assignments + interpretable token semantics vs. residual SID methods
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Palette-inspired prototype composition for SID is novel; SQ-DPP is a principled approach
-     - **Fairness: 4/10** — Larger gains on long-tail items indirectly addressing cold-start fairness
-     - **Robustness: 6/10** — 2 public datasets; more robust SID assignments; no industrial validation
-     - **Impact: 6/10** — HUST; novel SID construction paradigm with interpretability advantages
-
-5. **EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation**
-   * Affiliation: Kuaishou Technology / Shenzhen University — *(Zhuang Zhuang, Zhipeng Wei, Shijie Li, Peng Zhao, Jie Chen, Fei Pan — Kuaishou; Rongfeng Guo — Shenzhen U)*
-   * Link: [arxiv.org/abs/2607.29010](https://arxiv.org/abs/2607.29010)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Replaces raw CoT distillation for latent reasoning in GR with self-evolving primitive-guided on-policy distillation; extracts reusable reasoning primitives from agentic trajectories as pseudo-tools for structured teacher reasoning; closed-loop co-evolution aligns teacher supervision with student latent space.
-   * Key techniques:
-     - Reasoning primitives extraction: reusable atomic behaviors from agentic recommendation trajectories as pseudo-tools
-     - Primitive-guided structured CoT generation: reduced redundancy + improved consistency from teacher
-     - Self-evolving on-policy distillation: teacher reasoning evolves according to student's latent outcomes
-     - Closed-loop co-evolution: progressively better-aligned CoT supervision for latent reasoning transfer
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First reasoning primitive-guided distillation for GR; self-evolving on-policy mechanism is novel for latent reasoning
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Strong conceptual framework with structured primitives; no online A/B reported
-     - **Impact: 7/10** — Kuaishou; extends latent reasoning paradigm with self-evolving distillation; practical for industrial GR
-
-6. **GALA: Generative Aligned Learning for Adaptive Multimodal Representation in the Taobao Shangou Recommender System**
-   * Affiliation: Alibaba Group (Taobao) — *(Jiping Liu, Zhongmin Zhang, Zisen Sang, Zhijia Fang, Tao Ouyang, Ma Jiang, Shaopeng Liang, Zeyang Hou, Guodong Cao, Jia Jia — Alibaba)*
-   * Link: [arxiv.org/abs/2607.29213](https://arxiv.org/abs/2607.29213)
-   * Venue: ICDE 2026 (Industry and Applications Track)
-   * TL;DR: Three-stage pipeline for multimodal food-delivery rec with intermediate generative RL alignment stage bridging pretraining-fine-tuning gap; GRPO refines multimodal embeddings using conversion rewards; deployed at Taobao Shangou (200M DAU) with +0.55% order volume.
-   * Key techniques:
-     - Behavior-aware triplet pretraining on query-image-text pairs from search logs
-     - Intermediate generative RL alignment: GRPO refines embeddings via conversion-based rewards
-     - Adaptive gating + hybrid loss preserving multimodal contributions under ID-dominant training
-     - Production deployment serving 200M daily active users
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Intermediate RL alignment stage is practical; GRPO for multimodal rec is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — ICDE 2026; 200M DAU production at Taobao; +0.55% order volume with consistent offline gains
-     - **Impact: 7/10** — ICDE 2026; Alibaba Taobao; industrial multimodal rec with verified business impact
-
-7. **RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems**
-   * Affiliation: Kuaishou Technology — *(Haoran Ling, Yuecheng Li, Zeyu Song, Jing Yao, Shuwen Kang, Chi Lu, Wenjin Wu, Peng Jiang — Kuaishou)*
-   * Link: [arxiv.org/abs/2607.29241](https://arxiv.org/abs/2607.29241)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Bandit router selects modification direction + LLM generates concrete hypothesis/code edit for automated recsys optimization; jump-basin mechanism triggers structural exploration when local edits stagnate; 7-day A/B: +2.084% ADVV, +0.534% Revenue on short-video ads.
-   * Key techniques:
-     - Two-step optimization: bandit router (direction selection) + LLM (hypothesis generation + code editing)
-     - Jump-basin mechanism: activates structural-jump arm when local edits plateau for sustained exploration
-     - Historical validation feedback guiding bandit decisions across long-horizon experiments
-     - Open-source code (placeholder, "Coming Soon"): github.com/6lyc/RecHarness
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 1/10** — [github.com/6lyc/RecHarness](https://github.com/6lyc/RecHarness) — placeholder only (2 commits, "Coming Soon", no code, no license); stated as open-source in paper but not yet released
-     - **Novelty: 7/10** — Bandit-router for separating optimization direction from hypothesis generation is novel; jump-basin mechanism addresses exploration stagnation
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — 7-day online A/B at Kuaishou with +2.084% ADVV; multiple tasks/datasets/backbones; limited trial budget efficiency
-     - **Impact: 7/10** — Kuaishou; agentic recsys optimization with production-proven gains; practical framework for automated model iteration
-
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 125 papers as of August 13.
+**Count:** 126 papers as of August 14.
 
 | Score | Paper |
 | --- | --- |
@@ -1205,6 +1169,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 3/10 | Cheaper is Better: A Discount-Aware Network for Conversion Rate Prediction in E-commerce Recommendation System (DANet) |
 | 3/10 | Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) |
 | 3/10 | InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation (InforID) |
+| 3/10 | TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute) |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 | 1/10 | HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec) |
@@ -1338,6 +1303,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - InforID / Adaptive SID Capacity Allocation -- UCAS / CASIA
 - HCGRec / Hint-Conditioned GenRec -- SJTU / Huawei Noah's Ark Lab (CIKM 2026)
 - Token-Level Credit Assignment / Generative Document Retrieval -- Shandong U
+- DrIG / Dual-role Identifiers Multimodal Generative Retrieval -- U Tsukuba
 
 ### RL / Reinforcement Learning
 - ConnectionMind / Social Graph LLM Rec — Meta / MSU

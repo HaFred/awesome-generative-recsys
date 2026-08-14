@@ -68,6 +68,7 @@
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
 - TMallGS: Scaling Unified Feature and Sequence Modeling for Generative E-commerce Search (TMallGS)
 - Cheaper is Better: A Discount-Aware Network for Conversion Rate Prediction in E-commerce Recommendation System (DANet)
+- STAR: Structured Tokenization and Target-Aware Interest Representation for PCVR Prediction (STAR)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -161,6 +162,7 @@
 - On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
 - Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM)
 - Diffusion Language Model for Recommendation (DLMRec)
+- TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute)
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -237,6 +239,7 @@
 - Federated Variational Preference Alignment with Gumbel-Softmax Prior for Personalized User Preferences (FedVPA-GP)
 - PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest (PinEqualizer)
 - GRACE: Bringing GRACE to Recommendation: Fine-Tuning for Sustainable and Accurate Personalization (GRACE)
+- FSGR: Mitigating Token Frequency Bias for Fair SID-Based Generative Recommendation (FSGR)
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -467,6 +470,7 @@
 - Prompt Generation Technical Report (PG)
 - Beyond Semantic IDs: Encoding Business-Value Ranking into Document Identifiers for Generative Retrieval (CRID)
 - Token-Level Credit Assignment Optimization for Generative Document Retrieval
+- Generative Universal Multimodal Retrieval with Dual-role Identifiers (DrIG)
 
 ### Graph-based Recommendation
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -626,6 +630,8 @@
 - Probabilistic Residual Learning for Online Recommendations (PRL)
 - RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation (RankGraph-2)
 - GRACE: Bringing GRACE to Recommendation: Fine-Tuning for Sustainable and Accurate Personalization (GRACE)
+- STAR: Structured Tokenization and Target-Aware Interest Representation for PCVR Prediction (STAR)
+- DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation (DrEM)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -936,6 +942,8 @@
 - When Text-as-Vision Meets Semantic IDs in Generative Recommendation: An Empirical Study
 - Why Users Go There: World Knowledge-Augmented Generative Next POI Recommendation
 - PVTG: Personalized Video Thumbnail Generation with Preference-aware Highlight Retrieval (PVTG)
+- Generative Universal Multimodal Retrieval with Dual-role Identifiers (DrIG)
+- TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute)
 
 ### Optimizer
 - MuonRec
@@ -967,6 +975,7 @@
 - Trading Engagement for Sustainability: Carbon-Aware Re-ranking for E-commerce Recommendations
 - UniPinRec: Unifying Generative Retrieval and Ranking at Pinterest Scale
 - Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd)
+- DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation (DrEM)
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS)
@@ -1148,6 +1157,7 @@
 - MLPs are Efficient Distilled Generative Recommenders (SID-MLP)
 - TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
 - HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
+- FSGR: Mitigating Token Frequency Bias for Fair SID-Based Generative Recommendation (FSGR)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1201,6 +1211,7 @@
 - The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H2Rec)
 - Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation (GALLM)
 - From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM)
+- STAR: Structured Tokenization and Target-Aware Interest Representation for PCVR Prediction (STAR)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
