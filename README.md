@@ -56,13 +56,13 @@ mindmap
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
-        Progressive FM Post-Training -- Webtoon
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
+        Gwhere -- Amap / Alibaba
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -75,6 +75,95 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 16
+
+*Sunday, August 16, 2026. Arxiv inactive (weekend, Aug 15–16). Applied 3-month fallback strategy → found 5 missed genrec papers from May–Aug 2026: Sona Yandex Music cascade-replacing generative recommender, Related Intent Generation Amazon KDD 2026 intent-conditioned recall expansion, Hypothesis-Driven Shelf Generation Spotify RecSys 2026, Gwhere Amap generative next-POI opensource 5/10, ICICLE NTU in-context generative retrieval. Total: 5 papers.*
+
+1. **Sona Technical Report**
+   * Affiliation: Yandex — *(Sona Team: Alexandr Udeneev, Aleksei Krasilnikov, Alexey Nadtochiy, Andrey Semenov, Andrey Tsyrkunov, Anna Krivonos, Anna Lipkina, Artem Matveev, Daniil Burlakov, Daniil Leshchev, Daria Tikhonovich, Denis Burshtein, Ekaterina Dmitrieva, Eugene Krofto, Grigorii Khlystov, Ilya Murzin, Kirill Golovko, Ksenia Sycheva, Leonid Dmitriev, Mariia Rozaeva, Mariia Ulianova, Mikhail Sandul, Nikolai Savushkin, Oleg Sorokin, Roman Odobesku, Semyon Panenko, Sergei Liamaev, Sergei Makeev, Vadim Shilov, Veronika Ivanova, Viktor Yanush, Vladimir Baikalov, Vladislav Dodonov, Vladislav Tytskiy — Yandex)*
+   * Link: [arxiv.org/abs/2608.11015](https://arxiv.org/abs/2608.11015)
+   * Venue: arXiv technical report, August 2026
+   * TL;DR: Single-model generative recommender for Yandex Music replacing the entire production cascade (15+ candidate generators + pre-ranking + ranking); shared user representation couples autoregressive SID generation with an item-level Ranking Module via next-token-prediction + distillation; online A/B: +4.53% Active Users, +6.30% Listening Time, +11.42% Likes.
+   * Key techniques:
+     - Unified generate-and-rank: a single encoder turns logged engagement events into hidden states consumed by both the autoregressive decoder and the Ranking Module
+     - Distillation-only ranking supervision: a larger Teacher Ranker supplies ranking targets during training but is absent from serving (no second model in the serving path)
+     - No hand-engineered features: both Sona and its Teacher Ranker operate on logged event fields + learned item representations
+     - Active-Users uplift 2.35× the increment previously delivered by Argus, the strongest prior model on the surface
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Extends the Gryphon generate-and-rank lineage to full cascade replacement; shared-representation coupling of generation and ranking is clean but builds on prior work
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Large-scale online A/B on a Yandex Music smart-speaker surface; statistically significant uplifts on 3 metrics
+     - **Impact: 8/10** — Yandex; production-proven single-model replacement of a mature multi-stage cascade at a major streaming service
+
+2. **Improving Item Discoverability in e-Commerce Search via Related Intent Generation**
+   * Affiliation: Amazon — *(Ji Xin, Xiao Xiao, Ishan Bhatt, Vinesh Gudla, Trace Levinson, Raochuan Fan, Shishir Kumar Prasad, Prakash Putta, Tejaswi Tenneti — Amazon)*
+   * Link: [arxiv.org/abs/2607.27172](https://arxiv.org/abs/2607.27172)
+   * Venue: KDD 2026 TSMO
+   * TL;DR: Discovery-augmented e-commerce search generating implicit user intents for intent-conditioned recall expansion; two-stage hybrid architecture with a closed-weight LLM for head queries + LoRA/distilled small language model (SLM) for tail queries; extends discovery coverage 60%→80% at ~30% of teacher inference cost.
+   * Key techniques:
+     - Intent-conditioned recall expansion: generates implicit user intents to surface substitute/complementary/thematically-related items beyond strict query matching
+     - Two-stage hybrid architecture: closed-weight LLM for head queries + finetuned SLM (LoRA adapters + teacher-student distillation) for tail queries
+     - Dual evaluation: LLM-as-a-judge metrics (validated against human preferences) + end-to-end session-level purchase analysis
+     - Marketplace-balancing framing giving long-tail/emerging supply query-conditioned exposure
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — Intent-conditioned recall expansion with LLM→SLM distillation is practical; conceptually incremental
+     - **Fairness: 4/10** — Explicitly framed as marketplace-balancing for long-tail supply (indirect provider fairness)
+     - **Robustness: 6/10** — KDD 2026 TSMO; dual evaluation framework; industrial-scale grocery e-commerce
+     - **Impact: 6/10** — Amazon; practical discovery-augmented search addressing the cost-quality tradeoff of generative retrieval
+
+3. **Hypothesis-Driven Shelf Generation for Personalised Recommendation**
+   * Affiliation: Spotify — *(Aleksandr V. Petrov, Tarun Chillara, Matthew D. Moellman, Lucas de Haas, Yabai Song, Alina Susoykina, Melissa Crawford, Gabriel Negash, Erik Franco, Tasnim Rahman, Binal Jhaveri, Shubham Bansal, Hugues Bouchard, Roberto Mirizzi, Mounia Lalmas, Aloïs Gruson — Spotify)*
+   * Link: [arxiv.org/abs/2607.25823](https://arxiv.org/abs/2607.25823)
+   * Venue: RecSys 2026 Industry Track
+   * TL;DR: Replaces hand-crafted shelf templates on Spotify Home with natural-language content hypotheses; four-stage pipeline (hypothesis generation → catalogue fulfilment → shelf alignment → offline serving) decouples planning from retrieval and enables constrained generative retrieval over catalogue entities + frontier-LLM distillation into compact models.
+   * Key techniques:
+     - Content-hypothesis-driven shelves: natural-language hypotheses describing what a personalised shelf should contain, replacing fixed templates
+     - Four-stage decomposition: hypothesis generation, catalogue fulfilment, shelf alignment, offline serving — decouples planning from retrieval for independent optimisation
+     - Constrained generative retrieval over catalogue entities + distillation of frontier LLM behaviour into compact models
+     - Precomputed serving + offline LLM-as-a-judge evaluation; early online evaluation under uniform random exposure
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Hypothesis-driven shelf generation at the interface level is a fresh angle on generative recommendation
+     - **Fairness: 4/10** — Expands personalised supply to the long tail of individual taste (indirect fairness)
+     - **Robustness: 6/10** — RecSys 2026 Industry Track; offline analyses + early online evaluation at Spotify Home
+     - **Impact: 6/10** — Spotify; generative interface-level recommendation with frontier-LLM distillation
+
+4. **Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap**
+   * Affiliation: Amap / Alibaba Group — *(Penglong Zhai, Bowen Zheng, Jie Li, Yifang Yuan, Yue Liu, Sicong Wang, Mingyang Yin, Tingting Hu, Shuaijun Guo, Fanyi Di, Xin Li — Amap/Alibaba)*
+   * Link: [arxiv.org/abs/2607.26073](https://arxiv.org/abs/2607.26073)
+   * Venue: arXiv preprint, July 2026
+   * TL;DR: End-to-end industrial generative next-POI recommendation integrating SID generation with an LLM; contrastive residual-quantization tokenizer aligns textual/visual/spatial/collaborative signals; continued pretraining + SFT + Exposure-Aware Kahneman-Tversky Optimization (EAKTO); deployed at Amap: +5.83% P-CTR, +6.20% U-CTR.
+   * Key techniques:
+     - Contrastive residual-quantization tokenizer learning discriminative POI SIDs from text/visual/spatial/collaborative signals
+     - LLM adaptation via continued pretraining on spatio-temporal corpora + supervised fine-tuning
+     - Exposure-Aware Kahneman-Tversky Optimization (EAKTO): reinforcement-learning objective for behavioral preference alignment
+     - Deployed in Amap homepage under high-concurrency/low-latency constraints; long-term A/B validation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5/10** — [github.com/alibaba/SimCIT](https://github.com/alibaba/SimCIT) — MIT license; functional contrastive SID tokenizer (train/infer scripts, config); LLM training marked "coming soon"
+     - **Novelty: 6/10** — Contrastive RQ tokenizer for spatial POI SIDs + Kahneman-Tversky RL objective are well-motivated
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Public + large-scale Amap industrial dataset; deployed with long-term online A/B (+5.83% P-CTR, +6.20% U-CTR)
+     - **Impact: 7/10** — Amap/Alibaba; production-deployed generative next-POI recommendation at scale
+
+5. **ICICLE: Expanding Retrieval with In-Context Documents**
+   * Affiliation: National Taiwan University / Johns Hopkins University — *(Yu-Chen Den, Yung-Yu Shih, Zhi Rui Tam, Kuan-Yu Chen, Pu-Jen Cheng, Yun-Nung Chen — NTU; Eugene Yang — JHU)*
+   * Link: [arxiv.org/abs/2605.26902](https://arxiv.org/abs/2605.26902)
+   * Venue: arXiv preprint, May 2026
+   * TL;DR: Revisits incremental generative retrieval as an in-context retrieval problem; newly added documents supplied as inference-time document-docid evidence; source-aware docid generation with [COPY]-based routing + preference-based calibration; improves new-document retrieval while preserving seen-document retention without corpus-specific retraining.
+   * Key techniques:
+     - In-context indexing: source-aware docid generation over parametric memory + context-provided document-docid pairs
+     - [COPY]-based routing mechanism distinguishing context-grounded retrieval from parametric retrieval
+     - Preference-based calibration + large-context adaptation
+     - Diagnoses high-shot degradation as routing failure (source-selection calibration as the scaling bottleneck)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — In-context indexing for incremental generative retrieval is a clean alternative to parameter-update methods
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — MS MARCO + NQ320K; preprint (no venue/peer review yet)
+     - **Impact: 5/10** — NTU/JHU; practical in-context generative retrieval for evolving corpora
 
 ### Papers August 14
 
@@ -750,297 +839,11 @@ mindmap
      - **Robustness: 5/10** — Work in progress; no public benchmark or industrial A/B reported; decoder-only architecture is sound
      - **Impact: 6/10** — Kuaishou; opens new direction for generative recommendation in live-streaming domain; practical for short-video/live platforms
 
-### Papers August 6
-
-*Thursday, August 6, 2026. Arxiv active. cs.IR listing returned 1 new genrec paper (DEGR) from Aug 5 submission window + 4 missed papers from Jan–Apr 2026 3-month fallback (SIDReasoner NUS/USTC/Tencent KDD 2026, CARD UESTC/SWUFE SIGIR 2026, DIGER SIGIR 2026, S2GR Kuaishou KDD 2026). Total: 5 papers.*
-
-1. **DEGR: Dual Exploration-Driven Generative Re-Ranking for Adaptive Cross-Request Context Bridging**
-   * Affiliation: JD.com — *(Binglei Zhao, Xuanhua Yang, Xiwei Zhao, Sulong Xu — JD.com)*
-   * Link: [arxiv.org/abs/2608.04809](https://arxiv.org/abs/2608.04809)
-   * Venue: KDD 2026 ADS Track
-   * TL;DR: Generative re-ranking with hybrid supervised-RL exploration; exploratory reward model adaptively balances immediate vs. exploratory value per supply quality; deployed at JD.com with +1.22% UCTR, +0.20% PV.
-   * Key techniques:
-     - Dual exploration: immediate value exploitation + exploratory exposure driven by supply quality assessment
-     - Hybrid supervised-reinforcement optimization with exploration diversity constraint
-     - Adaptive reward-weighted ORPO for preference optimization under cross-request context
-     - Generator as adaptive cross-request contextual bridge
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First generative re-ranking with dual exploration bridging cross-request context; hybrid ORPO is practical
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — KDD 2026 ADS; production deployment at JD.com; +1.22% UCTR, +0.20% PV
-     - **Impact: 7/10** — KDD 2026 ADS; JD.com; practical generative re-ranking paradigm for industrial recommendation
-
-2. **SIDReasoner: Reasoning over Semantic IDs Enhances Generative Recommendation**
-   * Affiliation: National University of Singapore / University of Science and Technology of China / Tencent — *(Yingzhi He, Yuxin Chen, Tat-Seng Chua — NUS; Yan Sun, Junfei Tan, Xiaoyu Kong, Xiang Wang, An Zhang — USTC; Chunxu Shen — Tencent)*
-   * Link: [arxiv.org/abs/2603.23183](https://arxiv.org/abs/2603.23183)
-   * Venue: KDD 2026
-   * TL;DR: Two-stage framework for reasoning over SIDs via SID-language alignment + outcome-driven RL; enriched SID-centered corpus synthesized by teacher model grounds itemic tokens in diverse contexts; no recommendation-specific reasoning traces needed.
-   * Key techniques:
-     - SID-language alignment via multi-task training on enriched SID-centered corpus synthesized by stronger teacher model
-     - Outcome-driven reinforced optimization guiding model toward effective reasoning trajectories without explicit annotations
-     - Two-stage framework: alignment pretraining → RL-based reasoning activation
-     - Improved cross-domain generalization and interpretability beyond accuracy gains
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/HappyPointer/SIDReasoner](https://github.com/HappyPointer/SIDReasoner) — 29⭐, 10 commits; three-stage pipeline (SFT→Reasoning→RL); Zenodo DOI artifact; well-documented README with reproduction instructions; built on MiniOneRec
-     - **Novelty: 7/10** — First to enable reasoning over SIDs by strengthening SID-language alignment; outcome-driven RL for reasoning is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — KDD 2026 peer-reviewed; 3 real-world datasets; cross-domain generalization analysis; interpretability evaluation
-     - **Impact: 7/10** — KDD 2026; NUS/USTC/Tencent; opens new direction for reasoning-augmented SID-based generative recommendation
-
-3. **CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation**
-   * Affiliation: University of Electronic Science and Technology of China / Southwestern University of Finance and Economics — *(Yibiao Wei, Jie Zou, Xiao Ao, Pengfei Zhang, Zeyu Ma, Yang Yang — UESTC; Weikang Guo — SWUFE)*
-   * Link: [arxiv.org/abs/2604.26427](https://arxiv.org/abs/2604.26427)
-   * Venue: SIGIR 2026
-   * TL;DR: Visual semantic unit unifying text+visual+collab signals into structured representation; NU-RQ-VAE with learnable non-uniform transformation maps skewed embedding distributions to balanced latent space for improved codebook utilization.
-   * Key techniques:
-     - Visual semantic unit: unifies textual, visual, and collaborative signals into structured visual representation prior to encoding
-     - NU-RQ-VAE: learnable and invertible non-uniform transformation handling skewed semantic distributions
-     - Plug-and-play non-uniform transformation module robust across different quantization schemes
-     - Reduced supervision signal dependency for heterogeneous fusion in SID learning
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/HAI-UESTC/CARD](https://github.com/HAI-UESTC/CARD) — 19⭐, 49 commits; functional codebase with training pipeline; sparse README lacking paper link, results, license; built on TIGER/SASRec
-     - **Novelty: 7/10** — First to address non-uniform embedding distributions in SID quantization; visual semantic unit + NU-RQ-VAE is novel
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — SIGIR 2026 peer-reviewed; multiple datasets; plug-and-play module across quantization schemes
-     - **Impact: 6/10** — SIGIR 2026; UESTC; practical non-uniform quantization framework improving codebook utilization for genrec
-
-4. **DIGER: Differentiable Semantic ID for Generative Recommendation**
-   * Affiliation: University of Glasgow / Shandong University / Amazon / Telefónica / Leiden University — *(Junchen Fu, Joemon M. Jose — U Glasgow; Xuri Ge — Shandong U; Alexandros Karatzoglou — Amazon; Ioannis Arapakis — Telefónica; Suzan Verberne, Zhaochun Ren — Leiden U)*
-   * Link: [arxiv.org/abs/2601.19711](https://arxiv.org/abs/2601.19711)
-   * Venue: SIGIR 2026
-   * TL;DR: First differentiable SID joint optimization; Gumbel noise + uncertainty decay strategies prevent codebook collapse while aligning indexing and recommendation objectives end-to-end.
-   * Key techniques:
-     - Differentiable semantic indexing: recommendation gradients directly influence SID learning
-     - Gumbel noise injection encouraging early codebook exploration to prevent collapse
-     - Two uncertainty decay strategies: gradual noise reduction transitioning from exploration to exploitation
-     - Joint optimization closing the objective mismatch between content reconstruction and recommendation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/junchen-fu/DIGER](https://github.com/junchen-fu/DIGER) — SIGIR 2026 artifact; clean implementation with clear modular structure; well-documented; reproducible pipeline
-     - **Novelty: 7/10** — First to enable differentiable SID optimization for GR; Gumbel-based codebook collapse mitigation is principled
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — SIGIR 2026 peer-reviewed; multiple public datasets; consistent improvements across benchmark settings
-     - **Impact: 7/10** — SIGIR 2026; Glasgow/Shandong/Amazon; addresses fundamental objective-mismatch problem in genrec; opens differentiable SID research direction
-
-5. **S²GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation**
-   * Affiliation: Kuaishou Technology — *(Zihao Guo, Jian Wang, Ruxin Zhou, Youhua Liu, Jiawei Guo, Jun Zhao, Xiaoxiao Xu, Yongqi Liu, Kaiqiao Zhan — Kuaishou)*
-   * Link: [arxiv.org/abs/2601.18664](https://arxiv.org/abs/2601.18664)
-   * Venue: KDD 2026
-   * TL;DR: Inserts thinking tokens before each SID generation step with contrastive supervision against codebook cluster distributions; CoBa RQ-VAE integrates co-occurrence + load balancing for robust codebooks; online A/B at Kuaishou: +0.092% app usage time, +0.091% video views.
-   * Key techniques:
-     - CoBa RQ-VAE: item co-occurrence + load balancing + uniformity objectives for robust semantic codebooks
-     - Stepwise reasoning: thinking tokens interleaved before each SID code step with explicit semantic supervision
-     - Contrastive learning against ground-truth codebook cluster distributions for interpretable reasoning paths
-     - Balanced computational focus across all hierarchical SID codes vs. sequential separation approaches
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First stepwise latent reasoning for SID generation; CoBa RQ-VAE with co-occurrence is novel; thinking token supervision is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — KDD 2026 peer-reviewed; public + industrial datasets; online A/B at Kuaishou with +0.092% usage time
-     - **Impact: 7/10** — KDD 2026; Kuaishou; practical stepwise reasoning framework for genrec deployed on large-scale short-video platform
-
-### Papers August 5
-
-*Wednesday, August 5, 2026. Arxiv active. cs.IR listing returned 5 genrec papers from Aug 3–4 submission windows + 1 missed July 28 paper (UniR²). Total: 6 papers.*
-
-1. **SmartGR: Hierarchy and Beam-Aware Knowledge Distillation for Generative Recommendation**
-   * Affiliation: Zhejiang University — *(Ziheng Zhang, Yu Cui, Bohao Wang, Wujie Sun, Can Wang, Jiawei Chen — Zhejiang U; Yong He, Chao Yu, Chuan Yuan)*
-   * Link: [arxiv.org/abs/2608.02048](https://arxiv.org/abs/2608.02048)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: First knowledge distillation framework specifically designed for GR; Hierarchy-Aware SID Distillation addresses imbalanced distillation difficulty across SID levels; Beam-Aware Ranking Distillation transfers teacher ranking preferences during beam search; +8.6% performance with 2.39× inference speedup.
-   * Key techniques:
-     - Hierarchy-Aware SID Distillation: transfers teacher modeling capability across coarse-to-fine SID hierarchy with level-specific weighting
-     - Beam-Aware Ranking Distillation: distills teacher's beam search ranking preferences to correct prefix pruning errors
-     - Offline teacher cache with top-K token distributions at each valid SID position
-     - Unified distillation framework combining hierarchy-aware + beam-aware objectives for GR models
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First KD specifically designed for GR; hierarchy-aware + beam-aware distillation is practical but conceptually incremental
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — 4 benchmark datasets (Amazon Beauty/Toys + Kuaishou Ad/Video); 2.39× speedup; consistent across distillation configurations
-     - **Impact: 6/10** — Zhejiang U; practical contribution enabling efficient GR deployment; built on OneRec ecosystem
-
-2. **UnpairGR: Unpaired Modality-Agnostic Generative Recommendation**
-   * Affiliation: Beihang University / Meituan — *(Weihao Shen, Wei Chen, Fuwei Zhang, Meng Yuan, Yuqin Lan, Fuzhen Zhuang — Beihang; Guojun Liu, Qingsong Hua, Wei Lin — Meituan)*
-   * Link: [arxiv.org/abs/2608.02477](https://arxiv.org/abs/2608.02477)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Learns unified SID space from paired + image-only + text-only observations; lightweight modality-specific input projections + shared Transformer/codebooks; reliability-guided cross-modal consensus resolves incompatible identifier sequences; no feature imputation or modality-specific codebooks needed.
-   * Key techniques:
-     - Unified semantic-ID space learning from paired (image+text), image-only, and text-only observations
-     - Modality-specific processing confined to lightweight input projections; shared Transformer + residual codebooks
-     - Reliability-guided cross-modal consensus: paired observations establish cross-modal alignment for unimodal refinement
-     - Stationary tokenizer: learned tokenizer fixed as stable targets for autoregressive recommender
-     - No feature imputation, modality-specific codebooks, or fallback mappings
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to handle unpaired multimodal observations in GR; shared SID space with reliability-guided consensus is novel
-     - **Fairness: 4/10** — Improves coverage for items with incomplete modality data (indirect fairness benefit)
-     - **Robustness: 6/10** — 3 benchmark datasets; both fully-observed and incomplete-observation settings; consistent improvement
-     - **Impact: 6/10** — Beihang/Meituan; practical for real-world multimodal GR where modality missing is common
-
-3. **SITA: Semantic Interest Tokens for Target-Aware Compression in Long-Sequence Recommendation**
-   * Affiliation: University of Science and Technology of China / Kuaishou Technology — *(Rui Zhou, Hao Wang, Enhong Chen — USTC; Bo Chen, Qinglin Jia, Jiezhou Ji, Chaoyi Ma, Ruiming Tang — Kuaishou)*
-   * Link: [arxiv.org/abs/2608.03692](https://arxiv.org/abs/2608.03692)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Target-aware compression for long user sequences via semantic interest tokens learned through parallel semantic quantization; target-conditioned aggregation adaptively selects relevant interests per candidate; bridges the gap between efficient compression-based methods and adaptive target-retrieval methods.
-   * Key techniques:
-     - Semantic interest tokens: compress user history into structured semantic representations via parallel semantic quantization
-     - Target-conditioned aggregation: conditioned on target item's semantic identifier, adaptively aggregates corresponding structured interests
-     - Parallel semantic quantization organizes compressed interests into semantic structures without sequential dependency
-     - Balances target-aware modeling with compression efficiency; validated on public + large-scale industrial datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Target-aware compression via semantic interest tokens is practical; parallel semantic quantization for rec is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Public + large-scale industrial datasets; strong scalability maintained; consistent outperformance over baselines
-     - **Impact: 7/10** — USTC/Kuaishou; practical for industrial long-sequence recommendation bridging compression and target-awareness
-
-4. **STEPS: A Self-Triggered Agentic Push Recommendation System**
-   * Affiliation: ByteDance / Peking University — *(Zhao-Yu Zhang, Qingying Chen, Jing Zhou, Jian Sun, Siqi Chen, Leiying Chen, Chuan Zhou, Huiyou Jiang, Xin Tao, Chunyuan Zheng — ByteDance; Haoxuan Li, Zhouchen Lin — PKU)*
-   * Link: [arxiv.org/abs/2608.01949](https://arxiv.org/abs/2608.01949)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Reformulates push notification recommendation as proactive self-triggered agentic process; Planning Agent schedules next invocation via gated ordinal regression; Execution Agent decides send/drop with trajectory rewards; deployed at Douyin (1B+ users) with +0.28% active days, -1.91% push disablement, -79.42% compute overhead.
-   * Key techniques:
-     - Self-triggered agentic framework (STEPS): proactive closed-loop replacing passive polling/pre-scheduled delivery
-     - Two Decision Transformer-based agents: Planning Agent (gated ordinal regression for scheduling) + Execution Agent (trajectory-reward-driven send/drop)
-     - Lightweight filtering agent controls compute overhead and safeguards against unreasonable planning
-     - End-to-end architecture avoiding local optima in multi-stage push frameworks
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First self-triggered agentic push rec; reformulates push as proactive agentic process; gated ordinal regression for scheduling is novel
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Online A/B at Douyin (1B+ users); +0.28% active days; -1.91% push disablement; -79.42% compute reduction
-     - **Impact: 7/10** — ByteDance/PKU; production-proven agentic push paradigm; deployed at Douyin with verified engagement and efficiency gains
-
-5. **UniR²: Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence**
-   * Affiliation: Kuaishou Technology / CAS IIE — *(Shuang Wen, Pengbo Xu, Yusheng Huang, Jiangxia Cao, Shuang Yang, Zhaojie Liu — Kuaishou; Ruochen Yang, Jiawei Sheng, Tingwen Liu — CAS IIE)*
-   * Link: [arxiv.org/abs/2607.24439](https://arxiv.org/abs/2607.24439)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: Unified decoder-only Transformer merging generative recall + multi-objective ranking in single heterogeneous sequence; generated SID trajectory serves as representation bridge; Dual-Query Prefix-Causal Attention provides task-specific visibility with shared base weights + LoRA ranking adaptation; long-term online A/B validated at Kuaishou.
-   * Key techniques:
-     - Heterogeneous sequence: user context + SID trajectory + item features in single decoder-only Transformer
-     - Generated SID trajectory as representation bridge between recall and ranking stages
-     - Dual-Query Prefix-Causal Attention: task-specific information visibility with shared attention weights
-     - LoRA for ranking adaptation: preserves generative backbone while enabling ranking-specific optimization
-     - Eliminates objective inconsistency and information loss at candidate hand-off in cascade architectures
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to unify genrec recall + multi-objective ranking in single decoder-only sequence; Dual-Query Prefix-Causal Attention is novel
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Large-scale industrial data; long-term online A/B at Kuaishou with consistent positive gains
-     - **Impact: 7/10** — Kuaishou/CAS IIE; practical unified recall-ranking paradigm for industrial recommendation
-
-### Papers August 4
-
-*Tuesday, August 4, 2026. Arxiv active. cs.IR listing returned 6 genrec papers from Aug 1–2 submission window. Total: 6 papers.*
-
-1. **HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations**
-   * Affiliation: City University of Hong Kong / Kuaishou Technology — *(Kaifeng Guo, Jingtong Gao, Xiangyu Zhao — CityU; Yiming Yang, Fukang Yang, Yukang Liang, Peng Jiang, Qingpeng Cai — Kuaishou; Guolei Zeng — Independent)*
-   * Link: [arxiv.org/abs/2608.00750](https://arxiv.org/abs/2608.00750)
-   * Venue: KDD 2026 Research Track
-   * TL;DR: Converts item-level outcome feedback into dense, token-aligned learning signals for SID-based generative recommenders via hierarchical residual credit decomposition; RRPO with group-normalized advantages + KL regularization; online A/B-validated with source code and Zenodo artifact.
-   * Key techniques:
-     - Prefix-level utility estimation via group-wise reward smoothing over feature-based user clusters
-     - Residual token credit decomposition: prefix utilities broken into per-token credits, accumulated into credit-to-go signals
-     - Residual-Return Policy Optimization (RRPO): clipped updates, group-normalized advantages, KL regularization
-     - Converts sparse item-level feedback into dense token-aligned signals for conservative per-token improvement
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/Applied-Machine-Learning-Lab/KDD2026-HRPO](https://github.com/Applied-Machine-Learning-Lab/KDD2026-HRPO) — 3⭐, 6 commits; Apache 2.0; complete pipeline (KuaiSim simulator, SID mapping, HRPO table building, RRPO training + 11 baseline comparisons); Zenodo DOI artifact; well-documented README with reproduction instructions
-     - **Novelty: 7/10** — First to convert item-level feedback into hierarchical token-aligned credits for SID genrec; RRPO is a principled RL formulation
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — KDD 2026 peer-reviewed; public dataset + online A/B test in large-scale commercial system; comprehensive baseline comparisons (A2C, DDPG, HAC, Decision Transformer, etc.)
-     - **Impact: 7/10** — KDD 2026; CityU/Kuaishou; practical post-training framework for token-level credit assignment in SID-based genrec
-
-2. **Exp-RSFT: Exponential Reward Weighting for Fine-Tuning Generative Recommenders under Sparse and Noisy Feedback**
-   * Affiliation: Netflix — *(Keertana Chidambaram, Sanath Kumar Krishnamurthy, Qiuling Xu, Ko-Jen Hsiao, Moumita Bhattacharya — Netflix)*
-   * Link: [arxiv.org/abs/2608.00816](https://arxiv.org/abs/2608.00816)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Replaces PPO/DPO post-training with exponential reward-weighted SFT (Exp-RSFT); temperature λ balances coverage vs. noise costs with inverted-U optimality curve; no online exploration or preference data needed; outperforms PPO/DPO on 3 public + 1 industrial dataset.
-   * Key techniques:
-     - Exponential reward-weighted fine-tuning: weights logged interactions by exp(r/λ), directly optimizing logged rewards
-     - Theoretical suboptimality decomposition: coverage cost (logging policy limitations) + noise cost (imperfect feedback)
-     - Temperature λ balancing exploitation-robustness tradeoff → inverted-U performance curve
-     - Outperforms PPO/DPO which over-optimize unreliable reward models; no online exploration required
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Simple but principled alternative to PPO/DPO for genrec post-training; theoretical decomposition is clean
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — 3 public benchmarks + large-scale industrial dataset; theoretical analysis supporting empirical inverted-U trend
-     - **Impact: 6/10** — Netflix; practical lightweight post-training method for industrial genrec under sparse/noisy feedback
-
-3. **OMEGA: Collaborative Memory Augmentation for Generative Recommendation**
-   * Affiliation: Renmin University of China / ByteDance — *(Enze Liu, Wayne Xin Zhao — Renmin University; Zhen Tian — ByteDance)*
-   * Link: [arxiv.org/abs/2608.01315](https://arxiv.org/abs/2608.01315)
-   * Venue: KDD 2026 Research Track
-   * TL;DR: Bridges parametric knowledge gap in GR with explicit collaborative memory bank; learnable query tokens compress user sequences into compact memory; target-aware retrieval + gated cross-attention integration adaptively fuses global patterns with local context.
-   * Key techniques:
-     - Latent context compression: learnable query tokens distill sequential behavior into compact memory representations
-     - Collaborative memory bank: explicit repository of global cross-user behavioral patterns
-     - Lightweight target-aware retrieval: identifies relevant memories via sequence-level + target-level similarities
-     - Gated cross-attention integration: adaptively fuses retrieved collaborative memories while suppressing noisy patterns
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First to add explicit collaborative memory bank to GR; bridges implicit parametric ↔ explicit collaborative knowledge gap
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — KDD 2026 peer-reviewed; multiple real-world datasets; consistent outperformance over advanced GR models
-     - **Impact: 6/10** — KDD 2026; Renmin/ByteDance; opens new direction for memory-augmented generative recommendation
-
-4. **GARDRec: Decision-Level Graph Grounding for Large Language Model Recommendation**
-   * Affiliation: Harbin Institute of Technology — *(Yong Wang, Hongliang Sun, Jinlan Liu, Hua Zhang, Dianbo Sui, Dianhui Chu, Zhiying Tu — HIT)*
-   * Link: [arxiv.org/abs/2608.00669](https://arxiv.org/abs/2608.00669)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Shifts KG grounding from prompt-level to decision-level for LLM-based next-item ranking; semantic-structural item representations + temporally weighted graph contexts aligned with frozen LLM via multimodal prompts; late-stage decision branches inject explicit matching features.
-   * Key techniques:
-     - Semantic-structural item representations from textual node features + graph propagation
-     - Personalized graph contexts from temporally weighted histories + first-order neighborhoods
-     - Graph-LLM alignment via continuous multimodal prompts with frozen LLM backbone
-     - Late-stage decision branches injecting explicit interaction/matching features + inter-candidate attention
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Decision-level vs. prompt-level graph grounding is a practical refinement; conceptually incremental
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — 3 public benchmarks; multiple LLM backbones; ablation verifying each component
-     - **Impact: 5/10** — HIT; practical LLM-based recommendation with structured graph grounding
-
-5. **GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval**
-   * Affiliation: Meta — *(Zhou Fang, Yuhang Huang, Ang Zhang, Yihan He, Ruichao Xiao, Chao Li, Yavuz Yetim, Sibyl Yang, Xiaohan Wei, Fei Tian, Liang Wang, Liyuan Li, Nathan Yan, Gaoxiang Liu — Meta)*
-   * Link: [arxiv.org/abs/2608.00938](https://arxiv.org/abs/2608.00938)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Production serving system for ads genrec solving eligibility (GTM: bitmask+Bloom filter SID-prefix filtering, 23.55→40.42% pass rate) and latency (68× cross-attention, 11.1× decoder speedup on GH200 via wide-beam kernel/KV-cache/beam-search optimization).
-   * Key techniques:
-     - Generative Target Matching (GTM): SID-prefix-level personalized filtering using bitmask + Bloom filter matchers from advertiser targeting rules
-     - Encoder-decoder Transformer optimizations targeting wide-beam, short-sequence decoding regime
-     - Custom attention kernels + KV cache + beam search redesign for wide-beam inference
-     - 68× cross-attention, 23-26× self-attention, 11.1× overall decoder latency reduction on NVIDIA GH200
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First production serving system addressing both eligibility and latency for ads genrec; GTM is novel for ad targeting
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Production-scale system design; GH200 latency benchmarks; comprehensive serving pipeline coverage
-     - **Impact: 7/10** — Meta; practical blueprint for productionizing genrec in high-volume real-time ads systems
-
-6. **LIME-Rec: Auditing Semantic Gains in Sequential Recommendation — A Lightweight Recovery Test**
-   * Affiliation: Hunan University — *(Kong Wang, Kehua Yang — Hunan U; Zhongke He, Xiang Chen, Hongwei Zeng, Kai Deng, Long Wang)*
-   * Link: [arxiv.org/abs/2608.01260](https://arxiv.org/abs/2608.01260)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Diagnostic framework decomposing semantic recsys gains; three-expert fusion (SASRec + ItemCF + frozen BGE embeddings) with auditable score-level fusion + bounded history calibration recovers 7-12% over strongest baselines without serving-time LM inference; randomly permuting embeddings drops R@10 by 13.6-17.5%.
-   * Key techniques:
-     - Three-expert design: SASRec sequential + ItemCF co-occurrence + frozen BAAI/bge-base-en-v1.5 semantic expert
-     - Auditable score-level fusion: per-user score normalization with separately inspectable expert contributions
-     - Bounded history calibration fitted on validation data only, zero serving-time LM inference
-     - Controlled perturbation: random item-text permutation reducing R@10 by 13.6-17.5% → gains depend on genuine content correspondence
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/Double-wk/LIME-Rec](https://github.com/Double-wk/LIME-Rec) — 3⭐, 1 commit; Apache 2.0; well-structured package (lime_rec/, configs/, scripts/, workflows/); comprehensive README with multi-seed reproduction; tests included
-     - **Novelty: 7/10** — First lightweight recovery test auditing source of semantic gains in seqrec; diagnostic framing is important for the field
-     - **Fairness: 3/10** — Not addressing fairness directly
-     - **Robustness: 7/10** — 3 Amazon benchmarks + Yelp; multi-seed; controlled perturbations; three-expert isolation
-     - **Impact: 7/10** — Hunan U; important diagnostic contribution suggesting lightweight representations may explain much of semantic rec gains; challenges the need for complex semantic architectures
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 126 papers as of August 14.
+**Count:** 127 papers as of August 16.
 
 | Score | Paper |
 | --- | --- |
@@ -1153,6 +956,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM) |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
+| 5/10 | Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere) |
 | 5/10 | Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec) |
 | 5/10 | LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation (LBR) |
 | 5/10 | OneReason Technical Report |
@@ -1407,6 +1211,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - PushDualGen / LLM SID Push Rec -- Kuaishou
 - HCGRec / Hint-Conditioned GenRec -- SJTU / Huawei Noah's Ark Lab (CIKM 2026)
 - Token-Level Credit Assignment / Generative Document Retrieval -- Shandong U
+- Gwhere / Generative Next-POI with EAKTO RL -- Amap / Alibaba
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.

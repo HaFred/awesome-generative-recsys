@@ -402,6 +402,8 @@
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation (Tencent/ACL 2026)
 - Interpretable Representation via LLM-Driven Generative Disentanglement for Local-Life Service Recommendation (LGRID)
 - HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
+- Sona Technical Report (Sona)
+- Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
 
 ### Generative Retrieval / Ranking
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
@@ -471,6 +473,9 @@
 - Beyond Semantic IDs: Encoding Business-Value Ranking into Document Identifiers for Generative Retrieval (CRID)
 - Token-Level Credit Assignment Optimization for Generative Document Retrieval
 - Generative Universal Multimodal Retrieval with Dual-role Identifiers (DrIG)
+- Improving Item Discoverability in e-Commerce Search via Related Intent Generation
+- Hypothesis-Driven Shelf Generation for Personalised Recommendation
+- ICICLE: Expanding Retrieval with In-Context Documents (ICICLE)
 
 ### Graph-based Recommendation
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -632,6 +637,10 @@
 - GRACE: Bringing GRACE to Recommendation: Fine-Tuning for Sustainable and Accurate Personalization (GRACE)
 - STAR: Structured Tokenization and Target-Aware Interest Representation for PCVR Prediction (STAR)
 - DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation (DrEM)
+- Sona Technical Report (Sona)
+- Improving Item Discoverability in e-Commerce Search via Related Intent Generation
+- Hypothesis-Driven Shelf Generation for Personalised Recommendation
+- Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -667,6 +676,9 @@
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
 - SmartGR: Hierarchy and Beam-Aware Knowledge Distillation for Generative Recommendation (SmartGR)
+- Sona Technical Report (Sona)
+- Improving Item Discoverability in e-Commerce Search via Related Intent Generation
+- Hypothesis-Driven Shelf Generation for Personalised Recommendation
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 
@@ -944,6 +956,7 @@
 - PVTG: Personalized Video Thumbnail Generation with Preference-aware Highlight Retrieval (PVTG)
 - Generative Universal Multimodal Retrieval with Dual-role Identifiers (DrIG)
 - TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute)
+- Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
 
 ### Optimizer
 - MuonRec
@@ -1033,6 +1046,7 @@
 - Uncertainty-aware Generative Recommendation (UGR)
 - HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
 - Token-Level Credit Assignment Optimization for Generative Document Retrieval
+- Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1061,6 +1075,7 @@
 - Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
 - STORM: Stepwise Token Optimization with Reward-Guided Beam Search
+- ICICLE: Expanding Retrieval with In-Context Documents (ICICLE)
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -1158,6 +1173,7 @@
 - TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
 - HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
 - FSGR: Mitigating Token Frequency Bias for Fair SID-Based Generative Recommendation (FSGR)
+- Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
