@@ -76,6 +76,106 @@ mindmap
 ---
 ## By Date
 
+### Papers August 18
+
+*Tuesday, August 18, 2026. Arxiv active. cs.IR Aug 17–18 listings returned 6 recommendation papers spanning generative recommendation, LLM-based continual/multi-turn recommendation, and sequential recommendation. Total: 6 papers.*
+
+1. **EchoRec: Multi-Item Prediction-Empowered Generative Recommendation via Cycle-Consistent Preference Alignment**
+   * Affiliation: National University of Singapore / Tencent / BUPT / Shandong University — *(Haokai Ma, Aoqi Hu, Yonghui Yang, Teng Tu, Tat-Seng Chua — NUS; Ruobing Xie — Tencent; Yueao Xing — BUPT; Lei Meng — Shandong University)*
+   * Link: [arxiv.org/abs/2608.14011](https://arxiv.org/abs/2608.14011)
+   * Venue: arXiv preprint (under review)
+   * TL;DR: Unlocks Multi-Token Prediction's dense-supervision potential for generative recommendation — future behaviors carry a semantic echo of the current one that decays across horizons; EchoRec chains horizon-aware auxiliary branches and cycle-consistently aligns the decoding representation with a holistic preference.
+   * Key techniques:
+     - Horizon-aware Preference Generation (HPG): sequentially chains lightweight auxiliary branches on the base recommender, each conditioning on its predecessor to respect preference evolution
+     - Verifiable Holistic-Preference Alignment (VHA): consolidates multi-horizon signals into a holistic preference echoed back through cycle-consistent projectors to suppress spurious alignment (theoretically excludes rank-collapse under invertible transport)
+     - Disposable scaffolding discarded at inference → negligible online serving overhead; natural multi-item generation ability
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — code/datasets "available upon acceptance"; not yet public
+     - **Novelty: 7/10** — First to unlock MTP's dense-supervision (vs. efficiency) potential for genrec; cycle-consistent holistic alignment is clean and theoretically grounded
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — 3 datasets; under review (no peer review yet); theoretical guarantee on spurious-alignment exclusion
+     - **Impact: 6/10** — NUS/Tencent (Tat-Seng Chua); advances multi-token prediction for SID-based generative recommendation
+
+2. **Decoupled Temporal Encoding for Generative Recommendation**
+   * Affiliation: Meituan — *(Pengfei Jia, Jingjian Wang, Jingmao Li, Ge Zhang, Feng Shi)*
+   * Link: [arxiv.org/abs/2608.16274](https://arxiv.org/abs/2608.16274)
+   * Venue: CIKM 2026
+   * TL;DR: Separates broad temporal dynamics from local order cues in generative recommendation via a personalized macro-temporal module plus a time-gated micro-sequential module, motivated by multi-level temporal regularities (recency, meal-time peaks, weekday-weekend shifts, promotion bursts) in food delivery.
+   * Key techniques:
+     - Personalized macro-temporal module: injects compact temporal primitives into item embeddings
+     - Time-gated micro-sequential module: introduces relative-order bias only when interactions are temporally dense
+     - Parameter-efficient and deployment-friendly; easy integration into existing systems
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — Decoupling macro temporal dynamics from micro order cues is a clean, well-motivated fix vs. unified temporal modeling
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; real-world food delivery / instant retail system
+     - **Impact: 6/10** — Meituan; practical temporal encoding for industrial generative recommendation
+
+3. **TRACER: Balancing Stability-Plasticity-Cognitivity Trilemma for LLM Enhanced Continual Recommendation**
+   * Affiliation: POSTECH — *(WooJoo Kim, HyunSik Yoo, JunYoung Kim, JaeHyung Lim, SeongKu Kang, HwanJo Yu)*
+   * Link: [arxiv.org/abs/2608.16075](https://arxiv.org/abs/2608.16075)
+   * Venue: CIKM 2026
+   * TL;DR: Identifies the Stability-Plasticity-Cognitivity (SPC) trilemma in LLM-enhanced continual recommendation and harmonizes it with three specialized modules so LLM semantic priors support history retention and interest adaptation without disrupting continual learning.
+   * Key techniques:
+     - SPC Trilemma diagnosis: generalized LLM semantic priors (Cognitivity) conflict with retaining personalized history (Stability) and adapting to interest shifts (Plasticity)
+     - Three specialized modules targeting stability, plasticity, and cognitivity, preventing any single lemma from dominating
+     - Up to 14.38% improvement over SOTA across 5 real-world datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 4/10** — [github.com/woo-joo/TRACER_CIKM26](https://github.com/woo-joo/TRACER_CIKM26) — modular (base_rec/tracer/cl_frames/llm_enhancers), train.py + metrics, Zenodo pre-computed assets; no license, 1⭐, minimal README (no results/citation)
+     - **Novelty: 6/10** — SPC trilemma is a fresh framing of the LLM-continual-rec conflict; three-way harmonization is well-designed
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; 5 datasets; consistent gains
+     - **Impact: 5/10** — POSTECH; practical LLM-enhanced continual recommendation
+
+4. **GOD: Enhancing Generalization via Deep Grafting for Sequential Recommendation**
+   * Affiliation: POSTECH — *(WooJoo Kim, JunYoung Kim, JaeHyung Lim, HwanJo Yu)*
+   * Link: [arxiv.org/abs/2608.16073](https://arxiv.org/abs/2608.16073)
+   * Venue: CIKM 2026
+   * TL;DR: Component-level distillation via grafting — builds hybrid teacher-student source models to isolate whether weak generalization stems from unreliable embeddings, overfitted encoding, or co-adaptation to sparse histories.
+   * Key techniques:
+     - Graft-Oriented Distillation (GOD): replaces selected frozen-teacher components with trainable student counterparts to build hybrid source models
+     - Component-level feedback: evaluates student embeddings with the teacher encoder, and the student encoder with teacher embeddings
+     - Student-only at inference → no additional serving cost; up to 13.92% over SOTA on 3 datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 5/10** — Component-level grafting distillation is practical; conceptually incremental vs. representation/output matching
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; 3 datasets; consistent gains
+     - **Impact: 5/10** — POSTECH; practical distillation fix for sequential recommendation
+
+5. **Ask to Be Sure: Informative Interactions for Confident Multi-Turn LLM Recommendation**
+   * Affiliation: Amazon — *(Cedar Site Bai, Duanshun Li, Zhenyu Liao, Sheikh Sarwar, Huiyuan Chen, Yuan Chen, Changhe Yuan, Haiyang Zhang, Qilin Qi)*
+   * Link: [arxiv.org/abs/2608.15949](https://arxiv.org/abs/2608.15949)
+   * Venue: CIKM 2026
+   * TL;DR: Quantifies each multi-turn interaction by the reduction in the assistant's uncertainty (entropy over recommendations) and uses this entropy-reduction reward — without ground-truth recommendations — to fine-tune the LLM for strategic interaction generation.
+   * Key techniques:
+     - Entropy-reduction reward: measures information gain per interaction via entropy over recommendations, no ground-truth needed
+     - SFT + DPO fine-tuning with the entropy-reduction reward for strategic interaction generation
+     - Improves both recommendation quality and conversational efficiency on INSPIRED + ReDial
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — Entropy-reduction (uncertainty) reward for multi-turn elicitation without ground-truth is a clean, practical idea
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; INSPIRED + ReDial; SFT + DPO
+     - **Impact: 5/10** — Amazon; practical multi-turn LLM recommendation with strategic interaction
+
+6. **SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences**
+   * Affiliation: PayPal AI — *(Tsz Fung Pang, Po Jen Chen, Nimish Ronghe, Farhad Farahani, Bo Zhang)*
+   * Link: [arxiv.org/abs/2608.15429](https://arxiv.org/abs/2608.15429)
+   * Venue: RecSys 2026 CARS Workshop
+   * TL;DR: Generative action embedding with per-field tokenization (product/interaction/surface) encodes cross-surface financial-service user actions (checkout, P2P, in-app, email, account) into a unified user representation for downstream recommendation.
+   * Key techniques:
+     - Per-field tokenization: decomposes each action event into multiple field-level tokens enabling field-level attention and per-field objectives
+     - Decoder-only transformer with round-robin per-field tokenization + K independent LM heads
+     - Event-boundary contrastive head with stop-gradient compositional targets; strongest click/conversion lift across touchpoints
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — Per-field action tokenization for cross-surface generative embedding is a fresh, well-motivated angle for fintech
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — RecSys 2026 CARS workshop; offline ablation; no online A/B
+     - **Impact: 5/10** — PayPal; multi-surface generative embedding for financial-services recommendation
+
 ### Papers August 16
 
 *Sunday, August 16, 2026. Arxiv inactive (weekend, Aug 15–16). Applied 3-month fallback strategy → found 5 missed genrec papers from May–Aug 2026: Sona Yandex Music cascade-replacing generative recommender, Related Intent Generation Amazon KDD 2026 intent-conditioned recall expansion, Hypothesis-Driven Shelf Generation Spotify RecSys 2026, Gwhere Amap generative next-POI opensource 5/10, ICICLE NTU in-context generative retrieval. Total: 5 papers.*
@@ -750,100 +850,11 @@ mindmap
      - **Robustness: 6/10** — Thorough experiments; consistent outperformance especially data-constrained regimes
      - **Impact: 7/10** — Snap Inc.; opens diffusion-based GR paradigm with strong open-source implementation
 
-### Papers August 7
-
-*Friday, August 7, 2026. Arxiv active. cs.IR Aug 7 listing returned 1 new genrec paper (Gryphon-v2) + 1 missed paper from Aug 4 submission (UniGD) + 3 missed KDD/SIGIR 2026 papers from 3-month fallback (PinRec Pinterest KDD 2026, SA2CRQ JD.com/HIT/PKU/CAS IIE SIGIR 2026, OneLive Kuaishou). Total: 5 papers.*
-
-1. **Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation**
-   * Affiliation: Yandex — *(Anna Lipkina, Daria Tikhonovich, Viktor Yanush, Mariia Ulianova, Oleg Sorokin, Vladislav Dodonov, Ilya Murzin, Denis Burshtein, Nikolay Savushkin — Yandex)*
-   * Link: [arxiv.org/abs/2608.06213](https://arxiv.org/abs/2608.06213)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Unified generate-and-rank architecture replacing multi-stage cascade with single model; Rollout Distillation transfers production ranking preferences from Teacher Ranker to Ranking Module without second serving model; deployed at Yandex Music replacing 15+ candidate generators + pre-ranking + final ranking; +1.41% active users at comparable latency.
-   * Key techniques:
-     - Unified generate-and-rank: shared encoder processes user history once for both SID generation and item-level ranking
-     - Rollout Distillation: teacher scores as sole ranking supervision over decoder rollouts + logged impressions for complementary coverage
-     - Shared encoder reuse between autoregressive decoder and item-level Ranking Module
-     - End-to-end deployment replacing production cascade with single model
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Extends Gryphon with rollout distillation for end-to-end cascade replacement; deployment validation is strong
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Production deployment at Yandex Music; +1.41% active users; comparable latency to production cascade
-     - **Impact: 7/10** — Yandex; practical blueprint for end-to-end generative retrieval replacing multi-stage cascade in music streaming
-
-2. **UniGD: A Unified Generative-Discriminative Framework for Industrial Retrieval**
-   * Affiliation: Kuaishou Technology — *(Shujie Ji, Yawei Kong, Yilin Zhao, Li Wang, Xialong Liu, Peng Jiang — Kuaishou)*
-   * Link: [arxiv.org/abs/2608.03150](https://arxiv.org/abs/2608.03150)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Unified decoder-only framework integrating SID-based generation and query-ad relevance scoring in single model; CAGE coordinates conflicting gradients between generation and discrimination objectives; CAM anchors ad representations to frozen hierarchical codebooks; deployed at Kuaishou search ads: +5.78% revenue, -33% latency.
-   * Key techniques:
-     - Conflict-Aware Gradient Enhancement (CAGE): adaptive gradient coordination via orthogonal projection when generation and discrimination objectives conflict
-     - Codebook-Anchored Representation Module (CAM): anchors items to frozen hierarchical codebooks from multimodal pretrained model for rich semantic priors
-     - Heterogeneous Ad-material Modeling (HAM): shared backbone + type-specific capacity for short-video, product, and live-stream ads
-     - Unified decoder-only architecture eliminating external online relevance model
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Unified generative-discriminative with CAGE gradient coordination is practical; CAM+HAM are well-engineered for industrial ads
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Production A/B at Kuaishou; +5.78% revenue, -33% latency; NQ320K + MS300K public benchmarks
-     - **Impact: 7/10** — Kuaishou; practical unified framework bridging generation and relevance for industrial search advertising
-
-3. **PinRec: Unified Generative Retrieval for Pinterest Recommender Systems**
-   * Affiliation: Pinterest Inc. — *(Edoardo Botta, Jaewon Yang, Yi-Ping Hsu, Laksh Bhasin, Yilin Chen, Prabhat Agarwal, Anirudhan Badrinath, Jiajing Xu, Charles Rosenberg — Pinterest)*
-   * Link: [arxiv.org/abs/2504.10507](https://arxiv.org/abs/2504.10507)
-   * Venue: KDD 2026
-   * TL;DR: First unified generative retrieval model serving all Pinterest surfaces (home feed, search, related pins) with single pretrained-finetuned architecture; outcome-conditioned generation targets surface-specific business goals; +4% increase in search saves at Pinterest scale.
-   * Key techniques:
-     - Cross-surface pretraining + surface-specific fine-tuning: single model serves all recommendation surfaces
-     - Outcome-conditioned generation mechanism: targets different business outcomes per surface (saves, clicks, etc.)
-     - Unified token sequence combining heterogeneous inputs (query text + user history) across surfaces
-     - First rigorous study of unified generative retrieval deployed at Pinterest scale (600M+ MAU)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First multi-surface unified GR at production scale; outcome-conditioned generation is practical
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — KDD 2026; deployed at Pinterest (600M+ MAU); +4% search saves; cross-surface validation
-     - **Impact: 8/10** — KDD 2026; Pinterest; milestone for unified generative retrieval at internet-scale visual discovery platform
-
-4. **SA²CRQ: Towards Efficient and Generalizable Retrieval — Adaptive Semantic Quantization and Residual Knowledge Transfer**
-   * Affiliation: JD.com / Harbin Institute of Technology / Peking University / CAS IIE — *(Huimu Wang, Xingzhi Yao, Yiming Qiu, Qinghong Zhang, Songlin Wang, Sulong Xu — JD.com; Haotian Wang — HIT; Yufan Cui — PKU; Mingming Li — CAS IIE)*
-   * Link: [arxiv.org/abs/2602.23978](https://arxiv.org/abs/2602.23978)
-   * Venue: SIGIR 2026
-   * TL;DR: Addresses SID head-tail asymmetry — head items suffer ID collisions, tail items suffer semantic fragmentation; SARQ dynamically allocates code lengths based on item path entropy; ACRQ uses frozen head-item manifold to regularize tail-item representation learning; consistent improvements especially in cold-start.
-   * Key techniques:
-     - Sequential Adaptive Residual Quantization (SARQ): variable-length SID allocation — longer discriminative IDs for head items, shorter generalizable IDs for tail items
-     - Anchored Curriculum Residual Quantization (ACRQ): frozen semantic manifold from head items regularizes tail-item learning
-     - Path-entropy-based code length allocation adapting to item popularity
-     - Large-scale industrial search validation + public datasets; cold-start scenario emphasis
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to address SID head-tail asymmetry via adaptive code-length allocation; frozen manifold knowledge transfer is principled
-     - **Fairness: 4/10** — Explicitly improves tail/cold-start item retrieval; addresses data-imbalance fairness
-     - **Robustness: 6/10** — SIGIR 2026 peer-reviewed; industrial + public datasets; consistent cold-start gains
-     - **Impact: 6/10** — SIGIR 2026; JD.com/HIT/PKU/CAS IIE; practical adaptive SID framework for imbalanced industrial item corpora
-
-5. **OneLive: Dynamically Unified Generative Framework for Live-Streaming Recommendation**
-   * Affiliation: Kuaishou Technology — *(Shen Wang, Yusheng Huang, Ruochen Yang, Shuang Wen, Pengbo Xu, Jiangxia Cao, Yueyang Liu, Kuo Cai, Chengcheng Guo, Shiyao Wang, Xinchen Luo, Qiang Luo, Ruiming Tang, Shuang Yang, Zhaojie Liu, Guorui Zhou, Han Li, Kun Gai — Kuaishou)*
-   * Link: [arxiv.org/abs/2602.08612](https://arxiv.org/abs/2602.08612)
-   * Venue: arXiv preprint, February 2026
-   * TL;DR: First generative recommendation framework tailored for live-streaming; Dynamic Tokenizer with residual quantization handles continuously evolving live content; Time-Aware Gated Attention for temporal dynamics; Unified Multi-Objective Alignment for heterogeneous objectives; decoder-only architecture with Sequential MTP.
-   * Key techniques:
-     - Dynamic Tokenizer: continuous residual quantization encoding evolving real-time live content fused with behavior signals
-     - Time-Aware Gated Attention: explicit temporal dynamics modeling for timely decision-making in fast-changing live environments
-     - Sequential Multi-Token Prediction (MTP) + QK Norm for stable training and accelerated inference
-     - Unified Multi-Objective Alignment Framework: policy optimization balancing heterogeneous objectives (engagement, retention, revenue)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First generative recommendation specifically for live-streaming; dynamic tokenization for evolving content is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — Work in progress; no public benchmark or industrial A/B reported; decoder-only architecture is sound
-     - **Impact: 6/10** — Kuaishou; opens new direction for generative recommendation in live-streaming domain; practical for short-video/live platforms
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 127 papers as of August 16.
+**Count:** 128 papers as of August 18.
 
 | Score | Paper |
 | --- | --- |
@@ -967,6 +978,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 4/10 | Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation |
 | 4/10 | GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation |
 | 4/10 | RecRec: Recursive Refinement for Sequential Recommendation |
+| 4/10 | TRACER: Balancing Stability-Plasticity-Cognitivity Trilemma for LLM Enhanced Continual Recommendation (TRACER) |
 | 3/10 | Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS) |
 | 3/10 | PVTG / Personalized Video Thumbnail Generation |
 | 3/10 | STORM: Stepwise Token Optimization with Reward-Guided Beam Search |
@@ -1110,6 +1122,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DrIG / Dual-role Identifiers Multimodal Generative Retrieval -- U Tsukuba
 
 ### RL / Reinforcement Learning
+- Ask to Be Sure / Entropy-Reduction Reward for Multi-Turn LLM Rec — Amazon (CIKM 2026)
 - ConnectionMind / Social Graph LLM Rec — Meta / MSU
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
 - Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE)

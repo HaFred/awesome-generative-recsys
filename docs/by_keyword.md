@@ -114,6 +114,7 @@
 - Evaluating Scene-based In-Situ Item Labeling for Immersive Conversational Recommendation (ICRS)
 - When and How to Ask: Dynamic Preference Elicitation Strategies for Conversational Recommendation (COPE)
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation (Tencent/ACL 2026)
+- Ask to Be Sure: Informative Interactions for Confident Multi-Turn LLM Recommendation (Ask to Be Sure)
 
 ### Cross-Domain
 - Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
@@ -404,6 +405,9 @@
 - HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
 - Sona Technical Report (Sona)
 - Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
+- EchoRec: Multi-Item Prediction-Empowered Generative Recommendation via Cycle-Consistent Preference Alignment (EchoRec)
+- Decoupled Temporal Encoding for Generative Recommendation (DTE)
+- SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
 
 ### Generative Retrieval / Ranking
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
@@ -641,6 +645,8 @@
 - Improving Item Discoverability in e-Commerce Search via Related Intent Generation
 - Hypothesis-Driven Shelf Generation for Personalised Recommendation
 - Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
+- Decoupled Temporal Encoding for Generative Recommendation (DTE)
+- SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -679,6 +685,7 @@
 - Sona Technical Report (Sona)
 - Improving Item Discoverability in e-Commerce Search via Related Intent Generation
 - Hypothesis-Driven Shelf Generation for Personalised Recommendation
+- GOD: Enhancing Generalization via Deep Grafting for Sequential Recommendation (GOD)
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 
@@ -840,6 +847,8 @@
 - ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT)
 - Tokenizing Numerical and Embedding Features for LLM RecSys
 - Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation (GALLM)
+- TRACER: Balancing Stability-Plasticity-Cognitivity Trilemma for LLM Enhanced Continual Recommendation (TRACER)
+- Ask to Be Sure: Informative Interactions for Confident Multi-Turn LLM Recommendation (Ask to Be Sure)
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1174,6 +1183,7 @@
 - HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
 - FSGR: Mitigating Token Frequency Bias for Fair SID-Based Generative Recommendation (FSGR)
 - Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
+- EchoRec: Multi-Item Prediction-Empowered Generative Recommendation via Cycle-Consistent Preference Alignment (EchoRec)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1228,6 +1238,9 @@
 - Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation (GALLM)
 - From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM)
 - STAR: Structured Tokenization and Target-Aware Interest Representation for PCVR Prediction (STAR)
+- Decoupled Temporal Encoding for Generative Recommendation (DTE)
+- GOD: Enhancing Generalization via Deep Grafting for Sequential Recommendation (GOD)
+- SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
