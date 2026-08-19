@@ -69,12 +69,14 @@
 - TMallGS: Scaling Unified Feature and Sequence Modeling for Generative E-commerce Search (TMallGS)
 - Cheaper is Better: A Discount-Aware Network for Conversion Rate Prediction in E-commerce Recommendation System (DANet)
 - STAR: Structured Tokenization and Target-Aware Interest Representation for PCVR Prediction (STAR)
+- UniDot: A Unified Network for Sequence Modeling and Feature Interaction in Large-scale Recommendation (UniDot)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
 - Cold-Start Personalization via Training-Free Priors from Structured World Models (PEP)
 - DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation (DiffCold)
 - Mind the Gap: Bridging Behavioral Silos with LLMs in Multi-Vertical Recommendations
+- POI Recommendation with LLM-Augmented Multi-Graph Learning and Contrastive Alignment (LLM-MGCL)
 - Representation Curriculum: Stagewise Training for Robust Ranking and Allocation
 - DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM)
 - Denoising Implicit Feedback for Cold-start Recommendation (DIF)
@@ -98,6 +100,7 @@
 ### Contrastive Learning
 - GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation
 - Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
+- POI Recommendation with LLM-Augmented Multi-Graph Learning and Contrastive Alignment (LLM-MGCL)
 - Quality-Aware Collaborative Multi-Positive Contrastive Learning for Sequential Recommendation (QCMP-CL)
 - UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
 
@@ -267,6 +270,7 @@
 
 ### Generative Recommendation / VAE
 - Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation (Multi-Decoder OneRec)
+- Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs (OGR)
 - WhisperRec: Latent Reasoning for Efficient Foundation Recommendation Models (WhisperRec)
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - A2Gen (Action-Aware Generative Sequence Modeling)
@@ -490,6 +494,7 @@
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
 - GraphRAG-IRL
 - Guiding Federated Graph Recommendation with LLM-encoded knowledge
+- POI Recommendation with LLM-Augmented Multi-Graph Learning and Contrastive Alignment (LLM-MGCL)
 - RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation (RankGraph-2)
 - Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation (G2Rec)
 - CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
@@ -505,17 +510,20 @@
 
 
 ### Industrial
+- Decomposing Staleness in Recommender Systems: A Dual-Filter Framework for Supersession and Decay (SDF)
 - Discriminative Language Models as Effective Retrievers (Discriminative Retrieval)
 - DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval (DIRECTOR)
 - EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
 - Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation (Gryphon-v2)
 - Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation (Multi-Decoder OneRec)
+- Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs (OGR)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
 - PSG: Pair-Space Generation for Efficient Generative Reranking (PSG)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - SITA: Semantic Interest Tokens for Target-Aware Compression in Long-Sequence Recommendation (SITA)
 - STEPS: A Self-Triggered Agentic Push Recommendation System (STEPS)
+- UniDot: A Unified Network for Sequence Modeling and Feature Interaction in Large-scale Recommendation (UniDot)
 - UniR²: Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence (UniR²)
 - WhisperRec: Latent Reasoning for Efficient Foundation Recommendation Models (WhisperRec)
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
@@ -671,6 +679,7 @@
 
 ### Inference Acceleration / Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
+- Empowering Compact LLMs with Fusion of Layer-wise Exits for Recommendation (FLEXRec)
 - MLPs are Efficient Distilled Generative Recommenders (SID-MLP)
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation
@@ -695,9 +704,11 @@
 - CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
 - Discriminative Language Models as Effective Retrievers (Discriminative Retrieval / Case Against GenRec)
 - EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
+- Empowering Compact LLMs with Fusion of Layer-wise Exits for Recommendation (FLEXRec)
 - Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
+- POI Recommendation with LLM-Augmented Multi-Graph Learning and Contrastive Alignment (LLM-MGCL)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - TopoGR: Revealing and Preserving Latent Structure of Semantic ID in Generative Recommendation (TopoGR)
 - VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation (VaLiDRec)
@@ -867,6 +878,7 @@
 - Causal Representation Learning for Generalisable Recommendation
 - DeepInterestGR: Mining Deep Multi-Interest Using Multi-Modal LLMs
 - Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP)
+- Empowering Compact LLMs with Fusion of Layer-wise Exits for Recommendation (FLEXRec)
 - Generative Recommendation for Large-Scale Advertising (GR4AD)
 - GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation
 - IntRR: A Framework for Integrating SID Redistribution and Length Reduction
@@ -888,6 +900,7 @@
 - TAP-PER: Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization (TAP-PER)
 - TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation
 - Token Factory: Efficiently Integrating Diverse Signals into Large Recommendation Models (Token Factory)
+- UniDot: A Unified Network for Sequence Modeling and Feature Interaction in Large-scale Recommendation (UniDot)
 - UniGRec
 - UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation (UniFormer)
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
@@ -1102,6 +1115,7 @@
 
 ### Semantic / Structured IDs
 - CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
+- Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs (OGR)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
 - PaletteID: Prototype-Composed Semantic Identifiers for Multimodal CTR Prediction (PaletteID)
 - SnapLGR: LLM-Based Generative Retrieval for Snapchat Content Recommendation (SnapLGR)
@@ -1227,6 +1241,7 @@
 - IMFuse: Instance-Aware Multi-Layer Fusion for LLM-Enhanced Sequential Recommendation (IMFuse)
 - Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM)
 - UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
+- UniDot: A Unified Network for Sequence Modeling and Feature Interaction in Large-scale Recommendation (UniDot)
 - UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation (UniFormer)
 - UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence
 - VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE)
@@ -1250,6 +1265,7 @@
 
 
 ### Temporal Stability / Feature Pruning
+- Decomposing Staleness in Recommender Systems: A Dual-Filter Framework for Supersession and Decay (SDF)
 - Fortress: A Case Study in Stabilizing Search Recommendations
 
 

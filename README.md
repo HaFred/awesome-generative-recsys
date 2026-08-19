@@ -53,6 +53,7 @@ mindmap
         STATIC -- Google
         APAO -- Tsinghua
         SID-MLP -- UCSD / Snap
+        FLEXRec -- UQ
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
@@ -62,7 +63,6 @@ mindmap
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
-        Gwhere -- Amap / Alibaba
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -75,6 +75,95 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 19
+
+*Wednesday, August 19, 2026. Arxiv active. cs.IR Aug 18–19 listings returned 5 recommendation papers spanning end-to-end generative slate recommendation, compact-LLM efficiency, unified sequence+feature-interaction modeling, staleness filtering, and LLM-augmented POI recommendation. Total: 5 papers.*
+
+1. **Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs (OGR)**
+   * Affiliation: Kuaishou Technology — *(Yang Hu, Jiayi Guo, Jingui Ma, Ning Li, Jiangling Qin, Yanming Li, Yang Deng, Xiaoshuang Chen, Kaiqiao Zhan)*
+   * Link: [arxiv.org/abs/2608.17613](https://arxiv.org/abs/2608.17613)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: First end-to-end generative slate recommendation that directly generates ordered slates; TUSID fuses item-specific semantic + local collaborative signals into recommendation-aware hierarchical SIDs, list-wise preference planning + pipelined position-wise SID decoding models inter-item dependencies, and reward-guided conservative policy optimization (SPA) aligns slates with preferences; +48.2% NDCG@5 offline, +1.120% Effective Views online at Kuaishou.
+   * Key techniques:
+     - TUSID: adaptively fuses item-specific semantic and local collaborative information into hierarchical SIDs for recommendation-aware tokenization
+     - List-wise preference planning + pipelined position-wise SID decoding to model global preferences and inter-item dependencies while generating ordered slates
+     - SPA (reward-guided conservative policy optimization): aligns generated slates with user preferences beyond likelihood imitation
+     - End-to-end "generate-then-rank" unified framework replacing separate candidate generation + ranking
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First end-to-end generative slate recommendation; recommendation-aware SIDs + list-wise preference planning is a fresh, well-motivated angle
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — Offline (industrial + public datasets) + online A/B at Kuaishou; +1.120% Effective Views validated
+     - **Impact: 7/10** — Kuaishou; end-to-end slate-level generative recommendation with production validation
+
+2. **Empowering Compact LLMs with Fusion of Layer-wise Exits for Recommendation (FLEXRec)**
+   * Affiliation: University of Queensland / Griffith University / Edith Cowan University / University of Notre Dame — *(Xurong Liang, Tong Chen, Hongzhi Yin — UQ; Quoc Viet Hung Nguyen — Griffith; Jianxin Li — Edith Cowan; Xiangliang Zhang — Notre Dame)*
+   * Link: [arxiv.org/abs/2608.17316](https://arxiv.org/abs/2608.17316)
+   * Venue: ICDM 2026
+   * TL;DR: Discriminative compact-LLM framework that inserts prediction heads (exits) at multiple transformer layers and adaptively fuses their score distributions via an adaptive continuous router, enabling efficient full-corpus ranking without autoregressive decoding; SOTA accuracy among compact backbones.
+   * Key techniques:
+     - Fusion of Layer-wise Exits: prediction heads inserted at multiple transformer layers with adaptive score-distribution fusion
+     - Adaptive Continuous Router (AC-Router): dynamically selects both the number and identity of exits for each user sequence
+     - Target-k hinge loss regulates routing sparsity for efficiency
+     - Discriminative (embedding-similarity) full-corpus ranking, avoiding autoregressive decode latency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/xurong-liang/FLEXRec](https://github.com/xurong-liang/FLEXRec) — complete 4-stage pipeline (preprocess → LLM4Rec pretrain → multi-head pretrain → FLEXRec train) with eval scripts, datasets, requirements.txt, clear README; no license, 1⭐, single-GPU only
+     - **Novelty: 6/10** — Layer-wise exit fusion + adaptive continuous routing for compact discriminative LLM rec is a clean, practical idea
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — ICDM 2026 peer-reviewed; 3 datasets; Qwen3 1.7B + Llama 3.2 3B
+     - **Impact: 5/10** — UQ (Hongzhi Yin); practical efficiency solution for compact LLM-based recommendation
+
+3. **UniDot: A Unified Network for Sequence Modeling and Feature Interaction in Large-scale Recommendation**
+   * Affiliation: Meta — *(Rongcheng Lin, Yan Sun, Jamey Zhang, Guanglei Xiong, Ivan Ji, Xianjie Chen, Shujian Bu — Meta)*
+   * Link: [arxiv.org/abs/2608.16797](https://arxiv.org/abs/2608.16797)
+   * Venue: KDD 2026 UniRec Workshop (TAAC KDD Cup 2026 Industrial track runner-up)
+   * TL;DR: Unifies feature interaction and sequence modeling from an FM point of view — the embedding inner product (CF) is the same primitive as attention's query·key scoring — tokenizing non-sequential fields and multi-domain behavioral sequences into one shared token space with a single macro-block; runner-up on TAAC KDD Cup 2026 Industrial track.
+   * Key techniques:
+     - Single dot-product primitive unifying feature interaction (FM) and sequence modeling (attention) in one shared token space
+     - Token-mixing bus + sequence-retrieval bus (item tokens cross-attending histories) run in parallel, exchanging state each layer via MLP-Mixer fusion
+     - FM Highway: explicit per-layer dot-product interactions carried around the residual stack directly to the classifier
+     - Dual sparse/dense (Adagrad + Muon) optimizer, auxiliary conversion-delay head, multi-path mutual learning
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Unified FM-dot-product view bridging feature interaction + sequence modeling is a clean conceptual unification; practical industrial architecture
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — KDD Cup 2026 Industrial track runner-up; large-scale industrial validation
+     - **Impact: 6/10** — Meta; runner-up on TAAC KDD Cup 2026 Industrial track
+
+4. **Decomposing Staleness in Recommender Systems: A Dual-Filter Framework for Supersession and Decay (SDF)**
+   * Affiliation: Google — *(Di Bai, Feng Han, Zhenwei Tang, Jintao Liu, Luoshu Wang, Jialu Liu — Google)*
+   * Link: [arxiv.org/abs/2608.15780](https://arxiv.org/abs/2608.15780)
+   * Venue: CIKM 2026 Applied Research Track
+   * TL;DR: Decomposes recommendation staleness into supersession (emerging updates render prior coverage stale) and relevance decay (informational value diminishes over lifecycle), each handled by a learned filter; deployed in Google Discover, cutting user-filed staleness reports by 54.9% over two years.
+   * Key techniques:
+     - Relational staleness model: detects supersession between item pairs
+     - Predicted Traffic Ratio (PTR) model: forecasts relevance decay from item content, trained on lifetime visit traffic
+     - Dual-filter disjunction applied upstream of ranking to prune stale candidates, reducing downstream serving cost
+     - Two-year production deployment at Google Discover (hundreds of millions of daily active users)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Decomposing staleness into supersession + decay with two complementary learned filters is a clean, well-motivated industrial framing
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 8/10** — CIKM 2026 Applied Research; two-year production deployment; -54.9% user-filed staleness reports
+     - **Impact: 7/10** — Google; production-proven staleness filtering at massive scale
+
+5. **POI Recommendation with LLM-Augmented Multi-Graph Learning and Contrastive Alignment (LLM-MGCL)**
+   * Affiliation: University of Applied Sciences Ravensburg-Weingarten — *(Burak Tamer, Wolfram Höpken, Zehui Wang)*
+   * Link: [arxiv.org/abs/2608.16407](https://arxiv.org/abs/2608.16407)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Multi-graph neural network extending LightGCN with two LLM-derived auxiliary item-item graphs (semantic + geographic) to mitigate POI cold-start; +52.0% Recall@20 and +64.8% NDCG@20 over LightGCN on Yelp.
+   * Key techniques:
+     - Semantic graph built from sentence embeddings of LLM-generated photo summaries and keywords
+     - Geographic graph derived from Haversine distances between business locations
+     - Parallel propagation over behavioral + semantic + spatial graphs, additive fusion, bidirectional InfoNCE cross-view alignment
+     - Externally grounded LLM item knowledge compensates for missing collaborative signal
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — LLM-derived semantic + geographic graphs for POI cold-start is practical; conceptually incremental vs. multi-graph GNN literature
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — Yelp dataset with ablation study; preprint (no peer review yet)
+     - **Impact: 5/10** — Ravensburg-Weingarten (Wolfram Höpken); practical LLM-augmented POI cold-start mitigation
 
 ### Papers August 18
 
@@ -761,100 +850,11 @@ mindmap
      - **Robustness: 6/10** — 3 domains × 8 constructions; comprehensive analysis; no peer review yet
      - **Impact: 7/10** — UIUC (Hari Sundaram lab); important diagnostic work questioning SID fine-boundary assumptions; ISD practical for any SID-based genrec
 
-### Papers August 9
-
-*Sunday, August 9, 2026. Arxiv inactive (weekend). Applied 3-month fallback strategy → found 5 missed genrec papers from Nov 2025–Apr 2026: DualGR USTC/Kuaishou WWW 2026, GRC Alibaba/Wuhan U KDD 2026, SID Staleness ITMO/AI VK SIGIR 2026, MDGR Alibaba International, MaskGR Snap Inc. opensource 8/10. Total: 5 papers.*
-
-1. **DualGR: Generative Retrieval with Long and Short-Term Interests Modeling**
-   * Affiliation: University of Science and Technology of China / Kuaishou Technology — *(Zhongchao Yi, Zhengyang Zhou, Yang Wang — USTC; Kai Feng, Xiaojian Ma, Yalong Wang, Yongqi Liu, Han Li — Kuaishou)*
-   * Link: [arxiv.org/abs/2511.12518](https://arxiv.org/abs/2511.12518)
-   * Venue: WWW 2026
-   * TL;DR: Generative retrieval with explicit dual-branch long/short-term router + search-based SID decoding for noise control + exposure-aware NTP loss treating unclicked items as hard negatives; deployed at Kuaishou short-video: +0.527% video views, +0.432% watch time.
-   * Key techniques:
-     - Dual-Branch Long/Short-Term Router (DBR): selective activation covering stable preferences (long window ~1000) and transient intents (short window ~64)
-     - Search-based SID Decoding (S2D): constrains fine-level decoding within current coarse bucket for noise control and efficiency
-     - Exposure-aware Next-Token Prediction Loss (ENTP-Loss): treats exposed-but-unclicked items as coarse-level hard negatives for timely interest fade-out
-     - Encoder-free decoder-only backbone with step-wise target-aware cross-attention
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to explicitly model dual time-scale interests in GR via selective routing; ENTP-Loss exploits negative feedback
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — WWW 2026 peer-reviewed; online A/B at Kuaishou; +0.527% video views, +0.432% watch time
-     - **Impact: 7/10** — WWW 2026; USTC/Kuaishou; practical GR for industrial short-video with explicit interest time-scale modeling
-
-2. **GRC: Learning to Reflect and Correct — Towards Better Decoding Trajectories for Large-Scale Generative Recommendation**
-   * Affiliation: Alibaba International Digital Commerce Group / Wuhan University — *(Haibo Xing, Hao Deng, Lingyu Mu, Jinxin Hu, Yu Zhang, Xiaoyi Zeng — Alibaba; Jing Zhang — Wuhan U)*
-   * Link: [arxiv.org/abs/2602.23639](https://arxiv.org/abs/2602.23639)
-   * Venue: KDD 2026
-   * TL;DR: First structured reflection-correction framework for GR extending decoding into Generation→Reflection→Correction process; GRPO-based RL optimizes full trajectory; Entropy-Guided Reflection Scheduling dynamically allocates correction budget; +15.74% Recall, +1.79% ad revenue.
-   * Key techniques:
-     - Structured reflection-correction template: token-level localization + semantic consistency checking in discrete SID token space
-     - GRPO-based RL optimization: combined task reward (final token) + correction reward (error localization + quality improvement)
-     - Entropy-Guided Reflection Scheduling (EGRS): dynamically allocates correction budget to high-uncertainty beams
-     - Multi-granular reflection decomposing decoding into draft generation, reflection, reflection-guided correction
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First structured reflection-correction for GR; EGRS for inference efficiency is clever; GRPO in discrete SID space is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — KDD 2026 peer-reviewed; public + industrial datasets; online A/B +1.79% revenue; up to 15.74% Recall gain
-     - **Impact: 7/10** — KDD 2026; Alibaba/Wuhan U; opens reflection-correction paradigm for generative recommendation
-
-3. **Mitigating Collaborative Semantic ID Staleness in Generative Retrieval**
-   * Affiliation: ITMO University / AI VK — *(Vladimir Baikalov, Iskander Bagautdinov, Sergey Muravyov — ITMO/VK)*
-   * Link: [arxiv.org/abs/2604.13273](https://arxiv.org/abs/2604.13273)
-   * Venue: SIGIR 2026
-   * TL;DR: First systematic study of SID staleness under temporal distribution drift; lightweight model-agnostic SID alignment via bipartite matching between old and new codebooks; 8-9× training compute reduction while matching full-retrain recall.
-   * Key techniques:
-     - SID staleness diagnosis: interaction-informed SIDs degrade as collaborative patterns drift over time
-     - Bipartite token matching: aligns refreshed SIDs to existing vocabulary via codebook-wise assignment (Greedy/Hungarian)
-     - Warm-start fine-tuning: checkpoint-compatible adaptation without full rebuild-and-retrain pipeline
-     - Multi-step continual adaptation stability across consecutive refresh cycles
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First to formalize SID staleness in GR; bipartite alignment is simple but effective
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — SIGIR 2026 peer-reviewed; 3 benchmarks; multi-step adaptation analysis
-     - **Impact: 6/10** — SIGIR 2026; ITMO/VK; practical SID maintenance for continual GR deployment
-
-4. **MDGR: Masked Diffusion Generative Recommendation**
-   * Affiliation: Alibaba International Digital Commerce Group — *(Lingyu Mu, Hao Deng, Haibo Xing, Jinxin Hu, Yu Zhang, Xiaoyi Zeng — Alibaba)*
-   * Link: [arxiv.org/abs/2601.19501](https://arxiv.org/abs/2601.19501)
-   * Venue: arXiv preprint, January 2026
-   * TL;DR: Replaces autoregressive SID decoding with masked diffusion; parallel codebook + adaptive masking + warm-up two-stage parallel decoding; +10.78% over SOTA, +1.20% ad revenue in online deployment.
-   * Key techniques:
-     - Parallel codebook: structural foundation for diffusion-based GR (positions conditionally independent given unmasked tokens)
-     - Adaptive masking along temporal + sample dimensions for difficulty-aware training
-     - Warm-up two-stage parallel decoding: efficient inference generating multiple SID positions simultaneously
-     - Addresses three AR limitations: global dependency capture, fixed decoding path, inference efficiency
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Code stated "will be released upon acceptance"; not yet available
-     - **Novelty: 7/10** — First to apply masked diffusion to SID-based GR; parallel codebook + adaptive masking is well-designed
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Public + industrial-scale datasets; +1.20% online revenue; 10-SOTA-baseline comparison
-     - **Impact: 7/10** — Alibaba; practical diffusion-based alternative to autoregressive GR; production-verified
-
-5. **Masked Diffusion for Generative Recommendation (MaskGR)**
-   * Affiliation: Snap Inc. — *(Kulin Shah, Bhuvesh Kumar, Neil Shah, Liam Collins — Snap Inc.)*
-   * Link: [arxiv.org/abs/2511.23021](https://arxiv.org/abs/2511.23021)
-   * Venue: arXiv preprint, November 2025
-   * TL;DR: Masked diffusion as alternative to autoregressive modeling for SID-based GR; conditional independence enables parallel decoding; consistently outperforms AR especially in data-constrained settings; code open-sourced.
-   * Key techniques:
-     - Masked diffusion on SID sequences: discrete masking noise with conditional independence assumption
-     - Parallel decoding: predicts multiple masked SID positions simultaneously during inference
-     - Better data efficiency: performance gap widens in data-constrained settings
-     - Superior coarse-grained recall: diffusion better captures global token relationships vs. local AR bias
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/snap-research/MaskGR](https://github.com/snap-research/MaskGR) — well-structured repo with Hydra configs, Makefile targets, GRID pipeline integration; training/inference/eval scripts
-     - **Novelty: 6/10** — Applies masked diffusion to SID-based GR; conceptually clean but builds on known diffusion techniques
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Thorough experiments; consistent outperformance especially data-constrained regimes
-     - **Impact: 7/10** — Snap Inc.; opens diffusion-based GR paradigm with strong open-source implementation
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 128 papers as of August 18.
+**Count:** 129 papers as of August 19.
 
 | Score | Paper |
 | --- | --- |
@@ -918,6 +918,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Beyond Noisy Signals: Dual-Level Denoising for Multi-modal Sequential Recommendation (DDMSR) |
 | 7/10 | Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF) |
 | 7/10 | CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER) |
+| 7/10 | Empowering Compact LLMs with Fusion of Layer-wise Exits for Recommendation (FLEXRec) |
 | 7/10 | Fast and Feasible: Permutation-based Constrained Reranking for Revenue Maximization (PermR) |
 | 7/10 | FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation |
 | 7/10 | Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR) |
@@ -1151,6 +1152,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Self-Distilled Reinforcement Learning for Co-Evolving Agentic Recommender Systems (CoARS)
 - UniNote: A Unified Embedding Model for Multimodal Representation and Ranking
 - Objective Shaping with Hard Negatives
+- Once Generated, Ranked / End-to-End Generative Slate Recommendation (OGR) — Kuaishou
 - OneMall
 - OneBar: An End-to-End Content-Grounded Generative Query Recommendation Framework for E-Commerce Video Feeds (OneBar)
 - OneRec-Think
