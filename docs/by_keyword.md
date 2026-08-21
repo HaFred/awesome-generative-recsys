@@ -61,6 +61,7 @@
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
 - Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP)
 - Fine-Tuned LLM as a Complementary Predictor Improving Ads System
+- GateDiffInt: Gate-Mediated Controllable Diffusion and Multi-Intent LLM Distillation for User Behavior Modeling (GateDiffInt)
 - Generative Long-term User Interest Modeling for Click-Through Rate Prediction (GenLI)
 - Joint Optimization of Relevance and Engagement in Multi-Task Ranking for E-Commerce with Efficient LLM Supervision
 - LLM-HYPER: Generative CTR Modeling for Cold-Start Ad Personalization via LLM-Based Hypernetworks (LLM-HYPER)
@@ -149,9 +150,11 @@
 
 ### Diagnostics / Analysis
 - LIME-Rec: Auditing Semantic Gains in Sequential Recommendation (LIME-Rec)
+- SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation (SIDScope)
 
 
 ### Diffusion
+- GateDiffInt: Gate-Mediated Controllable Diffusion and Multi-Intent LLM Distillation for User Behavior Modeling (GateDiffInt)
 - MIRAGE: Escaping the Euclidean Void (Manifold-Informed Flow Matching for Sequential Recommendation)
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
 - DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation (DiffCold)
@@ -443,6 +446,7 @@
 - GenPage: Towards End-to-End Generative Homepage Construction at Netflix (GenPage)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
 - SmartGR: Hierarchy and Beam-Aware Knowledge Distillation for Generative Recommendation (SmartGR)
+- SSR-GRPO: Integrating Supervision and Semantic IDs into Reinforcement Learning for Dense Retrieval in E-commerce (SSR-GRPO)
 - UniR²: Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence (UniR²)
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
 - Graph-GRPO: Dependency-Aware Credit Assignment for Generative E-commerce Search Relevance
@@ -514,6 +518,7 @@
 - Discriminative Language Models as Effective Retrievers (Discriminative Retrieval)
 - DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval (DIRECTOR)
 - EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
+- GateDiffInt: Gate-Mediated Controllable Diffusion and Multi-Intent LLM Distillation for User Behavior Modeling (GateDiffInt)
 - Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation (Gryphon-v2)
 - Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation (Multi-Decoder OneRec)
@@ -522,6 +527,7 @@
 - PSG: Pair-Space Generation for Efficient Generative Reranking (PSG)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - SITA: Semantic Interest Tokens for Target-Aware Compression in Long-Sequence Recommendation (SITA)
+- SSR-GRPO: Integrating Supervision and Semantic IDs into Reinforcement Learning for Dense Retrieval in E-commerce (SSR-GRPO)
 - STEPS: A Self-Triggered Agentic Push Recommendation System (STEPS)
 - UniDot: A Unified Network for Sequence Modeling and Feature Interaction in Large-scale Recommendation (UniDot)
 - UniR²: Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence (UniR²)
@@ -690,6 +696,7 @@
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
+- SCoRD: Semantic-Assisted Continual Retriever-Reranker Distillation for LLM-Based Recommendation (SCoRD)
 - SmartGR: Hierarchy and Beam-Aware Knowledge Distillation for Generative Recommendation (SmartGR)
 - Sona Technical Report (Sona)
 - Improving Item Discoverability in e-Commerce Search via Related Intent Generation
@@ -705,12 +712,16 @@
 - Discriminative Language Models as Effective Retrievers (Discriminative Retrieval / Case Against GenRec)
 - EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
 - Empowering Compact LLMs with Fusion of Layer-wise Exits for Recommendation (FLEXRec)
+- GateDiffInt: Gate-Mediated Controllable Diffusion and Multi-Intent LLM Distillation for User Behavior Modeling (GateDiffInt)
 - Grevo: A Unified Generative Recommendation Framework with Evolutionary Item Indexing (Grevo)
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
 - POI Recommendation with LLM-Augmented Multi-Graph Learning and Contrastive Alignment (LLM-MGCL)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
+- rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
+- SCoRD: Semantic-Assisted Continual Retriever-Reranker Distillation for LLM-Based Recommendation (SCoRD)
 - TopoGR: Revealing and Preserving Latent Structure of Semantic ID in Generative Recommendation (TopoGR)
+- Training-Free LLM-Based Recommendation with Post-LLM Item Refinement Using Collaborative Signals (CoRRe)
 - VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation (VaLiDRec)
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
 - APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO)
@@ -863,6 +874,7 @@
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
+- rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -1073,6 +1085,7 @@
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k)
+- Training-Free LLM-Based Recommendation with Post-LLM Item Refinement Using Collaborative Signals (CoRRe)
 - What Limits Does Quantization Place on Dense Top-k Retrieval? A Theoretical Study
 - Beyond Patches: Superpixel Token-based Transformers for Attribute-Specific Fashion Retrieval (SuperFashion)
 - Bridging Short Videos and Live Streams: Reasoning-Guided Multimodal LLMs for Cross-Domain Representation Learning (RGCD-Rep)
@@ -1118,7 +1131,9 @@
 - Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs (OGR)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
 - PaletteID: Prototype-Composed Semantic Identifiers for Multimodal CTR Prediction (PaletteID)
+- SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation (SIDScope)
 - SnapLGR: LLM-Based Generative Retrieval for Snapchat Content Recommendation (SnapLGR)
+- SSR-GRPO: Integrating Supervision and Semantic IDs into Reinforcement Learning for Dense Retrieval in E-commerce (SSR-GRPO)
 - Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go)
 - ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation
 - Beyond Instance-Level Alignment and Uniformity: Semantic Factor Learning for Collaborative Filtering (SaFeAU)

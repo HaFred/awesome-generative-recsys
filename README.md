@@ -49,10 +49,10 @@ mindmap
         MiniOneRec -- USTC
         OpenOneRec -- Kuaishou
         RecRM-Bench -- Shenzhen U
+        SIDScope -- Huawei
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
-        SID-MLP -- UCSD / Snap
         FLEXRec -- UQ
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
@@ -75,6 +75,112 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 21
+
+*Friday, August 21, 2026. Arxiv active. cs.IR Aug 20–21 listings returned 6 recommendation papers spanning LLM-based recommendation distillation, training-free LLM rec, semantic-ID diagnostics, memory-augmented reasoning, RL dense retrieval, and diffusion-based user behavior modeling. Total: 6 papers.*
+
+1. **SCoRD: Semantic-Assisted Continual Retriever-Reranker Distillation for LLM-Based Recommendation**
+   * Affiliation: Korea University / University of Illinois at Urbana-Champaign / Sungkyunkwan University — *(Seunghyun Baek, Seunghan Lee, SeongKu Kang — Korea University; Gyuseok Lee, Dong Wang — UIUC; Wonbin Kweon — Sungkyunkwan University)*
+   * Link: [arxiv.org/abs/2608.19998](https://arxiv.org/abs/2608.19998)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Continual knowledge distillation for LLM-based retriever-reranker pipelines under non-stationary data streams; a semantic reasoning assistant distills the LLM's intent-inference ability into reusable intent-level guidance, enabling cheap retriever-only updates without repeated LLM inference.
+   * Key techniques:
+     - Semantic reasoning assistant: distills the LLM's ability to infer user intents into reusable intent-level guidance
+     - Selective distillation: reranker knowledge transferred to the retriever only on low-confidence sequences
+     - Retriever-derived representations and intent-drift signals fed back to the reranker for co-adaptation
+     - Avoids the prohibitive cost of repeatedly updating and distilling the LLM reranker
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Continual retriever-reranker co-adaptation with an intent-level semantic assistant is a practical, well-motivated framing
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — Real-world datasets; preprint (no peer review yet)
+     - **Impact: 5/10** — Korea University (SeongKu Kang); practical continual distillation for deployed two-stage LLM rec
+
+2. **Training-Free LLM-Based Recommendation with Post-LLM Item Refinement Using Collaborative Signals (CoRRe)**
+   * Affiliation: KAIST / Snap Inc. — *(Kyungho Kim, Sunwoo Kim, Geon Lee, Shinhwan Kang, Sojeong Kim, Kijung Shin — KAIST; Liam Collins, Bhuvesh Kumar, Donald Loveland — Snap Inc.)*
+   * Link: [arxiv.org/abs/2608.19665](https://arxiv.org/abs/2608.19665)
+   * Venue: CIKM 2026 (short)
+   * TL;DR: Post-LLM training-free recommendation injecting collaborative-filtering signals into LLM-generated item representations (rather than pre-LLM reranking/prompting); refines item-embedding directions via an item-item co-purchase graph and magnitudes via popularity, matching against LLM-generated user interests.
+   * Key techniques:
+     - Post-LLM paradigm: CF signals injected into LLM-generated item representations instead of pre-LLM candidate reranking/prompt augmentation
+     - Direction refinement via item-item co-purchase graph; magnitude refinement via item popularity
+     - Fully training-free, no model training or task-specific fine-tuning
+     - Competitive or superior to training-based methods on real-world datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Post-LLM (vs pre-LLM) CF injection is a clean reframing with consistent gains
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — CIKM 2026 peer-reviewed (short); real-world datasets; competitive with training-based baselines
+     - **Impact: 5/10** — KAIST/Snap; practical training-free LLM recommendation
+
+3. **SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation**
+   * Affiliation: Huawei Technologies Co., Ltd. — *(Jiandong Ding, Huijie Qin, Tiandeng Wu, Yi Cao)*
+   * Link: [arxiv.org/abs/2608.18779](https://arxiv.org/abs/2608.18779)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Source-traced diagnostic resource auditing semantic-ID tokenizer artifacts across D1–D7 signals (utilization, aliasing, neighborhood alignment, popularity allocation, structural cost, churn, trace accounting); finds interface health is mechanism-conditional rather than scalar, with prefix alignment tracking exposure only under prefix-based retrieval.
+   * Key techniques:
+     - D1–D7 multi-signal diagnostics: code utilization, prefix collision, neighborhood alignment, popularity allocation, structural cost, refresh churn, and generated-path trace accounting
+     - Source-traced normalization across 9 tokenizer exports from 7 families on Amazon + Yelp (8 executable routes + 1 auditable snapshot)
+     - Trace accounting exposes a hidden gap: valid target paths surviving without uniquely retrieving the target item (1.2–3.0 p.p.)
+     - Refresh case: repairing the mapping does not by itself restore an inherited generator (needs a separate handoff check)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/jdding/SIDscope](https://github.com/jdding/SIDscope) — MIT license; clean src/tests/docs/examples/experiments layout with pyproject.toml + setup.py, CPU-only verifier, frozen evidence summaries + conformance reports + table builders; 0⭐ (new)
+     - **Novelty: 6/10** — Mechanism-conditional multi-signal SID-interface diagnostics is a fresh, rigorous angle vs. scalar metrics
+     - **Fairness: 4/10** — D4 popularity allocation probes head/mid/tail capacity (indirect item-exposure fairness)
+     - **Robustness: 5/10** — 9 tokenizer exports × 7 families on 2 datasets; preprint (no peer review yet)
+     - **Impact: 6/10** — Huawei; important diagnostic resource for SID-based generative recommendation
+
+4. **rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation**
+   * Affiliation: University of Science, VNU-HCM (Vietnam National University Ho Chi Minh City) — *(Minh Hoang Nguyen, Tung Le, Huy Tien Nguyen)*
+   * Link: [arxiv.org/abs/2608.18952](https://arxiv.org/abs/2608.18952)
+   * Venue: arXiv preprint, August 2026
+   * TL;DR: Compresses teacher-LLM reasoning once into four typed, editable experience channels (long-term preference, short-term context, item-perception, counterfactual hard negatives) maintained by an LLM memory controller with Add/Delete/Modify/Keep ops + K-agent debate, so a lightweight student ranks purely by memory retrieval without re-invoking the teacher.
+   * Key techniques:
+     - Four typed experience channels: long-term preference, short-term context, item-perception, counterfactual hard-negative comparisons
+     - LLM memory controller performing Add/Delete/Modify/Keep operations with K-agent debate-based refinement
+     - Lightweight student LLM ranks purely by retrieval, decoupling inference cost from reasoning depth
+     - Up to 13.3% Impv over second-best baseline on ML-1M; debate lowers duplication 7.4 p.p.
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Editable experience memory with typed channels + memory controller is a clean, practical idea
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 5/10** — ML-1M + Amazon Beauty + Steam × 10 student backbones; preprint (no peer review yet)
+     - **Impact: 5/10** — VNU-HCM; practical memory-augmented LLM rec decoupling reasoning cost
+
+5. **SSR-GRPO: Integrating Supervision and Semantic IDs into Reinforcement Learning for Dense Retrieval in E-commerce**
+   * Affiliation: Alibaba Group — *(Guangxin Song, Xing Fang, Mingmin Jin, Jing Wang, Bokang Wang, Zhentao Song, Junjie Bai, Jianbo Zhu)*
+   * Link: [arxiv.org/abs/2608.19595](https://arxiv.org/abs/2608.19595)
+   * Venue: arXiv preprint, August 2026 (deployed on a large-scale e-commerce platform)
+   * TL;DR: Fixes R-GRPO's noisy top-K and biased relevance by dual-perspective relevance assessment combining Semantic IDs + dense vectors, plus SID-hierarchy hard-negative mining for intra-group masking and a Retrieval-DPO pairwise task; deployed in production.
+   * Key techniques:
+     - Dual-perspective relevance assessment: SID-based + dense-vector scores for more unbiased relevance signals
+     - SID-hierarchy hard-negative mining feeding (1) a masking function to filter intra-group noisy samples in R-GRPO and (2) a Retrieval-DPO pairwise task
+     - Integrates supervised signals with RL for fine-grained semantic distinction
+     - Validated offline + online, deployed on a large-scale e-commerce platform
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — SID-grounded dual-perspective relevance + hard-negative masking for retrieval RL is a clean, practical fix
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Offline + online experiments; production deployment on large-scale e-commerce
+     - **Impact: 6/10** — Alibaba; practical RL dense retrieval for e-commerce search
+
+6. **GateDiffInt: Gate-Mediated Controllable Diffusion and Multi-Intent LLM Distillation for User Behavior Modeling**
+   * Affiliation: Fudan University / Xiaohongshu Inc. — *(Jialong Duan — Fudan; Zichen Zhang, Zirui Tu, Zheng Zhang, Zepeng Li, Qingyao Cui, Qinwen Wang, Yudan Liu, Luo Yang, Yao Hu — Xiaohongshu)*
+   * Link: [arxiv.org/abs/2608.18764](https://arxiv.org/abs/2608.18764)
+   * Venue: arXiv preprint, August 2026 (deployed to primary traffic)
+   * TL;DR: Diagnoses Noise-Intent Coupling (NIC) in behavior sequences; uses a conversion-signal-aligned controllable forward diffusion with dual gating to denoise, then distills four structured intents (long-term, short-term, latent, conversion) from an LLM into a lightweight student for conversion-rate prediction.
+   * Key techniques:
+     - Noise-Intent Coupling (NIC) diagnosis: noise dilutes intents while missing intent priors leave denoising targetless
+     - Controllable forward diffusion with dual gating to enhance and denoise behavior sequences aligned to the conversion signal
+     - LLM teacher distills four structured intents into a lightweight student model
+     - Attention-based deep fusion of enhanced sequences + structured intents; deployed to primary traffic with GMV gains
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Gate-mediated controllable diffusion + multi-intent LLM distillation is a well-motivated industrial framing
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Public + industrial datasets; online A/B (hundreds of millions DAU); deployed to primary traffic
+     - **Impact: 7/10** — Xiaohongshu/Fudan; production-deployed diffusion+LLM user behavior modeling
 
 ### Papers August 19
 
@@ -532,329 +638,11 @@ mindmap
      - **Robustness: 7/10** — RecSys 2026 peer-reviewed; tie-aware protocol; multiple methods + datasets
      - **Impact: 6/10** — RecSys 2026; NTU; important diagnostic for reliable group recommendation evaluation
 
-### Papers August 12
-
-*Wednesday, August 12, 2026. Arxiv active. cs.IR Aug 11-12 listing returned 7 genrec papers. Total: 7 papers.*
-
-1. **FedCGR: Federated Cross-Domain Generative Recommendation**
-   * Affiliation: Qiyuan Lab / Beihang University — *(Zhuodong Liu, Hugen Lv, Xiangyu Li, Bohan Guo, Peiyu Hu — Qiyuan Lab/BUAA)*
-   * Link: [arxiv.org/abs/2608.10929](https://arxiv.org/abs/2608.10929)
-   * Venue: CIKM 2026
-   * TL;DR: First federated cross-domain generative recommendation framework; represents items as discrete SID sequences from public metadata for cross-domain alignment; reliability-aware semantic interface injects local CF evidence; prototype-personalized generator selectively aggregates shared parameters by domain relatedness.
-   * Key techniques:
-     - Stable SID vocabulary from public item-side metadata for cross-client token consistency without privacy leakage
-     - Reliability-aware semantic interface injecting local collaborative filtering signals into fixed-tokenizer bottleneck
-     - Prototype-personalized generator: selective aggregation of shared parameters according to domain relatedness
-     - Federated CDR reformulated as generation over shared SID language avoiding behavioral anchor dependency
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First to combine federated CDR with generative SID-based recommendation; reliability-aware interface is practical
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — CIKM 2026; 6 Amazon cross-domain scenarios; consistent outperformance vs. federated generative + sequential/CDR baselines
-     - **Impact: 6/10** — CIKM 2026; Qiyuan Lab/BUAA; opens federated generative cross-domain recommendation direction
-
-2. **Towards Efficient Reasoning in LLM-Based Recommender Systems via Model Merging (REAM)**
-   * Affiliation: University of Queensland — *(Linh Dieu Le, Tong Chen, Shazia Sadiq, Hongzhi Yin, Ming Jin, Junliang Yu — UQ)*
-   * Link: [arxiv.org/abs/2608.10447](https://arxiv.org/abs/2608.10447)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: First training-free model merging framework for reasoning compression in LLM recsys; attention-head-level merging with retrieval-criticality + decision-faithfulness + update-sensitivity signals; -24.3% reasoning length while maintaining accuracy.
-   * Key techniques:
-     - Head-level merge coefficients: distinct per attention head based on retrieval criticality, decision faithfulness, and update sensitivity
-     - Constrained water-filling allocation for coefficient optimization
-     - Merging slow-thinking (verbose reasoning) with fast-thinking (direct prediction) models in shared parameter space
-     - Training-free: no adaptation cost or brittle inference-time methods needed
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 4/10** — [github.com/linhledieu/REAM](https://github.com/linhledieu/REAM) — 0⭐, 6 commits, no license; clean 4-stage pipeline (head_reasoning_aware → update_sensitivity → allocation → merge) with run.py driver; maps code to paper sections; minimal documentation, no deps/requirements listed, no paper citation
-     - **Novelty: 6/10** — First model merging for reasoning compression in recsys; head-level coefficients are novel vs. uniform merging
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — 3 benchmark datasets; consistent -24.3% reasoning length; no venue/peer review yet
-     - **Impact: 5/10** — UQ; practical efficiency contribution for LLM-based rec deployment
-
-3. **GenRec: An LLM-Backed Recommendation Ranker at Netflix**
-   * Affiliation: Netflix — *(Ying Li, Shradha Sehgal, Arjun Rao, Rein Houthooft, Yaochen Zhu, Ashish Rastogi — Netflix)*
-   * Link: [arxiv.org/abs/2608.10257](https://arxiv.org/abs/2608.10257)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Two-phase LLM-backed ranker: Phase 1 adapts open-source LLM to Netflix catalog, Phase 2 post-trains with ranking-specific data/rewards; prefill-only inference for cost-constrained serving; large-scale A/B shows significant gains over production ranker with fewer labeled examples and input signals.
-   * Key techniques:
-     - Two-phase framework: catalog adaptation (understanding + instruction-following) → ranking alignment (reward signals + business objectives)
-     - Input verbalization: user histories and context as natural language instead of thousands of engineered features
-     - Prefill-only inference: cost-constrained serving design avoiding autoregressive decode overhead
-     - Paradigm shift: from feature engineering → context engineering; from bespoke architectures → shared foundation backbones
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available; built on in-house Netflix foundational LLM
-     - **Novelty: 5/10** — LLM-based ranking at Netflix scale with prefill-only serving is practically significant; conceptually builds on known LLM rec paradigms
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Large-scale A/B at Netflix vs. production ranker; statistically significant offline + online gains
-     - **Impact: 8/10** — Netflix; paradigm-shifting for industrial recommendation — first detailed account of LLM-backed ranking at major streaming platform
-
-4. **ConnectionMind: Leveraging Social Networks and Large Language Models for Personalized Recommendation at Meta**
-   * Affiliation: Meta / Michigan State University — *(Haoyu Han, Yuming Liu, Lei Huang, Lizhu Zhang, Xiangjun Fan — Meta; Jiliang Tang — MSU)*
-   * Link: [arxiv.org/abs/2608.10187](https://arxiv.org/abs/2608.10187)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Integrates heterogeneous social graph (users, items, friends, groups, creators) with LLM-based reasoning policy; formulates rec as graph reasoning problem discovering personalized paths; two-stage SFT+RL training; deployed at Meta: +0.43% video watch time.
-   * Key techniques:
-     - Heterogeneous graph connecting users, items, friends, groups, and creator pages
-     - LLM-based policy reasoning over graph structures to discover personalized user→item paths
-     - Two-stage: SFT on user-item interaction trajectories → end-to-end RL for social graph reasoning refinement
-     - Production deployment: measurable real-world impact in Meta's recommendation pipeline
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First to tightly integrate heterogeneous social graph + LLM reasoning for rec; graph-as-reasoning formulation is novel
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Production A/B at Meta; +0.43% video watch time; multiple real-world datasets
-     - **Impact: 7/10** — Meta; production-proven LLM+social-graph recommendation at massive scale
-
-5. **Do LLM Recommenders Know When They're Hallucinating? Auditing Confidence Calibration in Catalog Faithfulness**
-   * Affiliation: Amazon — *(Srijith Ravikumar — Amazon)*
-   * Link: [arxiv.org/abs/2608.10008](https://arxiv.org/abs/2608.10008)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: First joint audit of OOD hallucination rate + verbalized confidence calibration in zero-shot LLM rec; finds systematic under-confidence across all 4 LLMs (opposite of typical over-confidence); conformal abstention fails to filter hallucinations — "Just Ask" elicits generic quality rating, not catalog-membership probability.
-   * Key techniques:
-     - Joint audit framework: hallucination rate (OOD@10) + confidence calibration (ECE, Brier, reliability diagrams)
-     - 4 LLMs (Mistral, Llama-3.3, GPT-OSS, Claude) × 3 catalogs (MovieLens, Amazon, Yelp) × popularity strata
-     - Counterintuitive finding: all LLMs systematically under-confident (67-86/100 confidence on 92-100% accurate items)
-     - Elicitation mismatch diagnosis: generic confidence prompts fail; recommend catalog-anchored elicitation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First joint hallucination+calibration audit for LLM rec; under-confidence finding is counterintuitive and important
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — 4 LLMs × 3 catalogs; systematic across all cells; solo author, no peer review yet
-     - **Impact: 6/10** — Amazon; important diagnostic for LLM rec safety and reliability; practical guidance for catalog-grounded evaluation
-
-6. **Structure-Preserving Projection for Mitigating Modality Bias in LLM-Based Sequential Recommendation**
-   * Affiliation: National Taiwan University — *(Tzu-Wei Chiu, Song-Duo Ma, Hsin-Yu Lin, Pu-Jen Cheng — NTU)*
-   * Link: [arxiv.org/abs/2608.08583](https://arxiv.org/abs/2608.08583)
-   * Venue: RecSys 2026
-   * TL;DR: Identifies modality bias when projecting collaborative embeddings into LLM space distorts relational geometry; proposes structure-preserving projection with dedicated losses maintaining collaborative structure; consistent improvements for LLM-based sequential rec.
-   * Key techniques:
-     - Modality bias diagnosis: projecting collaborative embeddings into LLM space distorts underlying collaborative structure
-     - Structure-preserving losses: dedicated objectives maintaining relational geometry of collaborative embeddings during projection
-     - Plug-and-play approach compatible with existing LLM-based recommenders
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Structure-preserving projection is a practical fix for modality bias; conceptually incremental
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — RecSys 2026 peer-reviewed; consistent improvements across experiments
-     - **Impact: 5/10** — RecSys 2026; NTU; practical fix for LLM-based sequential rec with modality bias
-
-7. **Personalized Communication Skills for Agentic Recommender Systems (AgentCom)**
-   * Affiliation: Chongqing University / University of Queensland — *(Zongwei Wang, Min Gao, Guangyu Hu, Xinyi Gao — CQU; Junliang Yu — UQ)*
-   * Link: [arxiv.org/abs/2608.08417](https://arxiv.org/abs/2608.08417)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Introduces advisor agents with diverse histories to overcome perspective narrowing in agentic rec; organizes communication skills into why-what-how-who skill bank; personalized skill routing + failure-driven skill evolution; consistent gains across traditional, social, and agentic recommenders.
-   * Key techniques:
-     - Advisor agents: other users whose diverse histories provide complementary evidence for overlooked preferences
-     - Why-what-how-who skill bank: why (decision deficiency) → what (information task) → how (interaction protocol) → who (advisor retrieval)
-     - Personalized skill routing: sequentially selects suitable skills per user and recommendation context
-     - Failure-driven skill evolution: learns from unsuccessful communication cases to enrich shared skill bank
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First personalized communication skill framework for agentic rec; why-what-how-who decomposition is well-designed
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — Multiple rec paradigms (traditional, social, agentic); failure-driven evolution; no venue/peer review yet
-     - **Impact: 6/10** — CQU/UQ; extends agentic rec paradigm with personalized communication; practical for multi-agent rec systems
-
-### Papers August 11
-
-*Tuesday, August 11, 2026. Arxiv active. cs.IR Aug 10-11 new listing returned 6 genrec papers. Total: 6 papers.*
-
-1. **Preserving Item Semantics for Free: Rethinking Token Initialization in LLM-Based Generative Recommendation**
-   * Affiliation: Snap Inc. / University of Michigan — *(Donald Loveland, Liam Collins, Bhuvesh Kumar, Neil Shah — Snap Inc.; Danai Koutra — UMich)*
-   * Link: [arxiv.org/abs/2608.07816](https://arxiv.org/abs/2608.07816)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Simple parameter-free centroid initialization for SID tokens eliminates random Gaussian init; shows random init causes embeddings to organize around popularity instead of semantics; centroid init improves Recall@5 up to 16%, cold-item Recall@5 up to 60%, reaches peak with 40% fewer SFT steps.
-   * Key techniques:
-     - Centroid Initialization: initializes SID token embeddings directly from k-means centroids in semantic embedding space; parameter-free, drop-in replacement
-     - Diagnostic probes: Neighborhood Purity, Spectral Scale, Latent Signal Encoding quantifying popularity vs. semantic organization
-     - Matryoshka-compatible: exploits MRL for dimension matching via truncation to leading dimensions
-     - Residual k-means quantization for SID construction (not RQ-VAE)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First systematic diagnosis of random SID init failure mode; centroid init is elegantly simple and effective
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — 3 datasets; consistent gains across SFT + CPT regimes; gradient analysis provides theoretical grounding
-     - **Impact: 6/10** — Snap Inc./UMich; simple practical fix for any LLM-based GR; cold-item improvement especially valuable
-
-2. **PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation**
-   * Affiliation: Kuaishou Technology — *(Manjia Lin, Da Li, Yan Wang, Yong Jin, Zheming Ding, Wei Yuan, Lei Yan, Yanan Xia, Lu Zhang, Fan Yang, Xuanping Li, Yanan Niu — Kuaishou)*
-   * Link: [arxiv.org/abs/2608.07989](https://arxiv.org/abs/2608.07989)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Lightweight LLM (Qwen3-0.6B) generates SIDs first then skippable interpretable copy for push recommendation; deployed at Kuaishou with +8.50% effective play rate, -37.70% dissatisfaction rate; long-tail video exposure improved.
-   * Key techniques:
-     - Parallel Semantic ID encoding: 8 parallel embedding slots with K-means quantization (M=8, K=512) using Qwen2.5-Omni-3B compression tokens
-     - Scenario-Aware SID Adaptation: fine-tunes LLM with Text2SID + SID2Text tasks; multi-token binding merges frequent n-grams
-     - Token Freeze: freezes original vocabulary during SID token training for stability
-     - Representation Fusion: LLM-generated SID preference signals fused with user features for ANN search
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First to deploy LLM-based SID generation for push recommendation with interpretable copy; parallel SID construction is practical
-     - **Fairness: 4/10** — Long-tail video exposure improved (indirect provider fairness)
-     - **Robustness: 8/10** — Production A/B at Kuaishou (1B+ users); +8.50% effective play rate; -37.70% dissatisfaction
-     - **Impact: 7/10** — Kuaishou; practical LLM-based push genrec with verified business impact; interpretability is key differentiator
-
-3. **MetaStrategy: Generative Ranking with Executable LLM Strategies**
-   * Affiliation: Alibaba Group (Taobao) — *(Chengyu Lai, Jiuning Lin, Zhibo Xiao, Xiaodong Zhu, Ruiquan Lan, Bin Zhang, Zihong Huang, Wendong Zhang, Chuxin Chen, Yinjiang Cai, Shuai Zhong, Lingqing Zhang, Dimin Wang, Jialin Zhu, Han Zhu — Alibaba)*
-   * Link: [arxiv.org/abs/2608.09440](https://arxiv.org/abs/2608.09440)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: LLM generates structured JSON ranking strategy (objective weights, category preferences, position policies) instead of item sequences; deterministic validator compiles into isolated Generator competing under list-level Evaluator; deployed on Taobao Homepage: +2.11% click PV, +3.12% IPV, +2.83% transaction amount, zero RT increase.
-   * Key techniques:
-     - Generative strategy paradigm: LLM emits typed JSON bundle (objective weights, content/category/experience constraints, position policies) rather than item sequences
-     - Generator-Evaluator (GE) architecture: compiled strategy competes atomically with incumbents under list-level Evaluator
-     - Production-path replay environment: trains on re-executed logged requests without user exposure
-     - Evaluator-routed reward-augmented on-policy distillation: 4B Teachers → 0.8B Student
-     - Self-competitive curriculum + selection/relative-rank/baseline-lift rewards
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Novel paradigm: generate strategy not items; GE architecture with self-competitive curriculum is well-designed
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — 7-day A/B at Taobao; +2.11%/3.12%/2.83% on PV/IPV/transaction; zero RT increase via diff-triggered nearline
-     - **Impact: 8/10** — Alibaba Taobao; new paradigm for generative ranking applicable to any multi-objective industrial recommender
-
-4. **TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation**
-   * Affiliation: Zhejiang University / ByteDance — *(Wenqiao Zhu, Chao Xu, Haipang Wu, Ji Liu — ZJU/ByteDance)*
-   * Link: [arxiv.org/abs/2608.09605](https://arxiv.org/abs/2608.09605)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Pinpoints informative tokens from full item descriptions instead of truncating to first few; three-stage selection pipeline with proxy reward; +31.25% performance, +63.4% efficiency over 6 baselines.
-   * Key techniques:
-     - Token selection via preference optimization: identifies informative tokens across entire textual content
-     - Three-stage pipeline for systematic token selection and filtering
-     - Novel proxy reward mechanism guiding token selection process
-     - Balances recommendation quality with computational efficiency without truncation-induced information loss
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 1/10** — [github.com/WNQzhu/TSPORec](https://github.com/WNQzhu/TSPORec) — empty repo (0 stars, 0 commits); placeholder only
-     - **Novelty: 6/10** — Token selection over truncation is practical; proxy reward for preference optimization is clean
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — 2 models × 2 datasets; consistent gains; no peer review or industrial validation
-     - **Impact: 5/10** — ZJU/ByteDance; practical efficiency solution for LLM-based sequential rec
-
-5. **IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation**
-   * Affiliation: Amap / Alibaba Group — *(Junjie Sun, Longfei Xu, Huimin Yan, Wei Luo, Kaikui Liu, Xiangxiang Chu — Amap/Alibaba)*
-   * Link: [arxiv.org/abs/2608.09634](https://arxiv.org/abs/2608.09634)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: First multi-task generative recommender identifying threefold collapse (source/relational/hierarchical); Dual-Stream Decoupling + Task-Interactive Modeling + Hierarchical Querying; deployed on Amap serving hundreds of millions of users: +1.60% UVCTR.
-   * Key techniques:
-     - Dual-Stream Decoupling (DSD): injects task identity early, separates shared context from task-specific stream alleviating signal dilution
-     - Task-Interactive Modeling (TIM): replaces predefined funnel with explicit cross-task interaction; each task conditions on predecessors' outcomes with learned input-adaptive strength
-     - Hierarchical Querying (HQ): each task gathers multi-scale information across different layers at different training stages
-     - Threefold collapse diagnosis: source collapse (late signal injection), relational collapse (static funnel), hierarchical collapse (scale-stage mismatch)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First systematic diagnosis of multi-task collapse in genrec; three-component design is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — 4 task-head configurations; production deployment at Amap with hundreds of millions of users
-     - **Impact: 7/10** — Amap/Alibaba; practical multi-task generative recommendation with production validation
-
-6. **InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation**
-   * Affiliation: University of Chinese Academy of Sciences / Institute of Automation, CAS — *(Chenxi Li, Yuchen Lu, Xu Yang — UCAS/CASIA)*
-   * Link: [arxiv.org/abs/2608.09685](https://arxiv.org/abs/2608.09685)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Identifies homogeneous SID structures waste capacity; adaptive allocation of fixed capacity budget across semantic slots jointly determines ID length + slot-specific codebook sizes; improved accuracy under comparable budgets with one-step parallel prediction.
-   * Key techniques:
-     - Adaptive semantic target construction: allocates fixed capacity budget across candidate semantic slots
-     - Joint optimization of effective ID length and slot-specific codebook sizes
-     - Demonstrates uniformly expanding semantic slots provides limited gains → capacity redundancy in homogeneous SIDs
-     - One-step parallel prediction preserved; lightweight framework for parallel genrec
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 3/10** — [anonymous.4open.science/r/inforID-F582](https://anonymous.4open.science/r/inforID-F582) — anonymous repo; not a permanent public release
-     - **Novelty: 6/10** — First to address heterogeneous capacity demands across semantic subspaces; adaptive allocation is practical
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — Multiple datasets; comparable capacity budget comparison; no peer review yet
-     - **Impact: 5/10** — UCAS/CASIA; practical contribution to parallel genrec but limited industrial validation
-
-### Papers August 10
-
-*Monday, August 10, 2026. Arxiv active. cs.IR Aug 10 listing returned 4 genrec papers (light day) + 1 missed July 27 paper from 3-month fallback (SID Understanding, UIUC). Total: 5 papers.*
-
-1. **Progressive Alignment of Recommender Foundation Model through Multi-Phase Post-Training**
-   * Affiliation: Webtoon (NAVER WEBTOON) — *(Oseong Choi, Hoeinn Kim, Jihoon Lee, Byungsoo Kang, Taeyeong Jang — Webtoon)*
-   * Link: [arxiv.org/abs/2608.06792](https://arxiv.org/abs/2608.06792)
-   * Venue: RecSys 2026 Industry Track
-   * TL;DR: Three-phase progressive post-training (LP→FFT→RFT) decoupling downstream adaptation from business-metric alignment for recommender foundation models; reward-based RL fine-tuning uses learned reward model with dense implicit feedback; large-scale online A/B validated; code open-sourced.
-   * Key techniques:
-     - Three-phase framework: Linear Probing stabilizes heads in frozen FM space, Full Fine-Tuning jointly specializes, Reinforcement Fine-Tuning aligns with business objectives
-     - Decoupled alignment: business-metric supervision used only for reward modeling — policy optimized on dense implicit feedback
-     - Learned reward model avoids directly optimizing serving policy on sparse/noisy business targets
-     - Reference implementation at github.com/webtoon/rec-fm-progressive-alignment (Apache 2.0)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 5/10** — [github.com/webtoon/rec-fm-progressive-alignment](https://github.com/webtoon/rec-fm-progressive-alignment) — 3⭐, 1 commit, Apache 2.0; functional ref impl with clean modular structure (recfm/); runs on synthetic data; no pretrained weights or real dataset
-     - **Novelty: 5/10** — Three-phase alignment is a practical methodology but conceptually incremental; decoupling adaptation from alignment is sensible engineering
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; large-scale online A/B; production deployment validation
-     - **Impact: 6/10** — RecSys 2026 Industry; Webtoon; practical post-training blueprint for FM-based recommendation systems
-
-2. **From Classification to Recommendation: Empirical Analysis of Audio Embedding Models Application for Content-Based Music Recommendation**
-   * Affiliation: Macquarie University — *(Qingrui Li, Haowei Lou, Chengkai Huang, Quan Z. Sheng, Lina Yao — Macquarie/UNSW)*
-   * Link: [arxiv.org/abs/2608.06928](https://arxiv.org/abs/2608.06928)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: First systematic evaluation of audio embeddings across 3 recommendation paradigms (content-based, sequential, SID-based generative); increasing SID capacity does not consistently improve genrec and may introduce instability; practical guidance for audio encoder selection.
-   * Key techniques:
-     - Six representative audio encoders evaluated across three recommendation paradigms
-     - Residual-quantization analysis: codebook width, quantization depth, retained SID prefixes
-     - Key finding: audio-text-aligned and music-domain representations best when embedding geometry used directly; interaction-based training narrows encoder differences
-     - Key finding: increased SID capacity does not consistently improve generative rec performance
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — First systematic audio embedding evaluation across SID-based genrec; capacity-instability finding is practically important
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — 6 encoders × 3 paradigms on 2 music datasets; comprehensive but no venue/peer review yet
-     - **Impact: 5/10** — Macquarie/UNSW; practical empirical guidance for music rec adopting genrec
-
-3. **HD-Rec: Hierarchical Quantization with Domain-Adaptive Sparse Routing for Generative Cross-Domain Recommendation**
-   * Affiliation: City University of Hong Kong / Kuaishou Technology — *(Haiying He, Kuo Cai, Bo Chen, Jingtong Gao, Yejing Wang, Ruiming Tang, Guorui Zhou, Han Li — Kuaishou; Xiaopeng Li, Yuchen Gu, Derong Xu, Xiangyu Zhao — CityU)*
-   * Link: [arxiv.org/abs/2608.06997](https://arxiv.org/abs/2608.06997)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: First generative cross-domain recommendation framework; hierarchical domain-aware quantizer with shared coarse + adaptively routed fine codebooks; domain-adaptive sparse MoE combining shared + specialized experts; cross-granularity routing consistency objective.
-   * Key techniques:
-     - Hierarchical Domain-Aware Quantizer: globally shared coarse-level codebooks + adaptively routed fine-level codebooks for domain-specific granularity
-     - Domain-Adaptive Sparse MoE: continuously activated shared expert + dynamically selected specialized expert per domain
-     - Cross-Granularity Routing Consistency: regularizes token-level routing toward item-level consensus for coherent multi-token representations
-     - Unified generative framework handling heterogeneous item semantics and behavioral patterns across domains
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First generative cross-domain rec with hierarchical domain-aware SID construction; MoE + routing consistency is well-designed
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — 3 public cross-domain benchmarks; consistent gains over sequential, generative, and cross-domain baselines
-     - **Impact: 6/10** — CityU/Kuaishou (Xiangyu Zhao, Ruiming Tang); opens generative cross-domain recommendation direction
-
-4. **TM20K: Teacher Retains Full Tokens, Student Merges Efficiently — E-Commerce Sequence Modeling in Ad Recommendation**
-   * Affiliation: ByteDance — *(Xinchun Li, Duoru Zheng, Wenlin Zhao, Ziyi Zhou, Jingxuan Tan, Huizhi Yang, Linlan Chen, Dongjian Wang, Dongyue Wang, Xiaosong Li, Hongyue Mao, Yaocheng Tan — ByteDance)*
-   * Link: [arxiv.org/abs/2608.07055](https://arxiv.org/abs/2608.07055)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Ultra-long 20K-token e-commerce sequence modeling with full Transformer attention + teacher-student KD; student uses token merge for compression; deployed at ByteDance ads: +1.036% ADSS, only +5.6% serving latency.
-   * Key techniques:
-     - Full Transformer attention (not target-sequence attention) for effective ultra-long sequence feature extraction
-     - Token merge: simple yet well-motivated compression for student model maintaining acceptable performance
-     - Two-stage KD: one-time heavy teacher trained on full 20K tokens; student distilled with merged tokens
-     - Production deployment: extends sequence to 20K with near-identical training/serving cost as online SOTA
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Full-attention + token-merge KD for 20K sequences is practical; production-scale validation is strong
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Production A/B at ByteDance e-commerce ads; +1.036% ADSS with minimal latency overhead
-     - **Impact: 7/10** — ByteDance; practical ultra-long sequence scaling blueprint for industrial ad recommendation
-
-5. **Understanding Semantic IDs: From Item Representation to Item Selection in Generative Recommendation**
-   * Affiliation: University of Illinois at Urbana-Champaign — *(Junting Wang, Xinrui He, Yunzhe Li, Hari Sundaram — UIUC)*
-   * Link: [arxiv.org/abs/2607.24995](https://arxiv.org/abs/2607.24995)
-   * Venue: arXiv preprint, July 2026
-   * TL;DR: First systematic empirical analysis of SID construction→generation pipeline; SIDs recover only 32.2% of encoder neighbors, TIGER retains only 29.9% of plausible targets after final token; proposes Item-Supported Decoding (ISD) with up to 31.2% NDCG gain, zero retraining.
-   * Key techniques:
-     - Systematic SID pipeline analysis: item encoding → SID construction → autoregressive generation → recommendation
-     - 8 SID constructions × 3 Amazon domains: SID neighborhoods recover only 32.2% of encoder's 10 nearest neighbors
-     - Item-Supported Decoding (ISD): lightweight inference-time method using user-specific item ranking to support SID prefixes before beam search discards them
-     - No additional parameters or retraining required; relative NDCG@10 gains up to 31.2%
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First systematic diagnostic of SID construction-to-generation pipeline; ISD is a clever lightweight fix
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — 3 domains × 8 constructions; comprehensive analysis; no peer review yet
-     - **Impact: 7/10** — UIUC (Hari Sundaram lab); important diagnostic work questioning SID fine-boundary assumptions; ISD practical for any SID-based genrec
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 129 papers as of August 19.
+**Count:** 130 papers as of August 21.
 
 | Score | Paper |
 | --- | --- |
@@ -888,6 +676,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | ProRL: Effective Reinforcement Learning for Proactive Recommendation via Rectified Policy Gradient Estimation (ProRL) |
 | 8/10 | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender |
 | 8/10 | SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents |
+| 8/10 | SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation |
 | 8/10 | How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation? |
 | 8/10 | HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations |
 | 8/10 | Intuition-Guided Latent Reasoning for LLM-Based Recommendation (IntuRec) |
@@ -1190,6 +979,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DLMRec: Diffusion Language Model for Recommendation (DLMRec)
 - DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM)
 - SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
+- SSR-GRPO / Supervised Retrieval-GRPO with Semantic IDs -- Alibaba
 - STEPS / Self-Triggered Agentic Push -- ByteDance / PKU
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
