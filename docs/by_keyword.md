@@ -183,6 +183,7 @@
 ### Evaluation / Benchmark
 - Bradley-Terry Rankings for Recommender Systems Across Dataset Taxonomies
 - Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop)
+- Do Sequential Recommendation Benchmarks Really Require Higher-Order Sequence Modelling? (SeqBench)
 - From Prompt to Purchase: How AI Brand Recommendations Move Consumers on the Open Web
 - LLM-as-a-Judge for Reliable and Explainable Offline Evaluation in Top-K Recommendation (LLM Judge)
 - One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE)
@@ -266,6 +267,7 @@
 - Principled Synthetic Data Enables the First Scaling Laws for LLMs in Recommendation (Scaling Laws)
 - Scaling Laws for Behavioral Foundation Models over User Event Sequences
 - One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
+- RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN)
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 
@@ -523,6 +525,7 @@
 - Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation (Gryphon-v2)
 - Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation (Multi-Decoder OneRec)
 - Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs (OGR)
+- OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking (OneModel)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
 - PSG: Pair-Space Generation for Efficient Generative Reranking (PSG)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
@@ -1140,6 +1143,7 @@
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
 - Beyond Static Collision Handling: Adaptive Semantic ID Learning (AdaSID)
+- Beyond Uniform Token Training: A Multi-Target Framework for Learning Token-Weighted Objectives in Generative Recommenders (Beyond Uniform Token Training)
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
 - Causal Representation Learning for Generalisable Recommendation
 - ChronoID: Infusing Explicit Temporal Signals into Semantic IDs for Generative Recommendation (ChronoID)

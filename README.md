@@ -53,21 +53,21 @@ mindmap
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
-        FLEXRec -- UQ
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
+        RecPFN -- SAP
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
+        Beyond Uniform Token Training -- NTU / Academia Sinica
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
         FORGE Web Pollution -- CUHK
-        LIME-Rec -- Hunan U
 ```
 <div align="center">
   <i> Open-source Generative RecSys Map </i>
@@ -75,6 +75,95 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 22
+
+*Saturday, August 22, 2026. Arxiv weekend pause (no new Saturday announcement). Friday Aug 21 listing yielded 2 new papers (RecPFN, Sequential Benchmarks) plus 3 missed papers from Aug 18–20 (Think-to-Personalize, OneModel) plus 1 replacement (Beyond Uniform Token Training, v2 Aug 20). Total: 5 papers.*
+
+1. **RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations**
+   * Affiliation: SAP
+   * Link: [arxiv.org/abs/2608.19735](https://arxiv.org/abs/2608.19735)
+   * Venue: SIGIR 2026
+   * TL;DR: Brings prior-fitted networks (in-context learning) to sequential recommendation — pretrained entirely on synthetic clickstreams sampled from a broad structural causal prior, amortizing Bayesian-style inference from a small support set; SOTA zero-shot performance across 8 benchmarks.
+   * Key techniques:
+     - Prior-Fitted Network (PFN) pretrained on synthetic clickstream environments from a broad structural causal prior
+     - Amortized Bayesian-style inference from a small support set of domain sequences; no weight updates at inference
+     - Lightweight decoder-only transformer producing next-item predictions in a single forward pass
+     - Deployment-efficient and robust to domain shift; competitive with supervised methods in low-compute/low-data regimes
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/SAP-samples/tabular-ai-recpfn](https://github.com/SAP-samples/tabular-ai-recpfn) — official SAP samples repo with training + evaluation code
+     - **Novelty: 7/10** — First to bring prior-fitted networks / in-context learning to sequential recommendation
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — SIGIR 2026 peer-reviewed; 8 public benchmarks; robust to domain shift
+     - **Impact: 7/10** — SIGIR 2026; SAP; a practical path to generalizable, data-efficient recommenders
+
+2. **Do Sequential Recommendation Benchmarks Really Require Higher-Order Sequence Modelling?**
+   * Affiliation: Spotify
+   * Link: [arxiv.org/abs/2608.19833](https://arxiv.org/abs/2608.19833)
+   * Venue: RecSys 2026
+   * TL;DR: Two simple recency-weighted pairwise probes (SeqRules + PCTM) that learn no higher-order sequence representations match or beat SASRec on most benchmarks, questioning whether widely used sequential-rec benchmarks actually measure higher-order sequence modelling.
+   * Key techniques:
+     - SeqRules (Sequential Rules) and PCTM (Probabilistic Collaborative Transition Model) — recency-weighted pairwise probes without higher-order sequence representations
+     - Reproduction of eSASRec + sampled-softmax SASRec as the reference point
+     - At least one probe exceeds the eSASRec reproduction by 15–38% on 3 Amazon datasets and 4.4% on ML-1M
+     - Concrete test of whether a benchmark can meaningfully measure higher-order sequence-modelling gains
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Provocative benchmarking study with a concrete, reusable test for higher-order gains
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; 8 datasets
+     - **Impact: 7/10** — Spotify; challenges a core premise of sequential-rec benchmark design
+
+3. **Think-to-Personalize: Unifying Reasoning and Retrieval for User-Centric Personalized Dense Retrieval**
+   * Affiliation: University of Science and Technology of China / Meituan — *(Angqing Jiang, Gaoming Zhang, Defu Lian — USTC; Jianchun Song, Kena Qi, Dayao Chen, Wei Lin — Meituan)*
+   * Link: [arxiv.org/abs/2608.18855](https://arxiv.org/abs/2608.18855)
+   * Venue: CIKM 2026
+   * TL;DR: Unifies explicit user-centric intent reasoning with dense retrieval — the LLM reasons over the user's purchase history to deduce latent needs and generate an intent-enhanced query encoded into a unified dense embedding; two-stage SFT + GRPO RL.
+   * Key techniques:
+     - Explicit user-centric intent reasoning over historical purchase sequences to disambiguate noisy behavior
+     - Intent-enhanced query generation, then encoded into a unified dense embedding for retrieval
+     - Two-stage training: SFT (cold-start capability) + GRPO RL (align reasoning with retrieval utility)
+     - Online A/B: +0.46% order volume
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Reasoning-driven personalized dense retrieval (vs implicit embedding interaction) is a clean, well-motivated angle
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — CIKM 2026 peer-reviewed; proprietary + public benchmarks; online A/B
+     - **Impact: 6/10** — Meituan/USTC; a new paradigm for reasoning-driven personalized retrieval in e-commerce
+
+4. **OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking**
+   * Affiliation: Xiaohongshu
+   * Link: [arxiv.org/abs/2608.18606](https://arxiv.org/abs/2608.18606)
+   * Venue: arXiv preprint, August 2026 (deployed in production at Xiaohongshu)
+   * TL;DR: Unified multi-stream final-ranking foundation mapping heterogeneous behaviors into shared event sequences with an action-oriented backbone + Scenario-aware Information Modulation; deployed across Explore Feed, Feed Advertising, and Merchant Recommendation with consistent A/B gains.
+   * Key techniques:
+     - Shared event sequences unifying heterogeneous cross-stream user behaviors
+     - Long-context user representations with an action-oriented backbone
+     - Scenario-aware Information Modulation balancing cross-stream transfer and stream-specific specialization
+     - Production serving optimizations (stratified user representation, multi-objective training, feature decomposition, user-feature prefetching, shared user-tower)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — Unified multi-scenario ranking foundation is practical; scenario-aware modulation is conceptually incremental
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 7/10** — Production deployment; online A/B gains across 3 streams
+     - **Impact: 7/10** — Xiaohongshu; production-proven unified multi-stream ranking foundation
+
+5. **Beyond Uniform Token Training: A Multi-Target Framework for Learning Token-Weighted Objectives in Generative Recommenders**
+   * Affiliation: National Taiwan University / Academia Sinica — *(Wei-Ning Chiu, Song-Duo Ma, Pu-Jen Cheng — NTU; Han-Jay Shu — National Tsing Hua University; Chuan-Ju Wang — Academia Sinica)*
+   * Link: [arxiv.org/abs/2601.17787](https://arxiv.org/abs/2601.17787)
+   * Venue: CIKM 2026
+   * TL;DR: Token-weighted training objectives for generative recommenders — prefix-aware Front-Greater Weighting plus frequency weighting for long-tail tokens, integrated via multi-target curriculum learning; improves both popular and long-tail item recommendation.
+   * Key techniques:
+     - Front-Greater Weighting: prefix-aware scheme emphasizing tokens that most reduce semantic ambiguity among candidate items
+     - Frequency weighting: upweights infrequent tokens to counter long-tailed distributions and popularity bias
+     - Multi-target optimization with curriculum learning integrating token-weighted objectives with standard likelihood
+     - Robust across semantic-ID constructions and backbone scales; helps both head and tail items
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/CHIUWEINING/Token-Weighted-Multi-Target-Learning-for-Generative-Recommenders-with-Curriculum-Learning](https://github.com/CHIUWEINING/Token-Weighted-Multi-Target-Learning-for-Generative-Recommenders-with-Curriculum-Learning) — individual research repo with training code
+     - **Novelty: 6/10** — Token-weighted objectives aligned with semantic-ID structure is a clean, underexplored training fix
+     - **Fairness: 5/10** — Frequency weighting directly mitigates popularity bias toward long-tail items
+     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; multiple benchmarks; robust across SID constructions and backbone scales
+     - **Impact: 6/10** — NTU/Academia Sinica; token-weighted training applicable to any semantic-ID generative recommender
 
 ### Papers August 21
 
@@ -642,7 +731,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 130 papers as of August 21.
+**Count:** 132 papers as of August 22.
 
 | Score | Paper |
 | --- | --- |
@@ -701,6 +790,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) |
 | 8/10 | Masked Diffusion for Generative Recommendation (MaskGR) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
+| 7/10 | RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN) |
 | 7/10 | Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner) |
 | 7/10 | Can We Steer the Black-Box? Towards Controllability-Centric Evaluation of Recommender Systems with Collaborative Agents (CtrlBench-Rec) |
 | 7/10 | The Best of Both Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H²Rec) |
@@ -745,6 +835,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
+| 6/10 | Beyond Uniform Token Training: A Multi-Target Framework for Learning Token-Weighted Objectives in Generative Recommenders (Beyond Uniform Token Training) |
 | 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |
 | 6/10 | GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation |
 | 6/10 | Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd) |
@@ -980,6 +1071,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DREAM: Dynamic Refinement of Early Assignment Mappings (DREAM)
 - SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR)
 - SSR-GRPO / Supervised Retrieval-GRPO with Semantic IDs -- Alibaba
+- Think-to-Personalize / Reasoning + GRPO Personalized Dense Retrieval -- USTC / Meituan (CIKM 2026)
 - STEPS / Self-Triggered Agentic Push -- ByteDance / PKU
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
