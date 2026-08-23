@@ -31,6 +31,7 @@
 - STEPS: A Self-Triggered Agentic Push Recommendation System (STEPS)
 - TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
 - Personalized Communication Skills for Agentic Recommender Systems (AgentCom)
+- MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation (MACS)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -119,6 +120,7 @@
 - When and How to Ask: Dynamic Preference Elicitation Strategies for Conversational Recommendation (COPE)
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation (Tencent/ACL 2026)
 - Ask to Be Sure: Informative Interactions for Confident Multi-Turn LLM Recommendation (Ask to Be Sure)
+- MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation (MACS)
 
 ### Cross-Domain
 - Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
@@ -151,6 +153,7 @@
 ### Diagnostics / Analysis
 - LIME-Rec: Auditing Semantic Gains in Sequential Recommendation (LIME-Rec)
 - SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation (SIDScope)
+- Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance)
 
 
 ### Diffusion
@@ -203,6 +206,7 @@
 - Who Owns the AI Recommendation? A Multi-Industry Empirical Map of Brand Category Ownership Across Large Language Models (LLM Brand)
 - AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation (AgentSelect)
 - Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking)
+- Overview of the TREC 2025 Product Search and Recommendation Track
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -248,6 +252,7 @@
 - PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest (PinEqualizer)
 - GRACE: Bringing GRACE to Recommendation: Fine-Tuning for Sustainable and Accurate Personalization (GRACE)
 - FSGR: Mitigating Token Frequency Bias for Fair SID-Based Generative Recommendation (FSGR)
+- Unbiased Recommender Systems with Implicit Feedback
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -664,6 +669,7 @@
 - Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
 - Decoupled Temporal Encoding for Generative Recommendation (DTE)
 - SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
+- PriCoRec: A Privacy-Aware Cloud-Device Collaborative Framework for Ad Recommendation under Feature Constraints (PriCoRec)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1275,6 +1281,7 @@
 - Decoupled Temporal Encoding for Generative Recommendation (DTE)
 - GOD: Enhancing Generalization via Deep Grafting for Sequential Recommendation (GOD)
 - SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
+- Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey

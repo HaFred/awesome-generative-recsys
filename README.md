@@ -57,13 +57,13 @@ mindmap
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
         RecPFN -- SAP
+        Residual Dominance -- Hokkaido U
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
-        Beyond Uniform Token Training -- NTU / Academia Sinica
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -75,6 +75,95 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 23
+
+*Sunday, August 23, 2026. Arxiv weekend pause — no announcement since Thursday Aug 20, so zero new papers in the past 24h. Fallback per protocol: searched the missing dates in the log (Aug 20 / Aug 17 / Aug 15) plus Aug 14 for missed papers. Three genuinely new papers surfaced on Aug 17 (Unbiased RS, SAHC-NS, TREC 2025 track) and three missed Aug 14 papers (MACS, Residual Dominance, PriCoRec); the five most on-topic are listed below (SAHC-NS, a traditional CF negative-sampling paper, was dropped as out of the generative-recommendation scope). Total: 5 papers.*
+
+1. **Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders**
+   * Affiliation: Hokkaido University
+   * Link: [arxiv.org/abs/2608.14021](https://arxiv.org/abs/2608.14021)
+   * Venue: RecSys 2026
+   * TL;DR: Shows SASRec-style causal self-attention recommenders over-rely on the most recent item because residual connections dominate the self-attention aggregation — "residual dominance" — and gives a training-free inference-time residual-scaling knob to trade off recency vs. context.
+   * Key techniques:
+     - Prediction-time diagnostics + norm-based analysis of the full attention block
+     - "Residual dominance": residual addition sharply shifts the full-block representation toward same-position contributions
+     - Inference-time residual scaling as a controlled intervention inducing a monotonic mixing ↔ last-item-reliance tradeoff
+     - Reducing residual strength recovers final-position misses where non-final positions already rank the ground-truth item correctly
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/keito0329/Residual](https://github.com/keito0329/Residual) — public Python repo with README + supplement PDF matching the paper; no license, 1 star, single-purpose diagnostic
+     - **Novelty: 7/10** — Clean structural account linking last-item reliance to residual dominance is a novel, mechanistic insight
+     - **Fairness: 2/10** — Not addressing fairness
+     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; multiple models/datasets; controlled diagnostic intervention
+     - **Impact: 6/10** — RecSys 2026; practical inference-time fix applicable to any transformer sequential recommender
+
+2. **MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation**
+   * Affiliation: Stanford University / MIT / USC / Amazon
+   * Link: [arxiv.org/abs/2608.14068](https://arxiv.org/abs/2608.14068)
+   * Venue: Stanford Trust&Safety Conference / Stanford Market AI Conference (preprint)
+   * TL;DR: Hybrid multi-agent framework for fixed-catalog conversational e-commerce — LLMs handle language while a deterministic merchant agent enforces retrieval and hard constraints, with a session-persistent preference layer achieving zero constraint drift across turns.
+   * Key techniques:
+     - Hybrid two-agent split: LLM "shopping agent" (NL understanding, elicitation, response) + deterministic "merchant agent" (retrieval, hard-constraint filtering, brand exclusion, progressive relaxation)
+     - Session-persistent preference layer tracking budget overwrites and exclusion reversals across turns
+     - Correctness-critical operations kept deterministic rather than LLM-sampled to avoid hallucination
+     - 87.1% single-turn pass rate + perfect brand compliance; 72% macro Pass@5 with zero constraint drift (vs 56%/52% GPT/Gemini+Catalog)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Deterministic-constraint + LLM hybrid for reliability is clean but conceptually incremental
+     - **Fairness: 4/10** — Brand-exclusion/constraint compliance is a reliability constraint, not demographic fairness
+     - **Robustness: 7/10** — Reliability-focused evaluation vs GPT/Gemini baselines; zero constraint drift
+     - **Impact: 6/10** — Stanford; agentic-commerce reliability under hard constraints is a rising industrial concern
+
+3. **Unbiased Recommender Systems with Implicit Feedback**
+   * Affiliation: University of Illinois at Chicago
+   * Link: [arxiv.org/abs/2608.16704](https://arxiv.org/abs/2608.16704)
+   * Venue: RecSys 2026 (Doctoral Symposium)
+   * TL;DR: Doctoral-consortium work on mitigating position bias in learning-to-rank and popularity bias in CF and GNN social recommenders, so implicit feedback better reflects true user preferences.
+   * Key techniques:
+     - Control-function / residual-based correction for position bias in learning-to-rank
+     - Post-hoc popularity-bias correction in GNN-based collaborative filtering
+     - Debiasing message passing to curb popularity amplification in social/graph recommenders
+     - Unified treatment across LTR, CF, and social recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — Synthesizes established debiasing techniques rather than a fundamentally new mechanism
+     - **Fairness: 8/10** — Core focus is position + popularity bias mitigation
+     - **Robustness: 5/10** — Doctoral Symposium (single-author proposal); evaluated across public + industrial benchmarks
+     - **Impact: 5/10** — RecSys 2026 Doctoral Symposium; University of Illinois Chicago; contributes to fairer recommenders
+
+4. **Overview of the TREC 2025 Product Search and Recommendation Track**
+   * Affiliation: University of Illinois Urbana-Champaign / Lowe's / Snowflake / Walmart / Drexel University
+   * Link: [arxiv.org/abs/2608.17138](https://arxiv.org/abs/2608.17138)
+   * Venue: TREC 2025
+   * TL;DR: TREC 2025 product search + recommendation track introduces a novel related-product recommendation task whose annotated dataset distinguishes complementary vs. related products, enabling end-to-end e-commerce retrieval evaluation and conversational product discovery.
+   * Key techniques:
+     - Two tasks: query expansion and related-product recommendation
+     - Annotated dataset distinguishing complementary vs. related product relationships
+     - End-to-end retrieval-quality evaluation for e-commerce (no prior high-quality dataset existed)
+     - Building block for conversational product discovery experiences
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Track dataset released via TREC, not a code repository
+     - **Novelty: 5/10** — Novel related-product (complementary vs. related) task, but a track overview
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — Standardized TREC evaluation across participating systems
+     - **Impact: 6/10** — TREC benchmark; fills a gap in e-commerce recommendation evaluation
+
+5. **PriCoRec: A Privacy-Aware Cloud-Device Collaborative Framework for Ad Recommendation under Feature Constraints**
+   * Affiliation: University College Dublin / Huawei Ireland Research Centre
+   * Link: [arxiv.org/abs/2608.14429](https://arxiv.org/abs/2608.14429)
+   * Venue: RecSys 2026
+   * TL;DR: Splits ad recommendation into a cloud pre-ranking stage (cloud-accessible features) and an on-device ranking stage (sensitive features), keeping privacy-sensitive features on-device while preserving accuracy via a diversity regularizer and cloud-guided training.
+   * Key techniques:
+     - Cloud pre-ranking + on-device ranking split for privacy-aware deployment
+     - Diversity regularizer in pre-ranking to improve shortlist candidate quality
+     - Cloud-guided training to boost the lightweight on-device model without extra inference cost
+     - Keeps sensitive features (age, gender) on-device to satisfy privacy regulations
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — Cloud-device privacy split is practical; individual techniques are incremental
+     - **Fairness: 3/10** — Privacy-adjacent, not demographic fairness
+     - **Robustness: 6/10** — RecSys 2026 accepted; ad-recommendation experiments
+     - **Impact: 6/10** — University College Dublin / Huawei; privacy-preserving deployment is industry-relevant
 
 ### Papers August 22
 
@@ -731,7 +820,7 @@ mindmap
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 132 papers as of August 22.
+**Count:** 133 papers as of August 23.
 
 | Score | Paper |
 | --- | --- |
@@ -846,6 +935,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec) |
 | 6/10 | VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) |
 | 6/10 | From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM) |
+| 6/10 | Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance) |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
 | 5/10 | Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere) |
