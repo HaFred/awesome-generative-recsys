@@ -76,6 +76,95 @@ mindmap
 ---
 ## By Date
 
+### Papers August 24
+
+*Monday, August 24, 2026. Arxiv weekend pause continues — no announcement since Thursday Aug 20, and the Monday batch was not yet posted at capture time, so zero new papers in the past 24h. Fallback per protocol: re-scanned the most recent batch (Fri Aug 21 cs.IR) and surfaced 5 recommendation papers that were missed by the original Aug 21 entry. Total: 5 papers.*
+
+1. **Recommendation Quality and the Concentration of Consumption: Experimental Evidence from Netflix**
+   * Affiliation: Netflix (with Northwestern University / Cornell University academic co-authors)
+   * Link: [arxiv.org/abs/2608.21274](https://arxiv.org/abs/2608.21274)
+   * Venue: arXiv preprint, August 2026 (econ.GN / cs.IR)
+   * TL;DR: A field experiment on 8.5M Netflix users showing that recommendation-quality improvements raise total consumption and diffuse it from "superstar" head items toward the "middle-tail" (with minimal long-tail effect), challenging the claim that recommenders polarize consumption.
+   * Key techniques:
+     - Large-scale online experiment (8.5M users) on Netflix's production recommender
+     - Causal measurement of how recommendation quality shifts the consumption distribution across head / middle-tail / long-tail
+     - Finds returns to investing in middle-tail products grow as algorithms improve and platforms scale
+     - Economic framing linking recommender quality to market concentration
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code (Netflix proprietary experiment data)
+     - **Novelty: 5/10** — Empirical/causal study rather than a new method
+     - **Fairness: 7/10** — Directly measures consumption concentration / head-tail exposure, a fairness-relevant question
+     - **Robustness: 8/10** — 8.5M-user randomized experiment with strong causal identification
+     - **Impact: 8/10** — Netflix; challenges the "recommenders polarize consumption" narrative (econ.GN + cs.IR)
+
+2. **One Hierarchy, Two Systems: Semantic Product IDs for Discovery-Surface Ranking and Search-Page Query Reformulation**
+   * Affiliation: DoorDash
+   * Link: [arxiv.org/abs/2608.20640](https://arxiv.org/abs/2608.20640)
+   * Venue: arXiv preprint, August 2026 (cs.IR / cs.AI)
+   * TL;DR: A single hierarchical Semantic ID learned from product-content embeddings serves both personalized ranking (aggregating affinity/performance over SID prefixes) and query reformulation (grounding queries in SID concepts), with online gains in add-to-cart and reduced search effort.
+   * Key techniques:
+     - One shared semantic hierarchy learned from product-content embeddings, reused across ranking + query reformulation
+     - Ranking: aggregate consumer affinity + product performance over SID prefixes; sequence features for candidates and histories
+     - Query reformulation: ground queries/session transitions in SID concepts; navigation/refinement; assortment-filtered suggestions
+     - Online: stronger top-slot add-to-cart, broader exposure for less-popular products, reduced search effort
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Unifying ranking + query reformulation over one semantic hierarchy is a clean design
+     - **Fairness: 4/10** — Broader exposure for less-popular products is exposure-fairness adjacent
+     - **Robustness: 7/10** — Controlled ablations + online A/B at DoorDash
+     - **Impact: 7/10** — DoorDash; shared SID hierarchy spanning recommendation and search
+
+3. **Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)**
+   * Affiliation: Northeastern University (China)
+   * Link: [arxiv.org/abs/2608.21243](https://arxiv.org/abs/2608.21243)
+   * Venue: arXiv preprint, August 2026 (cs.IR / cs.AI)
+   * TL;DR: Uses knowledge-graph evidence to calibrate which historical interactions are reliable for sequential recommendation — identifying unusually-prominent relational paths, then comparing each interaction with structurally matched reference items to derive retention coefficients that gate history representations and reweight losses, with no KG needed at inference.
+   * Key techniques:
+     - Calibrated KG evidence per training example without adding graph representations to the recommendation backbone
+     - Compares observed context vs. structurally matched alternatives to find unusually-prominent relational paths → local KG view
+     - Per-interaction calibration vs. structurally matched reference items → retention coefficients
+     - Retention coefficients gate historical representations and reweight target losses; computed offline, inference-free
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — KG-calibrated denoising without a graph in the backbone is practical but incremental
+     - **Fairness: 4/10** — Denoising can curb popularity-driven distortion, not framed as fairness
+     - **Robustness: 5/10** — Standard sequential recommender + multiple denoising recommenders; preprint
+     - **Impact: 5/10** — Northeastern University; KG + sequential-rec behavior denoising
+
+4. **From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation**
+   * Affiliation: Kuaishou
+   * Link: [arxiv.org/abs/2608.21012](https://arxiv.org/abs/2608.21012)
+   * Venue: arXiv preprint, August 2026 (cs.IR / cs.LG); online A/B on production traffic
+   * TL;DR: Replaces multi-level residual semantic codebooks with a single-level large codebook (one semantic token + a separate collaborative disambiguation token) plus an exposure-aware dynamic update, improving Recall@10 by 5.0–8.8% on OneRec-V1/V2 and cutting decode FLOPs ~48%.
+   * Key techniques:
+     - Single-level large semantic codebook: one semantic token replaces multiple residual codes + separate collaborative disambiguation token to cut collisions
+     - Exposure-aware dynamic update: temporal weight decay, EMA center updates, exposure-weighted penalty on SID changes
+     - Offline evaluation framework: representation quality, code utilization, cluster load, full-SID collision, temporal stability
+     - OneRec-V1/V2 gains; 47.9–48.7% fewer decode FLOPs; +28.6–47% QPS; 5-day online A/B +0.792% consumption
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code (Kuaishou production)
+     - **Novelty: 6/10** — Single-level large codebook + exposure-aware dynamic update is a practical SID-codebook innovation
+     - **Fairness: 4/10** — Exposure-aware updating / code utilization (indirect)
+     - **Robustness: 7/10** — 2 public datasets + KuaiRec + online A/B (2.5% production traffic)
+     - **Impact: 7/10** — Kuaishou; OneRec-V1/V2 improvements; industrial SID codebook design
+
+5. **Profiling What Matters: Context-Aware Item Profiles from Large-Scale Metadata for LLM Recommenders (CAIRO)**
+   * Affiliation: Korea University
+   * Link: [arxiv.org/abs/2608.20801](https://arxiv.org/abs/2608.20801)
+   * Venue: CIKM 2026
+   * TL;DR: User-context-aware item profiling for LLM reranking — structures raw metadata/reviews into objective features + subjective traits, then a lightweight profiler selects the most relevant info per user-item pair, giving concise context-specific item-side evidence to the LLM ranker with limited serving overhead.
+   * Key techniques:
+     - Structures raw metadata + reviews into objective features and subjective traits
+     - Lightweight profiler selects relevant info per user-item pair with limited serving-time overhead
+     - Concise, context-specific profiles as item-side evidence for the LLM's ranking decision
+     - Consistent LLM-reranking gains across experiments
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — Context-aware item profiling is practical; conceptually incremental
+     - **Fairness: 3/10** — Not addressing fairness
+     - **Robustness: 6/10** — CIKM 2026 accepted; multiple experiments
+     - **Impact: 6/10** — CIKM 2026; Korea University; practical item-side feature selection for LLM reranking
+
 ### Papers August 23
 
 *Sunday, August 23, 2026. Arxiv weekend pause — no announcement since Thursday Aug 20, so zero new papers in the past 24h. Fallback per protocol: searched the missing dates in the log (Aug 20 / Aug 17 / Aug 15) plus Aug 14 for missed papers. Three genuinely new papers surfaced on Aug 17 (Unbiased RS, SAHC-NS, TREC 2025 track) and three missed Aug 14 papers (MACS, Residual Dominance, PriCoRec); the five most on-topic are listed below (SAHC-NS, a traditional CF negative-sampling paper, was dropped as out of the generative-recommendation scope). Total: 5 papers.*
@@ -726,95 +815,6 @@ mindmap
      - **Fairness: 3/10** — Not addressing fairness
      - **Robustness: 5/10** — TikTok + Amazon datasets; 10-seed paired tests; preprint
      - **Impact: 5/10** — UvA (Paul Groth); practical multimodal rec with temporal modality dynamics
-
-### Papers August 13
-
-*Thursday, August 13, 2026. Arxiv active. cs.IR Aug 12 listing returned 5 genrec/recsys papers. Total: 5 papers.*
-
-1. **HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs**
-   * Affiliation: Shanghai Jiao Tong University / Huawei Noah's Ark Lab — *(Kangning Zhang, Haotian Fang, Xukun Luo, Hao Yin, Yang Gao, Peng Yan, Weiwen Liu, Weinan Zhang, Yong Yu)*
-   * Link: [arxiv.org/abs/2608.11980](https://arxiv.org/abs/2608.11980)
-   * Venue: CIKM 2026
-   * TL;DR: Diagnoses the "zero-advantage" bottleneck in reward-based post-training of SID genrec — when an early semantic token enters the wrong branch, rollout groups miss the ground-truth item and receive identical zero rewards; supplies minimal target-prefix hints only for hard instances, then uses hint-aware credit decomposition (supervised for hinted tokens, GRPO for sampled suffix).
-   * Key techniques:
-     - Checkpoint-rollout diagnosis: supplies a minimal target-prefix hint only when the current generator cannot reach the correct item
-     - Hint-aware credit decomposition: supervised learning preserves item-semantic/prefix-structure alignment for hinted tokens; GRPO optimizes the sampled suffix
-     - Turns zero-reward groups into informative comparisons over item-token completions
-     - Reduces zero-advantage training samples from over 70% to below 20%
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 1/10** — [github.com/WncFht/GRec](https://github.com/WncFht/GRec) — code link provided in paper but repo returns 404 (not yet public)
-     - **Novelty: 7/10** — First to diagnose and treat the zero-advantage training failure in SID genrec; hint-conditioned generation is a clean, well-motivated fix
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; sequential recommendation benchmarks; consistent gains over SFT + vanilla reward-based post-training
-     - **Impact: 6/10** — CIKM 2026; SJTU (Weinan Zhang); practical post-training fix applicable to any SID-based genrec
-
-2. **Token-Level Credit Assignment Optimization for Generative Document Retrieval**
-   * Affiliation: Shandong University — *(Xinpeng Zhao, Yang Liu, Ran Chen, Xinyu Ma, Daiting Shi, Pengjie Ren, Zhumin Chen, Zhaochun Ren, Xin Xin)*
-   * Link: [arxiv.org/abs/2608.12049](https://arxiv.org/abs/2608.12049)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Fine-grained RL framework replacing sequence-level rewards with token-level relevance rewards for generative (DocID) retrieval; estimates step-wise rewards by measuring how each token decision changes the expected retrieval quality of the generation trajectory.
-   * Key techniques:
-     - Token-level relevance rewards: step-wise reward estimation measuring per-token impact on expected retrieval quality
-     - Precise credit assignment favoring token decisions that contribute directly to document-level relevance
-     - Practical reward-estimation strategies tailored to the autoregressive DocID generation process
-     - Policy optimization integrating fine-grained supervision to align decoding with retrieval objectives
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Token-level (vs sequence-level) RL rewards for generative retrieval is a clean, under-explored idea
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — Retrieval benchmarks; consistently outperforms sequence-level reward baselines; no venue/peer review yet
-     - **Impact: 5/10** — Shandong U; practical RL credit-assignment improvement for generative retrieval
-
-3. **Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation (GALLM)**
-   * Affiliation: Zhejiang University — *(Fenglin Yan, Bohao Wang, Jian Zhang, Yu Cui, Tongya Zheng, Ye Feng, Can Wang, Jiawei Chen)*
-   * Link: [arxiv.org/abs/2608.12184](https://arxiv.org/abs/2608.12184)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Graph-aware LLM framework building a collaborative graph over text tokens + item tokens with three relation types (Text-Text, Item-Text, Item-Item), turned into lightweight learnable attention biases — no additional graph encoder needed.
-   * Key techniques:
-     - Collaborative graph over text tokens + item tokens modeling three relation types
-     - Lightweight learnable attention biases injected into the LLM attention mechanism for collaborative-aware token interactions
-     - Item-Item relations derived from global item co-occurrence patterns across users
-     - No additional graph encoder; +9.76% average HR@5 over strongest baseline on 4 benchmarks
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Graph-aware attention biases for LLM seqrec are practical; conceptually incremental
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — 4 real-world benchmarks; consistent gains; no venue/peer review yet
-     - **Impact: 5/10** — Zhejiang U; practical integration of collaborative signals into LLM-based sequential rec
-
-4. **From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM)**
-   * Affiliation: POSTECH — *(Junyoung Kim, Wonbin Kweon, Woojoo Kim, Jaehyung Lim, Dongha Kim, Hwanjo Yu)*
-   * Link: [arxiv.org/abs/2608.11846](https://arxiv.org/abs/2608.11846)
-   * Venue: CIKM 2026
-   * TL;DR: Diagnoses similarity bias in transformer sequential rec (dot-product attention over-favors similar items, overlooking heterogeneous relations with meaningful preference signals); proposes PRISM with K Perspective Lenses combining an Affinity View (homogeneous) and a Contrast View (heterogeneous) to calibrate attention.
-   * Key techniques:
-     - Similarity-bias diagnosis: dot-product attention scores disproportionately favor similar items across transformer-based SR models
-     - K Perspective Lenses calibrating attention from distinct viewpoints
-     - Affinity View (homogeneous relations) + Contrast View (heterogeneous relations suppressed by bias)
-     - 7 real-world benchmarks; consistently outperforms SOTA baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/327aem/PRISM](https://github.com/327aem/PRISM) — 1⭐, 9 commits; functional code (train/trainer/dataset/metrics) with training scripts; minimal README, no license
-     - **Novelty: 5/10** — Multi-perspective attention calibration is practical; conceptually incremental
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; 7 benchmarks; consistent SOTA
-     - **Impact: 5/10** — CIKM 2026; POSTECH; practical attention fix for sequential recommendation
-
-5. **Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion**
-   * Affiliation: National Taiwan University — *(Song-Duo Ma, Pu-Jen Cheng)*
-   * Link: [arxiv.org/abs/2608.11190](https://arxiv.org/abs/2608.11190)
-   * Venue: RecSys 2026
-   * TL;DR: Shows recent group rec improvements are inflated by a systematic evaluation bias from training-time score compression + deterministic tie-breaking; proposes tie-aware evaluation computing the exact expectation of HR@K/NDCG@K under uniform random tie-breaking; finds many reported gains shrink substantially.
-   * Key techniques:
-     - Tie-breaking bias diagnosis: sigmoid-before-BPR inflates tied top scores, making HR@K/NDCG@K highly sensitive to tie resolution
-     - Tie-aware protocol: exact expectation of HR@K/NDCG@K under uniform random tie-breaking
-     - Re-evaluation of 5 recent methods + 6 baselines on CAMRa2011 and Mafengwo (group + user settings)
-     - Temperature-scaled BPR (τ-BPR) retains smoothing benefit without severe tie inflation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/songduoma/TieAwareGroupRec](https://github.com/songduoma/TieAwareGroupRec) — 0⭐, 18 commits; publication-grade README with full reproduction for 5 methods + 6 baselines
-     - **Novelty: 6/10** — First to isolate tie-breaking as a systematic evaluation confound in group rec; tie-aware protocol is an important diagnostic
-     - **Fairness: 4/10** — Establishes reliable, unbiased evaluation for group rec benchmarks (indirect fairness)
-     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; tie-aware protocol; multiple methods + datasets
-     - **Impact: 6/10** — RecSys 2026; NTU; important diagnostic for reliable group recommendation evaluation
 
 ## By Opensource
 

@@ -144,6 +144,7 @@
 
 
 ### Denoising
+- Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - ANCHOR: Agentic Noise Creation Framework for Human Simulation and Denoising Recommendation (ANCHOR)
 - DC4SR (Disagreement as Signals)
 - Denoising Implicit Feedback for Cold-start Recommendation (DIF)
@@ -230,6 +231,7 @@
 - LLM-Assisted Reranking to Operationalize Nuanced Objectives in Recommender Systems
 - One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE)
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
+- Recommendation Quality and the Concentration of Consumption: Experimental Evidence from Netflix
 - Representation Curriculum: Stagewise Training for Robust Ranking and Allocation
 - The Injection Paradox: Brand-Level Suppression in Safety-Trained LLM Recommendations via RAG Context Injection (Injection Paradox)
 - The Pitfall of Scaling Up: Uncovering and Mitigating Popularity Bias Amplification in Scaling Transformer-based Recommenders (SPRINT)
@@ -497,6 +499,7 @@
 - ICICLE: Expanding Retrieval with In-Context Documents (ICICLE)
 
 ### Graph-based Recommendation
+- Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
 - COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs
 - GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation
@@ -726,6 +729,7 @@
 - LaRec: Unleashing LLM-based Latent Reasoning for Generative Recommendation (LaRec)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
 - POI Recommendation with LLM-Augmented Multi-Graph Learning and Contrastive Alignment (LLM-MGCL)
+- Profiling What Matters: Context-Aware Item Profiles from Large-Scale Metadata for LLM Recommenders (CAIRO)
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
 - SCoRD: Semantic-Assisted Continual Retriever-Reranker Distillation for LLM-Based Recommendation (SCoRD)
@@ -1024,6 +1028,7 @@
 - Ocean4Rec: Offline LLM-Derived OCEAN Profiles for Request-Time VOD Reranking
 - One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank)
 - OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking System (OnePiece)
+- Profiling What Matters: Context-Aware Item Profiles from Large-Scale Metadata for LLM Recommenders (CAIRO)
 - Representation Curriculum: Stagewise Training for Robust Ranking and Allocation
 - ResRank
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
@@ -1163,6 +1168,7 @@
 - DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM)
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
+- From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation
 - FusID: Modality-Fused Semantic IDs for Generative Music Recommendation (FusID)
 - Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)
@@ -1183,6 +1189,7 @@
 - MERGE: Next-Generation Item Indexing Paradigm for Large-Scale Streaming Recommendation (MERGE)
 - Mitigating Collaborative Semantic ID Staleness in Generative Retrieval
 - On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec)
+- One Hierarchy, Two Systems: Semantic Product IDs for Discovery-Surface Ranking and Search-Page Query Reformulation
 - One Pool, Two Caches: Adaptive HBM Partitioning for Accelerating Generative Recommender Serving
 - PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation (PIT)
 - PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation
