@@ -56,14 +56,14 @@ mindmap
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
-        RecPFN -- SAP
-        Residual Dominance -- Hokkaido U
+        ANR-DiffRec -- Tongji U / Huawei / Fudan U
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
+        SST -- USTC / Huawei
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -75,6 +75,123 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 25
+
+*Tuesday, August 25, 2026. Arxiv Monday (Aug 24) batch — cs.IR / cs.AI / cs.LG. 7 papers found (4 opensource). Core generative-rec: SST (item tokenization), ANR-DiffRec (diffusion), DuELRec (LLM cross-domain), The Disconnect (reasoning-trace analysis); broader recsys: CRRN (CTR), BOAR (multi-behavior), HEGM (watch-time).*
+
+1. **Rethinking Item Tokenization in Generative Recommenders: From Fixed Atoms to Semantic Subwords**
+   * Affiliation: University of Science and Technology of China (USTC) / Huawei Technologies
+   * Link: [arxiv.org/abs/2608.22734](https://arxiv.org/abs/2608.22734)
+   * Venue: CIKM 2026
+   * TL;DR: Represents historical items as variable-length "semantic subwords" (instead of fixed-length SID sequences) while keeping fixed-length target decoding, reducing intra-item attention overload and re-directing model capacity toward inter-item behavioral transitions.
+   * Key techniques:
+     - Item-level Subword Tokenization (IST): merges stable adjacent atom tokens into compact semantic subword tokens
+     - Behavior-induced Co-occurrence Augmentation (BCA): injects coarse-grained semantic prefix-transition signals into training
+     - Validated on 3 public datasets × 3 generative recommender backbones
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/mxrcandy/Semantic-Subword-Tokenization](https://github.com/mxrcandy/Semantic-Subword-Tokenization): well-documented README with full IST+BCA workflow, runnable Beauty/TIGER example data, requirements.txt + configs; single example dataset and no explicit license
+     - **Novelty: 7/10** — History-side variable-length subword tokenization is a fresh angle on SID tokenization
+     - **Fairness: 3/10** — No fairness consideration
+     - **Robustness: 7/10** — Consistent gains across 3 datasets and 3 backbones
+     - **Impact: 7/10** — CIKM 2026; USTC/Huawei; tokenization is a central GenRec topic
+
+2. **Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation**
+   * Affiliation: Tongji University / Huawei Technologies / Fudan University
+   * Link: [arxiv.org/abs/2608.23400](https://arxiv.org/abs/2608.23400)
+   * Venue: arXiv preprint, August 2026 (cs.IR / cs.AI)
+   * TL;DR: Encodes item-based collaborative structure into discrete-diffusion generative recommendation via a collaborative-prior SID generation and an item-adaptive noise-rescheduling mechanism that treats tokens non-uniformly during denoising.
+   * Key techniques:
+     - Item co-occurrence matrix guides semantic ID generation (structured collaborative prior)
+     - Item-based adaptive noise rescheduling: denoising weights adjusted by local contextual recoverability + behavior-aware item dependencies
+     - Amazon Reviews 2023 (3 categories), outperforms SOTA generative recommenders
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5/10** — [github.com/CalmaQi/ANR-DiffRec](https://github.com/CalmaQi/ANR-DiffRec): code present (LLaDA/genrec, run_pipeline.py, dataset links) but sparse (4 commits), minimal README, no license
+     - **Novelty: 6/10** — Explicit collaborative structure + adaptive noise schedule in discrete diffusion for GenRec
+     - **Fairness: 2/10** — No fairness consideration
+     - **Robustness: 6/10** — Multiple benchmarks, consistent SOTA improvements
+     - **Impact: 6/10** — Diffusion GenRec is trending; Tongji/Huawei/Fudan
+
+3. **A Dual-Expert Strategy Integrating LLMs to Mitigate Negative Transfer in Cross-Domain Sequential Recommendation**
+   * Affiliation: KAIST
+   * Link: [arxiv.org/abs/2608.23131](https://arxiv.org/abs/2608.23131)
+   * Venue: CIKM 2026
+   * TL;DR: LLM-based cross-domain sequential recommendation (DuELRec) with a domain-gated dual-expert design and dual-sampling token-to-item contrastive learning to curb negative transfer across domains.
+   * Key techniques:
+     - Item-aware attention transformation: aggregates subword tokens into item-level representations with block-level attention masking
+     - Single-domain expert (within-domain attention) + cross-domain expert (all-domain) adaptively fused by a gate
+     - Dual-sampling token-to-item contrastive objective (single- + cross-domain item pools)
+     - 2 real-world datasets, 10 domains, outperforms 26 SOTA methods
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Domain-gated dual-expert to mitigate negative transfer in LLMRec CDSR
+     - **Fairness: 2/10** — No fairness consideration
+     - **Robustness: 6/10** — Extensive baselines across 10 domains
+     - **Impact: 6/10** — CIKM 2026; KAIST
+
+4. **The Disconnect Between Better Descriptive Reasoning Trace Quality and Recommendation Effectiveness**
+   * Affiliation: Spotify
+   * Link: [arxiv.org/abs/2608.23154](https://arxiv.org/abs/2608.23154)
+   * Venue: RecSys '26 Workshop on Agentic and Generative AI for E-Commerce
+   * TL;DR: First controlled 2×2 factorial study showing that better descriptive reasoning traces (natural-language titles + extensive SID alignment) do NOT translate into better offline recommendation accuracy under standard SFT and RL.
+   * Key techniques:
+     - 2×2 factorial over item representation (Title vs SID) and SID alignment (minimal vs extensive)
+     - Shared Qwen3-1.7B backbone; SFT vs RL training objectives compared
+     - 3 Amazon product domains
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — First controlled comparison of reasoning-trace quality vs. recommendation effectiveness
+     - **Fairness: 3/10** — Touches interpretability, limited fairness scope
+     - **Robustness: 7/10** — Controlled factorial design with a shared backbone
+     - **Impact: 7/10** — Spotify; challenges the "chain-of-thought helps GenRec" assumption
+
+5. **Cascading Relevance-driven Recommendation Network for CTR Prediction in Trigger-Introduced Recommendation**
+   * Affiliation: Alibaba (Taobao & Tmall Group)
+   * Link: [arxiv.org/abs/2608.22973](https://arxiv.org/abs/2608.22973)
+   * Venue: arXiv preprint, August 2026 (cs.IR)
+   * TL;DR: CTR prediction for "trigger-introduced recommendation" (TIR) that explicitly models trigger–target relevance with cascading interest fusion and a category-assisted pairwise loss.
+   * Key techniques:
+     - Trigger-Target Interaction layer (personalized gating on trigger/target features)
+     - Cascading Interest Fusion: cascading attention blocks estimate trigger intention and fuse instant + personalized interest
+     - Category-assisted Pairwise Loss enforcing trigger relevance
+     - Industrial + public datasets; online A/B validated
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 4/10** — [github.com/a-little-cabbage/CRRN](https://github.com/a-little-cabbage/CRRN): only 3 files (README, crrn.py, module.py), no license/requirements/training/eval pipeline
+     - **Novelty: 6/10** — New TIR scenario with explicit trigger-relevance modeling
+     - **Fairness: 2/10** — No fairness consideration
+     - **Robustness: 6/10** — Industrial + public + online A/B
+     - **Impact: 7/10** — Alibaba (Taobao & Tmall), deployed
+
+6. **Beyond Observed Auxiliary Relations: Environment-Conditioned Modeling for Multi-Behavior Recommendation**
+   * Affiliation: Korea University
+   * Link: [arxiv.org/abs/2608.22920](https://arxiv.org/abs/2608.22920)
+   * Venue: CIKM 2026
+   * TL;DR: Environment-conditioned multi-behavior recommendation (BOAR) that handles missing and unreliable auxiliary signals via two complementary modules conditioned on auxiliary observability.
+   * Key techniques:
+     - Two complementary modules conditioned on auxiliary observability (fill missing relations / suppress unreliable ones)
+     - Up to +7.82% HR@10 overall; up to +44.2% for items without auxiliary observations
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Linked repo (github.com/LSH0411/BOAR) returns 404 — not publicly accessible
+     - **Novelty: 5/10** — Observability-conditioned handling of missing/unreliable auxiliary signals
+     - **Fairness: 2/10** — No fairness consideration
+     - **Robustness: 6/10** — Strong gains on items lacking auxiliary observations
+     - **Impact: 6/10** — CIKM 2026; Korea University
+
+7. **Hierarchical Exponential-Gaussian Mixtures for Watch-Time Distribution Prediction**
+   * Affiliation: VK (AI VK) / Lomonosov Moscow State University
+   * Link: [arxiv.org/abs/2608.23356](https://arxiv.org/abs/2608.23356)
+   * Venue: ICDM 2026
+   * TL;DR: Distributional watch-time prediction for short-video recommendation that fixes EGMN's variance collapse / component redundancy via a hierarchical skip-watch decomposition and KL-based variance regularization.
+   * Key techniques:
+     - Hierarchical skip-watch decomposition: exponential component for quick skips + Gaussian mixture for engaged watching, separated by a learned skip gate
+     - KL-based variance regularization + structured initialization; removes forced Gaussian shift + entropy regularizer
+     - KuaiRec + VK-LSVD; 1.5-month production A/B with significant engagement lifts
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/rw404/HEGM](https://github.com/rw404/HEGM): Apache 2.0, full code + configs + preprocessing scripts + released checkpoints + deterministic reproducible eval
+     - **Novelty: 6/10** — Hierarchical skip-watch mixture addressing EGMN failure modes
+     - **Fairness: 2/10** — No fairness consideration
+     - **Robustness: 8/10** — Fixes variance collapse/component redundancy; 1.5-month production A/B
+     - **Impact: 6/10** — ICDM 2026; VK industrial short-video
 
 ### Papers August 24
 
@@ -727,100 +844,11 @@ mindmap
      - **Robustness: 5/10** — MS MARCO + NQ320K; preprint (no venue/peer review yet)
      - **Impact: 5/10** — NTU/JHU; practical in-context generative retrieval for evolving corpora
 
-### Papers August 14
-
-*Friday, August 14, 2026. Arxiv active. cs.IR Aug 13 listing returned 5 genrec/recsys papers. Total: 5 papers.*
-
-1. **FSGR: Mitigating Token Frequency Bias for Fair SID-Based Generative Recommendation**
-   * Affiliation: Nankai University — *(Yuchen Zheng, Sihan Xu, Jingwen Yang, Xiangrui Cai, Haiwei Zhang, Xiaojie Yuan)*
-   * Link: [arxiv.org/abs/2608.12845](https://arxiv.org/abs/2608.12845)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Diagnoses "Token Frequency Bias" in SID genrec — high-frequency SID tokens are systematically over-predicted while low-frequency tokens are under-predicted; FSGR rebalances the SID representation space (OT-based assignment + dual-criteria re-anchor) and adds two-stage training with hierarchical frequency calibration, achieving >20% Gini fairness improvement while maintaining accuracy.
-   * Key techniques:
-     - Token Frequency Bias diagnosis: over/under-prediction of high/low-frequency SID tokens from imbalanced codebooks + popularity bias + MLE objective
-     - OT-based Assignment Optimization + Dual-Criteria Re-anchor for a balanced SID representation space during construction
-     - Two-stage training + Hierarchical Frequency Calibration for layer-specific fairness fine-tuning
-     - >20% average Gini fairness improvement across 3 datasets and 3 backbones while maintaining competitive accuracy
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First to diagnose token frequency bias in SID genrec; OT-based re-anchor + hierarchical frequency calibration is principled
-     - **Fairness: 8/10** — Directly targets fairness (token frequency bias → item-category exposure fairness) with quantified Gini gains
-     - **Robustness: 5/10** — 3 public datasets × 3 backbone models; no venue/peer review yet
-     - **Impact: 6/10** — Nankai (Xiaojie Yuan); opens fairness direction for SID-based genrec
-
-2. **STAR: Structured Tokenization and Target-Aware Interest Representation for PCVR Prediction**
-   * Affiliation: Tsinghua University / Peking University — *(Yimeng Xu, Yingqi Song, Ying Jiang, Lan Ma — Tsinghua; Ruihao Zhang — Peking University)*
-   * Link: [arxiv.org/abs/2608.12986](https://arxiv.org/abs/2608.12986)
-   * Venue: KDD Cup 2026 Tencent UniRec Challenge (workshop)
-   * TL;DR: Practical PCVR ranking framework combining structured feature tokenization with target-aware interest representation on a HyFormer-style multi-sequence backbone; high-cardinality signal recovery, explicit user-item interaction tokens, target-aware sequence decoding, and InfoNCE-inspired contrastive objective; identifies temporal context as the largest contributor to ranking AUC.
-   * Key techniques:
-     - Structured feature tokenization on a HyFormer-style multi-sequence backbone unifying sequence modeling + feature interaction
-     - High-cardinality signal recovery + explicit user-item interaction tokens for sparse features
-     - Target-aware sequence decoding + weighted user-item contrastive auxiliary objective (InfoNCE-inspired)
-     - Train-inference pipeline alignment via reconstruction of feature remapping tables from saved config
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Practical challenge solution; tokenization + target-aware interest representation is incremental
-     - **Fairness: 3/10** — Not addressing fairness (ethics note flags monitoring before production)
-     - **Robustness: 5/10** — Challenge leaderboard-style offline evaluation; no online A/B
-     - **Impact: 5/10** — KDD Cup 2026 Tencent UniRec; Tsinghua/PKU; practical PCVR ranking blueprint
-
-3. **Generative Universal Multimodal Retrieval with Dual-role Identifiers (DrIG)**
-   * Affiliation: University of Tsukuba — *(Kaipeng Li, Haitao Yu, Xuanchen Zhou)*
-   * Link: [arxiv.org/abs/2608.12987](https://arxiv.org/abs/2608.12987)
-   * Venue: arXiv preprint, August 2026 (under review)
-   * TL;DR: Generative multimodal retrieval where each candidate gets one residual-quantized identifier playing a sequential role (autoregressive decode; first token = modality) and a set-based role (unordered set providing a prefix-independent relevance prior that guides beam search); outperforms SOTA generative multimodal baselines on M-BEIR.
-   * Key techniques:
-     - Dual-role identifiers: sequential role (AR decoding with modality token + progressive semantics) + set-based role (prefix-independent relevance prior)
-     - Set-based prior guides constrained beam search to alleviate prefix-level/local-optimum errors
-     - Hybrid reranking for efficiency-effectiveness tradeoff vs. dense retrievers
-     - Scaling/ablation analysis over base LMM, beam size, reranking depth, fusion strategy
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Dual-role identifier with set-based prefix-independent prior is a clean, novel idea
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — M-BEIR + text-to-image benchmarks; under review
-     - **Impact: 6/10** — U Tsukuba (Haitao Yu); advances generative multimodal retrieval
-
-4. **DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation**
-   * Affiliation: Shenzhen University / Kuaishou Technology — *(Canwei Huang, Tiantian He, Xiaoxiao Xu, Jun Zhang, Ziran Deng, Weike Pan, Chunjie Chen, Kaiqiao Zhan)*
-   * Link: [arxiv.org/abs/2608.12778](https://arxiv.org/abs/2608.12778)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Addresses prediction noise in multi-task pxtr signals used for ensemble ranking; risk-denoising robust loss corrects empirical risk using estimated preference flip probability (supervision side) + perturbation sampling with a preference-preserving ranking consistency regularizer (feature side); theoretical robustness proof + online A/B.
-   * Key techniques:
-     - Risk-denoising robust loss: corrects empirical risk using estimated preference flip probability
-     - Preference-preserving ranking consistency regularizer for feature-side output stability
-     - Perturbation sampling from the prediction-noise distribution
-     - Theoretical proof of robustness under flip-probability estimation error
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Dual-side (supervision + feature) noise handling in ensemble ranking is novel
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Theoretical analysis + offline experiments + large-scale online A/B
-     - **Impact: 6/10** — Kuaishou/SZU; practical robust ensemble ranking for industrial video rec
-
-5. **TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation**
-   * Affiliation: University of Amsterdam / University of Hong Kong / Aarhus University — *(Pengyu Zhang, Congfeng Cao, Paul Groth — UvA; Yangqin Jiang — HKU; Klim Zaporojets — Aarhus)*
-   * Link: [arxiv.org/abs/2608.10983](https://arxiv.org/abs/2608.10983)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Modality usefulness drifts over time at different rates (e.g., text→visual cues around holidays); temporal-aware modal router maps behavioral features to a personalized modality distribution, and a diffusion-based graph reconstructor conditioned via FiLM with dual-stream long/short-term denoising heads suppresses outdated modality edges; up to 9.8% improvement.
-   * Key techniques:
-     - Temporal-aware modal router: personalized modality distribution replacing globally shared fusion weights
-     - Diffusion-based graph reconstructor with Feature-wise Linear Modulation (FiLM) + dual-stream long/short-term denoising heads
-     - Suppresses outdated modality edges before they enter the propagation graph
-     - 10-seed paired tests; up to 9.8% Recall/Precision/NDCG gains
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 3/10** — [anonymous.4open.science/r/TimeRoute](https://anonymous.4open.science/r/TimeRoute) — anonymous repo for double-blind review; not a permanent public release
-     - **Novelty: 6/10** — Time-aware modality routing + diffusion for multimodal rec is well-motivated
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — TikTok + Amazon datasets; 10-seed paired tests; preprint
-     - **Impact: 5/10** — UvA (Paul Groth); practical multimodal rec with temporal modality dynamics
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 133 papers as of August 23.
+**Count:** 137 papers as of August 25.
 
 | Score | Paper |
 | --- | --- |
@@ -878,6 +906,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Cold-Starts in Generative Recommendation: A Reproducibility Study (ColdGenRec) |
 | 8/10 | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) |
 | 8/10 | Masked Diffusion for Generative Recommendation (MaskGR) |
+| 8/10 | Hierarchical Exponential-Gaussian Mixtures for Watch-Time Distribution Prediction (HEGM) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
 | 7/10 | RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN) |
 | 7/10 | Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner) |
@@ -921,6 +950,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Teach Multimodal Recommendation Model to See via Personalized Visual Extraction and Adaptive Learning (REVEAL) |
 | 7/10 | ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation |
 | 7/10 | Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking) |
+| 7/10 | Rethinking Item Tokenization in Generative Recommenders: From Fixed Atoms to Semantic Subwords (SST) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
@@ -945,11 +975,13 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 5/10 | Progressive Alignment of Recommender Foundation Model through Multi-Phase Post-Training (Progressive FM Post-Training) |
 | 5/10 | SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR) |
 | 5/10 | Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go) |
+| 5/10 | Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation (ANR-DiffRec) |
 | 4/10 | Towards Efficient Reasoning in LLM-Based Recommender Systems via Model Merging (REAM) |
 | 4/10 | Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation |
 | 4/10 | GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation |
 | 4/10 | RecRec: Recursive Refinement for Sequential Recommendation |
 | 4/10 | TRACER: Balancing Stability-Plasticity-Cognitivity Trilemma for LLM Enhanced Continual Recommendation (TRACER) |
+| 4/10 | Cascading Relevance-driven Recommendation Network for CTR Prediction in Trigger-Introduced Recommendation (CRRN) |
 | 3/10 | Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS) |
 | 3/10 | PVTG / Personalized Video Thumbnail Generation |
 | 3/10 | STORM: Stepwise Token Optimization with Reward-Guided Beam Search |

@@ -72,6 +72,7 @@
 - Cheaper is Better: A Discount-Aware Network for Conversion Rate Prediction in E-commerce Recommendation System (DANet)
 - STAR: Structured Tokenization and Target-Aware Interest Representation for PCVR Prediction (STAR)
 - UniDot: A Unified Network for Sequence Modeling and Feature Interaction in Large-scale Recommendation (UniDot)
+- Cascading Relevance-driven Recommendation Network for CTR Prediction in Trigger-Introduced Recommendation (CRRN)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -134,6 +135,7 @@
 - Causal-Invariant Cross-Domain Out-of-Distribution Recommendation (CICDOR)
 - HD-Rec: Hierarchical Quantization with Domain-Adaptive Sparse Routing for Generative Cross-Domain Recommendation (HD-Rec)
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
+- A Dual-Expert Strategy Integrating LLMs to Mitigate Negative Transfer in Cross-Domain Sequential Recommendation (DuELRec)
 
 ### Data Generation / Synthetic Data
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
@@ -155,6 +157,7 @@
 - LIME-Rec: Auditing Semantic Gains in Sequential Recommendation (LIME-Rec)
 - SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation (SIDScope)
 - Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance)
+- The Disconnect Between Better Descriptive Reasoning Trace Quality and Recommendation Effectiveness
 
 
 ### Diffusion
@@ -174,6 +177,7 @@
 - Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM)
 - Diffusion Language Model for Recommendation (DLMRec)
 - TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute)
+- Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation (ANR-DiffRec)
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -673,6 +677,7 @@
 - Decoupled Temporal Encoding for Generative Recommendation (DTE)
 - SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
 - PriCoRec: A Privacy-Aware Cloud-Device Collaborative Framework for Ad Recommendation under Feature Constraints (PriCoRec)
+- Hierarchical Exponential-Gaussian Mixtures for Watch-Time Distribution Prediction (HEGM)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -937,6 +942,7 @@
 - Dynamic Spectral Denoising with Global-Context Attention for Multi-Behavior Recommendation (SpectraMB)
 - GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation
 - PHKT: Personalized Dynamic Hypergraph-enhanced KAN-Transformer for Multi-behavior Sequential Recommendation (PHKT)
+- Beyond Observed Auxiliary Relations: Environment-Conditioned Modeling for Multi-Behavior Recommendation (BOAR)
 
 
 ### Multimodal
@@ -1230,6 +1236,7 @@
 - FSGR: Mitigating Token Frequency Bias for Fair SID-Based Generative Recommendation (FSGR)
 - Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
 - EchoRec: Multi-Item Prediction-Empowered Generative Recommendation via Cycle-Consistent Preference Alignment (EchoRec)
+- Rethinking Item Tokenization in Generative Recommenders: From Fixed Atoms to Semantic Subwords (SST)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
