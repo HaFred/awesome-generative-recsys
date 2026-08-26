@@ -73,6 +73,7 @@
 - STAR: Structured Tokenization and Target-Aware Interest Representation for PCVR Prediction (STAR)
 - UniDot: A Unified Network for Sequence Modeling and Feature Interaction in Large-scale Recommendation (UniDot)
 - Cascading Relevance-driven Recommendation Network for CTR Prediction in Trigger-Introduced Recommendation (CRRN)
+- Native Multimodal Representation Learning for Click-Through Rate Prediction in E-Commerce Scenarios
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -158,6 +159,7 @@
 - SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation (SIDScope)
 - Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance)
 - The Disconnect Between Better Descriptive Reasoning Trace Quality and Recommendation Effectiveness
+- Auditing Return Conditioning as a Control Knob: An Offline Diagnostic for Decision Transformer Recommendation
 
 
 ### Diffusion
@@ -678,6 +680,8 @@
 - SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
 - PriCoRec: A Privacy-Aware Cloud-Device Collaborative Framework for Ad Recommendation under Feature Constraints (PriCoRec)
 - Hierarchical Exponential-Gaussian Mixtures for Watch-Time Distribution Prediction (HEGM)
+- TAGR: Temporally Adaptive Generative Recommendation for Industrial Live-Streaming Advertising (TAGR)
+- RecGPT-Mobile-V2 Technical Report
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -889,6 +893,7 @@
 - Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation (GALLM)
 - TRACER: Balancing Stability-Plasticity-Cognitivity Trilemma for LLM Enhanced Continual Recommendation (TRACER)
 - Ask to Be Sure: Informative Interactions for Confident Multi-Turn LLM Recommendation (Ask to Be Sure)
+- Rethinking Semantic Alignment in LLM-Enhanced Collaborative Filtering: A Spectral Decoupling Approach (UniSpecRec)
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1237,6 +1242,8 @@
 - Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
 - EchoRec: Multi-Item Prediction-Empowered Generative Recommendation via Cycle-Consistent Preference Alignment (EchoRec)
 - Rethinking Item Tokenization in Generative Recommenders: From Fixed Atoms to Semantic Subwords (SST)
+- PRQ-KMeans: Projection Residual Quantization for Semantic ID Tokenization (PRQ-KMeans)
+- Tlow: Flow-based Item Tokenizer for Recommendation (Tlow)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
