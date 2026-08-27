@@ -74,6 +74,7 @@
 - UniDot: A Unified Network for Sequence Modeling and Feature Interaction in Large-scale Recommendation (UniDot)
 - Cascading Relevance-driven Recommendation Network for CTR Prediction in Trigger-Introduced Recommendation (CRRN)
 - Native Multimodal Representation Learning for Click-Through Rate Prediction in E-Commerce Scenarios
+- DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search (DCEO)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -93,6 +94,7 @@
 - ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation (ItemRAG)
 - PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest (PinEqualizer)
 - VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation (VaLiDRec)
+- MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation (MOTIF)
 
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
@@ -214,6 +216,7 @@
 - AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation (AgentSelect)
 - Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking)
 - Overview of the TREC 2025 Product Search and Recommendation Track
+- SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking (SWIM)
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -503,6 +506,7 @@
 - Improving Item Discoverability in e-Commerce Search via Related Intent Generation
 - Hypothesis-Driven Shelf Generation for Personalised Recommendation
 - ICICLE: Expanding Retrieval with In-Context Documents (ICICLE)
+- SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking (SWIM)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -682,6 +686,9 @@
 - Hierarchical Exponential-Gaussian Mixtures for Watch-Time Distribution Prediction (HEGM)
 - TAGR: Temporally Adaptive Generative Recommendation for Industrial Live-Streaming Advertising (TAGR)
 - RecGPT-Mobile-V2 Technical Report
+- An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
+- TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation (TransRetrieval)
+- DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search (DCEO)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -723,6 +730,7 @@
 - Improving Item Discoverability in e-Commerce Search via Related Intent Generation
 - Hypothesis-Driven Shelf Generation for Personalised Recommendation
 - GOD: Enhancing Generalization via Deep Grafting for Sequential Recommendation (GOD)
+- D3ER: Supporting Multi-Modal Recommendation via Disentangle and Distillation-based Dynamic Ensemble (D3ER)
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 
@@ -894,6 +902,8 @@
 - TRACER: Balancing Stability-Plasticity-Cognitivity Trilemma for LLM Enhanced Continual Recommendation (TRACER)
 - Ask to Be Sure: Informative Interactions for Confident Multi-Turn LLM Recommendation (Ask to Be Sure)
 - Rethinking Semantic Alignment in LLM-Enhanced Collaborative Filtering: A Spectral Decoupling Approach (UniSpecRec)
+- An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
+- MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation (MOTIF)
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -941,6 +951,8 @@
 - UniRec: Bridging the Expressive Gap via Chain-of-Attribute
 - UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence
 - NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems (NOVA)
+- An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
+- Hamiltonian Spectral-Temporal Dissipative Dynamics for Sequential Recommendation (HSR)
 ### Multi-behavior Recommendation
 
 - BITRec
@@ -1015,6 +1027,8 @@
 - Generative Universal Multimodal Retrieval with Dual-role Identifiers (DrIG)
 - TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute)
 - Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
+- D3ER: Supporting Multi-Modal Recommendation via Disentangle and Distillation-based Dynamic Ensemble (D3ER)
+- MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation (MOTIF)
 
 ### Optimizer
 - MuonRec
@@ -1048,6 +1062,7 @@
 - UniPinRec: Unifying Generative Retrieval and Ranking at Pinterest Scale
 - Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd)
 - DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation (DrEM)
+- SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking (SWIM)
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS)
@@ -1136,6 +1151,7 @@
 - Scaling Dense Retrieval with LLM-Annotated Training Data: Structured Mining and Progressive Curriculum for E-Commerce Sponsored Search
 - STORM: Stepwise Token Optimization with Reward-Guided Beam Search
 - ICICLE: Expanding Retrieval with In-Context Documents (ICICLE)
+- TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation (TransRetrieval)
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -1148,6 +1164,7 @@
 - UnpairGR: Unpaired Modality-Agnostic Generative Recommendation (UnpairGR)
 - Understanding Generative Recommendation with Semantic IDs from a Model-scaling View (SID Scaling)
 - UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
+- TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation (TransRetrieval)
 
 
 
@@ -1244,6 +1261,7 @@
 - Rethinking Item Tokenization in Generative Recommenders: From Fixed Atoms to Semantic Subwords (SST)
 - PRQ-KMeans: Projection Residual Quantization for Semantic ID Tokenization (PRQ-KMeans)
 - Tlow: Flow-based Item Tokenizer for Recommendation (Tlow)
+- An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1303,6 +1321,7 @@
 - GOD: Enhancing Generalization via Deep Grafting for Sequential Recommendation (GOD)
 - SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
 - Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance)
+- Hamiltonian Spectral-Temporal Dissipative Dynamics for Sequential Recommendation (HSR)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey

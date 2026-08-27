@@ -76,6 +76,123 @@ mindmap
 ---
 ## By Date
 
+### Papers August 27
+
+*Thursday, August 27, 2026. Arxiv Wednesday (Aug 26) batch — cs.IR / cs.LG. 7 papers found (0 opensource). Core generative-rec: AMBER (Meta event tokenization for LLM rec), SWIM (generative re-ranking list evaluator), TransRetrieval (Alibaba/Renmin retrieval scaling); broader: D3ER (multimodal rec), HSR (Hamiltonian sequential rec), MOTIF (cold-start multimodal), DCEO (e-commerce search causal optimization).*
+
+1. **An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)**
+   * Affiliation: Meta AI
+   * Link: [arxiv.org/abs/2608.25546](https://arxiv.org/abs/2608.25546)
+   * Venue: arXiv preprint, August 2026 (cs.IR)
+   * TL;DR: Introduces "event tokenization" — a new LLM input modality that compresses each interaction's full temporal snapshot (user/item/context/outcome) into a single bottlenecked Event Token, scaling a new dimension "snapshot resolution" to push the compute-quality Pareto frontier of industrial LLM recommendation.
+   * Key techniques:
+     - Event-centric paradigm: each sequence position encodes a full interaction snapshot, not just text/SID/categorical features
+     - New scaling dimension "snapshot resolution" (information encoded per event)
+     - AMBER (Autoregressive Modeling via Bottlenecked Event Representation): learned end-to-end, Event Tokens pre-computed & cached for serving
+     - Positive transfer: a single unified tokenizer beats dedicated per-entity tokenizers; Event Tokens transfer to non-LLM rankers as serving-time features
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 8/10** — New "snapshot resolution" scaling dimension + Event Token input modality reframes how LLM recs encode each interaction
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 7/10** — Industrial ranking + retrieval benchmarks; cross-architecture transfer evidence
+     - **Impact: 8/10** — Meta; reorients LLM-rec scaling around event-level information density
+
+2. **SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking**
+   * Affiliation: University of Science and Technology of China (USTC) / Kuaishou Technology
+   * Link: [arxiv.org/abs/2608.25104](https://arxiv.org/abs/2608.25104)
+   * Venue: CIKM 2026 (ACM DOI 10.1145/3799682.3840732)
+   * TL;DR: A list-level evaluator for the Generator-Evaluator re-ranking framework that models user behavior as a finite-horizon session-level survival process, capturing contextual dependency, user continuation, and diminishing returns that point-wise list scoring ignores.
+   * Key techniques:
+     - Prefix session-level survival process for the list's contribution to the session objective
+     - Factorization into a recursive survival distribution + reached-position conditional rewards
+     - Causally-masked Transformer for parallel continuation/utility estimation under strict latency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Code link (github.com/yuanhao53/SWIM) currently 404 / not yet public
+     - **Novelty: 7/10** — Session-level survival framing for list evaluation is a fresh angle vs point-wise aggregation
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 6/10** — Extensive listwise-reranking experiments with significant engagement gains
+     - **Impact: 7/10** — CIKM 2026; USTC/Kuaishou; targets the industrial generative re-ranking stage
+
+3. **TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation**
+   * Affiliation: Renmin University of China / Alibaba (Taobao & Tmall Group)
+   * Link: [arxiv.org/abs/2608.25528](https://arxiv.org/abs/2608.25528)
+   * Venue: CIKM 2026
+   * TL;DR: Transformer-based retrieval that scales with compute and cross-domain data by fixing token-norm divergence (weighted average aggregation), cutting per-candidate FLOPs by 85% (target token compression), and unifying domains with position-style domain embeddings.
+   * Key techniques:
+     - Weighted average aggregation restores the homogeneous-token assumption Transformers rely on
+     - Target token compression cuts per-candidate FLOPs by 85% while preserving cross-attention expressiveness
+     - Position-style domain embeddings turn cross-domain data into a scaling asset
+     - Log-linear scaling (+19.3/+22.2 pt Recall@2000); online +2.53% revenue at same latency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Solid engineering fixes (norm-homogeneity, token compression) but incremental over retrieval scaling work
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 7/10** — 40B-interaction industrial dataset + KuaiRand + online A/B
+     - **Impact: 7/10** — CIKM 2026; Alibaba, deployed
+
+4. **D3ER: Supporting Multi-Modal Recommendation via Disentangle and Distillation-based Dynamic Ensemble**
+   * Affiliation: Institute of Software, Chinese Academy of Sciences (ISCAS) / UCAS
+   * Link: [arxiv.org/abs/2608.25737](https://arxiv.org/abs/2608.25737)
+   * Venue: ACMMM 2026
+   * TL;DR: Introduces gradient boosting into multimodal recommendation to alternately optimize modal-homogeneity (HOI) and modal-heterogeneity (HEI) discriminative information, with knowledge distillation and global-correction regularization to curb storage cost and local optima.
+   * Key techniques:
+     - First gradient-boosting formulation for multimodal recommendation (alternate HOI/HEI learning)
+     - Knowledge distillation + global correction regularization to mitigate gradient-boosting cost/local-optima
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Gradient boosting for MR is a fresh angle, though the HOI/HEI disentanglement idea is familiar
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 5/10** — Prevalent real-world datasets only
+     - **Impact: 5/10** — ACMMM 2026; multimodal rec is a niche but active area
+
+5. **Hamiltonian Spectral-Temporal Dissipative Dynamics for Sequential Recommendation (HSR)**
+   * Affiliation: Hong Kong University of Science and Technology (HKUST)
+   * Link: [arxiv.org/abs/2608.25755](https://arxiv.org/abs/2608.25755)
+   * Venue: arXiv preprint, August 2026 (cs.IR; related ACM DOI 10.1145/3773078.3831793)
+   * TL;DR: Recasts preference evolution as a second-order dissipative Hamiltonian system in latent phase space (position = stable preference, momentum = short-term tendency), yielding a closed-form frequency-domain solution that captures inertia, periodicity, and abrupt shifts beyond first-order models.
+   * Key techniques:
+     - Dissipative Hamiltonian system over latent phase space (position + momentum)
+     - Linear time-invariant structure → closed-form frequency-domain solution
+     - Learnable dissipation for interest decay; local impulse refinement for sparse-log shocks
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Second-order Hamiltonian dynamics is a genuinely fresh formulation for sequential rec
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 6/10** — 3 benchmarks, beats Transformer- and SSM-based recommenders
+     - **Impact: 5/10** — HKUST; sequential rec, novel but niche
+
+6. **MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation**
+   * Affiliation: Taiyuan University of Technology / Northeastern University (China)
+   * Link: [arxiv.org/abs/2608.25381](https://arxiv.org/abs/2608.25381)
+   * Venue: WISE 2026
+   * TL;DR: Uses offline LLM motivation reasoning to reconstruct transferable item-item topology for cold-start multimodal recommendation, without injecting generated text into prediction.
+   * Key techniques:
+     - Semantic Motivation Reasoning (offline LLM) to infer intent semantics
+     - Knowledge-enhanced Graph Reconstruction + Weighted Graph Contrastive Learning
+     - Semantic-Structural Alignment; up to +6.07% relative over the strongest recent baseline
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — LLM motivation semantics for topology inference is a reasonable, incremental idea
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 5/10** — 3 multimodal benchmarks
+     - **Impact: 5/10** — WISE 2026; cold-start multimodal rec
+
+7. **DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search**
+   * Affiliation: Alibaba (Taobao & Tmall Group)
+   * Link: [arxiv.org/abs/2608.25635](https://arxiv.org/abs/2608.25635)
+   * Venue: arXiv preprint, August 2026 (cs.LG, cross-list cs.IR)
+   * TL;DR: An actor-critic framework that directly optimizes the relative causal effect between item-level proxy scores and the user-level long-term objective (n-day GMV/purchases), replacing hand-crafted multi-objective fusion weights.
+   * Key techniques:
+     - Relative causal effect as the alignment metric between proxy and ultimate objective
+     - Actor generates context-dependent fusion weights; critic estimates the ultimate objective
+     - Deployed; +0.36% GMV in a 41-day online A/B test
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — Direct causal-effect optimization of fusion weights is clean, but actor-critic ranking optimization is established
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 7/10** — Offline + 41-day online A/B
+     - **Impact: 7/10** — Alibaba; deployed in industrial e-commerce search
+
 ### Papers August 26
 
 *Wednesday, August 26, 2026. Arxiv Tuesday (Aug 25) batch — cs.IR / cs.LG. 7 papers found (1 opensource). Core generative-rec: PRQ-KMeans (SID tokenization), Tlow (flow tokenizer, opensource), TAGR (live-stream genrec), UniSpecRec (LLM CF); broader: RecGPT-Mobile-V2 (on-device LLM), Native Multimodal CTR, Auditing Return Conditioning (Decision-Transformer diagnostic).*
@@ -1266,6 +1383,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Gwhere / Generative Next-POI with EAKTO RL -- Amap / Alibaba
 - TAGR / Temporally Adaptive Generative Recommendation (IOPO) -- Kuaishou / Tsinghua
 - RecGPT-Mobile-V2 / On-Device Query Prediction with Reasoning-Cost RL -- Alibaba (Taobao)
+- DCEO / Direct Causal Effect Optimization (actor-critic) for Long-Term User Value -- Alibaba (Taobao & Tmall)
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
