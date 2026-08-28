@@ -44,6 +44,7 @@ mindmap
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
+        Self-Refreshing CRS -- Know-Center
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -63,7 +64,6 @@ mindmap
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
         SST -- USTC / Huawei
-        Tlow -- Tsinghua U / Tencent
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -75,6 +75,106 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 28
+
+*Friday, August 28, 2026. Arxiv Thursday (Aug 27) batch — cs.IR / cs.CV. 6 papers found (1 opensource). Core generative-rec: PailitaoGR (Alibaba generative image retrieval), PrismRec (flow-matching micro-video rec), CoVeMem (Xiaohongshu agentic vector memory); broader: MaskRec (unified CVR backbone), MOSAIC (meta-review UGC rec), Conversational Recommendation over Live E-Commerce (RecSys 2026 demo, opensource).*
+
+1. **PailitaoGR: Latent Think-with-Images for Generative Image Retrieval**
+   * Affiliation: Alibaba (Taobao & Tmall Group) — *(Xiaomeng Fan, Yueran Liu, Shengyu Zhou, Chenghan Fu, Wanxian Guan, Feng Li, Chuan Yu, Jian Xu, Bo Zheng)*
+   * Link: [arxiv.org/abs/2608.26658](https://arxiv.org/abs/2608.26658)
+   * Venue: arXiv preprint, August 2026 (cs.CV / cs.AI / cs.IR)
+   * TL;DR: Extends SID-based generative retrieval to image search by teaching the model to "think with images" — internalizing target-focused perception ("Zoom without Cropping") and selective auxiliary-evidence use ("Read without OCR") so it can pinpoint the search target amid distracting query-image content.
+   * Key techniques:
+     - Target-focused perception: a target Enhancer + on-policy distillation + attention-guidance loss sharpen the search-target visual tokens
+     - Selective auxiliary-evidence utilization: an auxiliary enhancer + in-capacity incremental contrastive distillation exploit useful side evidence
+     - Training/validation sets sampled from real online image-search logs; +13.8% avg over baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — "Think-with-images" reframes generative image retrieval as target-vs-auxiliary visual attention, a fresh angle beyond text/categorical SID generation
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 7/10** — Real online image-search logs; industrial-scale evaluation
+     - **Impact: 7/10** — Alibaba (Taobao & Tmall); pushes generative retrieval into the image-search domain
+
+2. **Preference Flow Matching with Spectral Factorization for Micro-video Recommendation (PrismRec)**
+   * Affiliation: National University of Defense Technology / National University of Singapore / Zhengzhou University — *(Xinxin Dong, Haokai Ma, Fei Hu, YuZe Zheng, Bin Wu, Yonghui Yang, Xiaodong Wang)*
+   * Link: [arxiv.org/abs/2608.26579](https://arxiv.org/abs/2608.26579)
+   * Venue: arXiv preprint, August 2026 (cs.IR)
+   * TL;DR: A flow-matching recommender that factorizes frame-level representations into static-semantic and dynamic factors in the temporal frequency domain, then injects user-calibrated context as a structured condition so video content becomes an intrinsic driver of preference formation instead of auxiliary side information.
+   * Key techniques:
+     - Spectral Semantic Factorization (SSF): prior-guided learnable frequency mask separates static vs. dynamic factors
+     - Context-Calibrated Preference Matching (CPM): per-user sensitivity weighting steers the flow-matching trajectory
+     - +22.65% over SOTA with the lowest inference cost / peak memory on 4 datasets across 2 platforms
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Frequency-domain factorization fused with flow matching is a clean, underexplored combination for micro-video rec
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 6/10** — 4 datasets, 2 platforms; strong gains and efficiency evidence
+     - **Impact: 6/10** — NUDT/NUS/Zhengzhou; advances generative (flow-matching) micro-video recommendation
+
+3. **When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems (CoVeMem)**
+   * Affiliation: Xiaohongshu — *(Hanchong Chen, Xing Tang, Lingjie Li, Xiongfeng Shan, Xiuqiang He)*
+   * Link: [arxiv.org/abs/2608.26895](https://arxiv.org/abs/2608.26895)
+   * Venue: arXiv preprint, August 2026 (cs.IR / cs.AI)
+   * TL;DR: Replaces the text-based memory of agentic recommenders with a collaborative vector memory — frozen LightGCN user/item states retrieved into the LLM context as soft tokens — so the full interaction history becomes trainable, matching text-memory agents with zero additional LLM calls.
+   * Key techniques:
+     - Frozen LightGCN user/item states form the memory bank; the candidate set retrieves the most relevant historical states
+     - Contrastive alignment to item-semantic anchors + listwise co-training with masked candidates + pointwise yes/no readout
+     - Matches/exceeds the strongest text-memory agent on 19/20 metric cells with zero extra LLM calls for memory
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Vectorizing the collaborative memory core (vs. text narrative) so gradients reach the full history is a fresh agentic-rec idea
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 6/10** — 4 instruction-grounded benchmarks; near-uniform gains with efficiency
+     - **Impact: 7/10** — Xiaohongshu; targets the agentic-recommender memory bottleneck
+
+4. **Topology-Masked Unified Backbone for Joint Feature Interaction and Multi-Domain Sequence Modeling (MaskRec)**
+   * Affiliation: Shandong University — *(Zhihao Zhu, Dezheng Han, Jikang Xia, Shuaishuai Guo)*
+   * Link: [arxiv.org/abs/2608.27005](https://arxiv.org/abs/2608.27005)
+   * Venue: TAAC-KDD Cup 2026 Workshop (Unified Block Innovation Award)
+   * TL;DR: A unified token-interaction backbone for industrial CVR prediction that models heterogeneous features and multi-domain behavior sequences within one topology-constrained attention space via a structured attention mask (TopoMask) plus learnable global/domain memory tokens.
+   * Key techniques:
+     - Unified token space with learnable global memory + domain-level memory tokens as aggregation nodes
+     - TopoMask structured attention mask selectively enables/blocks connections by information source
+     - Dual-path interactive query generation injects candidate-conditioned user-item signals
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — Unified token + topology-mask interaction is a clean engineering advance, incremental over unified ranking backbones
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 5/10** — Single Tencent Advertising competition dataset; stable gains over baseline
+     - **Impact: 4/10** — TAAC-KDD Cup 2026 workshop; industrial CVR prediction
+
+5. **Beyond a Single Story: Meta-Reviewing Sparse and Incomplete User-generated Contents for Recommendation (MOSAIC)**
+   * Affiliation: Nanyang Technological University — *(Hongren Wang, Tianjun Wei, Yingpeng Du, Jie Zhang, Yin-Leng Theng)*
+   * Link: [arxiv.org/abs/2608.26728](https://arxiv.org/abs/2608.26728)
+   * Venue: arXiv preprint, August 2026 (cs.IR)
+   * TL;DR: Borrows "meta-review" from peer review to synthesize each user's sparse/incomplete reviews into an aggregated meta-review of attribute-sentiment evidence from neighbor users, jointly improving rating prediction and explanation quality.
+   * Key techniques:
+     - Meta-review construction: aggregate attribute-sentiment evidence from neighbor users' reviews
+     - MMoE jointly optimizes rating + meta-review attribute-sentiment prediction; attention personalizes signals
+     - 4 real-world datasets; consistent gains especially for low-interaction users
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — Meta-review analogy for UGC aggregation is intuitive; MMoE composition is standard
+     - **Fairness: 3/10** — Mitigates data sparsity, delivering consistent gains for users with limited interaction history
+     - **Robustness: 5/10** — 4 datasets; rating + explanation quality
+     - **Impact: 5/10** — NTU; practical UGC/explainable recommendation under sparsity
+
+6. **Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval**
+   * Affiliation: Know-Center Research / Graz University of Technology — *(Ante Kapetanovic, Tomislav Duricic, Dionizije Fa, Andro Mercep, Emanuel Lacic)*
+   * Link: [arxiv.org/abs/2608.27006](https://arxiv.org/abs/2608.27006)
+   * Venue: ACM RecSys 2026 (Demo)
+   * TL;DR: A multi-turn conversational shopping assistant with a self-refreshing retriever that delta-syncs live merchant catalogues via per-item hashes, using the LLM only for intent classification and preference elicitation — demoed as a WhatsApp assistant.
+   * Key techniques:
+     - Self-refreshing retriever: per-item hash → classify New/Semantic/Metadata-only/Deleted/Unchanged; process only deltas
+     - Controller-based dialogue layer; retrieval, reranking, and diversity selection as dedicated functions
+     - Live chatbot + documentation + walkthrough open-sourced (Apache-2.0)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5/10** — [github.com/infobip/infobip-agentic-crs](https://github.com/infobip/infobip-agentic-crs) — Apache-2.0 demo companion: runnable dependency-free synthetic sync demo + excellent documented README, but the full private engine/commercial catalogue remain closed
+     - **Novelty: 5/10** — Self-refreshing (delta) catalogue sync for CRS is practical and under-addressed
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 4/10** — Demo paper; no large-scale offline/online eval
+     - **Impact: 5/10** — RecSys 2026 demo; Infobip; addresses the static-catalogue assumption in e-commerce CRS
 
 ### Papers August 27
 
@@ -893,111 +993,11 @@ mindmap
      - **Robustness: 5/10** — Yelp dataset with ablation study; preprint (no peer review yet)
      - **Impact: 5/10** — Ravensburg-Weingarten (Wolfram Höpken); practical LLM-augmented POI cold-start mitigation
 
-### Papers August 18
-
-*Tuesday, August 18, 2026. Arxiv active. cs.IR Aug 17–18 listings returned 6 recommendation papers spanning generative recommendation, LLM-based continual/multi-turn recommendation, and sequential recommendation. Total: 6 papers.*
-
-1. **EchoRec: Multi-Item Prediction-Empowered Generative Recommendation via Cycle-Consistent Preference Alignment**
-   * Affiliation: National University of Singapore / Tencent / BUPT / Shandong University — *(Haokai Ma, Aoqi Hu, Yonghui Yang, Teng Tu, Tat-Seng Chua — NUS; Ruobing Xie — Tencent; Yueao Xing — BUPT; Lei Meng — Shandong University)*
-   * Link: [arxiv.org/abs/2608.14011](https://arxiv.org/abs/2608.14011)
-   * Venue: arXiv preprint (under review)
-   * TL;DR: Unlocks Multi-Token Prediction's dense-supervision potential for generative recommendation — future behaviors carry a semantic echo of the current one that decays across horizons; EchoRec chains horizon-aware auxiliary branches and cycle-consistently aligns the decoding representation with a holistic preference.
-   * Key techniques:
-     - Horizon-aware Preference Generation (HPG): sequentially chains lightweight auxiliary branches on the base recommender, each conditioning on its predecessor to respect preference evolution
-     - Verifiable Holistic-Preference Alignment (VHA): consolidates multi-horizon signals into a holistic preference echoed back through cycle-consistent projectors to suppress spurious alignment (theoretically excludes rank-collapse under invertible transport)
-     - Disposable scaffolding discarded at inference → negligible online serving overhead; natural multi-item generation ability
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — code/datasets "available upon acceptance"; not yet public
-     - **Novelty: 7/10** — First to unlock MTP's dense-supervision (vs. efficiency) potential for genrec; cycle-consistent holistic alignment is clean and theoretically grounded
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — 3 datasets; under review (no peer review yet); theoretical guarantee on spurious-alignment exclusion
-     - **Impact: 6/10** — NUS/Tencent (Tat-Seng Chua); advances multi-token prediction for SID-based generative recommendation
-
-2. **Decoupled Temporal Encoding for Generative Recommendation**
-   * Affiliation: Meituan — *(Pengfei Jia, Jingjian Wang, Jingmao Li, Ge Zhang, Feng Shi)*
-   * Link: [arxiv.org/abs/2608.16274](https://arxiv.org/abs/2608.16274)
-   * Venue: CIKM 2026
-   * TL;DR: Separates broad temporal dynamics from local order cues in generative recommendation via a personalized macro-temporal module plus a time-gated micro-sequential module, motivated by multi-level temporal regularities (recency, meal-time peaks, weekday-weekend shifts, promotion bursts) in food delivery.
-   * Key techniques:
-     - Personalized macro-temporal module: injects compact temporal primitives into item embeddings
-     - Time-gated micro-sequential module: introduces relative-order bias only when interactions are temporally dense
-     - Parameter-efficient and deployment-friendly; easy integration into existing systems
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — Decoupling macro temporal dynamics from micro order cues is a clean, well-motivated fix vs. unified temporal modeling
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; real-world food delivery / instant retail system
-     - **Impact: 6/10** — Meituan; practical temporal encoding for industrial generative recommendation
-
-3. **TRACER: Balancing Stability-Plasticity-Cognitivity Trilemma for LLM Enhanced Continual Recommendation**
-   * Affiliation: POSTECH — *(WooJoo Kim, HyunSik Yoo, JunYoung Kim, JaeHyung Lim, SeongKu Kang, HwanJo Yu)*
-   * Link: [arxiv.org/abs/2608.16075](https://arxiv.org/abs/2608.16075)
-   * Venue: CIKM 2026
-   * TL;DR: Identifies the Stability-Plasticity-Cognitivity (SPC) trilemma in LLM-enhanced continual recommendation and harmonizes it with three specialized modules so LLM semantic priors support history retention and interest adaptation without disrupting continual learning.
-   * Key techniques:
-     - SPC Trilemma diagnosis: generalized LLM semantic priors (Cognitivity) conflict with retaining personalized history (Stability) and adapting to interest shifts (Plasticity)
-     - Three specialized modules targeting stability, plasticity, and cognitivity, preventing any single lemma from dominating
-     - Up to 14.38% improvement over SOTA across 5 real-world datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 4/10** — [github.com/woo-joo/TRACER_CIKM26](https://github.com/woo-joo/TRACER_CIKM26) — modular (base_rec/tracer/cl_frames/llm_enhancers), train.py + metrics, Zenodo pre-computed assets; no license, 1⭐, minimal README (no results/citation)
-     - **Novelty: 6/10** — SPC trilemma is a fresh framing of the LLM-continual-rec conflict; three-way harmonization is well-designed
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; 5 datasets; consistent gains
-     - **Impact: 5/10** — POSTECH; practical LLM-enhanced continual recommendation
-
-4. **GOD: Enhancing Generalization via Deep Grafting for Sequential Recommendation**
-   * Affiliation: POSTECH — *(WooJoo Kim, JunYoung Kim, JaeHyung Lim, HwanJo Yu)*
-   * Link: [arxiv.org/abs/2608.16073](https://arxiv.org/abs/2608.16073)
-   * Venue: CIKM 2026
-   * TL;DR: Component-level distillation via grafting — builds hybrid teacher-student source models to isolate whether weak generalization stems from unreliable embeddings, overfitted encoding, or co-adaptation to sparse histories.
-   * Key techniques:
-     - Graft-Oriented Distillation (GOD): replaces selected frozen-teacher components with trainable student counterparts to build hybrid source models
-     - Component-level feedback: evaluates student embeddings with the teacher encoder, and the student encoder with teacher embeddings
-     - Student-only at inference → no additional serving cost; up to 13.92% over SOTA on 3 datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 5/10** — Component-level grafting distillation is practical; conceptually incremental vs. representation/output matching
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; 3 datasets; consistent gains
-     - **Impact: 5/10** — POSTECH; practical distillation fix for sequential recommendation
-
-5. **Ask to Be Sure: Informative Interactions for Confident Multi-Turn LLM Recommendation**
-   * Affiliation: Amazon — *(Cedar Site Bai, Duanshun Li, Zhenyu Liao, Sheikh Sarwar, Huiyuan Chen, Yuan Chen, Changhe Yuan, Haiyang Zhang, Qilin Qi)*
-   * Link: [arxiv.org/abs/2608.15949](https://arxiv.org/abs/2608.15949)
-   * Venue: CIKM 2026
-   * TL;DR: Quantifies each multi-turn interaction by the reduction in the assistant's uncertainty (entropy over recommendations) and uses this entropy-reduction reward — without ground-truth recommendations — to fine-tune the LLM for strategic interaction generation.
-   * Key techniques:
-     - Entropy-reduction reward: measures information gain per interaction via entropy over recommendations, no ground-truth needed
-     - SFT + DPO fine-tuning with the entropy-reduction reward for strategic interaction generation
-     - Improves both recommendation quality and conversational efficiency on INSPIRED + ReDial
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — Entropy-reduction (uncertainty) reward for multi-turn elicitation without ground-truth is a clean, practical idea
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; INSPIRED + ReDial; SFT + DPO
-     - **Impact: 5/10** — Amazon; practical multi-turn LLM recommendation with strategic interaction
-
-6. **SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences**
-   * Affiliation: PayPal AI — *(Tsz Fung Pang, Po Jen Chen, Nimish Ronghe, Farhad Farahani, Bo Zhang)*
-   * Link: [arxiv.org/abs/2608.15429](https://arxiv.org/abs/2608.15429)
-   * Venue: RecSys 2026 CARS Workshop
-   * TL;DR: Generative action embedding with per-field tokenization (product/interaction/surface) encodes cross-surface financial-service user actions (checkout, P2P, in-app, email, account) into a unified user representation for downstream recommendation.
-   * Key techniques:
-     - Per-field tokenization: decomposes each action event into multiple field-level tokens enabling field-level attention and per-field objectives
-     - Decoder-only transformer with round-robin per-field tokenization + K independent LM heads
-     - Event-boundary contrastive head with stop-gradient compositional targets; strongest click/conversion lift across touchpoints
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — Per-field action tokenization for cross-surface generative embedding is a fresh, well-motivated angle for fintech
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — RecSys 2026 CARS workshop; offline ablation; no online A/B
-     - **Impact: 5/10** — PayPal; multi-surface generative embedding for financial-services recommendation
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 138 papers as of August 26.
+**Count:** 139 papers as of August 28.
 
 | Score | Paper |
 | --- | --- |
@@ -1126,6 +1126,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 5/10 | SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR) |
 | 5/10 | Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go) |
 | 5/10 | Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation (ANR-DiffRec) |
+| 5/10 | Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval |
 | 4/10 | Towards Efficient Reasoning in LLM-Based Recommender Systems via Model Merging (REAM) |
 | 4/10 | Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation |
 | 4/10 | GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation |

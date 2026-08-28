@@ -32,6 +32,7 @@
 - TwiSTAR: Think Fast, Think Slow, Then Act — Generative Recommendation with Adaptive Reasoning (TwiSTAR)
 - Personalized Communication Skills for Agentic Recommender Systems (AgentCom)
 - MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation (MACS)
+- When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems (CoVeMem)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -75,6 +76,7 @@
 - Cascading Relevance-driven Recommendation Network for CTR Prediction in Trigger-Introduced Recommendation (CRRN)
 - Native Multimodal Representation Learning for Click-Through Rate Prediction in E-Commerce Scenarios
 - DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search (DCEO)
+- Topology-Masked Unified Backbone for Joint Feature Interaction and Multi-Domain Sequence Modeling (MaskRec)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -125,6 +127,7 @@
 - Intent-Driven Semantic ID Generation for Grounded Conversational News Recommendation (Tencent/ACL 2026)
 - Ask to Be Sure: Informative Interactions for Confident Multi-Turn LLM Recommendation (Ask to Be Sure)
 - MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation (MACS)
+- Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval
 
 ### Cross-Domain
 - Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
@@ -182,6 +185,7 @@
 - Diffusion Language Model for Recommendation (DLMRec)
 - TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute)
 - Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation (ANR-DiffRec)
+- Preference Flow Matching with Spectral Factorization for Micro-video Recommendation (PrismRec)
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -507,6 +511,7 @@
 - Hypothesis-Driven Shelf Generation for Personalised Recommendation
 - ICICLE: Expanding Retrieval with In-Context Documents (ICICLE)
 - SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking (SWIM)
+- PailitaoGR: Latent Think-with-Images for Generative Image Retrieval (PailitaoGR)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -908,6 +913,7 @@
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
+- When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems (CoVeMem)
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -953,6 +959,7 @@
 - NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems (NOVA)
 - An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
 - Hamiltonian Spectral-Temporal Dissipative Dynamics for Sequential Recommendation (HSR)
+- Beyond a Single Story: Meta-Reviewing Sparse and Incomplete User-generated Contents for Recommendation (MOSAIC)
 ### Multi-behavior Recommendation
 
 - BITRec
