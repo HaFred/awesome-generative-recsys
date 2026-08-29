@@ -44,7 +44,6 @@ mindmap
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
-        Self-Refreshing CRS -- Know-Center
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -57,6 +56,7 @@ mindmap
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
+        VK-GNN -- VK
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -75,6 +75,123 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 29
+
+*Saturday, August 29, 2026. Arxiv Friday (Aug 28) announcement batch — cs.IR / cs.CL / cs.GT. 7 papers found (1 opensource). Core self-evolving / generative-retrieval: Astar (Alibaba/Lazada self-evolving industrial rec via RL), ProRetrieval (Tencent program-synthesis hybrid search), Order-Consistent LLM Scorers (JKU Linz/Thomson Reuters reranker decision-stability); broader: Stageboost (eBay signal rec), Scaling GNNs for Friend Rec (VK, CIKM 2026, opensource), Token-Level Advertising LAMA (Stanford/Purdue), When Does SFT Reduce Instruction Sensitivity (SNU).*
+
+1. **Astar: Learning to Propose Evolution Directions for Self-Evolving Industrial AI Systems**
+   * Affiliation: Alibaba (Lazada) / Zhejiang University — *(Jinxin Hu, Hao Deng, Haibo Xing, Lingyu Mu, Muyu Zou, Weiqin Yang, Sirui Chen, Bohao Wang, Zhezheng Hao, Hao Zhang, Zulong Chen, Shizhun Wang, Yu Zhang, Xiaoyi Zeng, Jiawei Chen)*
+   * Link: [arxiv.org/abs/2608.27287](https://arxiv.org/abs/2608.27287)
+   * Venue: arXiv preprint, August 2026 (cs.IR)
+   * TL;DR: Trains an 8B "evolution-guiding" model (Astar) from industrial iteration histories to propose the next improvement direction of a recommender — the one stage of the iterate loop still left to human experts — and closes the loop for fully automatic self-evolution on Alibaba's Lazada advertising system.
+   * Key techniques:
+     - Pairwise sample expansion + noise filtering turn noisy historical commits into a large, clean evolutionary corpus
+     - Mid-training + SFT + RL with hierarchical hints; reward model as a fast surrogate evaluator during RL
+     - Astar-8B single-proposal success 0.6786 vs 0.3229 (human experts) / 0.3071 (GPT-5.5); 20 consecutive auto-iterations in two weeks
+     - +23.6% offline Hitrate@200; online A/B +4.86% GMV, +1.82% advertising revenue
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 8/10** — Automating the "propose direction" stage of the rec-system iterate loop (via learned RL/SFT model) is a fresh, underexplored target for self-evolving recommenders
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 7/10** — Deployed at Lazada; real-execution success rate + two-week closed-loop + online A/B
+     - **Impact: 8/10** — Alibaba (Lazada) / Zhejiang University; blueprint for AI-driven self-evolution of industrial recommenders
+
+2. **ProRetrieval: Learning to Orchestrate Hybrid Search via Executable Program Synthesis**
+   * Affiliation: Tencent — *(Chengsong You, Zhen Sun, Yunhai Hu, Junwei Zhou, Xiaoyu Cao, Binyu Li, Ziyan Zhao, Weiyao Wang, Liren Lu, Zhijie Ye, Yumo Cao, Yitao Long, Yiwei Xu, Qiyi Jiang, Xuanyi Fu, Yufan Chen, Yilun Li, Rongkang Xiong, Yiran Zou, Nan Du)*
+   * Link: [arxiv.org/abs/2608.27017](https://arxiv.org/abs/2608.27017)
+   * Venue: arXiv preprint, August 2026 (cs.IR)
+   * TL;DR: Recasts the LLM as a retrieval *orchestrator* that synthesizes an executable program in a hybrid DSL (SQL over structured fields + vector-retrieval over text/images), letting SQL provide the Boolean algebra that fuses heterogeneous candidate sets; a Qwen3-4B trained with GRPO/DAPO beats GPT-5.5 on e-commerce and email benchmarks.
+   * Key techniques:
+     - Executable hybrid-DSL program synthesis (SQL operators interleaved with vector-retrieval primitives)
+     - GRPO + DAPO training under a hierarchical four-term reward
+     - Two new benchmarks built from Amazon products and Enron email
+     - Hit@1 0.81 vs 0.69 (GPT-5.5) on e-commerce; 0.91 vs 0.86 on email; beats Claude Opus 4.7
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Code (anonymous.4open.science) + HF data announced, but anonymous review links are not publicly accessible (401); no permanent public GitHub yet
+     - **Novelty: 7/10** — Program-synthesis orchestration of heterogeneous retrieval paths (vs. fixed fusion or single-backend RL retrievers) is a clean, fresh framing
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 6/10** — Two new benchmarks + broad baselines (GPT-5.5, Claude Opus 4.7, retrieval/graph methods)
+     - **Impact: 6/10** — Tencent; advances LLM-based generative/hybrid retrieval for industrial search
+
+3. **Equal Ranking Quality, Different Decisions: Training Order-Consistent LLM Scorers**
+   * Affiliation: Johannes Kepler University Linz / Thomson Reuters Labs — *(Markus Frohmann, Mahdiyar Alavi, Elizabeth Lingg, Navid Rekabsaz)*
+   * Link: [arxiv.org/abs/2608.26762](https://arxiv.org/abs/2608.26762)
+   * Venue: arXiv preprint, August 2026 (cs.CL / cs.IR / cs.LG)
+   * TL;DR: Shows that equal reranker *ranking* quality does not imply equal downstream *decisions* — reordering the same candidate set flips retained-set/reader answers — and proposes Order-Consistency SFT (OC-SFT) to make each score independent of prompt order.
+   * Key techniques:
+     - Order-dependence analysis across rerankers, reward models, and multi-doc QA scorers (retained-set overlap only 0.66–0.84 under reordering)
+     - OC-SFT trains a candidate's score to be order-independent in the weights
+     - Decision-stability measures (threshold-retention, reader answer, preference selection) across 12 base models
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Code link (github.com/thomsonreuters/presentation-dependence) returns 404 / not yet public
+     - **Novelty: 6/10** — Reframing scorer evaluation around order-induced *decision* variance (not just nDCG) is a useful, under-appreciated angle
+     - **Fairness: 2/10** — Order-consistency is a fairness-of-evaluation property, not demographic fairness
+     - **Robustness: 7/10** — Three tasks, 12 base models, controlled ablations of prompt-time and training-time fixes
+     - **Impact: 6/10** — Thomson Reuters; practical guidance for LLM reranker/scorer selection and training
+
+4. **Stageboost: Recommending Signals Based on Counterfactual Estimation**
+   * Affiliation: eBay — *(Darpan Singhal, Matan Mandelbrod, Tal Franji, Manasa Kolla, Vipul Gaba, Yuri Brovman)*
+   * Link: [arxiv.org/abs/2608.27366](https://arxiv.org/abs/2608.27366)
+   * Venue: Consequences 2026 Workshop (accepted)
+   * TL;DR: A two-stage XGBoost model that optimally populates the eBay View-Item page with contextual "signals" via counterfactual estimation, driving +0.08% overall GMB and +0.58% Parts & Accessories GMB from higher conversion of high-average-price items.
+   * Key techniques:
+     - Two-stage XGBoost signal selection with counterfactual estimation of signal value
+     - Online experimentation measuring Gross Merchandise Bought (GMB) lift
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 4/10** — Pragmatic industrial signal-recommendation via counterfactual estimation; incremental over standard uplift-modeling practice
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 5/10** — Online A/B on a production e-commerce surface; single-platform
+     - **Impact: 5/10** — eBay; industrial signal/content recommendation
+
+5. **Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling**
+   * Affiliation: AI VK / Lomonosov Moscow State University — *(Maksim Utushkin, Andrei Ovsiannikov, Alexander D'yakonov)*
+   * Link: [arxiv.org/abs/2608.27413](https://arxiv.org/abs/2608.27413)
+   * Venue: CIKM 2026 (accepted)
+   * TL;DR: A production-scale GNN friend-recommendation system using multi-hash ID embeddings (−98% embedding table) and timestamp-sorted CSR + binary search for O(log n) temporal neighbor sampling; +16% friend additions and +11.5% unique adders in A/B on a 194M-user/28B-edge graph.
+   * Key techniques:
+     - Multi-hash ID embeddings as the primary node representation, cutting the ID table >98% while preserving ranking quality
+     - Timestamp-sorted CSR storage with binary search, reducing per-node temporal sampling from O(deg+k) to O(log(deg)+k)
+     - Distributed training + inference framework for large temporal graphs
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/makut/VK-GNN](https://github.com/makut/VK-GNN) — Apache-2.0 Python framework matching the paper; 0⭐/minimal docs, framework-focused (no full A/B harness)
+     - **Novelty: 5/10** — Solid systems/engineering combination of multi-hash + temporal sampling, incremental over known techniques but well-executed at scale
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 7/10** — CIKM 2026; offline ablations + online A/B on a 194M-user/28B-edge graph
+     - **Impact: 6/10** — VK; practical scaling recipe for industrial GNN recommendation
+
+6. **Token-Level Advertising**
+   * Affiliation: Stanford University / Purdue University — *(Hanbing Liu, Bowei Zhang, Changyuan Yu, Yinyu Ye, Qi Qi)*
+   * Link: [arxiv.org/abs/2608.27382](https://arxiv.org/abs/2608.27382)
+   * Venue: arXiv preprint, August 2026 (cs.GT / cs.LG)
+   * TL;DR: Proposes LAMA, a token-level (generation-native) advertising mechanism that embeds advertiser influence directly into the generation process via a latent advertiser-mixture auction, satisfying Markov DSIC + IR and near-optimal KL-regularized welfare.
+   * Key techniques:
+     - Latent Advertiser Mixture Auction: advertisers report local continuation values inducing advertiser-specific next-token policies; platform decodes via a latent mixture with an allocation posterior
+     - Learning-based implementation reconstructs reports online from learned local advantages and root values
+     - Proof-of-concept on commercial-search query splits: higher welfare + revenue while preserving response quality
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 7/10** — Generation-native ad auction (influence at the token level instead of predefined slots) is a genuinely novel mechanism-design direction
+     - **Fairness: 1/10** — No fairness consideration
+     - **Robustness: 5/10** — Theoretical guarantees (DSIC/IR) + proof-of-concept experiments; pre-deployment
+     - **Impact: 6/10** — Stanford/Purdue; forward-looking blueprint for advertising in generative search/recommendation surfaces
+
+7. **When Does Supervised Fine-Tuning Reduce Instruction Sensitivity?**
+   * Affiliation: Seoul National University — *(Jaekeol Choi)*
+   * Link: [arxiv.org/abs/2608.26661](https://arxiv.org/abs/2608.26661)
+   * Venue: arXiv preprint, August 2026 (cs.IR)
+   * TL;DR: Measures "instruction sensitivity" (std of performance across paraphrased instructions) before/after SFT, finding SFT reduces it 54–71% at Qwen3-1.7B/4B but not at 8B, with the effect varying across model families on MS MARCO and ESCI-English.
+   * Key techniques:
+     - Controlled scale analysis across Qwen3 1.7B/4B/8B on MS MARCO; cross-family checks (Mistral-7B, Gemma-2-9B)
+     - Instruction sensitivity defined as std of task performance across paraphrased instructions
+     - Query-level bootstrap for statistically reliable paired contrasts
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — Systematic scale/family analysis of SFT's effect on instruction sensitivity is a useful characterization, conceptually incremental
+     - **Fairness: 2/10** — Robustness-to-instruction is a fairness-adjacent property; not demographic fairness
+     - **Robustness: 6/10** — Multi-scale, multi-family, bootstrap-significance analysis on two IR datasets
+     - **Impact: 5/10** — Seoul National University; informs SFT practice for LLM retrievers/recommenders
 
 ### Papers August 28
 
@@ -904,100 +1021,12 @@ mindmap
      - **Robustness: 7/10** — Public + industrial datasets; online A/B (hundreds of millions DAU); deployed to primary traffic
      - **Impact: 7/10** — Xiaohongshu/Fudan; production-deployed diffusion+LLM user behavior modeling
 
-### Papers August 19
-
-*Wednesday, August 19, 2026. Arxiv active. cs.IR Aug 18–19 listings returned 5 recommendation papers spanning end-to-end generative slate recommendation, compact-LLM efficiency, unified sequence+feature-interaction modeling, staleness filtering, and LLM-augmented POI recommendation. Total: 5 papers.*
-
-1. **Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs (OGR)**
-   * Affiliation: Kuaishou Technology — *(Yang Hu, Jiayi Guo, Jingui Ma, Ning Li, Jiangling Qin, Yanming Li, Yang Deng, Xiaoshuang Chen, Kaiqiao Zhan)*
-   * Link: [arxiv.org/abs/2608.17613](https://arxiv.org/abs/2608.17613)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: First end-to-end generative slate recommendation that directly generates ordered slates; TUSID fuses item-specific semantic + local collaborative signals into recommendation-aware hierarchical SIDs, list-wise preference planning + pipelined position-wise SID decoding models inter-item dependencies, and reward-guided conservative policy optimization (SPA) aligns slates with preferences; +48.2% NDCG@5 offline, +1.120% Effective Views online at Kuaishou.
-   * Key techniques:
-     - TUSID: adaptively fuses item-specific semantic and local collaborative information into hierarchical SIDs for recommendation-aware tokenization
-     - List-wise preference planning + pipelined position-wise SID decoding to model global preferences and inter-item dependencies while generating ordered slates
-     - SPA (reward-guided conservative policy optimization): aligns generated slates with user preferences beyond likelihood imitation
-     - End-to-end "generate-then-rank" unified framework replacing separate candidate generation + ranking
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First end-to-end generative slate recommendation; recommendation-aware SIDs + list-wise preference planning is a fresh, well-motivated angle
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — Offline (industrial + public datasets) + online A/B at Kuaishou; +1.120% Effective Views validated
-     - **Impact: 7/10** — Kuaishou; end-to-end slate-level generative recommendation with production validation
-
-2. **Empowering Compact LLMs with Fusion of Layer-wise Exits for Recommendation (FLEXRec)**
-   * Affiliation: University of Queensland / Griffith University / Edith Cowan University / University of Notre Dame — *(Xurong Liang, Tong Chen, Hongzhi Yin — UQ; Quoc Viet Hung Nguyen — Griffith; Jianxin Li — Edith Cowan; Xiangliang Zhang — Notre Dame)*
-   * Link: [arxiv.org/abs/2608.17316](https://arxiv.org/abs/2608.17316)
-   * Venue: ICDM 2026
-   * TL;DR: Discriminative compact-LLM framework that inserts prediction heads (exits) at multiple transformer layers and adaptively fuses their score distributions via an adaptive continuous router, enabling efficient full-corpus ranking without autoregressive decoding; SOTA accuracy among compact backbones.
-   * Key techniques:
-     - Fusion of Layer-wise Exits: prediction heads inserted at multiple transformer layers with adaptive score-distribution fusion
-     - Adaptive Continuous Router (AC-Router): dynamically selects both the number and identity of exits for each user sequence
-     - Target-k hinge loss regulates routing sparsity for efficiency
-     - Discriminative (embedding-similarity) full-corpus ranking, avoiding autoregressive decode latency
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/xurong-liang/FLEXRec](https://github.com/xurong-liang/FLEXRec) — complete 4-stage pipeline (preprocess → LLM4Rec pretrain → multi-head pretrain → FLEXRec train) with eval scripts, datasets, requirements.txt, clear README; no license, 1⭐, single-GPU only
-     - **Novelty: 6/10** — Layer-wise exit fusion + adaptive continuous routing for compact discriminative LLM rec is a clean, practical idea
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — ICDM 2026 peer-reviewed; 3 datasets; Qwen3 1.7B + Llama 3.2 3B
-     - **Impact: 5/10** — UQ (Hongzhi Yin); practical efficiency solution for compact LLM-based recommendation
-
-3. **UniDot: A Unified Network for Sequence Modeling and Feature Interaction in Large-scale Recommendation**
-   * Affiliation: Meta — *(Rongcheng Lin, Yan Sun, Jamey Zhang, Guanglei Xiong, Ivan Ji, Xianjie Chen, Shujian Bu — Meta)*
-   * Link: [arxiv.org/abs/2608.16797](https://arxiv.org/abs/2608.16797)
-   * Venue: KDD 2026 UniRec Workshop (TAAC KDD Cup 2026 Industrial track runner-up)
-   * TL;DR: Unifies feature interaction and sequence modeling from an FM point of view — the embedding inner product (CF) is the same primitive as attention's query·key scoring — tokenizing non-sequential fields and multi-domain behavioral sequences into one shared token space with a single macro-block; runner-up on TAAC KDD Cup 2026 Industrial track.
-   * Key techniques:
-     - Single dot-product primitive unifying feature interaction (FM) and sequence modeling (attention) in one shared token space
-     - Token-mixing bus + sequence-retrieval bus (item tokens cross-attending histories) run in parallel, exchanging state each layer via MLP-Mixer fusion
-     - FM Highway: explicit per-layer dot-product interactions carried around the residual stack directly to the classifier
-     - Dual sparse/dense (Adagrad + Muon) optimizer, auxiliary conversion-delay head, multi-path mutual learning
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Unified FM-dot-product view bridging feature interaction + sequence modeling is a clean conceptual unification; practical industrial architecture
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — KDD Cup 2026 Industrial track runner-up; large-scale industrial validation
-     - **Impact: 6/10** — Meta; runner-up on TAAC KDD Cup 2026 Industrial track
-
-4. **Decomposing Staleness in Recommender Systems: A Dual-Filter Framework for Supersession and Decay (SDF)**
-   * Affiliation: Google — *(Di Bai, Feng Han, Zhenwei Tang, Jintao Liu, Luoshu Wang, Jialu Liu — Google)*
-   * Link: [arxiv.org/abs/2608.15780](https://arxiv.org/abs/2608.15780)
-   * Venue: CIKM 2026 Applied Research Track
-   * TL;DR: Decomposes recommendation staleness into supersession (emerging updates render prior coverage stale) and relevance decay (informational value diminishes over lifecycle), each handled by a learned filter; deployed in Google Discover, cutting user-filed staleness reports by 54.9% over two years.
-   * Key techniques:
-     - Relational staleness model: detects supersession between item pairs
-     - Predicted Traffic Ratio (PTR) model: forecasts relevance decay from item content, trained on lifetime visit traffic
-     - Dual-filter disjunction applied upstream of ranking to prune stale candidates, reducing downstream serving cost
-     - Two-year production deployment at Google Discover (hundreds of millions of daily active users)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Decomposing staleness into supersession + decay with two complementary learned filters is a clean, well-motivated industrial framing
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 8/10** — CIKM 2026 Applied Research; two-year production deployment; -54.9% user-filed staleness reports
-     - **Impact: 7/10** — Google; production-proven staleness filtering at massive scale
-
-5. **POI Recommendation with LLM-Augmented Multi-Graph Learning and Contrastive Alignment (LLM-MGCL)**
-   * Affiliation: University of Applied Sciences Ravensburg-Weingarten — *(Burak Tamer, Wolfram Höpken, Zehui Wang)*
-   * Link: [arxiv.org/abs/2608.16407](https://arxiv.org/abs/2608.16407)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Multi-graph neural network extending LightGCN with two LLM-derived auxiliary item-item graphs (semantic + geographic) to mitigate POI cold-start; +52.0% Recall@20 and +64.8% NDCG@20 over LightGCN on Yelp.
-   * Key techniques:
-     - Semantic graph built from sentence embeddings of LLM-generated photo summaries and keywords
-     - Geographic graph derived from Haversine distances between business locations
-     - Parallel propagation over behavioral + semantic + spatial graphs, additive fusion, bidirectional InfoNCE cross-view alignment
-     - Externally grounded LLM item knowledge compensates for missing collaborative signal
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — LLM-derived semantic + geographic graphs for POI cold-start is practical; conceptually incremental vs. multi-graph GNN literature
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — Yelp dataset with ablation study; preprint (no peer review yet)
-     - **Impact: 5/10** — Ravensburg-Weingarten (Wolfram Höpken); practical LLM-augmented POI cold-start mitigation
 
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 139 papers as of August 28.
+**Count:** 140 papers as of August 29.
 
 | Score | Paper |
 | --- | --- |
@@ -1115,6 +1144,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) |
 | 6/10 | From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM) |
 | 6/10 | Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance) |
+| 6/10 | Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling |
 | 6/10 | Tlow: Flow-based Item Tokenizer for Recommendation (Tlow) |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
@@ -1385,6 +1415,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - TAGR / Temporally Adaptive Generative Recommendation (IOPO) -- Kuaishou / Tsinghua
 - RecGPT-Mobile-V2 / On-Device Query Prediction with Reasoning-Cost RL -- Alibaba (Taobao)
 - DCEO / Direct Causal Effect Optimization (actor-critic) for Long-Term User Value -- Alibaba (Taobao & Tmall)
+- Astar / Self-Evolving Industrial AI Evolution-Direction Proposal (mid-training + SFT + RL) -- Alibaba (Lazada) / Zhejiang University
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.

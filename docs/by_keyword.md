@@ -33,6 +33,7 @@
 - Personalized Communication Skills for Agentic Recommender Systems (AgentCom)
 - MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation (MACS)
 - When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems (CoVeMem)
+- Astar: Learning to Propose Evolution Directions for Self-Evolving Industrial AI Systems (Astar)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -77,6 +78,7 @@
 - Native Multimodal Representation Learning for Click-Through Rate Prediction in E-Commerce Scenarios
 - DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search (DCEO)
 - Topology-Masked Unified Backbone for Joint Feature Interaction and Multi-Domain Sequence Modeling (MaskRec)
+- Stageboost: Recommending Signals Based on Counterfactual Estimation
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -165,6 +167,7 @@
 - Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance)
 - The Disconnect Between Better Descriptive Reasoning Trace Quality and Recommendation Effectiveness
 - Auditing Return Conditioning as a Control Knob: An Offline Diagnostic for Decision Transformer Recommendation
+- When Does Supervised Fine-Tuning Reduce Instruction Sensitivity?
 
 
 ### Diffusion
@@ -194,6 +197,7 @@
 - FreeScale (Distributed Training for Sequence Recommendation)
 
 - RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching
+- Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling
 
 
 ### Evaluation / Benchmark
@@ -221,6 +225,8 @@
 - Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking)
 - Overview of the TREC 2025 Product Search and Recommendation Track
 - SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking (SWIM)
+- Equal Ranking Quality, Different Decisions: Training Order-Consistent LLM Scorers
+- When Does Supervised Fine-Tuning Reduce Instruction Sensitivity?
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -512,6 +518,7 @@
 - ICICLE: Expanding Retrieval with In-Context Documents (ICICLE)
 - SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking (SWIM)
 - PailitaoGR: Latent Think-with-Images for Generative Image Retrieval (PailitaoGR)
+- ProRetrieval: Learning to Orchestrate Hybrid Search via Executable Program Synthesis (ProRetrieval)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -529,6 +536,7 @@
 - CoPersona: Collaborative Persona Graphs for Robust LLM Personalization (CoPersona)
 - CCLRec: Consensus-driven Contrastive Learning for LLM-enhanced Graph Recommendation (CCLRec)
 - Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation (GALLM)
+- Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling
 
 
 ### Group Recommendation
@@ -694,6 +702,8 @@
 - An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
 - TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation (TransRetrieval)
 - DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search (DCEO)
+- Stageboost: Recommending Signals Based on Counterfactual Estimation
+- Token-Level Advertising
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1070,6 +1080,7 @@
 - Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd)
 - DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation (DrEM)
 - SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking (SWIM)
+- Equal Ranking Quality, Different Decisions: Training Order-Consistent LLM Scorers
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS)
@@ -1128,6 +1139,8 @@
 - HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
 - Token-Level Credit Assignment Optimization for Generative Document Retrieval
 - Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
+- Astar: Learning to Propose Evolution Directions for Self-Evolving Industrial AI Systems (Astar)
+- ProRetrieval: Learning to Orchestrate Hybrid Search via Executable Program Synthesis (ProRetrieval)
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
