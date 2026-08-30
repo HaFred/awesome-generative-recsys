@@ -144,6 +144,7 @@
 - HD-Rec: Hierarchical Quantization with Domain-Adaptive Sparse Routing for Generative Cross-Domain Recommendation (HD-Rec)
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 - A Dual-Expert Strategy Integrating LLMs to Mitigate Negative Transfer in Cross-Domain Sequential Recommendation (DuELRec)
+- Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR)
 
 ### Data Generation / Synthetic Data
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
@@ -737,6 +738,7 @@
 - MLPs are Efficient Distilled Generative Recommenders (SID-MLP)
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
+- Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR)
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
 - SCoRD: Semantic-Assisted Continual Retriever-Reranker Distillation for LLM-Based Recommendation (SCoRD)

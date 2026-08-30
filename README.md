@@ -41,7 +41,7 @@ mindmap
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
         ManCAR -- Xiamen U / Shopee
-        SIDReasoner -- NUS / USTC / Tencent
+        DASO -- Meta / Penn State
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -54,17 +54,17 @@ mindmap
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
+        GenCDSR -- CityU / ByteDance
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
-        VK-GNN -- VK
+        DLMRec -- PolyU / Tencent
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
-        SST -- USTC / Huawei
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -76,6 +76,126 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 30
+
+*Sunday, August 30, 2026. Arxiv weekend pause — no new announcement since Friday Aug 28 (already covered Aug 29). Applied the 3-month fallback and surfaced 7 on-topic generative-rec papers missing full entries: 3 fully new (DASO, GenCDSR, FlashTrie) + 4 previously compact-indexed only (DLMRec, BARGE, ColdSID, IBA — added to keyword/affiliation tables on Jul 24 but never given full entries/links/scores). 3 opensource: DASO (Meta, Apache-2.0), DLMRec (PolyU), GenCDSR (CityU, RecSys 2026).*
+
+1. **Difficulty-Aware Semantic-ID Optimization for Generative Recommendation (DASO)**
+   * Affiliation: Meta / The Pennsylvania State University — *(Xin Yu, Stephen Li, Sina Aghaei, Zifan Zhu, Jiamu Bai, Guanjie Huang, Bo Peng, Yiyao Liu, Lingzhou Xue)*
+   * Link: [arxiv.org/abs/2608.20611](https://arxiv.org/abs/2608.20611)
+   * Venue: arXiv preprint, August 2026 (cs.AI)
+   * TL;DR: Diagnoses vanilla GRPO's "target-missing" failure on tree-structured SID generation and reframes post-training as an online rollout-allocation problem, steering a bounded rollout budget toward prefix-guided completions.
+   * Key techniques:
+     - Prompt-level diagnostic: the frozen SFT checkpoint misses the target SID in the top-16 of a 50-beam search for many prompts (harder cases: no candidate enters the target branch)
+     - DASO profiles each rollout group by prefix-match depth, locates bottleneck SID levels, and reallocates a bounded portion of the group to prefix-guided completions (retaining raw rollouts for contrast)
+     - SID-prefix reward (graded credit) + auxiliary SFT anchor to avoid regression on already-solved examples
+     - Improves MiniOneRec-style GRPO on 11/12 public metrics (best on 9/12) + level-wise recall on the internal task
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/LucasXinYu/DASO](https://github.com/LucasXinYu/DASO); Apache-2.0, 28 .py + 13 .sh, README + deepspeed configs, code matches paper
+     - **Novelty: 8/10** — first to cast GRPO's target-missing failure as rollout allocation on the SID tree
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — 11/12 public metrics + internal task + SFT anchor
+     - **Impact: 7/10** — Meta; RL post-training for SID-based generative recommendation
+
+2. **Diffusion Language Model for Recommendation (DLMRec)**
+   * Affiliation: The Hong Kong Polytechnic University / Tencent — *(Chengyi Liu, Yongqi Zhou, Junwei Pan, Zhixiang Feng, Chengguo Yin, Haijie Gu, Jie Jiang, Yinghao Liu, Yujuan Ding, Qing Li, Wenqi Fan)*
+   * Link: [arxiv.org/abs/2607.21519](https://arxiv.org/abs/2607.21519)
+   * Venue: arXiv preprint, July 2026 (cs.IR)
+   * TL;DR: A discrete diffusion language model as a non-autoregressive alternative for recommendation, with a collaborative-aware tokenizer, curriculum denoising, and stability voting.
+   * Key techniques:
+     - Collaborative-aware stochastic tokenizer encodes multi-hop collaborative signals into discrete tokens compatible with diffusion modeling
+     - Curriculum-driven denoising training aligns the denoising process with preference recovery via progressive item- and token-level learning
+     - Stability-aware voting aggregates iterative predictions to improve generation consistency and robustness
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/ChengyiLIU-cs/DLMRec](https://github.com/ChengyiLIU-cs/DLMRec); full code + README + 9 yaml configs, but no license and committed .pyc caches
+     - **Novelty: 8/10** — discrete diffusion LM as an alternative to autoregressive generation for rec (bidirectional, error-correctable)
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — stability voting + curriculum training reduce generation variance
+     - **Impact: 7/10** — Wenqi Fan (PolyU) / Tencent; diffusion direction for generative rec
+
+3. **Can Generative Recommendation Reach Cold Items? A Temporal Perspective on Semantic-ID Generation (ColdSID)**
+   * Affiliation: Renmin University of China / Alibaba — *(Jie Peng, Yanping Zheng, Zhewei Wei, Bin Tong, Guan Wang, Bo Zheng)*
+   * Link: [arxiv.org/abs/2607.21101](https://arxiv.org/abs/2607.21101)
+   * Venue: arXiv preprint, July 2026 (cs.IR)
+   * TL;DR: An absolute-time temporal protocol that diagnoses cold-item reachability of SID-based generative rec at the token level, showing SID generation is compositional but not fully open-ended.
+   * Key techniques:
+     - Seen/unseen-hit analysis + coldness taxonomy + oracle-prefix probing under an absolute-time temporal split
+     - Token-level diagnosis: models can reach future items supported by observed tokens/prefixes, but struggle with unseen atomic tokens and unsupported SID paths
+     - Interprets SID generation as hierarchical semantic bucketing (early tokens = coarse regions, later tokens = item-specific paths)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — temporal cold-item reachability framing for SID genrec is fresh and under-studied
+     - **Fairness: 2/10** — touches cold-start/coverage (long-tail) but no explicit fairness formulation
+     - **Robustness: 6/10** — comprehensive seen/unseen analysis, but mostly diagnostic
+     - **Impact: 6/10** — Alibaba; informs SID-space design for cold items
+
+4. **Bridging the Structural Gap: Adapting Autoregressive Generation for Recommendation (BARGE)**
+   * Affiliation: Tencent / Shenzhen University / Sun Yat-sen University — *(Junchao Zeng, Junzhang Zhu, Junyang Chen, Yudong Li, Wei Liu, Chengxiang Zhuo, Zang Li)*
+   * Link: [arxiv.org/abs/2607.21028](https://arxiv.org/abs/2607.21028)
+   * Venue: arXiv preprint, July 2026 (v3 Aug 20, 2026)
+   * TL;DR: Fixes two structural gaps in GR (item-boundary loss and semantic drift) via Item Context-Aware Attention, Hierarchical Path Reranking, and Dual-Path Decoding; deployed at Tencent.
+   * Key techniques:
+     - Item Context-Aware Attention (ICA) restores item-level structure during encoding (cross-attention pooling + gated residual fusion)
+     - Hierarchical Path Reranking (HPR) with a path-level scorer (InfoNCE) suppresses semantic drift during decoding
+     - Dual-Path Decoding (DPD) with orthogonal-split quantization VAE (OSQ-VAE) + OR-fusion of two codebooks
+     - Online A/B at Tencent: +0.60% CTR, +1.34% click unique visitors, +1.70% total reading time
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — jointly attacks encoder item-boundary loss and decoder semantic drift with three orthogonal modules
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 8/10** — public benchmarks + offline test + online A/B; 19.91M params (smaller than TIGER)
+     - **Impact: 7/10** — Tencent industrial deployment; R@10 +19.6% on Amazon Beauty
+
+5. **Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR)**
+   * Affiliation: City University of Hong Kong / ByteDance — *(Yuxuan Hu, Yuhao Wang, Tianbo Huang, Chao Zhang, Ziwei Liu, Lihua Zhang, Xiangyu Zhao)*
+   * Link: [arxiv.org/abs/2607.28659](https://arxiv.org/abs/2607.28659)
+   * Venue: RecSys 2026
+   * TL;DR: Cross-domain hybrid tokenization (shared-specific + fine-grained codebooks) plus serial-parallel decoding for CDSR; +1.5% accuracy and -85.1% latency vs beam search.
+   * Key techniques:
+     - Cross-domain hybrid tokenization with a multi-tower architecture (shared-specific SST + fine-grained specific FGST codebooks, Gumbel-Softmax hard routing)
+     - Cross-domain serial-parallel decoding: serial high-level tokens then parallel fine-grained tokens (leveraging hierarchical SID structure)
+     - Unified training + per-domain LoRA adaptation; Trie-constrained generation
+     - -85.1% avg generation latency vs beam search (T5: -87.5%, Qwen3-0.6B: -82.7%)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/Applied-Machine-Learning-Lab/RecSys2026_GenCDSR](https://github.com/Applied-Machine-Learning-Lab/RecSys2026_GenCDSR); code + datasets + checkpoints, but no license
+     - **Novelty: 7/10** — hybrid shared-specific tokenization + serial-parallel decoding for CDSR
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — 3 datasets, 2 backbones (T5 + Qwen3-0.6B), 3 seeds, ablations
+     - **Impact: 7/10** — RecSys 2026 accepted; CityU / ByteDance
+
+6. **Where Reasoning Matters: Rethinking Latent Reasoning in Semantic ID-based Generative Recommendation (IBA)**
+   * Affiliation: Chongqing University / Griffith University — *(Shangxin Yang, Min Gao, Zongwei Wang, Junliang Yu)*
+   * Link: [arxiv.org/abs/2607.12425](https://arxiv.org/abs/2607.12425)
+   * Venue: arXiv preprint, July 2026 (cs.IR)
+   * TL;DR: Position-wise information gain shows earlier SID positions matter more; IBA treats latent-refinement steps as a budget and allocates them to high-IG positions.
+   * Key techniques:
+     - Position-wise information-gain (IG) measures how much each SID position reduces target uncertainty (early positions >> later)
+     - Information-Gain Budget Allocation (IBA) + Dual-Axis Refinement module (horizontal iterative updates + vertical semantic alignment)
+     - Two-stage training + lookahead objective; beats CARE and LatentR3 across datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — first to quantify position-wise IG and allocate latent-reasoning budget accordingly
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 6/10** — multiple datasets/backbones but no code, ablation-driven
+     - **Impact: 5/10** — accuracy-compute trade-off for latent-reasoning genrec
+
+7. **FlashTrie: A GPU-Accelerated Constrained Beam Search for Generative Retrieval**
+   * Affiliation: Microsoft / Nvidia — *(Dakshitha Anandakumar, Anurag Mukkara, Wenxiang Hu, Jiusheng Chen, M Akash Kumar, Ting Ye, Qiang Lou, Jian Jiao)*
+   * Link: [arxiv.org/abs/2607.10044](https://arxiv.org/abs/2607.10044)
+   * Venue: arXiv preprint, July 2026 (cs.LG)
+   * TL;DR: GPU-accelerated constrained beam search via an integer-aware succinct trie and a cooperative CUDA kernel; 24× speedup and +0.71% revenue in sponsored search.
+   * Key techniques:
+     - Integer-aware succinct trie layout with bit compression keeps the full index in GPU HBM
+     - Cooperative CUDA kernel performs beam expansion, validation, and pruning entirely on-device (no per-step host orchestration)
+     - GPU-aware parallel primitives replace CPU-style irregular lookup/heap maintenance
+     - 800M keywords, beam up to 1000, trie-search latency <3 ms, up to 24× speedup
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — code to be released "after the review process" (not yet public)
+     - **Novelty: 7/10** — GPU-native succinct trie + cooperative kernel for constrained beam search
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 8/10** — 800M-keyword scale, 24× speedup, online A/B +0.71% revenue
+     - **Impact: 7/10** — Microsoft/Nvidia; unlocks real-time constrained decoding for sponsored search
 
 ### Papers August 29
 
@@ -1269,7 +1389,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 140 papers as of August 29.
+**Count:** 143 papers as of August 30.
 
 | Score | Paper |
 | --- | --- |
@@ -1372,6 +1492,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation |
 | 7/10 | Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking) |
 | 7/10 | Rethinking Item Tokenization in Generative Recommenders: From Fixed Atoms to Semantic Subwords (SST) |
+| 7/10 | Difficulty-Aware Semantic-ID Optimization for Generative Recommendation (DASO) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
@@ -1389,6 +1510,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance) |
 | 6/10 | Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling |
 | 6/10 | Tlow: Flow-based Item Tokenizer for Recommendation (Tlow) |
+| 6/10 | Diffusion Language Model for Recommendation (DLMRec) |
+| 6/10 | Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR) |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
 | 5/10 | Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere) |
@@ -1547,6 +1670,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - HCGRec / Hint-Conditioned GenRec -- SJTU / Huawei Noah's Ark Lab (CIKM 2026)
 - Token-Level Credit Assignment / Generative Document Retrieval -- Shandong U
 - DrIG / Dual-role Identifiers Multimodal Generative Retrieval -- U Tsukuba
+- FlashTrie / GPU-Accelerated Constrained Beam Search -- Microsoft / Nvidia
 
 ### RL / Reinforcement Learning
 - Ask to Be Sure / Entropy-Reduction Reward for Multi-Turn LLM Rec — Amazon (CIKM 2026)
@@ -1659,6 +1783,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - RecGPT-Mobile-V2 / On-Device Query Prediction with Reasoning-Cost RL -- Alibaba (Taobao)
 - DCEO / Direct Causal Effect Optimization (actor-critic) for Long-Term User Value -- Alibaba (Taobao & Tmall)
 - Astar / Self-Evolving Industrial AI Evolution-Direction Proposal (mid-training + SFT + RL) -- Alibaba (Lazada) / Zhejiang University
+- DASO / Difficulty-Aware Semantic-ID Optimization (GRPO rollout-allocation) -- Meta / Penn State
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
