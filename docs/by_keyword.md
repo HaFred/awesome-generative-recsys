@@ -79,6 +79,7 @@
 - DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search (DCEO)
 - Topology-Masked Unified Backbone for Joint Feature Interaction and Multi-Domain Sequence Modeling (MaskRec)
 - Stageboost: Recommending Signals Based on Counterfactual Estimation
+- HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation (HubMixer)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -99,6 +100,7 @@
 - PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest (PinEqualizer)
 - VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation (VaLiDRec)
 - MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation (MOTIF)
+- Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)
 
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
@@ -228,6 +230,7 @@
 - SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking (SWIM)
 - Equal Ranking Quality, Different Decisions: Training Order-Consistent LLM Scorers
 - When Does Supervised Fine-Tuning Reduce Instruction Sensitivity?
+- An Empirical Evaluation of Cross-City POI Recommendation on a Large-Scale Benchmark
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -275,6 +278,7 @@
 - GRACE: Bringing GRACE to Recommendation: Fine-Tuning for Sustainable and Accurate Personalization (GRACE)
 - FSGR: Mitigating Token Frequency Bias for Fair SID-Based Generative Recommendation (FSGR)
 - Unbiased Recommender Systems with Implicit Feedback
+- Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -287,6 +291,7 @@
 - Federated Variational Preference Alignment with Gumbel-Softmax Prior for Personalized User Preferences (FedVPA-GP)
 - Guiding Federated Graph Recommendation with LLM-encoded knowledge
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
+- Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)
 
 
 
@@ -705,6 +710,7 @@
 - DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search (DCEO)
 - Stageboost: Recommending Signals Based on Counterfactual Estimation
 - Token-Level Advertising
+- HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation (HubMixer)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -972,6 +978,8 @@
 - An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
 - Hamiltonian Spectral-Temporal Dissipative Dynamics for Sequential Recommendation (HSR)
 - Beyond a Single Story: Meta-Reviewing Sparse and Incomplete User-generated Contents for Recommendation (MOSAIC)
+- HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation (HubMixer)
+- Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR)
 ### Multi-behavior Recommendation
 
 - BITRec
@@ -1048,6 +1056,8 @@
 - Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
 - D3ER: Supporting Multi-Modal Recommendation via Disentangle and Distillation-based Dynamic Ensemble (D3ER)
 - MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation (MOTIF)
+- SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP)
+- Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR)
 
 ### Optimizer
 - MuonRec
@@ -1344,6 +1354,7 @@
 - SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
 - Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance)
 - Hamiltonian Spectral-Temporal Dissipative Dynamics for Sequential Recommendation (HSR)
+- SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey

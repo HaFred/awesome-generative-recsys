@@ -54,17 +54,18 @@ mindmap
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
-        GenCDSR -- CityU / ByteDance
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
-        DLMRec -- PolyU / Tencent
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
+      Multimodal Fusion & Alignment
+        SG-UMP -- Imperial College London / NUPT
+        AMUR -- SJTU
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -76,6 +77,94 @@ mindmap
 
 ---
 ## By Date
+
+### Papers August 31
+
+*Monday, August 31, 2026. Arxiv active — Monday announcement batch. cs.IR returned 5 recommendation papers spanning parameter-efficient feature interaction (production-deployed at Kuaishou), multimodal recommendation alignment (2×, both open-source), federated cold-start recommendation, and large-scale cross-city POI evaluation. Total: 5 papers (2 opensource).*
+
+1. **SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework**
+   * Affiliation: Imperial College London / University College London / Nanjing University of Posts and Telecommunications — *(Xinyi Zhang — Imperial College London; Yutong Li — UCL; Peijie Sun — NUPT)*
+   * Link: [arxiv.org/abs/2608.28503](https://arxiv.org/abs/2608.28503)
+   * Venue: ACM Multimedia (MM) 2026 (Full Paper)
+   * TL;DR: A plug-and-play plugin for multimodal sequential recommendation that adapts the ordering of multimodal processing modules to user-level preference heterogeneity and dataset-level modality bias via a Module Combiner + Module Router.
+   * Key techniques:
+     - Module Combiner for flexible multimodal processing of heterogeneous signals (text, image, interactions)
+     - Module Router for dynamic module ordering conditioned on user preferences and dataset characteristics
+     - Consistent improvement across different backbones and multimodal settings on four real-world datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/esemsc-xz524/SG-UMP](https://github.com/esemsc-xz524/SG-UMP) — 10 .py files + README (datasets/settings/processing/training) matching the paper, but no license and a single-upload commit
+     - **Novelty: 6/10** — module routing for modality prioritization is a clean, generalizable plug-in angle
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — four real-world datasets across multiple backbones
+     - **Impact: 6/10** — MM 2026 full paper; broadly applicable multimodal sequential rec plugin
+
+2. **HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation**
+   * Affiliation: Kuaishou / Tsinghua University — *(Jie Zhou, Wenhao Li, Chang Liu, Enzhao Shen, Bo Liu, Xu Guo, Fei Pan, Peng Jiang — Kuaishou; Zixian Gong — Tsinghua)*
+   * Link: [arxiv.org/abs/2608.27991](https://arxiv.org/abs/2608.27991)
+   * Venue: arXiv preprint, August 2026 (fully deployed in production at Kuaishou)
+   * TL;DR: Parameter-efficient feature interaction that replaces direct raw-token mixing with a small set of learnable latent hubs organized through an induction–interaction–readout paradigm; +5.48% resume-submission conversion in Kuaishou A/B.
+   * Key techniques:
+     - Hub induction: latent hubs query heterogeneous input tokens via cross-attention to summarize them into compact hubs
+     - Hub interaction: high-order interaction performed in the cleaner latent hub space
+     - Token-conditioned readout: each token selectively reads from interacted hubs, preserving field identity
+     - Offline SOTA + online A/B (+5.48% resume conversion); deployed in production
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — latent hub mixing is a parameter-efficient alternative to token mixing for heterogeneous rec features
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — industrial offline + online A/B, production deployment
+     - **Impact: 7/10** — Kuaishou production feature-interaction backbone
+
+3. **Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR)**
+   * Affiliation: Shanghai Jiao Tong University — *(Wenze Ma, Chenyu Sun, Yanmin Zhu, Qiwen Gu, Xuhao Zhao)*
+   * Link: [arxiv.org/abs/2608.27950](https://arxiv.org/abs/2608.27950)
+   * Venue: CIKM 2026
+   * TL;DR: An information-theoretic selective modality-interest alignment framework for multimodal recommendation that enhances modality signals most related to user interests while suppressing weakly-aligned or noisy signals.
+   * Key techniques:
+     - Refine modality graph structures toward user behavior
+     - Selectively align shared interest-related semantics across modalities
+     - Preserve modality-specific complementary information during alignment
+     - SOTA on three real-world datasets over competitive baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5/10** — [github.com/Wenze1/AMUR](https://github.com/Wenze1/AMUR) — full source (configs/model/common/utils + main.py) matching the paper, but a one-line README and no license
+     - **Novelty: 6/10** — information-theoretic selective alignment is a principled refinement over heuristic modality fusion
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — three real-world datasets, competitive baselines, CIKM 2026 peer review
+     - **Impact: 6/10** — SJTU; CIKM 2026 multimodal recommendation
+
+4. **An Empirical Evaluation of Cross-City POI Recommendation on a Large-Scale Benchmark**
+   * Affiliation: UNSW Sydney / University of Amsterdam — *(Peibo Li, Yang Song, Hao Xue, Flora D. Salim — UNSW; Maarten de Rijke — University of Amsterdam)*
+   * Link: [arxiv.org/abs/2608.27840](https://arxiv.org/abs/2608.27840)
+   * Venue: arXiv preprint, August 2026 (cs.AI; cs.IR)
+   * TL;DR: Empirically re-examines cross-city POI recommendation on the large-scale Trip World benchmark, surfacing three bottlenecks of SOTA methods and piloting agentic next-POI methods.
+   * Key techniques:
+     - Destination-region prior analysis: hometown-aware models lean on destination priors more than user-specific preference transfer
+     - Accuracy-efficiency trade-off audit at scale (the simplest model is among the strongest)
+     - Semantic metadata integration audit (little benefit at this scale)
+     - Agentic next-POI diagnostic pilot (naive adaptation trails a popularity prior)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 5/10** — empirical benchmark diagnostic rather than a new method
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 6/10** — large-scale benchmark, multi-method, multi-bottleneck analysis
+     - **Impact: 6/10** — UNSW/UvA (de Rijke, Salim); guidance for cross-city POI rec design
+
+5. **Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)**
+   * Affiliation: POSTECH (Pohang University of Science and Technology) — *(Jaehyung Lim, Wonbin Kweon, Woojoo Kim, Junyoung Kim, Dongha Kim, Hwanjo Yu)*
+   * Link: [arxiv.org/abs/2608.27826](https://arxiv.org/abs/2608.27826)
+   * Venue: arXiv preprint, August 2026 (cs.IR; cs.LG)
+   * TL;DR: Federated cold-start recommendation addressing personalization, compositionality, and communication inefficiency under dual-sided constraints via a personalized representation generator + global multi-view encoder.
+   * Key techniques:
+     - Personalized representation generator produces user-specific item representations from attribute features
+     - Global multi-view encoder with item-adaptive gating and an orthogonality objective to reduce cross-view redundancy
+     - Fuses collaborative and attribute knowledge into a single exchanged item representation, eliminating client-side regularizers and cutting communication overhead
+     - Improves user-level fairness, warm-scenario adaptability, and Local Differential Privacy (LDP) robustness
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code available
+     - **Novelty: 6/10** — multi-view + personalized generation is a well-motivated fix for federated cold-start
+     - **Fairness: 7/10** — explicitly improves user-level fairness and LDP robustness
+     - **Robustness: 7/10** — cold-item + warm adaptability + LDP robustness experiments
+     - **Impact: 6/10** — POSTECH (Hwanjo Yu); federated cold-start rec
 
 ### Papers August 30
 
@@ -1036,113 +1125,6 @@ mindmap
      - **Robustness: 6/10** — CIKM 2026 peer-reviewed; multiple benchmarks; robust across SID constructions and backbone scales
      - **Impact: 6/10** — NTU/Academia Sinica; token-weighted training applicable to any semantic-ID generative recommender
 
-### Papers August 21
-
-*Friday, August 21, 2026. Arxiv active. cs.IR Aug 20–21 listings returned 6 recommendation papers spanning LLM-based recommendation distillation, training-free LLM rec, semantic-ID diagnostics, memory-augmented reasoning, RL dense retrieval, and diffusion-based user behavior modeling. Total: 6 papers.*
-
-1. **SCoRD: Semantic-Assisted Continual Retriever-Reranker Distillation for LLM-Based Recommendation**
-   * Affiliation: Korea University / University of Illinois at Urbana-Champaign / Sungkyunkwan University — *(Seunghyun Baek, Seunghan Lee, SeongKu Kang — Korea University; Gyuseok Lee, Dong Wang — UIUC; Wonbin Kweon — Sungkyunkwan University)*
-   * Link: [arxiv.org/abs/2608.19998](https://arxiv.org/abs/2608.19998)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Continual knowledge distillation for LLM-based retriever-reranker pipelines under non-stationary data streams; a semantic reasoning assistant distills the LLM's intent-inference ability into reusable intent-level guidance, enabling cheap retriever-only updates without repeated LLM inference.
-   * Key techniques:
-     - Semantic reasoning assistant: distills the LLM's ability to infer user intents into reusable intent-level guidance
-     - Selective distillation: reranker knowledge transferred to the retriever only on low-confidence sequences
-     - Retriever-derived representations and intent-drift signals fed back to the reranker for co-adaptation
-     - Avoids the prohibitive cost of repeatedly updating and distilling the LLM reranker
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Continual retriever-reranker co-adaptation with an intent-level semantic assistant is a practical, well-motivated framing
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — Real-world datasets; preprint (no peer review yet)
-     - **Impact: 5/10** — Korea University (SeongKu Kang); practical continual distillation for deployed two-stage LLM rec
-
-2. **Training-Free LLM-Based Recommendation with Post-LLM Item Refinement Using Collaborative Signals (CoRRe)**
-   * Affiliation: KAIST / Snap Inc. — *(Kyungho Kim, Sunwoo Kim, Geon Lee, Shinhwan Kang, Sojeong Kim, Kijung Shin — KAIST; Liam Collins, Bhuvesh Kumar, Donald Loveland — Snap Inc.)*
-   * Link: [arxiv.org/abs/2608.19665](https://arxiv.org/abs/2608.19665)
-   * Venue: CIKM 2026 (short)
-   * TL;DR: Post-LLM training-free recommendation injecting collaborative-filtering signals into LLM-generated item representations (rather than pre-LLM reranking/prompting); refines item-embedding directions via an item-item co-purchase graph and magnitudes via popularity, matching against LLM-generated user interests.
-   * Key techniques:
-     - Post-LLM paradigm: CF signals injected into LLM-generated item representations instead of pre-LLM candidate reranking/prompt augmentation
-     - Direction refinement via item-item co-purchase graph; magnitude refinement via item popularity
-     - Fully training-free, no model training or task-specific fine-tuning
-     - Competitive or superior to training-based methods on real-world datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Post-LLM (vs pre-LLM) CF injection is a clean reframing with consistent gains
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — CIKM 2026 peer-reviewed (short); real-world datasets; competitive with training-based baselines
-     - **Impact: 5/10** — KAIST/Snap; practical training-free LLM recommendation
-
-3. **SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation**
-   * Affiliation: Huawei Technologies Co., Ltd. — *(Jiandong Ding, Huijie Qin, Tiandeng Wu, Yi Cao)*
-   * Link: [arxiv.org/abs/2608.18779](https://arxiv.org/abs/2608.18779)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Source-traced diagnostic resource auditing semantic-ID tokenizer artifacts across D1–D7 signals (utilization, aliasing, neighborhood alignment, popularity allocation, structural cost, churn, trace accounting); finds interface health is mechanism-conditional rather than scalar, with prefix alignment tracking exposure only under prefix-based retrieval.
-   * Key techniques:
-     - D1–D7 multi-signal diagnostics: code utilization, prefix collision, neighborhood alignment, popularity allocation, structural cost, refresh churn, and generated-path trace accounting
-     - Source-traced normalization across 9 tokenizer exports from 7 families on Amazon + Yelp (8 executable routes + 1 auditable snapshot)
-     - Trace accounting exposes a hidden gap: valid target paths surviving without uniquely retrieving the target item (1.2–3.0 p.p.)
-     - Refresh case: repairing the mapping does not by itself restore an inherited generator (needs a separate handoff check)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/jdding/SIDscope](https://github.com/jdding/SIDscope) — MIT license; clean src/tests/docs/examples/experiments layout with pyproject.toml + setup.py, CPU-only verifier, frozen evidence summaries + conformance reports + table builders; 0⭐ (new)
-     - **Novelty: 6/10** — Mechanism-conditional multi-signal SID-interface diagnostics is a fresh, rigorous angle vs. scalar metrics
-     - **Fairness: 4/10** — D4 popularity allocation probes head/mid/tail capacity (indirect item-exposure fairness)
-     - **Robustness: 5/10** — 9 tokenizer exports × 7 families on 2 datasets; preprint (no peer review yet)
-     - **Impact: 6/10** — Huawei; important diagnostic resource for SID-based generative recommendation
-
-4. **rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation**
-   * Affiliation: University of Science, VNU-HCM (Vietnam National University Ho Chi Minh City) — *(Minh Hoang Nguyen, Tung Le, Huy Tien Nguyen)*
-   * Link: [arxiv.org/abs/2608.18952](https://arxiv.org/abs/2608.18952)
-   * Venue: arXiv preprint, August 2026
-   * TL;DR: Compresses teacher-LLM reasoning once into four typed, editable experience channels (long-term preference, short-term context, item-perception, counterfactual hard negatives) maintained by an LLM memory controller with Add/Delete/Modify/Keep ops + K-agent debate, so a lightweight student ranks purely by memory retrieval without re-invoking the teacher.
-   * Key techniques:
-     - Four typed experience channels: long-term preference, short-term context, item-perception, counterfactual hard-negative comparisons
-     - LLM memory controller performing Add/Delete/Modify/Keep operations with K-agent debate-based refinement
-     - Lightweight student LLM ranks purely by retrieval, decoupling inference cost from reasoning depth
-     - Up to 13.3% Impv over second-best baseline on ML-1M; debate lowers duplication 7.4 p.p.
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Editable experience memory with typed channels + memory controller is a clean, practical idea
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 5/10** — ML-1M + Amazon Beauty + Steam × 10 student backbones; preprint (no peer review yet)
-     - **Impact: 5/10** — VNU-HCM; practical memory-augmented LLM rec decoupling reasoning cost
-
-5. **SSR-GRPO: Integrating Supervision and Semantic IDs into Reinforcement Learning for Dense Retrieval in E-commerce**
-   * Affiliation: Alibaba Group — *(Guangxin Song, Xing Fang, Mingmin Jin, Jing Wang, Bokang Wang, Zhentao Song, Junjie Bai, Jianbo Zhu)*
-   * Link: [arxiv.org/abs/2608.19595](https://arxiv.org/abs/2608.19595)
-   * Venue: arXiv preprint, August 2026 (deployed on a large-scale e-commerce platform)
-   * TL;DR: Fixes R-GRPO's noisy top-K and biased relevance by dual-perspective relevance assessment combining Semantic IDs + dense vectors, plus SID-hierarchy hard-negative mining for intra-group masking and a Retrieval-DPO pairwise task; deployed in production.
-   * Key techniques:
-     - Dual-perspective relevance assessment: SID-based + dense-vector scores for more unbiased relevance signals
-     - SID-hierarchy hard-negative mining feeding (1) a masking function to filter intra-group noisy samples in R-GRPO and (2) a Retrieval-DPO pairwise task
-     - Integrates supervised signals with RL for fine-grained semantic distinction
-     - Validated offline + online, deployed on a large-scale e-commerce platform
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — SID-grounded dual-perspective relevance + hard-negative masking for retrieval RL is a clean, practical fix
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Offline + online experiments; production deployment on large-scale e-commerce
-     - **Impact: 6/10** — Alibaba; practical RL dense retrieval for e-commerce search
-
-6. **GateDiffInt: Gate-Mediated Controllable Diffusion and Multi-Intent LLM Distillation for User Behavior Modeling**
-   * Affiliation: Fudan University / Xiaohongshu Inc. — *(Jialong Duan — Fudan; Zichen Zhang, Zirui Tu, Zheng Zhang, Zepeng Li, Qingyao Cui, Qinwen Wang, Yudan Liu, Luo Yang, Yao Hu — Xiaohongshu)*
-   * Link: [arxiv.org/abs/2608.18764](https://arxiv.org/abs/2608.18764)
-   * Venue: arXiv preprint, August 2026 (deployed to primary traffic)
-   * TL;DR: Diagnoses Noise-Intent Coupling (NIC) in behavior sequences; uses a conversion-signal-aligned controllable forward diffusion with dual gating to denoise, then distills four structured intents (long-term, short-term, latent, conversion) from an LLM into a lightweight student for conversion-rate prediction.
-   * Key techniques:
-     - Noise-Intent Coupling (NIC) diagnosis: noise dilutes intents while missing intent priors leave denoising targetless
-     - Controllable forward diffusion with dual gating to enhance and denoise behavior sequences aligned to the conversion signal
-     - LLM teacher distills four structured intents into a lightweight student model
-     - Attention-based deep fusion of enhanced sequences + structured intents; deployed to primary traffic with GMV gains
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Gate-mediated controllable diffusion + multi-intent LLM distillation is a well-motivated industrial framing
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Public + industrial datasets; online A/B (hundreds of millions DAU); deployed to primary traffic
-     - **Impact: 7/10** — Xiaohongshu/Fudan; production-deployed diffusion+LLM user behavior modeling
-
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1389,7 +1371,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 143 papers as of August 30.
+**Count:** 145 papers as of August 31.
 
 | Score | Paper |
 | --- | --- |
@@ -1512,6 +1494,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | Tlow: Flow-based Item Tokenizer for Recommendation (Tlow) |
 | 6/10 | Diffusion Language Model for Recommendation (DLMRec) |
 | 6/10 | Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR) |
+| 6/10 | SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP) |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
 | 5/10 | Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere) |
@@ -1523,6 +1506,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 5/10 | Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go) |
 | 5/10 | Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation (ANR-DiffRec) |
 | 5/10 | Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval |
+| 5/10 | Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR) |
 | 4/10 | Towards Efficient Reasoning in LLM-Based Recommender Systems via Model Merging (REAM) |
 | 4/10 | Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation |
 | 4/10 | GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation |
