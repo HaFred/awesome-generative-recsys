@@ -231,6 +231,7 @@
 - Equal Ranking Quality, Different Decisions: Training Order-Consistent LLM Scorers
 - When Does Supervised Fine-Tuning Reduce Instruction Sensitivity?
 - An Empirical Evaluation of Cross-City POI Recommendation on a Large-Scale Benchmark
+- Off-Policy Evaluation for Semantic ID Recommenders: Does the Model's Own Code Hierarchy Help?
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -525,6 +526,8 @@
 - SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking (SWIM)
 - PailitaoGR: Latent Think-with-Images for Generative Image Retrieval (PailitaoGR)
 - ProRetrieval: Learning to Orchestrate Hybrid Search via Executable Program Synthesis (ProRetrieval)
+- Preference Shapes Relevance: Cross-component Hierarchical Semantic Alignment for Personalized Generative Retrieval (CHAP)
+- Generative Retrieval for E-commerce: Jointly Learning Embedding and Codebook with Same Product Cluster
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -927,6 +930,7 @@
 - Rethinking Semantic Alignment in LLM-Enhanced Collaborative Filtering: A Spectral Decoupling Approach (UniSpecRec)
 - An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
 - MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation (MOTIF)
+- Beyond Ranking Accuracy: Evaluating LLM-Cited Feature Rationales for Next Basket Repurchase Recommendation
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1093,6 +1097,7 @@
 - DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation (DrEM)
 - SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking (SWIM)
 - Equal Ranking Quality, Different Decisions: Training Order-Consistent LLM Scorers
+- Beyond Polarization: The Generative Constraint of Chain-of-Thought in Pointwise Reranking
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS)
@@ -1294,6 +1299,7 @@
 - PRQ-KMeans: Projection Residual Quantization for Semantic ID Tokenization (PRQ-KMeans)
 - Tlow: Flow-based Item Tokenizer for Recommendation (Tlow)
 - An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
+- CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation (CoFiRec)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)

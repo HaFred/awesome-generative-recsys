@@ -63,9 +63,9 @@ mindmap
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
+        CoFiRec -- UIUC / Ant Group
       Multimodal Fusion & Alignment
         SG-UMP -- Imperial College London / NUPT
-        AMUR -- SJTU
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -77,6 +77,107 @@ mindmap
 
 ---
 ## By Date
+
+### Papers September 01
+
+*Tuesday, September 1, 2026. Arxiv active — Tuesday announcement batch. cs.IR/cs.AI/cs.LG/cs.CL returned 6 recommendation papers spanning personalized generative retrieval (EMNLP 2026 Findings), coarse-to-fine SID tokenization (RecSys 2026, open-source), off-policy evaluation for SID recommenders, e-commerce generative retrieval (WWW 2026), LLM-cited explainability for next-basket repurchase, and a Chain-of-Thought bottleneck diagnosis in pointwise reranking (EMNLP 2026 Findings). Total: 6 papers (1 opensource).*
+
+1. **Preference Shapes Relevance: Cross-component Hierarchical Semantic Alignment for Personalized Generative Retrieval (CHAP)**
+   * Affiliation: University of Science and Technology of China / Meituan — *(Gaoming Zhang, Angqing Jiang, Defu Lian — USTC; Jianchun Song, Kena Qi, Dayao Chen, Wei Lin — Meituan)*
+   * Link: [arxiv.org/abs/2608.30553](https://arxiv.org/abs/2608.30553)
+   * Venue: Findings of EMNLP 2026
+   * TL;DR: Personalized generative retrieval (GR) that closes the semantic gap between static item-content SIDs and dynamic query intents via hierarchical semantic alignment, and cuts beam-search autoregressive decoding to a single pass with Residual Cascading Generation.
+   * Key techniques:
+     - Hierarchical Semantic Alignment: aligns the query latent space with the item quantization path and synchronizes multi-granular semantics
+     - Personalized GR synergizing discrete SIDs (structural guidance) with continuous representations (fine-grained semantic refinement)
+     - Residual Cascading Generation: restricts the multi-step Transformer decoder to single-pass inference to boost throughput with minimal information loss
+     - 3 public + 1 proprietary industrial dataset + online A/B
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — code link [github.com/zzzgm/CHAP](https://github.com/zzzgm/CHAP) stated in the paper returns 404 at check time; no public code available
+     - **Novelty: 7/10** — hierarchical cross-component alignment + residual cascading single-pass decoding is a fresh angle on GR personalization + latency
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — 3 public + industrial datasets + online A/B; EMNLP 2026 Findings peer review
+     - **Impact: 7/10** — USTC/Meituan; EMNLP 2026 personalized generative retrieval with online A/B validation
+
+2. **CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation**
+   * Affiliation: University of Illinois at Urbana-Champaign / Ant Group — *(Tianxin Wei, Xuying Ning, Xuxing Chen, Ruizhong Qiu, Yupeng Hou, Jingrui He — UIUC; Yan Xie, Shuang Yang, Zhigang Hua — Ant Group)*
+   * Link: [arxiv.org/abs/2511.22707](https://arxiv.org/abs/2511.22707)
+   * Venue: RecSys 2026 (v2 camera-ready)
+   * TL;DR: Coarse-to-fine generative-rec tokenizer that decomposes item information into multiple semantic levels (category → title/description → CF signals) and generates tokens progressively, matching the natural refinement of user intent during web browsing.
+   * Key techniques:
+     - Multi-level semantic decomposition (category, title/description, collaborative-filtering signals) instead of flattening all attributes into one embedding
+     - CoFiRec Tokenizer: tokenizes each level independently while preserving structural order
+     - Coarse-to-fine autoregressive decoding; theoretical proof that structured tokenization lowers generated-vs-ground-truth item dissimilarity
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/YennNing/CoFiRec](https://github.com/YennNing/CoFiRec) — full two-stage pipeline (tokenizer + generation), README, requirements, pre-generated checkpoints, Google Drive data link; no license
+     - **Novelty: 6/10** — coarse-to-fine hierarchical tokenization is a clean, principled extension of SID tokenization
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 6/10** — multiple public benchmarks + backbones; RecSys 2026 peer review
+     - **Impact: 7/10** — RecSys 2026; UIUC (Jingrui He) / Ant Group; structured tokenization broadly applicable to generative rec
+
+3. **Off-Policy Evaluation for Semantic ID Recommenders: Does the Model's Own Code Hierarchy Help?**
+   * Affiliation: Criteo — *(Artem Betlei)*
+   * Link: [arxiv.org/abs/2608.28905](https://arxiv.org/abs/2608.28905)
+   * Venue: arXiv preprint, August 2026 (cs.LG)
+   * TL;DR: Reuses the generative recommender's own SID tree as the action abstraction for off-policy evaluation; marginalizing items into code-prefix clusters — not the hierarchy itself — restores estimable support where item-level OPE fails.
+   * Key techniques:
+     - Shows per-item OPE is hopeless under near-argmax logging (small item-level effective sample size)
+     - Code-prefix cluster marginalization restores support and cuts error; the SID tree makes coarsening feasible (cluster mass returned cheaply by the decoder)
+     - Resolution depth as the operative knob, with a conditional bias bound linking coarsening bias to quantizer reconstruction residual and target-logging divergence
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — first to reuse the SID tree as an OPE action abstraction; fresh, under-studied framing
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 5/10** — theoretical (bias bound); no empirical experiments reported
+     - **Impact: 5/10** — Criteo; practical for generative-rec teams facing scarce A/B tests
+
+4. **Generative Retrieval for E-commerce: Jointly Learning Embedding and Codebook with Same Product Cluster**
+   * Affiliation: Alibaba Group — *(Songtao Fang, Zihao Xu, Shaowei Wei, Jin Zhang, Zhuojun Wang)*
+   * Link: [arxiv.org/abs/2608.30606](https://arxiv.org/abs/2608.30606)
+   * Venue: WWW 2026 (short paper)
+   * TL;DR: Jointly trains the product-embedding model and the SID codebook with same-cluster supervision, fixing the error-accumulation and cluster-inconsistency issues of the standard two-stage embedding-then-codebook pipeline.
+   * Key techniques:
+     - Joint embedding + codebook training (fixes cascaded error accumulation)
+     - Same-product-cluster supervision to model query-to-product and product-to-product interactions
+     - Products in the same cluster get consistent IDs, improving retrieval accuracy
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 5/10** — joint embedding+codebook training with cluster supervision is a solid but incremental fix
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 5/10** — e-commerce experiments; WWW 2026 peer review
+     - **Impact: 5/10** — Alibaba; practical for e-commerce generative retrieval
+
+5. **Beyond Ranking Accuracy: Evaluating LLM-Cited Feature Rationales for Next Basket Repurchase Recommendation**
+   * Affiliation: Walmart Global Tech — *(Yanan Cao, Anay Dombe, Murali Mohana Krishna Dandu, Shreeranjani Srirangamsridharan, Sinduja Subramaniam, Yogananth Mahalingam, Evren Korpeoglu, Kannan Achan)*
+   * Link: [arxiv.org/abs/2608.30333](https://arxiv.org/abs/2608.30333)
+   * Venue: arXiv preprint, September 2026 (cs.AI)
+   * TL;DR: Tests whether off-the-shelf LLMs work as next-basket repurchase recommenders and/or as validated explanation components, using a cross-model feature-masking protocol to assess outcome-grounded LLM-cited rationales.
+   * Key techniques:
+     - Repurchase features spanning cadence, frequency, recency, user behavior, and item popularity
+     - LLM-as-scorer vs heuristic/supervised rankers on 2 public grocery + 1 proprietary retail dataset
+     - Cross-model feature-masking protocol measuring ranking degradation; LLM-cited features vs model-specific attribution baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — outcome-grounded evaluation of LLM-cited rationale quality, decoupled from ranking accuracy
+     - **Fairness: 0/10** — no fairness consideration (explanation transparency is adjacent but not framed as fairness)
+     - **Robustness: 6/10** — 3 datasets + attribution baselines; careful masking protocol
+     - **Impact: 6/10** — Walmart; guidance for LLMs as explanation components in production next-basket rec
+
+6. **Beyond Polarization: The Generative Constraint of Chain-of-Thought in Pointwise Reranking**
+   * Affiliation: University of Chinese Academy of Sciences (UCAS) / Institute of Software, CAS — *(Xiaoyang Chen, Jie Liu, Haijin Liang, Haibo Shi, Jin Ma, Ben He, Yingfei Sun, Dezhi Ye)*
+   * Link: [arxiv.org/abs/2608.30398](https://arxiv.org/abs/2608.30398)
+   * Venue: Findings of EMNLP 2026
+   * TL;DR: Shows the CoT-vs-direct-scoring gap in pointwise reranking is stable up to 32B parameters and not repairable by RL, fine-grained supervision, or architectural decoupling — routing continuous relevance through discrete text constrains ranking signal resolution.
+   * Key techniques:
+     - Scale study up to 32B parameters, ruling out model/data-capacity confounders
+     - Stress tests: reinforcement learning, fine-grained supervision, architectural decoupling
+     - Concludes the gap is a stable generative-constraint bottleneck, not an easily-resolvable training bias
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — systematic diagnosis of a fundamental CoT bottleneck in pointwise reranking
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — multi-scale + multi-intervention stress tests; EMNLP 2026 Findings peer review
+     - **Impact: 6/10** — UCAS; important negative result for LLM reranking design
 
 ### Papers August 31
 
@@ -1036,95 +1137,6 @@ mindmap
      - **Robustness: 6/10** — RecSys 2026 accepted; ad-recommendation experiments
      - **Impact: 6/10** — University College Dublin / Huawei; privacy-preserving deployment is industry-relevant
 
-### Papers August 22
-
-*Saturday, August 22, 2026. Arxiv weekend pause (no new Saturday announcement). Friday Aug 21 listing yielded 2 new papers (RecPFN, Sequential Benchmarks) plus 3 missed papers from Aug 18–20 (Think-to-Personalize, OneModel) plus 1 replacement (Beyond Uniform Token Training, v2 Aug 20). Total: 5 papers.*
-
-1. **RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations**
-   * Affiliation: SAP
-   * Link: [arxiv.org/abs/2608.19735](https://arxiv.org/abs/2608.19735)
-   * Venue: SIGIR 2026
-   * TL;DR: Brings prior-fitted networks (in-context learning) to sequential recommendation — pretrained entirely on synthetic clickstreams sampled from a broad structural causal prior, amortizing Bayesian-style inference from a small support set; SOTA zero-shot performance across 8 benchmarks.
-   * Key techniques:
-     - Prior-Fitted Network (PFN) pretrained on synthetic clickstream environments from a broad structural causal prior
-     - Amortized Bayesian-style inference from a small support set of domain sequences; no weight updates at inference
-     - Lightweight decoder-only transformer producing next-item predictions in a single forward pass
-     - Deployment-efficient and robust to domain shift; competitive with supervised methods in low-compute/low-data regimes
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/SAP-samples/tabular-ai-recpfn](https://github.com/SAP-samples/tabular-ai-recpfn) — official SAP samples repo with training + evaluation code
-     - **Novelty: 7/10** — First to bring prior-fitted networks / in-context learning to sequential recommendation
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — SIGIR 2026 peer-reviewed; 8 public benchmarks; robust to domain shift
-     - **Impact: 7/10** — SIGIR 2026; SAP; a practical path to generalizable, data-efficient recommenders
-
-2. **Do Sequential Recommendation Benchmarks Really Require Higher-Order Sequence Modelling?**
-   * Affiliation: Spotify
-   * Link: [arxiv.org/abs/2608.19833](https://arxiv.org/abs/2608.19833)
-   * Venue: RecSys 2026
-   * TL;DR: Two simple recency-weighted pairwise probes (SeqRules + PCTM) that learn no higher-order sequence representations match or beat SASRec on most benchmarks, questioning whether widely used sequential-rec benchmarks actually measure higher-order sequence modelling.
-   * Key techniques:
-     - SeqRules (Sequential Rules) and PCTM (Probabilistic Collaborative Transition Model) — recency-weighted pairwise probes without higher-order sequence representations
-     - Reproduction of eSASRec + sampled-softmax SASRec as the reference point
-     - At least one probe exceeds the eSASRec reproduction by 15–38% on 3 Amazon datasets and 4.4% on ML-1M
-     - Concrete test of whether a benchmark can meaningfully measure higher-order sequence-modelling gains
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Provocative benchmarking study with a concrete, reusable test for higher-order gains
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; 8 datasets
-     - **Impact: 7/10** — Spotify; challenges a core premise of sequential-rec benchmark design
-
-3. **Think-to-Personalize: Unifying Reasoning and Retrieval for User-Centric Personalized Dense Retrieval**
-   * Affiliation: University of Science and Technology of China / Meituan — *(Angqing Jiang, Gaoming Zhang, Defu Lian — USTC; Jianchun Song, Kena Qi, Dayao Chen, Wei Lin — Meituan)*
-   * Link: [arxiv.org/abs/2608.18855](https://arxiv.org/abs/2608.18855)
-   * Venue: CIKM 2026
-   * TL;DR: Unifies explicit user-centric intent reasoning with dense retrieval — the LLM reasons over the user's purchase history to deduce latent needs and generate an intent-enhanced query encoded into a unified dense embedding; two-stage SFT + GRPO RL.
-   * Key techniques:
-     - Explicit user-centric intent reasoning over historical purchase sequences to disambiguate noisy behavior
-     - Intent-enhanced query generation, then encoded into a unified dense embedding for retrieval
-     - Two-stage training: SFT (cold-start capability) + GRPO RL (align reasoning with retrieval utility)
-     - Online A/B: +0.46% order volume
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Reasoning-driven personalized dense retrieval (vs implicit embedding interaction) is a clean, well-motivated angle
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — CIKM 2026 peer-reviewed; proprietary + public benchmarks; online A/B
-     - **Impact: 6/10** — Meituan/USTC; a new paradigm for reasoning-driven personalized retrieval in e-commerce
-
-4. **OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking**
-   * Affiliation: Xiaohongshu
-   * Link: [arxiv.org/abs/2608.18606](https://arxiv.org/abs/2608.18606)
-   * Venue: arXiv preprint, August 2026 (deployed in production at Xiaohongshu)
-   * TL;DR: Unified multi-stream final-ranking foundation mapping heterogeneous behaviors into shared event sequences with an action-oriented backbone + Scenario-aware Information Modulation; deployed across Explore Feed, Feed Advertising, and Merchant Recommendation with consistent A/B gains.
-   * Key techniques:
-     - Shared event sequences unifying heterogeneous cross-stream user behaviors
-     - Long-context user representations with an action-oriented backbone
-     - Scenario-aware Information Modulation balancing cross-stream transfer and stream-specific specialization
-     - Production serving optimizations (stratified user representation, multi-objective training, feature decomposition, user-feature prefetching, shared user-tower)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Unified multi-scenario ranking foundation is practical; scenario-aware modulation is conceptually incremental
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 7/10** — Production deployment; online A/B gains across 3 streams
-     - **Impact: 7/10** — Xiaohongshu; production-proven unified multi-stream ranking foundation
-
-5. **Beyond Uniform Token Training: A Multi-Target Framework for Learning Token-Weighted Objectives in Generative Recommenders**
-   * Affiliation: National Taiwan University / Academia Sinica — *(Wei-Ning Chiu, Song-Duo Ma, Pu-Jen Cheng — NTU; Han-Jay Shu — National Tsing Hua University; Chuan-Ju Wang — Academia Sinica)*
-   * Link: [arxiv.org/abs/2601.17787](https://arxiv.org/abs/2601.17787)
-   * Venue: CIKM 2026
-   * TL;DR: Token-weighted training objectives for generative recommenders — prefix-aware Front-Greater Weighting plus frequency weighting for long-tail tokens, integrated via multi-target curriculum learning; improves both popular and long-tail item recommendation.
-   * Key techniques:
-     - Front-Greater Weighting: prefix-aware scheme emphasizing tokens that most reduce semantic ambiguity among candidate items
-     - Frequency weighting: upweights infrequent tokens to counter long-tailed distributions and popularity bias
-     - Multi-target optimization with curriculum learning integrating token-weighted objectives with standard likelihood
-     - Robust across semantic-ID constructions and backbone scales; helps both head and tail items
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/CHIUWEINING/Token-Weighted-Multi-Target-Learning-for-Generative-Recommenders-with-Curriculum-Learning](https://github.com/CHIUWEINING/Token-Weighted-Multi-Target-Learning-for-Generative-Recommenders-with-Curriculum-Learning) — individual research repo with training code
-     - **Novelty: 6/10** — Token-weighted objectives aligned with semantic-ID structure is a clean, underexplored training fix
-     - **Fairness: 5/10** — Frequency weighting directly mitigates popularity bias toward long-tail items
-     - **Robustness: 6/10** — CIKM 2026 peer-reviewed; multiple benchmarks; robust across SID constructions and backbone scales
-     - **Impact: 6/10** — NTU/Academia Sinica; token-weighted training applicable to any semantic-ID generative recommender
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1371,7 +1383,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 145 papers as of August 31.
+**Count:** 146 papers as of September 1.
 
 | Score | Paper |
 | --- | --- |
@@ -1475,6 +1487,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking) |
 | 7/10 | Rethinking Item Tokenization in Generative Recommenders: From Fixed Atoms to Semantic Subwords (SST) |
 | 7/10 | Difficulty-Aware Semantic-ID Optimization for Generative Recommendation (DASO) |
+| 7/10 | CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation (CoFiRec) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
