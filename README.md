@@ -41,7 +41,7 @@ mindmap
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
         ManCAR -- Xiamen U / Shopee
-        DASO -- Meta / Penn State
+        DREAMS -- Sichuan University / NUS
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -51,6 +51,7 @@ mindmap
         OpenOneRec -- Kuaishou
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
+        RPCBench -- Jilin University
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
@@ -64,8 +65,6 @@ mindmap
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
         CoFiRec -- UIUC / Ant Group
-      Multimodal Fusion & Alignment
-        SG-UMP -- Imperial College London / NUPT
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -77,6 +76,129 @@ mindmap
 
 ---
 ## By Date
+
+### Papers September 02
+
+*Wednesday, September 2, 2026. Arxiv active — Tuesday announcement batch. cs.IR/cs.AI returned 7 recommendation papers spanning Tencent's unified industrial generative framework (TGR), a dual-node Monte Carlo Tree Search conversational recommender (DREAMS, EMNLP 2026, open-source), a co-evolving generative retriever trained with RL (CoGR, UNC/Apple), ByteDance's recommendation-native Transformer scaling (ReST), a training-time cold-item swap for sequential recommenders (SwapRec), a world-model-guided RL recommender (WMG-RL, EMNLP 2026), and a premise-critique benchmark for LLM recommenders (RPCBench, open-source). Total: 7 papers (2 opensource).*
+
+1. **TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning**
+   * Affiliation: Tencent — *(TGR Team: Lei Cheng, Haonan Hu, Beibei Kong, Yudong Li, Zang Li, Yunsheng Pang, Hongyang Su, Jianchao Tu, Yunlong Wang, Bing Wen, Junzhang Zhu, Shaojie Zhu, Chengxiang Zhuo)*
+   * Link: [arxiv.org/abs/2609.00986](https://arxiv.org/abs/2609.00986)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: Tencent Generative Recommendation (TGR) — a deployed industrial framework advancing recommendation toward the generative paradigm across three coupled directions: generative ranking (CCFormer), end-to-end generation (BARGE + whole-slate HiGR), and offline-injected semantic-ID reasoning tokens (TGR-Reason).
+   * Key techniques:
+     - TGR-GenRank / CCFormer: unified feature tokenization, field-separated cross attention, subspace token mixing, hierarchical sequence compression with per-item multi-task outputs
+     - TGR-GenRec / BARGE: item context-aware attention + hierarchical path reranking + orthogonal dual-path decoding for hierarchical SID generation
+     - TGR-GenRec / HiGR: whole-slate generation with prefix-structured semantic IDs, coarse-to-fine decoding, listwise multi-objective alignment (5× inference speedup)
+     - TGR-Reason: offline-generated SID reason tokens injected into online decoding, removing request-time rollout
+     - Deployed across Tencent surfaces serving hundreds of millions of users; CCFormer fully launched (+3.57% CTR, +1.71% ad revenue), TGR-Reason +477.8% cold-start new-user Hit@1
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 8/10** — unified ranking + generation + reasoning with whole-slate prefix-SID decoding is a comprehensive, forward-looking industrial design
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 9/10** — full production rollout with multiple A/B tests at Tencent scale
+     - **Impact: 9/10** — Tencent; hundreds of millions of users; blueprint for the next-gen generative ranking/generation stack
+
+2. **Towards Effective Structured Context Modeling for Conversational Recommender Systems via Dual-node Monte Carlo Tree Search**
+   * Affiliation: Sichuan University / National University of Singapore / Singapore Management University — *(Jincheng Zhang, Chen Huang, Wenqiang Lei — Sichuan University; See-Kiong Ng — NUS; Yang Deng — SMU)*
+   * Link: [arxiv.org/abs/2609.00618](https://arxiv.org/abs/2609.00618)
+   * Venue: EMNLP 2026 (Main Conference)
+   * TL;DR: DREAMS — a tree-structured context modeling framework for conversational recommendation that splits multi-turn preference tracking into MCTS-driven elicitation nodes (strategic action exploration) and LLM-based exploitation nodes (structured retrieval-query refinement).
+   * Key techniques:
+     - Dual node types aligned with the two CRS objectives: preference elicitation vs. preference exploitation
+     - Elicitation nodes use Monte Carlo Tree Search to strategically explore conversational actions and infer latent preferences
+     - Exploitation nodes use LLM-based refinement to transform the tracked preference state into structured retrieval queries
+     - Benchmark experiments on ReDial and OpenDialKG
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/SCUNLP/DREAMS](https://github.com/SCUNLP/DREAMS) — complete repo (code/data/script/tests, README with install + web-demo + CLI + simulator-eval commands, requirements.txt); no license
+     - **Novelty: 6/10** — dual-node MCTS for CRS context modeling is a fresh structure, though MCTS itself is a known tool
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — EMNLP 2026 main; benchmark datasets with simulator-based evaluation
+     - **Impact: 6/10** — EMNLP 2026; open-source MCTS framework for conversational recommenders
+
+3. **It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning**
+   * Affiliation: University of North Carolina at Chapel Hill / Apple — *(Runpeng Dai, Kaili Huang — UNC Chapel Hill; Changsung Kang, Ciya Liao — Apple)*
+   * Link: [arxiv.org/abs/2609.00638](https://arxiv.org/abs/2609.00638)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.CL)
+   * TL;DR: CoGR trains LLMs to directly construct retrieval representations on both query and item sides, each emitting a compact keyword set matched through an inverted index, then co-evolves the two generators with GRPO against the opposite side's frozen index.
+   * Key techniques:
+     - Two-sided generative keyword construction preserving compatibility with keyword-based retrieval infrastructure
+     - Supervised fine-tuning to establish an aligned keyword space, then co-evolving RL (GRPO) alternating query/item-side optimization
+     - Item side receives a counterfactual marginal reward measuring the query-side F1 change caused by its keywords
+     - Best F1 across 10 sparse/dense/generative baselines on an internal APP Marketplace dataset and the public WANDS benchmark (+10.9% / +36.1%)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — symmetric co-evolution of query- and item-side generators with a counterfactual marginal reward is a clean, novel retrieval formulation
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 6/10** — 10 baselines across internal + public benchmarks
+     - **Impact: 6/10** — Apple; drops into existing inverted-index retrieval stacks with large F1 gains
+
+4. **From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs**
+   * Affiliation: ByteDance — *(Jie Chen, Xiangqian Yu, Yanchao Lian, Tan Lu, Run Yang, Zhengchun Shang, Xing Wang, Cheng Chen, Ke Hu, Qiang Li, Tianjiu Yin, Xiaobing Liu)*
+   * Link: [arxiv.org/abs/2609.01240](https://arxiv.org/abs/2609.01240)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.AI / cs.LG)
+   * TL;DR: ReST — a recommendation-native Transformer scaling framework that handles noisy/sparse behavior signals via a dual-gated sequence encoder and the compute asymmetry of ranking via a heavy reusable encoder + lightweight cross decoder with shared-prefix serving.
+   * Key techniques:
+     - Dual-gated attention, rotary positional + temporal embedding, stabilized residual normalization, training-only auxiliary objectives
+     - Factorization into a heavy reusable encoder and a projection-free-KV lightweight cross decoder (compute-once, decode-many-times)
+     - User-level shared-prefix training coupled with shared-prefix serving
+     - One-week online A/B: +1.31% AUC and +11.93% core revenue within a 50 ms P99 budget; fully deployed
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — rec-native scaling design with shared-prefix serving is a practical, well-motivated contribution
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — industrial + public benchmarks, online A/B, full deployment
+     - **Impact: 7/10** — ByteDance; production-deployed ranking backbone for behavior-sequence scaling
+
+5. **SwapRec: Warming Up Cold Items Through Training-Time Swaps**
+   * Affiliation: Albatross AI / Johannes Kepler University Linz — *(Marta Moscati, Jan Malte Lichtenberg, Davide Abbattista, Antonio De Candia, Laura Boggia, Matteo Ruffini)*
+   * Link: [arxiv.org/abs/2609.00913](https://arxiv.org/abs/2609.00913)
+   * Venue: DaQuaMRec @ RecSys 2026 (2nd International Workshop on Data Quality-Aware Multimodal Recommendation)
+   * TL;DR: Shows sequential recommenders are not robust to the inference-time "swap" of cold items for their most-similar warm neighbors, and fixes it by applying the same swap heuristic at training time (SwapRec), improving accuracy and cold-item exposure.
+   * Key techniques:
+     - Reveals sequential models degrade when cold items are swapped for warm neighbors at inference
+     - SwapRec applies the identical swap heuristics during training, making the model swap-robust
+     - Quantitative evaluation in three domains (online shopping, movie, music) across SOTA sequential architectures
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 5/10** — simple but effective training-time formalization of an existing industrial heuristic
+     - **Fairness: 4/10** — increases cold-item representation in recommendation lists (coverage/fairness-adjacent)
+     - **Robustness: 5/10** — three domains across multiple sequential backbones; workshop venue
+     - **Impact: 4/10** — practical, easy-to-implement fix for real-time cold-item personalization
+
+6. **World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation**
+   * Affiliation: The Chinese University of Hong Kong / ByteDance / Zhejiang University — *(Ang Li, Bin Liang, Kam-Fai Wong — CUHK; Xin Xu, Yue Ma, Fubang Zhao — ByteDance; Yangyang Kang — Zhejiang University / ByteDance)*
+   * Link: [arxiv.org/abs/2609.01067](https://arxiv.org/abs/2609.01067)
+   * Venue: EMNLP 2026 (Main Conference)
+   * TL;DR: WMG-RL trains a frozen User Engagement World Model (UEWM) that infers user-specific dynamics from engagement history and simulates counterfactual feedback for candidate items, converting it into dense rewards so a compact 1.7B policy matches or surpasses larger LLMs.
+   * Key techniques:
+     - User Engagement World Model treating the recommended item as the action and heterogeneous user feedback as the environment observation
+     - Learns user-specific dynamics from engagement history rather than one fixed transition
+     - Parallel counterfactual feedback prediction for multiple candidate items, converted to dense rewards for policy optimization
+     - 1.7B student policy matches/surpasses much larger LLMs on downstream recommendation tasks
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — world-model-guided RL with counterfactual engagement simulation is a clean, practical alternative to costly online feedback
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 6/10** — EMNLP 2026 main; cross-domain transfer experiments
+     - **Impact: 6/10** — EMNLP 2026; enables compact policies for user-centric agents without online exposure
+
+7. **RPCBench: A Benchmark for Proactive Premise Critique in LLM-based Recommendation**
+   * Affiliation: Jilin University — *(Zhongru Chen, Yuan Wu, Yi Chang)*
+   * Link: [arxiv.org/abs/2609.00918](https://arxiv.org/abs/2609.00918)
+   * Venue: arXiv preprint, September 2026 (cs.AI / cs.CL)
+   * TL;DR: RPCBench evaluates Recommender-Premise Critique — whether LLM recommendation assistants detect, localize, and properly handle faulty premises in requests — via 4,623 evidence-grounded instances across five domains and ten premise-failure types.
+   * Key techniques:
+     - Evidence-grounded instances spanning 5 domains (MovieLens-1M, MIND, Yelp, Amazon Sports, Goodreads) and 10 premise-failure types
+     - Fine-grained evaluation over proactive detection, error localization, post-detection strategy, and evidence faithfulness
+     - Systematic evaluation of 11 LLMs with three-judge aggregation
+     - Finds proactive detection is the main bottleneck and overthinking penalizes over-long reasoning
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 9/10** — [github.com/ZhongruChen/RPCBench](https://github.com/ZhongruChen/RPCBench) — complete 4,623-instance benchmark + full code pipeline + extensive docs (data card, schema, reproduction, paper mapping) + release-validation script; no explicit license
+     - **Novelty: 7/10** — "premise critique" is a fresh evaluation angle beyond ranking/generation accuracy
+     - **Fairness: 5/10** — includes safety/compliance-boundary request handling and evidence-faithfulness, adjacent to robustness/fairness
+     - **Robustness: 8/10** — large-scale (4,623 instances, 11 models, 3 judges) with careful cross-model filtering
+     - **Impact: 7/10** — Jilin University (Yi Chang); timely benchmark as LLMs become interactive recommendation assistants
 
 ### Papers September 01
 
@@ -1048,95 +1170,6 @@ mindmap
      - **Robustness: 6/10** — CIKM 2026 accepted; multiple experiments
      - **Impact: 6/10** — CIKM 2026; Korea University; practical item-side feature selection for LLM reranking
 
-### Papers August 23
-
-*Sunday, August 23, 2026. Arxiv weekend pause — no announcement since Thursday Aug 20, so zero new papers in the past 24h. Fallback per protocol: searched the missing dates in the log (Aug 20 / Aug 17 / Aug 15) plus Aug 14 for missed papers. Three genuinely new papers surfaced on Aug 17 (Unbiased RS, SAHC-NS, TREC 2025 track) and three missed Aug 14 papers (MACS, Residual Dominance, PriCoRec); the five most on-topic are listed below (SAHC-NS, a traditional CF negative-sampling paper, was dropped as out of the generative-recommendation scope). Total: 5 papers.*
-
-1. **Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders**
-   * Affiliation: Hokkaido University
-   * Link: [arxiv.org/abs/2608.14021](https://arxiv.org/abs/2608.14021)
-   * Venue: RecSys 2026
-   * TL;DR: Shows SASRec-style causal self-attention recommenders over-rely on the most recent item because residual connections dominate the self-attention aggregation — "residual dominance" — and gives a training-free inference-time residual-scaling knob to trade off recency vs. context.
-   * Key techniques:
-     - Prediction-time diagnostics + norm-based analysis of the full attention block
-     - "Residual dominance": residual addition sharply shifts the full-block representation toward same-position contributions
-     - Inference-time residual scaling as a controlled intervention inducing a monotonic mixing ↔ last-item-reliance tradeoff
-     - Reducing residual strength recovers final-position misses where non-final positions already rank the ground-truth item correctly
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/keito0329/Residual](https://github.com/keito0329/Residual) — public Python repo with README + supplement PDF matching the paper; no license, 1 star, single-purpose diagnostic
-     - **Novelty: 7/10** — Clean structural account linking last-item reliance to residual dominance is a novel, mechanistic insight
-     - **Fairness: 2/10** — Not addressing fairness
-     - **Robustness: 7/10** — RecSys 2026 peer-reviewed; multiple models/datasets; controlled diagnostic intervention
-     - **Impact: 6/10** — RecSys 2026; practical inference-time fix applicable to any transformer sequential recommender
-
-2. **MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation**
-   * Affiliation: Stanford University / MIT / USC / Amazon
-   * Link: [arxiv.org/abs/2608.14068](https://arxiv.org/abs/2608.14068)
-   * Venue: Stanford Trust&Safety Conference / Stanford Market AI Conference (preprint)
-   * TL;DR: Hybrid multi-agent framework for fixed-catalog conversational e-commerce — LLMs handle language while a deterministic merchant agent enforces retrieval and hard constraints, with a session-persistent preference layer achieving zero constraint drift across turns.
-   * Key techniques:
-     - Hybrid two-agent split: LLM "shopping agent" (NL understanding, elicitation, response) + deterministic "merchant agent" (retrieval, hard-constraint filtering, brand exclusion, progressive relaxation)
-     - Session-persistent preference layer tracking budget overwrites and exclusion reversals across turns
-     - Correctness-critical operations kept deterministic rather than LLM-sampled to avoid hallucination
-     - 87.1% single-turn pass rate + perfect brand compliance; 72% macro Pass@5 with zero constraint drift (vs 56%/52% GPT/Gemini+Catalog)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Deterministic-constraint + LLM hybrid for reliability is clean but conceptually incremental
-     - **Fairness: 4/10** — Brand-exclusion/constraint compliance is a reliability constraint, not demographic fairness
-     - **Robustness: 7/10** — Reliability-focused evaluation vs GPT/Gemini baselines; zero constraint drift
-     - **Impact: 6/10** — Stanford; agentic-commerce reliability under hard constraints is a rising industrial concern
-
-3. **Unbiased Recommender Systems with Implicit Feedback**
-   * Affiliation: University of Illinois at Chicago
-   * Link: [arxiv.org/abs/2608.16704](https://arxiv.org/abs/2608.16704)
-   * Venue: RecSys 2026 (Doctoral Symposium)
-   * TL;DR: Doctoral-consortium work on mitigating position bias in learning-to-rank and popularity bias in CF and GNN social recommenders, so implicit feedback better reflects true user preferences.
-   * Key techniques:
-     - Control-function / residual-based correction for position bias in learning-to-rank
-     - Post-hoc popularity-bias correction in GNN-based collaborative filtering
-     - Debiasing message passing to curb popularity amplification in social/graph recommenders
-     - Unified treatment across LTR, CF, and social recommendation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Synthesizes established debiasing techniques rather than a fundamentally new mechanism
-     - **Fairness: 8/10** — Core focus is position + popularity bias mitigation
-     - **Robustness: 5/10** — Doctoral Symposium (single-author proposal); evaluated across public + industrial benchmarks
-     - **Impact: 5/10** — RecSys 2026 Doctoral Symposium; University of Illinois Chicago; contributes to fairer recommenders
-
-4. **Overview of the TREC 2025 Product Search and Recommendation Track**
-   * Affiliation: University of Illinois Urbana-Champaign / Lowe's / Snowflake / Walmart / Drexel University
-   * Link: [arxiv.org/abs/2608.17138](https://arxiv.org/abs/2608.17138)
-   * Venue: TREC 2025
-   * TL;DR: TREC 2025 product search + recommendation track introduces a novel related-product recommendation task whose annotated dataset distinguishes complementary vs. related products, enabling end-to-end e-commerce retrieval evaluation and conversational product discovery.
-   * Key techniques:
-     - Two tasks: query expansion and related-product recommendation
-     - Annotated dataset distinguishing complementary vs. related product relationships
-     - End-to-end retrieval-quality evaluation for e-commerce (no prior high-quality dataset existed)
-     - Building block for conversational product discovery experiences
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Track dataset released via TREC, not a code repository
-     - **Novelty: 5/10** — Novel related-product (complementary vs. related) task, but a track overview
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — Standardized TREC evaluation across participating systems
-     - **Impact: 6/10** — TREC benchmark; fills a gap in e-commerce recommendation evaluation
-
-5. **PriCoRec: A Privacy-Aware Cloud-Device Collaborative Framework for Ad Recommendation under Feature Constraints**
-   * Affiliation: University College Dublin / Huawei Ireland Research Centre
-   * Link: [arxiv.org/abs/2608.14429](https://arxiv.org/abs/2608.14429)
-   * Venue: RecSys 2026
-   * TL;DR: Splits ad recommendation into a cloud pre-ranking stage (cloud-accessible features) and an on-device ranking stage (sensitive features), keeping privacy-sensitive features on-device while preserving accuracy via a diversity regularizer and cloud-guided training.
-   * Key techniques:
-     - Cloud pre-ranking + on-device ranking split for privacy-aware deployment
-     - Diversity regularizer in pre-ranking to improve shortlist candidate quality
-     - Cloud-guided training to boost the lightweight on-device model without extra inference cost
-     - Keeps sensitive features (age, gender) on-device to satisfy privacy regulations
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Cloud-device privacy split is practical; individual techniques are incremental
-     - **Fairness: 3/10** — Privacy-adjacent, not demographic fairness
-     - **Robustness: 6/10** — RecSys 2026 accepted; ad-recommendation experiments
-     - **Impact: 6/10** — University College Dublin / Huawei; privacy-preserving deployment is industry-relevant
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1383,7 +1416,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 146 papers as of September 1.
+**Count:** 148 papers as of September 2.
 
 | Score | Paper |
 | --- | --- |
@@ -1401,6 +1434,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 9/10 | FORGE: Forming Semantic Identifiers for Generative Retrieval in Industrial Datasets |
 | 9/10 | DynamicPO: Dynamic Preference Optimization for Recommendation (DASFAA 2026) |
 | 9/10 | Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
+| 9/10 | RPCBench: A Benchmark for Proactive Premise Critique in LLM-based Recommendation (RPCBench) |
 | 8.5/10 | Factorized Latent Reasoning for LLM-based Recommendation (FLR) |
 | 8/10 | Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec) |
 | 8/10 | ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation |
@@ -1488,6 +1522,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Rethinking Item Tokenization in Generative Recommenders: From Fixed Atoms to Semantic Subwords (SST) |
 | 7/10 | Difficulty-Aware Semantic-ID Optimization for Generative Recommendation (DASO) |
 | 7/10 | CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation (CoFiRec) |
+| 7/10 | Towards Effective Structured Context Modeling for Conversational Recommender Systems via Dual-node Monte Carlo Tree Search (DREAMS) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
@@ -1668,6 +1703,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Token-Level Credit Assignment / Generative Document Retrieval -- Shandong U
 - DrIG / Dual-role Identifiers Multimodal Generative Retrieval -- U Tsukuba
 - FlashTrie / GPU-Accelerated Constrained Beam Search -- Microsoft / Nvidia
+- TGR / Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
 
 ### RL / Reinforcement Learning
 - Ask to Be Sure / Entropy-Reduction Reward for Multi-Turn LLM Rec — Amazon (CIKM 2026)
@@ -1781,6 +1817,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DCEO / Direct Causal Effect Optimization (actor-critic) for Long-Term User Value -- Alibaba (Taobao & Tmall)
 - Astar / Self-Evolving Industrial AI Evolution-Direction Proposal (mid-training + SFT + RL) -- Alibaba (Lazada) / Zhejiang University
 - DASO / Difficulty-Aware Semantic-ID Optimization (GRPO rollout-allocation) -- Meta / Penn State
+- CoGR / It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning -- UNC Chapel Hill / Apple
+- WMG-RL / World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation -- CUHK / ByteDance / Zhejiang University
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.

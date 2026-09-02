@@ -34,6 +34,7 @@
 - MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation (MACS)
 - When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems (CoVeMem)
 - Astar: Learning to Propose Evolution Directions for Self-Evolving Industrial AI Systems (Astar)
+- DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -59,6 +60,7 @@
 - InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation (UCAS/CASIA)
 - HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
 - Token-Level Credit Assignment Optimization for Generative Document Retrieval
+- TGR: Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -80,6 +82,7 @@
 - Topology-Masked Unified Backbone for Joint Feature Interaction and Multi-Domain Sequence Modeling (MaskRec)
 - Stageboost: Recommending Signals Based on Counterfactual Estimation
 - HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation (HubMixer)
+- From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -101,6 +104,7 @@
 - VaLiDRec: Variable-Length LLM-Aligned Semantic IDs for Generative Recommendation (VaLiDRec)
 - MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation (MOTIF)
 - Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)
+- SwapRec: Warming Up Cold Items Through Training-Time Swaps (SwapRec)
 
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
@@ -132,6 +136,7 @@
 - Ask to Be Sure: Informative Interactions for Confident Multi-Turn LLM Recommendation (Ask to Be Sure)
 - MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation (MACS)
 - Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval
+- DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
 
 ### Cross-Domain
 - Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
@@ -154,6 +159,7 @@
 - Principled Synthetic Data Enables the First Scaling Laws for LLMs in Recommendation (Scaling Laws)
 - RSIR: Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control (RSIR)
 - SAGE (Tabular Data Generation)
+- World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation (WMG-RL)
 
 
 ### Denoising
@@ -232,6 +238,7 @@
 - When Does Supervised Fine-Tuning Reduce Instruction Sensitivity?
 - An Empirical Evaluation of Cross-City POI Recommendation on a Large-Scale Benchmark
 - Off-Policy Evaluation for Semantic ID Recommenders: Does the Model's Own Code Hierarchy Help?
+- RPCBench: A Benchmark for Proactive Premise Critique in LLM-based Recommendation (RPCBench)
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -280,6 +287,7 @@
 - FSGR: Mitigating Token Frequency Bias for Fair SID-Based Generative Recommendation (FSGR)
 - Unbiased Recommender Systems with Implicit Feedback
 - Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)
+- SwapRec: Warming Up Cold Items Through Training-Time Swaps (SwapRec)
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -528,6 +536,8 @@
 - ProRetrieval: Learning to Orchestrate Hybrid Search via Executable Program Synthesis (ProRetrieval)
 - Preference Shapes Relevance: Cross-component Hierarchical Semantic Alignment for Personalized Generative Retrieval (CHAP)
 - Generative Retrieval for E-commerce: Jointly Learning Embedding and Codebook with Same Product Cluster
+- TGR: Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
+- It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning (CoGR)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -714,6 +724,8 @@
 - Stageboost: Recommending Signals Based on Counterfactual Estimation
 - Token-Level Advertising
 - HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation (HubMixer)
+- TGR: Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
+- From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -931,6 +943,9 @@
 - An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
 - MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation (MOTIF)
 - Beyond Ranking Accuracy: Evaluating LLM-Cited Feature Rationales for Next Basket Repurchase Recommendation
+- RPCBench: A Benchmark for Proactive Premise Critique in LLM-based Recommendation (RPCBench)
+- World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation (WMG-RL)
+- DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -984,6 +999,7 @@
 - Beyond a Single Story: Meta-Reviewing Sparse and Incomplete User-generated Contents for Recommendation (MOSAIC)
 - HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation (HubMixer)
 - Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR)
+- From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
 ### Multi-behavior Recommendation
 
 - BITRec
@@ -1138,6 +1154,7 @@
 - ThinkGR: Integrating Chain-of-Thought into Generative Retrieval
 - TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
 - VRec (Verifiable Reasoning)
+- DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
 
 
 ### Reinforcement Learning
@@ -1158,6 +1175,8 @@
 - Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere)
 - Astar: Learning to Propose Evolution Directions for Self-Evolving Industrial AI Systems (Astar)
 - ProRetrieval: Learning to Orchestrate Hybrid Search via Executable Program Synthesis (ProRetrieval)
+- It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning (CoGR)
+- World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation (WMG-RL)
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1202,6 +1221,7 @@
 - Understanding Generative Recommendation with Semantic IDs from a Model-scaling View (SID Scaling)
 - UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 - TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation (TransRetrieval)
+- From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
 
 
 
@@ -1361,6 +1381,7 @@
 - Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance)
 - Hamiltonian Spectral-Temporal Dissipative Dynamics for Sequential Recommendation (HSR)
 - SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP)
+- SwapRec: Warming Up Cold Items Through Training-Time Swaps (SwapRec)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
