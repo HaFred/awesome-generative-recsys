@@ -61,6 +61,7 @@
 - HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec)
 - Token-Level Credit Assignment Optimization for Generative Document Retrieval
 - TGR: Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
+- hLLM: Single Pass Decoding for Generative Reranking (hLLM)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -83,6 +84,7 @@
 - Stageboost: Recommending Signals Based on Counterfactual Estimation
 - HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation (HubMixer)
 - From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
+- From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -288,6 +290,7 @@
 - Unbiased Recommender Systems with Implicit Feedback
 - Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)
 - SwapRec: Warming Up Cold Items Through Training-Time Swaps (SwapRec)
+- GenCAR: Generative Counterfactual Alignment with Risk-Controlled Selection for Out-of-Distribution Recommendation (GenCAR)
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -538,6 +541,7 @@
 - Generative Retrieval for E-commerce: Jointly Learning Embedding and Codebook with Same Product Cluster
 - TGR: Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
 - It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning (CoGR)
+- SPAR: Enhancing Industrial-Scale Generative POI Recommendation via Real-World Spatial Perception (SPAR)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -726,6 +730,7 @@
 - HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation (HubMixer)
 - TGR: Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
 - From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
+- DMRL: Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation (DMRL)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -746,6 +751,7 @@
 - Real-Time Hard Negative Sampling via LLM-based Clustering for Large-Scale Two-Tower Retrieval
 - Birds of a Feather Cluster Nearby: A Proximity-Aware Geo-Codebook for Local Service Recommendation
 - Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
+- Recommender System as Slow and Fast Thinkers (DS-Frame)
 
 
 ### Inference Acceleration / Distillation
@@ -946,6 +952,7 @@
 - RPCBench: A Benchmark for Proactive Premise Critique in LLM-based Recommendation (RPCBench)
 - World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation (WMG-RL)
 - DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
+- SPAR: Enhancing Industrial-Scale Generative POI Recommendation via Real-World Spatial Perception (SPAR)
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1000,6 +1007,8 @@
 - HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation (HubMixer)
 - Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR)
 - From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
+- Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation (OrthoRec)
+- From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT)
 ### Multi-behavior Recommendation
 
 - BITRec
@@ -1078,6 +1087,7 @@
 - MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation (MOTIF)
 - SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP)
 - Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR)
+- Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation (OrthoRec)
 
 ### Optimizer
 - MuonRec
@@ -1114,6 +1124,7 @@
 - SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking (SWIM)
 - Equal Ranking Quality, Different Decisions: Training Order-Consistent LLM Scorers
 - Beyond Polarization: The Generative Constraint of Chain-of-Thought in Pointwise Reranking
+- hLLM: Single Pass Decoding for Generative Reranking (hLLM)
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS)
@@ -1177,6 +1188,7 @@
 - ProRetrieval: Learning to Orchestrate Hybrid Search via Executable Program Synthesis (ProRetrieval)
 - It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning (CoGR)
 - World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation (WMG-RL)
+- DMRL: Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation (DMRL)
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1382,6 +1394,7 @@
 - Hamiltonian Spectral-Temporal Dissipative Dynamics for Sequential Recommendation (HSR)
 - SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP)
 - SwapRec: Warming Up Cold Items Through Training-Time Swaps (SwapRec)
+- Recommender System as Slow and Fast Thinkers (DS-Frame)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey

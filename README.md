@@ -40,8 +40,7 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
-        ManCAR -- Xiamen U / Shopee
-        DREAMS -- Sichuan University / NUS
+        DS-Frame -- CityU HK
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -58,13 +57,15 @@ mindmap
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
+        CRAFT -- Tianjin University
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
-        CoFiRec -- UIUC / Ant Group
+      Multimodal Fusion & Alignment
+        OrthoRec -- CityU HK
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -76,6 +77,128 @@ mindmap
 
 ---
 ## By Date
+
+### Papers September 03
+
+*Thursday, September 3, 2026. Arxiv active — Wednesday announcement batch. cs.IR/cs.LG returned 7 recommendation papers spanning an adaptive fast-slow sequential recommendation framework (DS-Frame, open-source), a generative counterfactual alignment method with conformal FDR control for out-of-distribution recommendation (GenCAR), a conflict-aware multimodal recommender (OrthoRec, ACM MM 2026, open-source), Alibaba AMAP's industrial-scale generative POI recommender (SPAR), a document-mediated RL skill-optimization framework for ads (DMRL, SJTU/Kuaishou), Meta's single-pass decoding for generative reranking (hLLM), and a unified feature-transport block that won TAAC2026 (CRAFT, KDDCUP 2026 workshop, open-source). Total: 7 papers (3 opensource).*
+
+1. **Recommender System as Slow and Fast Thinkers**
+   * Affiliation: City University of Hong Kong — *(Zichen Yuan, Youhua Li — CityU HK; Xiaoxuan Dong, Jinwei Yang, Jining Luan — UESTC; Linkun Dai — SJTU; Chunxiao Li — USTC; Joemon M. Jose, Junchen Fu — University of Glasgow; Dexu Yu — Fenz.AI; Hanwen Du — Ohio State University)*
+   * Link: [arxiv.org/abs/2609.02671](https://arxiv.org/abs/2609.02671)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: DS-Frame — an adaptive fast-slow inference framework for sequential recommendation that pairs a fast routine-prediction system with a slow iterative latent-refinement system and a learned selector that routes each sample under a controllable computation budget.
+   * Key techniques:
+     - Fast System for efficient routine prediction on common behavior patterns
+     - Slow System for iterative latent refinement on challenging user groups (long histories, less-mainstream item profiles)
+     - Learned selector routing each sample under a controllable computation budget (accuracy-efficiency trade-off)
+     - Consistent gains on 5 real-world datasets, with larger gains on operationally challenging groups
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/ZichenYuan233/Recommender-System-as-Slow-and-Fast-Thinkers](https://github.com/ZichenYuan233/Recommender-System-as-Slow-and-Fast-Thinkers) — full code (helpers/models/utils + main.py) with README describing structure and usage; no license, no requirements.txt, minimal install/data docs
+     - **Novelty: 6/10** — Kahneman-style fast/slow adaptive inference is a fresh angle for sequential rec, though the underlying backbones are standard
+     - **Fairness: 0/10** — motivated by heterogeneous user environments but no explicit fairness mechanism
+     - **Robustness: 7/10** — 5 datasets; consistent gains and larger wins on challenging groups
+     - **Impact: 6/10** — CityU HK; adaptive inference for sequential recommenders
+
+2. **GenCAR: Generative Counterfactual Alignment with Risk-Controlled Selection for Out-of-Distribution Recommendation**
+   * Affiliation: Southern University of Science and Technology (SUSTech) — *(Qianqian Wang, Wenwu Gong, Lili Yang — SUSTech; Jiawen Zeng — University of Pennsylvania; Yunshan Li)*
+   * Link: [arxiv.org/abs/2609.02162](https://arxiv.org/abs/2609.02162)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.LG)
+   * TL;DR: GenCAR couples preference-grounded counterfactual supervision with conformal-p-value calibrated set selection to serve OOD recommendations while provably controlling the proxy-label false discovery rate.
+   * Key techniques:
+     - Formulates OOD serving as the α-Valid Counterfactual Recommendation (α-VCR) problem
+     - Fixes stable-preference representation while intervening on the environmental factor; grounds offline LLM proposals via preference anchors + trust-radius filtering
+     - Conformal p-values + Benjamini-Hochberg selection; Benjamini-Yekutieli guarantee under arbitrary dependence
+     - Finite-sample, distribution-free FDR bounds under exchangeability and positive regression dependence
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 8/10** — marrying counterfactual candidate generation with conformal FDR-controlled selection is a principled, underexplored combination
+     - **Fairness: 6/10** — risk/FDR control makes served sets reliable under shift (fairness-adjacent reliability)
+     - **Robustness: 8/10** — theoretical finite-sample guarantees + extensive OOD benchmark audits of realized false-discovery proportions
+     - **Impact: 6/10** — SUSTech/UPenn; theory-grounded OOD recommendation
+
+3. **Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation**
+   * Affiliation: City University of Hong Kong — *(Jialin Liu, Ray C. C. Cheung — CityU HK; Zhaorui Zhang — Hong Kong Polytechnic University)*
+   * Link: [arxiv.org/abs/2609.02152](https://arxiv.org/abs/2609.02152)
+   * Venue: ACM Multimedia 2026 (ACM MM 2026)
+   * TL;DR: OrthoRec challenges the "modality harmony" assumption by geometrically purifying multimodal features against a collaborative anchor and routing purified modalities through a topology-guided MoE to avoid representation distortion from deceptive visual clickbait.
+   * Key techniques:
+     - Collaborative-Guided Orthogonal Purification (CGOP): decouples each modality into parallel/orthogonal directions and truncates orthogonal noise with energy-preserving normalization
+     - Topology-Aware Routing Mixture-of-Experts (TAR-MoE): decoupled sigmoid gating conditioned on collaborative topology breaks the softmax zero-sum bottleneck
+     - safe-SSL objective dynamically penalizes forced contrastive alignment of contradictory pairs
+     - Robust on 3 Amazon datasets under modality noise and item sparsity
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/Camilla-jl/Orthorec](https://github.com/Camilla-jl/Orthorec) — complete PyTorch impl (common/configs/data/models/utils + main.py + train.sh + requirement.txt), README with dataset download instructions and hyperparameter config; no license
+     - **Novelty: 7/10** — conflict-aware multimodal rec via orthogonal purification + topology-guided routing is a clean, non-incremental contribution
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — ACM MM 2026; robust under modality noise and item sparsity
+     - **Impact: 7/10** — ACM MM 2026; open-source multimodal recommendation
+
+4. **SPAR: Enhancing Industrial-Scale Generative POI Recommendation via Real-World Spatial Perception**
+   * Affiliation: AMAP (Alibaba Group), Beijing — *(Fangye Wang, Haowen Lin, Yifang Yuan, Song Yang, Xiaojiang Zhou, Pengjie Wang — AMAP/Alibaba; Yunjin Gu — CUHK-Shenzhen)*
+   * Link: [arxiv.org/abs/2609.02062](https://arxiv.org/abs/2609.02062)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: SPAR injects real urban spatial knowledge (distance/direction/reachability) into generative POI recommendation across tokenization, continual pre-training, and task-vector-anchored fine-tuning, so predicted POIs are both behaviorally plausible and reachable.
+   * Key techniques:
+     - Spatially-Intrinsic SID (SI-SID): encodes lon/lat into a sinusoidal geospatial embedding fused with textual semantics before RQ-Kmeans
+     - Multi-Granular Geospatial CPT (MG-CPT): continually pre-trains the base LLM on 25 curated geospatial datasets across attribute/relation/navigation tiers
+     - Task-Vector Anchored SFT (TV-SFT): freezes spatial knowledge as a parameter-space task vector to prevent catastrophic forgetting during behavioral fine-tuning
+     - Evaluated on 2 public + 4 industrial-scale datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no code yet (authors plan to release 4 industrial POI datasets + 25 geospatial training sets + an 18-task benchmark, but no link)
+     - **Novelty: 8/10** — explicitly learning/preserving urban spatial geometry for generative POI is a genuine gap-filler
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 8/10** — 2 public + 4 industrial datasets with visualization
+     - **Impact: 8/10** — Alibaba AMAP; industrial-scale POI recommendation
+
+5. **DMRL: Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation**
+   * Affiliation: Shanghai Jiao Tong University / Kuaishou Technology — *(Wei Zhang, Hongji Li, Song Sun, Peng Yu, Xue Yang, Lei Zhao, Peng Jiang)*
+   * Link: [arxiv.org/abs/2609.02170](https://arxiv.org/abs/2609.02170)
+   * Venue: arXiv preprint, September 2026 (cs.LG)
+   * TL;DR: DMRL models skill-document optimization as a sequence of structured editing actions, with an upper-level agent editing docs and a frozen lower-level task agent evaluating edits via A/B testing, to self-evolve ad-recommendation skills with principled credit assignment.
+   * Key techniques:
+     - Dual-Relative Policy Optimization (DRPO): robust, risk-aware advantage estimation for post-training
+     - Long-term Reward Predictor (LRP): estimates long-term outcomes via disentangled representation learning + cross-attention over population heterogeneity
+     - Upper/lower agent split with A/B-tested document edits for credit assignment
+     - Deployed on a large-scale short-video ads platform
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — document-mediated skill self-evolution with DRPO/LRP is a fresh take on LLM-driven ad tuning
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — deployed on a short-video ads platform; outperforms SOTA baselines across ad metrics
+     - **Impact: 7/10** — SJTU/Kuaishou; industrial advertising recommendation
+
+6. **hLLM: Single Pass Decoding for Generative Reranking**
+   * Affiliation: Meta Platforms, Inc. — *(Emil Laftchiev, Prachi Agrawal, Moe Kayali, Bixing Yan, Qi Xu, Zijie Lei, Chen Qiu, Zhi Hua, Ke Li, Luke Simon)*
+   * Link: [arxiv.org/abs/2609.01807](https://arxiv.org/abs/2609.01807)
+   * Venue: arXiv preprint, September 2026 (cs.LG / cs.AI / cs.IR)
+   * TL;DR: hLLM (Hungarian LLM) decodes all N ranking ordinals in O(1) forward passes by reading an N×K item-position score matrix off prefill hidden states and solving the optimal bipartite assignment via the Hungarian algorithm — a 64× end-to-end speedup while maintaining ranking quality.
+   * Key techniques:
+     - Reads an N×K item-position score matrix from the LLM's prefill hidden states with a lightweight self-attention head
+     - Decodes ordinals as the optimal bipartite assignment (Hungarian algorithm), yielding a valid permutation by construction
+     - LoRA fine-tuning + teacher ranking distillation → 28 ms end-to-end, 64× speedup
+     - Connects generative ranking to combinatorial optimization; full ablation of architecture/training-signal/backbone
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 8/10** — O(1)-decode generative reranking via combinatorial assignment is a genuinely new decoding paradigm
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — ranking quality on par with teacher + systematic ablations
+     - **Impact: 8/10** — Meta; real-time generative reranking
+
+7. **From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models**
+   * Affiliation: Tianjin University (VIMA Group) — *(Zichen Luo, Jiachen Guo, Keming Gu, Jie Zhang)*
+   * Link: [arxiv.org/abs/2609.01655](https://arxiv.org/abs/2609.01655)
+   * Venue: KDDCUP 2026 Workshop (oral)
+   * TL;DR: CRAFT reframes unified recommendation from local feature interaction to controlled representation transport, where non-sequential context actively generates residual displacement and memory-preserving signals for intent/sequence states — the 1st-place academic-track solution of the TAAC-UniRec challenge.
+   * Key techniques:
+     - Contextual Residual Adaptive Feature Transport (CRAFT) block: reliability-aware contextual field generates sample-conditioned residual displacement + memory-preserving signals
+     - CRAFT Bridge: sequence refinement, intent-to-sequence cross-attention, and token-subspace rewiring
+     - Scales with both depth (6 blocks) and width; test AUC 0.838090 surpassing the prior leaderboard best
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5/10** — [github.com/AshleyLuo001/CRAFT](https://github.com/AshleyLuo001/CRAFT) — model-only release (craft_model.py + README + requirements.txt) with detailed architecture/scaling docs; no training pipeline, private data, or checkpoints
+     - **Novelty: 6/10** — transport-before-interaction view is a clean reframing, though architecturally incremental
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 6/10** — depth/width scaling + competition AUC; KDDCUP 2026 workshop oral
+     - **Impact: 7/10** — KDDCUP 2026 workshop oral; 1st-place TAAC-UniRec challenge
 
 ### Papers September 02
 
@@ -1081,95 +1204,6 @@ mindmap
      - **Robustness: 8/10** — Fixes variance collapse/component redundancy; 1.5-month production A/B
      - **Impact: 6/10** — ICDM 2026; VK industrial short-video
 
-### Papers August 24
-
-*Monday, August 24, 2026. Arxiv weekend pause continues — no announcement since Thursday Aug 20, and the Monday batch was not yet posted at capture time, so zero new papers in the past 24h. Fallback per protocol: re-scanned the most recent batch (Fri Aug 21 cs.IR) and surfaced 5 recommendation papers that were missed by the original Aug 21 entry. Total: 5 papers.*
-
-1. **Recommendation Quality and the Concentration of Consumption: Experimental Evidence from Netflix**
-   * Affiliation: Netflix (with Northwestern University / Cornell University academic co-authors)
-   * Link: [arxiv.org/abs/2608.21274](https://arxiv.org/abs/2608.21274)
-   * Venue: arXiv preprint, August 2026 (econ.GN / cs.IR)
-   * TL;DR: A field experiment on 8.5M Netflix users showing that recommendation-quality improvements raise total consumption and diffuse it from "superstar" head items toward the "middle-tail" (with minimal long-tail effect), challenging the claim that recommenders polarize consumption.
-   * Key techniques:
-     - Large-scale online experiment (8.5M users) on Netflix's production recommender
-     - Causal measurement of how recommendation quality shifts the consumption distribution across head / middle-tail / long-tail
-     - Finds returns to investing in middle-tail products grow as algorithms improve and platforms scale
-     - Economic framing linking recommender quality to market concentration
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code (Netflix proprietary experiment data)
-     - **Novelty: 5/10** — Empirical/causal study rather than a new method
-     - **Fairness: 7/10** — Directly measures consumption concentration / head-tail exposure, a fairness-relevant question
-     - **Robustness: 8/10** — 8.5M-user randomized experiment with strong causal identification
-     - **Impact: 8/10** — Netflix; challenges the "recommenders polarize consumption" narrative (econ.GN + cs.IR)
-
-2. **One Hierarchy, Two Systems: Semantic Product IDs for Discovery-Surface Ranking and Search-Page Query Reformulation**
-   * Affiliation: DoorDash
-   * Link: [arxiv.org/abs/2608.20640](https://arxiv.org/abs/2608.20640)
-   * Venue: arXiv preprint, August 2026 (cs.IR / cs.AI)
-   * TL;DR: A single hierarchical Semantic ID learned from product-content embeddings serves both personalized ranking (aggregating affinity/performance over SID prefixes) and query reformulation (grounding queries in SID concepts), with online gains in add-to-cart and reduced search effort.
-   * Key techniques:
-     - One shared semantic hierarchy learned from product-content embeddings, reused across ranking + query reformulation
-     - Ranking: aggregate consumer affinity + product performance over SID prefixes; sequence features for candidates and histories
-     - Query reformulation: ground queries/session transitions in SID concepts; navigation/refinement; assortment-filtered suggestions
-     - Online: stronger top-slot add-to-cart, broader exposure for less-popular products, reduced search effort
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Unifying ranking + query reformulation over one semantic hierarchy is a clean design
-     - **Fairness: 4/10** — Broader exposure for less-popular products is exposure-fairness adjacent
-     - **Robustness: 7/10** — Controlled ablations + online A/B at DoorDash
-     - **Impact: 7/10** — DoorDash; shared SID hierarchy spanning recommendation and search
-
-3. **Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)**
-   * Affiliation: Northeastern University (China)
-   * Link: [arxiv.org/abs/2608.21243](https://arxiv.org/abs/2608.21243)
-   * Venue: arXiv preprint, August 2026 (cs.IR / cs.AI)
-   * TL;DR: Uses knowledge-graph evidence to calibrate which historical interactions are reliable for sequential recommendation — identifying unusually-prominent relational paths, then comparing each interaction with structurally matched reference items to derive retention coefficients that gate history representations and reweight losses, with no KG needed at inference.
-   * Key techniques:
-     - Calibrated KG evidence per training example without adding graph representations to the recommendation backbone
-     - Compares observed context vs. structurally matched alternatives to find unusually-prominent relational paths → local KG view
-     - Per-interaction calibration vs. structurally matched reference items → retention coefficients
-     - Retention coefficients gate historical representations and reweight target losses; computed offline, inference-free
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — KG-calibrated denoising without a graph in the backbone is practical but incremental
-     - **Fairness: 4/10** — Denoising can curb popularity-driven distortion, not framed as fairness
-     - **Robustness: 5/10** — Standard sequential recommender + multiple denoising recommenders; preprint
-     - **Impact: 5/10** — Northeastern University; KG + sequential-rec behavior denoising
-
-4. **From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation**
-   * Affiliation: Kuaishou
-   * Link: [arxiv.org/abs/2608.21012](https://arxiv.org/abs/2608.21012)
-   * Venue: arXiv preprint, August 2026 (cs.IR / cs.LG); online A/B on production traffic
-   * TL;DR: Replaces multi-level residual semantic codebooks with a single-level large codebook (one semantic token + a separate collaborative disambiguation token) plus an exposure-aware dynamic update, improving Recall@10 by 5.0–8.8% on OneRec-V1/V2 and cutting decode FLOPs ~48%.
-   * Key techniques:
-     - Single-level large semantic codebook: one semantic token replaces multiple residual codes + separate collaborative disambiguation token to cut collisions
-     - Exposure-aware dynamic update: temporal weight decay, EMA center updates, exposure-weighted penalty on SID changes
-     - Offline evaluation framework: representation quality, code utilization, cluster load, full-SID collision, temporal stability
-     - OneRec-V1/V2 gains; 47.9–48.7% fewer decode FLOPs; +28.6–47% QPS; 5-day online A/B +0.792% consumption
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code (Kuaishou production)
-     - **Novelty: 6/10** — Single-level large codebook + exposure-aware dynamic update is a practical SID-codebook innovation
-     - **Fairness: 4/10** — Exposure-aware updating / code utilization (indirect)
-     - **Robustness: 7/10** — 2 public datasets + KuaiRec + online A/B (2.5% production traffic)
-     - **Impact: 7/10** — Kuaishou; OneRec-V1/V2 improvements; industrial SID codebook design
-
-5. **Profiling What Matters: Context-Aware Item Profiles from Large-Scale Metadata for LLM Recommenders (CAIRO)**
-   * Affiliation: Korea University
-   * Link: [arxiv.org/abs/2608.20801](https://arxiv.org/abs/2608.20801)
-   * Venue: CIKM 2026
-   * TL;DR: User-context-aware item profiling for LLM reranking — structures raw metadata/reviews into objective features + subjective traits, then a lightweight profiler selects the most relevant info per user-item pair, giving concise context-specific item-side evidence to the LLM ranker with limited serving overhead.
-   * Key techniques:
-     - Structures raw metadata + reviews into objective features and subjective traits
-     - Lightweight profiler selects relevant info per user-item pair with limited serving-time overhead
-     - Concise, context-specific profiles as item-side evidence for the LLM's ranking decision
-     - Consistent LLM-reranking gains across experiments
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Context-aware item profiling is practical; conceptually incremental
-     - **Fairness: 3/10** — Not addressing fairness
-     - **Robustness: 6/10** — CIKM 2026 accepted; multiple experiments
-     - **Impact: 6/10** — CIKM 2026; Korea University; practical item-side feature selection for LLM reranking
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1416,7 +1450,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 148 papers as of September 2.
+**Count:** 151 papers as of September 3.
 
 | Score | Paper |
 | --- | --- |
@@ -1481,6 +1515,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner) |
 | 7/10 | Can We Steer the Black-Box? Towards Controllability-Centric Evaluation of Recommender Systems with Collaborative Agents (CtrlBench-Rec) |
 | 7/10 | The Best of Both Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H²Rec) |
+| 7/10 | Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation (OrthoRec) |
 | 7/10 | Beyond Noisy Signals: Dual-Level Denoising for Multi-modal Sequential Recommendation (DDMSR) |
 | 7/10 | Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF) |
 | 7/10 | CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER) |
@@ -1537,6 +1572,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec) |
 | 6/10 | VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) |
 | 6/10 | From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM) |
+| 6/10 | Recommender System as Slow and Fast Thinkers (DS-Frame) |
 | 6/10 | Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance) |
 | 6/10 | Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling |
 | 6/10 | Tlow: Flow-based Item Tokenizer for Recommendation (Tlow) |
@@ -1545,6 +1581,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP) |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
+| 5/10 | From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT) |
 | 5/10 | Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere) |
 | 5/10 | Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec) |
 | 5/10 | LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation (LBR) |
@@ -1704,6 +1741,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DrIG / Dual-role Identifiers Multimodal Generative Retrieval -- U Tsukuba
 - FlashTrie / GPU-Accelerated Constrained Beam Search -- Microsoft / Nvidia
 - TGR / Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
+- hLLM / Single Pass Decoding for Generative Reranking -- Meta
 
 ### RL / Reinforcement Learning
 - Ask to Be Sure / Entropy-Reduction Reward for Multi-Turn LLM Rec — Amazon (CIKM 2026)
@@ -1819,6 +1857,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DASO / Difficulty-Aware Semantic-ID Optimization (GRPO rollout-allocation) -- Meta / Penn State
 - CoGR / It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning -- UNC Chapel Hill / Apple
 - WMG-RL / World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation -- CUHK / ByteDance / Zhejiang University
+- DMRL / Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation -- SJTU / Kuaishou
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
