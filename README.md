@@ -40,7 +40,7 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
-        DS-Frame -- CityU HK
+        SelfDR -- Tsinghua
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -57,13 +57,13 @@ mindmap
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
-        CRAFT -- Tianjin University
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
+        HypRQ-VAE -- Virginia Tech
       Multimodal Fusion & Alignment
         OrthoRec -- CityU HK
       Feature Quality & Safety
@@ -77,6 +77,95 @@ mindmap
 
 ---
 ## By Date
+
+### Papers September 04
+
+*Friday, September 4, 2026. Arxiv active — Wednesday announcement batch. cs.IR/cs.CV returned 5 recommendation papers spanning the first hyperbolic item indexing for long-tail-aware generative recommenders (HypRQ-VAE, ICDM 2026, open-source), explicit item-level posterior conditioning for semantic-ID diffusion recommendation (EPIC), self-distillation from reasoning for efficient LLM recommendation (SelfDR, CIKM 2026, open-source), Meituan's unified context-centric CTR paradigm (UniCon), and wildcard decoding for cross-modal generative retrieval (WIDE, ACM MM 2026). Total: 5 papers (3 opensource).*
+
+1. **HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems**
+   * Affiliation: Virginia Tech — *(Longfeng Wu, Tong Zeng, Lecheng Zheng, Bo Ji, Dawei Zhou — Virginia Tech; Giovanni Seni, Zhimin Peng, Bhanu Pratap Singh Rawat — Amazon; Si Zhang — Meta AI; Yao Zhou — Google; Yujun Yan — Dartmouth College)*
+   * Link: [arxiv.org/abs/2609.03369](https://arxiv.org/abs/2609.03369)
+   * Venue: IEEE ICDM 2026 (accepted)
+   * TL;DR: The first framework to learn item indexing in hyperbolic space — HypRQ-VAE exploits hyperbolic geometry's exponential volume expansion to naturally fit the power-law structure of user-item interactions, encoding rich textual semantics while preserving the fidelity of sparse long-tail items.
+   * Key techniques:
+     - Hyperbolic Residual-Quantized VAE (HypRQ-VAE): learns item vocabularies in hyperbolic (Poincaré ball) space instead of Euclidean space
+     - Hyperbolic geometry's exponential volume expansion accommodates head/tail power-law catalogs; hierarchical codeword placement encodes item hierarchy
+     - Möbius operations preserve geodesic structure during residual quantization of item embeddings
+     - 3 benchmark datasets; consistent gains, largest on tail-item recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/wulongfeng/HypRQ-VAE](https://github.com/wulongfeng/HypRQ-VAE) — complete code (hyp_main.py, hyp_trainer.py, hyp_generate_indices.py, tokenizer scripts, models/, fine-tuning/, data/, environment.yml, README); no license, no stars yet
+     - **Novelty: 8/10** — first hyperbolic item indexing for generative rec; a geometric solution to the long-tail problem
+     - **Fairness: 5/10** — long-tail/tail-item awareness is exposure-fairness-adjacent, but no explicit fairness mechanism
+     - **Robustness: 7/10** — 3 benchmark datasets; peer-reviewed at ICDM 2026
+     - **Impact: 7/10** — ICDM 2026; long-tail generative recommendation is a central open problem
+
+2. **EPIC: Explicit Posterior Item Conditioning for Semantic ID Diffusion Recommendation**
+   * Affiliation: Griffith University — *(Tuan-Binh Tran, Thanh Tam Nguyen, Quoc Viet Hung Nguyen — Griffith University; Dung D. Le, Thanh Trung Huynh — Singapore Management University; Tung Kieu — Aalborg University)*
+   * Link: [arxiv.org/abs/2609.03522](https://arxiv.org/abs/2609.03522)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.LG)
+   * TL;DR: Introduces explicit item-level competition into semantic-ID denoising by building a personalized posterior over feasible candidate items and projecting it back to unresolved SID positions, so item-level evidence guides which hypotheses stay reachable.
+   * Key techniques:
+     - Explicit Posterior Item Conditioning (EPIC): constructs a personalized item posterior over feasible candidates from generation context + user's recent interactions
+     - Candidate-conditioned transition evidence compares each candidate against the user's recent complete items
+     - Frontier-aware learning concentrates item-level supervision on states where multiple candidates genuinely compete
+     - Frozen pretrained backbone, no extra decoder forward pass; 4 Amazon benchmarks
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 3/10** — anonymous double-blind reproducibility link only ([anonymous.4open.science/r/EPIC](https://anonymous.4open.science/r/EPIC)); no stable public GitHub release yet
+     - **Novelty: 7/10** — item-level posterior conditioning in masked SID diffusion is a well-motivated, non-incremental angle
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — 4 Amazon benchmarks + diagnostic analyses attributing gains
+     - **Impact: 6/10** — Griffith; SID diffusion recommendation is an active direction
+
+3. **SelfDR: Self-Distillation from Reasoning for LLM-Based Recommendation**
+   * Affiliation: Tsinghua University — *(Chumeng Jiang, Jiayin Wang, Xinjie Lin, Zhiqiang Guo, Min Zhang — DCST Tsinghua University (Quan Cheng Laboratory); Hengliang Luo — Meituan)*
+   * Link: [arxiv.org/abs/2609.03313](https://arxiv.org/abs/2609.03313)
+   * Venue: CIKM 2026
+   * TL;DR: Distills an LLM's own reasoning-enhanced predictions into a direct recommender, keeping reasoning's accuracy gains while preserving inference efficiency — a reward-trained teacher reasoner feeds a same-backbone student via self-distillation with dynamic weighting.
+   * Key techniques:
+     - Teacher reasoner trained with downstream performance as reward to generate targeted rationales
+     - Student direct recommender (same base LLM) learns through self-distillation with dynamic weighting
+     - No external models — all components share the same base LLM
+     - 3 public datasets; validates effectiveness, rationality, and efficiency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 5/10** — [github.com/JiangDeccc/SelfDistillation](https://github.com/JiangDeccc/SelfDistillation) — codes/ + raw_data/ + README present; no license, minimal docs
+     - **Novelty: 7/10** — distilling reasoning into direct (reasoning-free) recommendation for efficiency is clean and practical
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — 3 public datasets; peer-reviewed at CIKM 2026
+     - **Impact: 7/10** — CIKM 2026; LLM-rec inference efficiency is high-impact
+
+4. **UniCon: A Unified Context-Centric Modeling Paradigm for CTR Prediction**
+   * Affiliation: Meituan — *(Jiajun Cui, Zhengqi Xu, Fan Zhang, Zhangteng, Gu Tang, Honghong Zhu, Mengxi Wu, Yulin Liang, Xingxing Wang)*
+   * Link: [arxiv.org/abs/2609.03290](https://arxiv.org/abs/2609.03290)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: Reframes unified CTR modeling around the "request context" as the atomic unit, treating history and prediction targets as homogeneous context units with intra-context (locality) and inter-context (dynamics) attention — deployed on Meituan search advertising.
+   * Key techniques:
+     - Context-centric modeling: request context as the basic unit; history + prediction targets organized as homogeneous context units
+     - Intra-context attention (Locality) captures local item coupling within a context
+     - Inter-context attention (Dynamics) models decision-state evolution across contexts
+     - Context-unit-level sequence compression reduces deployment overhead
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — context-centric reframing of unified CTR is clean but architecturally incremental
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — industrial deployment on Meituan search advertising + offline gains
+     - **Impact: 7/10** — Meituan; industrial-scale CTR prediction
+
+5. **WIDE: Wildcard Inference with Dynamic Expansion for Cross-Modal Generative Retrieval**
+   * Affiliation: Jilin University — *(Teng Guo, Xin Wang, Jiayou Xu, Keying Zhou, Haoxin Ruan — Jilin University; Jifeng Shen — Jiangsu University)*
+   * Link: [arxiv.org/abs/2609.03554](https://arxiv.org/abs/2609.03554)
+   * Venue: ACM Multimedia 2026 (ACM MM 2026)
+   * TL;DR: Addresses cross-modal information asymmetry in generative retrieval by emitting "wildcards" instead of forced identifiers at semantic blind spots, dynamically expanding the search space without log-prob penalties and re-ranking the expanded pool.
+   * Key techniques:
+     - Adaptive Entropy Thresholding (AET): calibrates layer-specific uncertainty boundaries offline
+     - Asymmetry-aware Wildcard Decoding (AWD): detects blind spots and emits wildcards instead of forced deterministic identifiers
+     - Blind-Spot Re-ranking (BSR): hybrid scoring of discrete generation confidence + continuous semantic similarity
+     - M-BEIR benchmark; suppresses forced hallucination while keeping compact indexes
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — wildcard decoding for cross-modal info asymmetry is a novel angle on constrained decoding
+     - **Fairness: 0/10** — no fairness consideration
+     - **Robustness: 7/10** — M-BEIR benchmark; peer-reviewed at ACM MM 2026
+     - **Impact: 7/10** — ACM MM 2026; cross-modal generative retrieval
 
 ### Papers September 03
 
@@ -1087,123 +1176,6 @@ mindmap
      - **Robustness: 6/10** — Careful controlled ablations; exploratory findings stated as descriptive
      - **Impact: 4/10** — Workshop paper, single author, exploratory
 
-### Papers August 25
-
-*Tuesday, August 25, 2026. Arxiv Monday (Aug 24) batch — cs.IR / cs.AI / cs.LG. 7 papers found (4 opensource). Core generative-rec: SST (item tokenization), ANR-DiffRec (diffusion), DuELRec (LLM cross-domain), The Disconnect (reasoning-trace analysis); broader recsys: CRRN (CTR), BOAR (multi-behavior), HEGM (watch-time).*
-
-1. **Rethinking Item Tokenization in Generative Recommenders: From Fixed Atoms to Semantic Subwords**
-   * Affiliation: University of Science and Technology of China (USTC) / Huawei Technologies
-   * Link: [arxiv.org/abs/2608.22734](https://arxiv.org/abs/2608.22734)
-   * Venue: CIKM 2026
-   * TL;DR: Represents historical items as variable-length "semantic subwords" (instead of fixed-length SID sequences) while keeping fixed-length target decoding, reducing intra-item attention overload and re-directing model capacity toward inter-item behavioral transitions.
-   * Key techniques:
-     - Item-level Subword Tokenization (IST): merges stable adjacent atom tokens into compact semantic subword tokens
-     - Behavior-induced Co-occurrence Augmentation (BCA): injects coarse-grained semantic prefix-transition signals into training
-     - Validated on 3 public datasets × 3 generative recommender backbones
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/mxrcandy/Semantic-Subword-Tokenization](https://github.com/mxrcandy/Semantic-Subword-Tokenization): well-documented README with full IST+BCA workflow, runnable Beauty/TIGER example data, requirements.txt + configs; single example dataset and no explicit license
-     - **Novelty: 7/10** — History-side variable-length subword tokenization is a fresh angle on SID tokenization
-     - **Fairness: 3/10** — No fairness consideration
-     - **Robustness: 7/10** — Consistent gains across 3 datasets and 3 backbones
-     - **Impact: 7/10** — CIKM 2026; USTC/Huawei; tokenization is a central GenRec topic
-
-2. **Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation**
-   * Affiliation: Tongji University / Huawei Technologies / Fudan University
-   * Link: [arxiv.org/abs/2608.23400](https://arxiv.org/abs/2608.23400)
-   * Venue: arXiv preprint, August 2026 (cs.IR / cs.AI)
-   * TL;DR: Encodes item-based collaborative structure into discrete-diffusion generative recommendation via a collaborative-prior SID generation and an item-adaptive noise-rescheduling mechanism that treats tokens non-uniformly during denoising.
-   * Key techniques:
-     - Item co-occurrence matrix guides semantic ID generation (structured collaborative prior)
-     - Item-based adaptive noise rescheduling: denoising weights adjusted by local contextual recoverability + behavior-aware item dependencies
-     - Amazon Reviews 2023 (3 categories), outperforms SOTA generative recommenders
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 5/10** — [github.com/CalmaQi/ANR-DiffRec](https://github.com/CalmaQi/ANR-DiffRec): code present (LLaDA/genrec, run_pipeline.py, dataset links) but sparse (4 commits), minimal README, no license
-     - **Novelty: 6/10** — Explicit collaborative structure + adaptive noise schedule in discrete diffusion for GenRec
-     - **Fairness: 2/10** — No fairness consideration
-     - **Robustness: 6/10** — Multiple benchmarks, consistent SOTA improvements
-     - **Impact: 6/10** — Diffusion GenRec is trending; Tongji/Huawei/Fudan
-
-3. **A Dual-Expert Strategy Integrating LLMs to Mitigate Negative Transfer in Cross-Domain Sequential Recommendation**
-   * Affiliation: KAIST
-   * Link: [arxiv.org/abs/2608.23131](https://arxiv.org/abs/2608.23131)
-   * Venue: CIKM 2026
-   * TL;DR: LLM-based cross-domain sequential recommendation (DuELRec) with a domain-gated dual-expert design and dual-sampling token-to-item contrastive learning to curb negative transfer across domains.
-   * Key techniques:
-     - Item-aware attention transformation: aggregates subword tokens into item-level representations with block-level attention masking
-     - Single-domain expert (within-domain attention) + cross-domain expert (all-domain) adaptively fused by a gate
-     - Dual-sampling token-to-item contrastive objective (single- + cross-domain item pools)
-     - 2 real-world datasets, 10 domains, outperforms 26 SOTA methods
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Domain-gated dual-expert to mitigate negative transfer in LLMRec CDSR
-     - **Fairness: 2/10** — No fairness consideration
-     - **Robustness: 6/10** — Extensive baselines across 10 domains
-     - **Impact: 6/10** — CIKM 2026; KAIST
-
-4. **The Disconnect Between Better Descriptive Reasoning Trace Quality and Recommendation Effectiveness**
-   * Affiliation: Spotify
-   * Link: [arxiv.org/abs/2608.23154](https://arxiv.org/abs/2608.23154)
-   * Venue: RecSys '26 Workshop on Agentic and Generative AI for E-Commerce
-   * TL;DR: First controlled 2×2 factorial study showing that better descriptive reasoning traces (natural-language titles + extensive SID alignment) do NOT translate into better offline recommendation accuracy under standard SFT and RL.
-   * Key techniques:
-     - 2×2 factorial over item representation (Title vs SID) and SID alignment (minimal vs extensive)
-     - Shared Qwen3-1.7B backbone; SFT vs RL training objectives compared
-     - 3 Amazon product domains
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — First controlled comparison of reasoning-trace quality vs. recommendation effectiveness
-     - **Fairness: 3/10** — Touches interpretability, limited fairness scope
-     - **Robustness: 7/10** — Controlled factorial design with a shared backbone
-     - **Impact: 7/10** — Spotify; challenges the "chain-of-thought helps GenRec" assumption
-
-5. **Cascading Relevance-driven Recommendation Network for CTR Prediction in Trigger-Introduced Recommendation**
-   * Affiliation: Alibaba (Taobao & Tmall Group)
-   * Link: [arxiv.org/abs/2608.22973](https://arxiv.org/abs/2608.22973)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: CTR prediction for "trigger-introduced recommendation" (TIR) that explicitly models trigger–target relevance with cascading interest fusion and a category-assisted pairwise loss.
-   * Key techniques:
-     - Trigger-Target Interaction layer (personalized gating on trigger/target features)
-     - Cascading Interest Fusion: cascading attention blocks estimate trigger intention and fuse instant + personalized interest
-     - Category-assisted Pairwise Loss enforcing trigger relevance
-     - Industrial + public datasets; online A/B validated
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 4/10** — [github.com/a-little-cabbage/CRRN](https://github.com/a-little-cabbage/CRRN): only 3 files (README, crrn.py, module.py), no license/requirements/training/eval pipeline
-     - **Novelty: 6/10** — New TIR scenario with explicit trigger-relevance modeling
-     - **Fairness: 2/10** — No fairness consideration
-     - **Robustness: 6/10** — Industrial + public + online A/B
-     - **Impact: 7/10** — Alibaba (Taobao & Tmall), deployed
-
-6. **Beyond Observed Auxiliary Relations: Environment-Conditioned Modeling for Multi-Behavior Recommendation**
-   * Affiliation: Korea University
-   * Link: [arxiv.org/abs/2608.22920](https://arxiv.org/abs/2608.22920)
-   * Venue: CIKM 2026
-   * TL;DR: Environment-conditioned multi-behavior recommendation (BOAR) that handles missing and unreliable auxiliary signals via two complementary modules conditioned on auxiliary observability.
-   * Key techniques:
-     - Two complementary modules conditioned on auxiliary observability (fill missing relations / suppress unreliable ones)
-     - Up to +7.82% HR@10 overall; up to +44.2% for items without auxiliary observations
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Linked repo (github.com/LSH0411/BOAR) returns 404 — not publicly accessible
-     - **Novelty: 5/10** — Observability-conditioned handling of missing/unreliable auxiliary signals
-     - **Fairness: 2/10** — No fairness consideration
-     - **Robustness: 6/10** — Strong gains on items lacking auxiliary observations
-     - **Impact: 6/10** — CIKM 2026; Korea University
-
-7. **Hierarchical Exponential-Gaussian Mixtures for Watch-Time Distribution Prediction**
-   * Affiliation: VK (AI VK) / Lomonosov Moscow State University
-   * Link: [arxiv.org/abs/2608.23356](https://arxiv.org/abs/2608.23356)
-   * Venue: ICDM 2026
-   * TL;DR: Distributional watch-time prediction for short-video recommendation that fixes EGMN's variance collapse / component redundancy via a hierarchical skip-watch decomposition and KL-based variance regularization.
-   * Key techniques:
-     - Hierarchical skip-watch decomposition: exponential component for quick skips + Gaussian mixture for engaged watching, separated by a learned skip gate
-     - KL-based variance regularization + structured initialization; removes forced Gaussian shift + entropy regularizer
-     - KuaiRec + VK-LSVD; 1.5-month production A/B with significant engagement lifts
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/rw404/HEGM](https://github.com/rw404/HEGM): Apache 2.0, full code + configs + preprocessing scripts + released checkpoints + deterministic reproducible eval
-     - **Novelty: 6/10** — Hierarchical skip-watch mixture addressing EGMN failure modes
-     - **Fairness: 2/10** — No fairness consideration
-     - **Robustness: 8/10** — Fixes variance collapse/component redundancy; 1.5-month production A/B
-     - **Impact: 6/10** — ICDM 2026; VK industrial short-video
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1450,7 +1422,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 151 papers as of September 3.
+**Count:** 154 papers as of September 4.
 
 | Score | Paper |
 | --- | --- |
@@ -1579,6 +1551,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | Diffusion Language Model for Recommendation (DLMRec) |
 | 6/10 | Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR) |
 | 6/10 | SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP) |
+| 6/10 | HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE) |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
 | 5/10 | From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT) |
@@ -1592,6 +1565,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 5/10 | Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation (ANR-DiffRec) |
 | 5/10 | Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval |
 | 5/10 | Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR) |
+| 5/10 | SelfDR: Self-Distillation from Reasoning for LLM-Based Recommendation (SelfDR) |
 | 4/10 | Towards Efficient Reasoning in LLM-Based Recommender Systems via Model Merging (REAM) |
 | 4/10 | Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation |
 | 4/10 | GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation |
@@ -1605,6 +1579,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 3/10 | Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) |
 | 3/10 | InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation (InforID) |
 | 3/10 | TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute) |
+| 3/10 | EPIC: Explicit Posterior Item Conditioning for Semantic ID Diffusion Recommendation (EPIC) |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 | 1/10 | HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec) |
@@ -1742,6 +1717,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - FlashTrie / GPU-Accelerated Constrained Beam Search -- Microsoft / Nvidia
 - TGR / Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
 - hLLM / Single Pass Decoding for Generative Reranking -- Meta
+- WIDE / Wildcard Inference with Dynamic Expansion for Cross-Modal Generative Retrieval -- Jilin University
 
 ### RL / Reinforcement Learning
 - Ask to Be Sure / Entropy-Reduction Reward for Multi-Turn LLM Rec — Amazon (CIKM 2026)

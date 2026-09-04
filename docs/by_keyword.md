@@ -62,6 +62,7 @@
 - Token-Level Credit Assignment Optimization for Generative Document Retrieval
 - TGR: Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
 - hLLM: Single Pass Decoding for Generative Reranking (hLLM)
+- WIDE: Wildcard Inference with Dynamic Expansion for Cross-Modal Generative Retrieval (WIDE)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -85,6 +86,7 @@
 - HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation (HubMixer)
 - From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
 - From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT)
+- UniCon: A Unified Context-Centric Modeling Paradigm for CTR Prediction (UniCon)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -200,6 +202,7 @@
 - TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute)
 - Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation (ANR-DiffRec)
 - Preference Flow Matching with Spectral Factorization for Micro-video Recommendation (PrismRec)
+- EPIC: Explicit Posterior Item Conditioning for Semantic ID Diffusion Recommendation (EPIC)
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -775,6 +778,7 @@
 - Hypothesis-Driven Shelf Generation for Personalised Recommendation
 - GOD: Enhancing Generalization via Deep Grafting for Sequential Recommendation (GOD)
 - D3ER: Supporting Multi-Modal Recommendation via Disentangle and Distillation-based Dynamic Ensemble (D3ER)
+- SelfDR: Self-Distillation from Reasoning for LLM-Based Recommendation (SelfDR)
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 
@@ -1332,6 +1336,7 @@
 - Tlow: Flow-based Item Tokenizer for Recommendation (Tlow)
 - An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
 - CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation (CoFiRec)
+- HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
