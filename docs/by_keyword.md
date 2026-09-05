@@ -35,6 +35,7 @@
 - When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems (CoVeMem)
 - Astar: Learning to Propose Evolution Directions for Self-Evolving Industrial AI Systems (Astar)
 - DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
+- RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems (RecEvolve)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -203,6 +204,7 @@
 - Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation (ANR-DiffRec)
 - Preference Flow Matching with Spectral Factorization for Micro-video Recommendation (PrismRec)
 - EPIC: Explicit Posterior Item Conditioning for Semantic ID Diffusion Recommendation (EPIC)
+- MGDiff: Multi-Interest Sequence Recommendation with Masking GNN-Guided Diffusion (MGDiff)
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -244,6 +246,8 @@
 - An Empirical Evaluation of Cross-City POI Recommendation on a Large-Scale Benchmark
 - Off-Policy Evaluation for Semantic ID Recommenders: Does the Model's Own Code Hierarchy Help?
 - RPCBench: A Benchmark for Proactive Premise Critique in LLM-based Recommendation (RPCBench)
+- The Utility of LLMs in Recommender Systems Explanation Evaluation
+- The Dice Roll Method: A Standardized Protocol for Repeated-Query Auditing of Large Language Model Brand Recommendations
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -294,6 +298,8 @@
 - Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)
 - SwapRec: Warming Up Cold Items Through Training-Time Swaps (SwapRec)
 - GenCAR: Generative Counterfactual Alignment with Risk-Controlled Selection for Out-of-Distribution Recommendation (GenCAR)
+- MGDiff: Multi-Interest Sequence Recommendation with Masking GNN-Guided Diffusion (MGDiff)
+- The Dice Roll Method: A Standardized Protocol for Repeated-Query Auditing of Large Language Model Brand Recommendations
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -545,6 +551,7 @@
 - TGR: Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
 - It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning (CoGR)
 - SPAR: Enhancing Industrial-Scale Generative POI Recommendation via Real-World Spatial Perception (SPAR)
+- ICEGR: An Intent-Coherent End-to-End Generative Retrieval Framework for E-commerce Search (ICEGR)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -734,6 +741,9 @@
 - TGR: Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
 - From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
 - DMRL: Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation (DMRL)
+- ICEGR: An Intent-Coherent End-to-End Generative Retrieval Framework for E-commerce Search (ICEGR)
+- LLM4AIGQ: LLM-based AI Guidance Query Generation Framework for Multi Interest Mining (LLM4AIGQ)
+- RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems (RecEvolve)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -769,6 +779,7 @@
 - Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
 - Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR)
+- DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR)
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
 - SCoRD: Semantic-Assisted Continual Retriever-Reranker Distillation for LLM-Based Recommendation (SCoRD)
@@ -781,6 +792,7 @@
 - SelfDR: Self-Distillation from Reasoning for LLM-Based Recommendation (SelfDR)
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
+- The Utility of LLMs in Recommender Systems Explanation Evaluation
 
 
 
@@ -957,6 +969,7 @@
 - World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation (WMG-RL)
 - DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
 - SPAR: Enhancing Industrial-Scale Generative POI Recommendation via Real-World Spatial Perception (SPAR)
+- LLM4AIGQ: LLM-based AI Guidance Query Generation Framework for Multi Interest Mining (LLM4AIGQ)
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1129,6 +1142,7 @@
 - Equal Ranking Quality, Different Decisions: Training Order-Consistent LLM Scorers
 - Beyond Polarization: The Generative Constraint of Chain-of-Thought in Pointwise Reranking
 - hLLM: Single Pass Decoding for Generative Reranking (hLLM)
+- DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR)
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS)

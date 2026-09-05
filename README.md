@@ -40,10 +40,10 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
-        SelfDR -- Tsinghua
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
+        DoPR -- SJTU
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -77,6 +77,131 @@ mindmap
 
 ---
 ## By Date
+
+### Papers September 05
+
+*Saturday, September 5, 2026. Arxiv weekend pause — no new announcement batch since Friday's run, so this entry surfaces 7 additional on-topic papers from the recent Sep 2–4 cs.IR batch not covered in the September 04 entry. Covers Baidu's intent-coherent end-to-end generative retrieval for e-commerce search (ICEGR, +7.53% GMV), a masking-GNN-guided diffusion framework for popularity-bias-free sequence recommendation (MGDiff), Alibaba's LLM-based AI guidance query generation for multi-interest mining (LLM4AIGQ), Google's autonomous agent system for production recommender optimization (RecEvolve), SJTU's reusable compressed-prefix LLM reranking (DoPR, EMNLP 2026 Findings, open-source), a University of Zurich study on LLMs for explanation evaluation (RecSys 2026), and a standardized protocol for auditing LLM brand recommendations (Dice Roll Method). Total: 7 papers (1 opensource).*
+
+1. **ICEGR: An Intent-Coherent End-to-End Generative Retrieval Framework for E-commerce Search**
+   * Affiliation: Baidu — *(Jiayi Tuo — USTC; Hehan Li, Dongjun Fu, Xin Lu, Ling Zhuang, Meifang Li, Peizhi Xu, Hanmeng Liu, Shuanglong Li, Liwei Qian — Baidu; Fuwei Zhang, Fuzhen Zhuang — Beihang University; Yanbiao Ma — Renmin University of China)*
+   * Link: [arxiv.org/abs/2608.29652](https://arxiv.org/abs/2608.29652)
+   * Venue: arXiv preprint, September 2026 (deployed in Baidu E-commerce Search)
+   * TL;DR: Maintains query-intent consistency across the whole generative-retrieval training pipeline — intent-aware SID construction, synthetic-query-augmented unified SFT, and relevance-calibrated preference optimization — to fix the intent drift that limits end-to-end GR in e-commerce search.
+   * Key techniques:
+     - Intent-Aware SID Construction injects query-intent signals into semantic-ID building so SIDs capture search intent beyond static product info
+     - Synthetic Query-Enhanced Unified SFT unifies multiple SFT tasks under the query-to-SID objective and augments sparse log supervision with synthetic queries for low-exposure products
+     - Relevance-Calibrated Preference Optimization blends query-product relevance with business signals via a margin-adaptive preference objective
+     - Deployed end-to-end GR pathway in Baidu E-commerce Search: +3.52% CTR, +15.96% order volume, +7.53% GMV in A/B
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (Baidu production system)
+     - **Novelty: 7/10** — intent-coherence across the full GR training pipeline is a clean, well-motivated industrial contribution
+     - **Fairness: 4/10** — relevance calibration keeps query relevance over popularity, mildly fairness-adjacent, but no explicit fairness mechanism
+     - **Robustness: 8/10** — production deployment with large A/B gains; offline Recall@20 +21.7%, NDCG@20 +26.6%
+     - **Impact: 8/10** — Baidu production; +7.53% GMV; a strong industrial generative-retrieval reference
+
+2. **MGDiff: Multi-Interest Sequence Recommendation with Masking GNN-Guided Diffusion**
+   * Affiliation: Huazhong University of Science and Technology — *(Wenjing Xiao, Hao Ding)*
+   * Link: [arxiv.org/abs/2609.01619](https://arxiv.org/abs/2609.01619)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: A masking-GNN-guided diffusion model for sequence recommendation that generates accurate, bias-free user-interest representations — denoising semantic distortion in guidance and suppressing popularity-bias-induced mode collapse.
+   * Key techniques:
+     - Dual-layer Semantic Guidance (DSG): extracts latent item semantics then decouples multidimensional user intent
+     - Weight-adaptive Masking Graph Neural Network reconstructs missing links to uncover deep item relationships beyond co-occurrence
+     - Dynamic Multi-Expert Network projects user preferences into distinct semantic subspaces
+     - Popularity-Aware Guidance (PAG) uses item popularity as a differentiable signal to recalibrate similarity and debias generation
+     - 4 benchmark datasets; superior to multiple baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — masking-GNN guidance + popularity-aware geometric debiasing is a fresh combination for diffusion rec
+     - **Fairness: 7/10** — explicitly targets popularity bias via PAG for bias-free, diverse recommendation
+     - **Robustness: 6/10** — 4 datasets; preprint without a venue yet
+     - **Impact: 6/10** — arXiv preprint; diffusion sequential recommendation is an active direction
+
+3. **LLM4AIGQ: LLM-based AI Guidance Query Generation Framework for Multi Interest Mining**
+   * Affiliation: Alibaba Group — *(Xiangchen Pan — HUST / Alibaba Group; Jiayi Xu, Jing Wang, Xing Fang, Lingyun Zhu — Alibaba Group)*
+   * Link: [arxiv.org/abs/2609.03674](https://arxiv.org/abs/2609.03674)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: Replaces co-occurrence-based query derivation with an LLM that segments user multi-interests and generates shopping-guidance queries per sub-interest, trained via an SFT + RL + DPO post-training pipeline with a multi-level reward.
+   * Key techniques:
+     - Multi-interest segmentation from user profiles + interaction sequences; per-sub-interest consumption-intent inference
+     - Post-training pipeline: SFT → RL (ROLL framework, vLLM inference) → DPO for query generation
+     - Multi-level reward design for multi-objective optimization and long-chain reasoning
+     - Nearline-generation + online-read architecture for latency constraints
+     - Offline + online A/B on Taobao; beats zero-shot SOTA and larger same-family models
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — LLM-native replacement of the Q2AIGQ retrieval paradigm is practical but incremental
+     - **Fairness: 4/10** — multi-interest coverage is mildly fairness-related; no explicit fairness mechanism
+     - **Robustness: 8/10** — offline + online A/B; deployed on Taobao with nearline/online serving
+     - **Impact: 7/10** — Alibaba/Taobao production; e-commerce query guidance at scale
+
+4. **RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems**
+   * Affiliation: Google — *(Weidi Pan, He Ma, Shuhao Ye, Palaksh Rungta, David McPeek, Junyi Jiao, Arnab Bhadury, Mingyan Gao, Onkar Dalal)*
+   * Link: [arxiv.org/abs/2609.01622](https://arxiv.org/abs/2609.01622)
+   * Venue: arXiv preprint (targeting RecSys 2026)
+   * TL;DR: Deploys a closed-loop autonomous agent that runs the whole research lifecycle — idea generation, code, training, evaluation — on a production Two-Tower retrieval model, yielding ~20% relative NDCG and +3.77% live user satisfaction while surfacing reward-hacking shortcuts.
+   * Key techniques:
+     - Continuous closed-loop pipeline: Propose Idea → Implement → Offline Train → Evaluate → Loop
+     - Centralized knowledge base of prior results drives hypothesis formulation and avoids redundant exploration
+     - 40+ autonomous training runs from scratch under production-scale evaluation
+     - Agent autonomously discovered reward-hacking shortcuts, exposing evaluation-protocol vulnerabilities
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (Google production infrastructure)
+     - **Novelty: 7/10** — an end-to-end autonomous research loop on a production recommender is a notable frontier demonstration
+     - **Fairness: 4/10** — not addressing fairness; instead stress-tests evaluation rigor (reward hacking)
+     - **Robustness: 8/10** — production-scale validation; ~20% NDCG, +3.77% live satisfaction
+     - **Impact: 8/10** — Google production; shifts manual → autonomous recommender optimization
+
+5. **DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking**
+   * Affiliation: Shanghai Jiao Tong University (LUMIA Lab) — *(Beiya Dai, Xinbing Wang, Zhouhan Lin — SJTU; Yifan Wei, Guang Yang, Xing Shi — ByteDance)*
+   * Link: [arxiv.org/abs/2609.03311](https://arxiv.org/abs/2609.03311)
+   * Venue: EMNLP 2026 Findings
+   * TL;DR: Decouples offline document processing from online reranking by precomputing compressed, query-independent document prefixes and reusing them across queries — up to 8× less memory and 8.04× lower latency while retaining 97.1–99.5% NDCG@10.
+   * Key techniques:
+     - Compressed document prefix states selected offline and reused whenever a document is retrieved
+     - Attention-guided selection of salient document states without a separate selector network
+     - Structured attention masking lets query/scoring tokens read bottleneck states during training
+     - RankNet training; TREC DL, BEIR, BRIGHT with Qwen3 0.6B–8B
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/dbylynn/DoPR](https://github.com/dbylynn/DoPR) — complete code (configs/, models/, scripts/, src/, requirements.txt, README with install/train/eval); single "Initial release" commit, no LICENSE file
+     - **Novelty: 7/10** — reusable compressed document prefixes for pointwise reranking is a clean efficiency angle
+     - **Fairness: 3/10** — not addressing fairness
+     - **Robustness: 7/10** — 3 benchmark suites, 0.6B–8B models; peer-reviewed at EMNLP 2026 Findings
+     - **Impact: 7/10** — EMNLP 2026 Findings; efficiency is a key bottleneck for LLM reranking
+
+6. **The Utility of LLMs in Recommender Systems Explanation Evaluation**
+   * Affiliation: University of Zurich — *(Kathrin Wardatzky, Oana Inel, Luca Rossetto, Abraham Bernstein)*
+   * Link: [arxiv.org/abs/2609.01627](https://arxiv.org/abs/2609.01627)
+   * Venue: ACM RecSys 2026 (accepted)
+   * TL;DR: A systematic study of whether LLMs can serve as judges for explanation-method selection — 18 prototypes scored by 14 LLMs against a human user study, yielding moderate rank correlation but low absolute agreement plus four practical recommendations.
+   * Key techniques:
+     - 18 explanation prototypes generated across varying RS/user information; evaluated by 14 LLMs at two temperatures
+     - Human-in-the-loop comparison against a user study
+     - Four recommendations: concise prompts, larger models, pre-test constructs, audit factual accuracy
+     - Finds neither humans nor LLMs reliably detect non-factual explanations
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — systematic LLM-judge study for explanation selection fills a real evaluation gap
+     - **Fairness: 5/10** — audits factual accuracy of explanations, an explainability/reliability concern
+     - **Robustness: 7/10** — peer-reviewed at RecSys 2026; human-study grounding
+     - **Impact: 6/10** — RecSys 2026; practical guidance for LLM explanation evaluation
+
+7. **The Dice Roll Method: A Standardized Protocol for Repeated-Query Auditing of Large Language Model Brand Recommendations**
+   * Affiliation: Independent Researcher — *(Dmitrij Żatuchin)*
+   * Link: [arxiv.org/abs/2609.04047](https://arxiv.org/abs/2609.04047)
+   * Venue: arXiv preprint (cs.IR / cs.CL)
+   * TL;DR: Formalizes a reusable statistical protocol for repeated-query auditing of LLM brand recommendations, decomposing response variance and giving iteration-count tiers tied to effect-size and generalizability targets.
+   * Key techniques:
+     - Negative-binomial mixed model with iterations as repeated measures; Cliff's delta effect size
+     - Dependence-preserving bootstrap + simulation-based power + generalizability-theory decomposition
+     - Three iteration tiers: exploratory (n=5), confirmatory (n=10), rigorous (n=15)
+     - Reanalysis of ~190K observations, 270+ brands, 6 languages; pre-registered external validation (37/39 cells)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — first standardized protocol for repeated-query LLM-recommendation auditing
+     - **Fairness: 8/10** — fairness-adjusted PASOR metric; directly targets brand-recommendation bias/stability
+     - **Robustness: 7/10** — 190K observations + pre-registered external validation across independent corpora
+     - **Impact: 4/10** — preprint, no venue yet; rigorous methodology for LLM rec reliability
 
 ### Papers September 04
 
@@ -1422,7 +1547,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 154 papers as of September 4.
+**Count:** 155 papers as of September 5.
 
 | Score | Paper |
 | --- | --- |
@@ -1530,6 +1655,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Difficulty-Aware Semantic-ID Optimization for Generative Recommendation (DASO) |
 | 7/10 | CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation (CoFiRec) |
 | 7/10 | Towards Effective Structured Context Modeling for Conversational Recommender Systems via Dual-node Monte Carlo Tree Search (DREAMS) |
+| 7/10 | DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
