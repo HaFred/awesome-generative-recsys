@@ -57,13 +57,13 @@ mindmap
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
+        TS-SSM -- Emory University
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         MaskGR -- Snap Inc.
-        HypRQ-VAE -- Virginia Tech
       Multimodal Fusion & Alignment
         OrthoRec -- CityU HK
       Feature Quality & Safety
@@ -77,6 +77,95 @@ mindmap
 
 ---
 ## By Date
+
+### Papers September 06
+
+*Sunday, September 6, 2026. Arxiv weekend pause — no new announcement batch since Friday (Sep 4). Following the fallback protocol, this entry surfaces 5 additional on-topic generative-rec papers from the recent Aug 29–31 cs.IR batch not covered by the September 04/05 entries: Alibaba AMAP's high-fidelity SIDs for LBS generative retrieval (HF-SID), Snap's co-engagement-aware multimodal item embeddings for dynamic product ads (CAMIE), Emory's two-sided state-space model for review-driven sequential recommendation (TS-SSM, EMNLP 2026 Findings, open-source), HIT's temporal autoregressive alignment against early beam pruning (TAAL), and HKU's two-agent knowledge-integrator framework for multimodal recommendation (AgentMMRec). Total: 5 papers (1 opensource).*
+
+1. **HF-SID: High-Fidelity Semantic IDs for Generative Retrieval in Location-Based Services**
+   * Affiliation: AMAP, Alibaba Group — *(with Jing Li — USTC; Zhibin Hao — Tsinghua University)*
+   * Link: [arxiv.org/abs/2608.30479](https://arxiv.org/abs/2608.30479)
+   * Venue: arXiv preprint, August 2026 (cs.IR)
+   * TL;DR: Restores geographic, numerical, and structural fidelity at the representation stage of POI Semantic IDs — before any information is committed to a discrete code — so LBS generative retrieval no longer blurs the fine-grained POI differences it must preserve.
+   * Key techniques:
+     - Geo-CPT + Num-CPT: transforms coordinates into a continuous 3D Cartesian form and encodes each numerical attribute as a single unit with type-aware embeddings, fixing LLMs' discontinuous coordinate embedding
+     - Structure-based Contrastive Learning on the last-layer residual separates co-located POIs that share a coarse tag but differ at the fine level
+     - Compact 3-token SID at no extra decoding cost (enriches representation rather than lengthening the identifier)
+     - Open-sources AMap-S, a large-scale real-world POI/trajectory dataset; large-scale industrial offline + production validation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; only the AMap-S POI dataset is released (not the model)
+     - **Novelty: 7/10** — targeting geographic/numerical/structural fidelity losses inside the SID representation is a fresh, well-motivated angle for LBS generative retrieval
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 8/10** — large-scale industrial AMap deployment with offline + production experiments
+     - **Impact: 7/10** — AMAP (Alibaba) production POI retrieval; releases a real-world LBS dataset
+
+2. **CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval**
+   * Affiliation: Snap Inc.
+   * Link: [arxiv.org/abs/2608.30255](https://arxiv.org/abs/2608.30255)
+   * Venue: arXiv preprint, August 2026 (cs.IR)
+   * TL;DR: Unifies Snap DPA's fragmented visual/text/multimodal encoders into a single LLM/MLLM-backbone embedding space and fine-tunes it on co-engaged item pairs, aligning embeddings with the co-engagement behavior that drives downstream conversions.
+   * Key techniques:
+     - Shared LLM/MLLM backbone using native multimodal interfaces to represent item images + metadata in one embedding space
+     - Symmetric in-batch InfoNCE fine-tuning on co-engaged item pairs mined from user journeys
+     - Serves text-only retrieval from the same checkpoint with minimal quality loss
+     - Production: +0.390% CTR / +10.832% CVR over multimodal control, +18.958% CTR / +13.12% CVR over text control
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (Snap production system)
+     - **Novelty: 6/10** — co-engagement-aligned MLLM embeddings as a drop-in for fragmented encoders is practical but incremental
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 8/10** — deployed in production DPA with strong offline + online gains
+     - **Impact: 8/10** — Snap production dynamic-product-ads retrieval
+
+3. **Two-Sided State-Space Models for Sequential Recommendation with Non-Random Multimodal Review Feedback**
+   * Affiliation: Emory University
+   * Link: [arxiv.org/abs/2609.00165](https://arxiv.org/abs/2609.00165)
+   * Venue: Findings of EMNLP 2026
+   * TL;DR: Models reviews as non-random, informative signals that both reflect and reshape evolving user and item states, via a two-sided state-space model with modality-missing-not-at-random fusion and asymmetric positive/negative carryover.
+   * Key techniques:
+     - Modality-missing-not-at-random fusion encodes review content plus the informative availability pattern (presence/absence of text/image)
+     - User-state evolution with temporal variation + local graph message passing using related item states
+     - Item-state evolution with asymmetric carryover of positive vs negative review shocks (different decay half-lives)
+     - 6 Amazon categories (+14.8–18.8% Recall@20 over BSARec) + Goodreads Fantasy
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/CausalMLResearch/TS-SSM](https://github.com/CausalMLResearch/TS-SSM): MIT license, official implementation with a well-structured README (model overview + mermaid pipeline + setup) and reproducibility materials; very new (1 star)
+     - **Novelty: 7/10** — two-sided (user + item) co-evolution with non-random multimodal review feedback is a fresh, principled formulation
+     - **Fairness: 4/10** — asymmetric negative/positive carryover is fairness-adjacent but not an explicit fairness mechanism
+     - **Robustness: 7/10** — 6 Amazon categories + Goodreads; detailed ablations; EMNLP Findings
+     - **Impact: 6/10** — EMNLP 2026 Findings; sequential recommendation
+
+4. **TAAL: Mitigating Early Beam Pruning in Generative Recommendation via Temporal Autoregressive Alignment**
+   * Affiliation: Harbin Institute of Technology (Weihai)
+   * Link: [arxiv.org/abs/2608.29179](https://arxiv.org/abs/2608.29179)
+   * Venue: arXiv preprint, August 2026 (cs.IR)
+   * TL;DR: Shows 91.9–96.6% of generative-retrieval failures occur within the first two beam-search decoding steps, then fixes the early-pruning problem by aligning the early-prefix distribution with historical transitions and PMI-calibrating candidate scores.
+   * Key techniques:
+     - Joint (c₁,c₂) soft target built from historical transitions, aligned with a forward-KL objective on the early-prefix distribution
+     - Pointwise Mutual Information (PMI) candidate-score calibration to downweight globally frequent prefixes at inference
+     - +39.5% / +6.7% / +28.6% NDCG@10 on Amazon Beauty / Instruments / Yelp; full-SID survival +3.9–16.6%
+     - Beam-width analysis: relative survival gain grows as the beam narrows (+39.4% at B=5)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 8/10** — directly targets the under-studied early-pruning failure mode of trie-constrained beam search with a transition-alignment + PMI approach
+     - **Fairness: 3/10** — PMI calibration incidentally reduces global-frequency bias, but no explicit fairness objective
+     - **Robustness: 7/10** — 3 benchmarks with consistent gains + thorough beam-width analysis
+     - **Impact: 6/10** — beam-search decoding is a core GenRec inference bottleneck
+
+5. **Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation**
+   * Affiliation: University of Hong Kong — *(with BIT, Peking University, Universiti Malaya, Macao Polytechnic University)*
+   * Link: [arxiv.org/abs/2608.29410](https://arxiv.org/abs/2608.29410)
+   * Venue: arXiv preprint, August 2026 (cs.IR)
+   * TL;DR: Two coordinated agents — an Integrator that distills behavior- and multimodal-aware knowledge into a reusable memory, and a Utilizer that converts that memory into graph structure and reranking — bridge the semantic gap between multimodal content and recommendation objectives.
+   * Key techniques:
+     - Integrator Agent infers user preferences + item properties from interactions + content, stored in reusable knowledge memory
+     - Utilizer Agent refines modality-specific item-item graphs, builds behavior-aware homogeneous graphs, and reranks under a frozen evaluation-time memory
+     - Knowledge converted into graph structure/model representations before recommendation (vs direct LLM feature augmentation or pure reranking)
+     - 3 Amazon multimodal datasets; gains persist under sparsity and item cold-start; knowledge transfers to existing backbones
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — treating LLM knowledge as an intermediate graph-structuring memory (rather than augmentation/reranking) is a distinct agentic design
+     - **Fairness: 4/10** — cold-start/sparsity robustness is mild; no explicit fairness mechanism
+     - **Robustness: 6/10** — 3 Amazon datasets + sparsity/cold-start + transfer studies
+     - **Impact: 6/10** — agent-based multimodal recommendation
 
 ### Papers September 05
 
@@ -1180,127 +1269,6 @@ mindmap
      - **Robustness: 7/10** — Offline + 41-day online A/B
      - **Impact: 7/10** — Alibaba; deployed in industrial e-commerce search
 
-### Papers August 26
-
-*Wednesday, August 26, 2026. Arxiv Tuesday (Aug 25) batch — cs.IR / cs.LG. 7 papers found (1 opensource). Core generative-rec: PRQ-KMeans (SID tokenization), Tlow (flow tokenizer, opensource), TAGR (live-stream genrec), UniSpecRec (LLM CF); broader: RecGPT-Mobile-V2 (on-device LLM), Native Multimodal CTR, Auditing Return Conditioning (Decision-Transformer diagnostic).*
-
-1. **PRQ-KMeans: Projection Residual Quantization for Semantic ID Tokenization**
-   * Affiliation: Kuaishou Technology
-   * Link: [arxiv.org/abs/2608.24207](https://arxiv.org/abs/2608.24207)
-   * Venue: arXiv preprint, August 2026 (cs.LG)
-   * TL;DR: Reframes residual-quantization SID construction as "progressive commonality removal" and proposes PRQ-KMeans — global-mean removal, Top-k similarity-weighted centroid refinement, and projection residuals — to improve post-hoc semantic-ID tokenization for generative retrieval/recommendation.
-   * Key techniques:
-     - Global-mean removal frees first-level codebook capacity from a corpus-wide shared component
-     - Top-k similarity-weighted centroid updates soften hard assignment to nearby codewords
-     - Projection residual (instead of full-codeword subtraction) removes only the selected-centroid component
-     - Up to +7.4% HitRate / +11.8% MRR on an industrial search dataset; 4 public recommendation benchmarks
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — "Progressive commonality removal" lens + projection residual is a thoughtful refinement, but incremental over RQ-KMeans/RQ-GMM
-     - **Fairness: 2/10** — No fairness consideration
-     - **Robustness: 6/10** — Industrial search + 4 public benchmarks with consistent gains
-     - **Impact: 6/10** — Kuaishou; SID tokenization is a central GenRec topic
-
-2. **Tlow: Flow-based Item Tokenizer for Recommendation**
-   * Affiliation: Tsinghua University / Tencent
-   * Link: [arxiv.org/abs/2608.24176](https://arxiv.org/abs/2608.24176)
-   * Venue: CIKM 2026 (Applied Research)
-   * TL;DR: Normalizing-flow item tokenizer that transforms semantic embeddings into a standard-normal latent space (dimensional independence + distributional simplicity) before independent tokenization, with codebook guidance aligning codebook and token-embedding spaces; deployed on WeChat multimodal retrieval.
-   * Key techniques:
-     - Flow-based transformation of raw semantic embeddings to a unified standard-normal latent space
-     - Independent tokenization on latent embeddings yields semantically clear token IDs
-     - Codebook guidance aligning codebook space with token embedding space for more distinct token embeddings
-     - Offline: 4 public datasets + cross-domain + multimodal; online WeChat: +10.32% global CTR (+11.64% new items)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/wjjln/Tlow](https://github.com/wjjln/Tlow): runnable (main.py/train.py, gin configs, run scripts, pre-trained Sports tokenizer cache) with a 3-step README; single init commit, no license/tests
-     - **Novelty: 7/10** — Flow-based distribution normalization for tokenization is a fresh angle vs RQ-VAE/OPQ; codebook guidance is a nice addition
-     - **Fairness: 2/10** — No fairness consideration
-     - **Robustness: 7/10** — 4 public datasets + cross-domain/multimodal + online WeChat A/B
-     - **Impact: 7/10** — CIKM 2026 Applied Research; Tsinghua/Tencent; deployed on WeChat
-
-3. **TAGR: Temporally Adaptive Generative Recommendation for Industrial Live-Streaming Advertising**
-   * Affiliation: Kuaishou Technology / Tsinghua University
-   * Link: [arxiv.org/abs/2608.24034](https://arxiv.org/abs/2608.24034)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: Three-level temporal adaptation for generative recommendation in live-stream ads — periodically-refreshing Live Semantic-Collaborative IDs (LSID), multi-granularity intent modeling, and Intermittent On-Policy Preference Optimization — deployed at Kuaishou with +8.5%/+7.4% click lifts and +16.1% revenue.
-   * Key techniques:
-     - LSID: periodically refreshes each live ad's SID from current scene + promoted products while keeping a stable token vocabulary
-     - Intent-Aware Generation (IAG): multi-granularity live-room entry history as the primary intent sequence + business-value-weighted next-token prediction
-     - Intermittent On-Policy Preference Optimization (IOPO): interleaves fresh on-policy preference updates with supervised NTP maintenance
-     - Deployed on a large-scale e-commerce live-stream advertising platform
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Temporal adaptation at token/intent/alignment levels for the harder live-stream setting
-     - **Fairness: 2/10** — No fairness consideration
-     - **Robustness: 7/10** — Large-scale production deployment with strong online lifts
-     - **Impact: 8/10** — Kuaishou live-stream ads; 16.1% revenue lift is significant industrial value
-
-4. **Rethinking Semantic Alignment in LLM-Enhanced Collaborative Filtering: A Spectral Decoupling Approach (UniSpecRec)**
-   * Affiliation: NAIST / Kyushu University
-   * Link: [arxiv.org/abs/2608.24363](https://arxiv.org/abs/2608.24363)
-   * Venue: WSDM 2027
-   * TL;DR: Spectral analysis shows collaborative and semantic signals favor different spectral parts, and alignment over-concentrates representations into dominant collaborative/principal semantic subspaces; UniSpecRec applies signal-specific spectral filtering and fuses predictions without cross-space alignment or extra parameters.
-   * Key techniques:
-     - Component-wise evaluation + training-dynamics analysis revealing alignment suppresses non-principal semantic components
-     - Signal-specific spectral filtering preserving collaborative and semantic representations in their own spaces
-     - Prediction-level decoupling (no cross-space alignment, no added trainable parameters)
-     - Validated across multiple datasets, LLM encoders, and collaborative backbones
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Spectral view + parameter-free prediction-level decoupling is a principled re-think of alignment
-     - **Fairness: 2/10** — No fairness consideration
-     - **Robustness: 6/10** — Multiple datasets/encoders/backbones
-     - **Impact: 6/10** — WSDM 2027; LLM+CF integration is a core topic
-
-5. **RecGPT-Mobile-V2 Technical Report**
-   * Affiliation: Alibaba Group (Taobao)
-   * Link: [arxiv.org/abs/2608.24295](https://arxiv.org/abs/2608.24295)
-   * Venue: arXiv technical report, August 2026 (cs.IR)
-   * TL;DR: On-device LLM for personalized query prediction in the Taobao feed — a staged design coupling intent quality and execution efficiency, evidence-preserving trajectory, adaptive reasoning-cost optimization after grounded rollouts, distilled into a compact low-bit student with budget-aware device-cloud routing.
-   * Key techniques:
-     - Evidence-preserving trajectory from heterogeneous interactions; recommendation-native domain adaptation + supervised alignment
-     - Reasoning-cost optimization gated on grouped rollouts meeting grounding/utility criteria
-     - Teacher→student distillation with low-bit execution, structured compression, budget-aware device-cloud routing
-     - Controlled RL: query quality 73.2%→78.6%, hard-failure 3.6%→1.6%, median CoT 62→14 tokens
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Coupled intent-quality/efficiency objective with adaptive reasoning-cost is practical
-     - **Fairness: 2/10** — No fairness consideration
-     - **Robustness: 6/10** — Controlled RL + online retrieval analyses
-     - **Impact: 7/10** — Alibaba Taobao on-device deployment; RecGPT lineage
-
-6. **Native Multimodal Representation Learning for Click-Through Rate Prediction in E-Commerce Scenarios**
-   * Affiliation: Alibaba (Taobao & Tmall Group) / University of Science and Technology of China
-   * Link: [arxiv.org/abs/2608.24091](https://arxiv.org/abs/2608.24091)
-   * Venue: CIKM 2026
-   * TL;DR: Shows end-to-end training of multimodal encoder + CTR model fails due to ambiguous supervision from non-multimodal behavior factors; proposes Mine-Then-Train, mining high-quality multimodally-interpretable samples from CTR data to fine-tune the encoder toward click preferences.
-   * Key techniques:
-     - Analysis: raw CTR behaviors are driven by both multimodal semantics and non-multimodal factors → inconsistent encoder updates
-     - Mine-Then-Train: mine multimodally-interpretable training samples, then fine-tune the encoder for click-preference alignment
-     - Offline + online experiments demonstrating effectiveness
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Diagnoses why E2E multimodal CTR fails; sample-mining fix is pragmatic
-     - **Fairness: 2/10** — No fairness consideration
-     - **Robustness: 6/10** — Offline + online experiments
-     - **Impact: 6/10** — CIKM 2026; Taobao & Tmall industrial CTR
-
-7. **Auditing Return Conditioning as a Control Knob: An Offline Diagnostic for Decision Transformer Recommendation**
-   * Affiliation: Independent Researcher
-   * Link: [arxiv.org/abs/2608.24815](https://arxiv.org/abs/2608.24815)
-   * Venue: CONSEQUENCES '26 workshop (co-located with ACM RecSys 2026)
-   * TL;DR: Audits whether reward (RTG) conditioning actually controls a Decision Transformer recommender via an RTG-locality ladder, no-RTG baseline, reward check, and shuffled-RTG ablation; finds context-wide RTG rewriting strongly shifts MovieLens Crime-share but a null result on MAL — so reward control is not established.
-   * Key techniques:
-     - RTG locality ladder: full-context vs current-slot RTG rewriting
-     - Four-check protocol: intervention locality, no-RTG baseline, logged-match/score reward check, within-trajectory shuffled-RTG ablation
-     - Cross-diagnostic pattern across locality + shuffled RTG + null MAL result → no established reward control
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Offline audit protocol for reward conditioning is a useful methodological addition
-     - **Fairness: 5/10** — Audit methodology relevant to controllability/reliability, not direct bias/fairness
-     - **Robustness: 6/10** — Careful controlled ablations; exploratory findings stated as descriptive
-     - **Impact: 4/10** — Workshop paper, single author, exploratory
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1547,7 +1515,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 155 papers as of September 5.
+**Count:** 156 papers as of September 6.
 
 | Score | Paper |
 | --- | --- |
@@ -1656,6 +1624,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation (CoFiRec) |
 | 7/10 | Towards Effective Structured Context Modeling for Conversational Recommender Systems via Dual-node Monte Carlo Tree Search (DREAMS) |
 | 7/10 | DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR) |
+| 7/10 | Two-Sided State-Space Models for Sequential Recommendation with Non-Random Multimodal Review Feedback (TS-SSM) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
@@ -1844,6 +1813,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - TGR / Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
 - hLLM / Single Pass Decoding for Generative Reranking -- Meta
 - WIDE / Wildcard Inference with Dynamic Expansion for Cross-Modal Generative Retrieval -- Jilin University
+- TAAL / Mitigating Early Beam Pruning via Temporal Autoregressive Alignment -- Harbin Institute of Technology
 
 ### RL / Reinforcement Learning
 - Ask to Be Sure / Entropy-Reduction Reward for Multi-Turn LLM Rec — Amazon (CIKM 2026)

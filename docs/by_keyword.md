@@ -36,6 +36,7 @@
 - Astar: Learning to Propose Evolution Directions for Self-Evolving Industrial AI Systems (Astar)
 - DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
 - RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems (RecEvolve)
+- Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation (AgentMMRec)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -552,6 +553,7 @@
 - It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning (CoGR)
 - SPAR: Enhancing Industrial-Scale Generative POI Recommendation via Real-World Spatial Perception (SPAR)
 - ICEGR: An Intent-Coherent End-to-End Generative Retrieval Framework for E-commerce Search (ICEGR)
+- HF-SID: High-Fidelity Semantic IDs for Generative Retrieval in Location-Based Services (HF-SID)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -744,6 +746,7 @@
 - ICEGR: An Intent-Coherent End-to-End Generative Retrieval Framework for E-commerce Search (ICEGR)
 - LLM4AIGQ: LLM-based AI Guidance Query Generation Framework for Multi Interest Mining (LLM4AIGQ)
 - RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems (RecEvolve)
+- CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval (CAMIE)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1105,6 +1108,8 @@
 - SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP)
 - Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR)
 - Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation (OrthoRec)
+- Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation (AgentMMRec)
+- CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval (CAMIE)
 
 ### Optimizer
 - MuonRec
@@ -1351,6 +1356,7 @@
 - An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)
 - CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation (CoFiRec)
 - HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE)
+- HF-SID: High-Fidelity Semantic IDs for Generative Retrieval in Location-Based Services (HF-SID)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1414,6 +1420,7 @@
 - SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP)
 - SwapRec: Warming Up Cold Items Through Training-Time Swaps (SwapRec)
 - Recommender System as Slow and Fast Thinkers (DS-Frame)
+- Two-Sided State-Space Models for Sequential Recommendation with Non-Random Multimodal Review Feedback (TS-SSM)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
