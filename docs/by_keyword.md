@@ -37,6 +37,7 @@
 - DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
 - RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems (RecEvolve)
 - Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation (AgentMMRec)
+- AtomRec: Evolving Atomic Memory for Agentic Recommendation (AtomRec)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -89,6 +90,7 @@
 - From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
 - From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT)
 - UniCon: A Unified Context-Centric Modeling Paradigm for CTR Prediction (UniCon)
+- Personalized Task Dependency Graphs for Mitigating Signal Erosion in Multi-Task Recommendation (PTDG)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -249,6 +251,7 @@
 - RPCBench: A Benchmark for Proactive Premise Critique in LLM-based Recommendation (RPCBench)
 - The Utility of LLMs in Recommender Systems Explanation Evaluation
 - The Dice Roll Method: A Standardized Protocol for Repeated-Query Auditing of Large Language Model Brand Recommendations
+- Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -572,6 +575,8 @@
 - CCLRec: Consensus-driven Contrastive Learning for LLM-enhanced Graph Recommendation (CCLRec)
 - Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation (GALLM)
 - Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling
+- Continual Graph Memory for Adaptive Recommendation under Intent Drift (CGM-Rec)
+- MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning (MURAL)
 
 
 ### Group Recommendation
@@ -747,6 +752,8 @@
 - LLM4AIGQ: LLM-based AI Guidance Query Generation Framework for Multi Interest Mining (LLM4AIGQ)
 - RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems (RecEvolve)
 - CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval (CAMIE)
+- Personalized Task Dependency Graphs for Mitigating Signal Erosion in Multi-Task Recommendation (PTDG)
+- Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro (AlleCompanion)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -973,11 +980,16 @@
 - DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
 - SPAR: Enhancing Industrial-Scale Generative POI Recommendation via Real-World Spatial Perception (SPAR)
 - LLM4AIGQ: LLM-based AI Guidance Query Generation Framework for Multi Interest Mining (LLM4AIGQ)
+- Latent-Aligned Reasoning for Multimodal Recommendation (LARK)
+- AtomRec: Evolving Atomic Memory for Agentic Recommendation (AtomRec)
+- Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
 - When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems (CoVeMem)
+- AtomRec: Evolving Atomic Memory for Agentic Recommendation (AtomRec)
+- Continual Graph Memory for Adaptive Recommendation under Intent Drift (CGM-Rec)
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -1110,6 +1122,8 @@
 - Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation (OrthoRec)
 - Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation (AgentMMRec)
 - CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval (CAMIE)
+- Latent-Aligned Reasoning for Multimodal Recommendation (LARK)
+- MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning (MURAL)
 
 ### Optimizer
 - MuonRec

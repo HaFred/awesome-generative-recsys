@@ -43,7 +43,7 @@ mindmap
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
-        DoPR -- SJTU
+        Repeated Queries -- EEUAS
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -77,6 +77,122 @@ mindmap
 
 ---
 ## By Date
+
+### Papers September 07
+
+*Monday, September 7, 2026. arXiv Friday (Sep 4) announcement batch — cs.IR / cs.AI. 7 papers found (1 opensource). Core generative/agentic rec: AtomRec (XJTLU/Xiaohongshu evolving atomic memory), CGM-Rec (Phenikaa continual graph memory, EMNLP 2026 Findings), LARK (Xiaohongshu/SJTU latent-aligned VLM reasoning), MURAL (American U uncertainty-aware multimodal GNN); broader: Repeated Queries (LLM brand-rec saturation audit, opensource), PTDG (Huawei multi-task dependency graphs, CIKM 2026), AlleCompanion (Allegro complementary rec, RecSys 2026 OARS).*
+
+1. **AtomRec: Evolving Atomic Memory for Agentic Recommendation**
+   * Affiliation: Xi'an Jiaotong-Liverpool University / Xiaohongshu — *(with Peking University, East China Normal University, Beijing Jiaotong University)*
+   * Link: [arxiv.org/abs/2609.04882](https://arxiv.org/abs/2609.04882)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: An agentic recommender that stores user/item memory as structured atomic units (not coarse summaries), links them semantically, and retrieves multi-hop evidence paths so fine-grained preference stages survive interest evolution.
+   * Key techniques:
+     - Atomic collaborative memory: user/item memories as structured atomic units with semantic links, evolved field-wise on new interactions
+     - Multi-hop evidence-path retrieval (vs. isolated neighbor summaries) for grounded, evidence-aware ranking
+     - ~8.5% average relative improvement over SOTA agentic and memory-augmented baselines on 4 public benchmarks
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — replacing coarse-summary memory with evolving atomic units + multi-hop evidence paths is a fresh, well-motivated advance for agentic-rec memory
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 6/10** — 4 public benchmarks with consistent gains
+     - **Impact: 7/10** — XJTLU/Xiaohongshu/PKU/ECNU/BJTU collaboration targeting the agentic-recommender memory bottleneck
+
+2. **Continual Graph Memory for Adaptive Recommendation under Intent Drift (CGM-Rec)**
+   * Affiliation: Phenikaa University, Vietnam — *(with Hanoi University of Science and Technology, University of Technology Sydney)*
+   * Link: [arxiv.org/abs/2609.04651](https://arxiv.org/abs/2609.04651)
+   * Venue: Findings of EMNLP 2026
+   * TL;DR: Treats the KG as a writable memory — a conservative Semantic Graph Memory plus a fast Episodic Lesson Memory — so a frozen-parameter model adapts to intent drift purely through memory writes.
+   * Key techniques:
+     - Semantic Graph Memory updated via quality-gated typed operations for stable, high-confidence relational knowledge
+     - Episodic Lesson Memory as a fast reactive store of recent outcomes, failures, and corrective hints
+     - Frozen-parameter, one-pass reranking protocol; HR@1 up to +29.58% over the strongest LLM baseline on Bundle, HR@5 0.5941 vs 0.4746 (K-RagRec) on ML-100K
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — only an anonymous review repo (anonymous.4open.science/r/CGM-17DD); no public code
+     - **Novelty: 6/10** — writable graph memory for frozen-parameter intent-drift adaptation is a clean idea, though memory-augmented KG rec is well-trodden
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 6/10** — multiple settings (Bundle, ML-100K, etc.) with consistent wins
+     - **Impact: 7/10** — EMNLP 2026 Findings
+
+3. **Latent-Aligned Reasoning for Multimodal Recommendation (LARK)**
+   * Affiliation: Xiaohongshu / Shanghai Jiao Tong University
+   * Link: [arxiv.org/abs/2609.04645](https://arxiv.org/abs/2609.04645)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.CL / cs.CV / cs.LG)
+   * TL;DR: A two-stage latent reasoning framework inside a single VLM that uses learnable latent tokens as "visual checkpoints" to stop cross-modal dilution as visual/textual signals attenuate through multi-step reasoning.
+   * Key techniques:
+     - Learnable latent tokens interleaved with multi-step CoT and aligned to a frozen vision encoder, preserving perceptual detail throughout the chain
+     - Bridge MLP + item-to-item contrastive learning; intermediate features aligned to first-stage CoT hidden states to anchor final embeddings to reasoning output
+     - SOTA across 3 public benchmarks + 1 industrial dataset, with controlled ablations
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — diagnosing "cross-modal dilution" and using latent-token visual checkpoints inside VLM reasoning is a fresh angle for multimodal rec
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 6/10** — 3 public + 1 industrial dataset with ablations
+     - **Impact: 6/10** — Xiaohongshu/SJTU; strong SOTA but no venue/code yet
+
+4. **MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning**
+   * Affiliation: American University — *(with Ulsan National Institute of Science and Technology, Michigan State University, Independent Researcher)*
+   * Link: [arxiv.org/abs/2609.04574](https://arxiv.org/abs/2609.04574)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.LG / cs.SI)
+   * TL;DR: Moves multimodal GNN recommendation from fixed structural augmentation to dynamic topology discovery, with uncertainty-aware fusion that down-weights noisy modality signals.
+   * Key techniques:
+     - Adaptive Edge Learner: differentiable retrieval-augmented strategy + ANN search to discover latent item-item correlations in O(N log N)
+     - Uncertainty-Aware Fusion models aleatoric uncertainty to down-weight unreliable modalities against cross-modal noise
+     - Contrastive teacher-student alignment anchors modality representations to stable behavioral signals (no gradient leakage)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — dynamic topology discovery + uncertainty-aware fusion is a solid, if incremental, evolution of multimodal GNN rec
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 8/10** — large-scale TikTok/Amazon benchmarks, robustness shown under extreme data corruption
+     - **Impact: 6/10** — beats both structural and generative SOTA baselines on multimodal rec
+
+5. **Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources**
+   * Affiliation: Estonian Entrepreneurship University of Applied Sciences
+   * Link: [arxiv.org/abs/2609.05059](https://arxiv.org/abs/2609.05059)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.CL)
+   * TL;DR: Shows non-retrieval LLMs keep adding never-seen brands even at run 15 (86–92% of cells) while retrieval-enabled engines saturate earlier — using exact rarefaction and Chao2 richness estimators.
+   * Key techniques:
+     - 300 question-engine cells (50 questions, 6 engines, 15 runs) over 1,470 adjudicated organizations with open extraction
+     - Exact rarefaction + Chao2 richness; parallel fixed-roster extraction reproduces flat curves, showing roster-bounded tracking manufactures plateaus
+     - Open-sources code, per-cell tables, and data pointers
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/Rankfor/rankfor-open](https://github.com/Rankfor/rankfor-open): well-organized repo (dice-roller + brand-detector + research/recommendation-saturation study), LICENSE, CITATION.cff, unit tests, docs; data archived on Zenodo (CC BY 4.0)
+     - **Novelty: 5/10** — rigorous follow-up to the author's Dice Roll Method; rarefaction/Chao2 on recommendation saturation is a useful methodological addition
+     - **Fairness: 8/10** — directly targets reliability/auditing of LLM recommendation output
+     - **Robustness: 7/10** — exact estimators over 300 cells; large N
+     - **Impact: 5/10** — single-author preprint; niche (brand-visibility auditing) but clean, reproducible methodology
+
+6. **Personalized Task Dependency Graphs for Mitigating Signal Erosion in Multi-Task Recommendation (PTDG)**
+   * Affiliation: Huawei Technologies Co., Ltd.
+   * Link: [arxiv.org/abs/2609.04862](https://arxiv.org/abs/2609.04862)
+   * Venue: CIKM 2026
+   * TL;DR: Item-adaptive "rewiring" of task dependency pathways (low-rank) plus adaptive progressive masking to fix cumulative signal erosion in multi-task CTR.
+   * Key techniques:
+     - Low-rank dependency rewiring respects physical causal constraints (Click → Pay) while creating adaptive information shortcuts
+     - GCN propagation with hard causal masking; Adaptive Progressive Masking (APM) decouples shared parameters by task sparsity
+     - AUC up to +1.45% on sparse conversion tasks; online A/B +1.2% CVR, +1.9% eCPM
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — personalized task-dependency rewiring + APM is a thoughtful, pragmatic advance over static MTL funnels
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 8/10** — KuaiRand1K + industrial dataset + online A/B
+     - **Impact: 7/10** — CIKM 2026; Huawei industrial multi-task recommendation
+
+7. **Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro (AlleCompanion)**
+   * Affiliation: Allegro
+   * Link: [arxiv.org/abs/2609.05063](https://arxiv.org/abs/2609.05063)
+   * Venue: RecSys 2026 OARS Workshop
+   * TL;DR: Production complementary-product retrieval that turns noisy co-purchase traffic into semantic compatibility via a category-constrained Two Tower plus a multi-source category mapping (ComCat).
+   * Key techniques:
+     - Category-constrained Two Tower architecture with a Category Adapter guiding embeddings within complementary boundaries
+     - ComCat: multi-source Complementary Categories Mapping (expert rules + human-in-the-loop + LLM reasoning + statistical mining)
+     - Data-level filtering heuristics; 20M+ monthly active users, uplift in attributed GMV and sponsored revenue
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 5/10** — category-constrained Two Tower + ComCat is practical, but the techniques are established
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 8/10** — deployed production system, 20M+ MAU
+     - **Impact: 7/10** — Allegro production complementary rec; RecSys 2026 workshop
 
 ### Papers September 06
 
@@ -1052,223 +1168,6 @@ mindmap
      - **Robustness: 6/10** — Multi-scale, multi-family, bootstrap-significance analysis on two IR datasets
      - **Impact: 5/10** — Seoul National University; informs SFT practice for LLM retrievers/recommenders
 
-### Papers August 28
-
-*Friday, August 28, 2026. Arxiv Thursday (Aug 27) batch — cs.IR / cs.CV. 6 papers found (1 opensource). Core generative-rec: PailitaoGR (Alibaba generative image retrieval), PrismRec (flow-matching micro-video rec), CoVeMem (Xiaohongshu agentic vector memory); broader: MaskRec (unified CVR backbone), MOSAIC (meta-review UGC rec), Conversational Recommendation over Live E-Commerce (RecSys 2026 demo, opensource).*
-
-1. **PailitaoGR: Latent Think-with-Images for Generative Image Retrieval**
-   * Affiliation: Alibaba (Taobao & Tmall Group) — *(Xiaomeng Fan, Yueran Liu, Shengyu Zhou, Chenghan Fu, Wanxian Guan, Feng Li, Chuan Yu, Jian Xu, Bo Zheng)*
-   * Link: [arxiv.org/abs/2608.26658](https://arxiv.org/abs/2608.26658)
-   * Venue: arXiv preprint, August 2026 (cs.CV / cs.AI / cs.IR)
-   * TL;DR: Extends SID-based generative retrieval to image search by teaching the model to "think with images" — internalizing target-focused perception ("Zoom without Cropping") and selective auxiliary-evidence use ("Read without OCR") so it can pinpoint the search target amid distracting query-image content.
-   * Key techniques:
-     - Target-focused perception: a target Enhancer + on-policy distillation + attention-guidance loss sharpen the search-target visual tokens
-     - Selective auxiliary-evidence utilization: an auxiliary enhancer + in-capacity incremental contrastive distillation exploit useful side evidence
-     - Training/validation sets sampled from real online image-search logs; +13.8% avg over baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — "Think-with-images" reframes generative image retrieval as target-vs-auxiliary visual attention, a fresh angle beyond text/categorical SID generation
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 7/10** — Real online image-search logs; industrial-scale evaluation
-     - **Impact: 7/10** — Alibaba (Taobao & Tmall); pushes generative retrieval into the image-search domain
-
-2. **Preference Flow Matching with Spectral Factorization for Micro-video Recommendation (PrismRec)**
-   * Affiliation: National University of Defense Technology / National University of Singapore / Zhengzhou University — *(Xinxin Dong, Haokai Ma, Fei Hu, YuZe Zheng, Bin Wu, Yonghui Yang, Xiaodong Wang)*
-   * Link: [arxiv.org/abs/2608.26579](https://arxiv.org/abs/2608.26579)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: A flow-matching recommender that factorizes frame-level representations into static-semantic and dynamic factors in the temporal frequency domain, then injects user-calibrated context as a structured condition so video content becomes an intrinsic driver of preference formation instead of auxiliary side information.
-   * Key techniques:
-     - Spectral Semantic Factorization (SSF): prior-guided learnable frequency mask separates static vs. dynamic factors
-     - Context-Calibrated Preference Matching (CPM): per-user sensitivity weighting steers the flow-matching trajectory
-     - +22.65% over SOTA with the lowest inference cost / peak memory on 4 datasets across 2 platforms
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Frequency-domain factorization fused with flow matching is a clean, underexplored combination for micro-video rec
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 6/10** — 4 datasets, 2 platforms; strong gains and efficiency evidence
-     - **Impact: 6/10** — NUDT/NUS/Zhengzhou; advances generative (flow-matching) micro-video recommendation
-
-3. **When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems (CoVeMem)**
-   * Affiliation: Xiaohongshu — *(Hanchong Chen, Xing Tang, Lingjie Li, Xiongfeng Shan, Xiuqiang He)*
-   * Link: [arxiv.org/abs/2608.26895](https://arxiv.org/abs/2608.26895)
-   * Venue: arXiv preprint, August 2026 (cs.IR / cs.AI)
-   * TL;DR: Replaces the text-based memory of agentic recommenders with a collaborative vector memory — frozen LightGCN user/item states retrieved into the LLM context as soft tokens — so the full interaction history becomes trainable, matching text-memory agents with zero additional LLM calls.
-   * Key techniques:
-     - Frozen LightGCN user/item states form the memory bank; the candidate set retrieves the most relevant historical states
-     - Contrastive alignment to item-semantic anchors + listwise co-training with masked candidates + pointwise yes/no readout
-     - Matches/exceeds the strongest text-memory agent on 19/20 metric cells with zero extra LLM calls for memory
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Vectorizing the collaborative memory core (vs. text narrative) so gradients reach the full history is a fresh agentic-rec idea
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 6/10** — 4 instruction-grounded benchmarks; near-uniform gains with efficiency
-     - **Impact: 7/10** — Xiaohongshu; targets the agentic-recommender memory bottleneck
-
-4. **Topology-Masked Unified Backbone for Joint Feature Interaction and Multi-Domain Sequence Modeling (MaskRec)**
-   * Affiliation: Shandong University — *(Zhihao Zhu, Dezheng Han, Jikang Xia, Shuaishuai Guo)*
-   * Link: [arxiv.org/abs/2608.27005](https://arxiv.org/abs/2608.27005)
-   * Venue: TAAC-KDD Cup 2026 Workshop (Unified Block Innovation Award)
-   * TL;DR: A unified token-interaction backbone for industrial CVR prediction that models heterogeneous features and multi-domain behavior sequences within one topology-constrained attention space via a structured attention mask (TopoMask) plus learnable global/domain memory tokens.
-   * Key techniques:
-     - Unified token space with learnable global memory + domain-level memory tokens as aggregation nodes
-     - TopoMask structured attention mask selectively enables/blocks connections by information source
-     - Dual-path interactive query generation injects candidate-conditioned user-item signals
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Unified token + topology-mask interaction is a clean engineering advance, incremental over unified ranking backbones
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 5/10** — Single Tencent Advertising competition dataset; stable gains over baseline
-     - **Impact: 4/10** — TAAC-KDD Cup 2026 workshop; industrial CVR prediction
-
-5. **Beyond a Single Story: Meta-Reviewing Sparse and Incomplete User-generated Contents for Recommendation (MOSAIC)**
-   * Affiliation: Nanyang Technological University — *(Hongren Wang, Tianjun Wei, Yingpeng Du, Jie Zhang, Yin-Leng Theng)*
-   * Link: [arxiv.org/abs/2608.26728](https://arxiv.org/abs/2608.26728)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: Borrows "meta-review" from peer review to synthesize each user's sparse/incomplete reviews into an aggregated meta-review of attribute-sentiment evidence from neighbor users, jointly improving rating prediction and explanation quality.
-   * Key techniques:
-     - Meta-review construction: aggregate attribute-sentiment evidence from neighbor users' reviews
-     - MMoE jointly optimizes rating + meta-review attribute-sentiment prediction; attention personalizes signals
-     - 4 real-world datasets; consistent gains especially for low-interaction users
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Meta-review analogy for UGC aggregation is intuitive; MMoE composition is standard
-     - **Fairness: 3/10** — Mitigates data sparsity, delivering consistent gains for users with limited interaction history
-     - **Robustness: 5/10** — 4 datasets; rating + explanation quality
-     - **Impact: 5/10** — NTU; practical UGC/explainable recommendation under sparsity
-
-6. **Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval**
-   * Affiliation: Know-Center Research / Graz University of Technology — *(Ante Kapetanovic, Tomislav Duricic, Dionizije Fa, Andro Mercep, Emanuel Lacic)*
-   * Link: [arxiv.org/abs/2608.27006](https://arxiv.org/abs/2608.27006)
-   * Venue: ACM RecSys 2026 (Demo)
-   * TL;DR: A multi-turn conversational shopping assistant with a self-refreshing retriever that delta-syncs live merchant catalogues via per-item hashes, using the LLM only for intent classification and preference elicitation — demoed as a WhatsApp assistant.
-   * Key techniques:
-     - Self-refreshing retriever: per-item hash → classify New/Semantic/Metadata-only/Deleted/Unchanged; process only deltas
-     - Controller-based dialogue layer; retrieval, reranking, and diversity selection as dedicated functions
-     - Live chatbot + documentation + walkthrough open-sourced (Apache-2.0)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 5/10** — [github.com/infobip/infobip-agentic-crs](https://github.com/infobip/infobip-agentic-crs) — Apache-2.0 demo companion: runnable dependency-free synthetic sync demo + excellent documented README, but the full private engine/commercial catalogue remain closed
-     - **Novelty: 5/10** — Self-refreshing (delta) catalogue sync for CRS is practical and under-addressed
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 4/10** — Demo paper; no large-scale offline/online eval
-     - **Impact: 5/10** — RecSys 2026 demo; Infobip; addresses the static-catalogue assumption in e-commerce CRS
-
-### Papers August 27
-
-*Thursday, August 27, 2026. Arxiv Wednesday (Aug 26) batch — cs.IR / cs.LG. 7 papers found (0 opensource). Core generative-rec: AMBER (Meta event tokenization for LLM rec), SWIM (generative re-ranking list evaluator), TransRetrieval (Alibaba/Renmin retrieval scaling); broader: D3ER (multimodal rec), HSR (Hamiltonian sequential rec), MOTIF (cold-start multimodal), DCEO (e-commerce search causal optimization).*
-
-1. **An Event is Worth One Token: Event Tokenization for Industrial-scale LLM Recommendation (AMBER)**
-   * Affiliation: Meta AI
-   * Link: [arxiv.org/abs/2608.25546](https://arxiv.org/abs/2608.25546)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: Introduces "event tokenization" — a new LLM input modality that compresses each interaction's full temporal snapshot (user/item/context/outcome) into a single bottlenecked Event Token, scaling a new dimension "snapshot resolution" to push the compute-quality Pareto frontier of industrial LLM recommendation.
-   * Key techniques:
-     - Event-centric paradigm: each sequence position encodes a full interaction snapshot, not just text/SID/categorical features
-     - New scaling dimension "snapshot resolution" (information encoded per event)
-     - AMBER (Autoregressive Modeling via Bottlenecked Event Representation): learned end-to-end, Event Tokens pre-computed & cached for serving
-     - Positive transfer: a single unified tokenizer beats dedicated per-entity tokenizers; Event Tokens transfer to non-LLM rankers as serving-time features
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 8/10** — New "snapshot resolution" scaling dimension + Event Token input modality reframes how LLM recs encode each interaction
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 7/10** — Industrial ranking + retrieval benchmarks; cross-architecture transfer evidence
-     - **Impact: 8/10** — Meta; reorients LLM-rec scaling around event-level information density
-
-2. **SWIM: Step-Wise Integrated Measure for Session-supervised List Evaluation in Generative Re-ranking**
-   * Affiliation: University of Science and Technology of China (USTC) / Kuaishou Technology
-   * Link: [arxiv.org/abs/2608.25104](https://arxiv.org/abs/2608.25104)
-   * Venue: CIKM 2026 (ACM DOI 10.1145/3799682.3840732)
-   * TL;DR: A list-level evaluator for the Generator-Evaluator re-ranking framework that models user behavior as a finite-horizon session-level survival process, capturing contextual dependency, user continuation, and diminishing returns that point-wise list scoring ignores.
-   * Key techniques:
-     - Prefix session-level survival process for the list's contribution to the session objective
-     - Factorization into a recursive survival distribution + reached-position conditional rewards
-     - Causally-masked Transformer for parallel continuation/utility estimation under strict latency
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Code link (github.com/yuanhao53/SWIM) currently 404 / not yet public
-     - **Novelty: 7/10** — Session-level survival framing for list evaluation is a fresh angle vs point-wise aggregation
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 6/10** — Extensive listwise-reranking experiments with significant engagement gains
-     - **Impact: 7/10** — CIKM 2026; USTC/Kuaishou; targets the industrial generative re-ranking stage
-
-3. **TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation**
-   * Affiliation: Renmin University of China / Alibaba (Taobao & Tmall Group)
-   * Link: [arxiv.org/abs/2608.25528](https://arxiv.org/abs/2608.25528)
-   * Venue: CIKM 2026
-   * TL;DR: Transformer-based retrieval that scales with compute and cross-domain data by fixing token-norm divergence (weighted average aggregation), cutting per-candidate FLOPs by 85% (target token compression), and unifying domains with position-style domain embeddings.
-   * Key techniques:
-     - Weighted average aggregation restores the homogeneous-token assumption Transformers rely on
-     - Target token compression cuts per-candidate FLOPs by 85% while preserving cross-attention expressiveness
-     - Position-style domain embeddings turn cross-domain data into a scaling asset
-     - Log-linear scaling (+19.3/+22.2 pt Recall@2000); online +2.53% revenue at same latency
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Solid engineering fixes (norm-homogeneity, token compression) but incremental over retrieval scaling work
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 7/10** — 40B-interaction industrial dataset + KuaiRand + online A/B
-     - **Impact: 7/10** — CIKM 2026; Alibaba, deployed
-
-4. **D3ER: Supporting Multi-Modal Recommendation via Disentangle and Distillation-based Dynamic Ensemble**
-   * Affiliation: Institute of Software, Chinese Academy of Sciences (ISCAS) / UCAS
-   * Link: [arxiv.org/abs/2608.25737](https://arxiv.org/abs/2608.25737)
-   * Venue: ACMMM 2026
-   * TL;DR: Introduces gradient boosting into multimodal recommendation to alternately optimize modal-homogeneity (HOI) and modal-heterogeneity (HEI) discriminative information, with knowledge distillation and global-correction regularization to curb storage cost and local optima.
-   * Key techniques:
-     - First gradient-boosting formulation for multimodal recommendation (alternate HOI/HEI learning)
-     - Knowledge distillation + global correction regularization to mitigate gradient-boosting cost/local-optima
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Gradient boosting for MR is a fresh angle, though the HOI/HEI disentanglement idea is familiar
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 5/10** — Prevalent real-world datasets only
-     - **Impact: 5/10** — ACMMM 2026; multimodal rec is a niche but active area
-
-5. **Hamiltonian Spectral-Temporal Dissipative Dynamics for Sequential Recommendation (HSR)**
-   * Affiliation: Hong Kong University of Science and Technology (HKUST)
-   * Link: [arxiv.org/abs/2608.25755](https://arxiv.org/abs/2608.25755)
-   * Venue: arXiv preprint, August 2026 (cs.IR; related ACM DOI 10.1145/3773078.3831793)
-   * TL;DR: Recasts preference evolution as a second-order dissipative Hamiltonian system in latent phase space (position = stable preference, momentum = short-term tendency), yielding a closed-form frequency-domain solution that captures inertia, periodicity, and abrupt shifts beyond first-order models.
-   * Key techniques:
-     - Dissipative Hamiltonian system over latent phase space (position + momentum)
-     - Linear time-invariant structure → closed-form frequency-domain solution
-     - Learnable dissipation for interest decay; local impulse refinement for sparse-log shocks
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Second-order Hamiltonian dynamics is a genuinely fresh formulation for sequential rec
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 6/10** — 3 benchmarks, beats Transformer- and SSM-based recommenders
-     - **Impact: 5/10** — HKUST; sequential rec, novel but niche
-
-6. **MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation**
-   * Affiliation: Taiyuan University of Technology / Northeastern University (China)
-   * Link: [arxiv.org/abs/2608.25381](https://arxiv.org/abs/2608.25381)
-   * Venue: WISE 2026
-   * TL;DR: Uses offline LLM motivation reasoning to reconstruct transferable item-item topology for cold-start multimodal recommendation, without injecting generated text into prediction.
-   * Key techniques:
-     - Semantic Motivation Reasoning (offline LLM) to infer intent semantics
-     - Knowledge-enhanced Graph Reconstruction + Weighted Graph Contrastive Learning
-     - Semantic-Structural Alignment; up to +6.07% relative over the strongest recent baseline
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — LLM motivation semantics for topology inference is a reasonable, incremental idea
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 5/10** — 3 multimodal benchmarks
-     - **Impact: 5/10** — WISE 2026; cold-start multimodal rec
-
-7. **DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search**
-   * Affiliation: Alibaba (Taobao & Tmall Group)
-   * Link: [arxiv.org/abs/2608.25635](https://arxiv.org/abs/2608.25635)
-   * Venue: arXiv preprint, August 2026 (cs.LG, cross-list cs.IR)
-   * TL;DR: An actor-critic framework that directly optimizes the relative causal effect between item-level proxy scores and the user-level long-term objective (n-day GMV/purchases), replacing hand-crafted multi-objective fusion weights.
-   * Key techniques:
-     - Relative causal effect as the alignment metric between proxy and ultimate objective
-     - Actor generates context-dependent fusion weights; critic estimates the ultimate objective
-     - Deployed; +0.36% GMV in a 41-day online A/B test
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — Direct causal-effect optimization of fusion weights is clean, but actor-critic ranking optimization is established
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 7/10** — Offline + 41-day online A/B
-     - **Impact: 7/10** — Alibaba; deployed in industrial e-commerce search
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1515,7 +1414,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 156 papers as of September 6.
+**Count:** 157 papers as of September 7.
 
 | Score | Paper |
 | --- | --- |
@@ -1625,6 +1524,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Towards Effective Structured Context Modeling for Conversational Recommender Systems via Dual-node Monte Carlo Tree Search (DREAMS) |
 | 7/10 | DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR) |
 | 7/10 | Two-Sided State-Space Models for Sequential Recommendation with Non-Random Multimodal Review Feedback (TS-SSM) |
+| 7/10 | Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
