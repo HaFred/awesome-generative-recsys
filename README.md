@@ -43,7 +43,7 @@ mindmap
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
-        Repeated Queries -- EEUAS
+        Embedding Surgery -- IIT-CNR Pisa
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -77,6 +77,122 @@ mindmap
 
 ---
 ## By Date
+
+### Papers September 08
+
+*Tuesday, September 8, 2026. arXiv Monday (Sep 7) announcement batch — cs.IR / cs.AI / cs.LG. 7 papers found (2 opensource). Core: SAM-D2Q (Alibaba/AliExpress multimodal Doc2Query, CIKM 2026 Oral), Distill Globally Adapt Locally (Amazon trade-up recommendation distillation, GenAIECommerce @ RecSys 2026), AutoLR (NetEase autonomous research-to-launch harness), Embedding Surgery (IIT-CNR Pisa dense-retrieval ranking correction, CIKM 2026, opensource); plus RegionFed (Walmart federated retail search), SAGE (Korea University visual retrieval, EMNLP 2026 Main, opensource), IGPO (Alibaba Taobao training-free AI search, EMNLP 2026 Industry).*
+
+1. **SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce**
+   * Affiliation: Alibaba International Digital Commerce Group (AliExpress)
+   * Link: [arxiv.org/abs/2609.04961](https://arxiv.org/abs/2609.04961)
+   * Venue: CIKM 2026 (Oral Full Paper)
+   * TL;DR: A business-aligned multimodal Doc2Query framework that SFTs a vision-language model, augments visual attributes, then RL-aligns pseudo-query generation toward search conversion — deployed in AliExpress (+3.38% GMV, +2.27% Pay Count).
+   * Key techniques:
+     - Task-adapted multimodal supervised fine-tuning over product titles, images, and user queries
+     - Multimodal data augmentation for key visual-attribute perception and expansion coverage
+     - Reinforcement-learning preference alignment toward search business objectives under Boolean-retrieval constraints
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (industrial, deployed in AliExpress)
+     - **Novelty: 7/10** — pairing multimodal Doc2Query with RL-based business-objective alignment is a fresh step beyond text-only document expansion
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 7/10** — offline gains plus a deployed online A/B (GMV +3.38%, Pay Count +2.27%)
+     - **Impact: 8/10** — CIKM 2026 Oral, production AliExpress search system
+
+2. **Distill Globally, Adapt Locally: Reasoning Distillation and Product-Type Test-Time Training for Scalable Trade-Up Recommendation**
+   * Affiliation: Amazon (Everyday Essentials Technologies)
+   * Link: [arxiv.org/abs/2609.05363](https://arxiv.org/abs/2609.05363)
+   * Venue: GenAIECommerce 2026 Workshop @ ACM RecSys 2026
+   * TL;DR: Distills LLM trade-up reasoning into a 15.5M-param embedding-pair classifier, then adapts the decision boundary per product type via test-time training (AUC 0.924 → 0.941), ~5,000× faster than direct LLM inference.
+   * Key techniques:
+     - Retrieval-augmented few-shot LLM teacher emits structured relation labels + natural-language rationales
+     - Alignment + contrastive distillation into a compact embedding-pair student (no LLM calls at inference)
+     - Product-type test-time training (PT-TTT) with lightweight category-specific adapters over the frozen student
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — reasoning distillation + category-specific TTT for a recommendation decision boundary is a clean, practical contribution
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 7/10** — fixed 8,352-pair benchmark with reported 95% CIs; AUC 0.924 → 0.941
+     - **Impact: 7/10** — Amazon, GenAIECommerce @ RecSys 2026; 5,000× speedup / 10,000× cost reduction vs. LLM
+
+3. **AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems**
+   * Affiliation: NetEase Games (Fuxi AI Lab)
+   * Link: [arxiv.org/abs/2609.04871](https://arxiv.org/abs/2609.04871)
+   * Venue: arXiv preprint, September 2026 (cs.AI)
+   * TL;DR: An autonomous research-to-launch harness for NetEase's DASHEN gaming-community recommender that coordinates a multi-expert council, a deterministic evidence-weighted explore-exploit selector, and layered knowledge to drive multi-day experiment cycles through launch review.
+   * Key techniques:
+     - Multi-expert council that debates and adversarially reviews proposals
+     - Deterministic evidence-weighted exploration–exploitation selector allocating a limited trial budget with Council reranking
+     - Layered knowledge system combining external research, production knowledge, and DASHEN domain knowledge
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — an end-to-end autonomous harness from research reproduction to launch review is a distinct, underexplored angle for industrial recsys
+     - **Fairness: 4/10** — adversarial council review provides some guardrails, but not a fairness contribution
+     - **Robustness: 6/10** — deployed in DASHEN over long-running, multi-day cycles
+     - **Impact: 7/10** — NetEase; targets the recsys research-to-production automation bottleneck
+
+4. **Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval**
+   * Affiliation: IIT-CNR, Pisa (Italian National Research Council)
+   * Link: [arxiv.org/abs/2609.05110](https://arxiv.org/abs/2609.05110)
+   * Venue: CIKM 2026
+   * TL;DR: A query-time convex-optimization "surgery" that applies localized, minimal edits to document embeddings — guided by editorial, click, or LLM feedback — to fix stale rankings without re-indexing (up to +60.64% relative nDCG@10 on DL-Hard).
+   * Key techniques:
+     - Embedding surgery formulated as convex optimization enforcing ranking constraints while minimizing representation drift
+     - Symmetric / demotion / promotion update variants for different feedback signals
+     - Safe in-place ANN index overwriting (no reconstruction); complements query-adaptation methods such as CoRocchio
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/maddalena-amendola/Embedding-Surgery](https://github.com/maddalena-amendola/Embedding-Surgery) — complete pipeline (embedding_surgery, corocchio, llm, index/generate utils), clean module split, README; no license/tests yet
+     - **Novelty: 6/10** — localized query-time embedding correction as convex optimization is a well-motivated, pragmatic idea (adjacent to CoRocchio/query-side adaptation)
+     - **Fairness: 4/10** — robust to noisy feedback, but not fairness-focused
+     - **Robustness: 7/10** — TREC DL/Robust/CAsT + MS MARCO, consistent gains even under noisy/shifting feedback
+     - **Impact: 6/10** — CIKM 2026; applicable to search, recommendation, and RAG pipelines
+
+5. **RegionFed: Federated Learning for Personalized Query Understanding in Heterogeneous Retail Environments**
+   * Affiliation: Walmart Global Tech
+   * Link: [arxiv.org/abs/2609.05403](https://arxiv.org/abs/2609.05403)
+   * Venue: arXiv preprint, September 2026 (cs.LG / cs.AI)
+   * TL;DR: A gradient-level federated personalization framework that uses ℓ2 conflict between regional and global gradients to diagnose heterogeneity, route each region to the cheapest sufficient personalization strategy, and avoid the transformer collapse of parameter-level methods (92.27% accuracy).
+   * Key techniques:
+     - Gradient-level personalization treating models as differentiable black boxes (zero code changes across T5-Small/T5-3B/RoBERTa/CNN)
+     - ℓ2 gradient-conflict as a unified signal for heterogeneity diagnosis + personalization-strength control
+     - Differential privacy (ε≈0.60) and O(1/√T) convergence guarantees
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — operating personalization at the gradient level sidesteps a concrete transformer failure mode, though personalized FL is a mature area
+     - **Fairness: 6/10** — regional personalization + differential privacy directly target cross-region equity and privacy
+     - **Robustness: 7/10** — 3 datasets (Amazon ESCI/Reviews, LEAF-FEMNIST) and 4 architectures with consistent gains
+     - **Impact: 6/10** — Walmart Global Tech; retail search across heterogeneous regions
+
+6. **SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval**
+   * Affiliation: Korea University
+   * Link: [arxiv.org/abs/2609.04255](https://arxiv.org/abs/2609.04255)
+   * Venue: EMNLP 2026 (Main)
+   * TL;DR: A training-free framework that parses dense document images into hierarchical graph nodes with multi-vector embeddings and performs iterative entity-level subgraph matching to counter "semantic dilution" (R@3 0.849 on the new DEAR dataset).
+   * Key techniques:
+     - Semantic Dilution failure-mode quantification as a function of entity density
+     - Hierarchical entity-graph parsing with multi-vector node embeddings
+     - Iterative entity-level subgraph matching; DEAR benchmark (1,055 query–image pairs from product detail pages)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 3/10** — [github.com/All4Nothing/SAGE](https://github.com/All4Nothing/SAGE) — repo announced but currently only a README placeholder (no code pushed yet)
+     - **Novelty: 6/10** — training-free hierarchical graph representation for fine-grained visual retrieval is a clean idea
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 6/10** — outperforms patch-level and OCR-based baselines on DEAR, but single-dataset evaluation
+     - **Impact: 6/10** — EMNLP 2026 Main; product-detail retrieval
+
+7. **Inventory-Grounded Policy-Level Optimization for Training-Free AI Search (IGPO)**
+   * Affiliation: Alibaba (Taobao AI Search)
+   * Link: [arxiv.org/abs/2609.04813](https://arxiv.org/abs/2609.04813)
+   * Venue: EMNLP 2026 (Industry Track)
+   * TL;DR: A training-free search optimization that separates Policy Guidelines from runtime inventory facts — online it probes inventory to build a "portrait" and injects relevant guidelines into retrieval/selection prompts (3.17% CTR lift, 38.9% fewer audited bad cases).
+   * Key techniques:
+     - Policy Guidelines decoupled from environment facts (no fine-tuning, RL, or static prompt patches)
+     - Inventory grounding: runtime probing → inventory portrait → guideline injection
+     - Contrastive signal from stochastic rollouts grouped by query; inventory-guided exploration loop
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — separating policy from environment facts for training-free adaptation is a sensible, production-oriented framing
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 7/10** — deployed since May 2026; 14-day online A/B (CTR +3.17%, bad cases −38.9%)
+     - **Impact: 7/10** — EMNLP 2026 Industry Track; commercial smart-assistant AI search
 
 ### Papers September 07
 
@@ -1051,123 +1167,6 @@ mindmap
      - **Robustness: 8/10** — 800M-keyword scale, 24× speedup, online A/B +0.71% revenue
      - **Impact: 7/10** — Microsoft/Nvidia; unlocks real-time constrained decoding for sponsored search
 
-### Papers August 29
-
-*Saturday, August 29, 2026. Arxiv Friday (Aug 28) announcement batch — cs.IR / cs.CL / cs.GT. 7 papers found (1 opensource). Core self-evolving / generative-retrieval: Astar (Alibaba/Lazada self-evolving industrial rec via RL), ProRetrieval (Tencent program-synthesis hybrid search), Order-Consistent LLM Scorers (JKU Linz/Thomson Reuters reranker decision-stability); broader: Stageboost (eBay signal rec), Scaling GNNs for Friend Rec (VK, CIKM 2026, opensource), Token-Level Advertising LAMA (Stanford/Purdue), When Does SFT Reduce Instruction Sensitivity (SNU).*
-
-1. **Astar: Learning to Propose Evolution Directions for Self-Evolving Industrial AI Systems**
-   * Affiliation: Alibaba (Lazada) / Zhejiang University — *(Jinxin Hu, Hao Deng, Haibo Xing, Lingyu Mu, Muyu Zou, Weiqin Yang, Sirui Chen, Bohao Wang, Zhezheng Hao, Hao Zhang, Zulong Chen, Shizhun Wang, Yu Zhang, Xiaoyi Zeng, Jiawei Chen)*
-   * Link: [arxiv.org/abs/2608.27287](https://arxiv.org/abs/2608.27287)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: Trains an 8B "evolution-guiding" model (Astar) from industrial iteration histories to propose the next improvement direction of a recommender — the one stage of the iterate loop still left to human experts — and closes the loop for fully automatic self-evolution on Alibaba's Lazada advertising system.
-   * Key techniques:
-     - Pairwise sample expansion + noise filtering turn noisy historical commits into a large, clean evolutionary corpus
-     - Mid-training + SFT + RL with hierarchical hints; reward model as a fast surrogate evaluator during RL
-     - Astar-8B single-proposal success 0.6786 vs 0.3229 (human experts) / 0.3071 (GPT-5.5); 20 consecutive auto-iterations in two weeks
-     - +23.6% offline Hitrate@200; online A/B +4.86% GMV, +1.82% advertising revenue
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 8/10** — Automating the "propose direction" stage of the rec-system iterate loop (via learned RL/SFT model) is a fresh, underexplored target for self-evolving recommenders
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 7/10** — Deployed at Lazada; real-execution success rate + two-week closed-loop + online A/B
-     - **Impact: 8/10** — Alibaba (Lazada) / Zhejiang University; blueprint for AI-driven self-evolution of industrial recommenders
-
-2. **ProRetrieval: Learning to Orchestrate Hybrid Search via Executable Program Synthesis**
-   * Affiliation: Tencent — *(Chengsong You, Zhen Sun, Yunhai Hu, Junwei Zhou, Xiaoyu Cao, Binyu Li, Ziyan Zhao, Weiyao Wang, Liren Lu, Zhijie Ye, Yumo Cao, Yitao Long, Yiwei Xu, Qiyi Jiang, Xuanyi Fu, Yufan Chen, Yilun Li, Rongkang Xiong, Yiran Zou, Nan Du)*
-   * Link: [arxiv.org/abs/2608.27017](https://arxiv.org/abs/2608.27017)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: Recasts the LLM as a retrieval *orchestrator* that synthesizes an executable program in a hybrid DSL (SQL over structured fields + vector-retrieval over text/images), letting SQL provide the Boolean algebra that fuses heterogeneous candidate sets; a Qwen3-4B trained with GRPO/DAPO beats GPT-5.5 on e-commerce and email benchmarks.
-   * Key techniques:
-     - Executable hybrid-DSL program synthesis (SQL operators interleaved with vector-retrieval primitives)
-     - GRPO + DAPO training under a hierarchical four-term reward
-     - Two new benchmarks built from Amazon products and Enron email
-     - Hit@1 0.81 vs 0.69 (GPT-5.5) on e-commerce; 0.91 vs 0.86 on email; beats Claude Opus 4.7
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Code (anonymous.4open.science) + HF data announced, but anonymous review links are not publicly accessible (401); no permanent public GitHub yet
-     - **Novelty: 7/10** — Program-synthesis orchestration of heterogeneous retrieval paths (vs. fixed fusion or single-backend RL retrievers) is a clean, fresh framing
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 6/10** — Two new benchmarks + broad baselines (GPT-5.5, Claude Opus 4.7, retrieval/graph methods)
-     - **Impact: 6/10** — Tencent; advances LLM-based generative/hybrid retrieval for industrial search
-
-3. **Equal Ranking Quality, Different Decisions: Training Order-Consistent LLM Scorers**
-   * Affiliation: Johannes Kepler University Linz / Thomson Reuters Labs — *(Markus Frohmann, Mahdiyar Alavi, Elizabeth Lingg, Navid Rekabsaz)*
-   * Link: [arxiv.org/abs/2608.26762](https://arxiv.org/abs/2608.26762)
-   * Venue: arXiv preprint, August 2026 (cs.CL / cs.IR / cs.LG)
-   * TL;DR: Shows that equal reranker *ranking* quality does not imply equal downstream *decisions* — reordering the same candidate set flips retained-set/reader answers — and proposes Order-Consistency SFT (OC-SFT) to make each score independent of prompt order.
-   * Key techniques:
-     - Order-dependence analysis across rerankers, reward models, and multi-doc QA scorers (retained-set overlap only 0.66–0.84 under reordering)
-     - OC-SFT trains a candidate's score to be order-independent in the weights
-     - Decision-stability measures (threshold-retention, reader answer, preference selection) across 12 base models
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Code link (github.com/thomsonreuters/presentation-dependence) returns 404 / not yet public
-     - **Novelty: 6/10** — Reframing scorer evaluation around order-induced *decision* variance (not just nDCG) is a useful, under-appreciated angle
-     - **Fairness: 2/10** — Order-consistency is a fairness-of-evaluation property, not demographic fairness
-     - **Robustness: 7/10** — Three tasks, 12 base models, controlled ablations of prompt-time and training-time fixes
-     - **Impact: 6/10** — Thomson Reuters; practical guidance for LLM reranker/scorer selection and training
-
-4. **Stageboost: Recommending Signals Based on Counterfactual Estimation**
-   * Affiliation: eBay — *(Darpan Singhal, Matan Mandelbrod, Tal Franji, Manasa Kolla, Vipul Gaba, Yuri Brovman)*
-   * Link: [arxiv.org/abs/2608.27366](https://arxiv.org/abs/2608.27366)
-   * Venue: Consequences 2026 Workshop (accepted)
-   * TL;DR: A two-stage XGBoost model that optimally populates the eBay View-Item page with contextual "signals" via counterfactual estimation, driving +0.08% overall GMB and +0.58% Parts & Accessories GMB from higher conversion of high-average-price items.
-   * Key techniques:
-     - Two-stage XGBoost signal selection with counterfactual estimation of signal value
-     - Online experimentation measuring Gross Merchandise Bought (GMB) lift
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 4/10** — Pragmatic industrial signal-recommendation via counterfactual estimation; incremental over standard uplift-modeling practice
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 5/10** — Online A/B on a production e-commerce surface; single-platform
-     - **Impact: 5/10** — eBay; industrial signal/content recommendation
-
-5. **Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling**
-   * Affiliation: AI VK / Lomonosov Moscow State University — *(Maksim Utushkin, Andrei Ovsiannikov, Alexander D'yakonov)*
-   * Link: [arxiv.org/abs/2608.27413](https://arxiv.org/abs/2608.27413)
-   * Venue: CIKM 2026 (accepted)
-   * TL;DR: A production-scale GNN friend-recommendation system using multi-hash ID embeddings (−98% embedding table) and timestamp-sorted CSR + binary search for O(log n) temporal neighbor sampling; +16% friend additions and +11.5% unique adders in A/B on a 194M-user/28B-edge graph.
-   * Key techniques:
-     - Multi-hash ID embeddings as the primary node representation, cutting the ID table >98% while preserving ranking quality
-     - Timestamp-sorted CSR storage with binary search, reducing per-node temporal sampling from O(deg+k) to O(log(deg)+k)
-     - Distributed training + inference framework for large temporal graphs
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/makut/VK-GNN](https://github.com/makut/VK-GNN) — Apache-2.0 Python framework matching the paper; 0⭐/minimal docs, framework-focused (no full A/B harness)
-     - **Novelty: 5/10** — Solid systems/engineering combination of multi-hash + temporal sampling, incremental over known techniques but well-executed at scale
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 7/10** — CIKM 2026; offline ablations + online A/B on a 194M-user/28B-edge graph
-     - **Impact: 6/10** — VK; practical scaling recipe for industrial GNN recommendation
-
-6. **Token-Level Advertising**
-   * Affiliation: Stanford University / Purdue University — *(Hanbing Liu, Bowei Zhang, Changyuan Yu, Yinyu Ye, Qi Qi)*
-   * Link: [arxiv.org/abs/2608.27382](https://arxiv.org/abs/2608.27382)
-   * Venue: arXiv preprint, August 2026 (cs.GT / cs.LG)
-   * TL;DR: Proposes LAMA, a token-level (generation-native) advertising mechanism that embeds advertiser influence directly into the generation process via a latent advertiser-mixture auction, satisfying Markov DSIC + IR and near-optimal KL-regularized welfare.
-   * Key techniques:
-     - Latent Advertiser Mixture Auction: advertisers report local continuation values inducing advertiser-specific next-token policies; platform decodes via a latent mixture with an allocation posterior
-     - Learning-based implementation reconstructs reports online from learned local advantages and root values
-     - Proof-of-concept on commercial-search query splits: higher welfare + revenue while preserving response quality
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 7/10** — Generation-native ad auction (influence at the token level instead of predefined slots) is a genuinely novel mechanism-design direction
-     - **Fairness: 1/10** — No fairness consideration
-     - **Robustness: 5/10** — Theoretical guarantees (DSIC/IR) + proof-of-concept experiments; pre-deployment
-     - **Impact: 6/10** — Stanford/Purdue; forward-looking blueprint for advertising in generative search/recommendation surfaces
-
-7. **When Does Supervised Fine-Tuning Reduce Instruction Sensitivity?**
-   * Affiliation: Seoul National University — *(Jaekeol Choi)*
-   * Link: [arxiv.org/abs/2608.26661](https://arxiv.org/abs/2608.26661)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: Measures "instruction sensitivity" (std of performance across paraphrased instructions) before/after SFT, finding SFT reduces it 54–71% at Qwen3-1.7B/4B but not at 8B, with the effect varying across model families on MS MARCO and ESCI-English.
-   * Key techniques:
-     - Controlled scale analysis across Qwen3 1.7B/4B/8B on MS MARCO; cross-family checks (Mistral-7B, Gemma-2-9B)
-     - Instruction sensitivity defined as std of task performance across paraphrased instructions
-     - Query-level bootstrap for statistically reliable paired contrasts
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — Systematic scale/family analysis of SFT's effect on instruction sensitivity is a useful characterization, conceptually incremental
-     - **Fairness: 2/10** — Robustness-to-instruction is a fairness-adjacent property; not demographic fairness
-     - **Robustness: 6/10** — Multi-scale, multi-family, bootstrap-significance analysis on two IR datasets
-     - **Impact: 5/10** — Seoul National University; informs SFT practice for LLM retrievers/recommenders
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1414,7 +1413,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 157 papers as of September 7.
+**Count:** 159 papers as of September 8.
 
 | Score | Paper |
 | --- | --- |
@@ -1525,6 +1524,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR) |
 | 7/10 | Two-Sided State-Space Models for Sequential Recommendation with Non-Random Multimodal Review Feedback (TS-SSM) |
 | 7/10 | Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources |
+| 7/10 | Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
@@ -1575,6 +1575,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 3/10 | InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation (InforID) |
 | 3/10 | TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute) |
 | 3/10 | EPIC: Explicit Posterior Item Conditioning for Semantic ID Diffusion Recommendation (EPIC) |
+| 3/10 | SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval (SAGE) |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 | 1/10 | HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec) |

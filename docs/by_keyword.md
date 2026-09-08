@@ -38,6 +38,7 @@
 - RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems (RecEvolve)
 - Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation (AgentMMRec)
 - AtomRec: Evolving Atomic Memory for Agentic Recommendation (AtomRec)
+- AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems (AutoLR)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -317,6 +318,7 @@
 - Guiding Federated Graph Recommendation with LLM-encoded knowledge
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 - Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)
+- RegionFed: Federated Learning for Personalized Query Understanding in Heterogeneous Retail Environments (RegionFed)
 
 
 
@@ -557,6 +559,9 @@
 - SPAR: Enhancing Industrial-Scale Generative POI Recommendation via Real-World Spatial Perception (SPAR)
 - ICEGR: An Intent-Coherent End-to-End Generative Retrieval Framework for E-commerce Search (ICEGR)
 - HF-SID: High-Fidelity Semantic IDs for Generative Retrieval in Location-Based Services (HF-SID)
+- SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce (SAM-D2Q)
+- SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval (SAGE)
+- Inventory-Grounded Policy-Level Optimization for Training-Free AI Search (IGPO)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -754,6 +759,10 @@
 - CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval (CAMIE)
 - Personalized Task Dependency Graphs for Mitigating Signal Erosion in Multi-Task Recommendation (PTDG)
 - Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro (AlleCompanion)
+- SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce (SAM-D2Q)
+- AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems (AutoLR)
+- RegionFed: Federated Learning for Personalized Query Understanding in Heterogeneous Retail Environments (RegionFed)
+- Inventory-Grounded Policy-Level Optimization for Training-Free AI Search (IGPO)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -800,6 +809,7 @@
 - GOD: Enhancing Generalization via Deep Grafting for Sequential Recommendation (GOD)
 - D3ER: Supporting Multi-Modal Recommendation via Disentangle and Distillation-based Dynamic Ensemble (D3ER)
 - SelfDR: Self-Distillation from Reasoning for LLM-Based Recommendation (SelfDR)
+- Distill Globally, Adapt Locally: Reasoning Distillation and Product-Type Test-Time Training for Scalable Trade-Up Recommendation
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 - The Utility of LLMs in Recommender Systems Explanation Evaluation
@@ -983,6 +993,8 @@
 - Latent-Aligned Reasoning for Multimodal Recommendation (LARK)
 - AtomRec: Evolving Atomic Memory for Agentic Recommendation (AtomRec)
 - Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources
+- Distill Globally, Adapt Locally: Reasoning Distillation and Product-Type Test-Time Training for Scalable Trade-Up Recommendation
+- AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems (AutoLR)
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1124,6 +1136,8 @@
 - CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval (CAMIE)
 - Latent-Aligned Reasoning for Multimodal Recommendation (LARK)
 - MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning (MURAL)
+- SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce (SAM-D2Q)
+- SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval (SAGE)
 
 ### Optimizer
 - MuonRec
@@ -1162,6 +1176,7 @@
 - Beyond Polarization: The Generative Constraint of Chain-of-Thought in Pointwise Reranking
 - hLLM: Single Pass Decoding for Generative Reranking (hLLM)
 - DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR)
+- Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS)
@@ -1226,6 +1241,7 @@
 - It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning (CoGR)
 - World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation (WMG-RL)
 - DMRL: Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation (DMRL)
+- SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce (SAM-D2Q)
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1257,6 +1273,9 @@
 - STORM: Stepwise Token Optimization with Reward-Guided Beam Search
 - ICICLE: Expanding Retrieval with In-Context Documents (ICICLE)
 - TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation (TransRetrieval)
+- Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval
+- SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval (SAGE)
+- Inventory-Grounded Policy-Level Optimization for Training-Free AI Search (IGPO)
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
