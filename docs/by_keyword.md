@@ -39,6 +39,7 @@
 - Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation (AgentMMRec)
 - AtomRec: Evolving Atomic Memory for Agentic Recommendation (AtomRec)
 - AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems (AutoLR)
+- Agentic ML Exploration (A-MLE) for Ads Ranking (A-MLE)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -92,6 +93,7 @@
 - From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT)
 - UniCon: A Unified Context-Centric Modeling Paradigm for CTR Prediction (UniCon)
 - Personalized Task Dependency Graphs for Mitigating Signal Erosion in Multi-Task Recommendation (PTDG)
+- SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching (SequenceO1)
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -253,6 +255,8 @@
 - The Utility of LLMs in Recommender Systems Explanation Evaluation
 - The Dice Roll Method: A Standardized Protocol for Repeated-Query Auditing of Large Language Model Brand Recommendations
 - Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources
+- FINALLY: A Dataset Recommender System for Recommender-Systems Research (FINALLY)
+- REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval (REDSI)
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -562,6 +566,9 @@
 - SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce (SAM-D2Q)
 - SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval (SAGE)
 - Inventory-Grounded Policy-Level Optimization for Training-Free AI Search (IGPO)
+- PDMR: Passage-Driven Multi-ID Document Retrieval (PDMR)
+- REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval (REDSI)
+- Exploring Bottom-Up Clustering for Creating Semantic IDs
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -763,6 +770,8 @@
 - AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems (AutoLR)
 - RegionFed: Federated Learning for Personalized Query Understanding in Heterogeneous Retail Environments (RegionFed)
 - Inventory-Grounded Policy-Level Optimization for Training-Free AI Search (IGPO)
+- SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching (SequenceO1)
+- Agentic ML Exploration (A-MLE) for Ads Ranking (A-MLE)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1390,6 +1399,9 @@
 - CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation (CoFiRec)
 - HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE)
 - HF-SID: High-Fidelity Semantic IDs for Generative Retrieval in Location-Based Services (HF-SID)
+- Exploring Bottom-Up Clustering for Creating Semantic IDs
+- REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval (REDSI)
+- PDMR: Passage-Driven Multi-ID Document Retrieval (PDMR)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1454,6 +1466,7 @@
 - SwapRec: Warming Up Cold Items Through Training-Time Swaps (SwapRec)
 - Recommender System as Slow and Fast Thinkers (DS-Frame)
 - Two-Sided State-Space Models for Sequential Recommendation with Non-Random Multimodal Review Feedback (TS-SSM)
+- SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching (SequenceO1)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
