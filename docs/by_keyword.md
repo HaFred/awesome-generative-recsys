@@ -40,6 +40,7 @@
 - AtomRec: Evolving Atomic Memory for Agentic Recommendation (AtomRec)
 - AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems (AutoLR)
 - Agentic ML Exploration (A-MLE) for Ads Ranking (A-MLE)
+- An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -148,6 +149,7 @@
 - MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation (MACS)
 - Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval
 - DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
+- Purchase Advice and Observable Buyer Responses in Real AI Conversations
 
 ### Cross-Domain
 - Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
@@ -188,6 +190,7 @@
 - The Disconnect Between Better Descriptive Reasoning Trace Quality and Recommendation Effectiveness
 - Auditing Return Conditioning as a Control Knob: An Offline Diagnostic for Decision Transformer Recommendation
 - When Does Supervised Fine-Tuning Reduce Instruction Sensitivity?
+- Purchase Advice and Observable Buyer Responses in Real AI Conversations
 
 
 ### Diffusion
@@ -220,6 +223,7 @@
 
 - RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching
 - Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling
+- Kernel-Managed Shared Memory for System-Wide Personalization
 
 
 ### Evaluation / Benchmark
@@ -257,6 +261,8 @@
 - Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources
 - FINALLY: A Dataset Recommender System for Recommender-Systems Research (FINALLY)
 - REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval (REDSI)
+- PRAGMA: Evaluating Personalized Guidance with Memory Alignment in Lifelong Conversations (PRAGMA)
+- Should I Be Polite to My LLM Relevance Judge? Tone as a Severity Operating-Point Shift
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -822,6 +828,7 @@
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 - The Utility of LLMs in Recommender Systems Explanation Evaluation
+- Should I Be Polite to My LLM Relevance Judge? Tone as a Severity Operating-Point Shift
 
 
 
@@ -1004,6 +1011,7 @@
 - Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources
 - Distill Globally, Adapt Locally: Reasoning Distillation and Product-Type Test-Time Training for Scalable Trade-Up Recommendation
 - AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems (AutoLR)
+- HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization (HyperTrace)
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1011,6 +1019,8 @@
 - When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems (CoVeMem)
 - AtomRec: Evolving Atomic Memory for Agentic Recommendation (AtomRec)
 - Continual Graph Memory for Adaptive Recommendation under Intent Drift (CGM-Rec)
+- PRAGMA: Evaluating Personalized Guidance with Memory Alignment in Lifelong Conversations (PRAGMA)
+- Kernel-Managed Shared Memory for System-Wide Personalization
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -1408,6 +1418,7 @@
 - VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)
 - Fairness Attacks on Recommender Systems
 - SIREN (Luring LLMs onto the Rocks): PAIR-Driven Preference Manipulation in Web-RAG Recommenders (SIREN)
+- An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS)
 
 ### Sequential Modeling / RoPE
 - Learning from the Future: Privileged Self-Distillation for Sequential Recommendation (PSD)

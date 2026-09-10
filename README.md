@@ -41,6 +41,7 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
+        HyperTrace -- Johns Hopkins U
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -51,8 +52,6 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
-        REDSI -- IRISA / Rennes
-        FINALLY -- University of Siegen
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
@@ -71,6 +70,7 @@ mindmap
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
         FORGE Web Pollution -- CUHK
+        AGAS -- Griffith U
 ```
 <div align="center">
   <i> Open-source Generative RecSys Map </i>
@@ -85,6 +85,108 @@ If you are interested in RFT your own GenRecSys, come check out our `verl`-based
 We manage to achieve 22% and 32% boosting for the end-to-end training efficiencies, compared with their respective vanilla implementations.
 
 ## By Date
+
+### Papers September 10
+
+*Thursday, September 10, 2026. arXiv Wednesday (Sep 9) announcement batch — cs.IR / cs.CL / cs.AI / cs.LG. 6 papers found (2 opensource). Note: the Thursday Sep 10 batch had not posted at scan time, so the "last 24h" window maps to the Sep 9 batch; it is personalization/security/evaluation-heavy with no new SID/generative-retrieval method. Core: AGAS (Griffith U agentic group shilling attack, opensource), HyperTrace (JHU hypothesis-based LLM preference tracing, EMNLP 2026 Findings, opensource), PRAGMA (SNU personalized-guidance benchmark), Purchase Advice (Aiso real-conversation purchase audit), LLM Relevance Judge tone (RecSys 2026 reproducibility), Kernel-Managed Shared Memory (Rutgers system-wide personalization).*
+
+1. **An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS)**
+   * Affiliation: Griffith University — *(Quoc Viet Nguyen, Quoc Viet Hung Nguyen, Thanh Tam Nguyen; also Edith Cowan University, University of Queensland, HUTECH University)*
+   * Link: [arxiv.org/abs/2609.09551](https://arxiv.org/abs/2609.09551)
+   * Venue: arXiv preprint, September 2026 (cs.CR / cs.CL)
+   * TL;DR: A coordinated multi-agent shilling framework where a central Coordinator directs role-switching worker agents to adaptively promote a target item across victim families while evading detection.
+   * Key techniques:
+     - Central Coordinator + role-switching worker agents pursuing a shared promotion objective
+     - Adaptive strategy adjustment when progress stalls or suppression signals rise
+     - Active/inactive role alternation to avoid repetitive, detectable patterns
+     - Outperforms strong baselines in target promotion while preserving benign recommendation quality and weakening representative detectors
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/phkhanhtrinh23/AGAS](https://github.com/phkhanhtrinh23/AGAS) — clean src/configs/tests/docs layout with pyproject+requirements, but no license and 2 stars (early stage)
+     - **Novelty: 7/10** — group-coordinated, role-switching agentic attack generalizes beyond target-specific single-agent shilling
+     - **Fairness: 8/10** — directly targets RS integrity/robustness and surfaces the need for adaptive defenses
+     - **Robustness: 7/10** — consistent gains under matched budgets + evasion of representative detectors
+     - **Impact: 6/10** — recsys security; red-team for shilling-resilient recommenders
+
+2. **HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization**
+   * Affiliation: Johns Hopkins University — *(also Institute of Science Tokyo)*
+   * Link: [arxiv.org/abs/2609.09835](https://arxiv.org/abs/2609.09835)
+   * Venue: EMNLP 2026 Findings
+   * TL;DR: A training-free framework that traces latent user preferences as interpretable natural-language hypotheses (short-term intent + long-term preference), updated via SMC-style reweighting with an LLM surrogate choice model.
+   * Key techniques:
+     - Natural-language hypothesis state over short-term intent and long-term preferences
+     - SMC-style hypothesis reweighting using an LLM-based surrogate choice model
+     - Cross-turn / cross-session updates without any parameter updates
+     - Improves response alignment, preference prediction, and profile consistency on PRISM and PersonaMem-v2
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/jiseshen/HyperTrace](https://github.com/jiseshen/HyperTrace) — functional core/model/eval/config code, but no README at root and no license
+     - **Novelty: 7/10** — SMC-style latent-preference tracing is a fresh training-free alternative to memory retrieval
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 6/10** — robust across turns/sessions; strong online baselines compared
+     - **Impact: 5/10** — EMNLP 2026 Findings; LLM personalization
+
+3. **PRAGMA: Evaluating Personalized Guidance with Memory Alignment in Lifelong Conversations**
+   * Affiliation: Seoul National University
+   * Link: [arxiv.org/abs/2609.09664](https://arxiv.org/abs/2609.09664)
+   * Venue: arXiv preprint, September 2026 (cs.AI)
+   * TL;DR: A benchmark for personalized guidance (recommendations, planning, decision support) in long-term LLM conversations, with evidence annotations and evolving user-context scenarios.
+   * Key techniques:
+     - Curated longitudinal conversation histories with evidence annotations
+     - Guidance scenarios grounded in evolving user contexts and incorrect user assumptions
+     - Evaluates retrieval systems, memory systems, and long-context models
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code/data announced
+     - **Novelty: 6/10** — first benchmark targeting personalized guidance beyond factual recall
+     - **Fairness: 4/10** — focuses on memory alignment, not user-fairness
+     - **Robustness: 5/10** — reveals a wide robustness gap in current memory systems
+     - **Impact: 5/10** — SNU; benchmark for memory-grounded recommendation agents
+
+4. **Purchase Advice and Observable Buyer Responses in Real AI Conversations**
+   * Affiliation: Aiso
+   * Link: [arxiv.org/abs/2609.09878](https://arxiv.org/abs/2609.09878)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: An audit of 317 real AI-assistant conversations showing recommendation content is observable far more often than the buyer's subsequent decision, exposing a fundamental measurement limitation.
+   * Key techniques:
+     - Audit of 317 licensed, consent-based, de-identified conversations (Apr 2023–Jul 2025)
+     - Single-agent AI screening for purchase-directed records (68 episodes)
+     - Operational definitions + text-free annotations + reproducible descriptive statistics
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — observational audit, no code released
+     - **Novelty: 5/10** — measurement-limitation audit rather than a new method
+     - **Fairness: 5/10** — audits persuasion/advice asymmetry in AI commerce
+     - **Robustness: 3/10** — small sample, unvalidated AI annotations, no causal claims
+     - **Impact: 4/10** — Aiso; informs evaluation of conversational commerce assistants
+
+5. **Should I Be Polite to My LLM Relevance Judge? Tone as a Severity Operating-Point Shift**
+   * Affiliation: Independent Researcher
+   * Link: [arxiv.org/abs/2609.09703](https://arxiv.org/abs/2609.09703)
+   * Venue: RecSys 2026 (Reproducibility & Practice Notes)
+   * TL;DR: Prompt tone shifts an LLM relevance judge's overall scoring leniency rather than improving judgment, a validity threat when absolute relevance labels matter.
+   * Key techniques:
+     - 3,498 TREC DL19/DL20 query-passage pairs × 8 judge models × 5 politeness levels × 3 paraphrases
+     - Severity operating-point account (Spearman ρ = −0.683; permutation p = 0.019)
+     - Separates calibration-based agreement shifts from ranking changes (NDCG@10 ≤ 0.011)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code
+     - **Novelty: 6/10** — tone-as-operating-point reconciles contradictory prior findings
+     - **Fairness: 6/10** — flags a validity threat to judge reliability/fairness
+     - **Robustness: 5/10** — model-dependent effects with a held-out cross-fit
+     - **Impact: 5/10** — RecSys 2026; LLM-as-judge evaluation practice
+
+6. **Kernel-Managed Shared Memory for System-Wide Personalization**
+   * Affiliation: Rutgers University
+   * Link: [arxiv.org/abs/2609.10144](https://arxiv.org/abs/2609.10144)
+   * Venue: arXiv preprint, September 2026 (cs.AI / cs.LG)
+   * TL;DR: Centralizes multi-agent memory retrieval/privacy/prompt-injection in an agent-system kernel (AIOS), delivering most of the personalization benefit of full context at a fraction of its cost.
+   * Key techniques:
+     - Kernel-governed retrieval, privacy enforcement, and prompt injection for tagged agent memories
+     - 1,800 trials across 3 assistant models (GPT-4o, Llama-3.1:8B, Qwen-2.5:7B)
+     - +2.4–4.0 personalization points vs. unmanaged Mem0 (p < 10⁻¹⁸); 15–61% lower latency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (evaluated on AIOS)
+     - **Novelty: 6/10** — kernel-managed memory is a principled system-level answer to cross-agent personalization
+     - **Fairness: 4/10** — privacy enforcement as a first-class concern
+     - **Robustness: 6/10** — large trial count, three models, statistical significance
+     - **Impact: 5/10** — Rutgers (Yongfeng Zhang); multi-agent personalization systems
 
 ### Papers September 09
 
@@ -1067,94 +1169,6 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
      - **Robustness: 7/10** — multi-scale + multi-intervention stress tests; EMNLP 2026 Findings peer review
      - **Impact: 6/10** — UCAS; important negative result for LLM reranking design
 
-### Papers August 31
-
-*Monday, August 31, 2026. Arxiv active — Monday announcement batch. cs.IR returned 5 recommendation papers spanning parameter-efficient feature interaction (production-deployed at Kuaishou), multimodal recommendation alignment (2×, both open-source), federated cold-start recommendation, and large-scale cross-city POI evaluation. Total: 5 papers (2 opensource).*
-
-1. **SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework**
-   * Affiliation: Imperial College London / University College London / Nanjing University of Posts and Telecommunications — *(Xinyi Zhang — Imperial College London; Yutong Li — UCL; Peijie Sun — NUPT)*
-   * Link: [arxiv.org/abs/2608.28503](https://arxiv.org/abs/2608.28503)
-   * Venue: ACM Multimedia (MM) 2026 (Full Paper)
-   * TL;DR: A plug-and-play plugin for multimodal sequential recommendation that adapts the ordering of multimodal processing modules to user-level preference heterogeneity and dataset-level modality bias via a Module Combiner + Module Router.
-   * Key techniques:
-     - Module Combiner for flexible multimodal processing of heterogeneous signals (text, image, interactions)
-     - Module Router for dynamic module ordering conditioned on user preferences and dataset characteristics
-     - Consistent improvement across different backbones and multimodal settings on four real-world datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/esemsc-xz524/SG-UMP](https://github.com/esemsc-xz524/SG-UMP) — 10 .py files + README (datasets/settings/processing/training) matching the paper, but no license and a single-upload commit
-     - **Novelty: 6/10** — module routing for modality prioritization is a clean, generalizable plug-in angle
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — four real-world datasets across multiple backbones
-     - **Impact: 6/10** — MM 2026 full paper; broadly applicable multimodal sequential rec plugin
-
-2. **HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction in Recommendation**
-   * Affiliation: Kuaishou / Tsinghua University — *(Jie Zhou, Wenhao Li, Chang Liu, Enzhao Shen, Bo Liu, Xu Guo, Fei Pan, Peng Jiang — Kuaishou; Zixian Gong — Tsinghua)*
-   * Link: [arxiv.org/abs/2608.27991](https://arxiv.org/abs/2608.27991)
-   * Venue: arXiv preprint, August 2026 (fully deployed in production at Kuaishou)
-   * TL;DR: Parameter-efficient feature interaction that replaces direct raw-token mixing with a small set of learnable latent hubs organized through an induction–interaction–readout paradigm; +5.48% resume-submission conversion in Kuaishou A/B.
-   * Key techniques:
-     - Hub induction: latent hubs query heterogeneous input tokens via cross-attention to summarize them into compact hubs
-     - Hub interaction: high-order interaction performed in the cleaner latent hub space
-     - Token-conditioned readout: each token selectively reads from interacted hubs, preserving field identity
-     - Offline SOTA + online A/B (+5.48% resume conversion); deployed in production
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — latent hub mixing is a parameter-efficient alternative to token mixing for heterogeneous rec features
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — industrial offline + online A/B, production deployment
-     - **Impact: 7/10** — Kuaishou production feature-interaction backbone
-
-3. **Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR)**
-   * Affiliation: Shanghai Jiao Tong University — *(Wenze Ma, Chenyu Sun, Yanmin Zhu, Qiwen Gu, Xuhao Zhao)*
-   * Link: [arxiv.org/abs/2608.27950](https://arxiv.org/abs/2608.27950)
-   * Venue: CIKM 2026
-   * TL;DR: An information-theoretic selective modality-interest alignment framework for multimodal recommendation that enhances modality signals most related to user interests while suppressing weakly-aligned or noisy signals.
-   * Key techniques:
-     - Refine modality graph structures toward user behavior
-     - Selectively align shared interest-related semantics across modalities
-     - Preserve modality-specific complementary information during alignment
-     - SOTA on three real-world datasets over competitive baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 5/10** — [github.com/Wenze1/AMUR](https://github.com/Wenze1/AMUR) — full source (configs/model/common/utils + main.py) matching the paper, but a one-line README and no license
-     - **Novelty: 6/10** — information-theoretic selective alignment is a principled refinement over heuristic modality fusion
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — three real-world datasets, competitive baselines, CIKM 2026 peer review
-     - **Impact: 6/10** — SJTU; CIKM 2026 multimodal recommendation
-
-4. **An Empirical Evaluation of Cross-City POI Recommendation on a Large-Scale Benchmark**
-   * Affiliation: UNSW Sydney / University of Amsterdam — *(Peibo Li, Yang Song, Hao Xue, Flora D. Salim — UNSW; Maarten de Rijke — University of Amsterdam)*
-   * Link: [arxiv.org/abs/2608.27840](https://arxiv.org/abs/2608.27840)
-   * Venue: arXiv preprint, August 2026 (cs.AI; cs.IR)
-   * TL;DR: Empirically re-examines cross-city POI recommendation on the large-scale Trip World benchmark, surfacing three bottlenecks of SOTA methods and piloting agentic next-POI methods.
-   * Key techniques:
-     - Destination-region prior analysis: hometown-aware models lean on destination priors more than user-specific preference transfer
-     - Accuracy-efficiency trade-off audit at scale (the simplest model is among the strongest)
-     - Semantic metadata integration audit (little benefit at this scale)
-     - Agentic next-POI diagnostic pilot (naive adaptation trails a popularity prior)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 5/10** — empirical benchmark diagnostic rather than a new method
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 6/10** — large-scale benchmark, multi-method, multi-bottleneck analysis
-     - **Impact: 6/10** — UNSW/UvA (de Rijke, Salim); guidance for cross-city POI rec design
-
-5. **Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)**
-   * Affiliation: POSTECH (Pohang University of Science and Technology) — *(Jaehyung Lim, Wonbin Kweon, Woojoo Kim, Junyoung Kim, Dongha Kim, Hwanjo Yu)*
-   * Link: [arxiv.org/abs/2608.27826](https://arxiv.org/abs/2608.27826)
-   * Venue: arXiv preprint, August 2026 (cs.IR; cs.LG)
-   * TL;DR: Federated cold-start recommendation addressing personalization, compositionality, and communication inefficiency under dual-sided constraints via a personalized representation generator + global multi-view encoder.
-   * Key techniques:
-     - Personalized representation generator produces user-specific item representations from attribute features
-     - Global multi-view encoder with item-adaptive gating and an orthogonality objective to reduce cross-view redundancy
-     - Fuses collaborative and attribute knowledge into a single exchanged item representation, eliminating client-side regularizers and cutting communication overhead
-     - Improves user-level fairness, warm-scenario adaptability, and Local Differential Privacy (LDP) robustness
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code available
-     - **Novelty: 6/10** — multi-view + personalized generation is a well-motivated fix for federated cold-start
-     - **Fairness: 7/10** — explicitly improves user-level fairness and LDP robustness
-     - **Robustness: 7/10** — cold-item + warm adaptability + LDP robustness experiments
-     - **Impact: 6/10** — POSTECH (Hwanjo Yu); federated cold-start rec
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1401,7 +1415,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 161 papers as of September 9.
+**Count:** 163 papers as of September 10.
 
 | Score | Paper |
 | --- | --- |
@@ -1515,6 +1529,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval |
 | 7/10 | FINALLY: A Dataset Recommender System for Recommender-Systems Research |
 | 7/10 | REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval |
+| 7/10 | An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
@@ -1537,6 +1552,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR) |
 | 6/10 | SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP) |
 | 6/10 | HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE) |
+| 6/10 | HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
 | 5/10 | From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT) |
