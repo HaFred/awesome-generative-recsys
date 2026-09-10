@@ -25,6 +25,7 @@ RecSys is starting to adopt LLM for feature extraction, retrieval, and ranking/r
 - [By Keyword](#by-keyword)
 - [By Affiliation](#by-affiliation)
 - [Papers Classic Must Read](#papers-classic-must-read)
+- [Verl-GR: An Awesome RL Toolkit for GenRecSys](#verl-gr-an-awesome-rl-toolkit-for-genrecsys)
 
 ```mermaid
 mindmap
@@ -76,6 +77,13 @@ mindmap
 </div>
 
 ---
+## `Verl-GR`: An Awesome RL Toolkit for GenRecSys
+If you are interested in RFT your own GenRecSys, come check out our `verl`-based implementation called `verl-gr` here:
+* [https://github.com/HaFred/verl-GR/tree/main/verl_gr/recipes/openonerec](https://github.com/HaFred/verl-GR/tree/main/verl_gr/recipes/openonerec)
+* [https://github.com/HaFred/verl-GR/tree/main/verl_gr/recipes/rankgrpo](https://github.com/HaFred/verl-GR/tree/main/verl_gr/recipes/rankgrpo)
+
+We manage to achieve 22% and 32% boosting for the end-to-end training efficiencies, compared with their respective vanilla implementations.
+
 ## By Date
 
 ### Papers September 09
