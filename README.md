@@ -41,7 +41,6 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
-        HyperTrace -- Johns Hopkins U
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -52,6 +51,7 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
+        FedHUR -- Fudan U
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
@@ -85,6 +85,111 @@ If you are interested in RFT your own GenRecSys, come check out our `verl`-based
 We manage to achieve 22% and 32% boosting for the end-to-end training efficiencies, compared with their respective vanilla implementations.
 
 ## By Date
+
+### Papers September 11
+
+*Friday, September 11, 2026. arXiv Thursday (Sep 10) announcement batch — cs.AI / cs.CL / cs.IR / cs.LG / stat.ML. 6 papers found (1 opensource). Note: the Friday Sep 11 batch had not posted at scan time, so the "last 24h" window maps to the Sep 10 batch; it is agentic/e-commerce/industrial-heavy with no new SID/tokenization method. Core: Auto-RecSys (Meta autonomous research agents for industry-scale recsys), UniRec (Kuaishou cross-stage fusion, deployed), FedHUR (Fudan hierarchical federated rec, CIKM 2026, opensource), Agentic Share-of-Search (Georgia Tech seller-side LLM-commerce competitive intelligence), On the Regularization Landscape (Kent State linear-rec unification theory), GMMM (U Tokyo causal framework for generative-engine marketing).*
+
+1. **Auto-RecSys: Harnessing Autonomous Research Agents for Industry-Scale Recommender System**
+   * Affiliation: Meta — *(Ming Li, Dai Li, Xuying Ning, Bo Sun, Rui Li, Yi Zhang, Silvia Gong, Xuan Cao, Cornelia Carapcea, Qunshu Zhang, Zhigang Wang, Yinglong Xia, Andy Wang; Xuying Ning also UIUC)*
+   * Link: [arxiv.org/abs/2609.10922](https://arxiv.org/abs/2609.10922)
+   * Venue: arXiv preprint, September 2026 (cs.AI / cs.CL)
+   * TL;DR: An autonomous research system that scales agentic hypothesis-generation/experimentation to industry-scale recommendation models whose training takes days, via parallel distributed execution and persistent cross-server memory.
+   * Key techniques:
+     - Distributed asynchronous execution for parallel multi-direction experiments across servers
+     - Centralized cross-server memory for persistent, recoverable execution across sessions/failures
+     - Cognitive-procedural separation: natural-language skill files steer LLM reasoning while deterministic scripts enforce correctness
+     - Dual-loop self-evolution (Execution Evolution Loop for playbooks, Idea Evolution Loop for ideation)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (Meta internal research infrastructure)
+     - **Novelty: 7/10** — scaling autonomous research agents to multi-day industry rec experiments with self-evolving playbooks is a fresh system angle
+     - **Fairness: 1/10** — not fairness-focused
+     - **Robustness: 8/10** — robustness is the core design goal (recoverable execution, persistent memory, playbook maturation)
+     - **Impact: 7/10** — Meta; cuts human time per experiment cycle on production recommendation models
+
+2. **UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems**
+   * Affiliation: Kuaishou Technology — *(Lingyuan Kong, Jiaqi Cui, Fanjiao Zeng, Congqi Wang, Yu Li, Yuan Cheng, Jingxin Liu, Xiaoshuang Chen, Kaiqiao Zhan)*
+   * Link: [arxiv.org/abs/2609.11052](https://arxiv.org/abs/2609.11052)
+   * Venue: arXiv preprint, September 2026 (cs.IR); fully deployed on Kuaishou
+   * TL;DR: Unified cross-stage (pre-ranking + ranking) fusion that trains both fusion agents in one computation graph with dual-axis preference alignment to remove cross-stage inconsistency in cascaded recommenders.
+   * Key techniques:
+     - Partially shared input embeddings trained in a single computation graph so gradients propagate across stages
+     - Dual-axis preference alignment: vertical cross-stage consistency + horizontal compact aggregation over heterogeneous prior signals
+     - Attribute group-relative regularization to stop end-to-end fusion over-concentrating on high-reward regions
+     - Online A/B: +0.616% app usage duration; fully deployed
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — joint cross-stage fusion optimization is under-explored vs. intra-stage multi-objective fusion
+     - **Fairness: 4/10** — attribute group-relative regularization addresses item-attribute distribution imbalance
+     - **Robustness: 6/10** — deployed in production with online A/B validation
+     - **Impact: 7/10** — Kuaishou production deployment; large-scale industrial cascade
+
+3. **FedHUR: Learning Hierarchical Utility-Guided Client Relations for Personalized Federated Recommendation**
+   * Affiliation: Fudan University — *(Mingzhe Han, Jiahao Liu, Dongsheng Li, Jiankui Zhou, Hansu Gu, Peng Zhang, Ning Gu, Tun Lu; Dongsheng Li also Microsoft Research Asia)*
+   * Link: [arxiv.org/abs/2609.11632](https://arxiv.org/abs/2609.11632)
+   * Venue: CIKM 2026
+   * TL;DR: Federated recommendation that learns hierarchical, utility-guided client relations from item-item filters so each client aggregates only the collaborators that actually improve its prediction, replacing predefined single-global-relation assumptions.
+   * Key techniques:
+     - Item-item filters as the object for relation construction and aggregation
+     - Hierarchical clustering of client information into global multi-granularity structure
+     - Hierarchical utility signals indicating which collaborative information helps each client
+     - Server retrieves useful clients per target for personalized aggregation; SOTA on 5 datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/Mingzhe-Han/FedHUR](https://github.com/Mingzhe-Han/FedHUR) — complete code (flalgorithm/model/entry/config + datasets) with runnable README, but minimal docs, no license, 1 star
+     - **Novelty: 6/10** — hierarchical utility-guided client relations generalize single-relation personalized aggregation
+     - **Fairness: 5/10** — federated privacy-preserving personalization; utility signals reduce harmful cross-client aggregation
+     - **Robustness: 6/10** — consistent gains across five real-world datasets
+     - **Impact: 6/10** — CIKM 2026; open-source federated rec framework
+
+4. **Agentic Share-of-Search: A Multi-Agent AI System for Competitive Decision-Making in LLM-Mediated E-Commerce**
+   * Affiliation: Georgia Institute of Technology — *(Spandan Ghose Chowdhury, College of Computing)*
+   * Link: [arxiv.org/abs/2609.11190](https://arxiv.org/abs/2609.11190)
+   * Venue: 2026 Decision Science Institute (DSI) Annual Conference
+   * TL;DR: A seller-side multi-agent system that measures "Agentic Share-of-Search" (how often an LLM shopping assistant surfaces a retailer's products) and diagnoses root causes via a ReAct agent that recommends merchandising interventions.
+   * Key techniques:
+     - Agentic Share-of-Search (ASoS): retailer-attribution-weighted visibility metric robust to entity-resolution noise
+     - Query agents deployed across leading AI shopping platforms
+     - ReAct-based diagnostic agent for root-cause attribution and intervention recommendation
+     - 100-trial ablation: recovers ablated signal in 39% (5.5x chance), 63.9% on high-correlation ablations
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (prototype)
+     - **Novelty: 7/10** — seller-side ASoS metric + diagnostic agent is a fresh inversion of generative commerce evaluation
+     - **Fairness: 6/10** — retailer-attribution weighting addresses measurement fairness across sellers
+     - **Robustness: 5/10** — 100-trial ablation with CIs; prototype feasibility stage
+     - **Impact: 5/10** — DSI 2026; emerging LLM-mediated e-commerce decision support
+
+5. **On the Regularization Landscape for the Linear Recommendation Models**
+   * Affiliation: Kent State University — *(Dong Li, Ruoming Jin, Hao Zhou — Kent State; Zhenming Liu, Bin Ren — College of William & Mary; Zhi Liu, Jing Gao — iLambda)*
+   * Link: [arxiv.org/abs/2609.11876](https://arxiv.org/abs/2609.11876)
+   * Venue: arXiv preprint, September 2026 (cs.AI)
+   * TL;DR: Unifies recent linear recommendation performance-leaders under two regularizers (nuclear-norm vs Frobenius-norm) and derives two new low-rank closed-form solutions that capture the best of both worlds.
+   * Key techniques:
+     - Shows all linear leaders effectively add only a nuclear-norm or Frobenius-norm regularizer
+     - Nuclear-norm models: low-rank + closed-form but rigid/limited; Frobenius-norm models: expressive but full-rank/hard-to-tune (ADMM)
+     - Two new low-rank, closed-form solutions generalizing Frobenius-norm regularizers
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (theory paper)
+     - **Novelty: 6/10** — a unifying regularization taxonomy plus closed-form constructions
+     - **Fairness: 3/10** — not fairness-focused (low-rank structure touches expressiveness only)
+     - **Robustness: 6/10** — closed-form solutions with theoretical guarantees
+     - **Impact: 5/10** — academic theory; clarifies the "barebones engine" behind linear rec models
+
+6. **Generative Marketing Mix Modeling: A Causal Inference Framework Linking GEO and GEM to Business Impact**
+   * Affiliation: The University of Tokyo — *(Masahiro Kato; also Mizuho-DL Financial Technology Co., Ltd.)*
+   * Link: [arxiv.org/abs/2609.11915](https://arxiv.org/abs/2609.11915)
+   * Venue: arXiv preprint, September 2026 (stat.ML / cs.AI / cs.LG / econ.EM)
+   * TL;DR: Extends marketing mix modeling to measure the causal effects of Generative Engine Optimization (GEO) and Generative Engine Marketing (GEM) by combining generated-answer occurrence counts with question counts, platform share, and notice probabilities.
+   * Key techniques:
+     - GEO/GEM inputs: occurrence probability x question counts x system share x notice probability
+     - Carryover + Hill saturation transformations before the response model, matching classic MMM
+     - Sequence-level treatment-effect comparison under alternative treatment paths
+     - Bayesian cut-posterior averaging over measurement uncertainty; eval on simulated product-recommendation answers (EN/JA)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — first causal-inference framework for GEO/GEM business attribution
+     - **Fairness: 4/10** — identification/measurement rigor (notice probabilities, measurement error) rather than fairness per se
+     - **Robustness: 6/10** — sufficient identification conditions + Bayesian uncertainty
+     - **Impact: 6/10** — generative commerce/marketing measurement; econometrics + ML relevance
 
 ### Papers September 10
 
@@ -1068,107 +1173,6 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
      - **Robustness: 8/10** — large-scale (4,623 instances, 11 models, 3 judges) with careful cross-model filtering
      - **Impact: 7/10** — Jilin University (Yi Chang); timely benchmark as LLMs become interactive recommendation assistants
 
-### Papers September 01
-
-*Tuesday, September 1, 2026. Arxiv active — Tuesday announcement batch. cs.IR/cs.AI/cs.LG/cs.CL returned 6 recommendation papers spanning personalized generative retrieval (EMNLP 2026 Findings), coarse-to-fine SID tokenization (RecSys 2026, open-source), off-policy evaluation for SID recommenders, e-commerce generative retrieval (WWW 2026), LLM-cited explainability for next-basket repurchase, and a Chain-of-Thought bottleneck diagnosis in pointwise reranking (EMNLP 2026 Findings). Total: 6 papers (1 opensource).*
-
-1. **Preference Shapes Relevance: Cross-component Hierarchical Semantic Alignment for Personalized Generative Retrieval (CHAP)**
-   * Affiliation: University of Science and Technology of China / Meituan — *(Gaoming Zhang, Angqing Jiang, Defu Lian — USTC; Jianchun Song, Kena Qi, Dayao Chen, Wei Lin — Meituan)*
-   * Link: [arxiv.org/abs/2608.30553](https://arxiv.org/abs/2608.30553)
-   * Venue: Findings of EMNLP 2026
-   * TL;DR: Personalized generative retrieval (GR) that closes the semantic gap between static item-content SIDs and dynamic query intents via hierarchical semantic alignment, and cuts beam-search autoregressive decoding to a single pass with Residual Cascading Generation.
-   * Key techniques:
-     - Hierarchical Semantic Alignment: aligns the query latent space with the item quantization path and synchronizes multi-granular semantics
-     - Personalized GR synergizing discrete SIDs (structural guidance) with continuous representations (fine-grained semantic refinement)
-     - Residual Cascading Generation: restricts the multi-step Transformer decoder to single-pass inference to boost throughput with minimal information loss
-     - 3 public + 1 proprietary industrial dataset + online A/B
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — code link [github.com/zzzgm/CHAP](https://github.com/zzzgm/CHAP) stated in the paper returns 404 at check time; no public code available
-     - **Novelty: 7/10** — hierarchical cross-component alignment + residual cascading single-pass decoding is a fresh angle on GR personalization + latency
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — 3 public + industrial datasets + online A/B; EMNLP 2026 Findings peer review
-     - **Impact: 7/10** — USTC/Meituan; EMNLP 2026 personalized generative retrieval with online A/B validation
-
-2. **CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation**
-   * Affiliation: University of Illinois at Urbana-Champaign / Ant Group — *(Tianxin Wei, Xuying Ning, Xuxing Chen, Ruizhong Qiu, Yupeng Hou, Jingrui He — UIUC; Yan Xie, Shuang Yang, Zhigang Hua — Ant Group)*
-   * Link: [arxiv.org/abs/2511.22707](https://arxiv.org/abs/2511.22707)
-   * Venue: RecSys 2026 (v2 camera-ready)
-   * TL;DR: Coarse-to-fine generative-rec tokenizer that decomposes item information into multiple semantic levels (category → title/description → CF signals) and generates tokens progressively, matching the natural refinement of user intent during web browsing.
-   * Key techniques:
-     - Multi-level semantic decomposition (category, title/description, collaborative-filtering signals) instead of flattening all attributes into one embedding
-     - CoFiRec Tokenizer: tokenizes each level independently while preserving structural order
-     - Coarse-to-fine autoregressive decoding; theoretical proof that structured tokenization lowers generated-vs-ground-truth item dissimilarity
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/YennNing/CoFiRec](https://github.com/YennNing/CoFiRec) — full two-stage pipeline (tokenizer + generation), README, requirements, pre-generated checkpoints, Google Drive data link; no license
-     - **Novelty: 6/10** — coarse-to-fine hierarchical tokenization is a clean, principled extension of SID tokenization
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 6/10** — multiple public benchmarks + backbones; RecSys 2026 peer review
-     - **Impact: 7/10** — RecSys 2026; UIUC (Jingrui He) / Ant Group; structured tokenization broadly applicable to generative rec
-
-3. **Off-Policy Evaluation for Semantic ID Recommenders: Does the Model's Own Code Hierarchy Help?**
-   * Affiliation: Criteo — *(Artem Betlei)*
-   * Link: [arxiv.org/abs/2608.28905](https://arxiv.org/abs/2608.28905)
-   * Venue: arXiv preprint, August 2026 (cs.LG)
-   * TL;DR: Reuses the generative recommender's own SID tree as the action abstraction for off-policy evaluation; marginalizing items into code-prefix clusters — not the hierarchy itself — restores estimable support where item-level OPE fails.
-   * Key techniques:
-     - Shows per-item OPE is hopeless under near-argmax logging (small item-level effective sample size)
-     - Code-prefix cluster marginalization restores support and cuts error; the SID tree makes coarsening feasible (cluster mass returned cheaply by the decoder)
-     - Resolution depth as the operative knob, with a conditional bias bound linking coarsening bias to quantizer reconstruction residual and target-logging divergence
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — first to reuse the SID tree as an OPE action abstraction; fresh, under-studied framing
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 5/10** — theoretical (bias bound); no empirical experiments reported
-     - **Impact: 5/10** — Criteo; practical for generative-rec teams facing scarce A/B tests
-
-4. **Generative Retrieval for E-commerce: Jointly Learning Embedding and Codebook with Same Product Cluster**
-   * Affiliation: Alibaba Group — *(Songtao Fang, Zihao Xu, Shaowei Wei, Jin Zhang, Zhuojun Wang)*
-   * Link: [arxiv.org/abs/2608.30606](https://arxiv.org/abs/2608.30606)
-   * Venue: WWW 2026 (short paper)
-   * TL;DR: Jointly trains the product-embedding model and the SID codebook with same-cluster supervision, fixing the error-accumulation and cluster-inconsistency issues of the standard two-stage embedding-then-codebook pipeline.
-   * Key techniques:
-     - Joint embedding + codebook training (fixes cascaded error accumulation)
-     - Same-product-cluster supervision to model query-to-product and product-to-product interactions
-     - Products in the same cluster get consistent IDs, improving retrieval accuracy
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 5/10** — joint embedding+codebook training with cluster supervision is a solid but incremental fix
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 5/10** — e-commerce experiments; WWW 2026 peer review
-     - **Impact: 5/10** — Alibaba; practical for e-commerce generative retrieval
-
-5. **Beyond Ranking Accuracy: Evaluating LLM-Cited Feature Rationales for Next Basket Repurchase Recommendation**
-   * Affiliation: Walmart Global Tech — *(Yanan Cao, Anay Dombe, Murali Mohana Krishna Dandu, Shreeranjani Srirangamsridharan, Sinduja Subramaniam, Yogananth Mahalingam, Evren Korpeoglu, Kannan Achan)*
-   * Link: [arxiv.org/abs/2608.30333](https://arxiv.org/abs/2608.30333)
-   * Venue: arXiv preprint, September 2026 (cs.AI)
-   * TL;DR: Tests whether off-the-shelf LLMs work as next-basket repurchase recommenders and/or as validated explanation components, using a cross-model feature-masking protocol to assess outcome-grounded LLM-cited rationales.
-   * Key techniques:
-     - Repurchase features spanning cadence, frequency, recency, user behavior, and item popularity
-     - LLM-as-scorer vs heuristic/supervised rankers on 2 public grocery + 1 proprietary retail dataset
-     - Cross-model feature-masking protocol measuring ranking degradation; LLM-cited features vs model-specific attribution baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — outcome-grounded evaluation of LLM-cited rationale quality, decoupled from ranking accuracy
-     - **Fairness: 0/10** — no fairness consideration (explanation transparency is adjacent but not framed as fairness)
-     - **Robustness: 6/10** — 3 datasets + attribution baselines; careful masking protocol
-     - **Impact: 6/10** — Walmart; guidance for LLMs as explanation components in production next-basket rec
-
-6. **Beyond Polarization: The Generative Constraint of Chain-of-Thought in Pointwise Reranking**
-   * Affiliation: University of Chinese Academy of Sciences (UCAS) / Institute of Software, CAS — *(Xiaoyang Chen, Jie Liu, Haijin Liang, Haibo Shi, Jin Ma, Ben He, Yingfei Sun, Dezhi Ye)*
-   * Link: [arxiv.org/abs/2608.30398](https://arxiv.org/abs/2608.30398)
-   * Venue: Findings of EMNLP 2026
-   * TL;DR: Shows the CoT-vs-direct-scoring gap in pointwise reranking is stable up to 32B parameters and not repairable by RL, fine-grained supervision, or architectural decoupling — routing continuous relevance through discrete text constrains ranking signal resolution.
-   * Key techniques:
-     - Scale study up to 32B parameters, ruling out model/data-capacity confounders
-     - Stress tests: reinforcement learning, fine-grained supervision, architectural decoupling
-     - Concludes the gap is a stable generative-constraint bottleneck, not an easily-resolvable training bias
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — systematic diagnosis of a fundamental CoT bottleneck in pointwise reranking
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — multi-scale + multi-intervention stress tests; EMNLP 2026 Findings peer review
-     - **Impact: 6/10** — UCAS; important negative result for LLM reranking design
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1415,7 +1419,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 163 papers as of September 10.
+**Count:** 164 papers as of September 11.
 
 | Score | Paper |
 | --- | --- |
@@ -1487,6 +1491,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Empowering Compact LLMs with Fusion of Layer-wise Exits for Recommendation (FLEXRec) |
 | 7/10 | Fast and Feasible: Permutation-based Constrained Reranking for Revenue Maximization (PermR) |
 | 7/10 | FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation |
+| 7/10 | FedHUR: Learning Hierarchical Utility-Guided Client Relations for Personalized Federated Recommendation |
 | 7/10 | Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR) |
 | 7/10 | Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb) |
 | 7/10 | HyCoRec: Hypergraph-Enhanced Multi-Preference Learning for Alleviating Matthew Effect in Conversational Recommendation |

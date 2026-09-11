@@ -41,6 +41,8 @@
 - AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems (AutoLR)
 - Agentic ML Exploration (A-MLE) for Ads Ranking (A-MLE)
 - An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS)
+- Auto-RecSys: Harnessing Autonomous Research Agents for Industry-Scale Recommender System (Auto-RecSys)
+- Agentic Share-of-Search: A Multi-Agent AI System for Competitive Decision-Making in LLM-Mediated E-Commerce (ASoS)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -191,6 +193,7 @@
 - Auditing Return Conditioning as a Control Knob: An Offline Diagnostic for Decision Transformer Recommendation
 - When Does Supervised Fine-Tuning Reduce Instruction Sensitivity?
 - Purchase Advice and Observable Buyer Responses in Real AI Conversations
+- On the Regularization Landscape for the Linear Recommendation Models
 
 
 ### Diffusion
@@ -329,6 +332,7 @@
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 - Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)
 - RegionFed: Federated Learning for Personalized Query Understanding in Heterogeneous Retail Environments (RegionFed)
+- FedHUR: Learning Hierarchical Utility-Guided Client Relations for Personalized Federated Recommendation (FedHUR)
 
 
 
@@ -778,6 +782,8 @@
 - Inventory-Grounded Policy-Level Optimization for Training-Free AI Search (IGPO)
 - SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching (SequenceO1)
 - Agentic ML Exploration (A-MLE) for Ads Ranking (A-MLE)
+- UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems (UniRec)
+- Auto-RecSys: Harnessing Autonomous Research Agents for Industry-Scale Recommender System (Auto-RecSys)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1012,6 +1018,8 @@
 - Distill Globally, Adapt Locally: Reasoning Distillation and Product-Type Test-Time Training for Scalable Trade-Up Recommendation
 - AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems (AutoLR)
 - HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization (HyperTrace)
+- Agentic Share-of-Search: A Multi-Agent AI System for Competitive Decision-Making in LLM-Mediated E-Commerce (ASoS)
+- Generative Marketing Mix Modeling: A Causal Inference Framework Linking GEO and GEM to Business Impact (GMMM)
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1072,6 +1080,8 @@
 - From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
 - Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation (OrthoRec)
 - From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT)
+- On the Regularization Landscape for the Linear Recommendation Models
+- UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems (UniRec)
 ### Multi-behavior Recommendation
 
 - BITRec
