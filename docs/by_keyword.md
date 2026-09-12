@@ -318,6 +318,9 @@
 - GenCAR: Generative Counterfactual Alignment with Risk-Controlled Selection for Out-of-Distribution Recommendation (GenCAR)
 - MGDiff: Multi-Interest Sequence Recommendation with Masking GNN-Guided Diffusion (MGDiff)
 - The Dice Roll Method: A Standardized Protocol for Repeated-Query Auditing of Large Language Model Brand Recommendations
+- Following the Preference, Missing the Optimum: Compliance Without Optimization in AI Housing Recommendation
+- What Price Fairness? Evaluating Energy - Fairness - Accuracy Trade-off in Recommender Systems
+- Quantifying the Engagement Trap: Impact of Short-form Video Recommender Systems on Users with ADHD
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -599,6 +602,7 @@
 - Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling
 - Continual Graph Memory for Adaptive Recommendation under Intent Drift (CGM-Rec)
 - MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning (MURAL)
+- Do All Nodes Benefit Equally from Knowledge Graphs? Adaptive Node-Aware KG Fusion for Recommendation (AdaKG)
 
 
 ### Group Recommendation
@@ -787,6 +791,7 @@
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
+- Enabling High-Bandwidth Flash for Generative Recommendation Serving with Write-Aware KV Cache Policy
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1271,6 +1276,7 @@
 - World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation (WMG-RL)
 - DMRL: Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation (DMRL)
 - SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce (SAM-D2Q)
+- EAGER: Enrich-and-Align Generative Query Recommendation from Clicked Items in E-commerce Search (EAGER)
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1488,6 +1494,7 @@
 - Recommender System as Slow and Fast Thinkers (DS-Frame)
 - Two-Sided State-Space Models for Sequential Recommendation with Non-Random Multimodal Review Feedback (TS-SSM)
 - SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching (SequenceO1)
+- Closing the Long-Short View Gap in Sequential Recommendation without Cached History
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
