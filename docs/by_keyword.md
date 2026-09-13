@@ -321,6 +321,8 @@
 - Following the Preference, Missing the Optimum: Compliance Without Optimization in AI Housing Recommendation
 - What Price Fairness? Evaluating Energy - Fairness - Accuracy Trade-off in Recommender Systems
 - Quantifying the Engagement Trap: Impact of Short-form Video Recommender Systems on Users with ADHD
+- FunnelAudit: Responsibility Auditing in Multi-Route Recommender Systems (FunnelAudit)
+- Democracy Needs Reach: Political Equality, Online Speech, and Algorithmic Recommendation
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -788,6 +790,7 @@
 - Agentic ML Exploration (A-MLE) for Ads Ranking (A-MLE)
 - UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems (UniRec)
 - Auto-RecSys: Harnessing Autonomous Research Agents for Industry-Scale Recommender System (Auto-RecSys)
+- Task-Blind No MORE: Multi-Task Information Flow in Unified Ranking Backbones (MORE)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1311,6 +1314,9 @@
 - Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval
 - SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval (SAGE)
 - Inventory-Grounded Policy-Level Optimization for Training-Free AI Search (IGPO)
+- Generative Late-Interaction Embeddings For Visual Document Retrieval (GLIE)
+- Matryoshka Hash Representations for Model-Aware Compact Semantic Retrieval (MHR)
+- Query-Aware Token Budgeting for Efficient Late-Interaction Visual Document Retrieval
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)

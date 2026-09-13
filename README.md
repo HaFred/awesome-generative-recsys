@@ -51,11 +51,11 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
-        FedHUR -- Fudan U
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
         Long-Short View Rec -- Texas A&M / UNSW
+        GLIE -- KAUST
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
@@ -85,6 +85,111 @@ If you are interested in RFT your own GenRecSys, come check out our `verl`-based
 We manage to achieve 22% and 32% boosting for the end-to-end training efficiencies, compared with their respective vanilla implementations.
 
 ## By Date
+
+### Papers September 13
+
+*Sunday, September 13, 2026. ArXiv weekend pause — no new announcement batch in the last 24h (last batch was Thu Sep 10, already covered by the Sep 11 run; Fri/Sat are no-announcement days). Fallback: re-scanned the Sep 7–11 cs.IR / cs.AI / cs.CL batches and surfaced 6 on-topic papers missed by prior runs (1 opensource). Core: FunnelAudit responsibility auditing for multi-route recsys (RMIT), MORE multi-task ranking backbone deployed on Momo (CIKM 2026), GLIE generative late-interaction embeddings (KAUST, opensource), Matryoshka Hash compact semantic retrieval (CUHK-Shenzhen), Query-Aware Token Budgeting for visual document retrieval (IISER Bhopal, ICDM 2026), Democracy Needs Reach algorithmic recommendation fairness (U Ottawa).*
+
+1. **FunnelAudit: Responsibility Auditing in Multi-Route Recommender Systems**
+   * Affiliation: RMIT University — *(Jie Li, Dudu Luo, Jiayang Niu, Ke Deng, Yongli Ren)*
+   * Link: [arxiv.org/abs/2609.06964](https://arxiv.org/abs/2609.06964)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: An executable framework for incident-level responsibility auditing in multi-route recommenders, using an accountability contract plus graded actual responsibility to find the smallest outcome-preserving contingency that makes each control pivotal, with checkable certificates.
+   * Key techniques:
+     - Accountability contract specifying the disputed Top-K event, controls/owners, permitted reference actions, and replay semantics
+     - Graded actual responsibility over every permitted control configuration; smallest outcome-preserving contingency per control
+     - Verifiable certificate recording the contingency + paired serving executions needed to verify the judgment
+     - 258,809 user-target incidents across 3 real datasets; independent replay reproduces all 9,121,792 outcomes; MILP cross-check
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — executable, witness-based responsibility auditing for recsys is a fresh governance angle
+     - **Fairness: 7/10** — accountability/attribution of inclusion-exclusion decisions underpins fairness audits
+     - **Robustness: 8/10** — large-scale incident study + exhaustive independent replay + MILP agreement
+     - **Impact: 6/10** — RMIT; actionable accountability tooling for multi-route recommenders
+
+2. **Task-Blind No MORE: Multi-Task Information Flow in Unified Ranking Backbones**
+   * Affiliation: Momo Inc. (Hello Group) — *(Yuchen Wang, Feng Niu, Qing Tan, Junting Lu, Baoxin Wu, Jun Gao)*
+   * Link: [arxiv.org/abs/2609.07273](https://arxiv.org/abs/2609.07273)
+   * Venue: CIKM 2026
+   * TL;DR: MORE embeds multi-task information flow inside a unified ranking backbone via persistent Anchor Tokens (Shared + Private), so task-specific signals co-evolve with sequence and feature representations at every layer — deployed in production on Momo.
+   * Key techniques:
+     - Anchor Tokens persisting across layers: Shared Anchors encode cross-task commonalities, Private Anchors capture task-specific priors
+     - Task-boundary mask mixes anchors with non-sequential features; independent per-task refinement branches
+     - Request-level shared computation cuts scoring latency ~30%
+     - Online A/B on Momo (tens of millions MAU): +3% usage duration, +3.6% interaction rate, +2% deep-chat rate
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (industrial deployment)
+     - **Novelty: 6/10** — moving multi-task learning into the backbone (vs post-hoc towers) is a clean architectural shift
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 8/10** — industrial datasets + online A/B + production deployment; scales with model size
+     - **Impact: 8/10** — CIKM 2026; deployed multi-task ranking at Momo scale
+
+3. **Generative Late-Interaction Embeddings For Visual Document Retrieval**
+   * Affiliation: King Abdullah University of Science and Technology (KAUST) — *(Mohamed Eltahir, Talal Aloushan, Rose Khairoalsendi, Jana Shata, Mohammed Alhassan, Leen Alrehaili, Naeemullah Khan; Tanveer Hussain — Edge Hill University)*
+   * Link: [arxiv.org/abs/2609.11808](https://arxiv.org/abs/2609.11808)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: GLIE regenerates a page's full late-interaction embedding set from a tiny learned basis (k≪N vectors), exploiting the geometric finding that ColPali/ColQwen vectors lie on the unit sphere with intrinsic dimension ~5–6 — cutting storage ~200× while retaining ~80% nDCG@5 at 4 vectors/page.
+   * Key techniques:
+     - Geometry-first insight: vectors lie exactly on the unit sphere near a 5–6-dim manifold, so few vectors regenerate all N
+     - Spherical k-means anchoring (free +0.093 nDCG@5); generative decoder expands top-L candidates for exact MaxSim rescoring
+     - Frozen encoder; 415K-param codec fitted in <3 GPU-min on 1K pages, zero-shot across ViDoRe v1+v2
+     - Beats every prior post-hoc compression baseline at every budget, and encoder fine-tuning at a matched budget
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/mohammad2012191/GLIE](https://github.com/mohammad2012191/GLIE) — full package (glie/ + scripts/ + LICENSE + requirements.txt) with detailed usage guide, reproduce_main.sh, config docs, and citation; fresh (Sep 10–11) but complete and reproducible
+     - **Novelty: 7/10** — generative reconstruction of multi-vector representations from a compact code is a new axis for storage-efficient retrieval
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — 3 encoders × ViDoRe v1+v2, zero-shot transfer, matched-budget ablations
+     - **Impact: 7/10** — KAUST; ~200× storage savings for late-interaction retrieval deployment
+
+4. **Matryoshka Hash Representations for Model-Aware Compact Semantic Retrieval**
+   * Affiliation: The Chinese University of Hong Kong, Shenzhen — *(Peichun Hua, Yunming Xiao)*
+   * Link: [arxiv.org/abs/2609.07276](https://arxiv.org/abs/2609.07276)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.AI / cs.LG)
+   * TL;DR: MHR decouples full-width binary-code training from prefix organization via a two-stage procedure (long code first, then frozen-model residual adaptors), yielding directly searchable nested 64/128/256-bit prefixes without degrading full-width quality.
+   * Key techniques:
+     - Two-stage decoupling of full-width training vs prefix organization; zero-initialized residual code adaptors
+     - Documents stored at 1 bit/coordinate; queries keep continuous logits (PQ-like) for expressivity
+     - FAISS FastScan implementation; MS MARCO → zero-shot 7 BEIR datasets
+     - .5561 NDCG@10 / .6535 Recall@100 at 32 bytes; drop-in for PQ, shortlisting, and LEANN graph pruning
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — identifying and resolving the full-width–prefix trade-off in nested binary codes is a focused, well-motivated contribution
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 6/10** — 7 BEIR datasets + ablations across index types
+     - **Impact: 5/10** — CUHK-Shenzhen; model-aware compact quantization relevant to rec candidate generation
+
+5. **Query-Aware Token Budgeting for Efficient Late-Interaction Visual Document Retrieval**
+   * Affiliation: Indian Institute of Science Education and Research (IISER) Bhopal — *(PS Rishi, Rajeev Ranjan Dwivedi, Vinod K. Kurmi)*
+   * Link: [arxiv.org/abs/2609.07262](https://arxiv.org/abs/2609.07262)
+   * Venue: IEEE ICDM 2026
+   * TL;DR: Formulates second-stage visual-document token selection as a budgeted MaxSim coverage problem (monotone submodular when clipped) and shows query-aware token budgeting recovers 93.99–98.39% of full-token score versus 32× static pooling.
+   * Key techniques:
+     - Compressed hot-path index generates candidates; query-aware budgeting over original token sets of shortlisted pages
+     - Budgeted MaxSim coverage formulation; clipped version proven monotone submodular
+     - Coverage-only / cluster-guided / token-wise / greedy marginal-gain policies compared
+     - 10 ViDoRe tasks; greedy marginal-gain recovers 98.39% of full-token score at pool-factor-8 budget
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — query-aware allocation (vs query-agnostic pooling) with a submodular formulation is a neat efficiency framing
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — 10 ViDoRe tasks; hold-out + leave-one-dataset-out; ICDM 2026
+     - **Impact: 5/10** — IISER Bhopal; efficiency for late-interaction visual retrieval
+
+6. **Democracy Needs Reach: Political Equality, Online Speech, and Algorithmic Recommendation**
+   * Affiliation: University of Ottawa — *(Étienne Brown)*
+   * Link: [arxiv.org/abs/2609.09465](https://arxiv.org/abs/2609.09465)
+   * Venue: Ethical Theory and Moral Practice (2026)
+   * TL;DR: Argues that unequal distribution of algorithmic reach on social platforms undermines equality of opportunity for political influence, and proposes "recommendation floors" (guaranteed minimum recommendation for a limited number of political posts/week) as a fairness mechanism.
+   * Key techniques:
+     - Normative analysis (drawing on Niko Kolodny) of algorithmic reach and equal opportunity for political influence (EOPI)
+     - "Recommendation floors" proposal for verified accounts' political speech
+     - Policy/structural-reform framing for the digital public sphere
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (philosophy/policy paper)
+     - **Novelty: 5/10** — recommendation floors as a concrete speech-equality mechanism is a fresh policy proposal
+     - **Fairness: 8/10** — political equality / equal-opportunity-for-influence is the core object of study
+     - **Robustness: 3/10** — argumentative, no empirical evaluation
+     - **Impact: 5/10** — published in Ethical Theory and Moral Practice; policy-relevant
 
 ### Papers September 12
 
@@ -1047,128 +1152,6 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
      - **Robustness: 7/10** — M-BEIR benchmark; peer-reviewed at ACM MM 2026
      - **Impact: 7/10** — ACM MM 2026; cross-modal generative retrieval
 
-### Papers September 03
-
-*Thursday, September 3, 2026. Arxiv active — Wednesday announcement batch. cs.IR/cs.LG returned 7 recommendation papers spanning an adaptive fast-slow sequential recommendation framework (DS-Frame, open-source), a generative counterfactual alignment method with conformal FDR control for out-of-distribution recommendation (GenCAR), a conflict-aware multimodal recommender (OrthoRec, ACM MM 2026, open-source), Alibaba AMAP's industrial-scale generative POI recommender (SPAR), a document-mediated RL skill-optimization framework for ads (DMRL, SJTU/Kuaishou), Meta's single-pass decoding for generative reranking (hLLM), and a unified feature-transport block that won TAAC2026 (CRAFT, KDDCUP 2026 workshop, open-source). Total: 7 papers (3 opensource).*
-
-1. **Recommender System as Slow and Fast Thinkers**
-   * Affiliation: City University of Hong Kong — *(Zichen Yuan, Youhua Li — CityU HK; Xiaoxuan Dong, Jinwei Yang, Jining Luan — UESTC; Linkun Dai — SJTU; Chunxiao Li — USTC; Joemon M. Jose, Junchen Fu — University of Glasgow; Dexu Yu — Fenz.AI; Hanwen Du — Ohio State University)*
-   * Link: [arxiv.org/abs/2609.02671](https://arxiv.org/abs/2609.02671)
-   * Venue: arXiv preprint, September 2026 (cs.IR)
-   * TL;DR: DS-Frame — an adaptive fast-slow inference framework for sequential recommendation that pairs a fast routine-prediction system with a slow iterative latent-refinement system and a learned selector that routes each sample under a controllable computation budget.
-   * Key techniques:
-     - Fast System for efficient routine prediction on common behavior patterns
-     - Slow System for iterative latent refinement on challenging user groups (long histories, less-mainstream item profiles)
-     - Learned selector routing each sample under a controllable computation budget (accuracy-efficiency trade-off)
-     - Consistent gains on 5 real-world datasets, with larger gains on operationally challenging groups
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/ZichenYuan233/Recommender-System-as-Slow-and-Fast-Thinkers](https://github.com/ZichenYuan233/Recommender-System-as-Slow-and-Fast-Thinkers) — full code (helpers/models/utils + main.py) with README describing structure and usage; no license, no requirements.txt, minimal install/data docs
-     - **Novelty: 6/10** — Kahneman-style fast/slow adaptive inference is a fresh angle for sequential rec, though the underlying backbones are standard
-     - **Fairness: 0/10** — motivated by heterogeneous user environments but no explicit fairness mechanism
-     - **Robustness: 7/10** — 5 datasets; consistent gains and larger wins on challenging groups
-     - **Impact: 6/10** — CityU HK; adaptive inference for sequential recommenders
-
-2. **GenCAR: Generative Counterfactual Alignment with Risk-Controlled Selection for Out-of-Distribution Recommendation**
-   * Affiliation: Southern University of Science and Technology (SUSTech) — *(Qianqian Wang, Wenwu Gong, Lili Yang — SUSTech; Jiawen Zeng — University of Pennsylvania; Yunshan Li)*
-   * Link: [arxiv.org/abs/2609.02162](https://arxiv.org/abs/2609.02162)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.LG)
-   * TL;DR: GenCAR couples preference-grounded counterfactual supervision with conformal-p-value calibrated set selection to serve OOD recommendations while provably controlling the proxy-label false discovery rate.
-   * Key techniques:
-     - Formulates OOD serving as the α-Valid Counterfactual Recommendation (α-VCR) problem
-     - Fixes stable-preference representation while intervening on the environmental factor; grounds offline LLM proposals via preference anchors + trust-radius filtering
-     - Conformal p-values + Benjamini-Hochberg selection; Benjamini-Yekutieli guarantee under arbitrary dependence
-     - Finite-sample, distribution-free FDR bounds under exchangeability and positive regression dependence
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 8/10** — marrying counterfactual candidate generation with conformal FDR-controlled selection is a principled, underexplored combination
-     - **Fairness: 6/10** — risk/FDR control makes served sets reliable under shift (fairness-adjacent reliability)
-     - **Robustness: 8/10** — theoretical finite-sample guarantees + extensive OOD benchmark audits of realized false-discovery proportions
-     - **Impact: 6/10** — SUSTech/UPenn; theory-grounded OOD recommendation
-
-3. **Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation**
-   * Affiliation: City University of Hong Kong — *(Jialin Liu, Ray C. C. Cheung — CityU HK; Zhaorui Zhang — Hong Kong Polytechnic University)*
-   * Link: [arxiv.org/abs/2609.02152](https://arxiv.org/abs/2609.02152)
-   * Venue: ACM Multimedia 2026 (ACM MM 2026)
-   * TL;DR: OrthoRec challenges the "modality harmony" assumption by geometrically purifying multimodal features against a collaborative anchor and routing purified modalities through a topology-guided MoE to avoid representation distortion from deceptive visual clickbait.
-   * Key techniques:
-     - Collaborative-Guided Orthogonal Purification (CGOP): decouples each modality into parallel/orthogonal directions and truncates orthogonal noise with energy-preserving normalization
-     - Topology-Aware Routing Mixture-of-Experts (TAR-MoE): decoupled sigmoid gating conditioned on collaborative topology breaks the softmax zero-sum bottleneck
-     - safe-SSL objective dynamically penalizes forced contrastive alignment of contradictory pairs
-     - Robust on 3 Amazon datasets under modality noise and item sparsity
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/Camilla-jl/Orthorec](https://github.com/Camilla-jl/Orthorec) — complete PyTorch impl (common/configs/data/models/utils + main.py + train.sh + requirement.txt), README with dataset download instructions and hyperparameter config; no license
-     - **Novelty: 7/10** — conflict-aware multimodal rec via orthogonal purification + topology-guided routing is a clean, non-incremental contribution
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — ACM MM 2026; robust under modality noise and item sparsity
-     - **Impact: 7/10** — ACM MM 2026; open-source multimodal recommendation
-
-4. **SPAR: Enhancing Industrial-Scale Generative POI Recommendation via Real-World Spatial Perception**
-   * Affiliation: AMAP (Alibaba Group), Beijing — *(Fangye Wang, Haowen Lin, Yifang Yuan, Song Yang, Xiaojiang Zhou, Pengjie Wang — AMAP/Alibaba; Yunjin Gu — CUHK-Shenzhen)*
-   * Link: [arxiv.org/abs/2609.02062](https://arxiv.org/abs/2609.02062)
-   * Venue: arXiv preprint, September 2026 (cs.IR)
-   * TL;DR: SPAR injects real urban spatial knowledge (distance/direction/reachability) into generative POI recommendation across tokenization, continual pre-training, and task-vector-anchored fine-tuning, so predicted POIs are both behaviorally plausible and reachable.
-   * Key techniques:
-     - Spatially-Intrinsic SID (SI-SID): encodes lon/lat into a sinusoidal geospatial embedding fused with textual semantics before RQ-Kmeans
-     - Multi-Granular Geospatial CPT (MG-CPT): continually pre-trains the base LLM on 25 curated geospatial datasets across attribute/relation/navigation tiers
-     - Task-Vector Anchored SFT (TV-SFT): freezes spatial knowledge as a parameter-space task vector to prevent catastrophic forgetting during behavioral fine-tuning
-     - Evaluated on 2 public + 4 industrial-scale datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no code yet (authors plan to release 4 industrial POI datasets + 25 geospatial training sets + an 18-task benchmark, but no link)
-     - **Novelty: 8/10** — explicitly learning/preserving urban spatial geometry for generative POI is a genuine gap-filler
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 8/10** — 2 public + 4 industrial datasets with visualization
-     - **Impact: 8/10** — Alibaba AMAP; industrial-scale POI recommendation
-
-5. **DMRL: Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation**
-   * Affiliation: Shanghai Jiao Tong University / Kuaishou Technology — *(Wei Zhang, Hongji Li, Song Sun, Peng Yu, Xue Yang, Lei Zhao, Peng Jiang)*
-   * Link: [arxiv.org/abs/2609.02170](https://arxiv.org/abs/2609.02170)
-   * Venue: arXiv preprint, September 2026 (cs.LG)
-   * TL;DR: DMRL models skill-document optimization as a sequence of structured editing actions, with an upper-level agent editing docs and a frozen lower-level task agent evaluating edits via A/B testing, to self-evolve ad-recommendation skills with principled credit assignment.
-   * Key techniques:
-     - Dual-Relative Policy Optimization (DRPO): robust, risk-aware advantage estimation for post-training
-     - Long-term Reward Predictor (LRP): estimates long-term outcomes via disentangled representation learning + cross-attention over population heterogeneity
-     - Upper/lower agent split with A/B-tested document edits for credit assignment
-     - Deployed on a large-scale short-video ads platform
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — document-mediated skill self-evolution with DRPO/LRP is a fresh take on LLM-driven ad tuning
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — deployed on a short-video ads platform; outperforms SOTA baselines across ad metrics
-     - **Impact: 7/10** — SJTU/Kuaishou; industrial advertising recommendation
-
-6. **hLLM: Single Pass Decoding for Generative Reranking**
-   * Affiliation: Meta Platforms, Inc. — *(Emil Laftchiev, Prachi Agrawal, Moe Kayali, Bixing Yan, Qi Xu, Zijie Lei, Chen Qiu, Zhi Hua, Ke Li, Luke Simon)*
-   * Link: [arxiv.org/abs/2609.01807](https://arxiv.org/abs/2609.01807)
-   * Venue: arXiv preprint, September 2026 (cs.LG / cs.AI / cs.IR)
-   * TL;DR: hLLM (Hungarian LLM) decodes all N ranking ordinals in O(1) forward passes by reading an N×K item-position score matrix off prefill hidden states and solving the optimal bipartite assignment via the Hungarian algorithm — a 64× end-to-end speedup while maintaining ranking quality.
-   * Key techniques:
-     - Reads an N×K item-position score matrix from the LLM's prefill hidden states with a lightweight self-attention head
-     - Decodes ordinals as the optimal bipartite assignment (Hungarian algorithm), yielding a valid permutation by construction
-     - LoRA fine-tuning + teacher ranking distillation → 28 ms end-to-end, 64× speedup
-     - Connects generative ranking to combinatorial optimization; full ablation of architecture/training-signal/backbone
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 8/10** — O(1)-decode generative reranking via combinatorial assignment is a genuinely new decoding paradigm
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — ranking quality on par with teacher + systematic ablations
-     - **Impact: 8/10** — Meta; real-time generative reranking
-
-7. **From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models**
-   * Affiliation: Tianjin University (VIMA Group) — *(Zichen Luo, Jiachen Guo, Keming Gu, Jie Zhang)*
-   * Link: [arxiv.org/abs/2609.01655](https://arxiv.org/abs/2609.01655)
-   * Venue: KDDCUP 2026 Workshop (oral)
-   * TL;DR: CRAFT reframes unified recommendation from local feature interaction to controlled representation transport, where non-sequential context actively generates residual displacement and memory-preserving signals for intent/sequence states — the 1st-place academic-track solution of the TAAC-UniRec challenge.
-   * Key techniques:
-     - Contextual Residual Adaptive Feature Transport (CRAFT) block: reliability-aware contextual field generates sample-conditioned residual displacement + memory-preserving signals
-     - CRAFT Bridge: sequence refinement, intent-to-sequence cross-attention, and token-subspace rewiring
-     - Scales with both depth (6 blocks) and width; test AUC 0.838090 surpassing the prior leaderboard best
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 5/10** — [github.com/AshleyLuo001/CRAFT](https://github.com/AshleyLuo001/CRAFT) — model-only release (craft_model.py + README + requirements.txt) with detailed architecture/scaling docs; no training pipeline, private data, or checkpoints
-     - **Novelty: 6/10** — transport-before-interaction view is a clean reframing, though architecturally incremental
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 6/10** — depth/width scaling + competition AUC; KDDCUP 2026 workshop oral
-     - **Impact: 7/10** — KDDCUP 2026 workshop oral; 1st-place TAAC-UniRec challenge
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1415,7 +1398,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 165 papers as of September 12.
+**Count:** 166 papers as of September 13.
 
 | Score | Paper |
 | --- | --- |
@@ -1467,6 +1450,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop) |
 | 8/10 | From Noise to Order: Learning to Rank via Denoising Diffusion (DiffusionRank) |
 | 8/10 | GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation |
+| 8/10 | Generative Late-Interaction Embeddings For Visual Document Retrieval (GLIE) |
 | 8/10 | GPlan: Generative Spatiotemporal Intent Sequence Recommendation via Implicit Reasoning in Amap |
 | 8/10 | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) |
 | 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
