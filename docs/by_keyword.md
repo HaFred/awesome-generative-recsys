@@ -43,6 +43,9 @@
 - An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS)
 - Auto-RecSys: Harnessing Autonomous Research Agents for Industry-Scale Recommender System (Auto-RecSys)
 - Agentic Share-of-Search: A Multi-Agent AI System for Competitive Decision-Making in LLM-Mediated E-Commerce (ASoS)
+- Who Are We Recommending To? Recommender Systems in the Agentic Web (Spotify) — RecSys 2026
+- Position: Recommender Systems Should Move Beyond Platform-Centric Ranking toward Personal Agent-Mediated Recommendation (PAMR)
+- MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory (MemRetriever)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -71,6 +74,7 @@
 - TGR: Tencent Generative Recommendation — Unified Generation and Reasoning (TGR)
 - hLLM: Single Pass Decoding for Generative Reranking (hLLM)
 - WIDE: Wildcard Inference with Dynamic Expansion for Cross-Modal Generative Retrieval (WIDE)
+- OneLA: Scaling Linear-Attention Decoding to Large Beams in Generative Recommendation (OneLA)
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -584,6 +588,7 @@
 - PDMR: Passage-Driven Multi-ID Document Retrieval (PDMR)
 - REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval (REDSI)
 - Exploring Bottom-Up Clustering for Creating Semantic IDs
+- Recommendation Retrievers Need Verifiers: Universal Generative Reranking for Sequential Recommendations (Verifiers)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -791,6 +796,8 @@
 - UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems (UniRec)
 - Auto-RecSys: Harnessing Autonomous Research Agents for Industry-Scale Recommender System (Auto-RecSys)
 - Task-Blind No MORE: Multi-Task Information Flow in Unified Ranking Backbones (MORE)
+- ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling (ChronicleRec)
+- MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment (MIMA)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1037,6 +1044,7 @@
 - Continual Graph Memory for Adaptive Recommendation under Intent Drift (CGM-Rec)
 - PRAGMA: Evaluating Personalized Guidance with Memory Alignment in Lifelong Conversations (PRAGMA)
 - Kernel-Managed Shared Memory for System-Wide Personalization
+- MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory (MemRetriever)
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -1097,6 +1105,7 @@
 - GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation
 - PHKT: Personalized Dynamic Hypergraph-enhanced KAN-Transformer for Multi-behavior Sequential Recommendation (PHKT)
 - Beyond Observed Auxiliary Relations: Environment-Conditioned Modeling for Multi-Behavior Recommendation (BOAR)
+- MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment (MIMA)
 
 
 ### Multimodal
@@ -1214,6 +1223,7 @@
 - hLLM: Single Pass Decoding for Generative Reranking (hLLM)
 - DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR)
 - Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval
+- Recommendation Retrievers Need Verifiers: Universal Generative Reranking for Sequential Recommendations (Verifiers)
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS)
@@ -1280,6 +1290,7 @@
 - DMRL: Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation (DMRL)
 - SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce (SAM-D2Q)
 - EAGER: Enrich-and-Align Generative Query Recommendation from Clicked Items in E-commerce Search (EAGER)
+- MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory (MemRetriever) — GRPO
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1456,6 +1467,8 @@
 - Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation (MDCNS)
 - FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation
 - FOSTER: First-order Dataset Distillation for Text-based Sequential Recommendation
+- Preference-Drift-Aware Subsequence Learning and Hierarchical Context Fusion for Long-Sequence Generative Recommendation
+- ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling (ChronicleRec)
 - Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR)
 - GPlan: Generative Spatiotemporal Intent Sequence Recommendation (GPlan)
 - Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)

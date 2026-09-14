@@ -41,6 +41,7 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
+        MemRetriever -- MemTensor
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -54,7 +55,6 @@ mindmap
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
-        Long-Short View Rec -- Texas A&M / UNSW
         GLIE -- KAUST
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
@@ -85,6 +85,145 @@ If you are interested in RFT your own GenRecSys, come check out our `verl`-based
 We manage to achieve 22% and 32% boosting for the end-to-end training efficiencies, compared with their respective vanilla implementations.
 
 ## By Date
+
+### Papers September 14
+
+*Monday, September 14, 2026. ArXiv active — Monday announcement batch (10 on-topic papers in cs.IR). Core: OneLA (HKU/Kuaishou) scales linear-attention decoding to large beams in generative recommendation; Meta's post-hoc generative verifier lifts recall for sequential retrievers; ChronicleRec (UNSW/Tencent) compresses lifelong user behavior into cacheable Chronicle Tokens deployed in Weixin Moments Ads; Preference-Drift-Aware subsequence learning (NEU/Tencent) for long-sequence GR; MIMA (Alibaba International) multi-interest rec; two agentic-web position papers (Spotify RecSys 2026 + UNC Charlotte PAMR); MemRetriever (MemTensor, opensource) agentic long-term memory retrieval. Total: 8 papers (1 opensource).*
+
+1. **Recommendation Retrievers Need Verifiers: Universal Generative Reranking for Sequential Recommendations**
+   * Affiliation: Meta (Meta MRS) — *(Benyu Zhang, Qiang Zhang, Rui Li, Qunshu Zhang, Devansh Tandon, Neeraj Bhatia)*
+   * Link: [arxiv.org/abs/2609.12270](https://arxiv.org/abs/2609.12270)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: A post-hoc generative verifier that promotes deep-list candidates into the consumed shortlist without retraining the retriever, improving Recall@10 across SASRec, GRU4Rec, NextItNet, and MiniOneRec.
+   * Key techniques:
+     - Lightweight generative verifier scores items via identifier-token likelihood (next-token cross-entropy)
+     - Trained post hoc with no sampled negatives or candidate pool; scores only the retriever's top-K at inference
+     - Minimal interface: retriever supplies query state + candidate items; any fixed tokenization supported
+     - Consistent Recall@10 gains on Amazon product + YaMBDa music rec; ablations isolate verification from content injection
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — post-hoc output-side verification for retrieval is a fresh angle vs. retraining the retriever
+     - **Fairness: 3/10** — no explicit fairness mechanism
+     - **Robustness: 7/10** — 4 retrievers × 2 datasets with ablations
+     - **Impact: 7/10** — Meta; plug-and-play recall lift for multi-stage recommenders
+
+2. **Preference-Drift-Aware Subsequence Learning and Hierarchical Context Fusion for Long-Sequence Generative Recommendation**
+   * Affiliation: Northeastern University (Shenyang) / Tencent — *(Fei Li, Qingyun Gao, Jianzhe Zhao, Guibing Guo; Beibei Kong, Lei Cheng, Chengxiang Zhuo, Zang Li)*
+   * Link: [arxiv.org/abs/2609.12556](https://arxiv.org/abs/2609.12556)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: Long-sequence generative recommendation that learns differentiable preference-drift-aware subsequence boundaries and fuses recent + global subsequence context via gated cross-attention, cutting full-sequence attention cost while boosting accuracy.
+   * Key techniques:
+     - Differentiable soft subsequence boundaries from multidimensional preference-drift information
+     - Linear attention with soft assignment weights aggregates items into preference-coherent representations
+     - Cross-attention captures recent↔subsequence dependencies; gated fusion blends recent + long-term preferences
+     - Consistent accuracy + efficiency gains over full-sequence and context-retrieval baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — preference-drift-aware soft boundaries + hierarchical fusion is a clean, well-motivated design
+     - **Fairness: 3/10** — no explicit fairness mechanism
+     - **Robustness: 7/10** — extensive baselines; explicitly targets noise/incomplete-context failure modes
+     - **Impact: 6/10** — NEU / Tencent; addresses a core long-sequence GR bottleneck
+
+3. **OneLA: Scaling Linear-Attention Decoding to Large Beams in Generative Recommendation**
+   * Affiliation: University of Hong Kong / Kuaishou Technology — *(Xiangrui Yang, Cheng Peng, Yunfeng Zhao, Liang Zeng, Ao Hu, Jiawei Yang, Shengzhe Wang, Jingshan Lv, Xiao Liang, Chen Yang, Jiaqiang Liu, Yiming Qiu)*
+   * Link: [arxiv.org/abs/2609.12399](https://arxiv.org/abs/2609.12399)
+   * Venue: arXiv preprint, September 2026 (cs.AI / cs.IR)
+   * TL;DR: A linear-attention decoding framework for large-beam generative recommendation that shares one prompt-derived state across beams with append-only divergent-transition records, delivering 1.54–2.46× decode speedups.
+   * Key techniques:
+     - Single shared prompt-derived state + compact append-only records of each beam's divergent transitions
+     - Lightweight ancestry index tracks each beam's history without moving/copying records
+     - Fused GPU kernel reuses shared state; only needed state computed per decoding step
+     - 1.54–2.46× end-to-end decode speedup with reduced recurrent-state memory and data movement
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 8/10** — shared-state + ancestry-index representation for large-beam linear attention is a novel systems contribution
+     - **Fairness: 2/10** — systems-level, no fairness angle
+     - **Robustness: 7/10** — measured speedups + memory/traffic reduction on GR workloads
+     - **Impact: 8/10** — HKU / Kuaishou (OneRec ecosystem); directly unblocks large-beam GR serving
+
+4. **ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling**
+   * Affiliation: UNSW Sydney / Tencent — *(Chengkai Huang, Yubin Sheng, Liang Guo, Haoxi Liu, Junwei Pan, Shangyu Zhang, Zhixiang Feng, Chao Zhou, Chengguo Yin, Lina Yao, Haijie Gu, Jie Jiang)*
+   * Link: [arxiv.org/abs/2609.12375](https://arxiv.org/abs/2609.12375)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: A pre-train-and-transfer framework compressing ultra-long behavior sequences into chronologically ordered, cacheable Chronicle Tokens via recency-aware multi-granularity merge and causal query interleaving, deployed in Weixin Moments Ads.
+   * Key techniques:
+     - Recency-aware multi-granularity merge (preserve recent, coarsen distant history)
+     - Causal encoder interleaves query tokens; each query summarizes only pre-anchor history
+     - Multi-horizon masking over recent-history windows; mask-and-predict pre-training objective
+     - +1.61% GMV in 7-day online A/B on Weixin Moments Ads; strong on KuaiRand + Tencent AdLive
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — target-independent, chronologically-anchored compression is a clean decoupling of lifelong modeling from scoring
+     - **Fairness: 3/10** — no explicit fairness mechanism
+     - **Robustness: 8/10** — public + industrial datasets, token analyses, statistically-significant online A/B
+     - **Impact: 8/10** — UNSW / Tencent; deployed in Weixin Moments Ads pCVR
+
+5. **MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment**
+   * Affiliation: Alibaba International Digital Commerce Group — *(Xingyuan Mao, Alin Fan, Shichao Nie, Junfeng Zhang, Yan Xiao, Tao Luo, Xiaoyi Zeng)*
+   * Link: [arxiv.org/abs/2609.12842](https://arxiv.org/abs/2609.12842)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: A multi-interest recommendation framework using multi-positive exclusive assignment (Hungarian matching) so interest differentiation emerges from the training objective itself, plus a routing module to calibrate interest-channel scores.
+   * Key techniques:
+     - Groups items co-occurring in one request into a positive set; complementary interests via causal Transformer decoder
+     - Hungarian matching exclusively assigns each positive to a distinct interest (anti-collapse)
+     - Lightweight routing estimates interest-activation probabilities to calibrate cross-channel scores
+     - SOTA on 3 public + 1 industrial dataset; online A/B gains
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — multi-positive exclusive assignment is a clean fix for interest collapse, though components are familiar
+     - **Fairness: 4/10** — interest differentiation indirectly improves minority-interest coverage
+     - **Robustness: 7/10** — 4 datasets incl. industrial + online A/B
+     - **Impact: 7/10** — Alibaba International; industrial multi-interest rec
+
+6. **Who Are We Recommending To? Recommender Systems in the Agentic Web**
+   * Affiliation: Spotify — *(Himan Abdollahpouri, Kyle Kretschman, Sai Ravindranath, Jackie Doremus, Mounia Lalmas)*
+   * Link: [arxiv.org/abs/2609.11945](https://arxiv.org/abs/2609.11945)
+   * Venue: ACM RecSys 2026 (Past, Present, and Future track)
+   * TL;DR: Position paper arguing recommendation is bifurcating — agents become the primary consumer in delegable contexts while humans remain the judge in experiential contexts — introducing a delegation spectrum and research agenda.
+   * Key techniques:
+     - Delegation spectrum over preference specifiability, outcome verifiability, and decision stakes
+     - Dual-audience optimization (human-interpretable + machine-actionable outputs)
+     - Agent preference modeling, outcome-based evaluation, and the agent attention economy
+     - New trust/accountability and monetization risks from agent mediation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — delegation spectrum and dual-audience framing are timely conceptual contributions
+     - **Fairness: 7/10** — foregrounds disclosure, auditing, and accountability in agent-mediated rec
+     - **Robustness: 4/10** — position paper without empirical validation
+     - **Impact: 8/10** — RecSys 2026 (20th-anniversary track), Spotify; shapes the agentic-web agenda
+
+7. **Position: Recommender Systems Should Move Beyond Platform-Centric Ranking toward Personal Agent-Mediated Recommendation**
+   * Affiliation: University of North Carolina at Charlotte — *(Haohan Yuan, Peng He, Dan Zhang, Jianpeng Liang, Junning Zhu)*
+   * Link: [arxiv.org/abs/2609.11942](https://arxiv.org/abs/2609.11942)
+   * Venue: arXiv preprint (position paper), September 2026 (cs.IR)
+   * TL;DR: Position paper proposing Personal Agent-Mediated Recommendation (PAMR), shifting from platform-side item ranking to user-side evidence mediation, with a mediation-centered evaluation framework.
+   * Key techniques:
+     - PAMR paradigm: user-facing agent discovers, filters, aggregates, and governs evidence across distributed sources
+     - Mediation-centered evaluation over utility–traceability–exposure–cost
+     - Proof-of-concept on hard Yelp restaurant rec: source selection + controlled disclosure as best operating point
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — reframes the recommendation bottleneck as evidence-control rather than ranking
+     - **Fairness: 7/10** — centers user control over evidence acquisition/disclosure
+     - **Robustness: 4/10** — position paper with a small proof-of-concept only
+     - **Impact: 6/10** — UNC Charlotte et al.; direction-setting for personal agents
+
+8. **MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory**
+   * Affiliation: MemTensor (Shanghai) Technology — *(Ruiyang Jiang, Chunyu Li, Zhiyu Li)*
+   * Link: [arxiv.org/abs/2609.11951](https://arxiv.org/abs/2609.11951)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: An agentic retrieval model that treats long-term memory access as a multi-step search/reflect/denoise process, trained via warm-start plus GRPO, improving memory retrieval across five benchmarks.
+   * Key techniques:
+     - Parallel/serial search, reflection, and denoising actions per step with adaptive termination
+     - ReAct-style search-memory trajectories for warm-start; Group Relative Policy Optimization (GRPO) for RL
+     - Reward for evidence coverage, noise reduction, answer sufficiency, and efficient termination
+     - MemRetriever-4B-RL beats DeepSeek-v4-Flash on LongMemEval; backend-agnostic
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/MemTensor/MemOS](https://github.com/MemTensor/MemOS) — active memory-OS repo (PR #2156+, Sept 2026 commits) with hybrid-retrieval/reflect pipelines, docs/, and CI; matches the search/reflect/retrieve pattern but the specific 4B-RL checkpoint/recipe is not fully packaged
+     - **Novelty: 7/10** — an intermediate decision layer for memory access is a clean agentic-retrieval formulation
+     - **Fairness: 4/10** — not directly addressed
+     - **Robustness: 7/10** — 5 benchmarks (LOCOMO, LongMemEval, HotpotQA, MuSiQue, 2WikiMultiHopQA)
+     - **Impact: 6/10** — MemTensor; long-term memory for personalized/agentic recommenders
 
 ### Papers September 13
 
@@ -1063,95 +1202,6 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
      - **Robustness: 7/10** — 190K observations + pre-registered external validation across independent corpora
      - **Impact: 4/10** — preprint, no venue yet; rigorous methodology for LLM rec reliability
 
-### Papers September 04
-
-*Friday, September 4, 2026. Arxiv active — Wednesday announcement batch. cs.IR/cs.CV returned 5 recommendation papers spanning the first hyperbolic item indexing for long-tail-aware generative recommenders (HypRQ-VAE, ICDM 2026, open-source), explicit item-level posterior conditioning for semantic-ID diffusion recommendation (EPIC), self-distillation from reasoning for efficient LLM recommendation (SelfDR, CIKM 2026, open-source), Meituan's unified context-centric CTR paradigm (UniCon), and wildcard decoding for cross-modal generative retrieval (WIDE, ACM MM 2026). Total: 5 papers (3 opensource).*
-
-1. **HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems**
-   * Affiliation: Virginia Tech — *(Longfeng Wu, Tong Zeng, Lecheng Zheng, Bo Ji, Dawei Zhou — Virginia Tech; Giovanni Seni, Zhimin Peng, Bhanu Pratap Singh Rawat — Amazon; Si Zhang — Meta AI; Yao Zhou — Google; Yujun Yan — Dartmouth College)*
-   * Link: [arxiv.org/abs/2609.03369](https://arxiv.org/abs/2609.03369)
-   * Venue: IEEE ICDM 2026 (accepted)
-   * TL;DR: The first framework to learn item indexing in hyperbolic space — HypRQ-VAE exploits hyperbolic geometry's exponential volume expansion to naturally fit the power-law structure of user-item interactions, encoding rich textual semantics while preserving the fidelity of sparse long-tail items.
-   * Key techniques:
-     - Hyperbolic Residual-Quantized VAE (HypRQ-VAE): learns item vocabularies in hyperbolic (Poincaré ball) space instead of Euclidean space
-     - Hyperbolic geometry's exponential volume expansion accommodates head/tail power-law catalogs; hierarchical codeword placement encodes item hierarchy
-     - Möbius operations preserve geodesic structure during residual quantization of item embeddings
-     - 3 benchmark datasets; consistent gains, largest on tail-item recommendation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/wulongfeng/HypRQ-VAE](https://github.com/wulongfeng/HypRQ-VAE) — complete code (hyp_main.py, hyp_trainer.py, hyp_generate_indices.py, tokenizer scripts, models/, fine-tuning/, data/, environment.yml, README); no license, no stars yet
-     - **Novelty: 8/10** — first hyperbolic item indexing for generative rec; a geometric solution to the long-tail problem
-     - **Fairness: 5/10** — long-tail/tail-item awareness is exposure-fairness-adjacent, but no explicit fairness mechanism
-     - **Robustness: 7/10** — 3 benchmark datasets; peer-reviewed at ICDM 2026
-     - **Impact: 7/10** — ICDM 2026; long-tail generative recommendation is a central open problem
-
-2. **EPIC: Explicit Posterior Item Conditioning for Semantic ID Diffusion Recommendation**
-   * Affiliation: Griffith University — *(Tuan-Binh Tran, Thanh Tam Nguyen, Quoc Viet Hung Nguyen — Griffith University; Dung D. Le, Thanh Trung Huynh — Singapore Management University; Tung Kieu — Aalborg University)*
-   * Link: [arxiv.org/abs/2609.03522](https://arxiv.org/abs/2609.03522)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.LG)
-   * TL;DR: Introduces explicit item-level competition into semantic-ID denoising by building a personalized posterior over feasible candidate items and projecting it back to unresolved SID positions, so item-level evidence guides which hypotheses stay reachable.
-   * Key techniques:
-     - Explicit Posterior Item Conditioning (EPIC): constructs a personalized item posterior over feasible candidates from generation context + user's recent interactions
-     - Candidate-conditioned transition evidence compares each candidate against the user's recent complete items
-     - Frontier-aware learning concentrates item-level supervision on states where multiple candidates genuinely compete
-     - Frozen pretrained backbone, no extra decoder forward pass; 4 Amazon benchmarks
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 3/10** — anonymous double-blind reproducibility link only ([anonymous.4open.science/r/EPIC](https://anonymous.4open.science/r/EPIC)); no stable public GitHub release yet
-     - **Novelty: 7/10** — item-level posterior conditioning in masked SID diffusion is a well-motivated, non-incremental angle
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — 4 Amazon benchmarks + diagnostic analyses attributing gains
-     - **Impact: 6/10** — Griffith; SID diffusion recommendation is an active direction
-
-3. **SelfDR: Self-Distillation from Reasoning for LLM-Based Recommendation**
-   * Affiliation: Tsinghua University — *(Chumeng Jiang, Jiayin Wang, Xinjie Lin, Zhiqiang Guo, Min Zhang — DCST Tsinghua University (Quan Cheng Laboratory); Hengliang Luo — Meituan)*
-   * Link: [arxiv.org/abs/2609.03313](https://arxiv.org/abs/2609.03313)
-   * Venue: CIKM 2026
-   * TL;DR: Distills an LLM's own reasoning-enhanced predictions into a direct recommender, keeping reasoning's accuracy gains while preserving inference efficiency — a reward-trained teacher reasoner feeds a same-backbone student via self-distillation with dynamic weighting.
-   * Key techniques:
-     - Teacher reasoner trained with downstream performance as reward to generate targeted rationales
-     - Student direct recommender (same base LLM) learns through self-distillation with dynamic weighting
-     - No external models — all components share the same base LLM
-     - 3 public datasets; validates effectiveness, rationality, and efficiency
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 5/10** — [github.com/JiangDeccc/SelfDistillation](https://github.com/JiangDeccc/SelfDistillation) — codes/ + raw_data/ + README present; no license, minimal docs
-     - **Novelty: 7/10** — distilling reasoning into direct (reasoning-free) recommendation for efficiency is clean and practical
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — 3 public datasets; peer-reviewed at CIKM 2026
-     - **Impact: 7/10** — CIKM 2026; LLM-rec inference efficiency is high-impact
-
-4. **UniCon: A Unified Context-Centric Modeling Paradigm for CTR Prediction**
-   * Affiliation: Meituan — *(Jiajun Cui, Zhengqi Xu, Fan Zhang, Zhangteng, Gu Tang, Honghong Zhu, Mengxi Wu, Yulin Liang, Xingxing Wang)*
-   * Link: [arxiv.org/abs/2609.03290](https://arxiv.org/abs/2609.03290)
-   * Venue: arXiv preprint, September 2026 (cs.IR)
-   * TL;DR: Reframes unified CTR modeling around the "request context" as the atomic unit, treating history and prediction targets as homogeneous context units with intra-context (locality) and inter-context (dynamics) attention — deployed on Meituan search advertising.
-   * Key techniques:
-     - Context-centric modeling: request context as the basic unit; history + prediction targets organized as homogeneous context units
-     - Intra-context attention (Locality) captures local item coupling within a context
-     - Inter-context attention (Dynamics) models decision-state evolution across contexts
-     - Context-unit-level sequence compression reduces deployment overhead
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — context-centric reframing of unified CTR is clean but architecturally incremental
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — industrial deployment on Meituan search advertising + offline gains
-     - **Impact: 7/10** — Meituan; industrial-scale CTR prediction
-
-5. **WIDE: Wildcard Inference with Dynamic Expansion for Cross-Modal Generative Retrieval**
-   * Affiliation: Jilin University — *(Teng Guo, Xin Wang, Jiayou Xu, Keying Zhou, Haoxin Ruan — Jilin University; Jifeng Shen — Jiangsu University)*
-   * Link: [arxiv.org/abs/2609.03554](https://arxiv.org/abs/2609.03554)
-   * Venue: ACM Multimedia 2026 (ACM MM 2026)
-   * TL;DR: Addresses cross-modal information asymmetry in generative retrieval by emitting "wildcards" instead of forced identifiers at semantic blind spots, dynamically expanding the search space without log-prob penalties and re-ranking the expanded pool.
-   * Key techniques:
-     - Adaptive Entropy Thresholding (AET): calibrates layer-specific uncertainty boundaries offline
-     - Asymmetry-aware Wildcard Decoding (AWD): detects blind spots and emits wildcards instead of forced deterministic identifiers
-     - Blind-Spot Re-ranking (BSR): hybrid scoring of discrete generation confidence + continuous semantic similarity
-     - M-BEIR benchmark; suppresses forced hallucination while keeping compact indexes
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — wildcard decoding for cross-modal info asymmetry is a novel angle on constrained decoding
-     - **Fairness: 0/10** — no fairness consideration
-     - **Robustness: 7/10** — M-BEIR benchmark; peer-reviewed at ACM MM 2026
-     - **Impact: 7/10** — ACM MM 2026; cross-modal generative retrieval
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1398,7 +1448,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 166 papers as of September 13.
+**Count:** 167 papers as of September 14.
 
 | Score | Paper |
 | --- | --- |
@@ -1480,6 +1530,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Learning Decomposed Contextual Token Representations from Pretrained and Collaborative Signals for Generative Recommendation (DECOR) |
 | 7/10 | Learning to Rotate: Temporal and Semantic Rotary Encoding for Sequential Modeling (SIREN-RoPE) |
 | 7/10 | LIME-Rec: Auditing Semantic Gains in Sequential Recommendation — A Lightweight Recovery Test |
+| 7/10 | MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory |
 | 7/10 | Mixture-of-Experts Knowledge Graph Retrieval-Augmented Generation for Multi-Agent LLM-based Recommendation (MixRAGRec) |
 | 7/10 | MLPs are Efficient Distilled Generative Recommenders (SID-MLP) |
 | 7/10 | OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework (OneSearch-V2) |
@@ -1707,6 +1758,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - hLLM / Single Pass Decoding for Generative Reranking -- Meta
 - WIDE / Wildcard Inference with Dynamic Expansion for Cross-Modal Generative Retrieval -- Jilin University
 - TAAL / Mitigating Early Beam Pruning via Temporal Autoregressive Alignment -- Harbin Institute of Technology
+- OneLA / Scaling Linear-Attention Decoding to Large Beams -- HKU / Kuaishou
 
 ### RL / Reinforcement Learning
 - EAGER: Enrich-and-Align Generative Query Recommendation from Clicked Items in E-commerce Search (EAGER) — Alibaba International
@@ -1824,6 +1876,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - CoGR / It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning -- UNC Chapel Hill / Apple
 - WMG-RL / World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation -- CUHK / ByteDance / Zhejiang University
 - DMRL / Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation -- SJTU / Kuaishou
+- MemRetriever / Learning to Search, Reflect, and Retrieve from Long-Term Memory (GRPO) -- MemTensor
 
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
