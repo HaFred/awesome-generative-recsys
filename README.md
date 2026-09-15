@@ -41,10 +41,10 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
-        MemRetriever -- MemTensor
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
+        TATK -- ECUST / SIAT CAS
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -59,14 +59,13 @@ mindmap
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
+        LION -- NUS / Meta
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
-        MaskGR -- Snap Inc.
-      Multimodal Fusion & Alignment
-        OrthoRec -- CityU HK
+        SCRec -- Kuaishou
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -85,6 +84,167 @@ If you are interested in RFT your own GenRecSys, come check out our `verl`-based
 We manage to achieve 22% and 32% boosting for the end-to-end training efficiencies, compared with their respective vanilla implementations.
 
 ## By Date
+
+### Papers September 15
+
+*Tuesday, September 15, 2026. ArXiv active — the Tuesday Sep 15 announcement batch (cs.IR new listings 1–35) plus late Monday-Sep-14 submissions (2609.14xxx–2609.15xxx) landed after the Sep 14 run. Core: LION (NUS/Meta, CIKM 2026, opensource) names "evolution conflict" in continual generative recommendation and fixes it with a sparse key-value memory layer; SCRec (Kuaishou, RecSys 2026, opensource) closes the cross-stage semantic/collaborative decoupling; VARG (Taobao & Tmall) adds a value-ordered third token plus Prefix-GRPO to Tmall App search, +1.45% GMV online; LazFormer (Alibaba International) transferable generative pre-training for industrial ranking; TATK (ECUST/SIAT, EMNLP 2026 Main, opensource) couples top-K learning with KG-grounded verification; GESE (Baidu) splits headline personalization into GSPO exploration + real-time selection, +2.57% CTR on a 100M-DAU feed; Safety as a Constraint (Netflix/UPenn) uses constrained GRPO for faithful, harmless explanations; P3Rec prior–posterior preference distillation; PinDCO (Pinterest, RecSys 2026) whole-page dynamic creative optimization. Total: 9 papers (3 opensource).*
+
+1. **Self-Evolving Memory for Generative Recommendation**
+   * Affiliation: National University of Singapore / Meta — *(Xinyu Lin, Zhuosong Jiang, Zixiao Suo, Siqin Wang, Hanqing Zeng, Hanchao Yu, Yinglong Xia, Jiang Zhang, Aashu Singh, Fei Liu, Wenjie Wang, Fuli Feng, Yang Song, Qifan Wang, Tat-Seng Chua)*
+   * Link: [arxiv.org/abs/2609.15598](https://arxiv.org/abs/2609.15598)
+   * Venue: CIKM 2026
+   * TL;DR: Diagnoses "evolution conflict" — dominant behavioral patterns hijacking the shared autoregressive parameters during continual generative-recommendation updates — and resolves it with LION, a sparse key-value memory layer plus a consolidation loss.
+   * Key techniques:
+     - Evolution-conflict diagnosis: heterogeneous per-user preference shifts are optimized in one fully shared AR parameter space, so dominant patterns crowd out underrepresented ones
+     - Three design principles for self-evolving recommenders: isolated memorization, reinforced evolution, scalable application
+     - LION = sparse memory activation over a key-value layer that isolates the evolution of different behavioral patterns
+     - Consolidation loss explicitly reinforces underrepresented preference dynamics during continual adaptation
+     - Evaluated per-period, per-user/item-group, and via evolution-convergence analysis on diverse real-world datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/JazyJiang/Self-Evolving-Memory-for-Generative-Recommendation](https://github.com/JazyJiang/Self-Evolving-Memory-for-Generative-Recommendation) — MIT-licensed, single-shot release containing full training/eval entry points (train.py, test.py, run.sh), YAML configs, the RQ-VAE tokenizer, the data pipeline, six reproduced continual-learning baselines (PESO, PISA, LSAT, ICL-TIGER, Replay-Pure-TIGER, SAIL-PIW), sweep drivers and analysis tools, with explicit reproducibility notes; only the paper-ready table export is delegated to a script, so it is close to paper-matching
+     - **Novelty: 8/10** — naming and diagnosing evolution conflict, then fixing it with isolated memory rather than more retraining, is a new framing for continually evolving GR
+     - **Fairness: 5/10** — no fairness objective per se, though group-wise evolution evaluation implicitly protects underrepresented preference patterns
+     - **Robustness: 8/10** — multiple continual-evolution protocols plus gradient-conflict, memory-activation and convergence diagnostics
+     - **Impact: 8/10** — NUS / Meta; targets the core deployment problem (continuous preference drift) for generative recommenders
+
+2. **Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation**
+   * Affiliation: Kuaishou Technology — *(Jiayi Dan)*
+   * Link: [arxiv.org/abs/2609.13678](https://arxiv.org/abs/2609.13678)
+   * Venue: RecSys 2026 Main Track
+   * TL;DR: SCRec re-couples the two stages of generative recommendation with bidirectional information supplementation — collaborative-enhanced tokenization, semantic-guided generation, and manifold alignment — at almost no extra training or inference cost.
+   * Key techniques:
+     - Collaborative-enhanced tokenization injects textualized collaborative signals into semantic IDs without introducing a separate alignment task
+     - Semantic-guided generation dynamically recalibrates semantic priors with learnable code embeddings during decoding
+     - Manifold alignment reconciles the geometric mismatch between the discrete codebook-index space and the dense continuous semantic space
+     - Packaged as a plug-and-play module and re-validated on TIGER and LIGER backbones
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/DanJiayi/SCRec](https://github.com/DanJiayi/SCRec) — complete three-step pipeline (preprocess → RQ-VAE train → generative train/eval) with run.sh, an extracted Beauty codebook under cache/ so RQ-VAE can be skipped, alternative collaborative-tokenization baselines in other_CT_methods/, and a csa-plug-and-play/ module; README covers quick start and generalizability, but there is no LICENSE file and the repo has been quiet since Jul 31, 2026
+     - **Novelty: 7/10** — the decoupling framing plus a joint bidirectional fix is a well-targeted contribution to the semantic-ID paradigm
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 7/10** — three Amazon categories plus cross-backbone (TIGER/LIGER) generalization tests
+     - **Impact: 7/10** — Kuaishou; directly relevant to industrial semantic-ID tokenizer design
+
+3. **VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search**
+   * Affiliation: University of Science and Technology of China / Taobao & Tmall Group of Alibaba / Nankai University — *(Xiaopeng Chu, Jianbo Zhu, Mingmin Jin, Jing Wang, Xing Fang, Wenyi Zhang)*
+   * Link: [arxiv.org/abs/2609.14493](https://arxiv.org/abs/2609.14493)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: A generative retrieval system for Tmall App search that admits generated candidates straight into the final ranker, encoding business value into a value-ordered third token and aligning generation with ranking via Prefix-GRPO, delivering +1.45% GMV in online A/B.
+   * Key techniques:
+     - VARG-ID builds RQ-VAE semantic prefixes with bidirectional query–item contrastive learning, then appends a value-ordered third token giving fine-grained addresses plus a business-value prior
+     - Three-stage SFT: item-to-identifier mapping → query-semantic retrieval → personalized retrieval
+     - Local ordinal supervision (LO-SFT) learns the within-cluster ordering encoded by the third token
+     - Prefix-GRPO with gated rewards (output legality, user behavior, ranker advantage, search relevance) and prefix-aware token weighting
+     - Coordinated daily product/model updates preserve existing item addresses while absorbing new products and feedback
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 8/10** — folding commercial value into the identifier itself and then aligning decoding to the downstream ranker is a strong industrial formulation
+     - **Fairness: 3/10** — value-optimized retrieval raises exposure-allocation questions that are not analyzed
+     - **Robustness: 8/10** — tens of millions of products offline, identifier-stability checks, and a 14-day 20%-traffic A/B test
+     - **Impact: 9/10** — Taobao & Tmall; +1.45% GMV, +0.22% IPV/user, +0.31% PCTR with a smaller candidate quota
+
+4. **LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training**
+   * Affiliation: Alibaba International Digital Commerce Group — *(Xiaodong Li, Alin Fan, Mingyang Li, Yan Xiao, Shichao Nie, Junfeng Zhang, Shaochuan Lin, Zhanming Ou, Tao Luo, Xiaoyi Zeng)*
+   * Link: [arxiv.org/abs/2609.14978](https://arxiv.org/abs/2609.14978)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: A scaling Transformer for industrial ranking that generative-pre-trains to autoregressively produce sequential features — initializing both sparse and dense parameters — and uses a residual adapter plus asymmetric multi-epoch training to avoid negative transfer and sparse overfitting.
+   * Key techniques:
+     - Generative pre-training module autoregressively generates sequential features, yielding favorable sparse + dense initialization for ranking
+     - Transferable residual adapter injects ranking-specific features residually to counter dense-parameter negative transfer
+     - Request-aware ranking module combines long-sequence compression, hybrid sparse attention, and a request-aware paradigm
+     - Asymmetric multi-epoch training resets sparse parameters while accumulating dense parameters across epochs
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — pre-training/ranking feature inconsistency and asymmetric sparse–dense epoch handling are pragmatic, under-addressed problems
+     - **Fairness: 2/10** — not addressed
+     - **Robustness: 6/10** — industrial-scale internal evaluation, but no public benchmarks or A/B numbers reported in the abstract
+     - **Impact: 7/10** — Alibaba International Digital Commerce; a scaling recipe for production rankers
+
+5. **TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation**
+   * Affiliation: East China University of Science and Technology / Hong Kong Institute of Science & Innovation, CAS / Shenzhen Institutes of Advanced Technology, CAS / Westlake University — *(Yuchen Guan, Jiaye Liu, Yifei Han, Zhenxi Zhang, Yixuan Weng, Bin Li)*
+   * Link: [arxiv.org/abs/2609.14565](https://arxiv.org/abs/2609.14565)
+   * Venue: EMNLP 2026 Main Conference
+   * TL;DR: TATK pairs Top-K Learning (context-aware metadata-KG prompt grounding + position-aware top-K rewards) with Knowledge-Grounded Verification (structure-aware reranking over top-M candidates) to fix the mismatch between text generation and full-catalog top-K ranking.
+   * Key techniques:
+     - Top-K Learning combines context-aware metadata-KG prompt grounding with position-aware top-K rewards aligned to ranking utility
+     - Knowledge-Grounded Verification reranks top-M candidates after a single LLM forward pass, reusing the same metadata-derived item graph
+     - Matched R²ec-style full-catalog protocol on three Amazon Reviews 2023 categories with Gemma-2-2B-It and Qwen2.5-3B-Instruct backbones
+     - Diagnostics (reward shape, sequence perturbation, relation quality, candidate pool) show structural evidence should be gated when metadata relations are sparse or noisy
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/conor1020/TATK](https://github.com/conor1020/TATK) — full_model/, baseline/rrec/, ablation_chain/, dataset_process/ and paper_source/ plus REPRODUCE.md, MANIFEST.md, requirements.txt and a documented quick start; however it is still packaged as an anonymous EMNLP submission snapshot (single commit, May 25 2026, "Anonymous" citation) and the license is review-only rather than a standard OSS license
+     - **Novelty: 7/10** — decomposing the generation↔ranking mismatch into three separable mismatches (context, objective, verification) is a clean formulation
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 8/10** — all 36 reported metrics improved, plus component, reward-shape, perturbation and relation-quality ablations
+     - **Impact: 7/10** — EMNLP 2026 Main; gives a practical gating rule (drop structural evidence when KGs are noisy) for LLM recommenders
+
+6. **Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation**
+   * Affiliation: Baidu Inc. — *(Yi Chen, Rufeng Cheng, Qiang Xie, Tao Li)*
+   * Link: [arxiv.org/abs/2609.15094](https://arxiv.org/abs/2609.15094)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.AI)
+   * TL;DR: GESE decouples the presentation layer into a GSPO-trained LLM that explores a diverse headline candidate set and a lightweight feedback-aware selector that exploits real-time context, gaining +2.57% CTR on a 100M+ DAU feed.
+   * Key techniques:
+     - LLM as probabilistic explorer, optimized with Group Sequence Policy Optimization (GSPO) and a hierarchical reward to maximize semantic coverage of latent user interests
+     - Explicitly targets mode collapse of single-best-headline optimization, which suppresses long-tail audiences
+     - Lightweight real-time feedback-aware selector picks the best realization from the candidate pool per instant context
+     - Full deployment on a commercial platform with over 100 million daily active users
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — the explore/exploit decomposition of generative personalization at the presentation layer is a fresh, well-motivated angle
+     - **Fairness: 6/10** — the coverage-oriented exploration objective is explicitly motivated by long-tail audience suppression
+     - **Robustness: 7/10** — large-scale online deployment with two live metrics and SOTA baselines
+     - **Impact: 8/10** — Baidu; +2.57% CTR / +0.87% dwell time at 100M-DAU scale
+
+7. **Safety as a Constraint: Fine-Tuning a LLM Recommender to Explain Itself**
+   * Affiliation: Netflix / University of Pennsylvania — *(Jiashu He, Emma Yanyang Kong, JJ Tan, David Fagnan)*
+   * Link: [arxiv.org/abs/2609.13657](https://arxiv.org/abs/2609.13657)
+   * Venue: arXiv preprint, September 2026 (cs.AI)
+   * TL;DR: Trains an in-house recommender LLM to explain its own recommendations with constrained GRPO — faithfulness as the objective, two harmlessness criteria as hard constraints — lifting the all-criteria PASS rate from 0.649 to 0.956.
+   * Key techniques:
+     - Two LoRA-based LLM-judge reward models with chain-of-thought rationales covering faithfulness and two harmlessness criteria, checked against human annotators
+     - Constrained GRPO: faithfulness maximized as the main objective while harmlessness criteria are enforced as constraints (primal–dual optimization)
+     - Explanations grounded in the user's previously watched similar shows ("watch this if you enjoyed X")
+     - Shows language and recommendation abilities are preserved, supporting single-model agentic user interfaces
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — constrained-RL where safety is a constraint rather than a blended reward, applied to self-explanation
+     - **Fairness: 8/10** — harmlessness constraints explicitly target stereotyping and sensitive associations for user groups
+     - **Robustness: 7/10** — held-out real-world test set, two independent judges, plus regression checks on language and recommendation quality
+     - **Impact: 7/10** — Netflix; directly transferable to explainable/agentic recommender UIs
+
+8. **P3Rec: Distilling Prior–Posterior Preference Reasoning for LLM-based Recommendation**
+   * Affiliation: Chongqing University of Technology / Peking University / Chongqing University — *(Jinfei Chen, Weihai Lu, Jiawei Cheng)*
+   * Link: [arxiv.org/abs/2609.13993](https://arxiv.org/abs/2609.13993)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: P3Rec distills both target-agnostic prior and target-conditioned posterior preference reasoning from an LLM into a lightweight retriever, then uses interest entropy to calibrate the user representation before contrastive retrieval.
+   * Key techniques:
+     - Joint extraction of prior (stable, target-agnostic) and posterior (target-conditioned) preference reasoning from the user side
+     - Item-centric preference representations derived from item semantics and predecessor interactions
+     - Progressive internalization: prior preference absorption + posterior-guided preference distillation
+     - Interest entropy characterizes historical interest dispersion and adaptively calibrates the user embedding before contrastive optimization
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — combining prior/posterior distillation with entropy-based calibration is a sensible but incremental refinement of the LLM-as-Enhancer paradigm
+     - **Fairness: 2/10** — not addressed
+     - **Robustness: 6/10** — evaluated on multiple public datasets, but the abstract reports no ablation depth
+     - **Impact: 5/10** — academic; keeps online inference LLM-free, useful for cost-sensitive deployment
+
+9. **PinDCO: Whole-Page Aware Dynamic Creative Optimization at Scale**
+   * Affiliation: Pinterest — *(Yu Hao, Yuchun Li, Peimeng Sui, Meilin Liu, Tianyuan Cui, Hao Li, Zicong Zhou, Akanksha Baid)*
+   * Link: [arxiv.org/abs/2609.11943](https://arxiv.org/abs/2609.11943)
+   * Venue: RecSys 2026
+   * TL;DR: A production DCO system for ad creative retrieval and selection on Pinterest that scores creative components with a fusion network and adjusts for rendered size in the waterfall grid, yielding +3.09% ad CTR.
+   * Key techniques:
+     - Creative Component Fusion Network (CCFN): one tower per creative component (image, title, layout) with component-specific hyperparameters, fused into a creative-level score conditioned on the ad-level prediction
+     - Pixel-aware Adjustment Module (PAM) accounts for rendered creative size affecting nearby content and session-level engagement
+     - Exploration–exploitation strategy improves training-data quality; a lightweight pre-selection model prunes candidates early
+     - Caching and dynamic batching for serving efficiency; launched in the Pinterest Ads platform
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — whole-page and pixel-aware creative scoring is a practical contribution rather than a new paradigm
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 7/10** — offline analyses plus online A/B experiments with positive whole-page metrics
+     - **Impact: 7/10** — Pinterest; shipped production system, +3.09% CTR
+
+*Note: 9 new papers surfaced (3 opensource), so no gap-fill or backfill search was required.*
 
 ### Papers September 14
 
@@ -1077,131 +1237,6 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
      - **Robustness: 6/10** — 3 Amazon datasets + sparsity/cold-start + transfer studies
      - **Impact: 6/10** — agent-based multimodal recommendation
 
-### Papers September 05
-
-*Saturday, September 5, 2026. Arxiv weekend pause — no new announcement batch since Friday's run, so this entry surfaces 7 additional on-topic papers from the recent Sep 2–4 cs.IR batch not covered in the September 04 entry. Covers Baidu's intent-coherent end-to-end generative retrieval for e-commerce search (ICEGR, +7.53% GMV), a masking-GNN-guided diffusion framework for popularity-bias-free sequence recommendation (MGDiff), Alibaba's LLM-based AI guidance query generation for multi-interest mining (LLM4AIGQ), Google's autonomous agent system for production recommender optimization (RecEvolve), SJTU's reusable compressed-prefix LLM reranking (DoPR, EMNLP 2026 Findings, open-source), a University of Zurich study on LLMs for explanation evaluation (RecSys 2026), and a standardized protocol for auditing LLM brand recommendations (Dice Roll Method). Total: 7 papers (1 opensource).*
-
-1. **ICEGR: An Intent-Coherent End-to-End Generative Retrieval Framework for E-commerce Search**
-   * Affiliation: Baidu — *(Jiayi Tuo — USTC; Hehan Li, Dongjun Fu, Xin Lu, Ling Zhuang, Meifang Li, Peizhi Xu, Hanmeng Liu, Shuanglong Li, Liwei Qian — Baidu; Fuwei Zhang, Fuzhen Zhuang — Beihang University; Yanbiao Ma — Renmin University of China)*
-   * Link: [arxiv.org/abs/2608.29652](https://arxiv.org/abs/2608.29652)
-   * Venue: arXiv preprint, September 2026 (deployed in Baidu E-commerce Search)
-   * TL;DR: Maintains query-intent consistency across the whole generative-retrieval training pipeline — intent-aware SID construction, synthetic-query-augmented unified SFT, and relevance-calibrated preference optimization — to fix the intent drift that limits end-to-end GR in e-commerce search.
-   * Key techniques:
-     - Intent-Aware SID Construction injects query-intent signals into semantic-ID building so SIDs capture search intent beyond static product info
-     - Synthetic Query-Enhanced Unified SFT unifies multiple SFT tasks under the query-to-SID objective and augments sparse log supervision with synthetic queries for low-exposure products
-     - Relevance-Calibrated Preference Optimization blends query-product relevance with business signals via a margin-adaptive preference objective
-     - Deployed end-to-end GR pathway in Baidu E-commerce Search: +3.52% CTR, +15.96% order volume, +7.53% GMV in A/B
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (Baidu production system)
-     - **Novelty: 7/10** — intent-coherence across the full GR training pipeline is a clean, well-motivated industrial contribution
-     - **Fairness: 4/10** — relevance calibration keeps query relevance over popularity, mildly fairness-adjacent, but no explicit fairness mechanism
-     - **Robustness: 8/10** — production deployment with large A/B gains; offline Recall@20 +21.7%, NDCG@20 +26.6%
-     - **Impact: 8/10** — Baidu production; +7.53% GMV; a strong industrial generative-retrieval reference
-
-2. **MGDiff: Multi-Interest Sequence Recommendation with Masking GNN-Guided Diffusion**
-   * Affiliation: Huazhong University of Science and Technology — *(Wenjing Xiao, Hao Ding)*
-   * Link: [arxiv.org/abs/2609.01619](https://arxiv.org/abs/2609.01619)
-   * Venue: arXiv preprint (cs.IR)
-   * TL;DR: A masking-GNN-guided diffusion model for sequence recommendation that generates accurate, bias-free user-interest representations — denoising semantic distortion in guidance and suppressing popularity-bias-induced mode collapse.
-   * Key techniques:
-     - Dual-layer Semantic Guidance (DSG): extracts latent item semantics then decouples multidimensional user intent
-     - Weight-adaptive Masking Graph Neural Network reconstructs missing links to uncover deep item relationships beyond co-occurrence
-     - Dynamic Multi-Expert Network projects user preferences into distinct semantic subspaces
-     - Popularity-Aware Guidance (PAG) uses item popularity as a differentiable signal to recalibrate similarity and debias generation
-     - 4 benchmark datasets; superior to multiple baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — masking-GNN guidance + popularity-aware geometric debiasing is a fresh combination for diffusion rec
-     - **Fairness: 7/10** — explicitly targets popularity bias via PAG for bias-free, diverse recommendation
-     - **Robustness: 6/10** — 4 datasets; preprint without a venue yet
-     - **Impact: 6/10** — arXiv preprint; diffusion sequential recommendation is an active direction
-
-3. **LLM4AIGQ: LLM-based AI Guidance Query Generation Framework for Multi Interest Mining**
-   * Affiliation: Alibaba Group — *(Xiangchen Pan — HUST / Alibaba Group; Jiayi Xu, Jing Wang, Xing Fang, Lingyun Zhu — Alibaba Group)*
-   * Link: [arxiv.org/abs/2609.03674](https://arxiv.org/abs/2609.03674)
-   * Venue: arXiv preprint, September 2026 (cs.IR)
-   * TL;DR: Replaces co-occurrence-based query derivation with an LLM that segments user multi-interests and generates shopping-guidance queries per sub-interest, trained via an SFT + RL + DPO post-training pipeline with a multi-level reward.
-   * Key techniques:
-     - Multi-interest segmentation from user profiles + interaction sequences; per-sub-interest consumption-intent inference
-     - Post-training pipeline: SFT → RL (ROLL framework, vLLM inference) → DPO for query generation
-     - Multi-level reward design for multi-objective optimization and long-chain reasoning
-     - Nearline-generation + online-read architecture for latency constraints
-     - Offline + online A/B on Taobao; beats zero-shot SOTA and larger same-family models
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — LLM-native replacement of the Q2AIGQ retrieval paradigm is practical but incremental
-     - **Fairness: 4/10** — multi-interest coverage is mildly fairness-related; no explicit fairness mechanism
-     - **Robustness: 8/10** — offline + online A/B; deployed on Taobao with nearline/online serving
-     - **Impact: 7/10** — Alibaba/Taobao production; e-commerce query guidance at scale
-
-4. **RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems**
-   * Affiliation: Google — *(Weidi Pan, He Ma, Shuhao Ye, Palaksh Rungta, David McPeek, Junyi Jiao, Arnab Bhadury, Mingyan Gao, Onkar Dalal)*
-   * Link: [arxiv.org/abs/2609.01622](https://arxiv.org/abs/2609.01622)
-   * Venue: arXiv preprint (targeting RecSys 2026)
-   * TL;DR: Deploys a closed-loop autonomous agent that runs the whole research lifecycle — idea generation, code, training, evaluation — on a production Two-Tower retrieval model, yielding ~20% relative NDCG and +3.77% live user satisfaction while surfacing reward-hacking shortcuts.
-   * Key techniques:
-     - Continuous closed-loop pipeline: Propose Idea → Implement → Offline Train → Evaluate → Loop
-     - Centralized knowledge base of prior results drives hypothesis formulation and avoids redundant exploration
-     - 40+ autonomous training runs from scratch under production-scale evaluation
-     - Agent autonomously discovered reward-hacking shortcuts, exposing evaluation-protocol vulnerabilities
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (Google production infrastructure)
-     - **Novelty: 7/10** — an end-to-end autonomous research loop on a production recommender is a notable frontier demonstration
-     - **Fairness: 4/10** — not addressing fairness; instead stress-tests evaluation rigor (reward hacking)
-     - **Robustness: 8/10** — production-scale validation; ~20% NDCG, +3.77% live satisfaction
-     - **Impact: 8/10** — Google production; shifts manual → autonomous recommender optimization
-
-5. **DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking**
-   * Affiliation: Shanghai Jiao Tong University (LUMIA Lab) — *(Beiya Dai, Xinbing Wang, Zhouhan Lin — SJTU; Yifan Wei, Guang Yang, Xing Shi — ByteDance)*
-   * Link: [arxiv.org/abs/2609.03311](https://arxiv.org/abs/2609.03311)
-   * Venue: EMNLP 2026 Findings
-   * TL;DR: Decouples offline document processing from online reranking by precomputing compressed, query-independent document prefixes and reusing them across queries — up to 8× less memory and 8.04× lower latency while retaining 97.1–99.5% NDCG@10.
-   * Key techniques:
-     - Compressed document prefix states selected offline and reused whenever a document is retrieved
-     - Attention-guided selection of salient document states without a separate selector network
-     - Structured attention masking lets query/scoring tokens read bottleneck states during training
-     - RankNet training; TREC DL, BEIR, BRIGHT with Qwen3 0.6B–8B
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/dbylynn/DoPR](https://github.com/dbylynn/DoPR) — complete code (configs/, models/, scripts/, src/, requirements.txt, README with install/train/eval); single "Initial release" commit, no LICENSE file
-     - **Novelty: 7/10** — reusable compressed document prefixes for pointwise reranking is a clean efficiency angle
-     - **Fairness: 3/10** — not addressing fairness
-     - **Robustness: 7/10** — 3 benchmark suites, 0.6B–8B models; peer-reviewed at EMNLP 2026 Findings
-     - **Impact: 7/10** — EMNLP 2026 Findings; efficiency is a key bottleneck for LLM reranking
-
-6. **The Utility of LLMs in Recommender Systems Explanation Evaluation**
-   * Affiliation: University of Zurich — *(Kathrin Wardatzky, Oana Inel, Luca Rossetto, Abraham Bernstein)*
-   * Link: [arxiv.org/abs/2609.01627](https://arxiv.org/abs/2609.01627)
-   * Venue: ACM RecSys 2026 (accepted)
-   * TL;DR: A systematic study of whether LLMs can serve as judges for explanation-method selection — 18 prototypes scored by 14 LLMs against a human user study, yielding moderate rank correlation but low absolute agreement plus four practical recommendations.
-   * Key techniques:
-     - 18 explanation prototypes generated across varying RS/user information; evaluated by 14 LLMs at two temperatures
-     - Human-in-the-loop comparison against a user study
-     - Four recommendations: concise prompts, larger models, pre-test constructs, audit factual accuracy
-     - Finds neither humans nor LLMs reliably detect non-factual explanations
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — systematic LLM-judge study for explanation selection fills a real evaluation gap
-     - **Fairness: 5/10** — audits factual accuracy of explanations, an explainability/reliability concern
-     - **Robustness: 7/10** — peer-reviewed at RecSys 2026; human-study grounding
-     - **Impact: 6/10** — RecSys 2026; practical guidance for LLM explanation evaluation
-
-7. **The Dice Roll Method: A Standardized Protocol for Repeated-Query Auditing of Large Language Model Brand Recommendations**
-   * Affiliation: Independent Researcher — *(Dmitrij Żatuchin)*
-   * Link: [arxiv.org/abs/2609.04047](https://arxiv.org/abs/2609.04047)
-   * Venue: arXiv preprint (cs.IR / cs.CL)
-   * TL;DR: Formalizes a reusable statistical protocol for repeated-query auditing of LLM brand recommendations, decomposing response variance and giving iteration-count tiers tied to effect-size and generalizability targets.
-   * Key techniques:
-     - Negative-binomial mixed model with iterations as repeated measures; Cliff's delta effect size
-     - Dependence-preserving bootstrap + simulation-based power + generalizability-theory decomposition
-     - Three iteration tiers: exploratory (n=5), confirmatory (n=10), rigorous (n=15)
-     - Reanalysis of ~190K observations, 270+ brands, 6 languages; pre-registered external validation (37/39 cells)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — first standardized protocol for repeated-query LLM-recommendation auditing
-     - **Fairness: 8/10** — fairness-adjusted PASOR metric; directly targets brand-recommendation bias/stability
-     - **Robustness: 7/10** — 190K observations + pre-registered external validation across independent corpora
-     - **Impact: 4/10** — preprint, no venue yet; rigorous methodology for LLM rec reliability
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1448,7 +1483,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 167 papers as of September 14.
+**Count:** 173 papers as of September 15.
 
 | Score | Paper |
 | --- | --- |
@@ -1483,6 +1518,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | ProRL: Effective Reinforcement Learning for Proactive Recommendation via Rectified Policy Gradient Estimation (ProRL) |
 | 8/10 | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender |
 | 8/10 | SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents |
+| 8/10 | Self-Evolving Memory for Generative Recommendation |
 | 8/10 | SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation |
 | 8/10 | How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation? |
 | 8/10 | HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations |
@@ -1510,6 +1546,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Masked Diffusion for Generative Recommendation (MaskGR) |
 | 8/10 | Hierarchical Exponential-Gaussian Mixtures for Watch-Time Distribution Prediction (HEGM) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
+| 7/10 | Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec) |
 | 7/10 | RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN) |
 | 7/10 | Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner) |
 | 7/10 | Can We Steer the Black-Box? Towards Controllability-Centric Evaluation of Recommender Systems with Collaborative Agents (CtrlBench-Rec) |
@@ -1584,6 +1621,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | Recommender System as Slow and Fast Thinkers (DS-Frame) |
 | 6/10 | Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance) |
 | 6/10 | Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling |
+| 6/10 | TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation |
 | 6/10 | Tlow: Flow-based Item Tokenizer for Recommendation (Tlow) |
 | 6/10 | Diffusion Language Model for Recommendation (DLMRec) |
 | 6/10 | Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR) |
@@ -1761,6 +1799,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - OneLA / Scaling Linear-Attention Decoding to Large Beams -- HKU / Kuaishou
 
 ### RL / Reinforcement Learning
+- VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
+- Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation (GESE) — Baidu (GSPO)
+- Safety as a Constraint: Fine-Tuning a LLM Recommender to Explain Itself — Netflix / UPenn (constrained GRPO)
+- TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation (TATK) — ECUST / SIAT CAS (EMNLP 2026)
 - EAGER: Enrich-and-Align Generative Query Recommendation from Clicked Items in E-commerce Search (EAGER) — Alibaba International
 - Ask to Be Sure / Entropy-Reduction Reward for Multi-Turn LLM Rec — Amazon (CIKM 2026)
 - ConnectionMind / Social Graph LLM Rec — Meta / MSU

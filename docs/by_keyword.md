@@ -101,6 +101,7 @@
 - UniCon: A Unified Context-Centric Modeling Paradigm for CTR Prediction (UniCon)
 - Personalized Task Dependency Graphs for Mitigating Signal Erosion in Multi-Task Recommendation (PTDG)
 - SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching (SequenceO1)
+
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -327,6 +328,7 @@
 - Quantifying the Engagement Trap: Impact of Short-form Video Recommender Systems on Users with ADHD
 - FunnelAudit: Responsibility Auditing in Multi-Route Recommender Systems (FunnelAudit)
 - Democracy Needs Reach: Political Equality, Online Speech, and Algorithmic Recommendation
+- Safety as a Constraint: Fine-Tuning a LLM Recommender to Explain Itself (Netflix / UPenn)
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -589,6 +591,7 @@
 - REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval (REDSI)
 - Exploring Bottom-Up Clustering for Creating Semantic IDs
 - Recommendation Retrievers Need Verifiers: Universal Generative Reranking for Sequential Recommendations (Verifiers)
+- VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -798,6 +801,9 @@
 - Task-Blind No MORE: Multi-Task Information Flow in Unified Ranking Backbones (MORE)
 - ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling (ChronicleRec)
 - MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment (MIMA)
+- LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training (LazFormer)
+- VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall
+- PinDCO: Whole-Page Aware Dynamic Creative Optimization at Scale (PinDCO) — Pinterest (RecSys 2026)
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -835,6 +841,7 @@
 - SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders (SORT)
 - Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR)
 - DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR)
+
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
 - SCoRD: Semantic-Assisted Continual Retriever-Reranker Distillation for LLM-Based Recommendation (SCoRD)
@@ -846,6 +853,8 @@
 - D3ER: Supporting Multi-Modal Recommendation via Disentangle and Distillation-based Dynamic Ensemble (D3ER)
 - SelfDR: Self-Distillation from Reasoning for LLM-Based Recommendation (SelfDR)
 - Distill Globally, Adapt Locally: Reasoning Distillation and Product-Type Test-Time Training for Scalable Trade-Up Recommendation
+- P3Rec: Distilling Prior-Posterior Preference Reasoning for LLM-based Recommendation (P3Rec)
+
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 - The Utility of LLMs in Recommender Systems Explanation Evaluation
@@ -1035,6 +1044,10 @@
 - HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization (HyperTrace)
 - Agentic Share-of-Search: A Multi-Agent AI System for Competitive Decision-Making in LLM-Mediated E-Commerce (ASoS)
 - Generative Marketing Mix Modeling: A Causal Inference Framework Linking GEO and GEM to Business Impact (GMMM)
+- Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation (GESE)
+- P3Rec: Distilling Prior-Posterior Preference Reasoning for LLM-based Recommendation (P3Rec)
+- Safety as a Constraint: Fine-Tuning a LLM Recommender to Explain Itself
+- TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation (TATK)
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1045,6 +1058,7 @@
 - PRAGMA: Evaluating Personalized Guidance with Memory Alignment in Lifelong Conversations (PRAGMA)
 - Kernel-Managed Shared Memory for System-Wide Personalization
 - MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory (MemRetriever)
+- Self-Evolving Memory for Generative Recommendation (LION)
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -1098,6 +1112,7 @@
 - From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT)
 - On the Regularization Landscape for the Linear Recommendation Models
 - UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems (UniRec)
+
 ### Multi-behavior Recommendation
 
 - BITRec
@@ -1224,6 +1239,7 @@
 - DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR)
 - Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval
 - Recommendation Retrievers Need Verifiers: Universal Generative Reranking for Sequential Recommendations (Verifiers)
+
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS)
@@ -1291,6 +1307,10 @@
 - SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce (SAM-D2Q)
 - EAGER: Enrich-and-Align Generative Query Recommendation from Clicked Items in E-commerce Search (EAGER)
 - MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory (MemRetriever) — GRPO
+- VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Prefix-GRPO
+- Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation (GESE) — GSPO
+- Safety as a Constraint: Fine-Tuning a LLM Recommender to Explain Itself — constrained GRPO
+- TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation (TATK) — position-aware top-K rewards
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1445,6 +1465,7 @@
 - Exploring Bottom-Up Clustering for Creating Semantic IDs
 - REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval (REDSI)
 - PDMR: Passage-Driven Multi-ID Document Retrieval (PDMR)
+- Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
