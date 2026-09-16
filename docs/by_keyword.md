@@ -46,6 +46,8 @@
 - Who Are We Recommending To? Recommender Systems in the Agentic Web (Spotify) — RecSys 2026
 - Position: Recommender Systems Should Move Beyond Platform-Centric Ranking toward Personal Agent-Mediated Recommendation (PAMR)
 - MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory (MemRetriever)
+- AURA: Agentic Diagnosis and Refinement for Production Recommender Systems at Scale (AURA)
+- LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP)
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -199,6 +201,8 @@
 - When Does Supervised Fine-Tuning Reduce Instruction Sensitivity?
 - Purchase Advice and Observable Buyer Responses in Real AI Conversations
 - On the Regularization Landscape for the Linear Recommendation Models
+- AURA: Agentic Diagnosis and Refinement for Production Recommender Systems at Scale (AURA)
+- LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP)
 
 
 ### Diffusion
@@ -271,6 +275,9 @@
 - REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval (REDSI)
 - PRAGMA: Evaluating Personalized Guidance with Memory Alignment in Lifelong Conversations (PRAGMA)
 - Should I Be Polite to My LLM Relevance Judge? Tone as a Severity Operating-Point Shift
+- Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations
+- LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP)
+- RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models (RegRet)
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -329,6 +336,8 @@
 - FunnelAudit: Responsibility Auditing in Multi-Route Recommender Systems (FunnelAudit)
 - Democracy Needs Reach: Political Equality, Online Speech, and Algorithmic Recommendation
 - Safety as a Constraint: Fine-Tuning a LLM Recommender to Explain Itself (Netflix / UPenn)
+- PCap: Personalized Retrieval-Stage Diversity Capping in Facebook Marketplace (PCap)
+- Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -501,6 +510,7 @@
 - EchoRec: Multi-Item Prediction-Empowered Generative Recommendation via Cycle-Consistent Preference Alignment (EchoRec)
 - Decoupled Temporal Encoding for Generative Recommendation (DTE)
 - SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
+- ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec)
 
 ### Generative Retrieval / Ranking
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
@@ -804,10 +814,14 @@
 - LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training (LazFormer)
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall
 - PinDCO: Whole-Page Aware Dynamic Creative Optimization at Scale (PinDCO) — Pinterest (RecSys 2026)
+- PCap: Personalized Retrieval-Stage Diversity Capping in Facebook Marketplace (PCap) — Meta
+- Balancing Trial and Reorder: A Hybrid Sequential Transformer-GBDT Ranker for On-Demand Delivery (UVR) — Wolt / DoorDash
+- AURA: Agentic Diagnosis and Refinement for Production Recommender Systems at Scale (AURA) — The Walt Disney Company
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
 - Enabling High-Bandwidth Flash for Generative Recommendation Serving with Write-Aware KV Cache Policy
+- Efficient Swing Computation for Retrieval in Large-Scale Recommender Systems (ASC / K-ASC)
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1048,6 +1062,8 @@
 - P3Rec: Distilling Prior-Posterior Preference Reasoning for LLM-based Recommendation (P3Rec)
 - Safety as a Constraint: Fine-Tuning a LLM Recommender to Explain Itself
 - TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation (TATK)
+- ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec)
+- Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1059,6 +1075,7 @@
 - Kernel-Managed Shared Memory for System-Wide Personalization
 - MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory (MemRetriever)
 - Self-Evolving Memory for Generative Recommendation (LION)
+- LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP) / ICE v2
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -1199,6 +1216,7 @@
 - MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning (MURAL)
 - SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce (SAM-D2Q)
 - SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval (SAGE)
+- RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models (RegRet) — ECCV 2026
 
 ### Optimizer
 - MuonRec
@@ -1239,6 +1257,7 @@
 - DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR)
 - Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval
 - Recommendation Retrievers Need Verifiers: Universal Generative Reranking for Sequential Recommendations (Verifiers)
+- Balancing Trial and Reorder: A Hybrid Sequential Transformer-GBDT Ranker for On-Demand Delivery (UVR) — Wolt / DoorDash
 
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
@@ -1348,6 +1367,8 @@
 - Generative Late-Interaction Embeddings For Visual Document Retrieval (GLIE)
 - Matryoshka Hash Representations for Model-Aware Compact Semantic Retrieval (MHR)
 - Query-Aware Token Budgeting for Efficient Late-Interaction Visual Document Retrieval
+- RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models (RegRet)
+- Efficient Swing Computation for Retrieval in Large-Scale Recommender Systems (ASC / K-ASC)
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -1466,6 +1487,7 @@
 - REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval (REDSI)
 - PDMR: Passage-Driven Multi-ID Document Retrieval (PDMR)
 - Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec)
+- ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1473,6 +1495,7 @@
 - Fairness Attacks on Recommender Systems
 - SIREN (Luring LLMs onto the Rocks): PAIR-Driven Preference Manipulation in Web-RAG Recommenders (SIREN)
 - An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS)
+- ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec) — weak-risk shilling-robust prompt routing
 
 ### Sequential Modeling / RoPE
 - Learning from the Future: Privileged Self-Distillation for Sequential Recommendation (PSD)
@@ -1535,6 +1558,7 @@
 - Two-Sided State-Space Models for Sequential Recommendation with Non-Random Multimodal Review Feedback (TS-SSM)
 - SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching (SequenceO1)
 - Closing the Long-Short View Gap in Sequential Recommendation without Cached History
+- Balancing Trial and Reorder: A Hybrid Sequential Transformer-GBDT Ranker for On-Demand Delivery (UVR)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey

@@ -44,7 +44,6 @@ mindmap
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
-        TATK -- ECUST / SIAT CAS
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -52,6 +51,7 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
+        LLM Brand Eval -- Northwestern U
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
@@ -65,11 +65,11 @@ mindmap
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
-        SCRec -- Kuaishou
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
         FORGE Web Pollution -- CUHK
+        LSREP -- Thakur College of Eng. & Tech.
 ```
 <div align="center">
   <i> Open-source Generative RecSys Map </i>
@@ -84,6 +84,158 @@ If you are interested in RFT your own GenRecSys, come check out our `verl`-based
 We manage to achieve 22% and 32% boosting for the end-to-end training efficiencies, compared with their respective vanilla implementations.
 
 ## By Date
+
+### Papers September 16
+
+*Wednesday, September 16, 2026. ArXiv active — the Wednesday Sep 16 announcement batch (9 new cs.IR submissions plus 6 cross-lists) together with late Sep 14/15 uploads. Core: ReliGRec (Central South University / Beihang / SCUT) turns user-level weak-risk estimation from an auxiliary prediction into a generation-time prompt-routing control signal for LLM-based generative recommendation; AURA (The Walt Disney Company, GenAIECommerce'26 co-located with RecSys 2026) puts specialized agents on production engagement logs to diagnose recommender failures and propose code-level refinements, ported across two streaming platforms; UVR (Wolt / DoorDash) replaces four separate venue rankers with one transformer-plus-GBDT hybrid and ships +5.5% Merchant Trial Rate and +0.16% Global CVR in three consecutive A/B tests; PCap (Meta) adds personalized Shannon-entropy diversity caps at the Facebook Marketplace retrieval stage with automated online parameter tuning; ASC/K-ASC (Hong Kong Baptist University, SIGMOD 2027) give provable approximate and top-K Swing computation for i2i retrieval with order-of-magnitude speedups on billion-edge graphs; LSREP + ICE v2 (Thakur College of Engineering and Technology, opensource) introduce a longitudinal state-replay protocol that exposes conversational-memory failure modes aggregate endpoint scores hide; Evaluating Brand Retrieval (Northwestern University / Boston University, opensource) reframes LLM brand recommendation as a stochastic retrieval-and-ranking process with BRP@k / MRR@k; RegRet (Zhejiang University / Xiaohongshu, ECCV 2026) adds region-level retrieval to LMMs alongside the 225K-pair REGMB benchmark. Total: 8 papers (2 opensource).*
+
+1. **ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing**
+   * Affiliation: Central South University / Beihang University / South China University of Technology — *(Haoran Yang, Fei Chen, Yutian Xiao, Jiahao Liang)*
+   * Link: [arxiv.org/abs/2609.16560](https://arxiv.org/abs/2609.16560)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: Estimates a weakly supervised user-level "weak risk" score from observed interaction histories and uses it to route each user to a Simple or Cautious prompt before decoding, turning risk estimation into a generation-time control signal rather than a training-time reweighting.
+   * Key techniques:
+     - Behavior Token encodes ordered interaction sequences; temporal Graph Tokens encode the evolving collaborative neighbourhood, keeping collaborative evidence dynamic rather than collapsed into a static embedding
+     - Dual-View Weak-Risk Estimator fuses both views to produce a user-level weak-risk score, mitigating the ambiguity of single-view evidence
+     - Weak supervision from review-feedback signals supplies proxy labels for only a subset of users, so the framework avoids claiming a calibrated maliciousness probability
+     - Cautious Prompt discards overreliance on isolated, short-term or excessively repetitive evidence and prioritizes temporally stable, collaboratively supported patterns
+     - Aggregated Graph Token also conditions next-item Semantic ID generation, so the same collaborative context drives both routing and generation
+     - Evaluated on Beauty and Yelp for recommendation quality, proxy-label prediction, and quality–efficiency routing analysis
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or repository link found in the paper or on the authors' pages
+     - **Novelty: 7/10** — moving weak-risk estimation from an auxiliary objective to a pre-decoding policy selector is a genuinely new control point for LLM-based generative recommendation
+     - **Fairness: 7/10** — explicitly targets the harm caused by shilling attacks and noisy or hijacked histories, protecting users whose behaviour deviates from collaborative neighbours
+     - **Robustness: 8/10** — designed around adversarial and noisy interaction patterns; the routing analysis reports quality–cost behaviour under weak-risk-guided prompting rather than a single average
+     - **Impact: 6/10** — academic China collaboration (CSU / Beihang / SCUT), offline-only evidence, but the routing idea transfers cleanly to industrial LLM recommenders
+
+2. **LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture**
+   * Affiliation: Thakur College of Engineering and Technology, Mumbai — *(Deepesh Sonar)*
+   * Link: [arxiv.org/abs/2609.16730](https://arxiv.org/abs/2609.16730)
+   * Venue: arXiv preprint, September 2026 (cs.AI / cs.CL / cs.IR)
+   * TL;DR: Argues that endpoint question answering cannot establish how a persistent memory state accumulates, ages or absorbs revisions, then introduces LSREP — ordered replay plus lifecycle schedules, repeated probes, evolving reference answers and mechanism-fidelity checks — and audits its own ICE v2 middleware with it.
+   * Key techniques:
+     - Longitudinal state-replay evaluation: replay interactions in order against explicit lifecycle schedules and probe the same question at 52 checkpoints
+     - Repeated probes with evolving reference answers capture temporal drift and multi-session failures that single-shot QA benchmarks miss
+     - Mechanism-fidelity audit explicitly reports which internal mechanisms were exercised, limiting attribution rather than over-claiming
+     - ICE v2 = local-first memory middleware with typed stores, retrieval fusion (RRF) and dynamic context budgets; the single-user instantiation spans 1,985 turns, 219 distinct probes and 1,211 probe-checkpoint observations
+     - Honest negative result: ICE v2 loses decisively to pure vector-RAG on LongMemEval (43.0% vs 69.5% in full-S), establishing a quality–cost trade-off rather than a superiority claim
+     - Frozen `v2-paper-eval` release archived on Zenodo for exact reproducibility
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/Deepnar/ice](https://github.com/Deepnar/ice) — Apache-2.0 with a Zenodo-archived frozen release (DOI 10.5281/zenodo.21759702); well-documented (README, `docs/ICE_Architecture.md`, CITATION.cff, CLAUDE.md, NOTICE), cleanly layered `src/` (api / classifier / retrieval / memory / workers / coding / ingestion / mcp / services), a pytest smoke suite, and the three experiments plus harnesses in `experiments/`. Docked two points because the README states plainly it is "not packaged or distributable software" — `setup.sh` is a personal Arch Linux bootstrap that assumes `pyenv`, an NVIDIA GPU and a local Ollama server, so reproduction requires real adaptation effort
+     - **Novelty: 8/10** — treating memory evaluation as an ordered replay with lifecycle schedules and a fidelity audit is a new protocol, and publishing a decisive loss on a public benchmark is rare
+     - **Fairness: 4/10** — single-user private instantiation; privacy-preserving by construction (local-first) but no group-level fairness analysis
+     - **Robustness: 8/10** — the protocol's whole purpose is exposing failure modes (multi-session, temporal, procedural-retrieval defects) that aggregate scores conceal; paired-difference CIs reported
+     - **Impact: 7/10** — independent solo work, but the audit framing directly challenges how agentic memory and conversational recommenders are currently benchmarked
+
+3. **AURA: Agentic Diagnosis and Refinement for Production Recommender Systems at Scale**
+   * Affiliation: The Walt Disney Company — *(SungGeun Kim, Abhinav Narain, Daniel Nemirovsky)*
+   * Link: [arxiv.org/abs/2609.16625](https://arxiv.org/abs/2609.16625)
+   * Venue: GenAIECommerce'26 — The Third Workshop on Agentic and Generative AI for E-Commerce, co-located with RecSys 2026
+   * TL;DR: AURA runs specialized agents over production engagement logs to surface qualitative failure patterns that aggregate metrics average away, then uses those diagnoses plus the recommender's own code, data and training pipeline to propose and implement refinements at the code level.
+   * Key techniques:
+     - Specialized diagnosis agents read engagement logs from thousands to millions of sessions and report concrete instances of where the recommender fails real users
+     - Diagnoses are grounded in the recommender's own codebase, data and training pipeline before any refinement is proposed, avoiding generic prompt-level suggestions
+     - Refinements are implemented at the code level, moving toward a self-improving recommender loop with safeguards and operational learnings reported
+     - Domain-specific elements are isolated in a configuration layer, which is what allowed the same architecture to port between two large consumer platforms at a major media-streaming company
+     - Explicitly mapped to e-commerce and online-retail recommendation, where the same segment-level harm (e.g. over-promoting high-margin items to price-sensitive shoppers) is averaged away by healthy top-line metrics
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; the system is internal to a major media-streaming company
+     - **Novelty: 8/10** — closing the loop from log-level qualitative diagnosis to code-level algorithm refinement is a materially new agentic architecture for recommender engineering
+     - **Fairness: 6/10** — motivated explicitly by subgroup and long-tail harm hidden by aggregation, though the reported improvements are not fairness metrics
+     - **Robustness: 6/10** — validated on two production platforms with safeguards, but reporting is early-stage with no published online metric deltas
+     - **Impact: 8/10** — industry-scale deployment at a major streaming company plus a transferable configuration-layer design; a credible template for agentic recommender maintenance
+
+4. **Efficient Swing Computation for Retrieval in Large-Scale Recommender Systems**
+   * Affiliation: Hong Kong Baptist University — *(Runhao Jiang, Renchi Yang)*
+   * Link: [arxiv.org/abs/2609.16850](https://arxiv.org/abs/2609.16850)
+   * Venue: SIGMOD 2027 (technical report)
+   * TL;DR: ASC and K-ASC make Swing similarity — the user-item-user structural measure behind industrial i2i retrieval — computable with rigorous probabilistic error guarantees, replacing quadratic-time exact computation and quality-degrading truncation heuristics.
+   * Key techniques:
+     - Combines two randomized algorithms, GNS and USS, in a non-trivial adaptive scheme that processes high-degree and low-degree query items with different estimators for minimal runtime cost
+     - ASC returns approximate Swing values with rigorous probabilistic relative and additive error guarantees rather than heuristic truncation
+     - K-ASC targets top-K queries via a filter-refinement paradigm with carefully designed heuristics
+     - Extensive evaluation on eight real datasets, including the billion-edge Yambda and MAG graphs where K-ASC remains efficient
+     - Reported orders-of-magnitude speedups over competitors at matched approximate and top-K result quality
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code repository or artifact link found in the paper
+     - **Novelty: 7/10** — Swing is a long-standing industrial workhorse; giving it adaptive, theoretically grounded approximation and a top-K variant is a real algorithmic contribution
+     - **Fairness: 0/10** — no fairness consideration; purely a similarity-computation efficiency problem
+     - **Robustness: 8/10** — probabilistic error guarantees plus validation on eight datasets and billion-edge graphs is strong theoretical and empirical evidence
+     - **Impact: 8/10** — HKBU and SIGMOD 2027; Swing is deployed widely in industrial i2i retrieval, so order-of-magnitude speedups have direct production value
+
+5. **PCap: Personalized Retrieval-Stage Diversity Capping in Facebook Marketplace**
+   * Affiliation: Meta — *(Guangchao Yuan, Janis Fuh, Christopher Choate, Xun Tang, Wenqi Zhu, Chengyi Zhang, Pavan Kumar Paalya Chandrashekar, Jiang Han, Jiangyuan Li, Hongyan Wang, Shuting Wang)*
+   * Link: [arxiv.org/abs/2609.16452](https://arxiv.org/abs/2609.16452)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: PCap moves diversity control from re-ranking to the retrieval stage, scoring each user's diversity preference with Shannon entropy, bucketing users, and applying per-bucket category caps tuned by an automated online optimizer.
+   * Key techniques:
+     - Shannon entropy-based scoring models individual diversity preferences from users' historical category distributions
+     - Users are segmented into diversity buckets, each receiving its own personalized category cap during multi-source candidate retrieval
+     - Parameter Tuning Sequence automates online optimization over the high-dimensional per-bucket cap space, avoiding manual grid search
+     - Applied at the retrieval stage rather than re-ranking, so diversity is enforced before candidates are truncated and no large diverse pool must be held downstream
+     - Large-scale online experiments on Facebook Marketplace report significant engagement improvements
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; Meta production system
+     - **Novelty: 7/10** — personalized per-user diversity caps enforced at retrieval, with automated cap optimization, is a practically new placement of the diversity lever
+     - **Fairness: 7/10** — diversity and exposure breadth are the explicit objective, and personalized caps avoid imposing one diversity level on all users
+     - **Robustness: 7/10** — validated by large-scale online experiments rather than offline proxies only; the short 5-page format limits ablation depth
+     - **Impact: 7/10** — Meta / Facebook Marketplace scale; a directly reusable recipe for industrial retrieval teams
+
+6. **Balancing Trial and Reorder: A Hybrid Sequential Transformer-GBDT Ranker for On-Demand Delivery (UVR)**
+   * Affiliation: Wolt (DoorDash, Inc.) — *(Marcel Kurovski — Munich; Attila Nagy — Munich; Steffen Klempau — Berlin; Aleksandr Fedintsev — Helsinki)*
+   * Link: [arxiv.org/abs/2609.16407](https://arxiv.org/abs/2609.16407)
+   * Venue: arXiv preprint, September 2026 (cs.IR; RecSys CCS)
+   * TL;DR: Universal Venue Ranker pairs a bidirectional transformer encoder for sequential user modelling with a GBDT ranker over contextual, user and store features, unifying four separate ranking models into one system while deliberately trading reorder accuracy for new-store trial.
+   * Key techniques:
+     - Hybrid architecture: the transformer encoder captures sequential user behaviour, the GBDT absorbs contextual, user and store features plus local constraints
+     - Trained across all stores and domains of a country while enforcing local delivery constraints (distance, courier availability, opening hours, workload) only at inference
+     - Label smoothing and trial-biased sample weighting steer ranking toward unexplored stores, lifting offline trial MRR by +12% to +30% while regressing reorder MRR in five of six countries
+     - Global CVR (blending trial and reorder sessions) stays statistically unchanged, making the trade-off explicitly measurable rather than hidden
+     - Three consecutive A/B tests: V1 +5.5% Merchant Trial Rate / +0.16% Global CVR; V2 +0.45% further trial; V3 cross-domain unification +1.31% Retail Merchant Trial Rate
+     - Replaces three restaurant rankers and one retail ranker with a single serving stack, materially simplifying operations
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; Wolt / DoorDash production system
+     - **Novelty: 6/10** — transformer-plus-GBDT hybrids are known; the contribution is the explicit trial-versus-reorder multi-objective framing and the cross-domain serving unification
+     - **Fairness: 6/10** — trial-biased weighting directly targets merchant long-tail exposure (new stores), a marketplace-fairness mechanism even if not framed as fairness
+     - **Robustness: 8/10** — three consecutive A/B tests spanning largest markets then all countries and both domains, with an honest account of where reorder MRR regresses
+     - **Impact: 7/10** — deployed at Wolt (30+ countries, 1,000+ cities); a strong industrial reference for locality-constrained, multi-objective ranking
+
+7. **Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations**
+   * Affiliation: Northwestern University / Boston University — *(Edward Malthouse, Kun-Yu Lee, Sanchary Pal, Xueyan Feng — Northwestern University; Jing Yang — Boston University)*
+   * Link: [arxiv.org/abs/2609.16304](https://arxiv.org/abs/2609.16304)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: Defines the competitive brand set independently of model output and estimates recommendation prevalence and prominence through repeated sampling, arguing LLM recommendation must be evaluated as a stochastic retrieval-and-ranking process rather than from a single generated list.
+   * Key techniques:
+     - Brand Recommendation Probability (BRP@k) measures how often a brand is recommended at all; MRR@k measures its prominence within the generated list
+     - The competitive set is defined independently of model outputs, avoiding the circularity of measuring a model against its own generations
+     - Repeated sampling across six LLMs and five product categories quantifies stochasticity instead of treating one response as the answer
+     - Category-only queries reveal substantial omission of established brands, and prominence tracks marketplace-visibility signals (search interest, online brand conversation) more than conventional brand popularity
+     - Needs-based queries and diagnostic positioning probes show that brands omitted from ordinary recommendations can remain conditionally retrievable when distinctive cues are supplied
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — anonymized repository at [anonymous.4open.science/r/LLM-Monitor-CF9F](https://anonymous.4open.science/r/LLM-Monitor-CF9F) holding config / lib / public / scripts / seed-data (39 files, README, package.json, server.js) for the analyses and figures, and the paper states it provides open-source software and data. Docked because the link is a double-blind anonymized mirror rather than a stable public repository, with no license or setup documentation visible, so reproducibility currently depends on that anonymized snapshot
+     - **Novelty: 7/10** — defining the competitive set independently of model output and treating LLM recommendation as repeated-sampling retrieval is a genuinely different evaluation stance for brand and product recommendation
+     - **Fairness: 8/10** — the entire contribution is an auditing framework that surfaces which brands, especially established ones, are systematically omitted — a direct marketplace-visibility fairness question
+     - **Robustness: 7/10** — six LLMs across five categories with repeated sampling and diagnostic positioning probes; no online validation
+     - **Impact: 7/10** — Northwestern / Boston University marketing-and-IR collaboration; gives practitioners a concrete auditing protocol for LLM-mediated brand discovery
+
+8. **RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models**
+   * Affiliation: Zhejiang University / Xiaohongshu Inc. — *(Xun Liang, Ruisi Zhao, Deng Cai — ZJU State Key Lab of CAD&CG; Weihang Pan, Wenxiao Wang, Binbin Lin — ZJU School of Software Technology; Honghui Yang, Boyuan Pan, Yao Hu — Xiaohongshu Inc.)*
+   * Link: [arxiv.org/abs/2609.16847](https://arxiv.org/abs/2609.16847)
+   * Venue: ECCV 2026
+   * TL;DR: RegRet adds a Region-Aware Encoder plus localized-captioning and regional-contrastive training to Large Multimodal Models so they can align user-specified image regions, without sacrificing global retrieval, and ships the 225K-pair REGMB benchmark.
+   * Key techniques:
+     - Region-Aware Encoder captures detailed regional features while explicitly balancing them against the global background context
+     - Multi-stage training pipeline combining detailed localized captioning with regional contrastive learning for fine-grained discriminability
+     - REGMB benchmark provides 225k contrastive pairs across four multimodal retrieval tasks, addressing both missing region-level training data and narrow existing evaluation
+     - Zero-shot RegRet already outperforms strong baselines; contrastive training adds an average improvement above 20% on REGMB and public benchmarks
+     - Global-level retrieval performance is preserved or improved, avoiding the usual region-versus-global trade-off
+     - Directly motivated by e-commerce product search and RAG, where region-level alignment matters
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — the ECCV 2026 page states "The code and data will be released for future research" but no repository exists yet at time of writing
+     - **Novelty: 7/10** — region-level retrieval inside an LMM with a balanced region/global encoder and a purpose-built 225K-pair benchmark is a solid, well-scoped contribution
+     - **Fairness: 4/10** — no fairness mechanism; region-level grounding is closer to accessibility than to bias mitigation
+     - **Robustness: 7/10** — zero-shot plus contrastive training across REGMB and public benchmarks, with global retrieval verified not to regress; ECCV 2026 peer review
+     - **Impact: 7/10** — Zhejiang University with Xiaohongshu; REGMB is likely to be reused, and region-level retrieval feeds e-commerce product search directly
 
 ### Papers September 15
 
@@ -1148,95 +1300,6 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
      - **Robustness: 8/10** — deployed production system, 20M+ MAU
      - **Impact: 7/10** — Allegro production complementary rec; RecSys 2026 workshop
 
-### Papers September 06
-
-*Sunday, September 6, 2026. Arxiv weekend pause — no new announcement batch since Friday (Sep 4). Following the fallback protocol, this entry surfaces 5 additional on-topic generative-rec papers from the recent Aug 29–31 cs.IR batch not covered by the September 04/05 entries: Alibaba AMAP's high-fidelity SIDs for LBS generative retrieval (HF-SID), Snap's co-engagement-aware multimodal item embeddings for dynamic product ads (CAMIE), Emory's two-sided state-space model for review-driven sequential recommendation (TS-SSM, EMNLP 2026 Findings, open-source), HIT's temporal autoregressive alignment against early beam pruning (TAAL), and HKU's two-agent knowledge-integrator framework for multimodal recommendation (AgentMMRec). Total: 5 papers (1 opensource).*
-
-1. **HF-SID: High-Fidelity Semantic IDs for Generative Retrieval in Location-Based Services**
-   * Affiliation: AMAP, Alibaba Group — *(with Jing Li — USTC; Zhibin Hao — Tsinghua University)*
-   * Link: [arxiv.org/abs/2608.30479](https://arxiv.org/abs/2608.30479)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: Restores geographic, numerical, and structural fidelity at the representation stage of POI Semantic IDs — before any information is committed to a discrete code — so LBS generative retrieval no longer blurs the fine-grained POI differences it must preserve.
-   * Key techniques:
-     - Geo-CPT + Num-CPT: transforms coordinates into a continuous 3D Cartesian form and encodes each numerical attribute as a single unit with type-aware embeddings, fixing LLMs' discontinuous coordinate embedding
-     - Structure-based Contrastive Learning on the last-layer residual separates co-located POIs that share a coarse tag but differ at the fine level
-     - Compact 3-token SID at no extra decoding cost (enriches representation rather than lengthening the identifier)
-     - Open-sources AMap-S, a large-scale real-world POI/trajectory dataset; large-scale industrial offline + production validation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code; only the AMap-S POI dataset is released (not the model)
-     - **Novelty: 7/10** — targeting geographic/numerical/structural fidelity losses inside the SID representation is a fresh, well-motivated angle for LBS generative retrieval
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 8/10** — large-scale industrial AMap deployment with offline + production experiments
-     - **Impact: 7/10** — AMAP (Alibaba) production POI retrieval; releases a real-world LBS dataset
-
-2. **CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval**
-   * Affiliation: Snap Inc.
-   * Link: [arxiv.org/abs/2608.30255](https://arxiv.org/abs/2608.30255)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: Unifies Snap DPA's fragmented visual/text/multimodal encoders into a single LLM/MLLM-backbone embedding space and fine-tunes it on co-engaged item pairs, aligning embeddings with the co-engagement behavior that drives downstream conversions.
-   * Key techniques:
-     - Shared LLM/MLLM backbone using native multimodal interfaces to represent item images + metadata in one embedding space
-     - Symmetric in-batch InfoNCE fine-tuning on co-engaged item pairs mined from user journeys
-     - Serves text-only retrieval from the same checkpoint with minimal quality loss
-     - Production: +0.390% CTR / +10.832% CVR over multimodal control, +18.958% CTR / +13.12% CVR over text control
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (Snap production system)
-     - **Novelty: 6/10** — co-engagement-aligned MLLM embeddings as a drop-in for fragmented encoders is practical but incremental
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 8/10** — deployed in production DPA with strong offline + online gains
-     - **Impact: 8/10** — Snap production dynamic-product-ads retrieval
-
-3. **Two-Sided State-Space Models for Sequential Recommendation with Non-Random Multimodal Review Feedback**
-   * Affiliation: Emory University
-   * Link: [arxiv.org/abs/2609.00165](https://arxiv.org/abs/2609.00165)
-   * Venue: Findings of EMNLP 2026
-   * TL;DR: Models reviews as non-random, informative signals that both reflect and reshape evolving user and item states, via a two-sided state-space model with modality-missing-not-at-random fusion and asymmetric positive/negative carryover.
-   * Key techniques:
-     - Modality-missing-not-at-random fusion encodes review content plus the informative availability pattern (presence/absence of text/image)
-     - User-state evolution with temporal variation + local graph message passing using related item states
-     - Item-state evolution with asymmetric carryover of positive vs negative review shocks (different decay half-lives)
-     - 6 Amazon categories (+14.8–18.8% Recall@20 over BSARec) + Goodreads Fantasy
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/CausalMLResearch/TS-SSM](https://github.com/CausalMLResearch/TS-SSM): MIT license, official implementation with a well-structured README (model overview + mermaid pipeline + setup) and reproducibility materials; very new (1 star)
-     - **Novelty: 7/10** — two-sided (user + item) co-evolution with non-random multimodal review feedback is a fresh, principled formulation
-     - **Fairness: 4/10** — asymmetric negative/positive carryover is fairness-adjacent but not an explicit fairness mechanism
-     - **Robustness: 7/10** — 6 Amazon categories + Goodreads; detailed ablations; EMNLP Findings
-     - **Impact: 6/10** — EMNLP 2026 Findings; sequential recommendation
-
-4. **TAAL: Mitigating Early Beam Pruning in Generative Recommendation via Temporal Autoregressive Alignment**
-   * Affiliation: Harbin Institute of Technology (Weihai)
-   * Link: [arxiv.org/abs/2608.29179](https://arxiv.org/abs/2608.29179)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: Shows 91.9–96.6% of generative-retrieval failures occur within the first two beam-search decoding steps, then fixes the early-pruning problem by aligning the early-prefix distribution with historical transitions and PMI-calibrating candidate scores.
-   * Key techniques:
-     - Joint (c₁,c₂) soft target built from historical transitions, aligned with a forward-KL objective on the early-prefix distribution
-     - Pointwise Mutual Information (PMI) candidate-score calibration to downweight globally frequent prefixes at inference
-     - +39.5% / +6.7% / +28.6% NDCG@10 on Amazon Beauty / Instruments / Yelp; full-SID survival +3.9–16.6%
-     - Beam-width analysis: relative survival gain grows as the beam narrows (+39.4% at B=5)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 8/10** — directly targets the under-studied early-pruning failure mode of trie-constrained beam search with a transition-alignment + PMI approach
-     - **Fairness: 3/10** — PMI calibration incidentally reduces global-frequency bias, but no explicit fairness objective
-     - **Robustness: 7/10** — 3 benchmarks with consistent gains + thorough beam-width analysis
-     - **Impact: 6/10** — beam-search decoding is a core GenRec inference bottleneck
-
-5. **Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation**
-   * Affiliation: University of Hong Kong — *(with BIT, Peking University, Universiti Malaya, Macao Polytechnic University)*
-   * Link: [arxiv.org/abs/2608.29410](https://arxiv.org/abs/2608.29410)
-   * Venue: arXiv preprint, August 2026 (cs.IR)
-   * TL;DR: Two coordinated agents — an Integrator that distills behavior- and multimodal-aware knowledge into a reusable memory, and a Utilizer that converts that memory into graph structure and reranking — bridge the semantic gap between multimodal content and recommendation objectives.
-   * Key techniques:
-     - Integrator Agent infers user preferences + item properties from interactions + content, stored in reusable knowledge memory
-     - Utilizer Agent refines modality-specific item-item graphs, builds behavior-aware homogeneous graphs, and reranks under a frozen evaluation-time memory
-     - Knowledge converted into graph structure/model representations before recommendation (vs direct LLM feature augmentation or pure reranking)
-     - 3 Amazon multimodal datasets; gains persist under sparsity and item cold-start; knowledge transfers to existing backbones
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — treating LLM knowledge as an intermediate graph-structuring memory (rather than augmentation/reranking) is a distinct agentic design
-     - **Fairness: 4/10** — cold-start/sparsity robustness is mild; no explicit fairness mechanism
-     - **Robustness: 6/10** — 3 Amazon datasets + sparsity/cold-start + transfer studies
-     - **Impact: 6/10** — agent-based multimodal recommendation
-
 ---
 
 We only keep the last 10 days summary here, for the past records please see [the archive](docs/archive_by_month).
@@ -1487,7 +1550,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 173 papers as of September 15.
+**Count:** 175 papers as of September 16.
 
 | Score | Paper |
 | --- | --- |
@@ -1549,6 +1612,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) |
 | 8/10 | Masked Diffusion for Generative Recommendation (MaskGR) |
 | 8/10 | Hierarchical Exponential-Gaussian Mixtures for Watch-Time Distribution Prediction (HEGM) |
+| 8/10 | LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
 | 7/10 | Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec) |
 | 7/10 | RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN) |
@@ -1632,6 +1696,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP) |
 | 6/10 | HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE) |
 | 6/10 | HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization |
+| 6/10 | Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
 | 5/10 | From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT) |
