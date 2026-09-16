@@ -1237,6 +1237,10 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
      - **Robustness: 6/10** — 3 Amazon datasets + sparsity/cold-start + transfer studies
      - **Impact: 6/10** — agent-based multimodal recommendation
 
+---
+
+We only keep the last 10 days summary here, for the past records please see [the archive](docs/archive_by_month).
+
 ## Papers Classic Must Read
 
 The list's in no particular order.
