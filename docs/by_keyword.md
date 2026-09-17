@@ -126,9 +126,11 @@
 - MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation (MOTIF)
 - Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)
 - SwapRec: Warming Up Cold Items Through Training-Time Swaps (SwapRec)
+- Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking
 
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
+- SURF: Subtractive Updates for Recommender Forgetting (SURF)
 
 
 
@@ -203,6 +205,7 @@
 - On the Regularization Landscape for the Linear Recommendation Models
 - AURA: Agentic Diagnosis and Refinement for Production Recommender Systems at Scale (AURA)
 - LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP)
+- How Calibration Content Shapes Attention-Based Reranking (Interpolated Null Calibration)
 
 
 ### Diffusion
@@ -278,6 +281,7 @@
 - Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations
 - LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP)
 - RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models (RegRet)
+- Understanding AI Provider Recommendations in Local Service Markets
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -338,6 +342,7 @@
 - Safety as a Constraint: Fine-Tuning a LLM Recommender to Explain Itself (Netflix / UPenn)
 - PCap: Personalized Retrieval-Stage Diversity Capping in Facebook Marketplace (PCap)
 - Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations
+- Understanding AI Provider Recommendations in Local Service Markets
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -511,6 +516,7 @@
 - Decoupled Temporal Encoding for Generative Recommendation (DTE)
 - SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
 - ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec)
+- LIGE-GR: A Smooth Leap from Ranking to Generative Recommendation in the LLM Era (LIGE-GR)
 
 ### Generative Retrieval / Ranking
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
@@ -602,6 +608,7 @@
 - Exploring Bottom-Up Clustering for Creating Semantic IDs
 - Recommendation Retrievers Need Verifiers: Universal Generative Reranking for Sequential Recommendations (Verifiers)
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG)
+- One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations (ANGLE)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -817,11 +824,16 @@
 - PCap: Personalized Retrieval-Stage Diversity Capping in Facebook Marketplace (PCap) — Meta
 - Balancing Trial and Reorder: A Hybrid Sequential Transformer-GBDT Ranker for On-Demand Delivery (UVR) — Wolt / DoorDash
 - AURA: Agentic Diagnosis and Refinement for Production Recommender Systems at Scale (AURA) — The Walt Disney Company
+- LIGE-GR: A Smooth Leap from Ranking to Generative Recommendation in the LLM Era (LIGE-GR)
+- Scaling Articulated Rationales for MLLM-based Recommendation (SARA)
+- One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations (ANGLE)
+- Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
 - Enabling High-Bandwidth Flash for Generative Recommendation Serving with Write-Aware KV Cache Policy
 - Efficient Swing Computation for Retrieval in Large-Scale Recommender Systems (ASC / K-ASC)
+- Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs (Quanta)
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1064,6 +1076,9 @@
 - TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation (TATK)
 - ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec)
 - Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations
+- Scaling Articulated Rationales for MLLM-based Recommendation (SARA)
+- Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking
+- Understanding AI Provider Recommendations in Local Service Markets
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1217,6 +1232,7 @@
 - SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce (SAM-D2Q)
 - SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval (SAGE)
 - RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models (RegRet) — ECCV 2026
+- Scaling Articulated Rationales for MLLM-based Recommendation (SARA)
 
 ### Optimizer
 - MuonRec
@@ -1258,6 +1274,8 @@
 - Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval
 - Recommendation Retrievers Need Verifiers: Universal Generative Reranking for Sequential Recommendations (Verifiers)
 - Balancing Trial and Reorder: A Hybrid Sequential Transformer-GBDT Ranker for On-Demand Delivery (UVR) — Wolt / DoorDash
+- Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking
+- How Calibration Content Shapes Attention-Based Reranking (Interpolated Null Calibration)
 
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
@@ -1300,6 +1318,7 @@
 - TriAlignGR: Triangular Multitask Alignment with Multimodal Deep Interest Mining for Generative Recommendation
 - VRec (Verifiable Reasoning)
 - DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
+- Scaling Articulated Rationales for MLLM-based Recommendation (SARA)
 
 
 ### Reinforcement Learning
@@ -1330,6 +1349,7 @@
 - Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation (GESE) — GSPO
 - Safety as a Constraint: Fine-Tuning a LLM Recommender to Explain Itself — constrained GRPO
 - TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation (TATK) — position-aware top-K rewards
+- LIGE-GR: A Smooth Leap from Ranking to Generative Recommendation in the LLM Era (LIGE-GR)
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1369,6 +1389,8 @@
 - Query-Aware Token Budgeting for Efficient Late-Interaction Visual Document Retrieval
 - RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models (RegRet)
 - Efficient Swing Computation for Retrieval in Large-Scale Recommender Systems (ASC / K-ASC)
+- How Calibration Content Shapes Attention-Based Reranking (Interpolated Null Calibration)
+- Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs (Quanta)
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -1488,6 +1510,7 @@
 - PDMR: Passage-Driven Multi-ID Document Retrieval (PDMR)
 - Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec)
 - ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec)
+- One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations (ANGLE)
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1559,6 +1582,7 @@
 - SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching (SequenceO1)
 - Closing the Long-Short View Gap in Sequential Recommendation without Cached History
 - Balancing Trial and Reorder: A Hybrid Sequential Transformer-GBDT Ranker for On-Demand Delivery (UVR)
+- SURF: Subtractive Updates for Recommender Forgetting (SURF)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey

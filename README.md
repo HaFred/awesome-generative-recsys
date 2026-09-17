@@ -51,7 +51,6 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
-        LLM Brand Eval -- Northwestern U
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
@@ -70,6 +69,7 @@ mindmap
         MemGen-GR -- CMU / UCSD / Meta
         FORGE Web Pollution -- CUHK
         LSREP -- Thakur College of Eng. & Tech.
+        SURF -- Sapienza U Rome / U Pisa
 ```
 <div align="center">
   <i> Open-source Generative RecSys Map </i>
@@ -84,6 +84,158 @@ If you are interested in RFT your own GenRecSys, come check out our `verl`-based
 We manage to achieve 22% and 32% boosting for the end-to-end training efficiencies, compared with their respective vanilla implementations.
 
 ## By Date
+
+### Papers September 17
+
+*Thursday, September 17, 2026. arXiv active — the Thursday Sep 17 announcement batch (9 new cs.IR submissions plus 8 cross-lists) together with late Sep 15/16 uploads. Core: LIGE-GR (Meta Platforms) turns a mature itemwise ranking recommender into a listwise generative system through three strictly reversible upgrades — a context-aware predictor, a listwise value model, and an RL-based Palette decoder — delivering +1.14% time spent on Instagram Reels and +0.72% on Facebook Video; SARA (Kuaishou) scales articulated user rationales from 86,564 authors to the full 10M-author space using a 240M-user data engine plus SFT and Quality-Refining DPO before feeding them into production ranking; ANGLE (Tencent) drops SID-based generative retrieval for LLM-generated hierarchical text representations and folds retrieval, relevance and ranking into one LLM, gaining +1.81% consumption and +2.16% GMV; SURF (Sapienza University of Rome / University of Pisa, CIKM 2026, opensource) makes sequential-recommender unlearning subtractive by training an auxiliary model on the embedding-space neighbourhood of the target item and subtracting its scores at inference, matching full retraining at 2% of the time budget. Total: 8 papers (2 opensource).*
+
+1. **LIGE-GR: A Smooth Leap from Ranking to Generative Recommendation in the LLM Era**
+   * Affiliation: Meta Platforms, Inc., Menlo Park, CA, USA — *(60+ authors; equal contribution: Venkat Srinivas, Chenzhang He, Sam Woodmansee, Shawn Lian, Wenjie Hu, Renjie Jiang)*
+   * Link: [arxiv.org/abs/2609.18148](https://arxiv.org/abs/2609.18148)
+   * Venue: arXiv preprint, September 2026 (cs.LG / cs.IR)
+   * TL;DR: Instead of rebuilding the stack from scratch, LIGE-GR upgrades a live itemwise ranking recommender into a listwise generation system via three additive, individually reversible components, and validates the migration on two of Meta's short-video surfaces.
+   * Key techniques:
+     - Context-Aware (CA) Predictor: a 4-head, 4-layer GPT-style causal transformer refining the incumbent context-free predictor, conditioning each item's score on the previously selected items so repetition, saturation, complementarity, diversity and fatigue enter the objective (~10% extra inference)
+     - Listwise Value Model: ListVM_vanilla sums context-aware item values across positions, while ListVM_golden additionally weights each item by its continuation probability — the likelihood the user actually reaches that position
+     - Palette Decoder: decoding framed as optimal sequential decision making with absorbing states; beam search of width b guided by Future-Value Estimation in both step-based and duration-aware form, the latter countering bias toward shorter items
+     - Strict generalization: reverting all three upgrades recovers the incumbent itemwise system exactly, so the migration is additive and reversible rather than disruptive; per-request fallback to the itemwise decoder when the latency budget τ is exceeded, plus config-level reversion without retraining
+     - Efficiency: cached CF representations computed once per request, re-scoring restricted to ~1/3 of candidates (+60–80% throughput), the beam batched into a single forward pass, and generation right-sized to the requested positions
+     - Results: +1.14% time spent on Instagram Reels (~7% latency, ~10% extra inference at b=1) and +0.72% on Facebook Video (~2.2% latency); improved diversity, creator mix, exploration and length variety, with a minor regression on content freshness
+     - Stated limitation: candidate pools on the order of 10² items; integration with Semantic IDs for larger spaces is left to future work
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or repository link; an internal Meta production deployment
+     - **Novelty: 8/10** — reframing the itemwise→generative migration as three formally reversible upgrades with an exact-generalization guarantee, plus duration-aware future-value estimation inside beam search, is a fresh and unusually well-specified industrial contribution
+     - **Fairness: 4/10** — not fairness-focused, but reports ecosystem-level effects on creator mix, diversity, exploration and content freshness rather than only engagement
+     - **Robustness: 9/10** — two production surfaces, online A/B, an explicit latency budget with per-request fallback, and config-level reversion without retraining
+     - **Impact: 9/10** — Meta scale (Instagram Reels + Facebook Video); supplies the concrete, low-risk migration recipe the industrial generative-recommendation literature has been missing
+
+2. **Scaling Articulated Rationales for MLLM-based Recommendation (SARA)**
+   * Affiliation: Kuaishou Technology
+   * Link: [arxiv.org/abs/2609.17639](https://arxiv.org/abs/2609.17639)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.AI)
+   * TL;DR: Treats users' natural-language explanations of their preferences as a first-class polarity-aware signal: a data engine elicits and curates them from 240M Kuaishou Live users, a 7B MLLM is aligned to generate them at scale, and the resulting positive/negative rationales are wired into production ranking.
+   * Key techniques:
+     - Articulated user rationales (AURs) framed as a new signal class — reason-level and polarity-aware, in contrast to implicit clicks and watch time that reveal what users do rather than why
+     - Data engine elicits and curates AURs from 240M Kuaishou Live users, producing SARA-HQ, a quality-controlled author-centric rationale dataset
+     - SARA-7B: large-scale SFT plus Quality-Refining DPO aligns a general-purpose MLLM, extending rationale generation from 86,564 AUR-covered authors to the full 10M-author space
+     - SARA-Ranker integrates the generated positive and negative rationales via rationale-aware interaction modelling and rejection-memory modelling
+     - Builds on Kuaishou's internal TagNex tagging system rather than relying on free-form generation alone; validated by offline evaluation, human calibration and online A/B
+     - Deployed with daily refresh for over 30 days on Kuaishou Featured Livestream, improving engagement while reducing negative feedback
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; SARA-HQ is an internal quality-controlled dataset rather than a released one
+     - **Novelty: 7/10** — articulated rationales are not new in isolation, but the elicitation → curation → DPO-aligned generation → production-ranker pipeline at 10M-author scale is a substantial systematisation
+     - **Fairness: 5/10** — polarity-aware rationales and rejection memory explicitly encode negative user feedback, a step toward representing dissatisfaction rather than only engagement
+     - **Robustness: 8/10** — 30+ days of daily-refresh production deployment, human calibration and online A/B, not just offline metrics
+     - **Impact: 8/10** — Kuaishou-scale industrial deployment that legitimises natural-language rationales as a ranking signal
+
+3. **One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations (ANGLE)**
+   * Affiliation: Tencent Inc. — *(Tongtong Liu, Renyu Zhang, Jiayu Ding, Hongchao Guo, Xintao Yang, He Wei, Zhaoyu Li, Haiyang Wu)*
+   * Link: [arxiv.org/abs/2609.18296](https://arxiv.org/abs/2609.18296)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: Argues discrete SIDs are the wrong retrieval interface for ads — the base LLM never learned them and decoding is one-to-one — and instead has the LLM generate hierarchical textual representations (commercial intent + ad abstract) while a single model handles retrieval, relevance and ranking.
+   * Key techniques:
+     - Names three concrete SID failure modes for ads: SIDs are not learned by the base LLM; SFT must memorise numerous SID-to-ad mappings, hurting generalisation to unseen ads; and the one-to-one SID↔ad mapping makes decoding inefficient
+     - Hierarchical textual representation: a high-level commercial-intent summary plus a fine-grained ad abstract, generated by the LLM itself
+     - Retrieval, relevance and ranking unified inside one LLM, replacing a small reward model (e.g. pctr) that otherwise caps how far the LLM can assess commercial value
+     - Targets the multi-stage cascading architecture (MCA) pathology of inconsistent per-module objectives and premature elimination of high-potential candidates
+     - Real-world search deployment: +1.81% consumption and +2.16% GMV; offline, ANGLE beats seven baselines on HR and ACR
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; Tencent internal production search ads
+     - **Novelty: 7/10** — replacing SID-based retrieval with LLM-generated hierarchical text while collapsing retrieval/relevance/ranking into one model is a well-argued alternative direction for generative retrieval, though the ingredients are individually established
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 8/10** — real-world search scenarios with online consumption/GMV uplift plus offline evaluation against seven baselines
+     - **Impact: 7/10** — Tencent sponsored search; a credible industrial counterpoint to the SID-centric generative-retrieval consensus
+
+4. **SURF: Subtractive Updates for Recommender Forgetting**
+   * Affiliation: Sapienza University of Rome / University of Pisa — *(Filippo Betello†, Antonio Purificato†, Nicola Tonellotto, Fabrizio Silvestri; † equal contribution)*
+   * Link: [arxiv.org/abs/2609.18695](https://arxiv.org/abs/2609.18695)
+   * Venue: CIKM '26 — Proceedings of the 35th ACM International Conference on Information and Knowledge Management, November 2026, Rome, Italy
+   * TL;DR: Makes sequential-recommender unlearning subtractive rather than retraining-based: locate the forget-target's neighbourhood in embedding space, train an auxiliary model on that compact local subset, and subtract its scores from the original model at inference.
+   * Key techniques:
+     - Three-stage protocol: (i) K-nearest-neighbour identification of the to-be-forgotten entity's neighbourhood in the embedding space, (ii) auxiliary-model training on that compact local subset only, (iii) score subtraction at inference — no full retraining
+     - Explicitly targets the sequential setting, where temporal interaction patterns make unlearning harder than in static recommenders; existing approaches either retrain fully or ignore sequence structure
+     - α parameter trades off the magnitude of the subtractive correction; supports both item-level and user-level forgetting
+     - Baselines: SRU (NED/CED deletion), RecEraser, Retrain, UltraRE, IFRU across 7 datasets
+     - Results: unlearning effectiveness comparable to full retraining, up to +32% NDCG@20, at as little as 0.02× the retraining time budget
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/FilippoBetello/SURF](https://github.com/FilippoBetello/SURF): usable repo with README (abstract + usage), install instructions, requirements.txt and a cfg/src/ntb layout covering BERT4Rec, GRU4Rec and SASRec, with all six baselines selectable via `--model_type`. Deductions: no LICENSE file, no tests or CI, and the last substantive code commit predates the paper (Feb 2026) — reproducible but not polished
+     - **Novelty: 7/10** — score subtraction from a locally trained auxiliary model is an elegant, cheap alternative to shard-based unlearning, and applying it to sequential recommenders fills a real gap
+     - **Fairness: 4/10** — not fairness-focused in the bias sense, but squarely motivated by user privacy and GDPR rights, a fairness-adjacent concern
+     - **Robustness: 7/10** — 7 datasets and 5 baselines with consistent unlearning-effectiveness results, though the subtraction trick carries a tunable α that must be set per setting
+     - **Impact: 7/10** — CIKM 2026 with open code; makes compliant forgetting practical for deployed sequential recommenders
+
+5. **Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking**
+   * Affiliation: Indeed Inc. — *(Qihang Wang, Jinwei Tan, Mengyuan Shi, Mayank Sharma, Shuai Zhao, Fuxian Li, Ryan Yan, Alexander P. Kreuzer, Mohit Jain, Dheeraj Toshniwal, Manoj Seethamsetty)*
+   * Link: [arxiv.org/abs/2609.18188](https://arxiv.org/abs/2609.18188)
+   * Venue: RecSys in HR '26 — The 6th Workshop on Recommender Systems for Human Resources, co-located with RecSys 2026; to appear in CEUR Workshop Proceedings
+   * TL;DR: Casts candidate-job relevance as ordinal classification over the grade tokens {1..5} and reads the score as the expectation of the first-token distribution — a deterministic, parse-free, single-decoding-step ranking primitive that works from only a few hundred thousand ordinal labels.
+   * Key techniques:
+     - Expected-value scoring from the first-token logit distribution over grade tokens, making the score a deterministic function of logits (fixing zero-shot LLM score instability) and removing output parsing
+     - Hybrid ordinal regression loss: an MSE term preserving ordinal distance combined with a categorical cross-entropy term sharpening class boundaries, fine-tuned into a Small Language Model
+     - Diagnosis of the deployment tension: zero-shot LLMs are unstable and rank poorly, while conventional deep rankers need millions of logged interactions that a low-traffic niche sourcing platform never produces
+     - Evaluation along two axes — Jobseeker Relevance and Employer Relevance — using NDCG@10 and low relevance rate
+     - Results: +54.2% Jobseeker NDCG@10 and −46.7% low-relevance rate in end-to-end simulation; a live online experiment cuts employer low-relevance by 27.3% and raises employer keep rate by 7.07%
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or model release; Indeed production sourcing
+     - **Novelty: 6/10** — reading a score as the expectation over next-token logits is a neat, well-motivated primitive; the hybrid ordinal loss is sensible rather than surprising
+     - **Fairness: 4/10** — the two-sided (jobseeker/employer) evaluation is a fairness-aware framing, but demographic or bias auditing is absent
+     - **Robustness: 6/10** — offline, simulated and live online evaluation, but on a single platform in a niche domain
+     - **Impact: 6/10** — RecSys in HR workshop; immediately actionable for label-scarce ranking deployments well beyond hiring
+
+6. **How Calibration Content Shapes Attention-Based Reranking**
+   * Affiliation: UC San Diego / Amazon — *(Petros Karypis, Hossein Rajaby Faghihi, Peter Chen, Rui Zhu, Noveen Sachdeva, Yan Zhu, Julian McAuley)*
+   * Link: [arxiv.org/abs/2609.17764](https://arxiv.org/abs/2609.17764)
+   * Venue: arXiv preprint, September 2026 (cs.CL / cs.IR)
+   * TL;DR: Shows that the null-query calibration pass attention-based rerankers rely on stops being null once modern prompt content (constraints, instructions, personas) leaks into the scoring readout, and fixes it with a training-free interpolated null calibration.
+   * Key techniques:
+     - Identifies the broken assumption: calibration assumes the null pass removes irrelevant signal from each document, but prompt content entering the scoring readout makes the null pass relevance-aware instead of null
+     - Quantifies the damage: calibration is especially harmful for prompts with longer, more detailed instructions, because the null-pass subtraction removes relevant signal
+     - Interpolated null calibration: a training-free modification controlling how much instruction content enters the null baseline, recovering performance on instruction-heavy tasks while preserving calibration's benefits when the null pass stays relevance-agnostic
+     - On instruction-heavy tasks the recovered rankings surpass generative rerankers
+     - Separate finding: in-context demonstrations improve attention-based reranking with little calibration interference, because demonstrations act only through the query pass and leave the null pass unchanged
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or repository link found in the paper or on the authors' pages
+     - **Novelty: 7/10** — diagnosing a widely used calibration step as silently broken by prompt engineering, and supplying a training-free interpolation fix, is a crisp and genuinely new finding for LLM reranking
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 6/10** — consistent analysis across instruction-heavy settings, but the evidence is ablation-driven rather than multi-domain at scale
+     - **Impact: 7/10** — UCSD / Amazon collaboration; affects any deployed attention-based reranker that still applies standard null-query calibration
+
+7. **Understanding AI Provider Recommendations in Local Service Markets**
+   * Affiliation: New York University Abu Dhabi — *(Hazem Ibrahim, Yasir Zaki)*
+   * Link: [arxiv.org/abs/2609.18341](https://arxiv.org/abs/2609.18341)
+   * Venue: arXiv preprint, September 2026 (cs.CY / cs.IR)
+   * TL;DR: Audits AI assistants' "referral layer" against official registries across the 100 largest U.S. metros and finds trustworthiness is governed mostly by whether retrieval is switched on, not by which model answers.
+   * Key techniques:
+     - Registry-backed audit of four service domains (Medicare clinician and facility records, SEC adviser disclosures) across the 100 largest U.S. metropolitan areas, under three conditions: open-weight model, proprietary model without web search, and the same proprietary model with search
+     - Without search, both models largely fabricate: only 4% of the open-weight model's recommended doctors and 11% of the proprietary model's match a clinician in the queried city, and open-weight matches are name coincidences — no likelier to be primary-care doctors than names drawn at random from the registry
+     - With search, 64–71% of recommendations match a real provider; search largely removes the metro-size penalty and also changes who is recommended
+     - Financial-sector finding: without search, recommended advisory firms carry SEC misconduct disclosures at 3.6× the registry base rate even after adjusting for firm size; with search, significantly below it
+     - Restaurants, where quality and visibility are separately measurable, show a 3–5× review-count premium but a rating premium of at most a tenth of a star
+     - Core claim: an answer produced without retrieval often carries no sign that its recommendations were never verified
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or dataset release accompanying the audit
+     - **Novelty: 7/10** — prior audits asked whether recommended providers exist and who they are; matching referrals against registries for quality and misconduct, and isolating retrieval configuration as the governing variable, is a materially new question
+     - **Fairness: 9/10** — the fairness dimension is the paper's spine: recommendation quality, disclosure rates and geographic equity (the metro-size penalty) are all audited directly
+     - **Robustness: 9/10** — four domains, 100 metros, 1,470+ adjudicated organizations and three retrieval conditions, with firm-size-adjusted controls
+     - **Impact: 8/10** — reframes AI recommendation trust as a retrieval-configuration problem with direct regulatory relevance
+
+8. **Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs**
+   * Affiliation: Novelcore, Athens / University of Peloponnese — *(Ioannis E. Livieris)*
+   * Link: [arxiv.org/abs/2609.18248](https://arxiv.org/abs/2609.18248)
+   * Venue: arXiv preprint, September 2026 (cs.IR)
+   * TL;DR: Collapses the four-system hybrid-retrieval stack (ANN index, full-text engine, graph database, document store) into one MIT-licensed Python library, using weighted reciprocal rank fusion instead of query-dependent score normalisation and demoting the graph from relevance scorer to candidate expander.
+   * Key techniques:
+     - Unifies dense vector search over 4-bit quantised embeddings, BM25 full-text retrieval and knowledge-graph traversal behind a single retrieval API
+     - Weighted reciprocal rank fusion rather than normalising heterogeneous scores onto a shared range, which the author argues is ill-posed because such normalisations are query-dependent
+     - Graph as candidate expander, not relevance scorer: traversal widens the candidate pool and newly admitted documents are re-scored by the dense indexes under an identifier allowlist, so structural adjacency decides what is considered while content evidence decides how it ranks
+     - 4-bit quantisation (≈4× compression) so hybrid retrieval fits on cheaper, smaller machines
+     - Motivated by the observation that integration glue between the four retrieval systems is rewritten in every project, each component contributing its own deployment surface and failure modes
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/ilivieris/quanta](https://github.com/ilivieris/quanta): MIT-licensed and packaged behind a single retrieval API with a clear design document; deductions for single-author maintenance, no independent benchmark against the assembled four-system baseline it replaces, and no test suite described in the paper
+     - **Novelty: 6/10** — each ingredient is standard; the contributions are the two design commitments (weighted RRF over score normalisation, graph-as-expander) and the packaging of four systems into one dependency
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 5/10** — design claims are argued rather than stress-tested across failure modes; no large-scale retrieval-quality study is reported
+     - **Impact: 5/10** — single-author preprint, but a genuinely reusable open-source building block for generative-retrieval and RAG pipelines
 
 ### Papers September 16
 
@@ -1184,122 +1336,6 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
      - **Robustness: 7/10** — deployed since May 2026; 14-day online A/B (CTR +3.17%, bad cases −38.9%)
      - **Impact: 7/10** — EMNLP 2026 Industry Track; commercial smart-assistant AI search
 
-### Papers September 07
-
-*Monday, September 7, 2026. arXiv Friday (Sep 4) announcement batch — cs.IR / cs.AI. 7 papers found (1 opensource). Core generative/agentic rec: AtomRec (XJTLU/Xiaohongshu evolving atomic memory), CGM-Rec (Phenikaa continual graph memory, EMNLP 2026 Findings), LARK (Xiaohongshu/SJTU latent-aligned VLM reasoning), MURAL (American U uncertainty-aware multimodal GNN); broader: Repeated Queries (LLM brand-rec saturation audit, opensource), PTDG (Huawei multi-task dependency graphs, CIKM 2026), AlleCompanion (Allegro complementary rec, RecSys 2026 OARS).*
-
-1. **AtomRec: Evolving Atomic Memory for Agentic Recommendation**
-   * Affiliation: Xi'an Jiaotong-Liverpool University / Xiaohongshu — *(with Peking University, East China Normal University, Beijing Jiaotong University)*
-   * Link: [arxiv.org/abs/2609.04882](https://arxiv.org/abs/2609.04882)
-   * Venue: arXiv preprint, September 2026 (cs.IR)
-   * TL;DR: An agentic recommender that stores user/item memory as structured atomic units (not coarse summaries), links them semantically, and retrieves multi-hop evidence paths so fine-grained preference stages survive interest evolution.
-   * Key techniques:
-     - Atomic collaborative memory: user/item memories as structured atomic units with semantic links, evolved field-wise on new interactions
-     - Multi-hop evidence-path retrieval (vs. isolated neighbor summaries) for grounded, evidence-aware ranking
-     - ~8.5% average relative improvement over SOTA agentic and memory-augmented baselines on 4 public benchmarks
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — replacing coarse-summary memory with evolving atomic units + multi-hop evidence paths is a fresh, well-motivated advance for agentic-rec memory
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 6/10** — 4 public benchmarks with consistent gains
-     - **Impact: 7/10** — XJTLU/Xiaohongshu/PKU/ECNU/BJTU collaboration targeting the agentic-recommender memory bottleneck
-
-2. **Continual Graph Memory for Adaptive Recommendation under Intent Drift (CGM-Rec)**
-   * Affiliation: Phenikaa University, Vietnam — *(with Hanoi University of Science and Technology, University of Technology Sydney)*
-   * Link: [arxiv.org/abs/2609.04651](https://arxiv.org/abs/2609.04651)
-   * Venue: Findings of EMNLP 2026
-   * TL;DR: Treats the KG as a writable memory — a conservative Semantic Graph Memory plus a fast Episodic Lesson Memory — so a frozen-parameter model adapts to intent drift purely through memory writes.
-   * Key techniques:
-     - Semantic Graph Memory updated via quality-gated typed operations for stable, high-confidence relational knowledge
-     - Episodic Lesson Memory as a fast reactive store of recent outcomes, failures, and corrective hints
-     - Frozen-parameter, one-pass reranking protocol; HR@1 up to +29.58% over the strongest LLM baseline on Bundle, HR@5 0.5941 vs 0.4746 (K-RagRec) on ML-100K
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — only an anonymous review repo (anonymous.4open.science/r/CGM-17DD); no public code
-     - **Novelty: 6/10** — writable graph memory for frozen-parameter intent-drift adaptation is a clean idea, though memory-augmented KG rec is well-trodden
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 6/10** — multiple settings (Bundle, ML-100K, etc.) with consistent wins
-     - **Impact: 7/10** — EMNLP 2026 Findings
-
-3. **Latent-Aligned Reasoning for Multimodal Recommendation (LARK)**
-   * Affiliation: Xiaohongshu / Shanghai Jiao Tong University
-   * Link: [arxiv.org/abs/2609.04645](https://arxiv.org/abs/2609.04645)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.CL / cs.CV / cs.LG)
-   * TL;DR: A two-stage latent reasoning framework inside a single VLM that uses learnable latent tokens as "visual checkpoints" to stop cross-modal dilution as visual/textual signals attenuate through multi-step reasoning.
-   * Key techniques:
-     - Learnable latent tokens interleaved with multi-step CoT and aligned to a frozen vision encoder, preserving perceptual detail throughout the chain
-     - Bridge MLP + item-to-item contrastive learning; intermediate features aligned to first-stage CoT hidden states to anchor final embeddings to reasoning output
-     - SOTA across 3 public benchmarks + 1 industrial dataset, with controlled ablations
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — diagnosing "cross-modal dilution" and using latent-token visual checkpoints inside VLM reasoning is a fresh angle for multimodal rec
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 6/10** — 3 public + 1 industrial dataset with ablations
-     - **Impact: 6/10** — Xiaohongshu/SJTU; strong SOTA but no venue/code yet
-
-4. **MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning**
-   * Affiliation: American University — *(with Ulsan National Institute of Science and Technology, Michigan State University, Independent Researcher)*
-   * Link: [arxiv.org/abs/2609.04574](https://arxiv.org/abs/2609.04574)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.LG / cs.SI)
-   * TL;DR: Moves multimodal GNN recommendation from fixed structural augmentation to dynamic topology discovery, with uncertainty-aware fusion that down-weights noisy modality signals.
-   * Key techniques:
-     - Adaptive Edge Learner: differentiable retrieval-augmented strategy + ANN search to discover latent item-item correlations in O(N log N)
-     - Uncertainty-Aware Fusion models aleatoric uncertainty to down-weight unreliable modalities against cross-modal noise
-     - Contrastive teacher-student alignment anchors modality representations to stable behavioral signals (no gradient leakage)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — dynamic topology discovery + uncertainty-aware fusion is a solid, if incremental, evolution of multimodal GNN rec
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 8/10** — large-scale TikTok/Amazon benchmarks, robustness shown under extreme data corruption
-     - **Impact: 6/10** — beats both structural and generative SOTA baselines on multimodal rec
-
-5. **Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources**
-   * Affiliation: Estonian Entrepreneurship University of Applied Sciences
-   * Link: [arxiv.org/abs/2609.05059](https://arxiv.org/abs/2609.05059)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.CL)
-   * TL;DR: Shows non-retrieval LLMs keep adding never-seen brands even at run 15 (86–92% of cells) while retrieval-enabled engines saturate earlier — using exact rarefaction and Chao2 richness estimators.
-   * Key techniques:
-     - 300 question-engine cells (50 questions, 6 engines, 15 runs) over 1,470 adjudicated organizations with open extraction
-     - Exact rarefaction + Chao2 richness; parallel fixed-roster extraction reproduces flat curves, showing roster-bounded tracking manufactures plateaus
-     - Open-sources code, per-cell tables, and data pointers
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/Rankfor/rankfor-open](https://github.com/Rankfor/rankfor-open): well-organized repo (dice-roller + brand-detector + research/recommendation-saturation study), LICENSE, CITATION.cff, unit tests, docs; data archived on Zenodo (CC BY 4.0)
-     - **Novelty: 5/10** — rigorous follow-up to the author's Dice Roll Method; rarefaction/Chao2 on recommendation saturation is a useful methodological addition
-     - **Fairness: 8/10** — directly targets reliability/auditing of LLM recommendation output
-     - **Robustness: 7/10** — exact estimators over 300 cells; large N
-     - **Impact: 5/10** — single-author preprint; niche (brand-visibility auditing) but clean, reproducible methodology
-
-6. **Personalized Task Dependency Graphs for Mitigating Signal Erosion in Multi-Task Recommendation (PTDG)**
-   * Affiliation: Huawei Technologies Co., Ltd.
-   * Link: [arxiv.org/abs/2609.04862](https://arxiv.org/abs/2609.04862)
-   * Venue: CIKM 2026
-   * TL;DR: Item-adaptive "rewiring" of task dependency pathways (low-rank) plus adaptive progressive masking to fix cumulative signal erosion in multi-task CTR.
-   * Key techniques:
-     - Low-rank dependency rewiring respects physical causal constraints (Click → Pay) while creating adaptive information shortcuts
-     - GCN propagation with hard causal masking; Adaptive Progressive Masking (APM) decouples shared parameters by task sparsity
-     - AUC up to +1.45% on sparse conversion tasks; online A/B +1.2% CVR, +1.9% eCPM
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — personalized task-dependency rewiring + APM is a thoughtful, pragmatic advance over static MTL funnels
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 8/10** — KuaiRand1K + industrial dataset + online A/B
-     - **Impact: 7/10** — CIKM 2026; Huawei industrial multi-task recommendation
-
-7. **Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro (AlleCompanion)**
-   * Affiliation: Allegro
-   * Link: [arxiv.org/abs/2609.05063](https://arxiv.org/abs/2609.05063)
-   * Venue: RecSys 2026 OARS Workshop
-   * TL;DR: Production complementary-product retrieval that turns noisy co-purchase traffic into semantic compatibility via a category-constrained Two Tower plus a multi-source category mapping (ComCat).
-   * Key techniques:
-     - Category-constrained Two Tower architecture with a Category Adapter guiding embeddings within complementary boundaries
-     - ComCat: multi-source Complementary Categories Mapping (expert rules + human-in-the-loop + LLM reasoning + statistical mining)
-     - Data-level filtering heuristics; 20M+ monthly active users, uplift in attributed GMV and sponsored revenue
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 5/10** — category-constrained Two Tower + ComCat is practical, but the techniques are established
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 8/10** — deployed production system, 20M+ MAU
-     - **Impact: 7/10** — Allegro production complementary rec; RecSys 2026 workshop
-
 ---
 
 We only keep the last 10 days summary here, for the past records please see [the archive](docs/archive_by_month).
@@ -1550,7 +1586,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 175 papers as of September 16.
+**Count:** 177 papers as of September 17.
 
 | Score | Paper |
 | --- | --- |
@@ -1614,6 +1650,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Hierarchical Exponential-Gaussian Mixtures for Watch-Time Distribution Prediction (HEGM) |
 | 8/10 | LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
+| 7/10 | Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs (Quanta) |
+| 7/10 | SURF: Subtractive Updates for Recommender Forgetting (SURF) |
 | 7/10 | Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec) |
 | 7/10 | RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN) |
 | 7/10 | Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner) |
