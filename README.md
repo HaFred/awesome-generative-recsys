@@ -51,6 +51,7 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
+        Transparent UPR Repro -- U Zurich
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
@@ -69,7 +70,6 @@ mindmap
         MemGen-GR -- CMU / UCSD / Meta
         FORGE Web Pollution -- CUHK
         LSREP -- Thakur College of Eng. & Tech.
-        SURF -- Sapienza U Rome / U Pisa
 ```
 <div align="center">
   <i> Open-source Generative RecSys Map </i>
@@ -84,6 +84,145 @@ If you are interested in RFT your own GenRecSys, come check out our `verl`-based
 We manage to achieve 22% and 32% boosting for the end-to-end training efficiencies, compared with their respective vanilla implementations.
 
 ## By Date
+
+### Papers September 18
+
+*Friday, September 18, 2026. arXiv active — the Friday Sep 18 cs.IR announcement batch (22 entries) plus late Sep 17 uploads and two cs.CL / cs.AI cross-overs. Headline: UniPolicy (Meituan) decouples a generative search-advertising retriever into objective-specific policy subspaces and decodes them with multi-policy beam search, gaining +0.71% CTR, +1.58% RPS and +1.32% ad revenue in a 7-day online A/B; CoFree (Alibaba/Taobao + Wuhan U + SJTU) names and fixes "reasoning collapse" in reasoning-augmented LLM embedding learning with reference-guided SFT plus dual embedding/reasoning rewards (+2.8 avg nDCG@10 over Qwen3-Embedding-4B on 22 datasets); SELF-INDEX (Yonsei University) lets a retrieval index rewrite its own index keys by diagnosing failures, revising the responsible keys, validating each revision and simulating unseen queries — but ships only a placeholder repository. MERIT-Rank (Honor Device) attacks the single-reasoning-trajectory bottleneck of LLM rerankers with a Multi-Trajectory Reasoning Space trained by Progressive Rank Policy Optimization. A sobering reproducibility result from the University of Zurich: natural-language user profiles leave the ranking of an LLM recommender unchanged even under direct activation steering, because the rating-regression objective absorbs the perturbation. Total: 8 papers (1 opensource).*
+
+1. **UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising**
+   * Affiliation: Meituan, Beijing, China — *(Kun Yao\*, Yuhang Zhou\*, Yichi Zhang, Zeliang Tong, Shengri Xue, Haitao Wang, Siyu Lu, Qianlong Xie, Xingxing Wang; \* equal contribution)*
+   * Link: [arxiv.org/abs/2609.20630](https://arxiv.org/abs/2609.20630)
+   * Venue: arXiv preprint, September 2026 (cs.CL; submitted 17 Sep 2026), 13 pages
+   * TL;DR: Rather than fusing relevance, click propensity and commercial value into one reward — which lets the strongest objective dominate the gradients — UniPolicy gives each business objective its own parameter subspace inside a shared generative-retrieval backbone and decodes all of them in parallel with a business-customizable multi-policy beam search.
+   * Key techniques:
+     - Hierarchical parameter decoupling per objective: objective-specific prefix tokens, sparse MoE-LoRA routing, and objective-specific residual FFNs on top of one shared backbone, yielding differentiated parameter and policy-expression spaces
+     - Pairwise preference construction from multi-stage behavioural feedback: exposed-but-unclicked samples are turned into relative preference information so the clicked candidate's relative advantage in the generation distribution is strengthened
+     - Per-objective independent GRPO (group-relative advantages computed from objective-specific SID rollout rewards) instead of naive reward fusion
+     - Inference-time parallel multi-policy beam search that allocates candidate quotas across objectives under a fixed retrieval budget, preserving retrieval quality
+     - Results: outperforms single-objective RL and naive reward-fusion baselines offline; 7-day online A/B on a real search advertising system gives +0.71% CTR, +1.58% RPS and +1.32% advertising revenue with stable serving latency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or model release; a Meituan production search-advertising system
+     - **Novelty: 7/10** — MoE-LoRA and prefix conditioning are established, but using them to give each business objective its own policy subspace while unifying quota allocation inside a single multi-policy beam search is a well-specified industrial advance over reward fusion
+     - **Fairness: 4/10** — not a bias audit, yet the paper's explicit motivation is that single-objective revenue optimisation is harmful to ecosystem health, and relevance/click objectives are carried in parallel with eCPM rather than after it
+     - **Robustness: 8/10** — large-scale offline comparison against single-objective RL and reward-fusion baselines plus a 7-day online A/B with stable latency, not a single-metric win
+     - **Impact: 8/10** — Meituan search advertising; gives the generative-retrieval-plus-RL line a concrete recipe for multi-objective alignment without gradient competition
+2. **Reasoning Quality Matters: Combating Reasoning Collapse in LLM-based Embedding Learning (CoFree)**
+   * Affiliation: Alibaba Group (Taobao) / Wuhan University / Shanghai Jiao Tong University — *(Zihan Gong\*, Xiaohan Ye\*, Jiangchao Yao, Jinsong Lan, Xiaoyong Zhu, Xu Chen (corresponding); \* equal contribution)*
+   * Link: [arxiv.org/abs/2609.20563](https://arxiv.org/abs/2609.20563)
+   * Venue: arXiv preprint, September 2026 (cs.IR), 30 pages
+   * TL;DR: Embedding specialisation degrades the reasoning that made the LLM a good embedder in the first place — either suppressing reasoning generation or emitting retrieval-irrelevant text — and CoFree fixes both forms of "reasoning collapse" with reference-guided SFT followed by dual embedding/reasoning rewards in RL.
+   * Key techniques:
+     - Names reasoning collapse as two distinct degradations: suppression of useful reasoning generation, and reasoning text that is irrelevant to retrieval
+     - Stage 1 reference-guided supervised fine-tuning restores the reasoning ability of the foundation embedder while retaining its representational strength
+     - Stage 2 RL with dual rewards — an embedding-oriented reward and a reasoning-oriented reward — so fine-grained relevance reasoning is preserved alongside the embedding objective
+     - Frames embedding learning as a high-quality reasoning-guided search process rather than static alignment (endpoint-coupled optimisation)
+     - Results: CoFree-4B improves an average +2.8 nDCG@10 over Qwen3-Embedding-4B across 22 MTEB and BRIGHT datasets; consistent gains in a real-world online retrieval system; code, the RTED dataset (3.6M instances) and checkpoints are promised but not yet released
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code, dataset or checkpoints at scan time; the paper commits to releasing CoFree, the RTED reasoning-augmented retrieval dataset and model checkpoints, so the score should be revisited
+     - **Novelty: 7/10** — diagnosing reasoning collapse and repairing it with a two-stage reference-guided SFT plus dual-reward RL objective is a fresh, well-motivated framing for LLM embedding training
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 8/10** — 22 datasets from MTEB and BRIGHT plus an online retrieval deployment, with an explicit two-stage ablation
+     - **Impact: 7/10** — Alibaba/Taobao + WHU + SJTU; embedding backbones feed every generative retrieval and LLM-rec pipeline built on top of them
+3. **Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro)**
+   * Affiliation: University of Zurich, Department of Informatics — *(Noah Mamié, Laurin van den Bergh)*
+   * Link: [arxiv.org/abs/2609.19831](https://arxiv.org/abs/2609.19831)
+   * Venue: BlackBoxNLP @ EMNLP 2026 — Special Track: Reproducibility and Reliability in Interpretability Analyses
+   * TL;DR: Reproduces the natural-language user-profile recommender and then pushes on its central promise — a negative result: editing or perturbing the profile shifts predicted ratings uniformly across genres but leaves the ranking unchanged, even under direct activation steering, because the rating-regression objective, not the profile interface, governs the model.
+   * Key techniques:
+     - Full reproduction of the ACL 2024 user-profile recommendation (UPR) study on Amazon Movies & TV and TripAdvisor, plus fixes to several issues and inconsistencies found in the original repository
+     - Systematic context ablation over input context (user profile / review history / item-review history) crossed with output format (item title / title and description)
+     - Multi-seed stability across five random seeds (37–41), with standard deviations reported for statistical reliability
+     - Mechanistic interpretability with the nnsight framework: counterfactual profile perturbations and activation steering probed against internal representations
+     - Non-LLM baselines (MostPop, UserKNN, ItemKNN, BPR, WMF, MF, NeuMF) re-run under a protocol standardized against the LLM evaluation script, with side-by-side original-vs-reproduction tables
+     - Conclusion: rating-regression models are the bottleneck; ranking-objective models clearly exceed them on the same task
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/nmamie/transparent_user_profiles](https://github.com/nmamie/transparent_user_profiles): genuinely usable release with preprocess/train/evaluate scripts, Cornac and personalization baselines, counterfactual-profile generation, latent-steering and behavioural-validation scripts, uv-locked `pyproject.toml` + `requirements.txt`, batch shell scripts and a quick-start README covering cuda/mps/cpu. Deductions: no LICENSE file, no tests or CI, single-author maintenance, last commit 11 Sep 2026
+     - **Novelty: 6/10** — a reproduction study rather than a new method, but the mechanistic finding that scrutable profiles do not move rankings (traced to the regression objective) is a genuinely new and useful negative result for the interpretable-recommendation line
+     - **Fairness: 7/10** — user scrutiny, profile correction and the genre-level distribution of prediction shifts are the paper's subject matter; transparency and user control are treated as fairness-adjacent obligations rather than ignored
+     - **Robustness: 7/10** — five seeds with variance reporting, two datasets, multiple context ablations and a mechanistic probe; limited by the small number of domains and the absence of an online study
+     - **Impact: 6/10** — BlackBoxNLP @ EMNLP 2026; tempers enthusiasm for "scrutable" LLM recommenders and hands the community a reproducible harness
+4. **Think Thrice Before Reranking: Multi-perspective Evidence and Reasoning Integration for Text Reranking (MERIT-Rank)**
+   * Affiliation: Honor Device Co., Ltd — *(Lijun Liu, Zhengzong Chen (corresponding), Wenyan Li, Yuanyuan Zhao, Fei Huang)*
+   * Link: [arxiv.org/abs/2609.20131](https://arxiv.org/abs/2609.20131)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.CL)
+   * TL;DR: One reasoning trajectory makes an LLM reranker fragile, so MERIT-Rank evaluates query–document relevance along several complementary trajectories, consolidates them into a single ranking decision, and trains the whole thing with staged, progressively harder ranking objectives.
+   * Key techniques:
+     - Multi-Trajectory Reasoning Space (MTRS) evaluating relevance from multiple perspectives instead of one chain of thought
+     - A joint reranker that fuses the independent reasoning paths into a unified ranking decision rather than picking one trajectory
+     - Progressive Rank Policy Optimization (PRPO): a progressive training framework that first stabilizes reasoning trajectories and then continually improves ranking quality through staged objectives
+     - Evaluated on reasoning-intensive (BRIGHT) and traditional retrieval benchmarks
+     - Results: a 4B MERIT-Rank outperforms most 7B and even 32B rerankers on BRIGHT
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no code or repository link anywhere in the paper or on an author page
+     - **Novelty: 6/10** — multi-perspective reasoning plus a consolidating reranker is a sensible answer to trajectory fragility; the progressive staged optimization is the more distinctive piece
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 7/10** — two benchmark families and a small model beating much larger rerankers, which is the robustness argument the paper is making
+     - **Impact: 6/10** — Honor Device corporate lab; directly actionable for anyone running LLM rerankers under tight latency/size budgets
+5. **FacetCRS: Multi-Faceted Preference Learning for Pricking Filter Bubbles in Conversational Recommender System (FacetCRS)**
+   * Affiliation: Sun Yat-sen University — *(Yongsen Zheng, Ziliang Chen, Jinghui Qin, Liang Lin (corresponding))*
+   * Link: [arxiv.org/abs/2609.20175](https://arxiv.org/abs/2609.20175)
+   * Venue: AAAI 2024 — Thirty-Eighth AAAI Conference on Artificial Intelligence (arXiv re-posting, v1 dated 24 Jul 2026)
+   * TL;DR: Attacks the filter bubble where it actually compounds — inside the conversational loop — by representing the user as four complementary preference facets (entity, word, context, review) that are refreshed by natural-language dialogue, so the profile keeps room for surprise instead of collapsing onto the dominant interest.
+   * Key techniques:
+     - Multi-facet preference modelling: entity-, word-, context- and review-level facets learned adaptively rather than one monolithic user vector
+     - End-to-end CRS framework that adaptively learns representations at several granularity levels and fuses diverse external knowledge (review text, entities)
+     - Bubble pricking framed as a dialogue-level, continuously intensified feedback-loop problem rather than a static recommender issue
+     - Two publicly available CRS benchmark datasets; reported state of the art on both bubble mitigation and recommendation quality
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — the first author's homepage advertises a CODE link for the AAAI'24 paper, but no reachable repository was found at scan time; nothing is linked from the arXiv posting
+     - **Novelty: 5/10** — the method predates most of this tracker and the four-facet recipe has since become a familiar template; the value here is the original, cleanly argued framing of bubble mitigation as an interactive problem
+     - **Fairness: 9/10** — the entire objective is filter-bubble reduction: exposure diversity and resistance to feedback-loop narrowing are the target metrics, not an afterthought
+     - **Robustness: 5/10** — two public CRS datasets with consistent gains, but no online study and no analysis of how the facets behave under long-horizon drift
+     - **Impact: 6/10** — AAAI 2024 venue; a late arXiv upload, but a useful reference point now that diversity and cocoon effects are back on the generative-rec agenda
+6. **Self-Evolving Search Index (SELF-INDEX)**
+   * Affiliation: Yonsei University — *(with Samsung Research, University of California Irvine, and Korea University)*
+   * Link: [arxiv.org/abs/2609.19656](https://arxiv.org/abs/2609.19656)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.AI), marked "Work in progress"
+   * TL;DR: Because the right index representation differs per retrieval environment, SELF-INDEX closes the loop — an LLM Optimizer diagnoses retrieval shortfalls, revises only the responsible index keys, validates each revision before committing, and a Query Simulator proactively invents demands the index has never seen.
+   * Key techniques:
+     - Optimizer loop: diagnose retrieval failure → selectively revise the responsible index keys → validate the revision → update the index, with no human in the loop
+     - Query Simulator that explores additional retrieval demands beyond the queries available for optimization, so the index evolves proactively rather than only reactively
+     - Environment-agnostic by design, evaluated across diverse corpora and retrievers
+     - Downstream benefits reported for search agents (effectiveness and efficiency) and for agent memory systems retrieving useful past interactions
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — the paper's `[CODE]` link (github.com/augustinLib/Self-Index) resolves to a repository containing only a 12-byte README and a single "Initial commit" from 16 Sep 2026; no implementation is public
+     - **Novelty: 7/10** — automating the human "diagnose → refine strategy → reprocess the index" loop, with validation before committing edits, is a sharp reframing of index optimization as self-evolution
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 5/10** — breadth across corpora and retrievers, but the paper is explicitly labelled work in progress with no large-scale or adversarial evaluation
+     - **Impact: 6/10** — Yonsei University with Samsung Research; index evolution matters for every agent-memory and RAG stack built on top of retrieval
+7. **Re2A: Situated Conversational Recommendation via Rubric-based Preference Reasoning and Alignment (Re2A)**
+   * Affiliation: The Hong Kong Polytechnic University / The Chinese University of Hong Kong / Sichuan University — *(Dongding Lin, Jian Wang, Xiaoyan Zhao, Wenjie Li (corresponding))*
+   * Link: [arxiv.org/abs/2609.18249](https://arxiv.org/abs/2609.18249)
+   * Venue: EMNLP 2026 (Main Conference)
+   * TL;DR: In situated conversational recommendation the recommender and user share a physical scene, so Re2A inserts an inspectable, rubric-derived preference state between reasoning and generation and optimises the response against both user-preference satisfaction and situation consistency.
+   * Key techniques:
+     - Rubric-based preference reasoning: automated rubrics drive the model to emit an explicit structured preference state recording inferred needs, attribute constraints and the visual target before any item is recommended — unlike free-form chain-of-thought
+     - Preference-conditioned optimization aligning response generation with the dual objectives of user-preference satisfaction and situation consistency
+     - The structured preference state acts as the shared interface between situated reasoning and response generation, rather than requiring a new optimization algorithm
+     - Two SCR datasets; consistent improvements over state-of-the-art baselines in precision and context awareness
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — the paper states code is available at github.com/DongdingLin/Re2A, but the repository is not publicly reachable (404) at scan time
+     - **Novelty: 7/10** — turning preference inference into an explicit, inspectable state that both the reasoner and the generator share is a clean design for a task (situated CRS) that remains underexplored
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 5/10** — two SCR datasets, no online deployment; the method depends on rubrics being well specified per domain
+     - **Impact: 7/10** — EMNLP 2026 main conference; extends conversational recommendation from text-only chat to scene-grounded assistance
+8. **Dense Feature Representation over Sequence Modeling: A Solution to the KDD Cup 2026 UniRec Challenge (KDD Cup 2026 UniRec)**
+   * Affiliation: Z Lab, Chengdu, Sichuan, China — *(Yi Zhang, Weiliang Ji)*
+   * Link: [arxiv.org/abs/2609.19787](https://arxiv.org/abs/2609.19787)
+   * Venue: KDD Cup 2026 Tencent UniRec Challenge Workshop (6 pages)
+   * TL;DR: A 10th-place competition report whose real payload is an attribution: a 15-step single-variable chain over 34.82M records shows dense feature representation (+0.0095 AUC) and the orthogonalized optimizer (+0.0028) carry the gain, while every sequence-modeling component is worth ≤0.0005 — and it documents a validation split that overstates the leaderboard by ~0.014.
+   * Key techniques:
+     - Dense-feature representation stack built on the official PCVRHyFormer baseline, raising test AUC from 0.813237 to 0.827816, with the final submission at 0.828535
+     - 15-step single-variable ablation chain plus a leave-one-out ablation from the full model to attribute every increment
+     - Orthogonalized optimizer (Muon-style) contributing +0.0028 AUC — an optimization effect, not an architectural one
+     - Anti-memorization and high-cardinality-ID treatments whose sign inverts against the leaderboard, traced to dump-to-dump distribution shift
+     - Generalization hazard: the row-group train/validation split shares one time window, inflating validation AUC by ~0.014; the divergence survives a time-ordered re-split, so verdicts must come from the held-out leaderboard
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no solution repository, checkpoint download or artifact link; only the competition site and cited third-party code
+     - **Novelty: 5/10** — an honest competition write-up rather than a new method; its contribution is the negative result that sequence modeling did nothing at this scale
+     - **Fairness: 2/10** — not fairness-focused
+     - **Robustness: 7/10** — ±0.0004 seed bands, leave-one-out attribution and a time-ordered re-split make this a careful methodological caution for industrial CVR practitioners
+     - **Impact: 5/10** — workshop paper, but a useful counterweight to the assumption that more sequence modeling is always the answer
 
 ### Papers September 17
 
@@ -1220,124 +1359,6 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
      - **Robustness: 6/10** — tiered capability framework + failure-mode analysis, but qualitative
      - **Impact: 7/10** — Google ads ranking; targets the long tail of models lacking expert attention
 
-### Papers September 08
-
-*Tuesday, September 8, 2026. arXiv Monday (Sep 7) announcement batch — cs.IR / cs.AI / cs.LG. 7 papers found (2 opensource). Core: SAM-D2Q (Alibaba/AliExpress multimodal Doc2Query, CIKM 2026 Oral), Distill Globally Adapt Locally (Amazon trade-up recommendation distillation, GenAIECommerce @ RecSys 2026), AutoLR (NetEase autonomous research-to-launch harness), Embedding Surgery (IIT-CNR Pisa dense-retrieval ranking correction, CIKM 2026, opensource); plus RegionFed (Walmart federated retail search), SAGE (Korea University visual retrieval, EMNLP 2026 Main, opensource), IGPO (Alibaba Taobao training-free AI search, EMNLP 2026 Industry).*
-
-1. **SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce**
-   * Affiliation: Alibaba International Digital Commerce Group (AliExpress)
-   * Link: [arxiv.org/abs/2609.04961](https://arxiv.org/abs/2609.04961)
-   * Venue: CIKM 2026 (Oral Full Paper)
-   * TL;DR: A business-aligned multimodal Doc2Query framework that SFTs a vision-language model, augments visual attributes, then RL-aligns pseudo-query generation toward search conversion — deployed in AliExpress (+3.38% GMV, +2.27% Pay Count).
-   * Key techniques:
-     - Task-adapted multimodal supervised fine-tuning over product titles, images, and user queries
-     - Multimodal data augmentation for key visual-attribute perception and expansion coverage
-     - Reinforcement-learning preference alignment toward search business objectives under Boolean-retrieval constraints
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (industrial, deployed in AliExpress)
-     - **Novelty: 7/10** — pairing multimodal Doc2Query with RL-based business-objective alignment is a fresh step beyond text-only document expansion
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 7/10** — offline gains plus a deployed online A/B (GMV +3.38%, Pay Count +2.27%)
-     - **Impact: 8/10** — CIKM 2026 Oral, production AliExpress search system
-
-2. **Distill Globally, Adapt Locally: Reasoning Distillation and Product-Type Test-Time Training for Scalable Trade-Up Recommendation**
-   * Affiliation: Amazon (Everyday Essentials Technologies)
-   * Link: [arxiv.org/abs/2609.05363](https://arxiv.org/abs/2609.05363)
-   * Venue: GenAIECommerce 2026 Workshop @ ACM RecSys 2026
-   * TL;DR: Distills LLM trade-up reasoning into a 15.5M-param embedding-pair classifier, then adapts the decision boundary per product type via test-time training (AUC 0.924 → 0.941), ~5,000× faster than direct LLM inference.
-   * Key techniques:
-     - Retrieval-augmented few-shot LLM teacher emits structured relation labels + natural-language rationales
-     - Alignment + contrastive distillation into a compact embedding-pair student (no LLM calls at inference)
-     - Product-type test-time training (PT-TTT) with lightweight category-specific adapters over the frozen student
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — reasoning distillation + category-specific TTT for a recommendation decision boundary is a clean, practical contribution
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 7/10** — fixed 8,352-pair benchmark with reported 95% CIs; AUC 0.924 → 0.941
-     - **Impact: 7/10** — Amazon, GenAIECommerce @ RecSys 2026; 5,000× speedup / 10,000× cost reduction vs. LLM
-
-3. **AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems**
-   * Affiliation: NetEase Games (Fuxi AI Lab)
-   * Link: [arxiv.org/abs/2609.04871](https://arxiv.org/abs/2609.04871)
-   * Venue: arXiv preprint, September 2026 (cs.AI)
-   * TL;DR: An autonomous research-to-launch harness for NetEase's DASHEN gaming-community recommender that coordinates a multi-expert council, a deterministic evidence-weighted explore-exploit selector, and layered knowledge to drive multi-day experiment cycles through launch review.
-   * Key techniques:
-     - Multi-expert council that debates and adversarially reviews proposals
-     - Deterministic evidence-weighted exploration–exploitation selector allocating a limited trial budget with Council reranking
-     - Layered knowledge system combining external research, production knowledge, and DASHEN domain knowledge
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — an end-to-end autonomous harness from research reproduction to launch review is a distinct, underexplored angle for industrial recsys
-     - **Fairness: 4/10** — adversarial council review provides some guardrails, but not a fairness contribution
-     - **Robustness: 6/10** — deployed in DASHEN over long-running, multi-day cycles
-     - **Impact: 7/10** — NetEase; targets the recsys research-to-production automation bottleneck
-
-4. **Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval**
-   * Affiliation: IIT-CNR, Pisa (Italian National Research Council)
-   * Link: [arxiv.org/abs/2609.05110](https://arxiv.org/abs/2609.05110)
-   * Venue: CIKM 2026
-   * TL;DR: A query-time convex-optimization "surgery" that applies localized, minimal edits to document embeddings — guided by editorial, click, or LLM feedback — to fix stale rankings without re-indexing (up to +60.64% relative nDCG@10 on DL-Hard).
-   * Key techniques:
-     - Embedding surgery formulated as convex optimization enforcing ranking constraints while minimizing representation drift
-     - Symmetric / demotion / promotion update variants for different feedback signals
-     - Safe in-place ANN index overwriting (no reconstruction); complements query-adaptation methods such as CoRocchio
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/maddalena-amendola/Embedding-Surgery](https://github.com/maddalena-amendola/Embedding-Surgery) — complete pipeline (embedding_surgery, corocchio, llm, index/generate utils), clean module split, README; no license/tests yet
-     - **Novelty: 6/10** — localized query-time embedding correction as convex optimization is a well-motivated, pragmatic idea (adjacent to CoRocchio/query-side adaptation)
-     - **Fairness: 4/10** — robust to noisy feedback, but not fairness-focused
-     - **Robustness: 7/10** — TREC DL/Robust/CAsT + MS MARCO, consistent gains even under noisy/shifting feedback
-     - **Impact: 6/10** — CIKM 2026; applicable to search, recommendation, and RAG pipelines
-
-5. **RegionFed: Federated Learning for Personalized Query Understanding in Heterogeneous Retail Environments**
-   * Affiliation: Walmart Global Tech
-   * Link: [arxiv.org/abs/2609.05403](https://arxiv.org/abs/2609.05403)
-   * Venue: arXiv preprint, September 2026 (cs.LG / cs.AI)
-   * TL;DR: A gradient-level federated personalization framework that uses ℓ2 conflict between regional and global gradients to diagnose heterogeneity, route each region to the cheapest sufficient personalization strategy, and avoid the transformer collapse of parameter-level methods (92.27% accuracy).
-   * Key techniques:
-     - Gradient-level personalization treating models as differentiable black boxes (zero code changes across T5-Small/T5-3B/RoBERTa/CNN)
-     - ℓ2 gradient-conflict as a unified signal for heterogeneity diagnosis + personalization-strength control
-     - Differential privacy (ε≈0.60) and O(1/√T) convergence guarantees
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — operating personalization at the gradient level sidesteps a concrete transformer failure mode, though personalized FL is a mature area
-     - **Fairness: 6/10** — regional personalization + differential privacy directly target cross-region equity and privacy
-     - **Robustness: 7/10** — 3 datasets (Amazon ESCI/Reviews, LEAF-FEMNIST) and 4 architectures with consistent gains
-     - **Impact: 6/10** — Walmart Global Tech; retail search across heterogeneous regions
-
-6. **SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval**
-   * Affiliation: Korea University
-   * Link: [arxiv.org/abs/2609.04255](https://arxiv.org/abs/2609.04255)
-   * Venue: EMNLP 2026 (Main)
-   * TL;DR: A training-free framework that parses dense document images into hierarchical graph nodes with multi-vector embeddings and performs iterative entity-level subgraph matching to counter "semantic dilution" (R@3 0.849 on the new DEAR dataset).
-   * Key techniques:
-     - Semantic Dilution failure-mode quantification as a function of entity density
-     - Hierarchical entity-graph parsing with multi-vector node embeddings
-     - Iterative entity-level subgraph matching; DEAR benchmark (1,055 query–image pairs from product detail pages)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 3/10** — [github.com/All4Nothing/SAGE](https://github.com/All4Nothing/SAGE) — repo announced but currently only a README placeholder (no code pushed yet)
-     - **Novelty: 6/10** — training-free hierarchical graph representation for fine-grained visual retrieval is a clean idea
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 6/10** — outperforms patch-level and OCR-based baselines on DEAR, but single-dataset evaluation
-     - **Impact: 6/10** — EMNLP 2026 Main; product-detail retrieval
-
-7. **Inventory-Grounded Policy-Level Optimization for Training-Free AI Search (IGPO)**
-   * Affiliation: Alibaba (Taobao AI Search)
-   * Link: [arxiv.org/abs/2609.04813](https://arxiv.org/abs/2609.04813)
-   * Venue: EMNLP 2026 (Industry Track)
-   * TL;DR: A training-free search optimization that separates Policy Guidelines from runtime inventory facts — online it probes inventory to build a "portrait" and injects relevant guidelines into retrieval/selection prompts (3.17% CTR lift, 38.9% fewer audited bad cases).
-   * Key techniques:
-     - Policy Guidelines decoupled from environment facts (no fine-tuning, RL, or static prompt patches)
-     - Inventory grounding: runtime probing → inventory portrait → guideline injection
-     - Contrastive signal from stochastic rollouts grouped by query; inventory-guided exploration loop
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — separating policy from environment facts for training-free adaptation is a sensible, production-oriented framing
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 7/10** — deployed since May 2026; 14-day online A/B (CTR +3.17%, bad cases −38.9%)
-     - **Impact: 7/10** — EMNLP 2026 Industry Track; commercial smart-assistant AI search
-
----
-
 We only keep the last 10 days summary here, for the past records please see [the archive](docs/archive_by_month).
 
 ## Papers Classic Must Read
@@ -1586,7 +1607,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 177 papers as of September 17.
+**Count:** 178 papers as of September 18.
 
 | Score | Paper |
 | --- | --- |
@@ -1650,6 +1671,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Hierarchical Exponential-Gaussian Mixtures for Watch-Time Distribution Prediction (HEGM) |
 | 8/10 | LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP) |
 | 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
+| 7/10 | Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) |
 | 7/10 | Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs (Quanta) |
 | 7/10 | SURF: Subtractive Updates for Recommender Forgetting (SURF) |
 | 7/10 | Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec) |
@@ -1904,6 +1926,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - WIDE / Wildcard Inference with Dynamic Expansion for Cross-Modal Generative Retrieval -- Jilin University
 - TAAL / Mitigating Early Beam Pruning via Temporal Autoregressive Alignment -- Harbin Institute of Technology
 - OneLA / Scaling Linear-Attention Decoding to Large Beams -- HKU / Kuaishou
+- UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan
 
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
@@ -2026,7 +2049,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - WMG-RL / World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation -- CUHK / ByteDance / Zhejiang University
 - DMRL / Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation -- SJTU / Kuaishou
 - MemRetriever / Learning to Search, Reflect, and Retrieve from Long-Term Memory (GRPO) -- MemTensor
-
+- UniPolicy / Objective-Specific Multi-Policy Alignment with Multi-Policy Beam Search -- Meituan
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
 

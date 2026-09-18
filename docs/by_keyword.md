@@ -48,6 +48,7 @@
 - MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory (MemRetriever)
 - AURA: Agentic Diagnosis and Refinement for Production Recommender Systems at Scale (AURA)
 - LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP)
+- SELF-INDEX: Self-Evolving Search Index (SELF-INDEX) — Yonsei University (with Samsung Research, UC Irvine, Korea University), arXiv 2609.19656
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -77,6 +78,7 @@
 - hLLM: Single Pass Decoding for Generative Reranking (hLLM)
 - WIDE: Wildcard Inference with Dynamic Expansion for Cross-Modal Generative Retrieval (WIDE)
 - OneLA: Scaling Linear-Attention Decoding to Large Beams in Generative Recommendation (OneLA)
+- UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
 
 ### CTR Prediction
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -103,6 +105,7 @@
 - UniCon: A Unified Context-Centric Modeling Paradigm for CTR Prediction (UniCon)
 - Personalized Task Dependency Graphs for Mitigating Signal Erosion in Multi-Task Recommendation (PTDG)
 - SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching (SequenceO1)
+- Dense Feature Representation over Sequence Modeling: A Solution to the KDD Cup 2026 UniRec Challenge (KDD Cup 2026 UniRec) — Z Lab (Chengdu), KDD Cup 2026 Tencent UniRec Challenge Workshop
 
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
@@ -161,6 +164,8 @@
 - Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval
 - DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
 - Purchase Advice and Observable Buyer Responses in Real AI Conversations
+- FacetCRS: Multi-Faceted Preference Learning for Pricking Filter Bubbles in Conversational Recommender System (FacetCRS) — Sun Yat-sen University, AAAI 2024
+- Re2A: Situated Conversational Recommendation via Rubric-based Preference Reasoning and Alignment (Re2A) — HK PolyU / CUHK / Sichuan University, EMNLP 2026
 
 ### Cross-Domain
 - Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
@@ -206,7 +211,8 @@
 - AURA: Agentic Diagnosis and Refinement for Production Recommender Systems at Scale (AURA)
 - LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP)
 - How Calibration Content Shapes Attention-Based Reranking (Interpolated Null Calibration)
-
+- Reasoning Quality Matters: Combating Reasoning Collapse in LLM-based Embedding Learning (CoFree) — Alibaba (Taobao) / Wuhan University / Shanghai Jiao Tong University, arXiv 2609.20563
+- SELF-INDEX: Self-Evolving Search Index (SELF-INDEX) — Yonsei University, arXiv 2609.19656
 
 ### Diffusion
 - GateDiffInt: Gate-Mediated Controllable Diffusion and Multi-Intent LLM Distillation for User Behavior Modeling (GateDiffInt)
@@ -282,6 +288,8 @@
 - LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP)
 - RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models (RegRet)
 - Understanding AI Provider Recommendations in Local Service Markets
+- Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) — University of Zurich, BlackBoxNLP @ EMNLP 2026
+- Dense Feature Representation over Sequence Modeling: A Solution to the KDD Cup 2026 UniRec Challenge (KDD Cup 2026 UniRec) — Z Lab (Chengdu), KDD Cup 2026 UniRec Workshop
 
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -343,6 +351,8 @@
 - PCap: Personalized Retrieval-Stage Diversity Capping in Facebook Marketplace (PCap)
 - Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations
 - Understanding AI Provider Recommendations in Local Service Markets
+- FacetCRS: Multi-Faceted Preference Learning for Pricking Filter Bubbles in Conversational Recommender System (FacetCRS) — Sun Yat-sen University, AAAI 2024
+- Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) — University of Zurich, BlackBoxNLP @ EMNLP 2026
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -517,6 +527,7 @@
 - SAGA: Structure-Attended Generative Action Embedding Model that encodes Multi-Surface User Action Sequences (SAGA)
 - ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec)
 - LIGE-GR: A Smooth Leap from Ranking to Generative Recommendation in the LLM Era (LIGE-GR)
+- UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
 
 ### Generative Retrieval / Ranking
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
@@ -609,6 +620,8 @@
 - Recommendation Retrievers Need Verifiers: Universal Generative Reranking for Sequential Recommendations (Verifiers)
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG)
 - One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations (ANGLE)
+- UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
+- SELF-INDEX: Self-Evolving Search Index (SELF-INDEX) — Yonsei University, arXiv 2609.19656
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -828,12 +841,15 @@
 - Scaling Articulated Rationales for MLLM-based Recommendation (SARA)
 - One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations (ANGLE)
 - Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking
+- UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
+- Dense Feature Representation over Sequence Modeling: A Solution to the KDD Cup 2026 UniRec Challenge (KDD Cup 2026 UniRec) — Z Lab (Chengdu), KDD Cup 2026 UniRec Workshop
 
 ### Infrastructure / Serving
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
 - Enabling High-Bandwidth Flash for Generative Recommendation Serving with Write-Aware KV Cache Policy
 - Efficient Swing Computation for Retrieval in Large-Scale Recommender Systems (ASC / K-ASC)
 - Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs (Quanta)
+- SELF-INDEX: Self-Evolving Search Index (SELF-INDEX) — Yonsei University, arXiv 2609.19656
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1079,6 +1095,9 @@
 - Scaling Articulated Rationales for MLLM-based Recommendation (SARA)
 - Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking
 - Understanding AI Provider Recommendations in Local Service Markets
+- Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) — University of Zurich, BlackBoxNLP @ EMNLP 2026
+- Re2A: Situated Conversational Recommendation via Rubric-based Preference Reasoning and Alignment (Re2A) — HK PolyU / CUHK / Sichuan University, EMNLP 2026
+- FacetCRS: Multi-Faceted Preference Learning for Pricking Filter Bubbles in Conversational Recommender System (FacetCRS) — Sun Yat-sen University, AAAI 2024
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1091,6 +1110,7 @@
 - MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory (MemRetriever)
 - Self-Evolving Memory for Generative Recommendation (LION)
 - LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP) / ICE v2
+- SELF-INDEX: Self-Evolving Search Index (SELF-INDEX) — Yonsei University, arXiv 2609.19656
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -1233,6 +1253,7 @@
 - SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval (SAGE)
 - RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models (RegRet) — ECCV 2026
 - Scaling Articulated Rationales for MLLM-based Recommendation (SARA)
+- Re2A: Situated Conversational Recommendation via Rubric-based Preference Reasoning and Alignment (Re2A) — HK PolyU / CUHK / Sichuan University, EMNLP 2026
 
 ### Optimizer
 - MuonRec
@@ -1276,6 +1297,7 @@
 - Balancing Trial and Reorder: A Hybrid Sequential Transformer-GBDT Ranker for On-Demand Delivery (UVR) — Wolt / DoorDash
 - Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking
 - How Calibration Content Shapes Attention-Based Reranking (Interpolated Null Calibration)
+- Think Thrice Before Reranking: Multi-perspective Evidence and Reasoning Integration for Text Reranking (MERIT-Rank) — Honor Device Co., Ltd, arXiv 2609.20131
 
 ### Reasoning
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
@@ -1319,7 +1341,9 @@
 - VRec (Verifiable Reasoning)
 - DREAMS: Dual-node Monte Carlo Tree Search for Conversational Recommendation (DREAMS)
 - Scaling Articulated Rationales for MLLM-based Recommendation (SARA)
-
+- Reasoning Quality Matters: Combating Reasoning Collapse in LLM-based Embedding Learning (CoFree) — Alibaba (Taobao) / Wuhan University / Shanghai Jiao Tong University, arXiv 2609.20563
+- Think Thrice Before Reranking: Multi-perspective Evidence and Reasoning Integration for Text Reranking (MERIT-Rank) — Honor Device Co., Ltd, arXiv 2609.20131
+- Re2A: Situated Conversational Recommendation via Rubric-based Preference Reasoning and Alignment (Re2A) — HK PolyU / CUHK / Sichuan University, EMNLP 2026
 
 ### Reinforcement Learning
 - EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation (EvoReason)
@@ -1350,6 +1374,8 @@
 - Safety as a Constraint: Fine-Tuning a LLM Recommender to Explain Itself — constrained GRPO
 - TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation (TATK) — position-aware top-K rewards
 - LIGE-GR: A Smooth Leap from Ranking to Generative Recommendation in the LLM Era (LIGE-GR)
+- UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
+- Reasoning Quality Matters: Combating Reasoning Collapse in LLM-based Embedding Learning (CoFree) — Alibaba (Taobao) / Wuhan University / Shanghai Jiao Tong University, arXiv 2609.20563
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1391,6 +1417,9 @@
 - Efficient Swing Computation for Retrieval in Large-Scale Recommender Systems (ASC / K-ASC)
 - How Calibration Content Shapes Attention-Based Reranking (Interpolated Null Calibration)
 - Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs (Quanta)
+- Reasoning Quality Matters: Combating Reasoning Collapse in LLM-based Embedding Learning (CoFree) — Alibaba (Taobao) / Wuhan University / Shanghai Jiao Tong University, arXiv 2609.20563
+- Self-Evolving Search Index (SELF-INDEX) — Yonsei University, arXiv 2609.19656
+- Think Thrice Before Reranking: Multi-perspective Evidence and Reasoning Integration for Text Reranking (MERIT-Rank) — Honor Device Co., Ltd, arXiv 2609.20131
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -1511,6 +1540,7 @@
 - Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec)
 - ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec)
 - One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations (ANGLE)
+- UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1583,6 +1613,7 @@
 - Closing the Long-Short View Gap in Sequential Recommendation without Cached History
 - Balancing Trial and Reorder: A Hybrid Sequential Transformer-GBDT Ranker for On-Demand Delivery (UVR)
 - SURF: Subtractive Updates for Recommender Forgetting (SURF)
+- Dense Feature Representation over Sequence Modeling: A Solution to the KDD Cup 2026 UniRec Challenge (KDD Cup 2026 UniRec) — Z Lab (Chengdu), KDD Cup 2026 UniRec Workshop
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
