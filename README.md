@@ -85,6 +85,91 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 
 ## By Date
 
+### Papers September 19
+
+*Saturday, September 19, 2026. arXiv weekend pause — no new generative-recommendation announcement batch landed in the last 24h (the Friday Sep 18 cs.IR batch was already captured in the Sep 18 run). Per the fallback rule, this run back-fills 5 on-topic papers from the Sep 9–16 window that prior runs missed: NarraLite (Tencent / HK PolyU) compresses multimodal generative recommendation for short-form-drama continuation with latent narrative reasoning; BanglaShop-CRS (University of Vermont) ships a 27K-dialogue Bangla conversational-recommendation benchmark; FlashVector (Stanford / Unity) is an agentic model-serving optimizer that doubled throughput on Unity's Vector ad platform; a trust-aware health recommendation policy (UIUC) couples worker health, trust and compliance via model-free RL; and a University of Melbourne null result showing sociodemographic attributes add no detectable lift to LLM next-location prediction. Total: 5 papers (0 opensource).*
+
+1. **NarraLite: Efficient Multimodal Generative Recommendation with Latent Narrative Reasoning**
+   * Affiliation: Tencent (Weixin Group) / The Hong Kong Polytechnic University — *(Chenxing Wang, Nantao Zheng, Hao Miao, Juyuan Wang, Xinke Jiang, Yuchen Fang (corresponding), Aolin Li, Haijun Wu)*
+   * Link: [arxiv.org/abs/2609.16070](https://arxiv.org/abs/2609.16070)
+   * Venue: arXiv preprint, September 2026 (cs.CL / cs.AI; submitted 13 Sep 2026)
+   * TL;DR: Generative recommendation reformulates item prediction as semantic-identifier generation, but episodic content — such as short-form dramas — is determined by narrative evolution rather than user preference; NarraLite jointly compresses perception and reasoning so a recommender can follow a multimodal storyline and predict its continuation without autoregressively decoding textual rationales.
+   * Key techniques:
+     - Progressive Spectral Compression: selectively distills long visual contexts into compact narrative-relevant evidence, preserving transition-critical information while cutting redundant visual computation
+     - Latent Narrative Reasoning: context-routed latent reasoning tokens whose contextualized representations are aligned with future-continuation semantics, enabling implicit narrative inference without explicit reasoning decoding
+     - A user-agnostic multimodal benchmark for short-form drama continuation spanning UGC, PGC and OOD settings
+     - Results: consistent gains in continuation accuracy, narrative coherence and robustness over existing approaches with a favourable accuracy–efficiency trade-off
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or checkpoint released at scan time
+     - **Novelty: 7/10** — latent (non-autoregressive) narrative reasoning plus spectral compression of visual context is a fresh efficiency-first take on multimodal generative recommendation
+     - **Fairness: 2/10** — not fairness-focused
+     - **Robustness: 6/10** — UGC/PGC/OOD benchmark with coherence and robustness gains, but no online deployment and no adversarial evaluation
+     - **Impact: 7/10** — Tencent Weixin; multimodal generative recommendation is an under-addressed axis and the efficiency story is directly relevant to production
+2. **BanglaShop-CRS: A User-Centric Bangla Dataset for Conversational Recommendation**
+   * Affiliation: University of Vermont (Complex Systems Center) — *(Tabia Tanzin Prama, Christopher M. Danforth, Peter Sheridan Dodds)*
+   * Link: [arxiv.org/abs/2609.18715](https://arxiv.org/abs/2609.18715)
+   * Venue: arXiv preprint, September 2026 (physics.soc-ph; submitted 16 Sep 2026)
+   * TL;DR: Existing conversational-recommender (CRS) resources concentrate in English, leaving Bangla and code-mixed Bangla–English underrepresented; BanglaShop-CRS is a 27,178-dialogue synthetic-but-user-grounded Bangla CRS benchmark built from real e-commerce behaviour.
+   * Key techniques:
+     - A large-scale user-centric synthetic generation pipeline grounded in real e-commerce behaviour: user purchase histories, positive/negative feedback and review texts keep dialogue content consistent with user preferences
+     - 27,178 multi-turn dialogues, 274,802 utterances and 3.6M tokens across 10 product domains
+     - Evaluated under catalog-constrained and open-vocabulary recommendation protocols; dialogue context improves recommendation quality and fine-tuning yields further gains
+     - Human evaluation by five native Bangla speakers (fluency, informativeness, logicality, coherence) with κ=0.65 inter-annotator agreement; factual-grounding eval confirms alignment with correct versus shuffled user records
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — dataset introduced but no public repository or download link found at scan time
+     - **Novelty: 5/10** — a language-resource contribution rather than a new method, but the first large Bangla CRS benchmark fills a real gap
+     - **Fairness: 6/10** — addresses representational inequity (Bangla / code-mixed underrepresented); inclusivity-adjacent
+     - **Robustness: 5/10** — human + GPT-5.1 factual-grounding eval with κ=0.65, but a single synthetic dataset and closed-set protocols
+     - **Impact: 5/10** — enables CRS research in Bangla; resource paper with clear downstream value
+3. **FlashVector: Agent for Hierarchical Model Serving Stack Optimization**
+   * Affiliation: Stanford University / Unity Vector AI Team — *(Qi Wu, Lohan Lemire, Kai Meng, Zhongmou Cai, Raphael Bargues, Petr Zhitnikov, Zeyuan Cao, Yao Wang, Shujun Bian, Wei Chen, Sean Sheng)*
+   * Link: [arxiv.org/abs/2609.17391](https://arxiv.org/abs/2609.17391)
+   * Venue: arXiv preprint, September 2026 (cs.AI / cs.PF; submitted 15 Sep 2026)
+   * TL;DR: Model serving is among the largest cost drivers in production recommender systems, so FlashVector generalizes the single-kernel optimization agent to the whole serving stack (GPU kernels, framework graph, model server, feature processing) and, deployed in Unity's Vector ad platform, delivers up to 2x throughput.
+   * Key techniques:
+     - An extensible agentic framework that generalizes the single-GPU-kernel optimization-agent paradigm to heterogeneous technical stacks (NVIDIA Triton C++ model server, Python feature-transformation service)
+     - Cross-layer optimization across GPU kernels, ML-framework computation graph, model server and on-demand feature processing
+     - Deployed in Unity's Vector advertising platform: up to 2x throughput on the model server, up to 1.98x latency speedup, and up to 1.6x throughput on the feature store
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or agent release at scan time
+     - **Novelty: 6/10** — extending agentic kernel optimization to the full serving hierarchy with an extensible framework is a clear industrial advance
+     - **Fairness: 1/10** — not relevant
+     - **Robustness: 6/10** — production deployment with measured throughput/latency gains across multiple stack layers, not a simulation
+     - **Impact: 6/10** — Unity advertising; serving-cost efficiency is a top concern for industrial recommender systems
+4. **Personalized and Trust-Aware Health Recommendation Policies for a Construction Workplace**
+   * Affiliation: University of Illinois Urbana-Champaign — *(Atefeh Mollabagher, Yogesh Gautam, Houtan Jebelli, Parinaz Naghizadeh)*
+   * Link: [arxiv.org/abs/2609.12679](https://arxiv.org/abs/2609.12679)
+   * Venue: arXiv preprint, September 2026 (cs.IR / eess.SY; submitted 11 Sep 2026)
+   * TL;DR: For construction-worker health, a recommender that triggers personalized interventions must respect that worker trust is shaped by health and recommendation dynamics and in turn drives compliance; the paper characterizes the trust-aware policy via both model-based control and model-free RL.
+   * Key techniques:
+     - A dynamic model coupling worker health evolution, trust dynamics (driven by health and recommendations) and compliance with future recommendations
+     - Characterization of the recommender policy: a health-based recommendation triggering threshold and the recommendation frequency
+     - Solved via both model-based short-horizon control and model-free reinforcement learning
+     - Analysis of how frequencies are tuned per worker to balance health, productivity and trust
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or simulator release at scan time
+     - **Novelty: 6/10** — jointly modelling health, trust and compliance in one dynamic recommendation policy is a distinctive framing for RL-based recommendation
+     - **Fairness: 7/10** — worker well-being and trust calibration are the explicit objectives; ethics/fairness-adjacent
+     - **Robustness: 5/10** — analytical characterization plus RL, but simulation-based with no field deployment
+     - **Impact: 5/10** — construction-workplace health; the trust–compliance coupling is a transferable idea for safety-critical recsys
+5. **Who You Are Adds Nothing Detectable to Where You Go Next: Sociodemographic Conditioning in LLM Next-Location Prediction**
+   * Affiliation: University of Melbourne — *(Xin Wang, Paraic Carroll, Kerry Nice, Sachith Seneviratne, Li Zhang)*
+   * Link: [arxiv.org/abs/2609.09609](https://arxiv.org/abs/2609.09609)
+   * Venue: arXiv preprint, September 2026 (cs.CY; submitted 9 Sep 2026), 17 pages
+   * TL;DR: A controlled study linking sociodemographic records to 5,000 Shenzhen residents' mobility data shows age/gender/occupation/income change top-1 next-location accuracy by at most ±0.8pp — demographics add no detectable predictive value, while candidate construction dominates reported performance.
+   * Key techniques:
+     - A closed-set benchmark where models rank 100 candidate destinations, evaluated with and without sociodemographic attributes while holding mobility history, candidates and all other prompt content fixed
+     - Four history lengths; paired top-1 accuracy change ranges −0.8 to +0.5 pp with no detectable gain
+     - Consistency checks: stay history withheld, alternative prediction times, two additional LLMs, and a supervised reranker trained on the same benchmark
+     - A permutation probe showing mis-matched attributes hurt accuracy whereas correctly matched attributes do not help — distinguishing demographic association from incremental predictive usefulness
+     - Candidate-construction analysis: removing distance raises accuracy 7.7pp under proximity sampling but lowers it 22.3pp under popularity sampling
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — benchmark built from proprietary mobility data; no public code or dataset link at scan time
+     - **Novelty: 7/10** — a rigorous null result on sociodemographic conditioning for LLM location/POI recommendation, with careful controls
+     - **Fairness: 6/10** — directly interrogates demographic conditioning (a fairness/privacy concern) and finds it carries no predictive value here
+     - **Robustness: 7/10** — four history lengths, three LLMs, a supervised reranker and multiple consistency checks
+     - **Impact: 6/10** — cautions the field against demographic conditioning in LLM mobility/POI recommendation; a useful negative result
+
 ### Papers September 18
 
 *Friday, September 18, 2026. arXiv active — the Friday Sep 18 cs.IR announcement batch (22 entries) plus late Sep 17 uploads and two cs.CL / cs.AI cross-overs. Headline: UniPolicy (Meituan) decouples a generative search-advertising retriever into objective-specific policy subspaces and decodes them with multi-policy beam search, gaining +0.71% CTR, +1.58% RPS and +1.32% ad revenue in a 7-day online A/B; CoFree (Alibaba/Taobao + Wuhan U + SJTU) names and fixes "reasoning collapse" in reasoning-augmented LLM embedding learning with reference-guided SFT plus dual embedding/reasoning rewards (+2.8 avg nDCG@10 over Qwen3-Embedding-4B on 22 datasets); SELF-INDEX (Yonsei University) lets a retrieval index rewrite its own index keys by diagnosing failures, revising the responsible keys, validating each revision and simulating unseen queries — but ships only a placeholder repository. MERIT-Rank (Honor Device) attacks the single-reasoning-trajectory bottleneck of LLM rerankers with a Multi-Trajectory Reasoning Space trained by Progressive Rank Policy Optimization. A sobering reproducibility result from the University of Zurich: natural-language user profiles leave the ranking of an LLM recommender unchanged even under direct activation steering, because the rating-regression objective absorbs the perturbation. Total: 8 papers (1 opensource).*
@@ -1259,108 +1344,6 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
      - **Robustness: 6/10** — large trial count, three models, statistical significance
      - **Impact: 5/10** — Rutgers (Yongfeng Zhang); multi-agent personalization systems
 
-### Papers September 09
-
-*Wednesday, September 9, 2026. arXiv Tuesday (Sep 8) announcement batch — cs.IR / cs.AI. 6 papers found (2 opensource). Core: SequenceO1 (ByteDance/Douyin ultra-long 100K sequence modeling, RecSys 2026 Industry long oral), FINALLY (U Siegen dataset recommender, RecSys 2026 demo, opensource), REDSI (IRISA Rennes first open-source DSI implementation, opensource), PDMR (IRIT Toulouse passage-driven multi-ID generative retrieval), Bottom-Up Clustering for Semantic IDs (Cornell workshop), A-MLE (Google agentic ML exploration for ads ranking).*
-
-1. **SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching**
-   * Affiliation: ByteDance (Douyin)
-   * Link: [arxiv.org/abs/2609.08443](https://arxiv.org/abs/2609.08443)
-   * Venue: RecSys 2026 Industry Track (long oral)
-   * TL;DR: A compress-then-reason framework for ultra-long user-behavior sequence modeling, deployed at full traffic on Douyin with histories of up to 100K interactions.
-   * Key techniques:
-     - Sketch Attention (SA): learnable prototypes + prototype-wise normalization compress the raw history into a fixed-size, target-agnostic user representation
-     - Stacked Target-to-History Cross Attention (STCA): a recent 10K suffix for short-term interests + the compact sketch for long-term preferences
-     - Low-rank user representation caching, multi-request user-level batching, pipeline lift, and a fused FlashSA kernel amortize storage/communication/compute
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (industrial, deployed at Douyin)
-     - **Novelty: 7/10** — compress-then-reason with prototype-based sketch attention is a fresh end-to-end answer to 100K-sequence ranking
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 8/10** — consistent offline + online gains at full Douyin traffic
-     - **Impact: 8/10** — RecSys 2026 Industry long oral; billion-scale production deployment
-
-2. **FINALLY: A Dataset Recommender System for Recommender-Systems Research**
-   * Affiliation: University of Siegen
-   * Link: [arxiv.org/abs/2609.08941](https://arxiv.org/abs/2609.08941)
-   * Venue: RecSys 2026 Demo (also Bachelor's thesis, University of Siegen, 2026)
-   * TL;DR: A web-based dataset recommender that constructs configurable dataset sets (90+ datasets) for offline RecSys evaluation via Effective-Covariance / Convex-Hull diversity objectives.
-   * Key techniques:
-     - Required-dataset + candidate-pool restrictions + metadata filters with configurable target-set sizes
-     - Diverse and non-diverse strategies via adapted Effective Covariance and Convex Hull objectives
-     - 420 recommendation runs across ten configurations; all deterministic strategy-configuration combinations reproducible
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — live system (finally.recommender-systems.com) + source at code.isg.beel.org/FINALLY; public, operational, 90+ datasets
-     - **Novelty: 6/10** — first operational dataset-set recommender for RecSys experiments (vs. manual/convention-driven selection)
-     - **Fairness: 4/10** — addresses dataset-selection concentration/bias, not user-facing fairness
-     - **Robustness: 6/10** — 420 runs, reproducible deterministic strategies, constraint satisfaction verified
-     - **Impact: 6/10** — RecSys 2026 demo; targets the under-addressed dataset-selection gap
-
-3. **REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval**
-   * Affiliation: IRISA / Université de Rennes
-   * Link: [arxiv.org/abs/2609.08860](https://arxiv.org/abs/2609.08860)
-   * Venue: arXiv preprint, September 2026 (cs.IR)
-   * TL;DR: ReDSI — the first open-source DSI implementation covering all three document identifier types (atomic, naive, semantic) plus a parameterizable, well-documented NQ320K construction pipeline.
-   * Key techniques:
-     - Unified open-source DSI supporting atomic / naive / semantic identifier types
-     - Parameterizable and well-documented NQ320K construction pipeline from Natural Questions
-     - Model-downscaling experiments across retrieval effectiveness, parameter efficiency, training methods, and decoding strategies
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — open-source ReDSI (repo linked in paper); first to cover all three ID types + documented NQ320K pipeline
-     - **Novelty: 6/10** — reproducibility/consistency contribution rather than a new method
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 7/10** — competitive-or-stronger results vs. DSI baselines under downscaling
-     - **Impact: 6/10** — fixes a long-standing DSI reproducibility gap for generative retrieval
-
-4. **PDMR: Passage-Driven Multi-ID Document Retrieval**
-   * Affiliation: IRIT, Université de Toulouse
-   * Link: [arxiv.org/abs/2609.08762](https://arxiv.org/abs/2609.08762)
-   * Venue: arXiv preprint, September 2026 (cs.IR)
-   * TL;DR: A generative retrieval framework that gives each document multiple passage-level identifiers as semantic entry points, with a multi-target objective distributing probability mass across valid passage IDs.
-   * Key techniques:
-     - Document segmentation + one identifier per selected passage (multi-entry representation)
-     - Multi-target learning to resolve the one-to-many supervision ambiguity
-     - Passage-level supervision, identifier design, and training-query augmentation ablations
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — multi-ID passage-level entry points is a clean extension beyond single-ID generative retrieval
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 6/10** — gains on NQ320K + MS MARCO Document with controlled ablations
-     - **Impact: 5/10** — advances generative retrieval for multi-faceted documents
-
-5. **Exploring Bottom-Up Clustering for Creating Semantic IDs**
-   * Affiliation: Cornell University
-   * Link: [arxiv.org/abs/2609.08310](https://arxiv.org/abs/2609.08310)
-   * Venue: Workshop paper (arXiv, cs.IR / cs.AI)
-   * TL;DR: Bottom-up (agglomerative) clustering to build unique, embedding-structure-preserving Semantic IDs for downstream generative retrieval.
-   * Key techniques:
-     - Bottom-up clustering preserves local embedding-space structure (vs. top-down residual quantization)
-     - Uniqueness guarantee + structure preservation for each identifier
-     - Improved clustering quality and downstream generative-retrieval utility
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — bottom-up (vs. top-down) clustering for SID construction is an under-explored direction
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 5/10** — workshop-scale evaluation, limited benchmarks
-     - **Impact: 5/10** — informs SID tokenization design for generative retrieval
-
-6. **Agentic ML Exploration (A-MLE) for Ads Ranking**
-   * Affiliation: Google
-   * Link: [arxiv.org/abs/2609.08248](https://arxiv.org/abs/2609.08248)
-   * Venue: arXiv preprint, September 2026 (cs.AI)
-   * TL;DR: An autonomous LLM-agent system that systematically explores ML techniques across a portfolio of ads-ranking models, decomposing ML iteration into five stages with human-in-the-loop checkpoints.
-   * Key techniques:
-     - Five-stage decomposition: hypothesis generation, exploration strategy, experiment execution, result analysis, shared knowledge substrate
-     - Sandboxed execution layer + domain-specific skills + agentic workflows
-     - Cross-LLM study (Claude Sonnet, Gemini, GPT) of execution reliability and exploration aggressiveness
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — agentic ML exploration as a force multiplier for industrial recommenders is an emerging, underexplored direction
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 6/10** — tiered capability framework + failure-mode analysis, but qualitative
-     - **Impact: 7/10** — Google ads ranking; targets the long tail of models lacking expert attention
-
-We only keep the last 10 days summary here, for the past records please see [the archive](docs/archive_by_month).
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1607,7 +1590,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 178 papers as of September 18.
+**Count:** 178 papers as of September 19.
 
 | Score | Paper |
 | --- | --- |
@@ -2050,6 +2033,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DMRL / Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation -- SJTU / Kuaishou
 - MemRetriever / Learning to Search, Reflect, and Retrieve from Long-Term Memory (GRPO) -- MemTensor
 - UniPolicy / Objective-Specific Multi-Policy Alignment with Multi-Policy Beam Search -- Meituan
+- Personalized and Trust-Aware Health Recommendation Policies for a Construction Workplace (Trust-Aware Health Rec) — University of Illinois Urbana-Champaign (model-free RL)
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
 

@@ -149,6 +149,7 @@
 
 
 ### Conversational
+- BanglaShop-CRS: A User-Centric Bangla Dataset for Conversational Recommendation (BanglaShop-CRS) — University of Vermont
 - A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset
 - GCRS: Generative Conversational Recommender System
 - MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music
@@ -845,6 +846,7 @@
 - Dense Feature Representation over Sequence Modeling: A Solution to the KDD Cup 2026 UniRec Challenge (KDD Cup 2026 UniRec) — Z Lab (Chengdu), KDD Cup 2026 UniRec Workshop
 
 ### Infrastructure / Serving
+- FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
 - Enabling High-Bandwidth Flash for Generative Recommendation Serving with Write-Aware KV Cache Policy
 - Efficient Swing Computation for Retrieval in Large-Scale Recommender Systems (ASC / K-ASC)
@@ -905,6 +907,7 @@
 
 
 ### LLM-based Recommendation
+- Who You Are Adds Nothing Detectable to Where You Go Next: Sociodemographic Conditioning in LLM Next-Location Prediction (Next-Location) — University of Melbourne
 - CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
 - Discriminative Language Models as Effective Retrievers (Discriminative Retrieval / Case Against GenRec)
 - EGR: Embedding-Native Generative Retrieval with a Shared LLM (EGR)
@@ -1176,6 +1179,7 @@
 
 
 ### Multimodal
+- NarraLite: Efficient Multimodal Generative Recommendation with Latent Narrative Reasoning (NarraLite) — Tencent / HK PolyU
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - UnpairGR: Unpaired Modality-Agnostic Generative Recommendation (UnpairGR)
 - A Cascaded Generative Approach for e-Commerce Recommendations
@@ -1346,6 +1350,7 @@
 - Re2A: Situated Conversational Recommendation via Rubric-based Preference Reasoning and Alignment (Re2A) — HK PolyU / CUHK / Sichuan University, EMNLP 2026
 
 ### Reinforcement Learning
+- Personalized and Trust-Aware Health Recommendation Policies for a Construction Workplace (Trust-Aware Health Rec) — University of Illinois Urbana-Champaign
 - EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation (EvoReason)
 - Exp-RSFT: Exponential Reward Weighting for Fine-Tuning Generative Recommenders under Sparse and Noisy Feedback (Exp-RSFT)
 - Progressive FM Post-Training: Progressive Alignment of Recommender Foundation Model through Multi-Phase Post-Training (Progressive FM Post-Training)
