@@ -49,6 +49,7 @@
 - AURA: Agentic Diagnosis and Refinement for Production Recommender Systems at Scale (AURA)
 - LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP)
 - SELF-INDEX: Self-Evolving Search Index (SELF-INDEX) — Yonsei University (with Samsung Research, UC Irvine, Korea University), arXiv 2609.19656
+- CORAL: An LLM-Native Harness for Production Recommender Systems (CORAL) — Meta AI, arXiv 2609.02730
 
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
@@ -214,6 +215,7 @@
 - How Calibration Content Shapes Attention-Based Reranking (Interpolated Null Calibration)
 - Reasoning Quality Matters: Combating Reasoning Collapse in LLM-based Embedding Learning (CoFree) — Alibaba (Taobao) / Wuhan University / Shanghai Jiao Tong University, arXiv 2609.20563
 - SELF-INDEX: Self-Evolving Search Index (SELF-INDEX) — Yonsei University, arXiv 2609.19656
+- Epistemic Warrant for LLM Recommendations: Characterizing the Basis for Reliance When Ground Truth Is Unavailable — Purdue University / University of Pennsylvania, arXiv 2609.04127
 
 ### Diffusion
 - GateDiffInt: Gate-Mediated Controllable Diffusion and Multi-Intent LLM Distillation for User Behavior Modeling (GateDiffInt)
@@ -236,6 +238,7 @@
 - Preference Flow Matching with Spectral Factorization for Micro-video Recommendation (PrismRec)
 - EPIC: Explicit Posterior Item Conditioning for Semantic ID Diffusion Recommendation (EPIC)
 - MGDiff: Multi-Interest Sequence Recommendation with Masking GNN-Guided Diffusion (MGDiff)
+- PAPA: Online Personalized Active Preference Alignment (PAPA) — Washington University in St. Louis, arXiv 2607.00486
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -354,6 +357,7 @@
 - Understanding AI Provider Recommendations in Local Service Markets
 - FacetCRS: Multi-Faceted Preference Learning for Pricking Filter Bubbles in Conversational Recommender System (FacetCRS) — Sun Yat-sen University, AAAI 2024
 - Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) — University of Zurich, BlackBoxNLP @ EMNLP 2026
+- Give the Long-tail More SPACE: Promoting Provider Fairness in Next POI Recommendation (SPACE) — Southeast University, arXiv 2608.07998
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -529,6 +533,7 @@
 - ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec)
 - LIGE-GR: A Smooth Leap from Ranking to Generative Recommendation in the LLM Era (LIGE-GR)
 - UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
+- PAPA: Online Personalized Active Preference Alignment (PAPA) — Washington University in St. Louis, arXiv 2607.00486
 
 ### Generative Retrieval / Ranking
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
@@ -644,6 +649,7 @@
 - Continual Graph Memory for Adaptive Recommendation under Intent Drift (CGM-Rec)
 - MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning (MURAL)
 - Do All Nodes Benefit Equally from Knowledge Graphs? Adaptive Node-Aware KG Fusion for Recommendation (AdaKG)
+- PCGNet: Unifying Shared and Specific Information for Fashion Matching Recommendations (PCGNet) — The Hong Kong Polytechnic University, arXiv 2609.13339
 
 
 ### Group Recommendation
@@ -844,6 +850,7 @@
 - Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking
 - UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
 - Dense Feature Representation over Sequence Modeling: A Solution to the KDD Cup 2026 UniRec Challenge (KDD Cup 2026 UniRec) — Z Lab (Chengdu), KDD Cup 2026 UniRec Workshop
+- CORAL: An LLM-Native Harness for Production Recommender Systems (CORAL) — Meta AI, arXiv 2609.02730
 
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
@@ -1101,6 +1108,7 @@
 - Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) — University of Zurich, BlackBoxNLP @ EMNLP 2026
 - Re2A: Situated Conversational Recommendation via Rubric-based Preference Reasoning and Alignment (Re2A) — HK PolyU / CUHK / Sichuan University, EMNLP 2026
 - FacetCRS: Multi-Faceted Preference Learning for Pricking Filter Bubbles in Conversational Recommender System (FacetCRS) — Sun Yat-sen University, AAAI 2024
+- Epistemic Warrant for LLM Recommendations: Characterizing the Basis for Reliance When Ground Truth Is Unavailable — Purdue University / University of Pennsylvania, arXiv 2609.04127
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1258,6 +1266,7 @@
 - RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models (RegRet) — ECCV 2026
 - Scaling Articulated Rationales for MLLM-based Recommendation (SARA)
 - Re2A: Situated Conversational Recommendation via Rubric-based Preference Reasoning and Alignment (Re2A) — HK PolyU / CUHK / Sichuan University, EMNLP 2026
+- Attribute-Conditioned Multimodal Slot Factorization for Controllable Fashion Retrieval (MM-slotgate) — Amazon, arXiv 2608.12570
 
 ### Optimizer
 - MuonRec
@@ -1381,6 +1390,7 @@
 - LIGE-GR: A Smooth Leap from Ranking to Generative Recommendation in the LLM Era (LIGE-GR)
 - UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
 - Reasoning Quality Matters: Combating Reasoning Collapse in LLM-based Embedding Learning (CoFree) — Alibaba (Taobao) / Wuhan University / Shanghai Jiao Tong University, arXiv 2609.20563
+- PAPA: Online Personalized Active Preference Alignment (PAPA) — Washington University in St. Louis, arXiv 2607.00486
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1546,6 +1556,7 @@
 - ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec)
 - One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations (ANGLE)
 - UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
+- Attribute-Conditioned Multimodal Slot Factorization for Controllable Fashion Retrieval (MM-slotgate) — Amazon, arXiv 2608.12570
 
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1619,6 +1630,7 @@
 - Balancing Trial and Reorder: A Hybrid Sequential Transformer-GBDT Ranker for On-Demand Delivery (UVR)
 - SURF: Subtractive Updates for Recommender Forgetting (SURF)
 - Dense Feature Representation over Sequence Modeling: A Solution to the KDD Cup 2026 UniRec Challenge (KDD Cup 2026 UniRec) — Z Lab (Chengdu), KDD Cup 2026 UniRec Workshop
+- Give the Long-tail More SPACE: Promoting Provider Fairness in Next POI Recommendation (SPACE) — Southeast University, arXiv 2608.07998
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey

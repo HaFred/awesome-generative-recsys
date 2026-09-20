@@ -41,6 +41,7 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
+        PAPA -- WashU (St. Louis)
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -51,7 +52,6 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
-        Transparent UPR Repro -- U Zurich
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
@@ -69,7 +69,7 @@ mindmap
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
         FORGE Web Pollution -- CUHK
-        LSREP -- Thakur College of Eng. & Tech.
+        SPACE -- Southeast U
 ```
 <div align="center">
   <i> Open-source Generative RecSys Map </i>
@@ -84,6 +84,107 @@ If you are interested in RFT your own GenRecSys, come check out our `verl`-based
 We manage to achieve 22% and 32% boosting for the end-to-end training efficiencies, compared with their respective vanilla implementations.
 
 ## By Date
+
+### Papers September 20
+
+*Sunday, September 20, 2026. arXiv weekend pause — no new generative-recommendation announcement batch landed in the last 24h (the most recent cs.IR listing is still Fri 18 Sep, already captured by the Sep 18 run). The `date_list` of missing dates in the date section is empty (Sep 10–19 are all present). Per the fallback rule, this run back-fills 6 on-topic papers from the Jun–Sep window that prior runs missed: CORAL (Meta AI) closes a continual agentic loop over a live production recommender with A/B wins on two social platforms; PAPA (WashU) does feedback-efficient diffusion preference alignment for recsys; SPACE (Southeast University, RecSys 2026) lifts long-tail POI exposure via constraint-guided latent diffusion and ships code; Epistemic Warrant (Purdue / UPenn) gives a four-tier reliance certificate for individual LLM recommendations; MM-slotgate (Amazon) factorizes Fashion-CLIP into named attribute slots for controllable fashion retrieval; and PCGNet (Hong Kong PolyU) unifies compatibility and personal preference for fashion matching. Total: 6 papers (2 opensource).*
+
+1. **CORAL: An LLM-Native Harness for Production Recommender Systems**
+   * Affiliation: Meta AI — *(Muhammad Rafay Azhar, Yuhang Zhou, Gilbert Jiang, Yuchen Wang, Rahul Sharma, Matthew DeSousa, Jiayi Liu, Xin Guo, Lizhu Zhang, Xiangjun Fan; all Meta AI)*
+   * Link: [arxiv.org/abs/2609.02730](https://arxiv.org/abs/2609.02730)
+   * Venue: RecSys 2026 OARS Workshop (arXiv preprint, September 2026; cs.CL; submitted 2 Sep 2026)
+   * TL;DR: Sustaining a production recommender is a continual constrained-optimization problem, so CORAL puts an LLM agent in a closed loop that observes operating signals, reasons over a memory of past decisions, and invokes tools — including a numerical optimizer that keeps every change inside a fixed budget — to reconfigure the live system, with A/B wins on two large social platforms.
+   * Key techniques:
+     - A constraint-optimized agentic loop (analysis → retrieval → attribution → constrained optimizer → apply) that reconfigures retrieval/ranking/serving parameters of a live recommender without parameter updates
+     - A numerical optimizer that projects over-budget proposals back into a feasible operating envelope, so the loop can run under production guardrails
+     - Memory of past decisions and measured outcomes drives in-context policy improvement as the loop iterates
+     - Validated with online A/B experiments on two large-scale social platforms: engagement up at no extra serving cost on one, serving-cost savings with no engagement loss on the other
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or agent release at scan time
+     - **Novelty: 8/10** — framing production recsys continual optimization as a closed agentic loop with a budget-constrained optimizer is a distinctive industrial advance
+     - **Fairness: 5/10** — the operating-budget guardrail is an equity/feasibility mechanism, but not a bias audit
+     - **Robustness: 8/10** — online A/B on two platforms with measured engagement/efficiency trade-offs, not a simulation
+     - **Impact: 9/10** — Meta production social platforms; a concrete blueprint for agentic continual optimization of recommender systems
+2. **PAPA: Online Personalized Active Preference Alignment**
+   * Affiliation: Washington University in St. Louis — *(Anindya Sarkar, Nasik Muhammad Nafi, Isaac Lyngaas, Muralikrishnan Gopalakrishnan Meena, Yevgeniy Vorobeychik)*
+   * Link: [arxiv.org/abs/2607.00486](https://arxiv.org/abs/2607.00486)
+   * Venue: ECML PKDD 2026 (arXiv preprint, July 2026; cs.LG / cs.AI / cs.CV; submitted 1 Jul 2026)
+   * TL;DR: Personalizing a recommender means aligning a generative model to user preferences that are initially unknown, so PAPA bypasses a parameterized reward model entirely and directly optimizes a diffusion model from real-time user feedback via a variational-inference-inspired objective.
+   * Key techniques:
+     - Feedback-efficient preference alignment that skips reward-model training, drawing on the variational inference framework
+     - Direct optimization of a diffusion model using real-time interactive user feedback
+     - A strengthened variant EPAPA with a cheaper fine-tuning strategy for real-world deployment
+     - Experiments and ablations across class-conditioned and fine-grained alignment tasks (image/fashion diffusion)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/NasikNafi/papa](https://github.com/NasikNafi/papa): real code with LICENSE, README quickstart, configs, scripts, and DDPM-based training/sampling; deductions: requirements.txt details "available soon" (incomplete), single-day commit burst, single-author maintenance, and the released experiments are on MNIST/fashion image diffusion rather than real recsys datasets
+     - **Novelty: 7/10** — eliminating the reward model for preference alignment is a clean, deployment-friendly take, though rooted in variational-inference ideas
+     - **Fairness: 4/10** — not fairness-focused
+     - **Robustness: 6/10** — ablations and multi-task experiments, but validation is on image-diffusion toy domains rather than live recsys
+     - **Impact: 6/10** — ECML PKDD 2026; the reward-model-free alignment idea transfers to recsys preference optimization
+3. **Give the Long-tail More SPACE: Promoting Provider Fairness in Next POI Recommendation**
+   * Affiliation: Southeast University, Nanjing, China — *(Anran Zhang, Jiaqi Jiang, Jiahui Jin, Yuhan Zhao)*
+   * Link: [arxiv.org/abs/2608.07998](https://arxiv.org/abs/2608.07998)
+   * Venue: RecSys 2026 (20th ACM Conference on Recommender Systems; arXiv preprint, August 2026; cs.IR; submitted 8 Aug 2026)
+   * TL;DR: Mainstream next-POI models starve long-tail merchants of exposure, and naive provider-fairness methods break because users have execution constraints and POIs have supply constraints, so SPACE generates virtual users under explicit feasibility and supply control to train existing recommenders fairly.
+   * Key techniques:
+     - Community inference to capture heterogeneous user execution constraints
+     - Unbalanced optimal-transport allocation deciding how many virtual users each tail POI gets from which communities under POI-specific supply budgets
+     - Constraint-guided latent diffusion to generate POI-conditional, community-consistent virtual user embeddings
+     - Model-agnostic: the synthetic user–POI pairs train existing recommenders unchanged
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 4/10** — [github.com/Anniran1/SPACE-main](https://github.com/Anniran1/SPACE-main): actual code (dataset_process, model, param, trainer, utils, main.py) matching the paper's stages, but a single initial commit (Jul 18 2026) with no README, no requirements.txt, no LICENSE, and committed `__pycache__/` and `.DS_Store` — usable for reproduction only with effort
+     - **Novelty: 7/10** — coupling supply- and physics-aware virtual-user generation with optimal transport is a fresh provider-fairness mechanism for POI rec
+     - **Fairness: 9/10** — provider fairness is the paper's explicit core contribution (long-tail exposure under real constraints)
+     - **Robustness: 7/10** — three real-world datasets, multiple backbones, accuracy preserved/improved while fairness rises
+     - **Impact: 6/10** — RecSys 2026; a directly usable fairness recipe for location-based recommendation
+4. **Epistemic Warrant for LLM Recommendations: Characterizing the Basis for Reliance When Ground Truth Is Unavailable**
+   * Affiliation: Purdue University / University of Pennsylvania — *(Shai Vardi (Purdue), João Sedoc (UPenn))*
+   * Link: [arxiv.org/abs/2609.04127](https://arxiv.org/abs/2609.04127)
+   * Venue: arXiv preprint, September 2026 (cs.AI; submitted 3 Sep 2026), 43 pages
+   * TL;DR: Users lack a principled basis for trusting an individual LLM recommendation, so the paper adapts epistemology into "epistemic warrant" — a decision-level construct capturing a model's preference stability and the scope over which it holds — operationalized as a four-tier reliance certificate for pairwise recommendations.
+   * Key techniques:
+     - Epistemic warrant: stability of the model's preference plus the scope over which that preference holds
+     - A four-tier reliance certificate (unstable / context-dependent / locally supported / broadly supported) for pairwise recommendations
+     - Known-groups tests recover expert-prespecified warrant orderings; stronger warrants align with independent crowd-worker consensus
+     - Shows warrant is distinct from verbalized confidence and not explained by decision difficulty
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or dataset link at scan time
+     - **Novelty: 8/10** — importing an epistemology construct to certify individual LLM-recommendation reliance is a genuinely new framing
+     - **Fairness: 7/10** — reliance certification is a trust/fairness-adjacent safeguard against over-trusting opaque LLM recs
+     - **Robustness: 7/10** — known-groups + crowd-consensus validation, but no live recsys deployment
+     - **Impact: 6/10** — a useful, implementable trust layer for LLM recommendation assistants
+5. **Attribute-Conditioned Multimodal Slot Factorization for Controllable Fashion Retrieval (MM-slotgate)**
+   * Affiliation: Amazon — *(Najmeh Forouzandehmehr, Topojoy Biswas, Evren Korpeoglu, Kannan Achan)*
+   * Link: [arxiv.org/abs/2608.12570](https://arxiv.org/abs/2608.12570)
+   * Venue: arXiv preprint, August 2026 (cs.CV / cs.IR; submitted 12 Aug 2026)
+   * TL;DR: Monolithic fashion-retrieval embeddings mix attributes into one vector; MM-slotgate factorizes Fashion-CLIP text/image embeddings into four named attribute slots with per-slot text-image gates, giving interpretable, controllable retrieval that beats equal-weight fusion on H&M.
+   * Key techniques:
+     - A multimodal slot encoder that factorizes Fashion-CLIP embeddings into four named attribute slots (category, color, pattern, demographic)
+     - Per-slot learnable text-image gates so color/pattern lean on image evidence while category/demographic stay text-driven
+     - A combined slot-similarity + slot-logit retrieval score
+     - Quantized slot codes enable targeted intervention (e.g., +15.3x lift on color); linear probes show no excess leakage
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or model release at scan time (Amazon)
+     - **Novelty: 7/10** — typed, attribute-conditioned multimodal slots with interpretable gates are a clear advance over opaque item-level semantic IDs
+     - **Fairness: 3/10** — not fairness-focused
+     - **Robustness: 6/10** — H&M benchmark with macro ConstraintSatisfied@10 and interpretability probes, single dataset
+     - **Impact: 6/10** — Amazon fashion retrieval; directly relevant to industrial multimodal generative/semantic-ID retrieval
+6. **PCGNet: Unifying Shared and Specific Information for Fashion Matching Recommendations**
+   * Affiliation: The Hong Kong Polytechnic University — *(Shuiying Liao, P. Y. Mok)*
+   * Link: [arxiv.org/abs/2609.13339](https://arxiv.org/abs/2609.13339)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.IT; submitted 11 Sep 2026)
+   * TL;DR: Fashion matching recommendation must satisfy both garment compatibility and personal preference, which prior decoupled models ignore, so PCGNet unifies the two via contrastive mutual-information maximization over shared and view-specific graph patterns.
+   * Key techniques:
+     - A Personalized Compatibility Graph Network framing fashion matching as multi-objective graph learning
+     - Contrastive mutual-information maximization to extract and align shared vs. view-specific (compatibility vs. preference) patterns
+     - Correlation-aware neighbor sampling and a learnable global graph augmentation for self-supervised signals
+     - Joint BPR ranking loss and multi-view mutual-information losses for recommendation scoring
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or repository at scan time
+     - **Novelty: 5/10** — a compatibility-plus-preference unification for fashion matching, but graph MI methods are established
+     - **Fairness: 2/10** — not fairness-focused
+     - **Robustness: 5/10** — two benchmark datasets, four metrics, no online or adversarial evaluation
+     - **Impact: 5/10** — a solid fashion compatibility/personalization contribution for e-commerce
 
 ### Papers September 19
 
@@ -1242,107 +1343,6 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
      - **Robustness: 6/10** — sufficient identification conditions + Bayesian uncertainty
      - **Impact: 6/10** — generative commerce/marketing measurement; econometrics + ML relevance
 
-### Papers September 10
-
-*Thursday, September 10, 2026. arXiv Wednesday (Sep 9) announcement batch — cs.IR / cs.CL / cs.AI / cs.LG. 6 papers found (2 opensource). Note: the Thursday Sep 10 batch had not posted at scan time, so the "last 24h" window maps to the Sep 9 batch; it is personalization/security/evaluation-heavy with no new SID/generative-retrieval method. Core: AGAS (Griffith U agentic group shilling attack, opensource), HyperTrace (JHU hypothesis-based LLM preference tracing, EMNLP 2026 Findings, opensource), PRAGMA (SNU personalized-guidance benchmark), Purchase Advice (Aiso real-conversation purchase audit), LLM Relevance Judge tone (RecSys 2026 reproducibility), Kernel-Managed Shared Memory (Rutgers system-wide personalization).*
-
-1. **An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS)**
-   * Affiliation: Griffith University — *(Quoc Viet Nguyen, Quoc Viet Hung Nguyen, Thanh Tam Nguyen; also Edith Cowan University, University of Queensland, HUTECH University)*
-   * Link: [arxiv.org/abs/2609.09551](https://arxiv.org/abs/2609.09551)
-   * Venue: arXiv preprint, September 2026 (cs.CR / cs.CL)
-   * TL;DR: A coordinated multi-agent shilling framework where a central Coordinator directs role-switching worker agents to adaptively promote a target item across victim families while evading detection.
-   * Key techniques:
-     - Central Coordinator + role-switching worker agents pursuing a shared promotion objective
-     - Adaptive strategy adjustment when progress stalls or suppression signals rise
-     - Active/inactive role alternation to avoid repetitive, detectable patterns
-     - Outperforms strong baselines in target promotion while preserving benign recommendation quality and weakening representative detectors
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/phkhanhtrinh23/AGAS](https://github.com/phkhanhtrinh23/AGAS) — clean src/configs/tests/docs layout with pyproject+requirements, but no license and 2 stars (early stage)
-     - **Novelty: 7/10** — group-coordinated, role-switching agentic attack generalizes beyond target-specific single-agent shilling
-     - **Fairness: 8/10** — directly targets RS integrity/robustness and surfaces the need for adaptive defenses
-     - **Robustness: 7/10** — consistent gains under matched budgets + evasion of representative detectors
-     - **Impact: 6/10** — recsys security; red-team for shilling-resilient recommenders
-
-2. **HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization**
-   * Affiliation: Johns Hopkins University — *(also Institute of Science Tokyo)*
-   * Link: [arxiv.org/abs/2609.09835](https://arxiv.org/abs/2609.09835)
-   * Venue: EMNLP 2026 Findings
-   * TL;DR: A training-free framework that traces latent user preferences as interpretable natural-language hypotheses (short-term intent + long-term preference), updated via SMC-style reweighting with an LLM surrogate choice model.
-   * Key techniques:
-     - Natural-language hypothesis state over short-term intent and long-term preferences
-     - SMC-style hypothesis reweighting using an LLM-based surrogate choice model
-     - Cross-turn / cross-session updates without any parameter updates
-     - Improves response alignment, preference prediction, and profile consistency on PRISM and PersonaMem-v2
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/jiseshen/HyperTrace](https://github.com/jiseshen/HyperTrace) — functional core/model/eval/config code, but no README at root and no license
-     - **Novelty: 7/10** — SMC-style latent-preference tracing is a fresh training-free alternative to memory retrieval
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 6/10** — robust across turns/sessions; strong online baselines compared
-     - **Impact: 5/10** — EMNLP 2026 Findings; LLM personalization
-
-3. **PRAGMA: Evaluating Personalized Guidance with Memory Alignment in Lifelong Conversations**
-   * Affiliation: Seoul National University
-   * Link: [arxiv.org/abs/2609.09664](https://arxiv.org/abs/2609.09664)
-   * Venue: arXiv preprint, September 2026 (cs.AI)
-   * TL;DR: A benchmark for personalized guidance (recommendations, planning, decision support) in long-term LLM conversations, with evidence annotations and evolving user-context scenarios.
-   * Key techniques:
-     - Curated longitudinal conversation histories with evidence annotations
-     - Guidance scenarios grounded in evolving user contexts and incorrect user assumptions
-     - Evaluates retrieval systems, memory systems, and long-context models
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code/data announced
-     - **Novelty: 6/10** — first benchmark targeting personalized guidance beyond factual recall
-     - **Fairness: 4/10** — focuses on memory alignment, not user-fairness
-     - **Robustness: 5/10** — reveals a wide robustness gap in current memory systems
-     - **Impact: 5/10** — SNU; benchmark for memory-grounded recommendation agents
-
-4. **Purchase Advice and Observable Buyer Responses in Real AI Conversations**
-   * Affiliation: Aiso
-   * Link: [arxiv.org/abs/2609.09878](https://arxiv.org/abs/2609.09878)
-   * Venue: arXiv preprint, September 2026 (cs.IR)
-   * TL;DR: An audit of 317 real AI-assistant conversations showing recommendation content is observable far more often than the buyer's subsequent decision, exposing a fundamental measurement limitation.
-   * Key techniques:
-     - Audit of 317 licensed, consent-based, de-identified conversations (Apr 2023–Jul 2025)
-     - Single-agent AI screening for purchase-directed records (68 episodes)
-     - Operational definitions + text-free annotations + reproducible descriptive statistics
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — observational audit, no code released
-     - **Novelty: 5/10** — measurement-limitation audit rather than a new method
-     - **Fairness: 5/10** — audits persuasion/advice asymmetry in AI commerce
-     - **Robustness: 3/10** — small sample, unvalidated AI annotations, no causal claims
-     - **Impact: 4/10** — Aiso; informs evaluation of conversational commerce assistants
-
-5. **Should I Be Polite to My LLM Relevance Judge? Tone as a Severity Operating-Point Shift**
-   * Affiliation: Independent Researcher
-   * Link: [arxiv.org/abs/2609.09703](https://arxiv.org/abs/2609.09703)
-   * Venue: RecSys 2026 (Reproducibility & Practice Notes)
-   * TL;DR: Prompt tone shifts an LLM relevance judge's overall scoring leniency rather than improving judgment, a validity threat when absolute relevance labels matter.
-   * Key techniques:
-     - 3,498 TREC DL19/DL20 query-passage pairs × 8 judge models × 5 politeness levels × 3 paraphrases
-     - Severity operating-point account (Spearman ρ = −0.683; permutation p = 0.019)
-     - Separates calibration-based agreement shifts from ranking changes (NDCG@10 ≤ 0.011)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code
-     - **Novelty: 6/10** — tone-as-operating-point reconciles contradictory prior findings
-     - **Fairness: 6/10** — flags a validity threat to judge reliability/fairness
-     - **Robustness: 5/10** — model-dependent effects with a held-out cross-fit
-     - **Impact: 5/10** — RecSys 2026; LLM-as-judge evaluation practice
-
-6. **Kernel-Managed Shared Memory for System-Wide Personalization**
-   * Affiliation: Rutgers University
-   * Link: [arxiv.org/abs/2609.10144](https://arxiv.org/abs/2609.10144)
-   * Venue: arXiv preprint, September 2026 (cs.AI / cs.LG)
-   * TL;DR: Centralizes multi-agent memory retrieval/privacy/prompt-injection in an agent-system kernel (AIOS), delivering most of the personalization benefit of full context at a fraction of its cost.
-   * Key techniques:
-     - Kernel-governed retrieval, privacy enforcement, and prompt injection for tagged agent memories
-     - 1,800 trials across 3 assistant models (GPT-4o, Llama-3.1:8B, Qwen-2.5:7B)
-     - +2.4–4.0 personalization points vs. unmanaged Mem0 (p < 10⁻¹⁸); 15–61% lower latency
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (evaluated on AIOS)
-     - **Novelty: 6/10** — kernel-managed memory is a principled system-level answer to cross-agent personalization
-     - **Fairness: 4/10** — privacy enforcement as a first-class concern
-     - **Robustness: 6/10** — large trial count, three models, statistical significance
-     - **Impact: 5/10** — Rutgers (Yongfeng Zhang); multi-agent personalization systems
 
 ## Papers Classic Must Read
 
@@ -1590,7 +1590,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 178 papers as of September 19.
+**Count:** 180 papers as of September 20.
 
 | Score | Paper |
 | --- | --- |
@@ -1717,6 +1717,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
+| 6/10 | PAPA: Online Personalized Active Preference Alignment (PAPA) |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
 | 6/10 | Beyond Uniform Token Training: A Multi-Target Framework for Learning Token-Weighted Objectives in Generative Recommenders (Beyond Uniform Token Training) |
 | 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |
@@ -1754,6 +1755,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 5/10 | Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval |
 | 5/10 | Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR) |
 | 5/10 | SelfDR: Self-Distillation from Reasoning for LLM-Based Recommendation (SelfDR) |
+| 4/10 | Give the Long-tail More SPACE: Promoting Provider Fairness in Next POI Recommendation (SPACE) |
 | 4/10 | Towards Efficient Reasoning in LLM-Based Recommender Systems via Model Merging (REAM) |
 | 4/10 | Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation |
 | 4/10 | GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation |
