@@ -85,6 +85,10 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 
 ## By Date
 
+We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
 ### Papers September 20
 
 *Sunday, September 20, 2026. arXiv weekend pause — no new generative-recommendation announcement batch landed in the last 24h (the most recent cs.IR listing is still Fri 18 Sep, already captured by the Sep 18 run). The `date_list` of missing dates in the date section is empty (Sep 10–19 are all present). Per the fallback rule, this run back-fills 6 on-topic papers from the Jun–Sep window that prior runs missed: CORAL (Meta AI) closes a continual agentic loop over a live production recommender with A/B wins on two social platforms; PAPA (WashU) does feedback-efficient diffusion preference alignment for recsys; SPACE (Southeast University, RecSys 2026) lifts long-tail POI exposure via constraint-guided latent diffusion and ships code; Epistemic Warrant (Purdue / UPenn) gives a four-tier reliance certificate for individual LLM recommendations; MM-slotgate (Amazon) factorizes Fashion-CLIP into named attribute slots for controllable fashion retrieval; and PCGNet (Hong Kong PolyU) unifies compatibility and personal preference for fashion matching. Total: 6 papers (2 opensource).*
