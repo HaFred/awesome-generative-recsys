@@ -134,6 +134,7 @@
 - SwapRec: Warming Up Cold Items Through Training-Time Swaps (SwapRec)
 - Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking
 
+- A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR) — Yandex / AIRI / HSE; Barlow-Twins decorrelation for head/tail exposure control
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
 - SURF: Subtractive Updates for Recommender Forgetting (SURF)
@@ -871,6 +872,7 @@
 - From Prompting to Behavioral Alignment: Personalized LLM Judges for Recommendation Evaluation
 - Beyond Interleaving: Causal Attention Reformulations for Generative Recommender Systems
 
+- MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling (MuSeR) — Baidu / CityU HK / CUHK; hierarchical temporal compression + multi-interest + beam-search retrieval, deployed at Baidu
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1132,6 +1134,7 @@
 - FacetCRS: Multi-Faceted Preference Learning for Pricking Filter Bubbles in Conversational Recommender System (FacetCRS) — Sun Yat-sen University, AAAI 2024
 - Epistemic Warrant for LLM Recommendations: Characterizing the Basis for Reliance When Ground Truth Is Unavailable — Purdue University / University of Pennsylvania, arXiv 2609.04127
 
+- Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery — Google; async LLM rationale generation for exploration
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
@@ -1594,6 +1597,8 @@
 - Drift-Aware Continual Tokenization for Generative Recommendation (DACT)
 - Iterative Semantic Reasoning from Individual to Group Interests for Generative Recommendation with LLMs (ISRF)
 
+- What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro) — Shandong U / Glasgow / Leiden; SIGIR-AP 2026; large-scale SID-design reproducibility study
+- Guiding the coarse levels of semantic IDs makes the fine levels learnable (Guided SID) — Meta; deterministic supervised index assignment pins coarse RQ-VAE levels to text-grounded attributes
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
 - VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)
@@ -1671,6 +1676,8 @@
 - Drift-Aware Continual Tokenization for Generative Recommendation (DACT)
 - Beyond Interleaving: Causal Attention Reformulations for Generative Recommender Systems
 
+- MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling (MuSeR) — Baidu / CityU HK / CUHK; hierarchical temporal compression + multi-interest + beam-search retrieval, deployed at Baidu
+- A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR) — Yandex / AIRI / HSE; Barlow-Twins decorrelation for head/tail exposure control
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 - Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges

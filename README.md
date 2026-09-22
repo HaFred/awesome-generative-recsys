@@ -41,7 +41,6 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
-        AGR -- Capital Normal U
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -66,10 +65,11 @@ mindmap
         FORGE SID -- Zhejiang U / Alibaba
         DIGER -- U Glasgow / Shandong / Amazon
         DACT -- Fudan U
-        ISRF -- Chongqing U Tech
+        SID-Repro -- Shandong U / Glasgow / Leiden
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
+        BT-SR -- Yandex / AIRI
 ```
 <div align="center">
   <i> Open-source Generative RecSys Map </i>
@@ -88,6 +88,99 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers September 22
+
+*Tuesday, September 22, 2026. The Tue 22 Sep cs.IR announcement batch (39 new cs.IR entries) plus the Mon 21 Sep tail (8) were scanned; 5 genuinely-new on-topic generative / sequential / LLM-rec papers surfaced (2 opensource). Core: SID-Repro — a large-scale reproducibility study of semantic-ID design (Shandong / Glasgow / Leiden, SIGIR-AP 2026, opensource); Guided SID pins coarse RQ-VAE levels to text-grounded attributes (Meta); MuSeR long-sequence multi-interest retrieval deployed at Baidu (+0.26% DAU, +0.89% session duration, online A/B); BT-SR Barlow-Twins decorrelation for controllable head/tail exposure (Yandex / AIRI / HSE, opensource); and LLM rationales for YouTube Music artist discovery at scale (Google). FacetCRS (arXiv:2609.20175) re-spotted in the listing — re-hit noted on its existing entry.*
+
+1. **What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro)**
+   * Affiliation: Shandong University (Jinan, China) / University of Glasgow / Leiden University — *(Yufei Chen, Junchen Fu, Jujia Zhao, Yukun Zhao, Zhaochun Ren)*
+   * Link: [arxiv.org/abs/2609.24430](https://arxiv.org/abs/2609.24430)
+   * Venue: SIGIR-AP 2026 (accepted)
+   * TL;DR: A large-scale reproducibility study under a unified framework shows semantic-ID-design effects are largely non-monotonic — no single RQ-VAE / OPQ design is universally best, codebook-utilization is diagnostic but insufficient, and scaling the backbone or SID length is not always beneficial.
+   * Key techniques:
+     - Unified experimental framework comparing multiple SID designs (RQ-VAE, OPQ, etc.) for generative recommendation
+     - Analysis of the connection between codebook utilization and recommendation quality
+     - Study of the effect of semantic code length on performance
+     - Semantic-neighborhood analysis of local item semantic preservation
+     - Cross-dataset controlled analyses
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/layingfish/SID-Repro](https://github.com/layingfish/SID-Repro): official reproducibility artifact with code + data; reuses a fixed RQ-VAE implementation (EdoardoBotta/RQ-VAE-Recommender) and the TIGER protocol so only the SID design varies; deductions: study-focused repo (no pretrained weights, single primary maintainer)
+     - **Novelty: 6/10** — a rigorous empirical measurement / meta-analysis of SID design rather than a new method
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 8/10** — the entire contribution is controlled cross-design, cross-dataset evaluation with matched protocols
+     - **Impact: 8/10** — SIGIR-AP 2026; directly reshapes how the field chooses and reports SID designs
+
+2. **Guiding the coarse levels of semantic IDs makes the fine levels learnable (Guided SID)**
+   * Affiliation: Meta — *(Bin Wang, Zhengyu Zhang)*
+   * Link: [arxiv.org/abs/2609.22227](https://arxiv.org/abs/2609.22227)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.CL / cs.LG; submitted 3 Sep 2026)
+   * TL;DR: Instead of post-hoc bridging, force the coarse RQ-VAE levels to encode a predefined text-grounded, task-relevant categorical attribute via deterministic supervised index assignment (overriding nearest-neighbor), keeping codebooks learnable; a trie-merge handles high-cardinality / set-valued attributes. In a matched end-to-end A/B it lifts recall@k (1.36x@k=1, 1.39x@k=10) and MRR 0.0260 to 0.0355.
+   * Key techniques:
+     - Guided SID: deterministic supervised index assignment for coarse RQ-VAE levels
+     - Predefined categorical attribute that is text-grounded (hence LLM-legible) and task-relevant
+     - Learnable codebooks that still receive reconstruction gradients
+     - Trie-merge construction mapping any high-cardinality or set-valued attribute onto the fixed code budget with semantically coherent buckets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (proprietary industrial logs; method fully specified in text)
+     - **Novelty: 8/10** — a clean reframing of SID construction so the levels that matter are meaningful by construction rather than via alignment corpora / RL
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — internal A/B on industrial logs across list lengths; single corpus, no public reproduction
+     - **Impact: 8/10** — Meta; significant recall/MRR gains in a deployed generative-retrieval setting
+
+3. **MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling (MuSeR)**
+   * Affiliation: Baidu, Beijing / City University of Hong Kong / Chinese University of Hong Kong — *(Yongkang Fu, Beining Bao, Yu Jiang, Xiangyu Zhao, Hongyang Wei, Guangxing Chen, Zuodong Yang, Shantao Li, Zonggang Wu, Yuqi Lu, Shouke Qin, Hanmeng Liu, Maolin Wang)*
+   * Link: [arxiv.org/abs/2609.23677](https://arxiv.org/abs/2609.23677)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 20 Sep 2026); deployed on Baidu APP
+   * TL;DR: A production retrieval framework that fits 10^4 to 10^5 user actions in a fixed serving budget via hierarchical temporal compression, disentangled multi-query interest extraction with orthogonality, and LLM-distilled multimodal alignment, plus hierarchical beam-search retrieval; online A/B gives +0.26% DAU and +0.89% session duration (p<0.05) on Baidu APP.
+   * Key techniques:
+     - Hierarchical temporal compression (recent actions at full resolution, older segments progressively pooled)
+     - Disentangled multi-query interest extraction with orthogonality regularization
+     - Multimodal semantic alignment augmenting sparse item IDs with LLM-distilled textual summaries
+     - Asynchronous user-representation refresh with adaptive caching
+     - Hierarchical beam-search retrieval across heterogeneous hardware
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (described as a production system rolled out at Baidu)
+     - **Novelty: 6/10** — a system-level integration of known components into a deployable long-sequence multi-interest pipeline rather than a new primitive
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 8/10** — online A/B across homepage feed, discovery feed and short-video scenarios with significant DAU / session gains and reduced latency
+     - **Impact: 8/10** — Baidu; significant real-world deployment gains at scale
+
+4. **A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR)**
+   * Affiliation: Yandex, Moscow / Applied AI Institute, Moscow / HSE University, Moscow — *(Veronika Ivanova, Marina Munkhoeva, Ivan Razvorotnev, Evgeny Frolov)*
+   * Link: [arxiv.org/abs/2609.23849](https://arxiv.org/abs/2609.23849)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 20 Sep 2026)
+   * TL;DR: Studies feature decorrelation as a knob to reshape representation geometry in dot-product sequential recommenders and curb popularity-driven concentration; proposes BT-SR (Barlow Twins regularization) with label-consistent positive pairs (shared next-item target), enabling controllable accuracy-exposure trade-offs across head and tail.
+   * Key techniques:
+     - Decorrelation-regularized training augmenting next-item prediction with a redundancy-reduction term
+     - BT-SR instantiating it with the Barlow Twins objective
+     - Label-consistent positive pairs (user histories sharing the same next-item) without synthetic corruptions
+     - Geometric analysis of low-rank direction suppression in user representation space
+     - Bucket-based alignment concentration metric quantifying head-vs-tail exposure
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/Veronika-Ivanova/barlow_twins_sasrec](https://github.com/Veronika-Ivanova/barlow_twins_sasrec): full code, preprocessing scripts and ablation studies; deductions: single-org, method-specific, no pretrained weights
+     - **Novelty: 6/10** — applying Barlow-Twins decorrelation to control head/tail exposure in sequential rec is a sensible refinement, not a paradigm shift
+     - **Fairness: 7/10** — directly targets popularity-driven concentration and the accuracy-exposure trade-off
+     - **Robustness: 6/10** — five public benchmarks plus geometric analysis
+     - **Impact: 5/10** — sequential-rec systems; practical for long-tail exposure control
+
+5. **Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery**
+   * Affiliation: Google LLC (YouTube Music / Google Research) — *(Xiao Liu, Yanwei Song, Srivaths Ranganathan, Yuan Chen, Zheyun Feng, Parker Steenburgh, Jochen Klingenhoefer, Nathan Lasche, Gergo Varady, Tim Steele)*
+   * Link: [arxiv.org/abs/2609.23877](https://arxiv.org/abs/2609.23877)
+   * Venue: arXiv preprint, September 2026 (cs.AI / cs.IR; submitted 20 Sep 2026)
+   * TL;DR: An industry case study of a decoupled recommendation architecture that pre-computes LLM-generated natural-language rationales for undiscovered artists asynchronously offline, lowering the trust barrier for exploration; large-scale online A/B shows significant gains in both user exploration and overall engagement on YouTube Music discovery surfaces.
+   * Key techniques:
+     - Decoupled recommendation architecture isolating LLM inference asynchronously offline
+     - Pre-computed personalized candidate pools of undiscovered artists with tailored rationales
+     - LLM-generated transparent natural-language rationales (Gemini) for explainability
+     - Large-scale online A/B on YouTube Music discovery surfaces
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (Google internal production system)
+     - **Novelty: 5/10** — an engineering / deployment case study of async LLM rationale generation, not a new method
+     - **Fairness: 2/10** — not fairness-focused; addresses exploration / trust barrier for new content
+     - **Robustness: 7/10** — large-scale online A/B with statistically significant exploration and engagement gains
+     - **Impact: 8/10** — Google / YouTube Music; significant real-world deployment
+
 
 ### Papers September 21
 
@@ -481,6 +574,7 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Fairness: 9/10** — the entire objective is filter-bubble reduction: exposure diversity and resistance to feedback-loop narrowing are the target metrics, not an afterthought
      - **Robustness: 5/10** — two public CRS datasets with consistent gains, but no online study and no analysis of how the facets behave under long-horizon drift
      - **Impact: 6/10** — AAAI 2024 venue; a late arXiv upload, but a useful reference point now that diversity and cocoon effects are back on the generative-rec agenda
+   * re-hit: 1 — Also published on 2026-09-22 (re-spotted in the cs.IR recent listing; first added under Papers September 18)
 6. **Self-Evolving Search Index (SELF-INDEX)**
    * Affiliation: Yonsei University — *(with Samsung Research, University of California Irvine, and Korea University)*
    * Link: [arxiv.org/abs/2609.19656](https://arxiv.org/abs/2609.19656)
@@ -1240,125 +1334,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 3/10** — argumentative, no empirical evaluation
      - **Impact: 5/10** — published in Ethical Theory and Moral Practice; policy-relevant
 
-### Papers September 12
-
-*Saturday, September 12, 2026. ArXiv weekend pause — no new announcement batch since Thursday (Sep 10), which the Sep 11 run already covered. Re-scanned the Sep 4–9 cs.IR / cs.AR / cs.AI batches and surfaced 7 on-topic papers missed by prior runs. 7 papers found (1 opensource). Core: High-Bandwidth Flash GR serving (Huawei), EAGER generative query rec (Alibaba International, deployed), AI housing-rec audit (compliance-without-optimization), Long-Short View Gap sequential rec (Texas A&M/UNSW, CIKM 2026, opensource), AdaKG node-aware KG fusion (Soongsil), green-cost-of-fairness (JKU Linz/ISISTAN), ADHD engagement trap (TU Graz).*
-
-1. **Enabling High-Bandwidth Flash for Generative Recommendation Serving with Write-Aware KV Cache Policy**
-   * Affiliation: Huawei Technologies Co., Ltd. — *(Danni Peng, Kai Wu, Tianyu Zuo, Pengfei Xia, Hui Zang)*
-   * Link: [arxiv.org/abs/2609.07175](https://arxiv.org/abs/2609.07175)
-   * Venue: arXiv preprint, September 2026 (cs.AR)
-   * TL;DR: Write-aware (LRU-K) KV-cache admission for High-Bandwidth Flash in generative-rec serving, decoupling writes from cache misses to extend flash lifetime from ~1 year to 6+ years while boosting throughput 3.8–4.7× over HBM-only.
-   * Key techniques:
-     - Admission-controlled LRU-K: filters low-reuse users before cache admission to cut write traffic
-     - Analytical model of GR serving throughput, KV-cache write traffic, and HBF endurance
-     - Evaluation across diverse memory systems (HBM / HBM+CPU / HBF) and GR workloads
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (Huawei systems paper)
-     - **Novelty: 6/10** — write-aware KV-cache policy for HBF is a fresh serving-systems angle for GR
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — analytical model + multi-system / multi-workload evaluation
-     - **Impact: 6/10** — Huawei; addresses the KV-cache capacity/bandwidth bottleneck as GR scales
-
-2. **EAGER: Enrich-and-Align Generative Query Recommendation from Clicked Items in E-commerce Search**
-   * Affiliation: Alibaba International Digital Commerce Group — *(Shuwei Yuan, Mingqian Ding, Luxin Liu, Rong Xiao, Xiaoyi Zeng)*
-   * Link: [arxiv.org/abs/2609.07143](https://arxiv.org/abs/2609.07143)
-   * Venue: arXiv preprint, September 2026 (cs.IR); deployed in production
-   * TL;DR: Two-stage generative query recommendation that first enriches clicked items into queries via a four-stage SFT curriculum, then aligns them to business objectives via GRPO with hybrid rewards; deployed at Alibaba International.
-   * Key techniques:
-     - Four-stage curriculum scaling information richness (item-only → user-conditioned) and reasoning depth (direct → CoT)
-     - Rationale augmentation, diversity regularization, and self-distillation in the enrichment stage
-     - GRPO post-training with a hybrid reward (rule-based business signals + preference-aware click reward)
-     - Offline experiments + online A/B; production deployment
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — enrich-then-align two-stage framing for click-grounded query generation is a clean industrial recipe
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — offline + online A/B; production deployment
-     - **Impact: 7/10** — Alibaba International; deployed generative query recommendation
-
-3. **Following the Preference, Missing the Optimum: Compliance Without Optimization in AI Housing Recommendation**
-   * Affiliation: Independent Researcher (Harvard University, DDes) — *(Hsuan Lo)*
-   * Link: [arxiv.org/abs/2609.10856](https://arxiv.org/abs/2609.10856)
-   * Venue: arXiv preprint, September 2026 (pre-registered audit)
-   * TL;DR: Audits LLM housing recommendation against a verifiable Pareto-frontier ground truth and finds near-perfect constraint compliance but 39% strictly-dominated recommendations — a "compliance without optimization" failure costing users ~US$900/month.
-   * Key techniques:
-     - Enumerated inventory of 120 real NYC listings with GTFS-computed transit commute per 150 synthetic renter scenarios
-     - Pareto-dominance instrumentation: a rec is dominated if a cheaper, faster, no-smaller listing exists in the same pool
-     - Within-scenario manipulation separating preference-honoring from optimization
-     - 9,945 calls across three models / two vendors; replicates within US$3 across OpenAI and Anthropic
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — verifiable ground-truth Pareto audit and the "compliance without optimization" framing are fresh
-     - **Fairness: 8/10** — directly measures discrimination and lost opportunity in housing rec
-     - **Robustness: 7/10** — large-scale (9,945 calls), pre-registered, cross-vendor replication
-     - **Impact: 6/10** — policy-relevant independent audit methodology
-
-4. **Closing the Long-Short View Gap in Sequential Recommendation without Cached History**
-   * Affiliation: Texas A&M University / University of New South Wales — *(Lingfeng Shi, Chengkai Huang, Lina Yao, James Caverlee)*
-   * Link: [arxiv.org/abs/2609.06219](https://arxiv.org/abs/2609.06219)
-   * Venue: CIKM 2026
-   * TL;DR: Closes the performance gap between training on long histories and serving on short recent behaviors — without persistent cached states — via angular similarity scoring, prefix-position-bias correction, and fine-tuning only bias/LayerNorm parameters.
-   * Key techniques:
-     - Angular (cosine) similarity scoring replaces dot-product to counter prefix position bias
-     - Modified softmax for prefix position-bias correction
-     - Two-stage framework: scoring correction then bias/LayerNorm-only fine-tuning (universal to sequential backbones)
-     - 2 backbones × 3 public datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/lingfengs111/long-short-view-rec](https://github.com/lingfengs111/long-short-view-rec) — full src/ + tests/ + config + reproduce.sh + README, Apache 2.0; 0 stars, single commit
-     - **Novelty: 6/10** — training-free-ish (bias/LayerNorm-only) gap closing is a neat efficiency angle
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — two backbones × three datasets
-     - **Impact: 6/10** — CIKM 2026; practical for low-overhead sequential-rec serving
-
-5. **Do All Nodes Benefit Equally from Knowledge Graphs? Adaptive Node-Aware KG Fusion for Recommendation (AdaKG)**
-   * Affiliation: Soongsil University — *(Jaehyun Park, Minseo Jeon, Daewon Gwak, Sunuk Kim, Hanvit Lee, Jinhong Jung)*
-   * Link: [arxiv.org/abs/2609.05909](https://arxiv.org/abs/2609.05909)
-   * Venue: arXiv preprint, September 2026 (cs.IR)
-   * TL;DR: KG-aware recommendation that adaptively weights item-side knowledge per node, using perturbation-based CF-signal stability to assign more KG reliance to less-stable nodes rather than injecting KG signals indiscriminately.
-   * Key techniques:
-     - Separate view-specific encoders for interaction graph (IG) and knowledge graph (KG) to avoid distorting CF signals
-     - Node-wise KG reliance estimated from CF-signal stability under small adversarial perturbations
-     - Adaptive alignment + fusion of IG/KG embeddings per estimated reliance
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — node-aware adaptive KG fusion via stability probing is a sensible refinement over uniform KG injection
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — multi-dataset comparison vs strong baselines
-     - **Impact: 5/10** — Soongsil U; KG-rec refinement
-
-6. **What Price Fairness? Evaluating Energy - Fairness - Accuracy Trade-off in Recommender Systems**
-   * Affiliation: Johannes Kepler University Linz / ISISTAN (CONICET-UNCPBA) — *(Abhirup Mitra, Oleg Lesota, Antonela Tommasel)*
-   * Link: [arxiv.org/abs/2609.05759](https://arxiv.org/abs/2609.05759)
-   * Venue: arXiv preprint, September 2026
-   * TL;DR: First systematic measurement of the "green cost of fairness" — showing provider-side fairness interventions shift energy cost to inference-time re-ranking (post-processing) vs training (in-processing), and calling for a three-way accuracy-fairness-energy trade-off.
-   * Key techniques:
-     - Compares in-processing, graph-level reweighting, and post-processing fairness interventions
-     - Separate energy measurement across training vs inference stages, two datasets, two hardware settings
-     - Three-way trade-off analysis (accuracy, provider fairness, energy)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — energy-cost-of-fairness is an under-studied, timely angle
-     - **Fairness: 8/10** — provider-side fairness is the core object of study
-     - **Robustness: 6/10** — multi-model, multi-dataset, multi-hardware measurement
-     - **Impact: 6/10** — sustainability + fairness; actionable for green RecSys
-
-7. **Quantifying the Engagement Trap: Impact of Short-form Video Recommender Systems on Users with ADHD**
-   * Affiliation: Graz University of Technology — *(Vedad Misirlic, Gregor Mayr, Elisabeth Lex)*
-   * Link: [arxiv.org/abs/2609.07795](https://arxiv.org/abs/2609.07795)
-   * Venue: arXiv preprint, September 2026
-   * TL;DR: A 302-participant stratified study operationalizing the "Engagement Trap" — showing engagement-optimized short-video recommenders disproportionately harm users with ADHD (time blindness, regret, distress) and proposing neuro-inclusive design principles.
-   * Key techniques:
-     - Operationalizes "Engagement Trap" for neurodivergent users
-     - Stratified Prolific study (302 participants) comparing ADHD vs non-ADHD users
-     - Proof-of-concept neuro-inclusive design interventions + feedback collection
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — neurodiversity-aware framing of algorithmic harm is fresh
-     - **Fairness: 9/10** — directly addresses systemic algorithmic harm to ADHD users
-     - **Robustness: 5/10** — user study (n=302), self-report measures
-     - **Impact: 6/10** — human-centered / neuro-inclusive design for recommender systems
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1605,7 +1580,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 184 papers as of September 21.
+**Count:** 186 papers as of September 22.
 
 | Score | Paper |
 | --- | --- |
@@ -1670,8 +1645,10 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP) |
 | 8/10 | Retrieval, Scoring, and Decoding Shape Performance and Stability in LLM-based Conversational Recommendation (CRS-Performance) |
 | 8/10 | Drift-Aware Continual Tokenization for Generative Recommendation (DACT) |
-| 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
-| 7/10 | Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) |
+| 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro)
+7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
+| 7/10 | A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR)
+7/10 | Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) |
 | 7/10 | Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs (Quanta) |
 | 7/10 | SURF: Subtractive Updates for Recommender Forgetting (SURF) |
 | 7/10 | Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec) |
@@ -1931,6 +1908,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - TAAL / Mitigating Early Beam Pruning via Temporal Autoregressive Alignment -- Harbin Institute of Technology
 - OneLA / Scaling Linear-Attention Decoding to Large Beams -- HKU / Kuaishou
 - UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan
+
+- MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling (MuSeR) — Baidu / CityU HK / CUHK (hierarchical beam-search retrieval)
 
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
