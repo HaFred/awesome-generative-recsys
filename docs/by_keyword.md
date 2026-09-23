@@ -206,6 +206,8 @@
 - When Recommendation Denoising Meets Popularity Bias: Understanding and Mitigating Their Interaction (PAD)
 
 
+- GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings (GroundedGEO) — Shenzhen University, arXiv 2609.25189
+
 ### Diagnostics / Analysis
 - LIME-Rec: Auditing Semantic Gains in Sequential Recommendation (LIME-Rec)
 - SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation (SIDScope)
@@ -255,6 +257,9 @@
 - Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling
 - Kernel-Managed Shared Memory for System-Wide Personalization
 
+
+
+- GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings (GroundedGEO) — Shenzhen University, arXiv 2609.25189
 
 ### Evaluation / Benchmark
 - Bradley-Terry Rankings for Recommender Systems Across Dataset Taxonomies
@@ -394,6 +399,9 @@
 - UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 
 
+
+- IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
+- From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation — Kuaishou, arXiv 2608.21012
 
 ### Generative Recommendation / VAE
 - Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation (Multi-Decoder OneRec)
@@ -547,6 +555,9 @@
 - Iterative Semantic Reasoning from Individual to Group Interests for Generative Recommendation with LLMs (ISRF)
 - Beyond Interleaving: Causal Attention Reformulations for Generative Recommender Systems
 
+- GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings (GroundedGEO) — Shenzhen University, arXiv 2609.25189
+- ReFilter: Bridging Embeddings and LLM Filtering for Similar Mobile App Retrieval (ReFilter) — University of Toronto / Université du Québec à Montréal; ASIS&T 2026, arXiv 2609.25306
+
 ### Generative Retrieval / Ranking
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
 - CapsID: Soft-Routed Variable-Length Semantic IDs
@@ -673,6 +684,8 @@
 
 - Enhancing Group Recommendation with Memory-Augmented Reasoning in LLM Agent (AGR)
 - Iterative Semantic Reasoning from Individual to Group Interests for Generative Recommendation with LLMs (ISRF)
+
+- IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
 
 ### Industrial
 - Decomposing Staleness in Recommender Systems: A Dual-Filter Framework for Supersession and Decay (SDF)
@@ -937,6 +950,8 @@
 - The Lifecycle of LLM-as-a-Judge for Large-Scale Recommendation Explanations
 - From Prompting to Behavioral Alignment: Personalized LLM Judges for Recommendation Evaluation
 
+- Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
+
 ### LLM-based Recommendation
 - Who You Are Adds Nothing Detectable to Where You Go Next: Sociodemographic Conditioning in LLM Next-Location Prediction (Next-Location) — University of Melbourne
 - CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
@@ -1150,6 +1165,9 @@
 
 - Enhancing Group Recommendation with Memory-Augmented Reasoning in LLM Agent (AGR)
 
+
+- IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
+
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
 - L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
@@ -1301,6 +1319,9 @@
 - MuonRec
 
 
+
+- Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
+
 ### Re-ranking
 - Bradley-Terry Rankings for Recommender Systems Across Dataset Taxonomies
 - Can LLM Rerankers Predict Their Own Ranking Performance?
@@ -1428,6 +1449,11 @@
 
 - Enhancing Group Recommendation with Memory-Augmented Reasoning in LLM Agent (AGR)
 
+
+- ReFilter: Bridging Embeddings and LLM Filtering for Similar Mobile App Retrieval (ReFilter) — University of Toronto / Université du Québec à Montréal; ASIS&T 2026, arXiv 2609.25306
+
+- DASO / Difficulty-Aware Semantic-ID Optimization (GRPO rollout-allocation) — Meta / Penn State — [Also published on 2026-09-23]
+
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k)
@@ -1488,6 +1514,9 @@
 
 
 
+
+- From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation — Kuaishou, arXiv 2608.21012
+
 ### Semantic / Structured IDs
 - CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
 - Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs (OGR)
@@ -1516,7 +1545,6 @@
 - DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM)
 - Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte)
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
-- From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation
 - FusID: Modality-Fused Semantic IDs for Generative Music Recommendation (FusID)
 - Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER)
 - GLIDE: Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify (GLIDE)

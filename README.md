@@ -59,6 +59,7 @@ mindmap
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
+        IntBMoE -- Alibaba AMap
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -69,7 +70,7 @@ mindmap
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
-        BT-SR -- Yandex / AIRI
+
 ```
 <div align="center">
   <i> Open-source Generative RecSys Map </i>
@@ -86,6 +87,97 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 ## By Date
 
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
+### Papers September 23
+
+*Wednesday, September 23, 2026. The Wed 23 Sep cs.IR announcement batch contributed only 3 on-topic generative/LLM-rec papers, below the 5-paper floor, so the 3-month fallback was applied; surfaced 5 genuinely-new on-topic papers (1 opensource: IntBMoE / Alibaba AMap). Core: IntBMoE full-participation MoE with block-level conditioning deployed in AMap generative rec (+2.4% UVCTR, 60ms budget); a dynamic single-level large semantic codebook for generative recommendation (Kuaishou); robust fusion of semantic + behavioural signals for LLM reranking in personalised search (Spotify, USRW @ RecSys 2026); GroundedGEO auditing the evidence gap in generative search rankings (Shenzhen U); and ReFilter bridging embeddings & LLM filtering for similar mobile-app retrieval (U Toronto / UQAM, ASIS&T 2026). DASO (2608.20611, Meta/Penn State, opensource) re-spotted — re-hit noted on its existing Aug 30 entry.*
+
+1. **IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation Mixture-of-Experts**
+   * Affiliation: Alibaba (AMap) — *(Ran Cheng, Longfei Xu, Zheng Liu, Kaikui Liu, Xiangxiang Chu)*
+   * Link: [arxiv.org/abs/2609.21346](https://arxiv.org/abs/2609.21346)
+   * Venue: arXiv preprint, September 2026 (cs.LG; submitted 18 Sep 2026)
+   * TL;DR: IntBMoE decouples three MoE quantities — participation (experts contributing per token), execution (experts computed), and materialization (expert parameter sets stored) — via block-conditioned expert composition with sparse block execution, giving full participation at sparse compute; deployed in AMap generative recommendation (+2.4% UVCTR, 60ms budget).
+   * Key techniques:
+     - Block-conditioned MoE: a small learned codebook (one block per entry) drives a hypernetwork that merges all expert bases in a layer's pool into one composed expert
+     - Full participation (every composed expert draws on the whole pool) with sparse execution (router sends each token to only a few blocks)
+     - Bounded materialization fixed by the codebook, not the input
+     - Dual-Path Residual Gating (DPRG): two independently composed paths coupled through multiplicative gating
+     - Deployed in AMap generative rec serving hundreds of millions of users; code at github.com/AMAP-ML/DreamX-Rec
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/AMAP-ML/DreamX-Rec](https://github.com/AMAP-ML/DreamX-Rec): official AMap generative-rec repo containing the IntBMoE expert-composition module (Apache-2.0, reproducible configs); deductions: large multi-module repo, IntBMoE is one component, limited standalone docs
+     - **Novelty: 7/10** — clean decoupling of participation/execution/materialization vs sparse-routing and dense-output-mixing MoE
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — image-classification + language-modeling + sequential-rec experiments, plus online A/B on AMap
+     - **Impact: 8/10** — Alibaba AMap; deployed generative rec with measurable UVCTR uplift at scale
+
+2. **From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation**
+   * Affiliation: Kuaishou — *(Tianlu Xie, Xin Ku, Mingjie Sun, Yunhao Sha, Lixiang Wang, Peng Wang, Yiyu Wang, Wenjin Wu, Zhaojie Liu, Peng Jiang, Wenwu Ou)*
+   * Link: [arxiv.org/abs/2608.21012](https://arxiv.org/abs/2608.21012)
+   * Venue: arXiv preprint, August 2026 (cs.IR / cs.LG; submitted 21 Aug 2026)
+   * TL;DR: Replaces multi-level residual-quantization SIDs with a single-level large semantic codebook (one semantic token per item, plus a separate collaborative disambiguation token to cut collisions) and an exposure-aware dynamic update, reducing autoregressive-decoding FLOPs ~48% and lifting QPS 28.6–47.0%.
+   * Key techniques:
+     - Single-level large semantic codebook replacing nested RQ-VAE levels
+     - Separate collaborative disambiguation token to reduce item collisions
+     - Exposure-aware dynamic update: temporal weight decay + EMA center updates + exposure-weighted penalty on SID changes
+     - Offline eval framework (representation quality, code utilization, cluster load, full-SID collision, temporal stability)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — questions the multi-level SID assumption with a flat large codebook + dynamic update, a useful structural counterpoint
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — two public datasets (OneRec-V1/V2), KuaiRec online, three serving architectures
+     - **Impact: 7/10** — Kuaishou; +0.792% primary consumption on a 5-day 2.5%-traffic A/B; directly relevant to large-scale generative-rec SID design
+
+3. **Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search**
+   * Affiliation: Spotify — *(Aleksandr V. Petrov, Nathan Stein, Erik Lybecker, Emma Schüldt, Daniel Lazarovski, Hugues Bouchard, Mounia Lalmas)*
+   * Link: [arxiv.org/abs/2609.25825](https://arxiv.org/abs/2609.25825)
+   * Venue: USRW Workshop @ RecSys 2026 (accepted)
+   * TL;DR: Studies shortcut learning when injecting behavioural Query Slice Stats (QSS) into LLM rerankers for personalised search, and fixes it with deterministic dual-sample feature-dropout training that preserves QSS gains while staying robust when the feature is unavailable.
+   * Key techniques:
+     - LLM-based cross-encoder reranking interface for personalised search
+     - QSS: interaction-derived behavioural feature summarising historical success for query-candidate pairs
+     - Deterministic dual-sample feature-dropout: each example shown once with QSS and once without
+     - Offline + live online evaluation on a large-scale audio-streaming search system
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (workshop paper)
+     - **Novelty: 6/10** — dual-sample feature-dropout to curb behavioural-shortcut learning in LLM rerankers is a pragmatic, well-motivated fix
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — the core contribution is robustness under QSS-removed evaluation (4.0% gain over naive QSS training) + ~2% live search-success lift
+     - **Impact: 5/10** — Spotify; workshop-scale but deployed-system study
+
+4. **GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings**
+   * Affiliation: Shenzhen University — *(Yihan Xia, Huiling Fan, Kangrong Zhong, Taotao Wang)*
+   * Link: [arxiv.org/abs/2609.25189](https://arxiv.org/abs/2609.25189)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.AI; submitted 21 Sep 2026)
+   * TL;DR: Audits the "evidence gap" in generative-engine-optimized (GEO) search rankings — the mismatch between claims surfaced and verifiable source evidence — with an evidence-paired benchmark (50 e-commerce queries, 1,950 cases) and a claim-level reranker that penalizes unsupported relevant claims.
+   * Key techniques:
+     - Evidence-paired benchmark of query-candidate cases with matched rich / supported / thinned-packet controls
+     - Claim-level reranker (GroundedGEO) that penalizes query-relevant claims lacking packet support
+     - Diagnostic of evidence-channel limits: label quality + packet coverage
+     - Preregistered reliability gate for automatic judges (all tested judges fail it)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — framing GEO through an evidence-gap audit (claim-evidence relation, not text property) is a fresh diagnostic angle
+     - **Fairness: 6/10** — evidence gaps have trust/fairness implications for information access
+     - **Robustness: 6/10** — controlled variants across multiple ranker models (Qwen2.5-7B, MiMo-v2.5, GLM-5.3-Flash)
+     - **Impact: 6/10** — Shenzhen University; timely given the GEO surge
+
+5. **ReFilter: Bridging Embeddings and LLM Filtering for Similar Mobile App Retrieval**
+   * Affiliation: University of Toronto / Université du Québec à Montréal — *(Buthayna AlMulla, Maram Assi, Safwat Hassan)*
+   * Link: [arxiv.org/abs/2609.25306](https://arxiv.org/abs/2609.25306)
+   * Venue: ASIS&T 2026 (accepted, 89th Annual Meeting)
+   * TL;DR: A hybrid similar-mobile-app retrieval framework that first retrieves semantically related candidates with embeddings, then applies LLM-based contextual filtering to keep only truly functionally similar apps, reaching 90% F1.
+   * Key techniques:
+     - Embedding-based candidate generation for similar-app retrieval
+     - LLM-based contextual filtering pass that removes false-positive neighbours
+     - Efficiency/accuracy balance tuned to avoid scoring all app pairs with the LLM
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (conference paper)
+     - **Novelty: 6/10** — embedding+LLM-filter hybrid for app similarity is a straightforward but useful pipeline
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 6/10** — evaluation on app-retrieval datasets with ablation of the filter stage (F1 90%)
+     - **Impact: 5/10** — U Toronto / UQAM; niche but practical retrieval task
 
 ---
 
@@ -1229,111 +1321,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 7/10** — 5 benchmarks (LOCOMO, LongMemEval, HotpotQA, MuSiQue, 2WikiMultiHopQA)
      - **Impact: 6/10** — MemTensor; long-term memory for personalized/agentic recommenders
 
-### Papers September 13
-
-*Sunday, September 13, 2026. ArXiv weekend pause — no new announcement batch in the last 24h (last batch was Thu Sep 10, already covered by the Sep 11 run; Fri/Sat are no-announcement days). Fallback: re-scanned the Sep 7–11 cs.IR / cs.AI / cs.CL batches and surfaced 6 on-topic papers missed by prior runs (1 opensource). Core: FunnelAudit responsibility auditing for multi-route recsys (RMIT), MORE multi-task ranking backbone deployed on Momo (CIKM 2026), GLIE generative late-interaction embeddings (KAUST, opensource), Matryoshka Hash compact semantic retrieval (CUHK-Shenzhen), Query-Aware Token Budgeting for visual document retrieval (IISER Bhopal, ICDM 2026), Democracy Needs Reach algorithmic recommendation fairness (U Ottawa).*
-
-1. **FunnelAudit: Responsibility Auditing in Multi-Route Recommender Systems**
-   * Affiliation: RMIT University — *(Jie Li, Dudu Luo, Jiayang Niu, Ke Deng, Yongli Ren)*
-   * Link: [arxiv.org/abs/2609.06964](https://arxiv.org/abs/2609.06964)
-   * Venue: arXiv preprint, September 2026 (cs.IR)
-   * TL;DR: An executable framework for incident-level responsibility auditing in multi-route recommenders, using an accountability contract plus graded actual responsibility to find the smallest outcome-preserving contingency that makes each control pivotal, with checkable certificates.
-   * Key techniques:
-     - Accountability contract specifying the disputed Top-K event, controls/owners, permitted reference actions, and replay semantics
-     - Graded actual responsibility over every permitted control configuration; smallest outcome-preserving contingency per control
-     - Verifiable certificate recording the contingency + paired serving executions needed to verify the judgment
-     - 258,809 user-target incidents across 3 real datasets; independent replay reproduces all 9,121,792 outcomes; MILP cross-check
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — executable, witness-based responsibility auditing for recsys is a fresh governance angle
-     - **Fairness: 7/10** — accountability/attribution of inclusion-exclusion decisions underpins fairness audits
-     - **Robustness: 8/10** — large-scale incident study + exhaustive independent replay + MILP agreement
-     - **Impact: 6/10** — RMIT; actionable accountability tooling for multi-route recommenders
-
-2. **Task-Blind No MORE: Multi-Task Information Flow in Unified Ranking Backbones**
-   * Affiliation: Momo Inc. (Hello Group) — *(Yuchen Wang, Feng Niu, Qing Tan, Junting Lu, Baoxin Wu, Jun Gao)*
-   * Link: [arxiv.org/abs/2609.07273](https://arxiv.org/abs/2609.07273)
-   * Venue: CIKM 2026
-   * TL;DR: MORE embeds multi-task information flow inside a unified ranking backbone via persistent Anchor Tokens (Shared + Private), so task-specific signals co-evolve with sequence and feature representations at every layer — deployed in production on Momo.
-   * Key techniques:
-     - Anchor Tokens persisting across layers: Shared Anchors encode cross-task commonalities, Private Anchors capture task-specific priors
-     - Task-boundary mask mixes anchors with non-sequential features; independent per-task refinement branches
-     - Request-level shared computation cuts scoring latency ~30%
-     - Online A/B on Momo (tens of millions MAU): +3% usage duration, +3.6% interaction rate, +2% deep-chat rate
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (industrial deployment)
-     - **Novelty: 6/10** — moving multi-task learning into the backbone (vs post-hoc towers) is a clean architectural shift
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 8/10** — industrial datasets + online A/B + production deployment; scales with model size
-     - **Impact: 8/10** — CIKM 2026; deployed multi-task ranking at Momo scale
-
-3. **Generative Late-Interaction Embeddings For Visual Document Retrieval**
-   * Affiliation: King Abdullah University of Science and Technology (KAUST) — *(Mohamed Eltahir, Talal Aloushan, Rose Khairoalsendi, Jana Shata, Mohammed Alhassan, Leen Alrehaili, Naeemullah Khan; Tanveer Hussain — Edge Hill University)*
-   * Link: [arxiv.org/abs/2609.11808](https://arxiv.org/abs/2609.11808)
-   * Venue: arXiv preprint, September 2026 (cs.IR)
-   * TL;DR: GLIE regenerates a page's full late-interaction embedding set from a tiny learned basis (k≪N vectors), exploiting the geometric finding that ColPali/ColQwen vectors lie on the unit sphere with intrinsic dimension ~5–6 — cutting storage ~200× while retaining ~80% nDCG@5 at 4 vectors/page.
-   * Key techniques:
-     - Geometry-first insight: vectors lie exactly on the unit sphere near a 5–6-dim manifold, so few vectors regenerate all N
-     - Spherical k-means anchoring (free +0.093 nDCG@5); generative decoder expands top-L candidates for exact MaxSim rescoring
-     - Frozen encoder; 415K-param codec fitted in <3 GPU-min on 1K pages, zero-shot across ViDoRe v1+v2
-     - Beats every prior post-hoc compression baseline at every budget, and encoder fine-tuning at a matched budget
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/mohammad2012191/GLIE](https://github.com/mohammad2012191/GLIE) — full package (glie/ + scripts/ + LICENSE + requirements.txt) with detailed usage guide, reproduce_main.sh, config docs, and citation; fresh (Sep 10–11) but complete and reproducible
-     - **Novelty: 7/10** — generative reconstruction of multi-vector representations from a compact code is a new axis for storage-efficient retrieval
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — 3 encoders × ViDoRe v1+v2, zero-shot transfer, matched-budget ablations
-     - **Impact: 7/10** — KAUST; ~200× storage savings for late-interaction retrieval deployment
-
-4. **Matryoshka Hash Representations for Model-Aware Compact Semantic Retrieval**
-   * Affiliation: The Chinese University of Hong Kong, Shenzhen — *(Peichun Hua, Yunming Xiao)*
-   * Link: [arxiv.org/abs/2609.07276](https://arxiv.org/abs/2609.07276)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.AI / cs.LG)
-   * TL;DR: MHR decouples full-width binary-code training from prefix organization via a two-stage procedure (long code first, then frozen-model residual adaptors), yielding directly searchable nested 64/128/256-bit prefixes without degrading full-width quality.
-   * Key techniques:
-     - Two-stage decoupling of full-width training vs prefix organization; zero-initialized residual code adaptors
-     - Documents stored at 1 bit/coordinate; queries keep continuous logits (PQ-like) for expressivity
-     - FAISS FastScan implementation; MS MARCO → zero-shot 7 BEIR datasets
-     - .5561 NDCG@10 / .6535 Recall@100 at 32 bytes; drop-in for PQ, shortlisting, and LEANN graph pruning
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — identifying and resolving the full-width–prefix trade-off in nested binary codes is a focused, well-motivated contribution
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — 7 BEIR datasets + ablations across index types
-     - **Impact: 5/10** — CUHK-Shenzhen; model-aware compact quantization relevant to rec candidate generation
-
-5. **Query-Aware Token Budgeting for Efficient Late-Interaction Visual Document Retrieval**
-   * Affiliation: Indian Institute of Science Education and Research (IISER) Bhopal — *(PS Rishi, Rajeev Ranjan Dwivedi, Vinod K. Kurmi)*
-   * Link: [arxiv.org/abs/2609.07262](https://arxiv.org/abs/2609.07262)
-   * Venue: IEEE ICDM 2026
-   * TL;DR: Formulates second-stage visual-document token selection as a budgeted MaxSim coverage problem (monotone submodular when clipped) and shows query-aware token budgeting recovers 93.99–98.39% of full-token score versus 32× static pooling.
-   * Key techniques:
-     - Compressed hot-path index generates candidates; query-aware budgeting over original token sets of shortlisted pages
-     - Budgeted MaxSim coverage formulation; clipped version proven monotone submodular
-     - Coverage-only / cluster-guided / token-wise / greedy marginal-gain policies compared
-     - 10 ViDoRe tasks; greedy marginal-gain recovers 98.39% of full-token score at pool-factor-8 budget
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — query-aware allocation (vs query-agnostic pooling) with a submodular formulation is a neat efficiency framing
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — 10 ViDoRe tasks; hold-out + leave-one-dataset-out; ICDM 2026
-     - **Impact: 5/10** — IISER Bhopal; efficiency for late-interaction visual retrieval
-
-6. **Democracy Needs Reach: Political Equality, Online Speech, and Algorithmic Recommendation**
-   * Affiliation: University of Ottawa — *(Étienne Brown)*
-   * Link: [arxiv.org/abs/2609.09465](https://arxiv.org/abs/2609.09465)
-   * Venue: Ethical Theory and Moral Practice (2026)
-   * TL;DR: Argues that unequal distribution of algorithmic reach on social platforms undermines equality of opportunity for political influence, and proposes "recommendation floors" (guaranteed minimum recommendation for a limited number of political posts/week) as a fairness mechanism.
-   * Key techniques:
-     - Normative analysis (drawing on Niko Kolodny) of algorithmic reach and equal opportunity for political influence (EOPI)
-     - "Recommendation floors" proposal for verified accounts' political speech
-     - Policy/structural-reform framing for the digital public sphere
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (philosophy/policy paper)
-     - **Novelty: 5/10** — recommendation floors as a concrete speech-equality mechanism is a fresh policy proposal
-     - **Fairness: 8/10** — political equality / equal-opportunity-for-influence is the core object of study
-     - **Robustness: 3/10** — argumentative, no empirical evaluation
-     - **Impact: 5/10** — published in Ethical Theory and Moral Practice; policy-relevant
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1580,7 +1567,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 186 papers as of September 22.
+**Count:** 187 papers as of September 23.
 
 | Score | Paper |
 | --- | --- |
@@ -1648,6 +1635,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro)
 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
 | 7/10 | A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR)
+| 7/10 | IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation Mixture-of-Experts (IntBMoE)
 7/10 | Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) |
 | 7/10 | Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs (Quanta) |
 | 7/10 | SURF: Subtractive Updates for Recommender Forgetting (SURF) |
@@ -2027,7 +2015,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - RecGPT-Mobile-V2 / On-Device Query Prediction with Reasoning-Cost RL -- Alibaba (Taobao)
 - DCEO / Direct Causal Effect Optimization (actor-critic) for Long-Term User Value -- Alibaba (Taobao & Tmall)
 - Astar / Self-Evolving Industrial AI Evolution-Direction Proposal (mid-training + SFT + RL) -- Alibaba (Lazada) / Zhejiang University
-- DASO / Difficulty-Aware Semantic-ID Optimization (GRPO rollout-allocation) -- Meta / Penn State
+- DASO / Difficulty-Aware Semantic-ID Optimization (GRPO rollout-allocation) -- Meta / Penn State — [Also published on 2026-09-23]
 - CoGR / It Takes Two to Match: Co-Evolving Generative Retriever with Reinforcement Learning -- UNC Chapel Hill / Apple
 - WMG-RL / World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation -- CUHK / ByteDance / Zhejiang University
 - DMRL / Document-Mediated Reinforcement Learning for Skill Optimization in Advertising Recommendation -- SJTU / Kuaishou
