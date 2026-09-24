@@ -70,6 +70,7 @@
 | **Dalhousie University** | CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER) |
 | **Dalian University of Technology** | Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go) ‖ RAGR: Review-Augmented Generative Recommendation |
 | **Deezer** | Music Playlist Captioning at Scale with Large Language Models |
+| **DePaul University** | When LLM-Based User Profiling Adds Value in Production Streaming Recommendation (WhenLLM-Profiling) |
 | **Dolby Laboratories** | Multimodal Music Recommendation System using LLMs |
 | **DoorDash Inc.** | Joint Optimization of Relevance and Engagement in Multi-Task Ranking for E-Commerce with Efficient LLM Supervision ‖ Mind the Gap: Bridging Behavioral Silos with LLMs in Multi-Vertical Recommendations ‖ One Hierarchy, Two Systems: Semantic Product IDs for Discovery-Surface Ranking and Search-Page Query Reformulation |
 | **Duke Kunshan University / Duke University** | COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs ‖ From Bootstrapping to Sequence Modeling: A Unified Generative Framework for Personalized Landing-Page Modeling (GLAN) |

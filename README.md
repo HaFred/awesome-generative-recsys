@@ -59,7 +59,6 @@ mindmap
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
-        IntBMoE -- Alibaba AMap
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -67,6 +66,7 @@ mindmap
         DIGER -- U Glasgow / Shandong / Amazon
         DACT -- Fudan U
         SID-Repro -- Shandong U / Glasgow / Leiden
+        CHAP -- USTC
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -89,6 +89,141 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers September 24
+
+*Wednesday, September 24, 2026. The Wed Sep 24 cs.IR announcement batch was thin on on-topic generative/LLM-rec papers; 7 of the 8 in-scope papers below were in fact already indexed in the docs files (docs/by_keyword.md and docs/by_affiliation.md) by the Sep 23 three-month fallback, but their README `### Papers` entries were missing and are completed today, while 1 (When LLM-Based User Profiling, submitted 23 Sep) is a fresh last-24h find. 8 papers total (1 opensource: CHAP / USTC). Core: CHAP hierarchical cross-component semantic alignment for personalized generative retrieval with single-pass residual-cascading decoding (USTC, opensource, EMNLP 2026 Findings); SPAR and HF-SID pushing geographic/numeric-fidelity Semantic IDs for AMap POI generative retrieval (HF-SID deployed +6.74% PV_CVR / +6.03% UV_CVR); PrismRec spectral-factorization flow matching for micro-video; MGDiff masking-GNN-guided diffusion for multi-interest sequential recommendation; DiffCold conditional-diffusion resolution of the cold-start seesaw dilemma (ECML-PKDD 2026); Bottom-Up clustering for structure-preserving Semantic IDs (Cornell / PayPal); and a production study on when LLM-based user profiling pays off (DePaul).*
+
+1. **CHAP: Preference Shapes Relevance: Cross-component Hierarchical Semantic Alignment for Personalized Generative Retrieval**
+   * Affiliation: University of Science and Technology of China (USTC) — *(Gaoming Zhang, Angqing Jiang, Jianchun Song, Kena Qi, Dayao Chen, Wei Lin, Defu Lian)*
+   * Link: [arxiv.org/abs/2608.30553](https://arxiv.org/abs/2608.30553)
+   * Venue: Findings of EMNLP 2026 (22 pages, 10 figures, 7 tables; cs.IR / cs.AI; submitted 31 Aug 2026)
+   * TL;DR: CHAP is a personalized generative-retrieval framework that hierarchically aligns the query's latent space with the item's quantization path and synergizes discrete Semantic IDs (structural guidance) with continuous representations (fine-grained refinement); a Residual Cascading Generation mechanism restricts the costly Transformer decoder to a single pass, boosting throughput while mitigating information loss.
+   * Key techniques:
+     - Hierarchical Semantic Alignment: aligns query latent space with item quantization path and synchronizes multi-granular semantics
+     - Personalized GR that models user behavior via discrete SIDs + continuous representations
+     - Residual Cascading Generation: single-pass inference instead of multi-step autoregressive beam search
+     - Code released at github.com/zzzgm/CHAP (3 public + 1 proprietary industrial dataset, online A/B)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/zzzgm/CHAP](https://github.com/zzzgm/CHAP): official repo with code, configs and the industrial-dataset pipeline; deductions: limited standalone documentation / README depth
+     - **Novelty: 7/10** — hierarchical cross-component alignment + residual-cascading single-pass decoding is a clean twist on GR decoding
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — 3 public datasets + 1 proprietary industrial + online A/B tests
+     - **Impact: 7/10** — USTC; solid empirical + deployment story for personalized GR
+
+2. **SPAR: Enhancing Industrial-Scale Generative POI Recommendation via Real-World Spatial Perception**
+   * Affiliation: AMAP, Alibaba Group — *(Fangye Wang, Yunjin Gu, Haowen Lin, Yifang Yuan, Song Yang, Xiaojiang Zhou, Pengjie Wang)*
+   * Link: [arxiv.org/abs/2609.02062](https://arxiv.org/abs/2609.02062)
+   * Venue: arXiv preprint, September 2026 (cs.IR; v1 2 Sep 2026, v2 17 Sep 2026)
+   * TL;DR: SPAR injects real urban spatial knowledge (distance, direction, reachability) into the generative POI recommendation interest space via three synergistic stages — spatially-intrinsic SID tokenization, geospatial continual pre-training, and task-vector-anchored SFT — so predictions are geographically coherent rather than merely behaviorally plausible.
+   * Key techniques:
+     - Spatially-Intrinsic SID (SI-SID): sinusoidal geospatial embedding fused with textual semantic, quantized via RQ-Kmeans for semantically + geographically consistent IDs
+     - Multi-Granular Geospatial CPT (MG-CPT): continual pre-training on 25 curated geospatial datasets (attributes, pairwise relations, city-scale navigation)
+     - Task-Vector Anchored SFT (TV-SFT): freezes acquired spatial knowledge as a parameter-space task vector to prevent catastrophic forgetting during behavioral fine-tuning
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — explicit spatial-knowledge injection into the generative-rec interest space is a clear LBS contribution
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — 2 public + 4 industrial-scale datasets, with visualization studies
+     - **Impact: 7/10** — Alibaba AMap; directly targets industrial POI generative retrieval
+
+3. **HF-SID: High-Fidelity Semantic IDs for Generative Retrieval in Location-Based Services**
+   * Affiliation: AMAP, Alibaba Group — *(Haowen Lin, Jing Li, Zhibin Hao, Fangye Wang, Lihui Su, Song Yang, Xiaojiang Zhou, Pengjie Wang)*
+   * Link: [arxiv.org/abs/2608.30479](https://arxiv.org/abs/2608.30479)
+   * Venue: arXiv preprint, August 2026 (cs.IR; submitted 31 Aug 2026)
+   * TL;DR: HF-SID restores geographic, numerical, and structural fidelity at the representation stage before discretization — 3D Cartesian coordinates, unit-encoded numerics, and structure-based contrastive learning — producing high-fidelity 3-token SIDs at no extra decoding cost; deployed in AMap with +6.74% PV_CVR / +6.03% UV_CVR.
+   * Key techniques:
+     - Continuous 3D Cartesian coordinate transform so numeric differences reflect true geographic distance
+     - Type-aware numerical unit encoding (Geo-CPT, Num-CPT) for scale-robust dynamic attributes
+     - Structure-based Contrastive Learning on the last-layer residual to separate co-located POIs differing at the fine level
+     - 3-token SID at no extra decoding cost (enriches representation, not the identifier length)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — deployed industrially at AMap but no public code
+     - **Novelty: 7/10** — fidelity-first representation before quantization is a sharp LBS-specific angle
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — large-scale industrial evaluation + deployment metrics
+     - **Impact: 8/10** — Alibaba AMap; measurable online CVR uplift at scale
+
+4. **PrismRec: Preference Flow Matching with Spectral Factorization for Micro-video Recommendation**
+   * Affiliation: National University of Defense Technology — *(Xinxin Dong, Haokai Ma, Fei Hu, YuZe Zheng, Bin Wu, Yonghui Yang, Xiaodong Wang)*
+   * Link: [arxiv.org/abs/2608.26579](https://arxiv.org/abs/2608.26579)
+   * Venue: arXiv preprint, August 2026 (cs.IR; submitted 27 Aug 2026)
+   * TL;DR: PrismRec is a preference flow-matching framework for micro-video recommendation that uses Spectral Semantic Factorization to split frame representations into static semantic and dynamic factors via a frequency-domain mask, then Context-Calibrated Preference Matching to inject user-specific calibrated context as a structured condition steering the flow toward the target.
+   * Key techniques:
+     - Spectral Semantic Factorization (SSF): prior-guided learnable frequency mask separates static semantic vs evolving dynamic factors from frame-level representations
+     - Context-Calibrated Preference Matching (CPM): weights factors by each user's sensitivity and injects calibrated context as a structured condition
+     - Flow-matching generation with video content as an intrinsic driver of preference formation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — spectral (frequency-domain) factorization of video semantics for flow matching is distinctive
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — 4 datasets from 2 platforms, lowest inference cost / peak memory among compared methods
+     - **Impact: 7/10** — micro-video domain; up to 22.65% over SOTA on some datasets
+
+5. **MGDiff: Multi-Interest Sequence Recommendation with Masking GNN-Guided Diffusion**
+   * Affiliation: Huazhong University of Science and Technology — *(Wenjing Xiao, Hao Ding)*
+   * Link: [arxiv.org/abs/2609.01619](https://arxiv.org/abs/2609.01619)
+   * Venue: arXiv preprint, June 2026 (cs.IR; submitted 30 Jun 2026)
+   * TL;DR: MGDiff is a multi-interest sequential-recommendation framework using a Masking GNN-guided diffusion model that generates accurate, popularity-bias-free user interest during diffusion, combining dual-layer semantic guidance, a link-reconstructing masking GNN, and a popularity-aware guidance mechanism.
+   * Key techniques:
+     - Dual-layer Semantic Guidance (DSG): latent item-semantics extraction + multi-dimensional intent decoupling
+     - Weight-adaptive Masking GNN: reconstructs missing links to uncover deep item relationships beyond co-occurrence
+     - Dynamic Multi-Expert Network: projects preferences into distinct semantic subspaces to suppress irrelevant interference
+     - Popularity-Aware Guidance (PAG): differentiable popularity signal recalibrates similarity to reduce popularity bias
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — GNN-guided diffusion for multi-interest seq rec is a reasonable combination
+     - **Fairness: 0/10** — not fairness-focused (popularity debiasing ≠ demographic fairness)
+     - **Robustness: 6/10** — 4 widely-used datasets
+     - **Impact: 6/10** — incremental multi-interest + diffusion contribution
+
+6. **DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation**
+   * Affiliation: Shanghai Jiao Tong University / Xiaohongshu Inc. — *(Kangning Zhang, Yingjie Qin, Weinan Zhang, Yong Yu, Jianghao Lin)*
+   * Link: [arxiv.org/abs/2606.12245](https://arxiv.org/abs/2606.12245)
+   * Venue: ECML-PKDD 2026 (accepted; cs.IR / cs.AI; submitted 10 Jun 2026)
+   * TL;DR: DiffCold is a diffusion-based generative model that resolves the cold-start "seesaw dilemma" by unifying warm (behavioral manifold) and cold (semantic manifold) item representations via conditional diffusion, with a retrieval-enhanced aggregator and simulation-based representation alignment.
+   * Key techniques:
+     - Conditional diffusion reconstructs warm item embeddings from content, preserving manifold structure without degrading warm precision
+     - Retrieval-enhanced Aggregator initializes generation from semantically similar warm items to bypass inefficient noise
+     - Simulation-based Representation Alignment: contrastive module enforcing distribution consistency between generated and real embeddings
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — frames cold-start as a distributional-disparity / seesaw problem and uses diffusion to unify manifolds
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 6/10** — 3 benchmarks
+     - **Impact: 7/10** — ECML-PKDD 2026; addresses a persistent industrial pain point
+
+7. **Exploring Bottom-Up Clustering for Creating Semantic IDs**
+   * Affiliation: Cornell University / PayPal AI — *(Leah Woldemariam, Sudhanshu Garg, Taha Belkhouja, Charles Kim-Yip, Ali Sahami)*
+   * Link: [arxiv.org/abs/2609.08310](https://arxiv.org/abs/2609.08310)
+   * Venue: Workshop paper, September 2026 (cs.IR / cs.AI; submitted 8 Sep 2026)
+   * TL;DR: Proposes a bottom-up clustering algorithm for Semantic ID construction that preserves local embedding structure (unlike top-down residual quantization), yielding unique, structure-preserving identifiers that improve downstream generative-retrieval utility.
+   * Key techniques:
+     - Bottom-up clustering to preserve local structure in the embedding space
+     - Uniqueness guarantees for each identifier
+     - Structure preservation vs residual-quantization (RQ-VAE) hierarchical baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (workshop paper)
+     - **Novelty: 6/10** — bottom-up (vs residual top-down) clustering for SID is a sensible structural counterpoint
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 6/10** — clustering-quality + downstream generative-retrieval utility evaluation
+     - **Impact: 6/10** — Cornell / PayPal; workshop-scale SID-method contribution
+
+8. **When LLM-Based User Profiling Adds Value in Production Streaming Recommendation**
+   * Affiliation: DePaul University — *(Milad Sabouri, Neeraj Sharma, Sardar Hamidian, Shaghayegh Agah)*
+   * Link: [arxiv.org/abs/2609.27183](https://arxiv.org/abs/2609.27183)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 23 Sep 2026)
+   * TL;DR: Systematically compares four semantic user-profiling strategies (aggregate embedding vs LLM-generated natural-language profile, crossed with temporal disentanglement of recent vs historical behavior) on a real production streaming dataset, characterizing when the extra cost of LLM-based profiling is justified.
+   * Key techniques:
+     - Factorial 2×2 design: representation type (aggregate vs LLM NL profile) × temporal handling (recent vs historical disentanglement)
+     - Evaluation on a real-world production dataset across accuracy and beyond-accuracy recommendation-quality dimensions
+     - Analysis across user-behavior types and the temporal-window setting governing disentanglement
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — a clear, well-scoped empirical study rather than a new method
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 6/10** — production dataset + multi-dimensional (accuracy + beyond-accuracy) evaluation
+     - **Impact: 6/10** — DePaul; directly informs production profiling-cost trade-offs
 
 ### Papers September 23
 
@@ -1567,7 +1702,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 187 papers as of September 23.
+**Count:** 188 papers as of September 24.
 
 | Score | Paper |
 | --- | --- |
@@ -1591,6 +1726,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation |
 | 8/10 | APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO) |
 | 8/10 | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
+| 8/10 | Preference Shapes Relevance: Cross-component Hierarchical Semantic Alignment for Personalized Generative Retrieval (CHAP) |
 | 8/10 | COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs |
 | 8/10 | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) |
 | 8/10 | Mult-DPO: Multinomial Direct Preference Optimization for Recommender Systems |

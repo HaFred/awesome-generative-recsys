@@ -953,6 +953,7 @@
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 
 ### LLM-based Recommendation
+- When LLM-Based User Profiling Adds Value in Production Streaming Recommendation (WhenLLM-Profiling) — DePaul University
 - Who You Are Adds Nothing Detectable to Where You Go Next: Sociodemographic Conditioning in LLM Next-Location Prediction (Next-Location) — University of Melbourne
 - CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
 - Discriminative Language Models as Effective Retrievers (Discriminative Retrieval / Case Against GenRec)
