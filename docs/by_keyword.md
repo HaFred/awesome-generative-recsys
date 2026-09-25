@@ -175,6 +175,8 @@
 - Retrieval, Scoring, and Decoding Shape Performance and Stability in LLM-based Conversational Recommendation (CRS-Performance)
 
 ### Cross-Domain
+- Cross-Country Code-Mixing for Generative Recommendation (CMRec)
+
 - Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
 - Bridging Short Videos and Live Streams: Reasoning-Guided Multimodal LLMs for Cross-Domain Representation Learning (RGCD-Rep)
 - DSIRM: Learning Query-Bridged Discrete Semantic Identifiers for E-commerce Relevance Modeling (DSIRM)
@@ -688,6 +690,8 @@
 - IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
 
 ### Industrial
+- Cross-Country Code-Mixing for Generative Recommendation (CMRec)
+
 - Decomposing Staleness in Recommender Systems: A Dual-Filter Framework for Supersession and Decay (SDF)
 - Discriminative Language Models as Effective Retrievers (Discriminative Retrieval)
 - DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval (DIRECTOR)
@@ -1366,6 +1370,9 @@
 - Retrieval, Scoring, and Decoding Shape Performance and Stability in LLM-based Conversational Recommendation (CRS-Performance)
 
 ### Reasoning
+- From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)
+- Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)
+
 - A Reproducibility Analysis of PO4ISR: Diagnosing and Mitigating Semantic Drift in LLM-Based Session Recommendation
 - Agentic Recommender System with Hierarchical Belief-State Memory (MARS)
 - Bridging Behavior and Semantics for Time-aware Cross-Domain Sequential Recommendation (BST-CDSR)
@@ -1415,6 +1422,8 @@
 - Iterative Semantic Reasoning from Individual to Group Interests for Generative Recommendation with LLMs (ISRF)
 
 ### Reinforcement Learning
+- Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)
+
 - Personalized and Trust-Aware Health Recommendation Policies for a Construction Workplace (Trust-Aware Health Rec) — University of Illinois Urbana-Champaign
 - EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation (EvoReason)
 - Exp-RSFT: Exponential Reward Weighting for Fine-Tuning Generative Recommenders under Sparse and Noisy Feedback (Exp-RSFT)
@@ -1519,6 +1528,9 @@
 - From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation — Kuaishou, arXiv 2608.21012
 
 ### Semantic / Structured IDs
+- From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)
+- Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)
+
 - CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
 - Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs (OGR)
 - OxygenREC-v2: Internalizing Discrimination into Generative Recommendation (OxygenREC-v2)
