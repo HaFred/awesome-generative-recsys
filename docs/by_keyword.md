@@ -1,6 +1,7 @@
 # Papers by Keyword
 
 ### Agent / LLM Agent
+- Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems (AgentX-Model) — Kuaishou, arXiv 2609.30001
 - Effective Reinforcement Learning for Agentic Search by Recycling Zero-Variance Queries During Training
 - ANCHOR: Agentic Noise Creation Framework for Human Simulation and Denoising Recommendation (ANCHOR)
 - AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems (AgentX)
@@ -227,6 +228,8 @@
 - Epistemic Warrant for LLM Recommendations: Characterizing the Basis for Reliance When Ground Truth Is Unavailable — Purdue University / University of Pennsylvania, arXiv 2609.04127
 
 ### Diffusion
+- Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
+- X-Rec Technical Report (X-Rec) — TikTok, arXiv 2609.29180
 - GateDiffInt: Gate-Mediated Controllable Diffusion and Multi-Intent LLM Distillation for User Behavior Modeling (GateDiffInt)
 - MIRAGE: Escaping the Euclidean Void (Manifold-Informed Flow Matching for Sequential Recommendation)
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
@@ -264,6 +267,7 @@
 - GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings (GroundedGEO) — Shenzhen University, arXiv 2609.25189
 
 ### Evaluation / Benchmark
+- The Recall Ceiling of LLM Recommendation Reranking (RecallCeiling) — University of Southern California, arXiv 2609.27953
 - Bradley-Terry Rankings for Recommender Systems Across Dataset Taxonomies
 - Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop)
 - Do Sequential Recommendation Benchmarks Really Require Higher-Order Sequence Modelling? (SeqBench)
@@ -561,6 +565,8 @@
 - ReFilter: Bridging Embeddings and LLM Filtering for Similar Mobile App Retrieval (ReFilter) — University of Toronto / Université du Québec à Montréal; ASIS&T 2026, arXiv 2609.25306
 
 ### Generative Retrieval / Ranking
+- OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender (OneTrans-V2) — ByteDance, arXiv 2609.28589
+- X-Rec Technical Report (X-Rec) — TikTok, arXiv 2609.29180
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
 - CapsID: Soft-Routed Variable-Length Semantic IDs
 - CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation
@@ -690,6 +696,9 @@
 - IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
 
 ### Industrial
+- OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender (OneTrans-V2) — ByteDance, arXiv 2609.28589
+- X-Rec Technical Report (X-Rec) — TikTok, arXiv 2609.29180
+- Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems (AgentX-Model) — Kuaishou, arXiv 2609.30001
 - Cross-Country Code-Mixing for Generative Recommendation (CMRec)
 
 - Decomposing Staleness in Recommender Systems: A Dual-Filter Framework for Supersession and Decay (SDF)
@@ -957,6 +966,8 @@
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 
 ### LLM-based Recommendation
+- The Recall Ceiling of LLM Recommendation Reranking (RecallCeiling) — University of Southern California, arXiv 2609.27953
+- LSF-SR: Latent Semantic Fusion for Sequential Recommendation via Flow-based Conditional Variational Autoencoders (LSF-SR) — National Yang Ming Chiao Tung University, arXiv 2609.29815
 - When LLM-Based User Profiling Adds Value in Production Streaming Recommendation (WhenLLM-Profiling) — DePaul University
 - Who You Are Adds Nothing Detectable to Where You Go Next: Sociodemographic Conditioning in LLM Next-Location Prediction (Next-Location) — University of Melbourne
 - CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec)
@@ -1239,6 +1250,7 @@
 
 
 ### Multimodal
+- Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
 - NarraLite: Efficient Multimodal Generative Recommendation with Latent Narrative Reasoning (NarraLite) — Tencent / HK PolyU
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - UnpairGR: Unpaired Modality-Agnostic Generative Recommendation (UnpairGR)
@@ -1328,6 +1340,7 @@
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 
 ### Re-ranking
+- The Recall Ceiling of LLM Recommendation Reranking (RecallCeiling) — University of Southern California, arXiv 2609.27953
 - Bradley-Terry Rankings for Recommender Systems Across Dataset Taxonomies
 - Can LLM Rerankers Predict Their Own Ranking Performance?
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1649,6 +1662,7 @@
 - ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec) — weak-risk shilling-robust prompt routing
 
 ### Sequential Modeling / RoPE
+- LSF-SR: Latent Semantic Fusion for Sequential Recommendation via Flow-based Conditional Variational Autoencoders (LSF-SR) — National Yang Ming Chiao Tung University, arXiv 2609.29815
 - Learning from the Future: Privileged Self-Distillation for Sequential Recommendation (PSD)
 - MIRAGE: Escaping the Euclidean Void (Manifold-Informed Flow Matching for Sequential Recommendation)
 - SITA: Semantic Interest Tokens for Target-Aware Compression in Long-Sequence Recommendation (SITA)
