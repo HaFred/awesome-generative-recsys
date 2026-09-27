@@ -54,6 +54,8 @@
 
 - Enhancing Group Recommendation with Memory-Augmented Reasoning in LLM Agent (AGR)
 
+- Weather- and Location-Aware Agentic Dining Recommendation (Agentic Dining) — Independent; arXiv 2608.07593
+
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 - GenRec: An LLM-Backed Recommendation Ranker at Netflix (GenRec)
@@ -379,6 +381,8 @@
 - Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) — University of Zurich, BlackBoxNLP @ EMNLP 2026
 - Give the Long-tail More SPACE: Promoting Provider Fairness in Next POI Recommendation (SPACE) — Southeast University, arXiv 2608.07998
 
+- Fair on the Surface? Benchmarking Hidden-Output Fairness Gaps in LLM Recommenders (FairGap) — University of Georgia / USC / CMU / Michigan State; arXiv 2608.08284
+
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 
@@ -682,6 +686,8 @@
 - Do All Nodes Benefit Equally from Knowledge Graphs? Adaptive Node-Aware KG Fusion for Recommendation (AdaKG)
 - PCGNet: Unifying Shared and Specific Information for Fashion Matching Recommendations (PCGNet) — The Hong Kong Polytechnic University, arXiv 2609.13339
 
+
+- X-KGRank: A Knowledge Graph RAG Framework for Explainable Recommendations via Pattern Mining and LLM Re-Ranking (X-KGRank) — San Jose State University; arXiv 2608.01732
 
 ### Group Recommendation
 - AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation
@@ -1166,6 +1172,9 @@
 - Epistemic Warrant for LLM Recommendations: Characterizing the Basis for Reliance When Ground Truth Is Unavailable — Purdue University / University of Pennsylvania, arXiv 2609.04127
 
 - Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery — Google; async LLM rationale generation for exploration
+- REPREC: Representation Driven Parameter-Efficient Recommendation System (REPREC) — Ohio State University / Capital One; arXiv 2607.24845
+- X-KGRank: A Knowledge Graph RAG Framework for Explainable Recommendations via Pattern Mining and LLM Re-Ranking (X-KGRank) — San Jose State University; arXiv 2608.01732
+
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
@@ -1733,6 +1742,8 @@
 
 - MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling (MuSeR) — Baidu / CityU HK / CUHK; hierarchical temporal compression + multi-interest + beam-search retrieval, deployed at Baidu
 - A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR) — Yandex / AIRI / HSE; Barlow-Twins decorrelation for head/tail exposure control
+- CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER) — Renmin University of China / Dalhousie University; arXiv 2608.25370
+
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 - Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges
