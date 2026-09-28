@@ -56,6 +56,9 @@
 
 - Weather- and Location-Aware Agentic Dining Recommendation (Agentic Dining) — Independent; arXiv 2608.07593
 
+- RecToolBench: Benchmarking Recommendation-Specific Tool Orchestration under Fuzzy User Intent (RecToolBench) — University of Virginia / Jilin University / Squirrel AI / PolyU, arXiv 2609.30717
+- AgentRecommender: LLM Agents Enable Customizable Recommender Systems on the User Side (AgentRecommender) — National Institute of Informatics, arXiv 2609.31166
+
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 - GenRec: An LLM-Backed Recommendation Ranker at Netflix (GenRec)
@@ -317,6 +320,8 @@
 - The Lifecycle of LLM-as-a-Judge for Large-Scale Recommendation Explanations
 - From Prompting to Behavioral Alignment: Personalized LLM Judges for Recommendation Evaluation
 
+- RecToolBench: Benchmarking Recommendation-Specific Tool Orchestration under Fuzzy User Intent (RecToolBench) — University of Virginia / Jilin University / Squirrel AI / PolyU, arXiv 2609.30717
+
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
@@ -567,6 +572,10 @@
 
 - GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings (GroundedGEO) — Shenzhen University, arXiv 2609.25189
 - ReFilter: Bridging Embeddings and LLM Filtering for Similar Mobile App Retrieval (ReFilter) — University of Toronto / Université du Québec à Montréal; ASIS&T 2026, arXiv 2609.25306
+
+- T-RoPE: Time-Aware Rotary Position Embedding for Sequential Recommendation (T-RoPE) — Shopify, arXiv 2609.30576
+- KuaFu: Compressing Long User Behavior into Understanding at Billion Scale (KuaFu) — Tencent, arXiv 2609.31045
+- Recommendation World Models for Future-State Control (UA-TWM) — University of British Columbia et al., arXiv 2609.30711
 
 ### Generative Retrieval / Ranking
 - OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender (OneTrans-V2) — ByteDance, arXiv 2609.28589
@@ -905,6 +914,9 @@
 - Beyond Interleaving: Causal Attention Reformulations for Generative Recommender Systems
 
 - MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling (MuSeR) — Baidu / CityU HK / CUHK; hierarchical temporal compression + multi-interest + beam-search retrieval, deployed at Baidu
+- T-RoPE: Time-Aware Rotary Position Embedding for Sequential Recommendation (T-RoPE) — Shopify, arXiv 2609.30576
+- KuaFu: Compressing Long User Behavior into Understanding at Billion Scale (KuaFu) — Tencent, arXiv 2609.31045
+
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1174,6 +1186,10 @@
 - Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery — Google; async LLM rationale generation for exploration
 - REPREC: Representation Driven Parameter-Efficient Recommendation System (REPREC) — Ohio State University / Capital One; arXiv 2607.24845
 - X-KGRank: A Knowledge Graph RAG Framework for Explainable Recommendations via Pattern Mining and LLM Re-Ranking (X-KGRank) — San Jose State University; arXiv 2608.01732
+
+- RecToolBench: Benchmarking Recommendation-Specific Tool Orchestration under Fuzzy User Intent (RecToolBench) — University of Virginia / Jilin University / Squirrel AI / PolyU, arXiv 2609.30717
+- KuaFu: Compressing Long User Behavior into Understanding at Billion Scale (KuaFu) — Tencent, arXiv 2609.31045
+- AgentRecommender: LLM Agents Enable Customizable Recommender Systems on the User Side (AgentRecommender) — National Institute of Informatics, arXiv 2609.31166
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1743,6 +1759,9 @@
 - MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling (MuSeR) — Baidu / CityU HK / CUHK; hierarchical temporal compression + multi-interest + beam-search retrieval, deployed at Baidu
 - A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR) — Yandex / AIRI / HSE; Barlow-Twins decorrelation for head/tail exposure control
 - CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER) — Renmin University of China / Dalhousie University; arXiv 2608.25370
+
+- T-RoPE: Time-Aware Rotary Position Embedding for Sequential Recommendation (T-RoPE) — Shopify, arXiv 2609.30576
+- Recommendation World Models for Future-State Control (UA-TWM) — University of British Columbia et al., arXiv 2609.30711
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
