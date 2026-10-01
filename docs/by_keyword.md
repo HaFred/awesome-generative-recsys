@@ -705,6 +705,10 @@
 
 
 - X-KGRank: A Knowledge Graph RAG Framework for Explainable Recommendations via Pattern Mining and LLM Re-Ranking (X-KGRank) — San Jose State University; arXiv 2608.01732
+- GEAR: Generative End-to-end Ad Retrieval at Douyin (GEAR) — ByteDance (Douyin); arXiv 2609.39327
+- Residual Trajectory Distillation for Generative Retrieval (ResTD) — Beihang University / Meituan; arXiv 2609.39319
+- Learning Multiresolution Relevance for Hierarchical Generative Retrieval (RARS) — Beihang University / Meituan; arXiv 2609.39312 [opensource]
+- Exploring Forum Post Retrieval with Generative Modeling — Meta (Facebook); arXiv 2609.38646
 
 ### Group Recommendation
 - AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation
@@ -980,6 +984,9 @@
 - SelfDR: Self-Distillation from Reasoning for LLM-Based Recommendation (SelfDR)
 - Distill Globally, Adapt Locally: Reasoning Distillation and Product-Type Test-Time Training for Scalable Trade-Up Recommendation
 - P3Rec: Distilling Prior-Posterior Preference Reasoning for LLM-based Recommendation (P3Rec)
+- GEAR: Generative End-to-end Ad Retrieval at Douyin (GEAR) — ByteDance (Douyin); arXiv 2609.39327
+- Exploring Forum Post Retrieval with Generative Modeling — Meta (Facebook Forum); arXiv 2609.38646
+- KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation — Kuaishou; SIGIR 2026 challenge; arXiv 2609.39828
 
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
@@ -1420,6 +1427,8 @@
 - Think Thrice Before Reranking: Multi-perspective Evidence and Reasoning Integration for Text Reranking (MERIT-Rank) — Honor Device Co., Ltd, arXiv 2609.20131
 
 - Retrieval, Scoring, and Decoding Shape Performance and Stability in LLM-based Conversational Recommendation (CRS-Performance)
+- KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneRec-V2 / OneReason) — Kuaishou; SIGIR 2026 challenge; arXiv 2609.39828
+- Routing Between Generative and Collaborative User Profiles: A Serving-Time Gate for Controllable Novelty — DePaul University / Comcast Technology AI; arXiv 2609.39043
 
 ### Reasoning
 - From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)
@@ -1474,6 +1483,7 @@
 - Iterative Semantic Reasoning from Individual to Group Interests for Generative Recommendation with LLMs (ISRF)
 
 - ReMem: Multi-memory GRPO for Long-Context Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU, arXiv 2609.37311
+- KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneReason / OneRec-V2) — Kuaishou; SIGIR 2026 challenge; arXiv 2609.39828
 ### Reinforcement Learning
 - Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)
 
@@ -1583,6 +1593,7 @@
 - From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation — Kuaishou, arXiv 2608.21012
 
 - HELIX: Rethinking Scaling Laws for Large-Scale Recommendation (HELIX) - TikTok, arXiv 2609.37183
+- KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneReason / OneRec-V2) — Kuaishou; OneReason uses advanced RL to make CoT reasoning beneficial; SIGIR 2026 challenge; arXiv 2609.39828
 ### Semantic / Structured IDs
 - From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)
 - Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)
@@ -1697,6 +1708,10 @@
 - What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro) — Shandong U / Glasgow / Leiden; SIGIR-AP 2026; large-scale SID-design reproducibility study
 - Guiding the coarse levels of semantic IDs makes the fine levels learnable (Guided SID) — Meta; deterministic supervised index assignment pins coarse RQ-VAE levels to text-grounded attributes
 - SpeakGR: Preserving Language Generation While Learning Semantic IDs (SpeakGR) - Imperial College London, arXiv 2609.35430
+- FineSID: Scalable and Efficient Semantic Identifier Learning for Generative Recommendation — Tsinghua University / Huawei Noah's Ark Lab / USTC; arXiv 2609.36670
+- Residual Trajectory Distillation for Generative Retrieval (ResTD) — Beihang University / Meituan; arXiv 2609.39319
+- Learning Multiresolution Relevance for Hierarchical Generative Retrieval (RARS) — Beihang University / Meituan; arXiv 2609.39312 [opensource]
+- GEAR: Generative End-to-end Ad Retrieval at Douyin (GEAR) — ByteDance (Douyin); arXiv 2609.39327
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
 - VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)

@@ -53,7 +53,6 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
-        Eval4DiRec -- UTS
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
@@ -68,6 +67,7 @@ mindmap
         FORGE SID -- Zhejiang U / Alibaba
         DACT -- Fudan U
         CHAP -- USTC
+        RARS -- Beihang U / Meituan
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -88,6 +88,136 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 ## By Date
 
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
+### Papers October 01
+
+*Thursday, October 1, 2026. The Wednesday Sep 30 cs.IR announcement batch (submitted through Sep 30) carried 7 on-topic generative / LLM / agentic-rec papers absent from the repo: KUAISHOU Explorer LLM-Rec Challenge 2026 (reasoning generative recommendation, Kuaishou), GEAR (generative end-to-end ad retrieval at Douyin / ByteDance), ResTD (residual-trajectory distillation for generative retrieval, Beihang–Meituan), RARS (multiresolution relevance for hierarchical generative retrieval, Beihang–Meituan, opensource), Forum Post Retrieval with Generative Modeling (Meta), a serving-time routing gate between generative and collaborative user profiles (DePaul / Comcast), and FineSID (scalable SID learning, Tsinghua / Huawei / USTC). Total: 7 papers (1 opensource: RARS).*
+
+1. **KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation**
+   * Affiliation: Kuaishou Technology — *(Jiangxia Cao, Hao Peng, Wenlong Xu, Jiaxin Deng, et al.; 115 authors)*
+   * Link: [arxiv.org/abs/2609.39828](https://arxiv.org/abs/2609.39828)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 30 Sep 2026); associated with SIGIR 2026
+   * TL;DR: Kuaishou's overview of the OneRec / OneRec-V2 generative recommendation models and the OneReason reasoning model, announcing the KUAISHOU Explorer LLM-Rec Challenge 2026 on Reasoning Generative Recommendation.
+   * Key techniques:
+     - Semantic-ID-based OneRec / OneRec-V2 autoregressive next-item prediction, already deployed in production
+     - OneRec-Think / OpenOneRec / OneReason connect item SIDs with natural language in a unified representation space
+     - OneReason: structured template-based supervision for interest reasoning + advanced RL to make CoT reasoning beneficial
+     - Challenge design to spur research on recommendation foundation models with natural-language CoT reasoning
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code for this challenge overview (refers to separately released OneRec / OneReason)
+     - **Novelty: 6/10** — overview / challenge paper; synthesizes OneRec / OneReason progress and motivates reasoning-GR, but not a novel method per se
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 5/10** — notes that reasoning CoT does not always improve performance; no new empirical robustness study within this paper
+     - **Impact: 8/10** — Kuaishou production (OneRec deployed) + SIGIR 2026 challenge; shapes the reasoning-generative-rec agenda
+
+2. **Generative End-to-end Ad Retrieval at Douyin (GEAR)**
+   * Affiliation: ByteDance (Douyin) — *(Shaowen Zeng, Yanhua Huang, Jiacheng Sun, Jiarui Liu, Qian Dai, Zhikai Yang, Hancheng Li, Boya Wu, Tuoyu Zhang, Yekui Chen, Xiang Sun)*
+   * Link: [arxiv.org/abs/2609.39327](https://arxiv.org/abs/2609.39327)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 30 Sep 2026)
+   * TL;DR: GEAR is an end-to-end generative retrieval framework for Douyin Ads that jointly optimizes tokenizer, generator, and reranker to cure representation collapse (BasisVQ / BasisRQ) and item collisions (context-conditioned reranking); serves hundreds of millions of DAU with online A/B gains.
+   * Key techniques:
+     - End-to-end generative retrieval reformulating ad retrieval as discrete item-token generation
+     - BasisVQ: orthogonal-basis reparameterization of the codebook for global gradient sharing and rigid latent-space rotation (stabilizes training)
+     - Prefix-aware BasisRQ: extends BasisVQ with prefix awareness at the same asymptotic cost (higher expressiveness)
+     - Context-conditioned reranking head disambiguates colliding items with minimal overhead
+     - Fully differentiable, scalable paradigm deployed on Douyin Ads
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — ByteDance industrial system, no public code
+     - **Novelty: 8/10** — orthogonal-basis codebook reparameterization + prefix-aware RQ + context-conditioned reranking is a principled joint solution to the coupled collapse / collision bottleneck
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 8/10** — production-deployed at hundreds of millions DAU, substantial online A/B improvements
+     - **Impact: 9/10** — ByteDance / Douyin production at massive scale; high industrial impact
+
+3. **Residual Trajectory Distillation for Generative Retrieval (ResTD)**
+   * Affiliation: Beihang University / Meituan — *(Weihao Shen, Wei Chen, Fuwei Zhang, Guojun Liu, Qingsong Hua, Wei Lin, Fuzhen Zhuang)*
+   * Link: [arxiv.org/abs/2609.39319](https://arxiv.org/abs/2609.39319)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 30 Sep 2026)
+   * TL;DR: ResTD distills the discarded residual-quantization trajectories of a frozen RQ indexer into SID-decoding states as a "process teacher," recovering distinctions hidden by hard SID supervision and improving generative retrieval (extensible to generative recommendation).
+   * Key techniques:
+     - Treats the frozen RQ indexer as a process teacher
+     - Distills residual-induced codeword preferences into SID-decoding states
+     - Recovers distinctions hidden by hard assignments; earlier decoder states capture later quantization decisions
+     - Preserves the original retrieval index and inference procedure (drop-in supervision)
+     - Experiments on multilingual e-commerce retrieval; extensible to generative recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — paper links github.com/Nevaeh7/iclr2027_ResTD but the repository is not accessible (404 / private) at indexing time; no usable public code
+     - **Novelty: 8/10** — residual-trajectory distillation as process-teacher supervision is a fresh angle on SID training
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — consistent gains over strong baselines and matched controls on multilingual e-commerce retrieval; representation-probe evidence; mainly retrieval (rec extensible)
+     - **Impact: 7/10** — strong academic contribution to generative retrieval / SID; targets ICLR 2027
+
+4. **Learning Multiresolution Relevance for Hierarchical Generative Retrieval (RARS)**
+   * Affiliation: Beihang University / Meituan — *(Weihao Shen, Wei Chen, Fuwei Zhang, Guojun Liu, Qingsong Hua, Wei Lin, Fuzhen Zhuang)*
+   * Link: [arxiv.org/abs/2609.39312](https://arxiv.org/abs/2609.39312)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 30 Sep 2026)
+   * TL;DR: RARS formulates multiresolution relevance as consistent conditional distributions over the SID hierarchy and introduces Resolution-Aligned Relevance Supervision (RARS) that trains a shared query representation via a prefix-conditioned predictor; improves hierarchical generative retrieval while keeping standard autoregressive inference.
+   * Key techniques:
+     - Multiresolution relevance = consistent conditional distributions induced by a single document-level relevance measure across the SID hierarchy
+     - RARS aggregates document relevance over prefixes and trains a prefix-conditioned predictor to allocate relevance among sibling branches
+     - All relevance-bearing children participate in local competition; each local loss is weighted by the relevance mass reaching its parent
+     - Predictor is discarded after training → standard autoregressive retrieval at inference
+     - Beats full-SID and grouped / decoder / sampled-tree soft-target supervision on 3 multilingual ESCI locales
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/Nevaeh7/RARS](https://github.com/Nevaeh7/RARS): MIT-licensed, Python, contains rars/ source package, configs/, scripts/, README.md, pyproject.toml (official first-author repo). Caveats: very new (created 2026-09-18), 1 star, 0 forks, no external validation yet, documentation depth limited
+     - **Novelty: 8/10** — multiresolution relevance supervision over the SID hierarchy is a clean, principled idea
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — consistent gains across 3 ESCI locales, robust across alternative identifier structures and relevance definitions
+     - **Impact: 7/10** — solid academic contribution; targets ICLR 2027
+
+5. **Exploring Forum Post Retrieval with Generative Modeling**
+   * Affiliation: Meta (Facebook / Meta AI) — *(Yang Li, Yaguang Liu, Heng Liu, Shengbo Guo, Samson Komo, et al.; 17 authors)*
+   * Link: [arxiv.org/abs/2609.38646](https://arxiv.org/abs/2609.38646)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 29 Sep 2026)
+   * TL;DR: An industrial exploration of generative recommendation on Facebook Forum (a new surface), using cross-platform hierarchical SIDs from Facebook Feed and a 3B instruction-tuned LM fine-tuned to generate SIDs, with systematic ablations on SID construction, history composition, and user-profile features.
+   * Key techniques:
+     - Transfer along two axes: train on broader Facebook Groups engagements + reuse cross-platform Feed SIDs (prefix-based hierarchical SIDs)
+     - 3B-parameter instruction-tuned LM supervised-fine-tuned to generate SIDs from user context
+     - Systematic ablations: SID construction, user-history composition / length, user-profile features
+     - Shows cross-platform SIDs transfer to a new recommendation surface
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Meta internal; no public code
+     - **Novelty: 6/10** — primarily a practical transfer / ablation study for a new surface rather than a new method
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 6/10** — systematic ablations, but single new surface (Facebook Forum), no online A/B reported
+     - **Impact: 7/10** — Meta production context; practical guidance for deploying GR on real social platforms
+
+6. **Routing Between Generative and Collaborative User Profiles: A Serving-Time Gate for Controllable Novelty**
+   * Affiliation: DePaul University / Comcast Technology AI — *(Milad Sabouri, Neeraj Sharma, Sardar Hamidian, Shaghayegh Agah)*
+   * Link: [arxiv.org/abs/2609.39043](https://arxiv.org/abs/2609.39043)
+   * Venue: Workshop on Generative, Retrieval-augmented, and Agentic Intelligence for Personalization (GRAIP), Rome, November 2026; arXiv preprint, September 2026 (cs.IR; submitted 30 Sep 2026)
+   * TL;DR: Trains a serving-time routing gate that selectively sends users to an LLM-generated-profile recommender vs a collaborative sequential model to raise Novelty@10 while bounding NDCG loss, exposing a tunable novelty–relevance frontier on a production streaming dataset.
+   * Key techniques:
+     - Serving-time routing gate using only serving-time features
+     - Assigns each user to a collaborative sequential model or an LLM-generated-profile model
+     - A routing threshold controls aggressiveness → tunable novelty–relevance trade-off
+     - At 5% NDCG-loss budget: +6.5% Novelty@10 while routing only 12.5% of users
+     - Beats heuristic / random routing; benefit stems from selective routing not LLM generation alone
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; workshop paper
+     - **Novelty: 7/10** — serving-time selective routing of generative vs collaborative profiles for controllable novelty is a practical framing
+     - **Fairness: 3/10** — touches beyond-accuracy (novelty / exposure) trade-off, but not fairness per se
+     - **Robustness: 6/10** — real-world streaming dataset, tunable frontier; single dataset, no online test
+     - **Impact: 6/10** — Comcast production context, workshop (Rome Nov 2026); moderate relevance
+
+7. **FineSID: Scalable and Efficient Semantic Identifier Learning for Generative Recommendation**
+   * Affiliation: Tsinghua University / Huawei Noah's Ark Lab / University of Science and Technology of China — *(Song-Li Wu, Weinan Gan, Zhaocheng Du, Xianquan Wang, Jingyi Wang)*
+   * Link: [arxiv.org/abs/2609.36670](https://arxiv.org/abs/2609.36670)
+   * Venue: arXiv preprint, September 2026 (cs.AI; submitted 29 Sep 2026)
+   * TL;DR: FineSID moves beyond Top-1 hard assignment in SID vector quantization by distributing learning signals softly across the whole codebook (Global-Local Quantization + Quantization Semantic Consistency), alleviating SID collisions and stabilizing training in large codebooks.
+   * Key techniques:
+     - Global-Local Quantization (GLQ): Local Refinement Quantization (LRQ) softmax soft-assignment with straight-through estimator + Global Anchor Quantization (GAQ) EMA frequency-scaled update
+     - Quantization Semantic Consistency Module (QSCM) keeps codes from drifting off meaning
+     - Soft, differentiable gradient propagation across the entire codebook → balanced utilization
+     - Initialization-agnostic; emits hard discrete SIDs at inference (decoder interface unchanged)
+     - +12.7% / 13.0% / 8.9% Recall@10 vs CAR on Instrument / Scientific / Game Amazon sets; 100% codebook utilization
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — paper states "Codes are available" but provides no public repo link at indexing time; treated as not-yet-released
+     - **Novelty: 8/10** — principled move beyond Top-1 hard assignment with globally-balanced soft gradient propagation
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 8/10** — robust to initialization; improves codebook utilization & accuracy on multiple benchmarks; strong vs CAR
+     - **Impact: 8/10** — Tsinghua / Huawei / USTC; strong SID contribution, high relevance to generative recommendation
 
 ---
 
@@ -1041,107 +1171,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 7/10** — large-scale production-style data with efficiency + NE gains
      - **Impact: 8/10** — LinkedIn; a directly deployable efficiency/architecture recipe for generative ranking
 
-### Papers September 20
-
-*Sunday, September 20, 2026. arXiv weekend pause — no new generative-recommendation announcement batch landed in the last 24h (the most recent cs.IR listing is still Fri 18 Sep, already captured by the Sep 18 run). The `date_list` of missing dates in the date section is empty (Sep 10–19 are all present). Per the fallback rule, this run back-fills 6 on-topic papers from the Jun–Sep window that prior runs missed: CORAL (Meta AI) closes a continual agentic loop over a live production recommender with A/B wins on two social platforms; PAPA (WashU) does feedback-efficient diffusion preference alignment for recsys; SPACE (Southeast University, RecSys 2026) lifts long-tail POI exposure via constraint-guided latent diffusion and ships code; Epistemic Warrant (Purdue / UPenn) gives a four-tier reliance certificate for individual LLM recommendations; MM-slotgate (Amazon) factorizes Fashion-CLIP into named attribute slots for controllable fashion retrieval; and PCGNet (Hong Kong PolyU) unifies compatibility and personal preference for fashion matching. Total: 6 papers (2 opensource).*
-
-1. **CORAL: An LLM-Native Harness for Production Recommender Systems**
-   * Affiliation: Meta AI — *(Muhammad Rafay Azhar, Yuhang Zhou, Gilbert Jiang, Yuchen Wang, Rahul Sharma, Matthew DeSousa, Jiayi Liu, Xin Guo, Lizhu Zhang, Xiangjun Fan; all Meta AI)*
-   * Link: [arxiv.org/abs/2609.02730](https://arxiv.org/abs/2609.02730)
-   * Venue: RecSys 2026 OARS Workshop (arXiv preprint, September 2026; cs.CL; submitted 2 Sep 2026)
-   * TL;DR: Sustaining a production recommender is a continual constrained-optimization problem, so CORAL puts an LLM agent in a closed loop that observes operating signals, reasons over a memory of past decisions, and invokes tools — including a numerical optimizer that keeps every change inside a fixed budget — to reconfigure the live system, with A/B wins on two large social platforms.
-   * Key techniques:
-     - A constraint-optimized agentic loop (analysis → retrieval → attribution → constrained optimizer → apply) that reconfigures retrieval/ranking/serving parameters of a live recommender without parameter updates
-     - A numerical optimizer that projects over-budget proposals back into a feasible operating envelope, so the loop can run under production guardrails
-     - Memory of past decisions and measured outcomes drives in-context policy improvement as the loop iterates
-     - Validated with online A/B experiments on two large-scale social platforms: engagement up at no extra serving cost on one, serving-cost savings with no engagement loss on the other
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code or agent release at scan time
-     - **Novelty: 8/10** — framing production recsys continual optimization as a closed agentic loop with a budget-constrained optimizer is a distinctive industrial advance
-     - **Fairness: 5/10** — the operating-budget guardrail is an equity/feasibility mechanism, but not a bias audit
-     - **Robustness: 8/10** — online A/B on two platforms with measured engagement/efficiency trade-offs, not a simulation
-     - **Impact: 9/10** — Meta production social platforms; a concrete blueprint for agentic continual optimization of recommender systems
-2. **PAPA: Online Personalized Active Preference Alignment**
-   * Affiliation: Washington University in St. Louis — *(Anindya Sarkar, Nasik Muhammad Nafi, Isaac Lyngaas, Muralikrishnan Gopalakrishnan Meena, Yevgeniy Vorobeychik)*
-   * Link: [arxiv.org/abs/2607.00486](https://arxiv.org/abs/2607.00486)
-   * Venue: ECML PKDD 2026 (arXiv preprint, July 2026; cs.LG / cs.AI / cs.CV; submitted 1 Jul 2026)
-   * TL;DR: Personalizing a recommender means aligning a generative model to user preferences that are initially unknown, so PAPA bypasses a parameterized reward model entirely and directly optimizes a diffusion model from real-time user feedback via a variational-inference-inspired objective.
-   * Key techniques:
-     - Feedback-efficient preference alignment that skips reward-model training, drawing on the variational inference framework
-     - Direct optimization of a diffusion model using real-time interactive user feedback
-     - A strengthened variant EPAPA with a cheaper fine-tuning strategy for real-world deployment
-     - Experiments and ablations across class-conditioned and fine-grained alignment tasks (image/fashion diffusion)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/NasikNafi/papa](https://github.com/NasikNafi/papa): real code with LICENSE, README quickstart, configs, scripts, and DDPM-based training/sampling; deductions: requirements.txt details "available soon" (incomplete), single-day commit burst, single-author maintenance, and the released experiments are on MNIST/fashion image diffusion rather than real recsys datasets
-     - **Novelty: 7/10** — eliminating the reward model for preference alignment is a clean, deployment-friendly take, though rooted in variational-inference ideas
-     - **Fairness: 4/10** — not fairness-focused
-     - **Robustness: 6/10** — ablations and multi-task experiments, but validation is on image-diffusion toy domains rather than live recsys
-     - **Impact: 6/10** — ECML PKDD 2026; the reward-model-free alignment idea transfers to recsys preference optimization
-3. **Give the Long-tail More SPACE: Promoting Provider Fairness in Next POI Recommendation**
-   * Affiliation: Southeast University, Nanjing, China — *(Anran Zhang, Jiaqi Jiang, Jiahui Jin, Yuhan Zhao)*
-   * Link: [arxiv.org/abs/2608.07998](https://arxiv.org/abs/2608.07998)
-   * Venue: RecSys 2026 (20th ACM Conference on Recommender Systems; arXiv preprint, August 2026; cs.IR; submitted 8 Aug 2026)
-   * TL;DR: Mainstream next-POI models starve long-tail merchants of exposure, and naive provider-fairness methods break because users have execution constraints and POIs have supply constraints, so SPACE generates virtual users under explicit feasibility and supply control to train existing recommenders fairly.
-   * Key techniques:
-     - Community inference to capture heterogeneous user execution constraints
-     - Unbalanced optimal-transport allocation deciding how many virtual users each tail POI gets from which communities under POI-specific supply budgets
-     - Constraint-guided latent diffusion to generate POI-conditional, community-consistent virtual user embeddings
-     - Model-agnostic: the synthetic user–POI pairs train existing recommenders unchanged
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 4/10** — [github.com/Anniran1/SPACE-main](https://github.com/Anniran1/SPACE-main): actual code (dataset_process, model, param, trainer, utils, main.py) matching the paper's stages, but a single initial commit (Jul 18 2026) with no README, no requirements.txt, no LICENSE, and committed `__pycache__/` and `.DS_Store` — usable for reproduction only with effort
-     - **Novelty: 7/10** — coupling supply- and physics-aware virtual-user generation with optimal transport is a fresh provider-fairness mechanism for POI rec
-     - **Fairness: 9/10** — provider fairness is the paper's explicit core contribution (long-tail exposure under real constraints)
-     - **Robustness: 7/10** — three real-world datasets, multiple backbones, accuracy preserved/improved while fairness rises
-     - **Impact: 6/10** — RecSys 2026; a directly usable fairness recipe for location-based recommendation
-4. **Epistemic Warrant for LLM Recommendations: Characterizing the Basis for Reliance When Ground Truth Is Unavailable**
-   * Affiliation: Purdue University / University of Pennsylvania — *(Shai Vardi (Purdue), João Sedoc (UPenn))*
-   * Link: [arxiv.org/abs/2609.04127](https://arxiv.org/abs/2609.04127)
-   * Venue: arXiv preprint, September 2026 (cs.AI; submitted 3 Sep 2026), 43 pages
-   * TL;DR: Users lack a principled basis for trusting an individual LLM recommendation, so the paper adapts epistemology into "epistemic warrant" — a decision-level construct capturing a model's preference stability and the scope over which it holds — operationalized as a four-tier reliance certificate for pairwise recommendations.
-   * Key techniques:
-     - Epistemic warrant: stability of the model's preference plus the scope over which that preference holds
-     - A four-tier reliance certificate (unstable / context-dependent / locally supported / broadly supported) for pairwise recommendations
-     - Known-groups tests recover expert-prespecified warrant orderings; stronger warrants align with independent crowd-worker consensus
-     - Shows warrant is distinct from verbalized confidence and not explained by decision difficulty
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code or dataset link at scan time
-     - **Novelty: 8/10** — importing an epistemology construct to certify individual LLM-recommendation reliance is a genuinely new framing
-     - **Fairness: 7/10** — reliance certification is a trust/fairness-adjacent safeguard against over-trusting opaque LLM recs
-     - **Robustness: 7/10** — known-groups + crowd-consensus validation, but no live recsys deployment
-     - **Impact: 6/10** — a useful, implementable trust layer for LLM recommendation assistants
-5. **Attribute-Conditioned Multimodal Slot Factorization for Controllable Fashion Retrieval (MM-slotgate)**
-   * Affiliation: Amazon — *(Najmeh Forouzandehmehr, Topojoy Biswas, Evren Korpeoglu, Kannan Achan)*
-   * Link: [arxiv.org/abs/2608.12570](https://arxiv.org/abs/2608.12570)
-   * Venue: arXiv preprint, August 2026 (cs.CV / cs.IR; submitted 12 Aug 2026)
-   * TL;DR: Monolithic fashion-retrieval embeddings mix attributes into one vector; MM-slotgate factorizes Fashion-CLIP text/image embeddings into four named attribute slots with per-slot text-image gates, giving interpretable, controllable retrieval that beats equal-weight fusion on H&M.
-   * Key techniques:
-     - A multimodal slot encoder that factorizes Fashion-CLIP embeddings into four named attribute slots (category, color, pattern, demographic)
-     - Per-slot learnable text-image gates so color/pattern lean on image evidence while category/demographic stay text-driven
-     - A combined slot-similarity + slot-logit retrieval score
-     - Quantized slot codes enable targeted intervention (e.g., +15.3x lift on color); linear probes show no excess leakage
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code or model release at scan time (Amazon)
-     - **Novelty: 7/10** — typed, attribute-conditioned multimodal slots with interpretable gates are a clear advance over opaque item-level semantic IDs
-     - **Fairness: 3/10** — not fairness-focused
-     - **Robustness: 6/10** — H&M benchmark with macro ConstraintSatisfied@10 and interpretability probes, single dataset
-     - **Impact: 6/10** — Amazon fashion retrieval; directly relevant to industrial multimodal generative/semantic-ID retrieval
-6. **PCGNet: Unifying Shared and Specific Information for Fashion Matching Recommendations**
-   * Affiliation: The Hong Kong Polytechnic University — *(Shuiying Liao, P. Y. Mok)*
-   * Link: [arxiv.org/abs/2609.13339](https://arxiv.org/abs/2609.13339)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.IT; submitted 11 Sep 2026)
-   * TL;DR: Fashion matching recommendation must satisfy both garment compatibility and personal preference, which prior decoupled models ignore, so PCGNet unifies the two via contrastive mutual-information maximization over shared and view-specific graph patterns.
-   * Key techniques:
-     - A Personalized Compatibility Graph Network framing fashion matching as multi-objective graph learning
-     - Contrastive mutual-information maximization to extract and align shared vs. view-specific (compatibility vs. preference) patterns
-     - Correlation-aware neighbor sampling and a learnable global graph augmentation for self-supervised signals
-     - Joint BPR ranking loss and multi-view mutual-information losses for recommendation scoring
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code or repository at scan time
-     - **Novelty: 5/10** — a compatibility-plus-preference unification for fashion matching, but graph MI methods are established
-     - **Fairness: 2/10** — not fairness-focused
-     - **Robustness: 5/10** — two benchmark datasets, four metrics, no online or adversarial evaluation
-     - **Impact: 5/10** — a solid fashion compatibility/personalization contribution for e-commerce
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1388,7 +1417,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 193 papers as of September 30.
+**Count:** 194 papers as of October 01.
 
 | Score | Paper |
 | --- | --- |
@@ -1483,6 +1512,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | HyCoRec: Hypergraph-Enhanced Multi-Preference Learning for Alleviating Matthew Effect in Conversational Recommendation |
 | 7/10 | SIDInspector: A Mapping-First Diagnostic Resource for Semantic-ID Tokenizers |
 | 7/10 | Learning Decomposed Contextual Token Representations from Pretrained and Collaborative Signals for Generative Recommendation (DECOR) |
+| 7/10 | Learning Multiresolution Relevance for Hierarchical Generative Retrieval (RARS) |
 | 7/10 | Learning to Rotate: Temporal and Semantic Rotary Encoding for Sequential Modeling (SIREN-RoPE) |
 | 7/10 | LIME-Rec: Auditing Semantic Gains in Sequential Recommendation — A Lightweight Recovery Test |
 | 7/10 | MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory |
@@ -1852,6 +1882,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 - GRP / Snap's Generative Recommendation Paradigm - mGRPO reward-guided post-training, progressive E2E deployment (GRP) - Snap Inc.
 - ReMem / Multi-memory GRPO for Long-Context Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU
+- KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneRec-V2 / OneReason) — Kuaishou (SIGIR 2026 challenge; OneReason uses advanced RL to make CoT reasoning beneficial) — [arxiv](https://arxiv.org/abs/2609.39828)
 See [Full keyword index](docs/by_keyword.md) for all other categories.
 
 ## By Affiliation
