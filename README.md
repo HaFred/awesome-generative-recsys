@@ -44,6 +44,7 @@ mindmap
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
+        When-the-Label -- Uber AI
     Representation Layer: Model Training & Optimization
       Editing & Control
         CRAMER -- Renmin U / Dalhousie U
@@ -58,16 +59,15 @@ mindmap
         APAO -- Tsinghua
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
-        REPREC -- Ohio State U / Capital One
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
+        RouteRec -- KAIST / SNU
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DACT -- Fudan U
         CHAP -- USTC
-        RARS -- Beihang U / Meituan
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -90,6 +90,171 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers October 02
+
+*Friday, October 2, 2026. The Thursday Oct 1 cs.IR announcement batch (submitted through Oct 1) and late Sep 30 submissions surfaced 9 on-topic generative / LLM / agentic / semantic-ID papers absent from the repo: AgentWebRec (compact evidence fusion over the agent web for personalized rec, Beihang), GrIS / Graph-Informed Semantic IDs (recursive graph-partition SID construction, Huawei Ireland, CIKM 2026), REPAIR (repairs lossy preference states of frozen personalization encoders, IIIT Delhi, NeurIPS 2026), a multilingual-consistency study of Semantic IDs (Amazon / Rutgers, WiNLP 2026), the Context-Sufficiency Frontier theory for generative-AI personalization (ABYAT), an audit of policy-selected labels in synthetic conversational music rec (Uber AI, RecSys Challenge 2026, opensource), RouteRec (behavior-guided sparse MoE routing for sequential rec, KAIST / SNU, CIKM 2026, opensource), a production streaming-rec user-profiling study (DePaul / Comcast), and an empirical study of the decision-oriented reranking model Jev (U Rochester / Meta AI). Total: 9 papers (2 opensource: RouteRec, When the Label Ignores the Request).*
+
+1. **AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation**
+   * Affiliation: Beihang University — *(Haoran Qiang, Guannan Liu, Liang Zhang, Junjie Wu)*
+   * Link: [arxiv.org/abs/2610.01705](https://arxiv.org/abs/2610.01705)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 1 Oct 2026)
+   * TL;DR: AgentWebRec reframes recommendation over the emerging agent web (User-Agents-Platform) as a task-time evidence-acquisition-and-fusion problem under a finite evidence budget, progressively acquiring and fusing distributed evidence from a user's own agent memory and neighboring user agents while keeping agent memories local.
+   * Key techniques:
+     - Agent-web pathway where LLM-based personal agents carry user semantics and intermediate between users and platforms
+     - Task-time evidence acquisition: decide what to ask and what to keep rather than learning from aggregated data
+     - Grounds each decision in platform item semantics plus task-relevant evidence from the target user agent's private memory
+     - Conditionally queries neighboring user agents for complementary preference patterns when local evidence is insufficient
+     - Evaluated on four InstructRec datasets; ablations confirm complementary gains from each evidence layer
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code at indexing time
+     - **Novelty: 8/10** — recasting agent-web rec as task-time evidence acquisition/fusion under a budget is a fresh framing
+     - **Fairness: 2/10** — not fairness-focused; agent-mediated evidence could create representation gaps
+     - **Robustness: 7/10** — consistent gains over baselines across 4 datasets; ablations support layer contributions
+     - **Impact: 7/10** — speaks to the emerging agent-web / personal-agent recommendation paradigm
+
+2. **Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)**
+   * Affiliation: Huawei Ireland Research Centre, Dublin, Ireland — *(Aleksei Medvedev, Alejandro Ariza-Casabona, Steven Derby, Gonzalo Fiz Pontiveros, Xinyang Shao, Florian Spiess)*
+   * Link: [arxiv.org/abs/2610.01533](https://arxiv.org/abs/2610.01533)
+   * Venue: CIKM 2026 (35th ACM CIKM, Rome, Nov 2026); arXiv preprint, October 2026 (cs.AI / cs.IR; submitted 1 Oct 2026)
+   * TL;DR: GrIS reframes Semantic-ID construction as a recursive clustering / hierarchical graph-partition problem over a graph whose nodes carry semantic content and edges carry collaborative signal, subsuming RQ-VAE and RQ-KMeans as the empty-graph special case; two instantiations (RecDMoN, RQ-GAE) improve over CF-aware SOTA by up to +52% Hit@10.
+   * Key techniques:
+     - SID construction = recursive graph partition (graph construction and partition are explicit, separately configurable axes)
+     - RecDMoN: hierarchical assignment via differentiable graph pooling
+     - RQ-GAE: extends RQ-VAE with graph-aware item representations and a graph-reconstruction objective
+     - Recovers RQ-VAE / RQ-KMeans as the empty-graph corner of the design space
+     - Gains on multiple real-world datasets; improvements on either axis combine and evaluate systematically
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code at indexing time
+     - **Novelty: 9/10** — principled reframing of SID construction as recursive graph clustering; unifies prior approaches
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 8/10** — consistent +52% Hit@10 gains over CF-aware SOTA across multiple datasets
+     - **Impact: 8/10** — Huawei industrial context; reframes the SID design space for generative recommendation
+
+3. **Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders (REPAIR)**
+   * Affiliation: Indraprastha Institute of Information Technology Delhi (IIIT Delhi) — *(Parthiv Chatterjee, Dhiraj Golhar, Ummesalma Diwan, Sourish Dasgupta, Manjunath Joshi, Tanmoy Chakraborty)*
+   * Link: [arxiv.org/abs/2610.01270](https://arxiv.org/abs/2610.01270)
+   * Venue: NeurIPS 2026 (accepted); arXiv preprint, October 2026 (cs.LG / cs.IR; submitted 1 Oct 2026)
+   * TL;DR: REPAIR repairs the lossy preference states produced by frozen personalization encoders by comparing cached per-timestep representations with the current state in a learned coordinate space and adding an aggregate correction before the task head, improving MRR / nDCG@10 for 12 representative hosts with encoder and head both frozen.
+   * Key techniques:
+     - Encoder-host repair reuses representations from the existing forward computation (no history re-encoding)
+     - Compares cached representations against the current preference state in a compact learned coordinate space
+     - Resolves corrective evidence over extended history, recent interactions, and localized bursts
+     - Selects which patterns at which timesteps contribute; adds aggregate correction to the state before the task head
+     - Applies to recommendation hosts (MovieLens, PENS, MIND, Amazon Reviews 2023) and personalized generation (IMPerSumm)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code at indexing time
+     - **Novelty: 8/10** — post-compression state correction is a clean angle on frozen-encoder personalization
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — gains across 12 hosts with frozen encoder/head; rank/temporal diagnostics
+     - **Impact: 7/10** — NeurIPS 2026; practical for deployed personalization encoders
+
+4. **Do Multilingual Encoders Produce Language-Consistent Semantic IDs?**
+   * Affiliation: Abhinav Bohra (Amazon), Anuj Bohra (Rutgers University) — *(Abhinav Bohra, Anuj Bohra)*
+   * Link: [arxiv.org/abs/2610.01139](https://arxiv.org/abs/2610.01139)
+   * Venue: WiNLP 2026 (short paper, co-located with EMNLP 2026); arXiv preprint, October 2026 (cs.IR / cs.CL; submitted 1 Oct 2026)
+   * TL;DR: Using Amazon ESCI listings in English, Spanish, and Japanese, the paper shows multilingual encoders do NOT automatically yield language-consistent Semantic IDs: a Japanese translation preserves the first SID code of its English counterpart in only 7.7% of cases (vs 89.0% for an English rewording), and balancing the quantizer fit further reduces cross-lingual prefix agreement.
+   * Key techniques:
+     - Tests whether translations stay close to their English source under a multilingual encoder (Multilingual E5)
+     - Examines residual-quantization sensitivity to translation-induced movement
+     - Distance-matched product-directed controls isolate language effects from product-driven movement
+     - Compares multilingual vs language-balanced quantizer fitting for SID agreement
+     - Reports cross-lingual SID agreement rates across EN/ES/JA
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code at indexing time
+     - **Novelty: 7/10** — careful empirical dissection of cross-lingual SID consistency
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 6/10** — controlled experiments with matched controls; limited to one encoder / one catalog family
+     - **Impact: 6/10** — important caveat for multilingual generative retrieval deployments
+
+5. **When More Data Is Not Enough: The Context-Sufficiency Frontier in Generative AI Personalization (Context-Sufficiency)**
+   * Affiliation: ABYAT — *(Merieme Askour, Ayoub Merimi)*
+   * Link: [arxiv.org/abs/2610.00654](https://arxiv.org/abs/2610.00654)
+   * Venue: Preprint submitted to Journal of Service Research (JSR); arXiv preprint, October 2026 (cs.AI / cs.LG; submitted 30 Sep 2026)
+   * TL;DR: Proposes a theory of context sufficiency for generative-AI personalization: once provider-supplied context becomes easy to add, relevance to the user's current intent matters more than volume - identifying four states (insufficiency, sufficiency, saturation, interference) and a Context-Sufficiency Frontier; a full-factorial experiment at a large home-furnishing retailer shows relevant context improves appropriateness while irrelevant context reduces it and destabilizes retrieval.
+   * Key techniques:
+     - Distinguishes customer evidence (historical behavior/preferences) from provider-side context (what is possible/permitted/advisable now)
+     - Four-state theory: insufficiency, sufficiency, saturation, interference
+     - Context-Sufficiency Frontier locates the minimal relevant context set
+     - Full-factorial experiment with a generative recommender at a large home-furnishing retailer
+     - Enforces context constraints throughout the service process
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code at indexing time
+     - **Novelty: 7/10** — theory of context sufficiency is a fresh framing for generative-AI personalization
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 5/10** — single-retailer full-factorial experiment; theoretical claims need broader validation
+     - **Impact: 6/10** — actionable framing for industrial personalization; JSR submission
+
+6. **When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation (When-the-Label)**
+   * Affiliation: Uber AI — *(Sanjeev Suresh)*
+   * Link: [arxiv.org/abs/2609.39696](https://arxiv.org/abs/2609.39696)
+   * Venue: Proceedings of the Workshop on the ACM RecSys Challenge 2026 (RecSys Challenge '26); arXiv preprint, October 2026 (cs.IR; submitted 30 Sep 2026)
+   * TL;DR: Audits the point where policy-selected (LLM-generated) labels contradict the user's explicit request in the RecSys Challenge 2026 TalkPlay conversational music benchmark - the official label contradicts an exact-song request in half of audited development turns; a small catalog-resolved training supplement closes most of the gap (+53.3% relative nDCG@20 on conflict turns) while leaving the official metric intact.
+   * Key techniques:
+     - Audits turns where the user asks for an exact song by name (label-request directly comparable)
+     - Catalog-resolved request-satisfying targets added to a small fraction of training turns
+     - Matched control that detects the same requests but trains only on official labels
+     - Verified against the official RecSys Challenge 2026 metric
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/Sanjeev-S/recsys2026-request-audit](https://github.com/Sanjeev-S/recsys2026-request-audit): audit code released; recent, single-author, modest documentation, no external validation yet
+     - **Novelty: 7/10** — exposes a concrete label-request misalignment in synthetic conversational-rec benchmarks
+     - **Fairness: 4/10** — touches label correctness/representativeness of simulated user intent
+     - **Robustness: 6/10** — matched-control verification; single benchmark (TalkPlay)
+     - **Impact: 6/10** — directly relevant to how synthetic conversational-rec benchmarks are constructed and trusted
+
+7. **RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation (RouteRec)**
+   * Affiliation: Junyeong Song (KAIST), Jaemin Yoo (Seoul National University) — *(Junyeong Song, Jaemin Yoo)*
+   * Link: [arxiv.org/abs/2609.39007](https://arxiv.org/abs/2609.39007)
+   * Venue: CIKM 2026 (35th ACM CIKM, Rome, Nov 2026); arXiv preprint, October 2026 (cs.IR / cs.LG; submitted 30 Sep 2026)
+   * TL;DR: RouteRec is a sequential recommender that uses observed session behavior (interaction tempo, item-group focus, repetition/carryover, popularity tendency) as the MoE routing criterion, routing computation at macro/mid/micro scopes; across six datasets and 18 metric combinations it ranks first in 12 and second in 3, with the best average rank 1.61 vs 4.11 for the next-best baseline.
+   * Key techniques:
+     - Behavior-guided sparse routing: sessionized behavioral cues select expert groups, then backbone state refines expert selection
+     - Summarizes four behavioral-evidence types from sessionized histories
+     - Routes at macro, mid, and micro scopes
+     - Conditional computation via Mixture of Experts with sparse allocation
+     - Cue-derived routing guides allocation beyond added capacity
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/jy1559/RouteRec](https://github.com/jy1559/RouteRec): official first-author repo released with the CIKM 2026 paper; recent, needs verification of completeness/docs/external validation
+     - **Novelty: 8/10** — using observed session behavior as the MoE routing criterion is a clear idea
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — 6 datasets / 18 combinations, strong average-rank results; analyses on routing patterns
+     - **Impact: 7/10** — CIKM 2026; practical sequential-rec architecture
+
+8. **When LLM-Inferred User Context Adds Value in Production Streaming Recommendation (LLM-Inferred-Context)**
+   * Affiliation: DePaul University / Comcast Technology AI — *(Milad Sabouri, Neeraj Sharma, Sardar Hamidian, Shaghayegh Agah)*
+   * Link: [arxiv.org/abs/2609.38999](https://arxiv.org/abs/2609.38999)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 30 Sep 2026)
+   * TL;DR: Evaluates semantic user-profiling strategies on a production streaming platform under a 2x2 design crossing representation type (aggregate vs LLM-generated) with contextual scope (holistic history vs attention-fused short/long-term); aggregate profiles win under habitual consumption (~4/5 of users) while LLM-generated profiles win for exploratory users, and LLM-generated profiles show a popularity-attractor effect that lowers catalog coverage.
+   * Key techniques:
+     - LLM renders unstructured interaction history as a natural-language thematic user context
+     - 2x2 design: representation type x contextual scope
+     - Ranking against the full catalog on a production streaming dataset
+     - Characterizes when generated profiles beat aggregate embeddings by consumption regime
+     - Context-aware selection of profiling strategy from inferred consumption regime
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code at indexing time
+     - **Novelty: 7/10** — systematic characterization of when LLM-inferred profiles help on production streaming data
+     - **Fairness: 2/10** — notes popularity-attractor effect (lower catalog coverage / novelty) from LLM profiles
+     - **Robustness: 6/10** — production streaming dataset, 2x2 design; single platform
+     - **Impact: 6/10** — Comcast production context; actionable guidance for profiling strategy
+
+9. **Decision-Oriented Recommendation Reranking: An Empirical Study of Jev (Jev)**
+   * Affiliation: Hanjia Lyu (University of Rochester), Yinglong Xia (Meta AI) — *(Hanjia Lyu, Yinglong Xia)*
+   * Link: [arxiv.org/abs/2609.40241](https://arxiv.org/abs/2609.40241)
+   * Venue: arXiv preprint, October 2026 (cs.CL / cs.IR; submitted 30 Sep 2026)
+   * TL;DR: A controlled empirical study of Jev - a decision-oriented "System One Model" (TypeSafe AI) that maps a context state and a set of options to per-option probabilities - for personalized recommendation reranking, compared with recommendation-specific models and pointwise/listwise Qwen rerankers across multiple Amazon Reviews domains and candidate-set sizes; Jev matches quality while exhibiting far gentler latency growth than pointwise Qwen rerankers.
+   * Key techniques:
+     - Decision-oriented model: state (history) + options (candidates) -> probabilities used directly as scores
+     - SASRec retriever with hard candidate sets (ground-truth item in top-200)
+     - Controlled candidate-set sizes K in {20, 50, 100, 200}
+     - Compares against SASRec, DCNv2, pointwise/listwise Qwen2.5-7B rerankers
+     - Quality-latency curves across domains
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Jev is a hosted third-party model (TypeSafe AI); no public code from the study
+     - **Novelty: 6/10** — primarily an empirical characterization of a decision-oriented reranker rather than a new method
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 5/10** — controlled multi-domain study; single retriever (SASRec), hosted-model latency includes network overhead
+     - **Impact: 6/10** — motivates decision-oriented models as a quality-latency regime for reranking
 
 ### Papers October 01
 
@@ -1054,123 +1219,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Impact: 8/10** — Google / YouTube Music; significant real-world deployment
 
 
-### Papers September 21
-
-*Monday, September 21, 2026. The Monday Sep 21 arXiv cs.IR batch had not posted at scan time (newest cs.IR listing is still Fri 18 Sep, already captured by the Sep 18 run), so the last-24h window is empty. Per the fallback protocol a broadened archive-aware search (Dec 2025 – Sep 2026, with every `docs/archive_by_month/*.md` month checked for dedup) surfaced 7 genuinely-new on-topic generative-recommendation papers. NOTE: the prior run's 8 "new" candidates were all already present in the repo or its archive months, so this run restarts the search from scratch rather than re-adding duplicates. Total: 7 papers (4 opensource).*
-
-1. **Retrieval, Scoring, and Decoding Shape Performance and Stability in LLM-based Conversational Recommendation**
-   * Affiliation: Infobip (Split / Zagreb, Croatia) — *(Ante Kapetanovic, Tomislav Duricic, Andro Mercep, Emanuel Lacic)*
-   * Link: [arxiv.org/abs/2609.00086](https://arxiv.org/abs/2609.00086)
-   * Venue: CIKM 2026 (35th ACM Int. Conf. on Information and Knowledge Management, Rome, Nov 2026; arXiv preprint 31 Aug 2026; cs.CL / cs.AI; submitted 31 Aug 2026), DOI 10.1145/3799682.3840066
-   * TL;DR: LLM rerankers in conversational recommendation are highly sensitive to the retrieval-and-inference protocol — on ReDial, a proprietary reranker reaches NDCG@10 0.1497 vs 0.0939 for the best non-LLM baseline under a shared top-250 pool, but unconstrained (zero-shot generation) scoring inflates that to 0.2925, and switching candidate generators or raising decoding temperature reshapes the results; the paper argues candidate set, pool size, scoring policy and decoding config must be standard reporting fields.
-   * Key techniques:
-     - A shared retrieve-then-rerank pipeline comparing proprietary, open-weight and fine-tuned LLM rerankers against CF/sequential baselines on the ReDial conversational movie benchmark
-     - Candidate-aware vs. unconstrained (zero-shot generation) scoring showing the apparent LLM advantage is largely a protocol artifact
-     - Varying candidate-pool size, first-stage retriever (semantic vs collaborative filtering) and decoding temperature to expose sensitivity
-     - Showing no open-weight LLM beats a tuned shallow autoencoder under matched protocol, and CF candidates lift NDCG@10 by >50% over semantic ones
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/infobip/crs-performance](https://github.com/infobip/crs-performance): official CIKM'26 artifact with data-processing, retriever, scoring and decoding configs that reproduce the ReDial experiments; deductions: scoped to a single benchmark (ReDial), no pretrained weights released, single-org maintenance
-     - **Novelty: 6/10** — largely a rigorous empirical measurement / reporting-discipline paper rather than a new method
-     - **Fairness: 6/10** — surfaces candidate-generation bias but is not a fairness study per se
-     - **Robustness: 9/10** — the paper's entire contribution is a stability analysis across pool size, retriever and temperature, with matched-pool controls
-     - **Impact: 8/10** — CIKM 2026; directly reshapes how the field reports LLM reranker gains
-2. **Enhancing Group Recommendation with Memory-Augmented Reasoning in LLM Agent (AGR)**
-   * Affiliation: Capital Normal University (Beijing) / The University of Queensland (Australia) — *(Qimeng Niu, Bowen Hao, Zixuan Zhang, Shuyu Qu, Hongzhi Yin)*
-   * Link: [arxiv.org/abs/2608.21939](https://arxiv.org/abs/2608.21939)
-   * Venue: arXiv preprint, August 2026 (cs.IR; submitted 22 Aug 2026)
-   * TL;DR: Group recommendation needs to model evolving preferences and explicit consensus formation, so AGR is an LLM agent with a token-hash Memory Module (insert/update/retrieve/forget/summarize) and a four-step Reasoning Module (group-interest collection, consensus refinement, multi-dimensional evaluation, explainable generation), trained with SFT then GRPO; it beats SOTA on LastFM and Douban in accuracy and explainability.
-   * Key techniques:
-     - A token-based hash-table memory for dynamic, forgetful, summarized tracking of group/user interaction history
-     - A four-step reasoning module moving beyond black-box inference to interpretable group recommendations
-     - Reinforcement Fine-Tuning: SFT to bootstrap module invocation, then Group Relative Policy Optimization (GRPO) to let the agent autonomously coordinate memory+reasoning
-     - Evaluated on LastFM and Douban with accuracy and explainability gains
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [huggingface.co/niuqimeng/AGR](https://huggingface.co/niuqimeng/AGR): released model weights + inference for the memory-augmented LLM agent; deductions: model-only release, agent harness / training code not clearly open, single-author HF repo
-     - **Novelty: 7/10** — coupling a memory module with GRPO-coordinated reasoning for group rec is a clean advance over fixed-history LLM methods
-     - **Fairness: 6/10** — consensus-formation modeling has an equity dimension but is not a fairness audit
-     - **Robustness: 6/10** — two public datasets, no online or adversarial evaluation
-     - **Impact: 7/10** — group recommendation + GRPO is an active axis; reproducible weights help
-3. **The Lifecycle of LLM-as-a-Judge for Large-Scale Recommendation Explanations**
-   * Affiliation: Netflix (Los Gatos, CA) — *(Emma Yanyang Kong, JJ Tan, Ishan Gupta, Lars Olds, Claire Campbell, David Fagnan, Ratna Kavuri, Veli Balin, Rohan Gosain, Louis Garcia, Minsu Jang)*
-   * Link: [arxiv.org/abs/2608.18300](https://arxiv.org/abs/2608.18300)
-   * Venue: COLM 2026 Workshop (Lifelong Agents + AIMS); arXiv v3 31 Aug 2026 (cs.AI; first submitted 18 Aug 2026)
-   * TL;DR: An LLM judge in production has a lifecycle, not a one-off benchmark; Netflix presents the four-phase lifecycle (Birth → Training via Reasoning-Aligned Rubric Tuning → Deployment in quality-gating + reflective-generation roles → Monitoring with HITL drift detection) for judges of recommendation explanations, backed by a five-week online A/B test over tens of millions of members.
-   * Key techniques:
-     - A four-phase judge lifecycle framework (Birth, Training, Deployment, Monitoring)
-     - Reasoning-Aligned Rubric Tuning (RART): a meta-judge over reasoning output as the learning signal
-     - Dual online judge roles: quality gating and reflective generation
-     - Continuous Human-in-the-Loop alignment detecting drift and triggering re-tuning behind a human review gate; five-week A/B over tens of millions of members
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code or judge release at scan time (Netflix)
-     - **Novelty: 8/10** — framing a judge as a maintained lifecycle with RART and online dual-role deployment is distinctive
-     - **Fairness: 7/10** — quality-gating plus drift monitoring are trust/fairness-adjacent safeguards
-     - **Robustness: 8/10** — five-week online A/B over tens of millions of members with drift detection, not a simulation
-     - **Impact: 9/10** — Netflix production recsys; concrete blueprint for deploying and maintaining LLM judges at scale
-4. **From Prompting to Behavioral Alignment: Personalized LLM Judges for Recommendation Evaluation**
-   * Affiliation: Netflix — *(Alireza S. Ziabari, Kat Ellis, Colleen Chan, Ding Tong)*
-   * Link: [arxiv.org/abs/2608.11493](https://arxiv.org/abs/2608.11493)
-   * Venue: arXiv preprint, August 2026 (cs.AI / cs.LG; submitted 11 Aug 2026)
-   * TL;DR: Off-the-shelf LLMs exhibit "bidirectional rationalization" — they convincingly argue both for and against the same user engagement on the same item — so Netflix develops a sequential behavioral-alignment framework (fine-tuning + preference optimization over paired correct/counterfactual rationales) that lifts Macro-F1 by 32.19% over zero-shot and matches the production feature-engineered baseline.
-   * Key techniques:
-     - Identification of bidirectional rationalization as a critical zero-shot LLM-judge failure mode
-     - A sequential behavioral-alignment framework pairing fine-tuning with preference optimization
-     - Paired correct vs. counterfactual rationale supervision from real homepage interaction logs
-     - 32.19% Macro-F1 lift over zero-shot, matching the production feature-pipeline baseline
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code or model release at scan time (Netflix)
-     - **Novelty: 7/10** — behavioral alignment via paired rationales is a neat fix for the rationalization failure mode
-     - **Fairness: 6/10** — not fairness-focused
-     - **Robustness: 7/10** — validated on real production interaction logs against the live baseline
-     - **Impact: 8/10** — Netflix; directly targets a real offline-evaluation reliability gap
-5. **Drift-Aware Continual Tokenization for Generative Recommendation (DACT)**
-   * Affiliation: Fudan University (Shanghai) / Microsoft Research Asia — *(Yuebo Feng, Jiahao Liu, Mingzhe Han, Dongsheng Li, Hansu Gu, Peng Zhang, Tun Lu, Ning Gu)*
-   * Link: [arxiv.org/abs/2603.29705](https://arxiv.org/abs/2603.29705)
-   * Venue: arXiv preprint, March 2026 (cs.IR; submitted 31 Mar 2026)
-   * TL;DR: Collaborative tokenizers for generative recommendation drift as new items and interactions arrive, and naive fine-tuning shifts token sequences for most existing items, breaking GRM alignment; DACT is a drift-aware continual tokenization framework with a Collaborative Drift Identification Module (CDIM) for differentiated optimization and a relaxed-to-strict hierarchical code reassignment that adapts with minimal disruption.
-   * Key techniques:
-     - A two-stage continual-tokenization pipeline: tokenizer fine-tuning + hierarchical code reassignment
-     - CDIM: a jointly trained module outputting item-level drift confidence for differentiated (drifting vs stationary) optimization
-     - Relaxed-to-strict code reassignment limiting unnecessary token-sequence changes
-     - Evaluated on three real datasets with two GRMs, reducing disruption to prior learned embeddings
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/HomesAmaranta/DACT](https://github.com/HomesAmaranta/DACT): full two-stage implementation (CDIM + hierarchical code reassignment) with configs and dataset scripts; deductions: limited documentation, single-lab maintenance
-     - **Novelty: 8/10** — framing tokenizer maintenance as continual / drift-aware learning with a drift-confidence module is genuinely new
-     - **Fairness: 5/10** — not fairness-focused
-     - **Robustness: 8/10** — stability-plasticity experiments across datasets and two GRMs
-     - **Impact: 8/10** — tokenizer stability is a real production pain point for generative recsys
-6. **Iterative Semantic Reasoning from Individual to Group Interests for Generative Recommendation with LLMs (ISRF)**
-   * Affiliation: Chongqing University of Technology / Chongqing Normal University — *(Xiaofei Zhu, Jinfei Chen, Feiyang Yuan, Zhou Yang)*
-   * Link: [arxiv.org/abs/2603.13934](https://arxiv.org/abs/2603.13934)
-   * Venue: WWW 2026 (The Web Conference, Dubai; arXiv preprint 14 Mar 2026; cs.IR / cs.AI; submitted 14 Mar 2026), DOI 10.1145/3774904.3792123
-   * TL;DR: Truly modeling user interest needs semantic reasoning from explicit individual to implicit group interests, so ISRF uses LLMs in three steps — bidirectional reasoning over item attributes to build a semantic interaction graph, similarity-based user graph for group implicit interests, and an iterative batch optimization where individual and group interests mutually refine — beating SOTA on Sports/Beauty/Toys.
-   * Key techniques:
-     - Multi-step bidirectional reasoning over item attributes to infer semantic item features and an explicit-interest interaction graph
-     - A similarity-based user graph inferring implicit interests of similar user groups
-     - Iterative batch optimization: explicit individual interests guide group refinement, group interests enhance individual modeling
-     - Validated on Sports, Beauty, Toys datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/htired/ISRF](https://github.com/htired/ISRF): official WWW'26 code with semantic-graph construction and iterative optimization; deductions: modest README, single-lab, no pretrained weights
-     - **Novelty: 7/10** — individual→group iterative semantic reasoning is a clear take on interest modeling
-     - **Fairness: 6/10** — group-interest modeling has an equity angle but is not a fairness study
-     - **Robustness: 6/10** — three public datasets, no online or adversarial evaluation
-     - **Impact: 7/10** — WWW 2026; semantic reasoning for generative rec is a growing direction
-7. **Beyond Interleaving: Causal Attention Reformulations for Generative Recommender Systems**
-   * Affiliation: LinkedIn Inc. (Mountain View, CA) — *(Hailing Cheng)*
-   * Link: [arxiv.org/abs/2603.10369](https://arxiv.org/abs/2603.10369)
-   * Venue: arXiv preprint, March 2026 (cs.IR / cs.AI; submitted 11 Mar 2026), submitted to KDD 2026
-   * TL;DR: Interleaving item and action tokens in generative recommenders doubles sequence length, adds quadratic overhead and relies on implicit attention to recover causality; the paper reframes interleaving as similarity-weighted action pooling and proposes AttnLFA and AttnMVP, which drop interleaved dependencies, cut sequence complexity ~50%, and beat interleaved baselines on large-scale social-network product data with 23%/12% training-time savings.
-   * Key techniques:
-     - A principled reformulation aligning sequence modeling with item→action causal structure and attention theory
-     - AttnLFA (Attention-based Late Fusion for Actions) and AttnMVP (Attention-based Mixed Value Pooling) eliminating interleaved dependencies
-     - ~50% sequence-complexity reduction with preserved Transformer expressivity
-     - Evaluated on large-scale product recommendation from a major social network: NE gains and 23%/12% training-time reductions
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code or model release at scan time (LinkedIn)
-     - **Novelty: 8/10** — explicit causal-attention reformulation replacing interleaving is a clean architecture contribution
-     - **Fairness: 5/10** — not fairness-focused
-     - **Robustness: 7/10** — large-scale production-style data with efficiency + NE gains
-     - **Impact: 8/10** — LinkedIn; a directly deployable efficiency/architecture recipe for generative ranking
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1417,7 +1465,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 194 papers as of October 01.
+**Count:** 196 papers as of October 02.
 
 | Score | Paper |
 | --- | --- |
@@ -1555,6 +1603,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Enhancing Group Recommendation with Memory-Augmented Reasoning in LLM Agent (AGR) |
 | 7/10 | Iterative Semantic Reasoning from Individual to Group Interests for Generative Recommendation with LLMs (ISRF) |
 | 7/10 | X-KGRank: A Knowledge Graph RAG Framework for Explainable Recommendations via Pattern Mining and LLM Re-Ranking (X-KGRank) |
+| 7/10 | RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation (RouteRec) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | PAPA: Online Personalized Active Preference Alignment (PAPA) |
@@ -1581,6 +1630,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE) |
 | 6/10 | HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization |
 | 6/10 | Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations |
+| 6/10 | When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation (When-the-Label) |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
 | 5/10 | From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT) |

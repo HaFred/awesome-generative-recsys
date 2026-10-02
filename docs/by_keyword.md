@@ -60,6 +60,8 @@
 - AgentRecommender: LLM Agents Enable Customizable Recommender Systems on the User Side (AgentRecommender) — National Institute of Informatics, arXiv 2609.31166
 
 - ReMem: Multi-memory GRPO for Long-Context Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU, arXiv 2609.37311
+- AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation (AgentWebRec) — Beihang University, arXiv 2610.01705
+
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 - GenRec: An LLM-Backed Recommendation Ranker at Netflix (GenRec)
@@ -180,6 +182,7 @@
 - Re2A: Situated Conversational Recommendation via Rubric-based Preference Reasoning and Alignment (Re2A) — HK PolyU / CUHK / Sichuan University, EMNLP 2026
 
 - Retrieval, Scoring, and Decoding Shape Performance and Stability in LLM-based Conversational Recommendation (CRS-Performance)
+- When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation (When-the-Label) — Uber AI, arXiv 2609.39696 [opensource]
 
 ### Cross-Domain
 - Cross-Country Code-Mixing for Generative Recommendation (CMRec)
@@ -232,6 +235,7 @@
 - Reasoning Quality Matters: Combating Reasoning Collapse in LLM-based Embedding Learning (CoFree) — Alibaba (Taobao) / Wuhan University / Shanghai Jiao Tong University, arXiv 2609.20563
 - SELF-INDEX: Self-Evolving Search Index (SELF-INDEX) — Yonsei University, arXiv 2609.19656
 - Epistemic Warrant for LLM Recommendations: Characterizing the Basis for Reliance When Ground Truth Is Unavailable — Purdue University / University of Pennsylvania, arXiv 2609.04127
+- When More Data Is Not Enough: The Context-Sufficiency Frontier in Generative AI Personalization (Context-Sufficiency) — ABYAT, arXiv 2610.00654
 
 ### Diffusion
 - Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
@@ -326,6 +330,8 @@
 
 - ED-DR: Off-Policy Ranking Evaluation under Ranking-Dependent Examination (ED-DR) - Waseda University, arXiv 2609.35034
 - Eval4DiRec: A Unified and Systematic Evaluation Framework for Diffusion-based Recommender Systems (Eval4DiRec) - University of Technology Sydney, ACM TKDD, arXiv 2609.34404
+- When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation (When-the-Label) — Uber AI, arXiv 2609.39696 [opensource]
+
 ### Fairness
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
@@ -709,6 +715,7 @@
 - Residual Trajectory Distillation for Generative Retrieval (ResTD) — Beihang University / Meituan; arXiv 2609.39319
 - Learning Multiresolution Relevance for Hierarchical Generative Retrieval (RARS) — Beihang University / Meituan; arXiv 2609.39312 [opensource]
 - Exploring Forum Post Retrieval with Generative Modeling — Meta (Facebook); arXiv 2609.38646
+- Graph-Informed Semantic IDs (GrIS): Balancing Semantic and Collaborative Signals via Recursive Graph Partition (GrIS) — Huawei Ireland Research Centre, arXiv 2610.01533
 
 ### Group Recommendation
 - AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation
@@ -931,6 +938,8 @@
 
 - GRP: Snap's Generative Recommendation Paradigm (GRP) - Snap Inc., arXiv 2609.36688
 - HELIX: Purified and Unified Large-Scale Recommendation (HELIX) - TikTok, arXiv 2609.37183
+- When LLM-Inferred User Context Adds Value in Production Streaming Recommendation (LLM-Inferred-Context) — DePaul University / Comcast, arXiv 2609.38999
+
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1209,6 +1218,11 @@
 - AgentRecommender: LLM Agents Enable Customizable Recommender Systems on the User Side (AgentRecommender) — National Institute of Informatics, arXiv 2609.31166
 
 - EvoSkillRec: LLM-Driven Skill-Genome Evolution for Recommender Architecture Discovery (EvoSkillRec) - Huawei Noah's Ark Lab / City University of Hong Kong, arXiv 2609.34552
+- Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders (REPAIR) — IIIT Delhi, arXiv 2610.01270
+- When More Data Is Not Enough: The Context-Sufficiency Frontier in Generative AI Personalization (Context-Sufficiency) — ABYAT, arXiv 2610.00654
+- When LLM-Inferred User Context Adds Value in Production Streaming Recommendation (LLM-Inferred-Context) — DePaul University / Comcast, arXiv 2609.38999
+- Decision-Oriented Recommendation Reranking: An Empirical Study of Jev (Jev) — University of Rochester / Meta AI, arXiv 2609.40241
+
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
@@ -1233,8 +1247,7 @@
 - L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
 - MixRAGRec: MoE KG-RAG for Multi-Agent LLM Recommendation
 - OneMall
-
-
+- RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation (RouteRec) — KAIST / Seoul National University, arXiv 2609.39007 [opensource]
 
 ### Model / Architecture
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
@@ -1429,6 +1442,7 @@
 - Retrieval, Scoring, and Decoding Shape Performance and Stability in LLM-based Conversational Recommendation (CRS-Performance)
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneRec-V2 / OneReason) — Kuaishou; SIGIR 2026 challenge; arXiv 2609.39828
 - Routing Between Generative and Collaborative User Profiles: A Serving-Time Gate for Controllable Novelty — DePaul University / Comcast Technology AI; arXiv 2609.39043
+- Decision-Oriented Recommendation Reranking: An Empirical Study of Jev (Jev) — University of Rochester / Meta AI, arXiv 2609.40241
 
 ### Reasoning
 - From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)
@@ -1572,6 +1586,7 @@
 - Reasoning Quality Matters: Combating Reasoning Collapse in LLM-based Embedding Learning (CoFree) — Alibaba (Taobao) / Wuhan University / Shanghai Jiao Tong University, arXiv 2609.20563
 - Self-Evolving Search Index (SELF-INDEX) — Yonsei University, arXiv 2609.19656
 - Think Thrice Before Reranking: Multi-perspective Evidence and Reasoning Integration for Text Reranking (MERIT-Rank) — Honor Device Co., Ltd, arXiv 2609.20131
+- Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders (REPAIR) — IIIT Delhi, arXiv 2610.01270
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -1712,6 +1727,9 @@
 - Residual Trajectory Distillation for Generative Retrieval (ResTD) — Beihang University / Meituan; arXiv 2609.39319
 - Learning Multiresolution Relevance for Hierarchical Generative Retrieval (RARS) — Beihang University / Meituan; arXiv 2609.39312 [opensource]
 - GEAR: Generative End-to-end Ad Retrieval at Douyin (GEAR) — ByteDance (Douyin); arXiv 2609.39327
+- Graph-Informed Semantic IDs (GrIS): Balancing Semantic and Collaborative Signals via Recursive Graph Partition (GrIS) — Huawei Ireland Research Centre, arXiv 2610.01533
+- Do Multilingual Encoders Produce Language-Consistent Semantic IDs? (MultiLing-SID) — Amazon / Rutgers, arXiv 2610.01139
+
 ### Security / Adversarial
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
 - VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)
@@ -1796,6 +1814,7 @@
 
 - T-RoPE: Time-Aware Rotary Position Embedding for Sequential Recommendation (T-RoPE) — Shopify, arXiv 2609.30576
 - Recommendation World Models for Future-State Control (UA-TWM) — University of British Columbia et al., arXiv 2609.30711
+- RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation (RouteRec) — KAIST / Seoul National University, arXiv 2609.39007 [opensource]
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
