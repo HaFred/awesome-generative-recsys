@@ -399,6 +399,7 @@
 - Fair on the Surface? Benchmarking Hidden-Output Fairness Gaps in LLM Recommenders (FairGap) — University of Georgia / USC / CMU / Michigan State; arXiv 2608.08284
 
 - Mult-BiW: Mitigating Popularity Bias via Multinomial-Likelihood Bi-Weighting (Mult-BiW) - Université de Montréal, ACM TOIS, arXiv 2609.35041
+- Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems (PromptShift) — UESTC (training-free bias mitigation)
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 
@@ -687,6 +688,8 @@
 
 - GRP: Snap's Generative Recommendation Paradigm with Multimodal Semantic IDs (GRP) - Snap Inc., arXiv 2609.36688
 - SpeakGR: Learning Semantic IDs Without Forgetting Language Generation (SpeakGR) - Imperial College London, arXiv 2609.35430
+- Beyond the Beam: Constructive Repair and Candidate Completion for Generative Recommendation (Beyond the Beam) — Beijing Institute of Technology
+- SPRINT: Single-Step Generative Recommendation via Average Probability Velocity (SPRINT) — University of Technology Sydney (single-pass SID generation)
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -1223,6 +1226,7 @@
 - When LLM-Inferred User Context Adds Value in Production Streaming Recommendation (LLM-Inferred-Context) — DePaul University / Comcast, arXiv 2609.38999
 - Decision-Oriented Recommendation Reranking: An Empirical Study of Jev (Jev) — University of Rochester / Meta AI, arXiv 2609.40241
 
+- System Attribution in LLM Brand Recommendations (Dmitrij Żatuchin) — EUAS / Rankfor.AI
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)

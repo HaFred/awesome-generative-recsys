@@ -91,6 +91,130 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
+### Papers October 03
+
+*Saturday, October 3, 2026. The Friday Oct 2 cs.IR announcement batch (21 new submissions) was already fully captured by the October 02 run, so the strict last-24h window yields 0 genuinely new generative-recsys papers. To meet the 5-paper minimum, 1 on-topic paper from that batch (System Attribution in LLM Brand Recommendations) plus 6 further in-scope generative / LLM / semantic-ID / RL papers from the last ~3 weeks (Sep 13–28) were backfilled from the arxiv keyword pools. Total: 7 papers (1 opensource: Self-Evolving Memory / LION, CIKM 2026).*
+
+1. **Beyond the Beam: Constructive Repair and Candidate Completion for Generative Recommendation**
+   * Affiliation: Beijing Institute of Technology — *(Zijun Zhao, Peng Zhang, Gang Zhang, Yuanchi Ma, Hui He, Zhendong Niu)*
+   * Link: [arxiv.org/abs/2609.33745](https://arxiv.org/abs/2609.33745)
+   * Venue: preprint
+   * TL;DR: Beyond-beam retrieval that repairs identifier assignment via minimum-replacement integral flow and certifies candidate completion to recover items outside the initial beam.
+   * Key techniques:
+     - Output-invariance certificates identify failures shared by all admissible assignments
+     - Coupled support and ranking constraints give the exact feasible interval of new-item counts for target recovery
+     - Minimum-replacement repair via an integral-flow formulation; shared map + generator adaptation
+     - Combined generative-likelihood / collaborative-evidence scoring with retained-prefix-bounded candidate completion and certified global Top-K stopping
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code repository released.
+     - **Novelty: 8/10** — Reframes out-of-beam failures as a constructive repair + certified completion problem; integral-flow min-replacement is a new angle on generative retrieval.
+     - **Fairness: 4/10** — Not addressed.
+     - **Robustness: 8/10** — Output-invariance certificates and exhaustive finite-catalog evaluation confirm construction in every feasible case; +15.5–46.3% Recall@10 over strong baselines.
+     - **Impact: 8/10** — Directly improves deployment-relevant generative retrieval; works with both T5 and decoder-only LC-Rec.
+
+2. **Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems** (PromptShift)
+   * Affiliation: University of Electronic Science and Technology of China (UESTC), Chengdu — *(Zhuoxiong Gan, Qiang Dong)*
+   * Link: [arxiv.org/abs/2609.34229](https://arxiv.org/abs/2609.34229)
+   * Venue: preprint
+   * TL;DR: A training-free, interpretable framework that quantifies and mitigates identity-cue preference drift in LLM-based recommenders.
+   * Key techniques:
+     - Drift: divergence (membership + ranking) between an identity-cued list and the history-only reference
+     - SliceShift: how far a cued list gravitates toward slice-popular items vs the global population
+     - DifHitRate: difficulty-weighted hit metric crediting less-popular, higher-ranked relevant items
+     - Adaptive post-hoc reranker interpolating the LLM ranking with inverse slice-popularity
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code repository released.
+     - **Novelty: 7/10** — Formalizes identity-cue drift with measurable, interpretable diagnostics and a training-free mitigation.
+     - **Fairness: 8/10** — Directly targets group-level (identity-slice) preference bias in LLM recommendations.
+     - **Robustness: 7/10** — Consistent across 2 datasets x 3 LLMs; SliceShift positive in all 6 settings; -62.42% macro-mean SliceShift.
+     - **Impact: 7/10** — Practical, zero-training fairness/robustness knob for deployed LLM recommenders.
+
+3. **SPRINT: Single-Step Generative Recommendation via Average Probability Velocity**
+   * Affiliation: University of Technology Sydney — *(Zhuo Cai, Shoujin Wang, Peilin Zhou, Min Xu, Julian McAuley, Fang Chen)*
+   * Link: [arxiv.org/abs/2609.34306](https://arxiv.org/abs/2609.34306)
+   * Venue: preprint
+   * TL;DR: Generates the full Semantic ID in a single forward pass via an "average probability velocity" perspective plus a dual-level flow contrastive objective.
+   * Key techniques:
+     - Views SID generation as a flow of token probabilities characterized by average velocity over the whole process
+     - Bidirectional Transformer parameterizes all token probabilities independently in one pass
+     - Token-level and SID-level flow contrastive objectives restore cross-position coherence
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code repository found for this paper.
+     - **Novelty: 9/10** — Breaks the token-by-token AR/NAR paradigm; single-pass SID generation is a distinct efficiency contribution.
+     - **Fairness: 4/10** — Not addressed.
+     - **Robustness: 7/10** — Extensive experiments; 8.39–10.04x speedup with +7.77% avg accuracy, but single-pass coherence is reconstructed rather than guaranteed.
+     - **Impact: 9/10** — Major latency win for latency-sensitive generative retrieval; from the McAuley group.
+
+4. **ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing**
+   * Affiliation: Central South University, Changsha, China — *(Haoran Yang, Fei Chen; with Yutian Xiao, Beihang University; Jiahao Liang, South China University of Technology)*
+   * Link: [arxiv.org/abs/2609.16560](https://arxiv.org/abs/2609.16560)
+   * Venue: preprint
+   * TL;DR: A weakly-supervised framework that estimates per-user weak risk and routes between Simple / Cautious prompts at generation time.
+   * Key techniques:
+     - Behavior Token + temporal Graph Tokens encode sequential and collaborative context
+     - Dual-View Weak-Risk Estimator fuses views into a user-level weak-risk score
+     - Cautious Prompt steers toward stable, collaboratively-supported evidence
+     - Weak-risk proxy labels derived from review-feedback signals
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code repository released.
+     - **Novelty: 7/10** — Turns weak-risk estimation into a generation-time control signal via prompt routing.
+     - **Fairness: 6/10** — Addresses manipulation/shilling-robustness rather than demographic fairness per se.
+     - **Robustness: 8/10** — Explicitly reliability-oriented; routes away from brittle/short-term signals.
+     - **Impact: 7/10** — Relevant to safe, robust LLM generative recommendation.
+
+5. **Self-Evolving Memory for Generative Recommendation** (LION)
+   * Affiliation: National University of Singapore — *(Xinyu Lin, Zhuosong Jiang, et al.; with Meta AI)*
+   * Link: [arxiv.org/abs/2609.15598](https://arxiv.org/abs/2609.15598)
+   * Venue: CIKM 2026
+   * TL;DR: A sparse Key-Value memory paradigm (LION) that resolves the "evolution conflict" in continual generative recommendation.
+   * Key techniques:
+     - Isolated memorization via sparse memory activation to separate heterogeneous preference patterns
+     - Reinforced evolution via a consolidation loss for underrepresented dynamics
+     - Scalable application across continual-evolution settings
+     - Three design principles: isolated memorization, reinforced evolution, scalable application
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — Code released at [github.com/JazyJiang/Self-Evolving-Memory-for-Generative-Recommendation](https://github.com/JazyJiang/Self-Evolving-Memory-for-Generative-Recommendation). Repo present with code + README, moderate documentation; CIKM'26 artifact.
+     - **Novelty: 8/10** — Identifies and addresses evolution conflict in shared autoregressive genrec parameters.
+     - **Fairness: 5/10** — Mitigates underrepresented-pattern neglect (a fairness-adjacent concern).
+     - **Robustness: 8/10** — Per-period / user-group / convergence evaluations show stable continual learning.
+     - **Impact: 9/10** — CIKM'26; touches a core continual-learning pain point for generative recommenders.
+
+6. **VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search**
+   * Affiliation: University of Science and Technology of China (USTC), Hefei — *(Xiaopeng Chu, Wenyi Zhang; with Alibaba/Tmall: Jianbo Zhu, Mingmin Jin, Jing Wang, Xing Fang)*
+   * Link: [arxiv.org/abs/2609.14493](https://arxiv.org/abs/2609.14493)
+   * Venue: preprint (Tmall / Alibaba, deployed)
+   * TL;DR: Generative retrieval for Tmall search that admits generated candidates straight to the final ranker using business-value-ordered SIDs and Prefix-GRPO.
+   * Key techniques:
+     - VARG-ID: RQ-VAE semantic prefix + value-ordered 3rd token for fine-grained addresses
+     - Three-stage supervised fine-tuning (mapping, query-semantic, personalized retrieval)
+     - Local ordinal supervision (LO-SFT) for within-cluster ordering
+     - Prefix-GRPO with gated rewards (legality, behavior, ranker advantage, relevance) + prefix-aware token weighting
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Industrial system; no public code released.
+     - **Novelty: 8/10** — Couples business value into the SID and aligns generation to the ranker via GRPO.
+     - **Fairness: 4/10** — Not addressed.
+     - **Robustness: 7/10** — 14-day online A/B (20% traffic) + coordinated daily product/model updates.
+     - **Impact: 9/10** — Real Tmall deployment: +1.45% GMV, +0.22% IPV, +0.31% PCTR.
+
+7. **System Attribution in LLM Brand Recommendations: Single Responses Identify the System, Aggregated Brand Profiles Do Not Transfer**
+   * Affiliation: Estonian Entrepreneurship University of Applied Sciences (EUAS), Tallinn, Estonia — *(Dmitrij Żatuchin; also Rankfor.AI, Wrocław, Poland)*
+   * Link: [arxiv.org/abs/2610.00253](https://arxiv.org/abs/2610.00253)
+   * Venue: preprint
+   * TL;DR: Audits whether per-system brand-recommendation profiles describe the deployed LLM; single responses attribute well, but aggregate brand profiles fail to transfer across domains.
+   * Key techniques:
+     - Character n-gram classifier attributing 5 deployed endpoints (GPT-5.2, Gemini 3 Flash, Grok, Perplexity) with 97.84% accuracy
+     - Output-length truncation analysis (1,024-token cap) quantifying harness-induced censoring
+     - Retrieval-grounded arm changing the harness (0/120 Grok answers attributed to Grok)
+     - Grouped cross-validation separating four systems at 66.53% vs a 33.71% permutation null
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code repository released.
+     - **Novelty: 7/10** — Shows the surface form of an answer carries system identity while aggregate brand behavior does not.
+     - **Fairness: 5/10** — Auditing/transparency lens on LLM recommendations rather than a fairness method.
+     - **Robustness: 7/10** — Strong cross-validation, null tests, and a harness-ablation arm.
+     - **Impact: 5/10** — Useful for LLM-recommender transparency auditing; narrow empirical scope.
+
+---
+
 ### Papers October 02
 
 *Friday, October 2, 2026. The Thursday Oct 1 cs.IR announcement batch (submitted through Oct 1) and late Sep 30 submissions surfaced 9 on-topic generative / LLM / agentic / semantic-ID papers absent from the repo: AgentWebRec (compact evidence fusion over the agent web for personalized rec, Beihang), GrIS / Graph-Informed Semantic IDs (recursive graph-partition SID construction, Huawei Ireland, CIKM 2026), REPAIR (repairs lossy preference states of frozen personalization encoders, IIIT Delhi, NeurIPS 2026), a multilingual-consistency study of Semantic IDs (Amazon / Rutgers, WiNLP 2026), the Context-Sufficiency Frontier theory for generative-AI personalization (ABYAT), an audit of policy-selected labels in synthetic conversational music rec (Uber AI, RecSys Challenge 2026, opensource), RouteRec (behavior-guided sparse MoE routing for sequential rec, KAIST / SNU, CIKM 2026, opensource), a production streaming-rec user-profiling study (DePaul / Comcast), and an empirical study of the decision-oriented reranking model Jev (U Rochester / Meta AI). Total: 9 papers (2 opensource: RouteRec, When the Label Ignores the Request).*
@@ -1124,101 +1248,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 6/10** — evaluation on app-retrieval datasets with ablation of the filter stage (F1 90%)
      - **Impact: 5/10** — U Toronto / UQAM; niche but practical retrieval task
 
----
-
-### Papers September 22
-
-*Tuesday, September 22, 2026. The Tue 22 Sep cs.IR announcement batch (39 new cs.IR entries) plus the Mon 21 Sep tail (8) were scanned; 5 genuinely-new on-topic generative / sequential / LLM-rec papers surfaced (2 opensource). Core: SID-Repro — a large-scale reproducibility study of semantic-ID design (Shandong / Glasgow / Leiden, SIGIR-AP 2026, opensource); Guided SID pins coarse RQ-VAE levels to text-grounded attributes (Meta); MuSeR long-sequence multi-interest retrieval deployed at Baidu (+0.26% DAU, +0.89% session duration, online A/B); BT-SR Barlow-Twins decorrelation for controllable head/tail exposure (Yandex / AIRI / HSE, opensource); and LLM rationales for YouTube Music artist discovery at scale (Google). FacetCRS (arXiv:2609.20175) re-spotted in the listing — re-hit noted on its existing entry.*
-
-1. **What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro)**
-   * Affiliation: Shandong University (Jinan, China) / University of Glasgow / Leiden University — *(Yufei Chen, Junchen Fu, Jujia Zhao, Yukun Zhao, Zhaochun Ren)*
-   * Link: [arxiv.org/abs/2609.24430](https://arxiv.org/abs/2609.24430)
-   * Venue: SIGIR-AP 2026 (accepted)
-   * TL;DR: A large-scale reproducibility study under a unified framework shows semantic-ID-design effects are largely non-monotonic — no single RQ-VAE / OPQ design is universally best, codebook-utilization is diagnostic but insufficient, and scaling the backbone or SID length is not always beneficial.
-   * Key techniques:
-     - Unified experimental framework comparing multiple SID designs (RQ-VAE, OPQ, etc.) for generative recommendation
-     - Analysis of the connection between codebook utilization and recommendation quality
-     - Study of the effect of semantic code length on performance
-     - Semantic-neighborhood analysis of local item semantic preservation
-     - Cross-dataset controlled analyses
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/layingfish/SID-Repro](https://github.com/layingfish/SID-Repro): official reproducibility artifact with code + data; reuses a fixed RQ-VAE implementation (EdoardoBotta/RQ-VAE-Recommender) and the TIGER protocol so only the SID design varies; deductions: study-focused repo (no pretrained weights, single primary maintainer)
-     - **Novelty: 6/10** — a rigorous empirical measurement / meta-analysis of SID design rather than a new method
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 8/10** — the entire contribution is controlled cross-design, cross-dataset evaluation with matched protocols
-     - **Impact: 8/10** — SIGIR-AP 2026; directly reshapes how the field chooses and reports SID designs
-
-2. **Guiding the coarse levels of semantic IDs makes the fine levels learnable (Guided SID)**
-   * Affiliation: Meta — *(Bin Wang, Zhengyu Zhang)*
-   * Link: [arxiv.org/abs/2609.22227](https://arxiv.org/abs/2609.22227)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.CL / cs.LG; submitted 3 Sep 2026)
-   * TL;DR: Instead of post-hoc bridging, force the coarse RQ-VAE levels to encode a predefined text-grounded, task-relevant categorical attribute via deterministic supervised index assignment (overriding nearest-neighbor), keeping codebooks learnable; a trie-merge handles high-cardinality / set-valued attributes. In a matched end-to-end A/B it lifts recall@k (1.36x@k=1, 1.39x@k=10) and MRR 0.0260 to 0.0355.
-   * Key techniques:
-     - Guided SID: deterministic supervised index assignment for coarse RQ-VAE levels
-     - Predefined categorical attribute that is text-grounded (hence LLM-legible) and task-relevant
-     - Learnable codebooks that still receive reconstruction gradients
-     - Trie-merge construction mapping any high-cardinality or set-valued attribute onto the fixed code budget with semantically coherent buckets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (proprietary industrial logs; method fully specified in text)
-     - **Novelty: 8/10** — a clean reframing of SID construction so the levels that matter are meaningful by construction rather than via alignment corpora / RL
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — internal A/B on industrial logs across list lengths; single corpus, no public reproduction
-     - **Impact: 8/10** — Meta; significant recall/MRR gains in a deployed generative-retrieval setting
-
-3. **MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling (MuSeR)**
-   * Affiliation: Baidu, Beijing / City University of Hong Kong / Chinese University of Hong Kong — *(Yongkang Fu, Beining Bao, Yu Jiang, Xiangyu Zhao, Hongyang Wei, Guangxing Chen, Zuodong Yang, Shantao Li, Zonggang Wu, Yuqi Lu, Shouke Qin, Hanmeng Liu, Maolin Wang)*
-   * Link: [arxiv.org/abs/2609.23677](https://arxiv.org/abs/2609.23677)
-   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 20 Sep 2026); deployed on Baidu APP
-   * TL;DR: A production retrieval framework that fits 10^4 to 10^5 user actions in a fixed serving budget via hierarchical temporal compression, disentangled multi-query interest extraction with orthogonality, and LLM-distilled multimodal alignment, plus hierarchical beam-search retrieval; online A/B gives +0.26% DAU and +0.89% session duration (p<0.05) on Baidu APP.
-   * Key techniques:
-     - Hierarchical temporal compression (recent actions at full resolution, older segments progressively pooled)
-     - Disentangled multi-query interest extraction with orthogonality regularization
-     - Multimodal semantic alignment augmenting sparse item IDs with LLM-distilled textual summaries
-     - Asynchronous user-representation refresh with adaptive caching
-     - Hierarchical beam-search retrieval across heterogeneous hardware
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (described as a production system rolled out at Baidu)
-     - **Novelty: 6/10** — a system-level integration of known components into a deployable long-sequence multi-interest pipeline rather than a new primitive
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 8/10** — online A/B across homepage feed, discovery feed and short-video scenarios with significant DAU / session gains and reduced latency
-     - **Impact: 8/10** — Baidu; significant real-world deployment gains at scale
-
-4. **A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR)**
-   * Affiliation: Yandex, Moscow / Applied AI Institute, Moscow / HSE University, Moscow — *(Veronika Ivanova, Marina Munkhoeva, Ivan Razvorotnev, Evgeny Frolov)*
-   * Link: [arxiv.org/abs/2609.23849](https://arxiv.org/abs/2609.23849)
-   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 20 Sep 2026)
-   * TL;DR: Studies feature decorrelation as a knob to reshape representation geometry in dot-product sequential recommenders and curb popularity-driven concentration; proposes BT-SR (Barlow Twins regularization) with label-consistent positive pairs (shared next-item target), enabling controllable accuracy-exposure trade-offs across head and tail.
-   * Key techniques:
-     - Decorrelation-regularized training augmenting next-item prediction with a redundancy-reduction term
-     - BT-SR instantiating it with the Barlow Twins objective
-     - Label-consistent positive pairs (user histories sharing the same next-item) without synthetic corruptions
-     - Geometric analysis of low-rank direction suppression in user representation space
-     - Bucket-based alignment concentration metric quantifying head-vs-tail exposure
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/Veronika-Ivanova/barlow_twins_sasrec](https://github.com/Veronika-Ivanova/barlow_twins_sasrec): full code, preprocessing scripts and ablation studies; deductions: single-org, method-specific, no pretrained weights
-     - **Novelty: 6/10** — applying Barlow-Twins decorrelation to control head/tail exposure in sequential rec is a sensible refinement, not a paradigm shift
-     - **Fairness: 7/10** — directly targets popularity-driven concentration and the accuracy-exposure trade-off
-     - **Robustness: 6/10** — five public benchmarks plus geometric analysis
-     - **Impact: 5/10** — sequential-rec systems; practical for long-tail exposure control
-
-5. **Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery**
-   * Affiliation: Google LLC (YouTube Music / Google Research) — *(Xiao Liu, Yanwei Song, Srivaths Ranganathan, Yuan Chen, Zheyun Feng, Parker Steenburgh, Jochen Klingenhoefer, Nathan Lasche, Gergo Varady, Tim Steele)*
-   * Link: [arxiv.org/abs/2609.23877](https://arxiv.org/abs/2609.23877)
-   * Venue: arXiv preprint, September 2026 (cs.AI / cs.IR; submitted 20 Sep 2026)
-   * TL;DR: An industry case study of a decoupled recommendation architecture that pre-computes LLM-generated natural-language rationales for undiscovered artists asynchronously offline, lowering the trust barrier for exploration; large-scale online A/B shows significant gains in both user exploration and overall engagement on YouTube Music discovery surfaces.
-   * Key techniques:
-     - Decoupled recommendation architecture isolating LLM inference asynchronously offline
-     - Pre-computed personalized candidate pools of undiscovered artists with tailored rationales
-     - LLM-generated transparent natural-language rationales (Gemini) for explainability
-     - Large-scale online A/B on YouTube Music discovery surfaces
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (Google internal production system)
-     - **Novelty: 5/10** — an engineering / deployment case study of async LLM rationale generation, not a new method
-     - **Fairness: 2/10** — not fairness-focused; addresses exploration / trust barrier for new content
-     - **Robustness: 7/10** — large-scale online A/B with statistically significant exploration and engagement gains
-     - **Impact: 8/10** — Google / YouTube Music; significant real-world deployment
-
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1805,6 +1834,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 - MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling (MuSeR) — Baidu / CityU HK / CUHK (hierarchical beam-search retrieval)
 
+- Beyond the Beam: Constructive Repair and Candidate Completion for Generative Recommendation (Beyond the Beam) — Beijing Institute of Technology
+
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
 - Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation (GESE) — Baidu (GSPO)
@@ -1933,6 +1964,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - GRP / Snap's Generative Recommendation Paradigm - mGRPO reward-guided post-training, progressive E2E deployment (GRP) - Snap Inc.
 - ReMem / Multi-memory GRPO for Long-Context Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneRec-V2 / OneReason) — Kuaishou (SIGIR 2026 challenge; OneReason uses advanced RL to make CoT reasoning beneficial) — [arxiv](https://arxiv.org/abs/2609.39828)
+- SPRINT: Single-Step Generative Recommendation via Average Probability Velocity (SPRINT) — University of Technology Sydney (single-pass SID generation)
+- ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec) — Central South University / Beihang / South China Univ. of Tech.
+
 See [Full keyword index](docs/by_keyword.md) for all other categories.
 
 ## By Affiliation
