@@ -91,6 +91,127 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
+### Papers October 04
+
+*Sunday, October 4, 2026. The live last-24h arxiv cs.IR announcement window is empty (weekend — no Oct 3–4 batch), so per the fallback we drew 7 genuinely-new, on-topic generative / LLM / agentic / conversational recommendation papers from the arxiv keyword pools over the last ~3 months (Jul–Oct 2026). All 7 are closed-source. Total: 7 papers (0 opensource).*
+
+1. **Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems**
+   * Affiliation: Pinterest, Inc. — *(Christine Herlihy, Xumei Xi, Shloka Desai, Kevin Bannerman Hutchful, Pedro Silva)*
+   * Link: [arxiv.org/abs/2609.33073](https://arxiv.org/abs/2609.33073)
+   * Venue: KDD 2025 Workshop on Online and Adaptive Recommender Systems (OARS)
+   * TL;DR: Extends algorithmic-harm taxonomies to generative-model-augmented, non-conversational recommender systems, exposing novel causal drivers (e.g., sanitization) and offering a causal analysis of how harmful (input, output) subsets arise.
+   * Key techniques:
+     - Expanded taxonomy of algorithmic harms for generative-model-augmented recsys
+     - Separation of representational / quality-of-service harms from endogenous harms (e.g., sanitization when inputs misalign with designer objectives)
+     - Causal analysis of problematic subsets of the (input, output) joint distribution to guide detection/mitigation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code or benchmark released.
+     - **Novelty: 7/10** — Solid conceptual extension of harm taxonomies to the gen-augmented setting; no new method, but a needed framing.
+     - **Fairness: 9/10** — Core contribution is fairness/responsible-AI: taxonomizing novel harms in gen-augmented recsys.
+     - **Robustness: 6/10** — Causal/conceptual analysis; no empirical robustness evaluation across models or deployments.
+     - **Impact: 7/10** — Important responsible-AI framing for generative recsys; workshop venue tempers reach.
+
+2. **MM-VeriRec: Failure-Guided Fusion for Verifiable Agentic Multimodal Recommendation**
+   * Affiliation: Independent Research, United States — *(Yufeng Wang)*
+   * Link: [arxiv.org/abs/2609.31718](https://arxiv.org/abs/2609.31718)
+   * Venue: 1st Int'l Workshop on Agentic Multimodal Intelligence (AMI '26), co-located with ACM Multimedia 2026
+   * TL;DR: A verifiable agentic multimodal recommendation protocol with failure-guided fusion that detects hidden visual constraints, image-text mismatch, and abstains on impossible tasks.
+   * Key techniques:
+     - Tasks built from real movie-poster / product-image datasets with deterministic visual-attribute verification
+     - Failures converted into actionable labels: text-trap following, visual ignorance, false acceptance
+     - Adaptive attribute gate + failure-guided fusion that routes to the correct repair
+     - Transfer under a non-aligned gate: an independently derived leave-one-out CLIP detector still reaches 0.7028 / 0.6111 visual-grounded success
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code released.
+     - **Novelty: 8/10** — Verifiable agentic multimodal rec with failure-guided fusion + abstention is a fresh angle on trustworthy multimodal rec.
+     - **Fairness: 5/10** — Not directly addressed.
+     - **Robustness: 8/10** — Verifier-aligned gating and ablation across LLM families show it handles hidden constraints and impossible tasks.
+     - **Impact: 7/10** — Strong benchmark + diagnostic loop for trustworthy agentic multimodal rec; workshop venue.
+
+3. **Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops**
+   * Affiliation: Spotify — *(Enrico Palumbo, Alexandre Tamborrino, Victor Ode, Ben Lacker, Adrià Casas Escoda, Jeremy Hopple, et al.)*
+   * Link: [arxiv.org/abs/2609.30297](https://arxiv.org/abs/2609.30297)
+   * Venue: RecSys 2026
+   * TL;DR: A multi-turn synthetic-data generation + self-improvement loop for conversational recommendation agents at Spotify, improving quality +8% over a highly optimized manual prompt and +14% user listening in online A/B.
+   * Key techniques:
+     - Single-turn prompt → realistic multi-turn conversation transformation for cold-start evaluation
+     - Variance-based contrastive optimization for agent planning
+     - Iterative refinement through a coding agent (self-improvement loop)
+     - Productionized with online A/B tests: +14% listening, +5% WAU, −5% skip rate vs. session-refinement-only experience
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Industrial system; no public code released.
+     - **Novelty: 7/10** — Practical novelty: synthetic-data + self-improvement loop for rec-agent planning; not a new architecture.
+     - **Fairness: 4/10** — Not addressed.
+     - **Robustness: 7/10** — Validated via online A/B at Spotify scale; real deployment evidence.
+     - **Impact: 9/10** — RecSys 2026, deployed at Spotify with strong online gains — high industry impact.
+
+4. **Overview and Analysis of the RecSys Challenge 2026: Conversational Music Recommendation**
+   * Affiliation: Sony Group Corporation, SiriusXM, Deezer Research, Amazon, Politecnico di Bari, Maastricht University — *(Seungheon Doh, Sergio Oramas, Bruno Sguerra, Abhinav Bohra, Claudio Pomo, Francesco Barile)*
+   * Link: [arxiv.org/abs/2609.33045](https://arxiv.org/abs/2609.33045)
+   * Venue: RecSys Challenge 2026 (RecSysChallenge '26)
+   * TL;DR: Organizer overview/analysis of the RecSys 2026 conversational music recommendation challenge (retrieve tracks + generate grounded response), analyzing 16 systems via retrieve–rerank–generate and exposing benchmark/eval limitations.
+   * Key techniques:
+     - Retrieve–rerank–generate framework for cross-system analysis
+     - Variance study of recommendation performance across users, requests, and dialogue contexts
+     - Identifies single-ground-truth relevance and teacher-forced synthetic-dialogue eval as benchmark limitations
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Challenge baseline referenced but no public code URL; dataset on HuggingFace/Codabench.
+     - **Novelty: 6/10** — Analysis/organizer paper, not a new method; but a defining shared benchmark for conversational rec.
+     - **Fairness: 5/10** — Discusses eval bias but no fairness method.
+     - **Robustness: 7/10** — Synthesizes lessons from 16 systems and surfaces protocol weaknesses.
+     - **Impact: 8/10** — Defines a major shared benchmark for conversational recommendation — high community impact.
+
+5. **Do Evidence-Reading Diagnostics Improve Interface Selection in Small LLM Recommenders?**
+   * Affiliation: Independent Researcher — *(Han Chen, Yingrui Li)*
+   * Link: [arxiv.org/abs/2609.37472](https://arxiv.org/abs/2609.37472)
+   * Venue: preprint
+   * TL;DR: Evidence-reading diagnostic prompts for small LLM recommenders do NOT meaningfully improve interface selection (NDCG@5 change within ±0.0019, below target); retrieved-similar-user evidence does help prompting.
+   * Key techniques:
+     - Baseline vs. augmented selector using six evidence-reading prompts over 6 small LLMs × 4 domains × 3,426 users
+     - Stability prompts varying wording and candidate order
+     - Chronological evaluation; 95% bootstrap intervals on NDCG@5
+     - Reveals answer-position and tie-response biases in small LLM recommenders
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Scripts/code referenced but no public repository URL.
+     - **Novelty: 6/10** — Rigorous negative-result / diagnostic study; reframes how to validate LLM-rec diagnostics.
+     - **Fairness: 4/10** — Not addressed.
+     - **Robustness: 7/10** — Careful bootstrap analysis and bias diagnostics; honest about non-effects.
+     - **Impact: 6/10** — Useful methodological caution for LLM-rec interface selection; preprint.
+
+6. **FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization**
+   * Affiliation: JPMorganChase — *(Arundeep Chinta, Lucas Vinh Tran, Jay Katukuri)*
+   * Link: [arxiv.org/abs/2609.31890](https://arxiv.org/abs/2609.31890)
+   * Venue: 2nd Workshop on Advances in Financial AI (ICLR 2026)
+   * TL;DR: FARE frames Share-of-Voice-constrained fair ranking as a deep RL problem with CTR uncertainty in the state, reducing SOV deviation from fairness targets while minimizing engagement loss.
+   * Key techniques:
+     - SOV-constrained ranking cast as constrained trade execution (analogous to algorithmic finance)
+     - Uncertainty (σ) explicitly in agent state/policy — larger adjustments where CTR is uncertain
+     - FARE-PC (uncertainty-weighted proportional control), FARE-ES (evolution strategies), FARE-PPO (policy gradient)
+     - Modular execution layer atop any black-box CTR model, no retraining
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code released.
+     - **Novelty: 8/10** — RL framing of fair-exposure ranking with uncertainty-aware state is novel.
+     - **Fairness: 9/10** — Core contribution is fairness (SOV constraints) in personalization.
+     - **Robustness: 7/10** — Evaluated on synthetic data + KuaiRand-Pure; ES outperforms PPO.
+     - **Impact: 7/10** — Financial-services personalization with fairness guarantees; workshop venue.
+
+7. **On Evaluating and Improving Conversational Agents in Production**
+   * Affiliation: Zalando SE — *(Kasra Hosseini, Wen-Sen Cheng, Marco-Andrea Buchmann, Emir Mulabegovic, Weiwei Cheng)*
+   * Link: [arxiv.org/abs/2609.32092](https://arxiv.org/abs/2609.32092)
+   * Venue: preprint (cs.MA)
+   * TL;DR: An Evaluation Harness + Improvement Orchestrator for testing a production multi-agent shopping assistant via grounded user simulation, isolating real behavior changes from run-to-run noise.
+   * Key techniques:
+     - Evaluation Harness generates targeted assertions + a fixed cohort of customer scenarios, reproduces behavior via grounded user simulation
+     - Stored baseline from repeated runs of the unchanged system
+     - Improvement Orchestrator turns assertion results into hypotheses, compares isolated modifications via paired percentile bootstrap over scenario-level differences
+     - Human-approved revisions to future evaluations without altering past decisions
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Industrial framework; no public code released.
+     - **Novelty: 7/10** — Solid engineering-method contribution: harness/orchestrator for production conversational-agent evaluation.
+     - **Fairness: 4/10** — Not addressed.
+     - **Robustness: 8/10** — Handles LLM/retrieval stochasticity via bootstrap; distinguishes real gains from fluctuation.
+     - **Impact: 7/10** — Practical production eval framework at Zalando scale; preprint.
+
 ### Papers October 03
 
 *Saturday, October 3, 2026. The Friday Oct 2 cs.IR announcement batch (21 new submissions) was already fully captured by the October 02 run, so the strict last-24h window yields 0 genuinely new generative-recsys papers. To meet the 5-paper minimum, 1 on-topic paper from that batch (System Attribution in LLM Brand Recommendations) plus 6 further in-scope generative / LLM / semantic-ID / RL papers from the last ~3 weeks (Sep 13–28) were backfilled from the arxiv keyword pools. Total: 7 papers (1 opensource: Self-Evolving Memory / LION, CIKM 2026).*
@@ -1158,97 +1279,8 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Fairness: 0/10** — not fairness-focused
      - **Robustness: 6/10** — production dataset + multi-dimensional (accuracy + beyond-accuracy) evaluation
      - **Impact: 6/10** — DePaul; directly informs production profiling-cost trade-offs
-
-### Papers September 23
-
-*Wednesday, September 23, 2026. The Wed 23 Sep cs.IR announcement batch contributed only 3 on-topic generative/LLM-rec papers, below the 5-paper floor, so the 3-month fallback was applied; surfaced 5 genuinely-new on-topic papers (1 opensource: IntBMoE / Alibaba AMap). Core: IntBMoE full-participation MoE with block-level conditioning deployed in AMap generative rec (+2.4% UVCTR, 60ms budget); a dynamic single-level large semantic codebook for generative recommendation (Kuaishou); robust fusion of semantic + behavioural signals for LLM reranking in personalised search (Spotify, USRW @ RecSys 2026); GroundedGEO auditing the evidence gap in generative search rankings (Shenzhen U); and ReFilter bridging embeddings & LLM filtering for similar mobile-app retrieval (U Toronto / UQAM, ASIS&T 2026). DASO (2608.20611, Meta/Penn State, opensource) re-spotted — re-hit noted on its existing Aug 30 entry.*
-
-1. **IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation Mixture-of-Experts**
-   * Affiliation: Alibaba (AMap) — *(Ran Cheng, Longfei Xu, Zheng Liu, Kaikui Liu, Xiangxiang Chu)*
-   * Link: [arxiv.org/abs/2609.21346](https://arxiv.org/abs/2609.21346)
-   * Venue: arXiv preprint, September 2026 (cs.LG; submitted 18 Sep 2026)
-   * TL;DR: IntBMoE decouples three MoE quantities — participation (experts contributing per token), execution (experts computed), and materialization (expert parameter sets stored) — via block-conditioned expert composition with sparse block execution, giving full participation at sparse compute; deployed in AMap generative recommendation (+2.4% UVCTR, 60ms budget).
-   * Key techniques:
-     - Block-conditioned MoE: a small learned codebook (one block per entry) drives a hypernetwork that merges all expert bases in a layer's pool into one composed expert
-     - Full participation (every composed expert draws on the whole pool) with sparse execution (router sends each token to only a few blocks)
-     - Bounded materialization fixed by the codebook, not the input
-     - Dual-Path Residual Gating (DPRG): two independently composed paths coupled through multiplicative gating
-     - Deployed in AMap generative rec serving hundreds of millions of users; code at github.com/AMAP-ML/DreamX-Rec
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/AMAP-ML/DreamX-Rec](https://github.com/AMAP-ML/DreamX-Rec): official AMap generative-rec repo containing the IntBMoE expert-composition module (Apache-2.0, reproducible configs); deductions: large multi-module repo, IntBMoE is one component, limited standalone docs
-     - **Novelty: 7/10** — clean decoupling of participation/execution/materialization vs sparse-routing and dense-output-mixing MoE
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — image-classification + language-modeling + sequential-rec experiments, plus online A/B on AMap
-     - **Impact: 8/10** — Alibaba AMap; deployed generative rec with measurable UVCTR uplift at scale
-
-2. **From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation**
-   * Affiliation: Kuaishou — *(Tianlu Xie, Xin Ku, Mingjie Sun, Yunhao Sha, Lixiang Wang, Peng Wang, Yiyu Wang, Wenjin Wu, Zhaojie Liu, Peng Jiang, Wenwu Ou)*
-   * Link: [arxiv.org/abs/2608.21012](https://arxiv.org/abs/2608.21012)
-   * Venue: arXiv preprint, August 2026 (cs.IR / cs.LG; submitted 21 Aug 2026)
-   * TL;DR: Replaces multi-level residual-quantization SIDs with a single-level large semantic codebook (one semantic token per item, plus a separate collaborative disambiguation token to cut collisions) and an exposure-aware dynamic update, reducing autoregressive-decoding FLOPs ~48% and lifting QPS 28.6–47.0%.
-   * Key techniques:
-     - Single-level large semantic codebook replacing nested RQ-VAE levels
-     - Separate collaborative disambiguation token to reduce item collisions
-     - Exposure-aware dynamic update: temporal weight decay + EMA center updates + exposure-weighted penalty on SID changes
-     - Offline eval framework (representation quality, code utilization, cluster load, full-SID collision, temporal stability)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — questions the multi-level SID assumption with a flat large codebook + dynamic update, a useful structural counterpoint
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — two public datasets (OneRec-V1/V2), KuaiRec online, three serving architectures
-     - **Impact: 7/10** — Kuaishou; +0.792% primary consumption on a 5-day 2.5%-traffic A/B; directly relevant to large-scale generative-rec SID design
-
-3. **Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search**
-   * Affiliation: Spotify — *(Aleksandr V. Petrov, Nathan Stein, Erik Lybecker, Emma Schüldt, Daniel Lazarovski, Hugues Bouchard, Mounia Lalmas)*
-   * Link: [arxiv.org/abs/2609.25825](https://arxiv.org/abs/2609.25825)
-   * Venue: USRW Workshop @ RecSys 2026 (accepted)
-   * TL;DR: Studies shortcut learning when injecting behavioural Query Slice Stats (QSS) into LLM rerankers for personalised search, and fixes it with deterministic dual-sample feature-dropout training that preserves QSS gains while staying robust when the feature is unavailable.
-   * Key techniques:
-     - LLM-based cross-encoder reranking interface for personalised search
-     - QSS: interaction-derived behavioural feature summarising historical success for query-candidate pairs
-     - Deterministic dual-sample feature-dropout: each example shown once with QSS and once without
-     - Offline + live online evaluation on a large-scale audio-streaming search system
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (workshop paper)
-     - **Novelty: 6/10** — dual-sample feature-dropout to curb behavioural-shortcut learning in LLM rerankers is a pragmatic, well-motivated fix
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — the core contribution is robustness under QSS-removed evaluation (4.0% gain over naive QSS training) + ~2% live search-success lift
-     - **Impact: 5/10** — Spotify; workshop-scale but deployed-system study
-
-4. **GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings**
-   * Affiliation: Shenzhen University — *(Yihan Xia, Huiling Fan, Kangrong Zhong, Taotao Wang)*
-   * Link: [arxiv.org/abs/2609.25189](https://arxiv.org/abs/2609.25189)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.AI; submitted 21 Sep 2026)
-   * TL;DR: Audits the "evidence gap" in generative-engine-optimized (GEO) search rankings — the mismatch between claims surfaced and verifiable source evidence — with an evidence-paired benchmark (50 e-commerce queries, 1,950 cases) and a claim-level reranker that penalizes unsupported relevant claims.
-   * Key techniques:
-     - Evidence-paired benchmark of query-candidate cases with matched rich / supported / thinned-packet controls
-     - Claim-level reranker (GroundedGEO) that penalizes query-relevant claims lacking packet support
-     - Diagnostic of evidence-channel limits: label quality + packet coverage
-     - Preregistered reliability gate for automatic judges (all tested judges fail it)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — framing GEO through an evidence-gap audit (claim-evidence relation, not text property) is a fresh diagnostic angle
-     - **Fairness: 6/10** — evidence gaps have trust/fairness implications for information access
-     - **Robustness: 6/10** — controlled variants across multiple ranker models (Qwen2.5-7B, MiMo-v2.5, GLM-5.3-Flash)
-     - **Impact: 6/10** — Shenzhen University; timely given the GEO surge
-
-5. **ReFilter: Bridging Embeddings and LLM Filtering for Similar Mobile App Retrieval**
-   * Affiliation: University of Toronto / Université du Québec à Montréal — *(Buthayna AlMulla, Maram Assi, Safwat Hassan)*
-   * Link: [arxiv.org/abs/2609.25306](https://arxiv.org/abs/2609.25306)
-   * Venue: ASIS&T 2026 (accepted, 89th Annual Meeting)
-   * TL;DR: A hybrid similar-mobile-app retrieval framework that first retrieves semantically related candidates with embeddings, then applies LLM-based contextual filtering to keep only truly functionally similar apps, reaching 90% F1.
-   * Key techniques:
-     - Embedding-based candidate generation for similar-app retrieval
-     - LLM-based contextual filtering pass that removes false-positive neighbours
-     - Efficiency/accuracy balance tuned to avoid scoring all app pairs with the LLM
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (conference paper)
-     - **Novelty: 6/10** — embedding+LLM-filter hybrid for app similarity is a straightforward but useful pipeline
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — evaluation on app-retrieval datasets with ablation of the filter stage (F1 90%)
-     - **Impact: 5/10** — U Toronto / UQAM; niche but practical retrieval task
-
 ## Papers Classic Must Read
+
 
 The list's in no particular order.
 
@@ -1494,7 +1526,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 196 papers as of October 02.
+**Count:** 196 papers as of October 04.
 
 | Score | Paper |
 | --- | --- |

@@ -2,10 +2,13 @@
 
 ### Agent / LLM Agent
 - Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems (AgentX-Model) — Kuaishou, arXiv 2609.30001
+- Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops — Spotify, arXiv 2609.30297
 - Effective Reinforcement Learning for Agentic Search by Recycling Zero-Variance Queries During Training
 - ANCHOR: Agentic Noise Creation Framework for Human Simulation and Denoising Recommendation (ANCHOR)
 - AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems (AgentX)
+- MM-VeriRec: Failure-Guided Fusion for Verifiable Agentic Multimodal Recommendation — Independent Researcher, arXiv 2609.31718
 - NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems (NOVA)
+- On Evaluating and Improving Conversational Agents in Production — Zalando, arXiv 2609.32092
 - Prompt Optimization for User Simulation in Conversational Recommender Systems (UserSimulator)
 - tau-Rec: A Verifiable Benchmark for Agentic Recommender Systems
 - Skill Is Not Document: A Query-Conditional Benchmark and Two-Stage Retriever for LLM Agent Skill Routing (R3)
@@ -163,6 +166,9 @@
 
 ### Conversational
 - BanglaShop-CRS: A User-Centric Bangla Dataset for Conversational Recommendation (BanglaShop-CRS) — University of Vermont
+- Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops — Spotify, arXiv 2609.30297
+- On Evaluating and Improving Conversational Agents in Production — Zalando, arXiv 2609.32092
+- Overview and Analysis of the RecSys Challenge 2026: Conversational Music Recommendation — Sony Group Corporation, arXiv 2609.33045
 - A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset
 - GCRS: Generative Conversational Recommender System
 - MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music
@@ -333,6 +339,8 @@
 - When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation (When-the-Label) — Uber AI, arXiv 2609.39696 [opensource]
 
 ### Fairness
+- Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
+- FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
 - Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec)
 - Attention Calibration for Position-Fair Dense Information Retrieval
@@ -733,6 +741,8 @@
 - IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
 
 ### Industrial
+- Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops — Spotify, arXiv 2609.30297
+- On Evaluating and Improving Conversational Agents in Production — Zalando, arXiv 2609.32092
 - OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender (OneTrans-V2) — ByteDance, arXiv 2609.28589
 - X-Rec Technical Report (X-Rec) — TikTok, arXiv 2609.29180
 - Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems (AgentX-Model) — Kuaishou, arXiv 2609.30001
@@ -1013,6 +1023,10 @@
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 
 ### LLM-based Recommendation
+- Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
+- Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops — Spotify, arXiv 2609.30297
+- Do Evidence-Reading Diagnostics Improve Interface Selection in Small LLM Recommenders? — Independent Researcher, arXiv 2609.37472
+- Overview and Analysis of the RecSys Challenge 2026: Conversational Music Recommendation — Sony Group Corporation, arXiv 2609.33045
 - The Recall Ceiling of LLM Recommendation Reranking (RecallCeiling) — University of Southern California, arXiv 2609.27953
 - LSF-SR: Latent Semantic Fusion for Sequential Recommendation via Flow-based Conditional Variational Autoencoders (LSF-SR) — National Yang Ming Chiao Tung University, arXiv 2609.29815
 - When LLM-Based User Profiling Adds Value in Production Streaming Recommendation (WhenLLM-Profiling) — DePaul University
@@ -1314,6 +1328,7 @@
 
 ### Multimodal
 - Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
+- MM-VeriRec: Failure-Guided Fusion for Verifiable Agentic Multimodal Recommendation — Independent Researcher, arXiv 2609.31718
 - NarraLite: Efficient Multimodal Generative Recommendation with Latent Narrative Reasoning (NarraLite) — Tencent / HK PolyU
 - RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation (RecoReward)
 - UnpairGR: Unpaired Modality-Agnostic Generative Recommendation (UnpairGR)
@@ -1403,6 +1418,7 @@
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 
 ### Re-ranking
+- FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
 - The Recall Ceiling of LLM Recommendation Reranking (RecallCeiling) — University of Southern California, arXiv 2609.27953
 - Bradley-Terry Rankings for Recommender Systems Across Dataset Taxonomies
 - Can LLM Rerankers Predict Their Own Ranking Performance?
@@ -1503,6 +1519,7 @@
 - ReMem: Multi-memory GRPO for Long-Context Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU, arXiv 2609.37311
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneReason / OneRec-V2) — Kuaishou; SIGIR 2026 challenge; arXiv 2609.39828
 ### Reinforcement Learning
+- FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
 - Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)
 
 - Personalized and Trust-Aware Health Recommendation Policies for a Construction Workplace (Trust-Aware Health Rec) — University of Illinois Urbana-Champaign
@@ -1735,6 +1752,7 @@
 - Do Multilingual Encoders Produce Language-Consistent Semantic IDs? (MultiLing-SID) — Amazon / Rutgers, arXiv 2610.01139
 
 ### Security / Adversarial
+- Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
 - VENOMREC: Cross-Modal Interactive Poisoning for Targeted Promotion in Multimodal LLM Recommender Systems (VENOMREC)
 - Fairness Attacks on Recommender Systems
