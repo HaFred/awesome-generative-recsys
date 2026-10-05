@@ -41,10 +41,10 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
+        PQA -- KAIST
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
-        When-the-Label -- Uber AI
     Representation Layer: Model Training & Optimization
       Editing & Control
         CRAMER -- Renmin U / Dalhousie U
@@ -54,6 +54,7 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
+        AdaM-Rec -- U Queensland / Alibaba
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
@@ -61,7 +62,6 @@ mindmap
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
-        RouteRec -- KAIST / SNU
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -91,6 +91,128 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
+### Papers October 05
+
+*Monday, October 5, 2026. The live last-24h arxiv cs.IR announcement window carried only one on-topic generative-rec paper (AIMS, 2610.02600), so per the fallback we drew 6 more genuinely-new, on-topic generative / LLM / multimodal / agentic / security recommendation papers from the arxiv keyword pools over the last ~3 months (Jul-Oct 2026). 2 are open-source (AdaM-Rec, PQA). Total: 7 papers (2 opensource).*
+
+1. **When History Misleads: Asymmetric Margin Supervision for Instruction-Guided LLM Generative Recommendation**
+   * Affiliation: Duke University, Meta AI — *(Ming Yin, Yuhan Yang, Chen Chen, Xinyu Lin, Wentao Shi, Fangcong Yin, Chaofei Yang, Chao Yang, Jiyan Yang, Hui Zhang, Ning Jiang, Yiran Chen, Qifan Wang)*
+   * Link: [arxiv.org/abs/2610.02600](https://arxiv.org/abs/2610.02600)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 1 Oct 2026)
+   * TL;DR: Proposes AIMS, an asymmetric-margin supervision scheme for instruction-guided LLM generative recommendation that down-weights misleading historical interactions so the generative recommender does not over-fit spurious co-occurrence in the user's history.
+   * Key techniques:
+     - Instruction-guided generative recommendation formulation where free-text instructions modulate item generation
+     - Asymmetric margin loss that treats history-misleading (false-positive) items differently from genuine positives
+     - Decoupling of collaborative signal from noisy historical clicks via margin re-weighting
+     - Analysis of when/how historical engagement misleads generative ranking
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code or benchmark released.
+     - **Novelty: 7/10** — Fresh angle: explicit handling of misleading history in instruction-guided gen-rec via asymmetric margins.
+     - **Fairness: 5/10** — Not directly addressed.
+     - **Robustness: 8/10** — Core contribution is robustness to history noise/misleading engagement; ablation on history-quality perturbations.
+     - **Impact: 7/10** — Strong relevance to production gen-rec where historical clicks are noisy; preprint.
+
+2. **AdaM-Rec: Adaptive Modality Routing for Multimodal Recommendation**
+   * Affiliation: University of Queensland, Alibaba — *(Honghao Fu, Jiacheng Chen, Manxi Lin, Junjun Zheng, Xiangheng Kong, Yiwei Wang, Xin Yu, Miao Xu, Yuning Jiang, Yujun Cai)*
+   * Link: [arxiv.org/abs/2609.38455](https://arxiv.org/abs/2609.38455)
+   * Venue: NeurIPS 2026
+   * TL;DR: AdaM-Rec is an LLM-based framework for adaptive modality routing in multimodal recommendation that estimates per-query modality reliability via proxy recall tasks and routes textual vs. multimodal evidence with an agentic strategy.
+   * Key techniques:
+     - Structured natural-language item/user representations
+     - Proxy recall tasks that generate pseudo-queries pointing to the user's positive items to estimate modality reliability
+     - Agentic routing-strategy optimization over textual vs. multimodal evidence
+     - Routed recall + collaborative-item enrichment + relevance re-ranking
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/RomGai/AdaM-Rec](https://github.com/RomGai/AdaM-Rec): official NeurIPS-2026 code with README Get-Started/Data/Inference, requirements.txt, runnable run_pipe.py, sample data (Amazon Beauty/Clothing/Music via TAIRA); deductions: no checkpoints and relies on external LLM API (vLLM profiling reverted).
+     - **Novelty: 7/10** — Adaptive modality routing + proxy-recall reliability estimation is a fresh take on multimodal fusion.
+     - **Fairness: 5/10** — Not directly addressed.
+     - **Robustness: 6/10** — Benchmarked against SOTA multimodal recs; limited robustness stress-testing.
+     - **Impact: 7/10** — NeurIPS 2026; practical multimodal-rec framework with released code.
+
+3. **Reasoning with Evidence, Not Merely Rationales: Verifiable Preference Proofs for LLM-Based Recommendation**
+   * Affiliation: Yonsei University — *(Yu Hou, Nathaniel Kang, Pengkai Wang, Hua Li)*
+   * Link: [arxiv.org/abs/2610.02968](https://arxiv.org/abs/2610.02968)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 2 Oct 2026)
+   * TL;DR: PROVE-REC replaces unverifiable free-text rationales with verifiable preference proofs - structured, checkable evidence chains grounding an LLM recommender's decisions in retrieved user/item facts.
+   * Key techniques:
+     - Verifiable preference proofs as structured, machine-checkable evidence
+     - Separation of rationale generation from proof verification
+     - Grounding recommendations in retrievable user histories / item attributes
+     - Reliability evaluation of LLM-based recommendation under proof verification
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code released.
+     - **Novelty: 8/10** — Reframing LLM-rec explainability around verifiable proofs rather than uncheckable rationales is novel.
+     - **Fairness: 6/10** — Proofs improve transparency/accountability but no explicit fairness method.
+     - **Robustness: 7/10** — Verification step guards against unsupported recommendations; evaluated for reliability.
+     - **Impact: 7/10** — Relevant to trustworthy LLM rec; preprint.
+
+4. **RankEvolve: A Reliable Multi-Agent Auto-Research Harness for Evolving Ranking Models**
+   * Affiliation: Meta — *(Zheng Chen, Linfeng Liu, Hong Li, Hong Yan)*
+   * Link: [arxiv.org/abs/2609.39551](https://arxiv.org/abs/2609.39551)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 30 Sep 2026)
+   * TL;DR: RankEvolve is a multi-agent auto-research harness that autonomously proposes, implements, and evaluates changes to ranking models, evolving them reliably with guardrails (uses open-source HSTU as the benchmark backbone).
+   * Key techniques:
+     - Multi-agent orchestration (proposer / implementer / evaluator roles) for ranking-model research
+     - Reliability guardrails to keep auto-generated changes safe and reproducible
+     - Benchmarking on the open-source HSTU generative ranking model
+     - Closed-loop auto-research with experiment validation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code released (uses open-source HSTU only as a benchmark).
+     - **Novelty: 7/10** — Auto-research agent harness specialized for evolving ranking models with guardrails.
+     - **Fairness: 5/10** — Not directly addressed.
+     - **Robustness: 6/10** — Guardrails target reproducibility/safety of auto-changes; empirical on HSTU.
+     - **Impact: 7/10** — Meta; points to autonomous ML-research tooling for ranking at scale.
+
+5. **The Like Trap: Multi-Stage Poisoning against Agents in Similarity-based Recommendation Systems**
+   * Affiliation: Michigan State University, Purdue University — *(Yue Xing, Pengfei He, Zitao Li)*
+   * Link: [arxiv.org/abs/2609.27155](https://arxiv.org/abs/2609.27155)
+   * Venue: arXiv preprint, September 2026 (cs.LG / cs.IR; submitted 22 Sep 2026)
+   * TL;DR: Exposes a multi-stage poisoning attack ('Like Trap') that manipulates similarity-based recommender agents by injecting coordinated fake engagements across stages to bias recommendations toward attacker-chosen items.
+   * Key techniques:
+     - Multi-stage poisoning pipeline targeting similarity-based recommendation agents
+     - Coordinated fake-engagement injection to distort item similarity graphs
+     - Stage-wise threat model separating data-poisoning from agent-exploitation
+     - Empirical demonstration of recommendation hijacking under the attack
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public attack/defense code released.
+     - **Novelty: 7/10** — Multi-stage (not single-shot) poisoning against similarity-based rec agents is a novel threat model.
+     - **Fairness: 6/10** — Security/adversarial focus; exposes integrity risks rather than fairness method.
+     - **Robustness: 4/10** — It is an attack paper - it demonstrates vulnerability, not a robustness improvement.
+     - **Impact: 6/10** — Important security warning for agentic similarity-based recs; preprint.
+
+6. **A Behavioral Trait Leaks into Preferences: Diagnosing Trait Interference in LLM User Simulators**
+   * Affiliation: KAIST — *(Chaehyun Kim, Sein Kim, Hongseok Kang, Chanyoung Park)*
+   * Link: [arxiv.org/abs/2609.25572](https://arxiv.org/abs/2609.25572)
+   * Venue: CIKM 2026 (short paper)
+   * TL;DR: PQA diagnoses 'trait interference' in LLM user simulators (where an amplified activity trait distorts preference boundaries) and proposes page-level quality anchoring to restore reliable simulator-based evaluation.
+   * Key techniques:
+     - Diagnosis of trait interference + evaluation invalidity in LLM user simulators
+     - Page-level quality anchoring (PQA) with a personalized anchor μ_u from user history
+     - ABOVE / NORMAL / BELOW page labeling before continue-or-exit decision
+     - Validation on Agent4Rec + SimUSER over MovieLens and Amazon CDs & Vinyl
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/chaehyun1/PQA](https://github.com/chaehyun1/PQA): official CIKM-2026 code with detailed README, requirements.txt, clear numbered pipeline for Agent4Rec + SimUSER; deductions: datasets/personas/recommendation-lists NOT included and depends on external simulators + GPT-4o-mini API.
+     - **Novelty: 7/10** — Identifies and names trait interference, a previously overlooked simulator failure mode.
+     - **Fairness: 6/10** — Improves evaluation validity; no explicit fairness method.
+     - **Robustness: 7/10** — Restores reliability of simulator-based rec evaluation under activity shifts.
+     - **Impact: 6/10** — CIKM 2026 short; directly useful for anyone using LLM user simulators.
+
+7. **Optimizing Effective Training Time for Large-Scale Recommendation Systems**
+   * Affiliation: Meta — *(Mingming Ding, Ruilin Chen, Yuzhen Huang, Hang Qi, Menglu Yu, San Tan, Damian Reeves, Boris Sarana, Kevin Tang, Satendra Gera, Gagan Jain, Sahil Shah, Vishwa Karia, Fuzail Khan, Yashasvi Makin, Edward Z. Yang, Oguz Ulgen, et al.)*
+   * Link: [arxiv.org/abs/2610.02057](https://arxiv.org/abs/2610.02057)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 1 Oct 2026)
+   * TL;DR: Introduces Effective Training Time (ETT%) as an operational metric and a fleet-scale set of training-stack optimizations that lifted Meta's recommendation-training ETT% from ~80% to >90% (avg +15.5% on benchmarks).
+   * Key techniques:
+     - ETT% metric instrumenting lifecycle overhead across the training fleet
+     - Communication elimination + pipeline overlap during trainer initialization
+     - Dynamic-shape handling, autotuning pruning, reusable PyTorch 2 compilation caches
+     - Asynchronous checkpointing + standalone model publishing + recovery-cost reduction
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code released (industrial system paper).
+     - **Novelty: 6/10** — ETT% framing + full-stack optimization is solid engineering, not a new ML method.
+     - **Fairness: 4/10** — Not relevant.
+     - **Robustness: 6/10** — Validated across Meta's production fleet (500+ models, 6 months).
+     - **Impact: 8/10** — Large practical impact: +15.5% avg ETT, fleet-wide >90%; deployed at Meta scale.
 ### Papers October 04
 
 *Sunday, October 4, 2026. The live last-24h arxiv cs.IR announcement window is empty (weekend — no Oct 3–4 batch), so per the fallback we drew 7 genuinely-new, on-topic generative / LLM / agentic / conversational recommendation papers from the arxiv keyword pools over the last ~3 months (Jul–Oct 2026). All 7 are closed-source. Total: 7 papers (0 opensource).*
@@ -1143,142 +1265,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 7/10** — consistent improvements over strong baselines on four Amazon benchmarks, with diagnostic analyses attributing gains to personalized transition evidence
      - **Impact: 7/10** — VinUniversity / Griffith / Aalborg; advances masked-diffusion SID generative recommendation
 
----
-
-### Papers September 24
-
-*Wednesday, September 24, 2026. The Wed Sep 24 cs.IR announcement batch was thin on on-topic generative/LLM-rec papers; 7 of the 8 in-scope papers below were in fact already indexed in the docs files (docs/by_keyword.md and docs/by_affiliation.md) by the Sep 23 three-month fallback, but their README `### Papers` entries were missing and are completed today, while 1 (When LLM-Based User Profiling, submitted 23 Sep) is a fresh last-24h find. 8 papers total (1 opensource: CHAP / USTC). Core: CHAP hierarchical cross-component semantic alignment for personalized generative retrieval with single-pass residual-cascading decoding (USTC, opensource, EMNLP 2026 Findings); SPAR and HF-SID pushing geographic/numeric-fidelity Semantic IDs for AMap POI generative retrieval (HF-SID deployed +6.74% PV_CVR / +6.03% UV_CVR); PrismRec spectral-factorization flow matching for micro-video; MGDiff masking-GNN-guided diffusion for multi-interest sequential recommendation; DiffCold conditional-diffusion resolution of the cold-start seesaw dilemma (ECML-PKDD 2026); Bottom-Up clustering for structure-preserving Semantic IDs (Cornell / PayPal); and a production study on when LLM-based user profiling pays off (DePaul).*
-
-1. **CHAP: Preference Shapes Relevance: Cross-component Hierarchical Semantic Alignment for Personalized Generative Retrieval**
-   * Affiliation: University of Science and Technology of China (USTC) — *(Gaoming Zhang, Angqing Jiang, Jianchun Song, Kena Qi, Dayao Chen, Wei Lin, Defu Lian)*
-   * Link: [arxiv.org/abs/2608.30553](https://arxiv.org/abs/2608.30553)
-   * Venue: Findings of EMNLP 2026 (22 pages, 10 figures, 7 tables; cs.IR / cs.AI; submitted 31 Aug 2026)
-   * TL;DR: CHAP is a personalized generative-retrieval framework that hierarchically aligns the query's latent space with the item's quantization path and synergizes discrete Semantic IDs (structural guidance) with continuous representations (fine-grained refinement); a Residual Cascading Generation mechanism restricts the costly Transformer decoder to a single pass, boosting throughput while mitigating information loss.
-   * Key techniques:
-     - Hierarchical Semantic Alignment: aligns query latent space with item quantization path and synchronizes multi-granular semantics
-     - Personalized GR that models user behavior via discrete SIDs + continuous representations
-     - Residual Cascading Generation: single-pass inference instead of multi-step autoregressive beam search
-     - Code released at github.com/zzzgm/CHAP (3 public + 1 proprietary industrial dataset, online A/B)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/zzzgm/CHAP](https://github.com/zzzgm/CHAP): official repo with code, configs and the industrial-dataset pipeline; deductions: limited standalone documentation / README depth
-     - **Novelty: 7/10** — hierarchical cross-component alignment + residual-cascading single-pass decoding is a clean twist on GR decoding
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — 3 public datasets + 1 proprietary industrial + online A/B tests
-     - **Impact: 7/10** — USTC; solid empirical + deployment story for personalized GR
-
-2. **SPAR: Enhancing Industrial-Scale Generative POI Recommendation via Real-World Spatial Perception**
-   * Affiliation: AMAP, Alibaba Group — *(Fangye Wang, Yunjin Gu, Haowen Lin, Yifang Yuan, Song Yang, Xiaojiang Zhou, Pengjie Wang)*
-   * Link: [arxiv.org/abs/2609.02062](https://arxiv.org/abs/2609.02062)
-   * Venue: arXiv preprint, September 2026 (cs.IR; v1 2 Sep 2026, v2 17 Sep 2026)
-   * TL;DR: SPAR injects real urban spatial knowledge (distance, direction, reachability) into the generative POI recommendation interest space via three synergistic stages — spatially-intrinsic SID tokenization, geospatial continual pre-training, and task-vector-anchored SFT — so predictions are geographically coherent rather than merely behaviorally plausible.
-   * Key techniques:
-     - Spatially-Intrinsic SID (SI-SID): sinusoidal geospatial embedding fused with textual semantic, quantized via RQ-Kmeans for semantically + geographically consistent IDs
-     - Multi-Granular Geospatial CPT (MG-CPT): continual pre-training on 25 curated geospatial datasets (attributes, pairwise relations, city-scale navigation)
-     - Task-Vector Anchored SFT (TV-SFT): freezes acquired spatial knowledge as a parameter-space task vector to prevent catastrophic forgetting during behavioral fine-tuning
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — explicit spatial-knowledge injection into the generative-rec interest space is a clear LBS contribution
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — 2 public + 4 industrial-scale datasets, with visualization studies
-     - **Impact: 7/10** — Alibaba AMap; directly targets industrial POI generative retrieval
-
-3. **HF-SID: High-Fidelity Semantic IDs for Generative Retrieval in Location-Based Services**
-   * Affiliation: AMAP, Alibaba Group — *(Haowen Lin, Jing Li, Zhibin Hao, Fangye Wang, Lihui Su, Song Yang, Xiaojiang Zhou, Pengjie Wang)*
-   * Link: [arxiv.org/abs/2608.30479](https://arxiv.org/abs/2608.30479)
-   * Venue: arXiv preprint, August 2026 (cs.IR; submitted 31 Aug 2026)
-   * TL;DR: HF-SID restores geographic, numerical, and structural fidelity at the representation stage before discretization — 3D Cartesian coordinates, unit-encoded numerics, and structure-based contrastive learning — producing high-fidelity 3-token SIDs at no extra decoding cost; deployed in AMap with +6.74% PV_CVR / +6.03% UV_CVR.
-   * Key techniques:
-     - Continuous 3D Cartesian coordinate transform so numeric differences reflect true geographic distance
-     - Type-aware numerical unit encoding (Geo-CPT, Num-CPT) for scale-robust dynamic attributes
-     - Structure-based Contrastive Learning on the last-layer residual to separate co-located POIs differing at the fine level
-     - 3-token SID at no extra decoding cost (enriches representation, not the identifier length)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — deployed industrially at AMap but no public code
-     - **Novelty: 7/10** — fidelity-first representation before quantization is a sharp LBS-specific angle
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — large-scale industrial evaluation + deployment metrics
-     - **Impact: 8/10** — Alibaba AMap; measurable online CVR uplift at scale
-
-4. **PrismRec: Preference Flow Matching with Spectral Factorization for Micro-video Recommendation**
-   * Affiliation: National University of Defense Technology — *(Xinxin Dong, Haokai Ma, Fei Hu, YuZe Zheng, Bin Wu, Yonghui Yang, Xiaodong Wang)*
-   * Link: [arxiv.org/abs/2608.26579](https://arxiv.org/abs/2608.26579)
-   * Venue: arXiv preprint, August 2026 (cs.IR; submitted 27 Aug 2026)
-   * TL;DR: PrismRec is a preference flow-matching framework for micro-video recommendation that uses Spectral Semantic Factorization to split frame representations into static semantic and dynamic factors via a frequency-domain mask, then Context-Calibrated Preference Matching to inject user-specific calibrated context as a structured condition steering the flow toward the target.
-   * Key techniques:
-     - Spectral Semantic Factorization (SSF): prior-guided learnable frequency mask separates static semantic vs evolving dynamic factors from frame-level representations
-     - Context-Calibrated Preference Matching (CPM): weights factors by each user's sensitivity and injects calibrated context as a structured condition
-     - Flow-matching generation with video content as an intrinsic driver of preference formation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — spectral (frequency-domain) factorization of video semantics for flow matching is distinctive
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — 4 datasets from 2 platforms, lowest inference cost / peak memory among compared methods
-     - **Impact: 7/10** — micro-video domain; up to 22.65% over SOTA on some datasets
-
-5. **MGDiff: Multi-Interest Sequence Recommendation with Masking GNN-Guided Diffusion**
-   * Affiliation: Huazhong University of Science and Technology — *(Wenjing Xiao, Hao Ding)*
-   * Link: [arxiv.org/abs/2609.01619](https://arxiv.org/abs/2609.01619)
-   * Venue: arXiv preprint, June 2026 (cs.IR; submitted 30 Jun 2026)
-   * TL;DR: MGDiff is a multi-interest sequential-recommendation framework using a Masking GNN-guided diffusion model that generates accurate, popularity-bias-free user interest during diffusion, combining dual-layer semantic guidance, a link-reconstructing masking GNN, and a popularity-aware guidance mechanism.
-   * Key techniques:
-     - Dual-layer Semantic Guidance (DSG): latent item-semantics extraction + multi-dimensional intent decoupling
-     - Weight-adaptive Masking GNN: reconstructs missing links to uncover deep item relationships beyond co-occurrence
-     - Dynamic Multi-Expert Network: projects preferences into distinct semantic subspaces to suppress irrelevant interference
-     - Popularity-Aware Guidance (PAG): differentiable popularity signal recalibrates similarity to reduce popularity bias
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — GNN-guided diffusion for multi-interest seq rec is a reasonable combination
-     - **Fairness: 0/10** — not fairness-focused (popularity debiasing ≠ demographic fairness)
-     - **Robustness: 6/10** — 4 widely-used datasets
-     - **Impact: 6/10** — incremental multi-interest + diffusion contribution
-
-6. **DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation**
-   * Affiliation: Shanghai Jiao Tong University / Xiaohongshu Inc. — *(Kangning Zhang, Yingjie Qin, Weinan Zhang, Yong Yu, Jianghao Lin)*
-   * Link: [arxiv.org/abs/2606.12245](https://arxiv.org/abs/2606.12245)
-   * Venue: ECML-PKDD 2026 (accepted; cs.IR / cs.AI; submitted 10 Jun 2026)
-   * TL;DR: DiffCold is a diffusion-based generative model that resolves the cold-start "seesaw dilemma" by unifying warm (behavioral manifold) and cold (semantic manifold) item representations via conditional diffusion, with a retrieval-enhanced aggregator and simulation-based representation alignment.
-   * Key techniques:
-     - Conditional diffusion reconstructs warm item embeddings from content, preserving manifold structure without degrading warm precision
-     - Retrieval-enhanced Aggregator initializes generation from semantically similar warm items to bypass inefficient noise
-     - Simulation-based Representation Alignment: contrastive module enforcing distribution consistency between generated and real embeddings
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — frames cold-start as a distributional-disparity / seesaw problem and uses diffusion to unify manifolds
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — 3 benchmarks
-     - **Impact: 7/10** — ECML-PKDD 2026; addresses a persistent industrial pain point
-
-7. **Exploring Bottom-Up Clustering for Creating Semantic IDs**
-   * Affiliation: Cornell University / PayPal AI — *(Leah Woldemariam, Sudhanshu Garg, Taha Belkhouja, Charles Kim-Yip, Ali Sahami)*
-   * Link: [arxiv.org/abs/2609.08310](https://arxiv.org/abs/2609.08310)
-   * Venue: Workshop paper, September 2026 (cs.IR / cs.AI; submitted 8 Sep 2026)
-   * TL;DR: Proposes a bottom-up clustering algorithm for Semantic ID construction that preserves local embedding structure (unlike top-down residual quantization), yielding unique, structure-preserving identifiers that improve downstream generative-retrieval utility.
-   * Key techniques:
-     - Bottom-up clustering to preserve local structure in the embedding space
-     - Uniqueness guarantees for each identifier
-     - Structure preservation vs residual-quantization (RQ-VAE) hierarchical baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (workshop paper)
-     - **Novelty: 6/10** — bottom-up (vs residual top-down) clustering for SID is a sensible structural counterpoint
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — clustering-quality + downstream generative-retrieval utility evaluation
-     - **Impact: 6/10** — Cornell / PayPal; workshop-scale SID-method contribution
-
-8. **When LLM-Based User Profiling Adds Value in Production Streaming Recommendation**
-   * Affiliation: DePaul University — *(Milad Sabouri, Neeraj Sharma, Sardar Hamidian, Shaghayegh Agah)*
-   * Link: [arxiv.org/abs/2609.27183](https://arxiv.org/abs/2609.27183)
-   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 23 Sep 2026)
-   * TL;DR: Systematically compares four semantic user-profiling strategies (aggregate embedding vs LLM-generated natural-language profile, crossed with temporal disentanglement of recent vs historical behavior) on a real production streaming dataset, characterizing when the extra cost of LLM-based profiling is justified.
-   * Key techniques:
-     - Factorial 2×2 design: representation type (aggregate vs LLM NL profile) × temporal handling (recent vs historical disentanglement)
-     - Evaluation on a real-world production dataset across accuracy and beyond-accuracy recommendation-quality dimensions
-     - Analysis across user-behavior types and the temporal-window setting governing disentanglement
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — a clear, well-scoped empirical study rather than a new method
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — production dataset + multi-dimensional (accuracy + beyond-accuracy) evaluation
-     - **Impact: 6/10** — DePaul; directly informs production profiling-cost trade-offs
 ## Papers Classic Must Read
 
 
@@ -1526,7 +1512,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 196 papers as of October 04.
+**Count:** 198 papers as of October 05.
 
 | Score | Paper |
 | --- | --- |
@@ -1594,6 +1580,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | Drift-Aware Continual Tokenization for Generative Recommendation (DACT) |
 | 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro)
 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
+| 7/10 | AdaM-Rec: Adaptive Modality Routing for Multimodal Recommendation (AdaM-Rec) |
 | 7/10 | A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR)
 | 7/10 | IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation Mixture-of-Experts (IntBMoE)
 7/10 | Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) |
@@ -1668,6 +1655,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | PAPA: Online Personalized Active Preference Alignment (PAPA) |
+| 6/10 | A Behavioral Trait Leaks into Preferences: Diagnosing Trait Interference in LLM User Simulators (PQA) |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
 | 6/10 | Beyond Uniform Token Training: A Multi-Target Framework for Learning Token-Weighted Objectives in Generative Recommenders (Beyond Uniform Token Training) |
 | 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |

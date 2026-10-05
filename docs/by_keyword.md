@@ -63,6 +63,9 @@
 - AgentRecommender: LLM Agents Enable Customizable Recommender Systems on the User Side (AgentRecommender) — National Institute of Informatics, arXiv 2609.31166
 
 - ReMem: Multi-memory GRPO for Long-Context Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU, arXiv 2609.37311
+
+- RankEvolve: A Reliable Multi-Agent Auto-Research Harness for Evolving Ranking Models (RankEvolve) — Meta, arXiv 2609.39551
+- The Like Trap: Multi-Stage Poisoning against Agents in Similarity-based Recommendation Systems (Like Trap) — Michigan State University, arXiv 2609.27155
 - AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation (AgentWebRec) — Beihang University, arXiv 2610.01705
 
 ### Beam Search / Constrained Decoding
@@ -281,6 +284,8 @@
 
 
 
+
+- Optimizing Effective Training Time for Large-Scale Recommendation Systems — Meta, arXiv 2610.02057
 - GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings (GroundedGEO) — Shenzhen University, arXiv 2609.25189
 
 ### Evaluation / Benchmark
@@ -336,6 +341,8 @@
 
 - ED-DR: Off-Policy Ranking Evaluation under Ranking-Dependent Examination (ED-DR) - Waseda University, arXiv 2609.35034
 - Eval4DiRec: A Unified and Systematic Evaluation Framework for Diffusion-based Recommender Systems (Eval4DiRec) - University of Technology Sydney, ACM TKDD, arXiv 2609.34404
+
+- A Behavioral Trait Leaks into Preferences: Diagnosing Trait Interference in LLM User Simulators (PQA) — KAIST, arXiv 2609.25572 [opensource]
 - When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation (When-the-Label) — Uber AI, arXiv 2609.39696 [opensource]
 
 ### Fairness
@@ -697,6 +704,8 @@
 - GRP: Snap's Generative Recommendation Paradigm with Multimodal Semantic IDs (GRP) - Snap Inc., arXiv 2609.36688
 - SpeakGR: Learning Semantic IDs Without Forgetting Language Generation (SpeakGR) - Imperial College London, arXiv 2609.35430
 - Beyond the Beam: Constructive Repair and Candidate Completion for Generative Recommendation (Beyond the Beam) — Beijing Institute of Technology
+
+- RankEvolve: A Reliable Multi-Agent Auto-Research Harness for Evolving Ranking Models (RankEvolve) — Meta, arXiv 2609.39551
 - SPRINT: Single-Step Generative Recommendation via Average Probability Velocity (SPRINT) — University of Technology Sydney (single-pass SID generation)
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -951,6 +960,8 @@
 
 - GRP: Snap's Generative Recommendation Paradigm (GRP) - Snap Inc., arXiv 2609.36688
 - HELIX: Purified and Unified Large-Scale Recommendation (HELIX) - TikTok, arXiv 2609.37183
+
+- Optimizing Effective Training Time for Large-Scale Recommendation Systems — Meta, arXiv 2610.02057
 - When LLM-Inferred User Context Adds Value in Production Streaming Recommendation (LLM-Inferred-Context) — DePaul University / Comcast, arXiv 2609.38999
 
 ### Infrastructure / Serving
@@ -1240,6 +1251,10 @@
 - When LLM-Inferred User Context Adds Value in Production Streaming Recommendation (LLM-Inferred-Context) — DePaul University / Comcast, arXiv 2609.38999
 - Decision-Oriented Recommendation Reranking: An Empirical Study of Jev (Jev) — University of Rochester / Meta AI, arXiv 2609.40241
 
+
+- When History Misleads: Asymmetric Margin Supervision for Instruction-Guided LLM Generative Recommendation (AIMS) — Duke University, arXiv 2610.02600
+- Reasoning with Evidence, Not Merely Rationales: Verifiable Preference Proofs for LLM-Based Recommendation (PROVE-REC) — Yonsei University, arXiv 2610.02968
+- A Behavioral Trait Leaks into Preferences: Diagnosing Trait Interference in LLM User Simulators (PQA) — KAIST, arXiv 2609.25572 [opensource]
 - System Attribution in LLM Brand Recommendations (Dmitrij Żatuchin) — EUAS / Rankfor.AI
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1408,6 +1423,8 @@
 - RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models (RegRet) — ECCV 2026
 - Scaling Articulated Rationales for MLLM-based Recommendation (SARA)
 - Re2A: Situated Conversational Recommendation via Rubric-based Preference Reasoning and Alignment (Re2A) — HK PolyU / CUHK / Sichuan University, EMNLP 2026
+
+- AdaM-Rec: Adaptive Modality Routing for Multimodal Recommendation (AdaM-Rec) — University of Queensland, arXiv 2609.38455 [opensource]
 - Attribute-Conditioned Multimodal Slot Factorization for Controllable Fashion Retrieval (MM-slotgate) — Amazon, arXiv 2608.12570
 
 ### Optimizer
@@ -1758,6 +1775,8 @@
 - Fairness Attacks on Recommender Systems
 - SIREN (Luring LLMs onto the Rocks): PAIR-Driven Preference Manipulation in Web-RAG Recommenders (SIREN)
 - An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS)
+
+- The Like Trap: Multi-Stage Poisoning against Agents in Similarity-based Recommendation Systems (Like Trap) — Michigan State University, arXiv 2609.27155
 - ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec) — weak-risk shilling-robust prompt routing
 
 ### Sequential Modeling / RoPE
