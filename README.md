@@ -41,7 +41,6 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
-        PQA -- KAIST
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -54,7 +53,6 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
-        AdaM-Rec -- U Queensland / Alibaba
       Efficient Decoding
         STATIC -- Google
         APAO -- Tsinghua
@@ -68,6 +66,8 @@ mindmap
         FORGE SID -- Zhejiang U / Alibaba
         DACT -- Fudan U
         CHAP -- USTC
+        SPRIG -- Johannes Kepler University Linz
+        CreGR -- University of Technology Sydney
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -90,6 +90,95 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers October 06
+
+*Tuesday, October 6, 2026. The live last-24h arxiv cs.IR announcement window carried only 3 on-topic generative-rec papers (SPRIG, CreGR, SAGA-CDR), below the 5-paper floor, so per the fallback we drew 2 more genuinely-new, on-topic papers from the arxiv keyword pools over the last ~3 months (LRPRec, FairDiff). 2 are open-source (SPRIG, CreGR). Total: 5 papers (2 opensource).*
+
+1. **SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation**
+   * Affiliation: Johannes Kepler University Linz — *(Justin Hangoebl, Marta Moscati, Alessandro B. Melchiorre, Shah Nawaz, Markus Schedl)*
+   * Link: [arxiv.org/abs/2610.06590](https://arxiv.org/abs/2610.06590)
+   * Venue: CIKM 2026 (short paper), arXiv preprint, October 2026 (cs.IR; submitted 5 Oct 2026)
+   * TL;DR: SPRIG integrates content-derived Semantic IDs into knowledge-graph path reasoning, training on KG paths that terminate in items represented as discrete content-derived tokens — combining relational grounding with parameter-efficient SID item representations.
+   * Key techniques:
+     - Knowledge-graph path reasoning generative recommender (entity-relation path generation)
+     - Semantic IDs (hierarchically quantized discrete codes) replacing opaque item tokens
+     - KG paths terminating in discrete, content-derived SID tokens for compositional generalization
+     - Beam output postprocessor for SEM-tuple decoding; built as a fork of the hopwise library
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — Official MIT-licensed code (github.com/justinhangoebl/semantic-id-knowledge-graph-recommender), a well-structured fork of hopwise with a documented SPRIG model class, dataset, SEM tokenizer, and config.
+     - **Novelty: 7/10** — Clean fusion of SID item representation with KG path reasoning, addressing both lines' complementary limitations.
+     - **Fairness: 5/10** — Not directly addressed.
+     - **Robustness: 6/10** — Uses fewer parameters and lower compute than baselines; robustness is not the focus.
+     - **Impact: 7/10** — Strong fit for knowledge-rich domains (movies, music); reproducible MIT codebase.
+
+2. **Generate What You Can Trust: Content Credibility in Generative Recommenders (CreGR)**
+   * Affiliation: University of Technology Sydney — *(Zhuo Cai, Guanghao Wu, Shoujin Wang, Peilin Zhou, Victor W. Chu)*
+   * Link: [arxiv.org/abs/2610.05670](https://arxiv.org/abs/2610.05670)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 5 Oct 2026)
+   * TL;DR: CreGR is the first credible generative recommender that tackles content credibility across both GR stages — a credibility-aware tokenizer that disentangles credible/uncredible tokens, and an accuracy-preserving discrete-diffusion generator with an asymmetric masking strategy that suppresses uncredible-content tokens.
+   * Key techniques:
+     - Generative recommendation with semantic IDs (discrete token sequences)
+     - Credibility-aware tokenizer that learns discriminative tokens for credible vs. uncredible items
+     - Discrete-diffusion generator with asymmetric masking probability reduction for uncredible tokens
+     - Accuracy preservation: user-preference-signal tokens are left unaffected
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — Official code (github.com/iamZhuoCai/CreGR) with detailed README, run_pipeline.py, requirements.txt, but no license file and last commit 30 May 2026 (stale).
+     - **Novelty: 7/10** — First to explicitly address content credibility in generative recommenders across tokenization and generation.
+     - **Fairness: 9/10** — Core contribution is credibility/fairness (protecting users from fake news and related harms), explicitly optimized.
+     - **Robustness: 6/10** — Credibility handling helps robustness to malicious content; not stress-tested broadly.
+     - **Impact: 7/10** — Directly relevant to societal harms (fake news, platform reputation); practical discrete-diffusion design.
+
+3. **Reading the Mood: Emotion-Guided Book-to-Music Recommendation via CGANs and LLMs (SAGA-CDR)**
+   * Affiliation: National Technical University of Athens — *(Manousos Linardakis, Georgios Alexandridis)*
+   * Link: [arxiv.org/abs/2610.06703](https://arxiv.org/abs/2610.06703)
+   * Venue: SENTIRE 2026 (ICDM 2026 Workshops), arXiv preprint, October 2026 (cs.IR; submitted 5 Oct 2026)
+   * TL;DR: SAGA-CDR is a two-phase cross-domain recommender that pairs books with mood-matched music — transformer sentiment embeddings mapped across domains via a Conditional GAN (with a mask-conditioned, stochastic generator), then LLM-based valence-arousal emotion filtering.
+   * Key techniques:
+     - Cross-domain recommendation (book → music)
+     - Transformer-based sentiment embeddings from user reviews
+     - Conditional GAN with a mask-conditioned generator handling missing sentiment and injecting stochasticity
+     - LLM classification of books into valence-arousal emotional quadrants for candidate filtering
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code released.
+     - **Novelty: 6/10** — Combines CGAN cross-domain transfer with LLM emotion alignment; a modest, incremental framing.
+     - **Fairness: 5/10** — Not directly addressed.
+     - **Robustness: 5/10** — Evaluated on Amazon (English) and Douban (Chinese, cross-lingual); robustness not stressed.
+     - **Impact: 5/10** — Niche cross-domain book-to-music scenario; workshop paper.
+
+4. **Learning Robust Personalized Prompts for LLM-Driven Sequential Recommendation (LRPRec)**
+   * Affiliation: Zhejiang University — *(Xiaolin Zheng, Qiyong Zhong, Jiajie Su, Xiang Chen)*
+   * Link: [arxiv.org/abs/2610.03923](https://arxiv.org/abs/2610.03923)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 2 Oct 2026)
+   * TL;DR: LRPRec is a learnable prompting framework for LLM-driven sequential recommendation that initializes continuous instruction prompts from discrete templates and injects a user preference embedding while constraining shared prompts within a trust region to prevent semantic drift.
+   * Key techniques:
+     - LLM-driven sequential recommendation as autoregressive generation conditioned on natural-language prompts
+     - Continuous instruction prompts initialized from discrete templates
+     - Personalized prompt injection: user behavior → preference embedding added to shared prompts
+     - Semantic drift constraint: trust-region regularization around initialization anchors
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code released.
+     - **Novelty: 7/10** — Decouples stability (trust-region shared prompts) from expressiveness (additive personalization).
+     - **Fairness: 4/10** — Not addressed.
+     - **Robustness: 8/10** — Core contribution is robustness to prompt wording changes and semantic drift; main evaluation axis.
+     - **Impact: 6/10** — Removes manual prompt engineering for LLM sequential rec; solid empirical gains.
+
+5. **FairDiff: Mitigating the Self-Reinforcing Matthew Effect in Diffusion Recommender Models**
+   * Affiliation: Tsinghua University — *(Song-Li Wu¹, Xianquan Wang³, Zhaocheng Du², Weinan Gan², Jingyi Wang¹)* — also Huawei Noah's Ark Lab, University of Science and Technology of China
+   * Link: [arxiv.org/abs/2609.36671](https://arxiv.org/abs/2609.36671)
+   * Venue: arXiv preprint, September 2026 (cs.AI; submitted 29 Sep 2026)
+   * TL;DR: FairDiff exposes a self-reinforcing Matthew Effect in diffusion recommenders — driven by popularity-dominated loss and a structural prior mismatch that collapses reverse sampling toward popular items — and proposes a plug-and-play framework with Popularity Condition Guidance (inference-time reweighting) and a Semantic Calibration module (one-step optimal transport).
+   * Key techniques:
+     - Diffusion Recommender Models (DRMs) with forward/reverse denoising
+     - Popularity Condition Guidance (PCG): inference-time score-field reweighting that penalizes high-popularity regions
+     - Semantic Calibration (SC) module: one-step optimal transport bridging the prior mismatch
+     - Plug-and-play, architecture- and training-agnostic integration
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code released.
+     - **Novelty: 8/10** — Identifies a unique generative-dynamics bias mechanism (prior mismatch) in DRMs, distinct from standard popularity bias.
+     - **Fairness: 9/10** — Core contribution is fairness (mitigating the Matthew Effect / long-tail suppression).
+     - **Robustness: 7/10** — Plug-and-play across DRMs; validated on multiple datasets.
+     - **Impact: 7/10** — A general framework for the fast-growing DRM line; strong empirical fairness gains.
 
 ### Papers October 05
 
@@ -213,6 +302,7 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Fairness: 4/10** — Not relevant.
      - **Robustness: 6/10** — Validated across Meta's production fleet (500+ models, 6 months).
      - **Impact: 8/10** — Large practical impact: +15.5% avg ETT, fleet-wide >90%; deployed at Meta scale.
+
 ### Papers October 04
 
 *Sunday, October 4, 2026. The live last-24h arxiv cs.IR announcement window is empty (weekend — no Oct 3–4 batch), so per the fallback we drew 7 genuinely-new, on-topic generative / LLM / agentic / conversational recommendation papers from the arxiv keyword pools over the last ~3 months (Jul–Oct 2026). All 7 are closed-source. Total: 7 papers (0 opensource).*
@@ -1176,95 +1266,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 8/10** — 560/636 experiments AUC>baseline plus five online A/B evaluations across business settings
      - **Impact: 8/10** — Kuaishou; production rec-research automation at scale
 
-### Papers September 25
-
-*Friday, September 25, 2026. The Fri 25 Sep cs.IR announcement batch contributed only 3 on-topic generative/LLM-rec papers in the last 24h (all submitted 24 Sep), below the 5-paper floor, so the 3-month fallback was applied, surfacing 2 additional genuinely-new on-topic papers (submitted 7 Sep and 3 Sep, both absent from README). 5 papers total (1 opensource: Evo-Rec / Emory). Core: two Emory / Microsoft / Cornell studies on reasoning + Semantic IDs — retrieval-grounded credit assignment that localizes reward to individual interest hypotheses in SID-reasoning traces, and Evo-Rec, a 3-stage SID-alignment to Best-of-N SFT to ranking-aware GRPO framework (opensource, +19.3% Recall@5 / +32.5% NDCG@10); CMRec cross-country code-mixing for generative recommendation deployed at Alibaba International (CIKM 2026 Short, +1.77% ad revenue / +2.64% orders online A/B); a write-aware KV-cache policy enabling High-Bandwidth Flash for GR serving (Huawei, cs.AR, 3.8-4.7x throughput vs HBM-only, flash lifetime 1yr to 6yr+); and EPIC explicit posterior item-conditioning for SID diffusion recommendation (VinUniversity / Griffith / Aalborg, 4 Amazon benchmarks).*
-
-1. **From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation**
-   * Affiliation: Emory University / Microsoft / Cornell University — *(Mengdan Zhu, Yufan Zhao, Yao Zhao, Sophie Di, Tao Di, Yulan Yan, Sridhar Iyer, Liang Zhao)*
-   * Link: [arxiv.org/abs/2609.29983](https://arxiv.org/abs/2609.29983)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.AI; submitted 24 Sep 2026)
-   * TL;DR: Identifies a credit-assignment gap in reasoning-enhanced SID generative recommenders trained with group-relative policy optimization under an exact-match SID reward (sparse advantage when all rollouts miss; identical advantage when rollouts share a SID reward regardless of trace quality), and fixes it by grounding each reasoning trace in retrieval so reward is assigned at the hypothesis span level.
-   * Key techniques:
-     - Retrieval-grounded query attribution: structure each trace into a history summary, a set of interest hypotheses, and a final SID
-     - Frozen retriever executes every hypothesis as a catalog query, making each hypothesis independently verifiable rather than judged only through the final SID
-     - Rollout rewarded when any of its queries retrieves the target within top-K; per-query hit indicators localize reward to individual hypotheses
-     - Span-level credit assignment: only target-hitting hypotheses receive positive retrieval advantage, and the retrieval channel never updates the final SID span, so rollouts sharing a SID reward get different updates
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — span-level retrieval-grounded credit assignment for SID reasoning traces is a clean, well-motivated fix for a real GRPO failure mode
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — consistent improvements across three Amazon Reviews datasets, plus an oracle analysis on Video Games showing interest-conditioned SID decoding helps
-     - **Impact: 7/10** — Emory / Microsoft / Cornell; directly improves reasoning-enhanced SID generative recommendation
-
-2. **Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)**
-   * Affiliation: Emory University / Microsoft / Cornell University — *(Mengdan Zhu, Yufan Zhao, Sophie Di, Yao Zhao, Tao Di, Yulan Yan, Sridhar Iyer, Liang Zhao)*
-   * Link: [arxiv.org/abs/2609.29973](https://arxiv.org/abs/2609.29973)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.AI; submitted 24 Sep 2026)
-   * TL;DR: A three-stage framework that learns better reasoning for SID-based generative recommendation — align SIDs with textual/behavioral context, sample-and-select better reasoning traces via Best-of-N SFT, then optimize the reasoning policy with ranking-aware GRPO — outperforming discriminative, generative, and reasoning-enhanced baselines on three Amazon benchmarks.
-   * Key techniques:
-     - Stage 1 SID alignment: align Semantic IDs with their textual and behavioral contexts so the model understands and generates item identifiers
-     - Stage 2 Best-of-N reasoning SFT: sample multiple candidate reasoning traces and retain those that improve prediction of the ground-truth item, giving a stronger reasoning initialization
-     - Stage 3 ranking-aware GRPO: optimize the reasoning policy via RL with catalog-constrained item generation and ranking-aware recommendation feedback
-     - Code released at github.com/mengdanzhu/evo-rec (3-stage pipeline, eval scripts, checkpoints)
-   * Scores (Opensource? / Novelty / Robustness / Fairness / Impact):
-     - **Opensource?: 7/10** — [github.com/mengdanzhu/evo-rec](https://github.com/mengdanzhu/evo-rec): official repo with the 3-stage SID-alignment to Best-of-N SFT to ranking-aware GRPO pipeline, eval scripts and checkpoints; deductions: Stage-1 data marked "to be released upon acceptance", single primary maintainer
-     - **Novelty: 8/10** — explicitly learning to select and evolve effective reasoning traces via Best-of-N + ranking-aware GRPO is a clear step beyond fixed chain-of-thought GR
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 8/10** — consistent gains over discriminative / generative / reasoning baselines across all metrics on three Amazon Review benchmarks (+19.3% Recall@5, +32.5% NDCG@10)
-     - **Impact: 8/10** — Emory / Microsoft / Cornell; opensource with checkpoints, directly advances reasoning-based SID recommendation
-
-3. **Cross-Country Code-Mixing for Generative Recommendation (CMRec)**
-   * Affiliation: Alibaba International Digital Commerce Group — *(Yuan Gao, Hao Deng, Haibo Xing, Yi Xu, Lingyu Mu, Jinxin Hu, Yu Zhang, Xiaoyi Zeng)*
-   * Link: [arxiv.org/abs/2609.28972](https://arxiv.org/abs/2609.28972)
-   * Venue: CIKM 2026 Short (cs.IR / cs.AI; submitted 24 Sep 2026)
-   * TL;DR: A cross-country generative-recommendation framework that injects cross-country supervision at the data level (not just the parameter level) via dual-constrained, context-aware code-mixing over a shared multi-country semantic codebook, improving recommendation quality in data-sparse countries while preserving data-rich ones.
-   * Key techniques:
-     - Shared semantic codebook learned from multi-modal content and behavioral co-occurrence across countries
-     - Dual-constrained context-aware code-mixing: token-level substitutions satisfying both static (content) and dynamic (price, audience, popularity) constraints
-     - Context-aware loss reweighting mixed samples by their plausibility in the current sequence
-     - Online A/B on a large-scale e-commerce platform (+1.77% advertising revenue, +2.64% orders)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (CIKM 2026 Short)
-     - **Novelty: 7/10** — code-switching-inspired data-level cross-country mixing is a fresh angle on cross-market generative recommendation
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — two real-world multi-country datasets plus an online A/B test with measurable revenue/order lifts
-     - **Impact: 8/10** — Alibaba International; deployed online A/B with +1.77% ad revenue / +2.64% orders
-
-4. **Enabling High-Bandwidth Flash for Generative Recommendation Serving with Write-Aware KV Cache Policy**
-   * Affiliation: Huawei — *(Danni Peng, Kai Wu, Tianyu Zuo, Pengfei Xia, Hui Zang)*
-   * Link: [arxiv.org/abs/2609.07175](https://arxiv.org/abs/2609.07175)
-   * Venue: arXiv preprint, September 2026 (cs.AR; submitted 7 Sep 2026)
-   * TL;DR: Evaluates a write-aware KV-cache policy (admission-controlled LRU-K) for High-Bandwidth Flash (HBF) in generative-recommendation serving, decoupling KV-cache writes from misses to cut write traffic and extend flash endurance from ~1 year to 6+ years while keeping 3.8-4.7x throughput vs HBM-only systems.
-   * Key techniques:
-     - High-Bandwidth Flash (HBF) as a high-capacity, HBM-class-bandwidth KV-cache tier enabling larger KV retention and better serving throughput
-     - Write-aware KV-cache policy: admission-controlled LRU-K filters low-reuse users before cache admission, decoupling writes from misses
-     - Analytical model characterizing GR serving performance, KV write traffic, and HBF lifetime
-     - Evaluation across diverse memory systems and GR workloads
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (cs.AR systems paper)
-     - **Novelty: 6/10** — applying admission-controlled LRU-K write-awareness to HBF-based KV caching for GR serving is a sensible systems contribution
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — analytical model + simulation across memory systems and GR workloads (3.8-4.7x vs HBM-only; LRU-K K=10 extends lifetime ~1yr to 6yr+)
-     - **Impact: 6/10** — Huawei; addresses a concrete serving/economics bottleneck for KV-cache reuse in GR
-
-5. **EPIC: Explicit Posterior Item Conditioning for Semantic ID Diffusion Recommendation**
-   * Affiliation: VinUniversity / Griffith University / Aalborg University — *(Tuan-Binh Tran, Thanh Tam Nguyen, Quoc Viet Hung Nguyen, Dung D. Le, Tung Kieu, Thanh Trung Huynh)*
-   * Link: [arxiv.org/abs/2609.03522](https://arxiv.org/abs/2609.03522)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.LG; submitted 3 Sep 2026)
-   * TL;DR: Introduces explicit item-level posterior conditioning into SID masked-diffusion denoising: it builds a personalized posterior over feasible candidate items from the current generation context and recent interactions, then projects it back to unresolved SID positions to guide token decisions, with a frozen backbone and no extra decoder forward pass.
-   * Key techniques:
-     - Explicit posterior item conditioning (EPIC) into SID masked-diffusion denoising
-     - Personalized posterior over feasible candidate items from the current generation context and the user's recent interactions
-     - Project the posterior back to unresolved SID positions to guide subsequent token decisions
-     - Frozen pretrained backbone; no additional decoder forward pass required
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — explicit item-level competition / posterior conditioning in SID diffusion is a distinctive departure from position-wise token prediction
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — consistent improvements over strong baselines on four Amazon benchmarks, with diagnostic analyses attributing gains to personalized transition evidence
-     - **Impact: 7/10** — VinUniversity / Griffith / Aalborg; advances masked-diffusion SID generative recommendation
-
 ## Papers Classic Must Read
 
 
@@ -1512,7 +1513,7 @@ The list's in no particular order.
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 198 papers as of October 05.
+**Count:** 200 papers as of October 06.
 
 | Score | Paper |
 | --- | --- |
@@ -1633,6 +1634,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP) |
 | 7/10 | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
 | 7/10 | Skill Is Not Document: A Query-Conditional Benchmark and Two-Stage Retriever for LLM Agent Skill Routing (R3) |
+| 7/10 | SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation (SPRIG) |
 | 7/10 | tau-Rec: A Verifiable Benchmark for Agentic Recommender Systems |
 | 7/10 | Teach Multimodal Recommendation Model to See via Personalized Visual Extraction and Adaptive Learning (REVEAL) |
 | 7/10 | ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation |
@@ -1659,6 +1661,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
 | 6/10 | Beyond Uniform Token Training: A Multi-Target Framework for Learning Token-Weighted Objectives in Generative Recommenders (Beyond Uniform Token Training) |
 | 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |
+| 6/10 | Generate What You Can Trust: Content Credibility in Generative Recommenders (CreGR) |
 | 6/10 | GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation |
 | 6/10 | Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd) |
 | 6/10 | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) |
