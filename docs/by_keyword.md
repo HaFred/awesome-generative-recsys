@@ -193,6 +193,8 @@
 - Retrieval, Scoring, and Decoding Shape Performance and Stability in LLM-based Conversational Recommendation (CRS-Performance)
 - When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation (When-the-Label) — Uber AI, arXiv 2609.39696 [opensource]
 
+- Adapting Generative Recommenders for Multi-Turn Interaction (INTEGER) — National Taiwan University / Johns Hopkins University, arXiv 2610.08136
+
 ### Cross-Domain
 - Cross-Country Code-Mixing for Generative Recommendation (CMRec)
 
@@ -274,6 +276,9 @@
 
 - Eval4DiRec: A Unified Evaluation Framework for Diffusion-based Recommender Systems (Eval4DiRec) - University of Technology Sydney, ACM TKDD, arXiv 2609.34404
 - FairDiff: Mitigating the Self-Reinforcing Matthew Effect in Diffusion Recommender Models (FairDiff) — Tsinghua University / Huawei Noah's Ark Lab / USTC, arXiv 2609.36671
+
+- Disentangling Paradigm, Identifier, and Decoding in Generative Retrieval (Disentangling Paradigm/Identifier/Decoding) — Artefact Research Center / Université d'Angers (LERIA), arXiv 2610.08716
+
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
 - Building a privacy-preserving Federated Recommender system for mobile devices
@@ -419,6 +424,9 @@
 - Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems (PromptShift) — UESTC (training-free bias mitigation)
 - FairDiff: Mitigating the Self-Reinforcing Matthew Effect in Diffusion Recommender Models (FairDiff) — Tsinghua University / Huawei Noah's Ark Lab / USTC, arXiv 2609.36671
 - Generate What You Can Trust: Content Credibility in Generative Recommenders (CreGR) — University of Technology Sydney, arXiv 2610.05670 [opensource]
+
+- Aligning Performance with Contribution: Towards Contribution-Aware Fair Recommendation (CPFR) — Shanghai University of Finance and Economics / Singapore University of Technology and Design, arXiv 2610.08245
+
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 
@@ -610,6 +618,9 @@
 
 - GRP: Snap's Generative Recommendation Paradigm - Unified Retrieval, Ranking, and Reward Modeling (GRP) - Snap Inc., arXiv 2609.36688
 - Generate What You Can Trust: Content Credibility in Generative Recommenders (CreGR) — University of Technology Sydney, arXiv 2610.05670 [opensource]
+
+- Adapting Generative Recommenders for Multi-Turn Interaction (INTEGER) — National Taiwan University / Johns Hopkins University, arXiv 2610.08136
+
 ### Generative Retrieval / Ranking
 - OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender (OneTrans-V2) — ByteDance, arXiv 2609.28589
 - X-Rec Technical Report (X-Rec) — TikTok, arXiv 2609.29180
@@ -713,6 +724,10 @@
 - RankEvolve: A Reliable Multi-Agent Auto-Research Harness for Evolving Ranking Models (RankEvolve) — Meta, arXiv 2609.39551
 - SPRINT: Single-Step Generative Recommendation via Average Probability Velocity (SPRINT) — University of Technology Sydney (single-pass SID generation)
 - SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation (SPRIG) — Johannes Kepler University Linz, CIKM 2026, arXiv 2610.06590 [opensource]
+
+- A Systematic Study of Semantic ID Spaces for Generative Information Retrieval (Semantic-ID Spaces) — Artefact Research Center / Université d'Angers (LERIA), arXiv 2610.08732
+- Disentangling Paradigm, Identifier, and Decoding in Generative Retrieval (Disentangling Paradigm/Identifier/Decoding) — Artefact Research Center / Université d'Angers (LERIA), arXiv 2610.08716
+
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -1590,6 +1605,9 @@
 
 - GRP: Snap's Generative Recommendation Paradigm with mGRPO Reward-Guided Post-Training (GRP) - Snap Inc., arXiv 2609.36688
 - ReMem: Multi-memory GRPO for Long-Context Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU, arXiv 2609.37311
+
+- Reinforcement Learning with Conformal Action Sets: An Application to Sequential Recommendation (RLCP) — University of Pennsylvania, arXiv 2610.08743
+
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k)
@@ -1778,6 +1796,8 @@
 - Do Multilingual Encoders Produce Language-Consistent Semantic IDs? (MultiLing-SID) — Amazon / Rutgers, arXiv 2610.01139
 - SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation (SPRIG) — Johannes Kepler University Linz, CIKM 2026, arXiv 2610.06590 [opensource]
 
+- A Systematic Study of Semantic ID Spaces for Generative Information Retrieval (Semantic-ID Spaces) — Artefact Research Center / Université d'Angers (LERIA), arXiv 2610.08732
+
 ### Security / Adversarial
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1867,6 +1887,8 @@
 - Recommendation World Models for Future-State Control (UA-TWM) — University of British Columbia et al., arXiv 2609.30711
 - RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation (RouteRec) — KAIST / Seoul National University, arXiv 2609.39007 [opensource]
 - Learning Robust Personalized Prompts for LLM-Driven Sequential Recommendation (LRPRec) — Zhejiang University, arXiv 2610.03923
+
+- Reinforcement Learning with Conformal Action Sets: An Application to Sequential Recommendation (RLCP) — University of Pennsylvania, arXiv 2610.08743
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
