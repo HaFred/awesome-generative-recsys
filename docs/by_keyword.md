@@ -154,18 +154,12 @@
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
 - SURF: Subtractive Updates for Recommender Forgetting (SURF)
 
-
-
-
-
 ### Contrastive Learning
 - GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation
 - Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb)
 - POI Recommendation with LLM-Augmented Multi-Graph Learning and Contrastive Alignment (LLM-MGCL)
 - Quality-Aware Collaborative Multi-Positive Contrastive Learning for Sequential Recommendation (QCMP-CL)
 - UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
-
-
 
 ### Conversational
 - BanglaShop-CRS: A User-Centric Bangla Dataset for Conversational Recommendation (BanglaShop-CRS) — University of Vermont
@@ -221,14 +215,12 @@
 - SAGE (Tabular Data Generation)
 - World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation (WMG-RL)
 
-
 ### Denoising
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - ANCHOR: Agentic Noise Creation Framework for Human Simulation and Denoising Recommendation (ANCHOR)
 - DC4SR (Disagreement as Signals)
 - Denoising Implicit Feedback for Cold-start Recommendation (DIF)
 - When Recommendation Denoising Meets Popularity Bias: Understanding and Mitigating Their Interaction (PAD)
-
 
 - GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings (GroundedGEO) — Shenzhen University, arXiv 2609.25189
 
@@ -279,6 +271,10 @@
 
 - Disentangling Paradigm, Identifier, and Decoding in Generative Retrieval (Disentangling Paradigm/Identifier/Decoding) — Artefact Research Center / Université d'Angers (LERIA), arXiv 2610.08716
 
+- JBM-Diff: Joint Behavior-guided and Modality-coherence Conditional Graph Diffusion Denoising for Multi-Modal Recommendation (JBM-Diff) — Huazhong University of Science and Technology, arXiv 2604.03654
+- FatsMB: From Agnostic to Specific: Latent Preference Diffusion for Multi-Behavior Sequential Recommendation (FatsMB) — CAS / Kuaishou, arXiv 2602.23132
+- DiffSBR: Diffusion-based Latent Neighbor Generation for Session-based Recommendation (DiffSBR) — UESTC, arXiv 2601.03903
+- DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation (DiffuReason) — Tencent (Think-then-Diffuse + GRPO), arXiv 2602.09744
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
 - Building a privacy-preserving Federated Recommender system for mobile devices
@@ -288,9 +284,6 @@
 - RcLLM: Accelerating Generative Recommendation via Beyond-Prefix KV Caching
 - Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling
 - Kernel-Managed Shared Memory for System-Wide Personalization
-
-
-
 
 - Optimizing Effective Training Time for Large-Scale Recommendation Systems — Meta, arXiv 2610.02057
 - GroundedGEO: Auditing the Evidence Gap in Generative Search Rankings (GroundedGEO) — Shenzhen University, arXiv 2609.25189
@@ -430,7 +423,6 @@
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 
-
 ### Federated Recommendation
 - Beyond Centralization: User-Controlled Federated Recommendations in Practice
 - Building a privacy-preserving Federated Recommender system for mobile devices
@@ -442,8 +434,6 @@
 - RegionFed: Federated Learning for Personalized Query Understanding in Heterogeneous Retail Environments (RegionFed)
 - FedHUR: Learning Hierarchical Utility-Guided Client Relations for Personalized Federated Recommendation (FedHUR)
 
-
-
 ### Foundation Models
 - Principled Synthetic Data Enables the First Scaling Laws for LLMs in Recommendation (Scaling Laws)
 - Scaling Laws for Behavioral Foundation Models over User Event Sequences
@@ -451,8 +441,6 @@
 - RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN)
 - ShopX: A Foundation Model for Intent-to-Item Fulfillment in Agentic Shopping (ShopX)
 - UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
-
-
 
 - IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
 - From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation — Kuaishou, arXiv 2608.21012
@@ -728,6 +716,7 @@
 - A Systematic Study of Semantic ID Spaces for Generative Information Retrieval (Semantic-ID Spaces) — Artefact Research Center / Université d'Angers (LERIA), arXiv 2610.08732
 - Disentangling Paradigm, Identifier, and Decoding in Generative Retrieval (Disentangling Paradigm/Identifier/Decoding) — Artefact Research Center / Université d'Angers (LERIA), arXiv 2610.08716
 
+- Missed Targets: Training with Missed Targets in Generative Recommendation (Missed Targets) — Zhejiang University, arXiv 2610.10124
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -750,7 +739,6 @@
 - Do All Nodes Benefit Equally from Knowledge Graphs? Adaptive Node-Aware KG Fusion for Recommendation (AdaKG)
 - PCGNet: Unifying Shared and Specific Information for Fashion Matching Recommendations (PCGNet) — The Hong Kong Polytechnic University, arXiv 2609.13339
 
-
 - X-KGRank: A Knowledge Graph RAG Framework for Explainable Recommendations via Pattern Mining and LLM Re-Ranking (X-KGRank) — San Jose State University; arXiv 2608.01732
 - GEAR: Generative End-to-end Ad Retrieval at Douyin (GEAR) — ByteDance (Douyin); arXiv 2609.39327
 - Residual Trajectory Distillation for Generative Retrieval (ResTD) — Beihang University / Meituan; arXiv 2609.39319
@@ -763,8 +751,6 @@
 - AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation
 - Consensus vs. Dissent: Dynamic LLM Modeling of Subjective Preferences in Group Recommenders
 - Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking)
-
-
 
 - Enhancing Group Recommendation with Memory-Augmented Reasoning in LLM Agent (AGR)
 - Iterative Semantic Reasoning from Individual to Group Interests for Generative Recommendation with LLMs (ISRF)
@@ -1012,7 +998,6 @@
 - Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
 - Recommender System as Slow and Fast Thinkers (DS-Frame)
 
-
 ### Inference Acceleration / Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
 - Empowering Compact LLMs with Fusion of Layer-wise Exits for Recommendation (FLEXRec)
@@ -1047,8 +1032,6 @@
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
 - The Utility of LLMs in Recommender Systems Explanation Evaluation
 - Should I Be Polite to My LLM Relevance Judge? Tone as a Severity Operating-Point Shift
-
-
 
 - The Lifecycle of LLM-as-a-Judge for Large-Scale Recommendation Explanations
 - From Prompting to Behavioral Alignment: Personalized LLM Judges for Recommendation Evaluation
@@ -1273,12 +1256,12 @@
 - When LLM-Inferred User Context Adds Value in Production Streaming Recommendation (LLM-Inferred-Context) — DePaul University / Comcast, arXiv 2609.38999
 - Decision-Oriented Recommendation Reranking: An Empirical Study of Jev (Jev) — University of Rochester / Meta AI, arXiv 2609.40241
 
-
 - When History Misleads: Asymmetric Margin Supervision for Instruction-Guided LLM Generative Recommendation (AIMS) — Duke University, arXiv 2610.02600
 - Reasoning with Evidence, Not Merely Rationales: Verifiable Preference Proofs for LLM-Based Recommendation (PROVE-REC) — Yonsei University, arXiv 2610.02968
 - A Behavioral Trait Leaks into Preferences: Diagnosing Trait Interference in LLM User Simulators (PQA) — KAIST, arXiv 2609.25572 [opensource]
 - System Attribution in LLM Brand Recommendations (Dmitrij Żatuchin) — EUAS / Rankfor.AI
 - Learning Robust Personalized Prompts for LLM-Driven Sequential Recommendation (LRPRec) — Zhejiang University, arXiv 2610.03923
+- MATE: Adaptive Long- and Short-Term User Memory for LLM-Based Recommendation (MATE) — Yonsei University, arXiv 2610.06050
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
@@ -1293,7 +1276,6 @@
 - SELF-INDEX: Self-Evolving Search Index (SELF-INDEX) — Yonsei University, arXiv 2609.19656
 
 - Enhancing Group Recommendation with Memory-Augmented Reasoning in LLM Agent (AGR)
-
 
 - IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
 
@@ -1363,7 +1345,7 @@
 - Beyond Observed Auxiliary Relations: Environment-Conditioned Modeling for Multi-Behavior Recommendation (BOAR)
 - MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment (MIMA)
 
-
+- FatsMB: From Agnostic to Specific: Latent Preference Diffusion for Multi-Behavior Sequential Recommendation (FatsMB) — CAS / Kuaishou, arXiv 2602.23132
 ### Multimodal
 - Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
 - MM-VeriRec: Failure-Guided Fusion for Verifiable Agentic Multimodal Recommendation — Independent Researcher, arXiv 2609.31718
@@ -1451,10 +1433,9 @@
 - Attribute-Conditioned Multimodal Slot Factorization for Controllable Fashion Retrieval (MM-slotgate) — Amazon, arXiv 2608.12570
 - Reading the Mood: Emotion-Guided Book-to-Music Recommendation via CGANs and LLMs (SAGA-CDR) — National Technical University of Athens, SENTIRE 2026 (ICDM Workshops), arXiv 2610.06703
 
+- JBM-Diff: Joint Behavior-guided and Modality-coherence Conditional Graph Diffusion Denoising for Multi-Modal Recommendation (JBM-Diff) — Huazhong University of Science and Technology, arXiv 2604.03654
 ### Optimizer
 - MuonRec
-
-
 
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 
@@ -1598,7 +1579,6 @@
 
 - Enhancing Group Recommendation with Memory-Augmented Reasoning in LLM Agent (AGR)
 
-
 - ReFilter: Bridging Embeddings and LLM Filtering for Similar Mobile App Retrieval (ReFilter) — University of Toronto / Université du Québec à Montréal; ASIS&T 2026, arXiv 2609.25306
 
 - DASO / Difficulty-Aware Semantic-ID Optimization (GRPO rollout-allocation) — Meta / Penn State — [Also published on 2026-09-23]
@@ -1666,9 +1646,6 @@
 - UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems (UniMixer)
 - TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation (TransRetrieval)
 - From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs (ReST)
-
-
-
 
 - From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation — Kuaishou, arXiv 2608.21012
 
@@ -1798,6 +1775,7 @@
 
 - A Systematic Study of Semantic ID Spaces for Generative Information Retrieval (Semantic-ID Spaces) — Artefact Research Center / Université d'Angers (LERIA), arXiv 2610.08732
 
+- FLASH: Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment (FLASH) — U Illinois Chicago / NeurIPS 2026, arXiv 2610.07402
 ### Security / Adversarial
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1890,17 +1868,16 @@
 
 - Reinforcement Learning with Conformal Action Sets: An Application to Sequential Recommendation (RLCP) — University of Pennsylvania, arXiv 2610.08743
 
+- FatsMB: From Agnostic to Specific: Latent Preference Diffusion for Multi-Behavior Sequential Recommendation (FatsMB) — CAS / Kuaishou, arXiv 2602.23132
+- DiffSBR: Diffusion-based Latent Neighbor Generation for Session-based Recommendation (DiffSBR) — UESTC, arXiv 2601.03903
+- DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation (DiffuReason) — Tencent, arXiv 2602.09744
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 - Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges
 
-
-
-
 ### Temporal Stability / Feature Pruning
 - Decomposing Staleness in Recommender Systems: A Dual-Filter Framework for Supersession and Decay (SDF)
 - Fortress: A Case Study in Stabilizing Search Recommendations
-
 
 ### Training Systems / NPU Optimization
 - Not Only NTP: Extending Training Signal Coverage for Generative Recommendation (NONTP)

@@ -45,8 +45,6 @@ mindmap
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
     Representation Layer: Model Training & Optimization
-      Editing & Control
-        CRAMER -- Renmin U / Dalhousie U
       Frameworks & Benchmarks
         MiniOneRec -- USTC
         OpenOneRec -- Kuaishou
@@ -66,13 +64,14 @@ mindmap
         FORGE SID -- Zhejiang U / Alibaba
         DACT -- Fudan U
         CHAP -- USTC
-        SPRIG -- Johannes Kepler University Linz
-        CreGR -- University of Technology Sydney
+        FLASH -- U Illinois Chicago
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
-
+        JBM-Diff -- Huazhong UST
+        FatsMB -- CAS / Kuaishou
 ```
+
 <div align="center">
   <i> Open-source Generative RecSys Map </i>
 </div>
@@ -90,6 +89,122 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers October 08
+
+*Thursday, October 8, 2026. The live 24h arxiv window (papers dated Oct 7) carried only 1 strictly on-topic generative-recommendation paper (Missed Targets, 2610.10124); the other Oct 7 hits were already catalogued on Oct 7. Below the 5-paper floor, the 3-month keyword fallback surfaced 6 additional on-topic papers, of which 4 were genuinely uncatalogued and 2 were recovered from the Feb–Apr window (DiffuReason, JBM-Diff, FatsMB, DiffSBR). 3 are opensource. By Opensource count 200 -> 203.*
+
+1. **Training with Missed Targets in Generative Recommendation: Separating Supervision from Probability Competition (Missed Targets)**
+   * Affiliation: Zhejiang University — *(Xuesi Wang, Yangbin Shi, Xiaolin Zheng)*
+   * Link: [arxiv.org/abs/2610.10124](https://arxiv.org/abs/2610.10124)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 7 Oct 2026)
+   * TL;DR: Generative recommenders return a limited candidate set and may drop observed targets before reranking; naively appending those "missed targets" to reranker training lists silently changes retrieved-target weight, adds supervision, AND makes the two groups compete for probability, so a naive append/no-append comparison cannot explain ranking changes. The paper builds three matched losses to isolate these effects and shows the competition can hurt returned-item ranking.
+   * Key techniques:
+     - Constructs three matched losses that hold retrieved-target weight fixed while separately introducing appended-target supervision and group probability competition
+     - Intermediate loss trains within both groups but normalizes them separately, preventing training-only targets from competing with inference candidates
+     - Evaluates with a released OneRec model and locally trained Amazon generators; removing the competition improved FT-NDCG by 7.8–22.2% across four Amazon Video Games comparisons (95% CIs exclude zero)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; reuses a released OneRec checkpoint
+     - **Novelty: 6/10** — a careful causal dissection of the missed-target training artifact rather than a new architecture
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — rigorous matched-loss experimental design with FT-NDCG gains and 95% intervals over users and runs
+     - **Impact: 6/10** — Zhejiang University; practical guidance on when candidate completion helps vs. hurts
+
+2. **Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment (FLASH)**
+   * Affiliation: University of Illinois Chicago — *(Yuqing Liu, Huiyuan Chen, Yibo Wang, Wooseong Yang, Philip S. Yu)*
+   * Link: [arxiv.org/abs/2610.07402](https://arxiv.org/abs/2610.07402) · [Code](https://github.com/KevinC2015/Flash)
+   * Venue: NeurIPS 2026; arXiv preprint, October 2026 (cs.IR; submitted 5 Oct 2026)
+   * TL;DR: Challenges the consensus that hashing-based semantic IDs are inherently inferior to learned quantization; shows the gap comes from a structural mismatch with autoregressive decoding plus rigid discretization, and proposes FLASH — a training-free SimHash tokenizer revitalized by parallel decoding and explicit semantic alignment that matches learned SIDs without any tokenizer training.
+   * Key techniques:
+     - Two-stage framework: training-free SimHash semantic-ID tokenization + parallel decoding (removes the AR mismatch)
+     - Explicit semantic alignment as a universally effective mechanism across diverse generative-retrieval paradigms
+     - Achieves SOTA across multiple datasets with no tokenizer training and stronger cold-start generalization
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/KevinC2015/Flash](https://github.com/KevinC2015/Flash) (NeurIPS 2026 code release, documented)
+     - **Novelty: 7/10** — reframes the hashing-vs-learned-SID debate around decoding/alignment rather than tokenizer capacity
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — SOTA across multiple datasets with stronger cold-start generalization
+     - **Impact: 8/10** — University of Illinois Chicago / Philip S. Yu; a simple, training-free tokenizer that rivals learned SIDs at NeurIPS
+
+3. **MATE: Adaptive Long- and Short-Term User Memory for LLM-Based Recommendation**
+   * Affiliation: Yonsei University — *(Yu Hou)*, Seoul, Korea
+   * Link: [arxiv.org/abs/2610.06050](https://arxiv.org/abs/2610.06050)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 5 Oct 2026)
+   * TL;DR: LLM-based sequential recommenders use semantic representations but do not distinguish persistent preferences from recent interests; MATE evaluates each new interaction from two temporal perspectives to control updates of a long-term (conservative) and a short-term (adaptive) user memory, with a recent-context representation gating their contribution.
+   * Key techniques:
+     - Temporal-evidence computation: repeated historical support + recent-interaction consistency for each newly observed interaction
+     - Two user-specific memories: long-term conservatively preserves persistent preferences, short-term rapidly adapts to recent interests
+     - Online adaptation keeps the shared model fixed and updates only the two memories; +7.0–13.2% NDCG@10 over the strongest baseline on MovieLens-10M, Amazon Luxury Beauty, and KuaiRec
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code repository linked
+     - **Novelty: 7/10** — adaptive long/short-term memory with temporal-evidence gating for LLM-based sequential rec
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — consistent 7.0–13.2% NDCG@10 gains across three benchmarks
+     - **Impact: 6/10** — Yonsei University; a clean LLM-based sequential-rec memory framework
+
+4. **DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation**
+   * Affiliation: Tencent — *(Jie Jiang, Yang Wu, Qian Li, Yuling Xiong, Yihang Su, Junbang Huo, Longfei Lu, Jun Zhang, Huan Yu)*, Beijing
+   * Link: [arxiv.org/abs/2602.09744](https://arxiv.org/abs/2602.09744)
+   * Venue: arXiv preprint, February 2026 (cs.IR; v2 submitted 12 Feb 2026)
+   * TL;DR: A unified "Think-then-Diffuse" framework for sequential recommendation that integrates multi-step Thinking Tokens (latent reasoning), diffusion-based refinement (probabilistic intent denoising), and end-to-end GRPO alignment so the reasoning and refinement modules co-evolve without staged optimization.
+   * Key techniques:
+     - Think stage: generates Thinking Tokens that reason over user history to form an initial intent hypothesis
+     - Diffuse stage: refines the hypothesis via a diffusion process that models user intent as a distribution, iteratively denoising against reasoning noise
+     - GRPO-based reinforcement learning enables reasoning + refinement to co-evolve end-to-end; validated by online A/B on a large-scale industrial platform
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code repository linked
+     - **Novelty: 8/10** — unifies latent reasoning + diffusion refinement + GRPO in one end-to-end framework, removing staged-pipeline constraints
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 8/10** — improves diverse backbone architectures and is validated online via A/B
+     - **Impact: 8/10** — Tencent; industrially validated sequential recommendation
+
+5. **Joint Behavior-guided and Modality-coherence Conditional Graph Diffusion Denoising for Multi-Modal Recommendation (JBM-Diff)**
+   * Affiliation: Huazhong University of Science and Technology — *(Xiangchen Pan, Wei Wei)*, Wuhan, China
+   * Link: [arxiv.org/abs/2604.03654](https://arxiv.org/abs/2604.03654) · [Code](https://github.com/pxcstart/JBMDiff)
+   * Venue: arXiv preprint, April 2026 (cs.IR; submitted 4 Apr 2026)
+   * TL;DR: A joint behavior-guided and modality-coherence conditional graph diffusion model (JBM-Diff) for multi-modal recommendation that denoises both redundant, preference-irrelevant multimodal features and feedback-biased (false positive/negative) user behaviors.
+   * Key techniques:
+     - Diffusion model conditioned on collaborative features per modality to remove preference-irrelevant multimodal information
+     - Multi-view message propagation + feature fusion to align collaborative and modal semantics
+     - Behavior-perspective partial-order consistency detection sets sample-pair credibility for data augmentation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/pxcstart/JBMDiff](https://github.com/pxcstart/JBMDiff)
+     - **Novelty: 7/10** — joint denoising of multimodal features and feedback bias via behavior-guided modality-coherence conditional diffusion
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — extensive experiments on three public datasets
+     - **Impact: 6/10** — Huazhong University of Science and Technology; multimodal recommendation denoising
+
+6. **From Agnostic to Specific: Latent Preference Diffusion for Multi-Behavior Sequential Recommendation (FatsMB)**
+   * Affiliation: Institute of Information Engineering, Chinese Academy of Sciences / University of Chinese Academy of Sciences — *(Ruochen Yang, Xiaodong Li, Jiawei Sheng, Tingwen Liu)* + Kuaishou Technology, Beijing — *(Jiangxia Cao, Shen Wang, Shuang Yang)*
+   * Link: [arxiv.org/abs/2602.23132](https://arxiv.org/abs/2602.23132) · [Code](https://github.com/OrchidViolet/FatsMB)
+   * Venue: KDD 2026; arXiv preprint, February 2026 (cs.IR / cs.LG; submitted 26 Feb 2026)
+   * TL;DR: FatsMB is a diffusion-based framework that guides preference generation from behavior-agnostic to behavior-specific in latent spaces for multi-behavior sequential recommendation, capturing the latent user preference underlying decision-making and the asymmetric uncertainty from low-entropy behaviors to high-entropy items.
+   * Key techniques:
+     - Multi-Behavior AutoEncoder (MBAE) builds a unified user latent preference space with cross-behavior interaction; Behavior-aware RoPE (BaRoPE) for multi-information fusion
+     - Target behavior-specific preference transfer in the latent space, enriched with informative priors
+     - Multi-Condition Guided Layer Normalization (MCGLN) for the denoising process
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/OrchidViolet/FatsMB](https://github.com/OrchidViolet/FatsMB) (KDD 2026 code release)
+     - **Novelty: 7/10** — behavior-agnostic→behavior-specific latent preference diffusion with MBAE + BaRoPE + MCGLN
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — extensive experiments on real-world datasets; KDD 2026
+     - **Impact: 7/10** — CAS / Kuaishou; KDD 2026 multi-behavior sequential recommendation
+
+7. **Unleashing the Potential of Neighbors: Diffusion-based Latent Neighbor Generation for Session-based Recommendation (DiffSBR)**
+   * Affiliation: University of Electronic Science and Technology of China — *(Yuhan Yang, Jie Zou, Guojia An, Jiwei Wei, Yang Yang, Heng Tao Shen)*
+   * Link: [arxiv.org/abs/2601.03903](https://arxiv.org/abs/2601.03903)
+   * Venue: KDD 2026 (accepted); arXiv preprint, January 2026 (cs.IR; submitted 7 Jan 2026)
+   * TL;DR: DiffSBR generates high-quality latent neighbors for session-based recommendation via two diffusion modules — retrieval-augmented (uses retrieved neighbors as guidance) and self-augmented (injects the current session's multimodal signals) — then enhances session representations with the generated latent neighbors.
+   * Key techniques:
+     - Retrieval-augmented diffusion: retrieved neighbors constrain and reconstruct the latent-neighbor distribution; the retriever learns from generator feedback
+     - Self-augmented diffusion: contrastive learning injects the current session's multimodal signals to guide latent-neighbor generation
+     - Generated latent neighbors augment session representations; extensive experiments on four public datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code repository linked
+     - **Novelty: 7/10** — diffusion-based latent neighbor generation (retrieval-augmented + self-augmented) with retriever–generator co-training for session-based rec
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — extensive experiments on four public datasets; KDD 2026
+     - **Impact: 6/10** — University of Electronic Science and Technology of China; KDD 2026 session-based recommendation
 
 ### Papers October 07
 
@@ -1167,95 +1282,11 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 3/10** — no offline or online empirical metrics disclosed; conceptual / position paper
      - **Impact: 6/10** — NII; thought-provoking direction but unvalidated empirically
 
-### Papers September 27
-
-*Sunday, September 27, 2026. The live 24h arxiv window was empty (Sunday — no cs.IR announcement batch posts on weekends), so the minimum-5-papers fallback was invoked: a 3-month sweep (cs.IR / LLM-rec queries, cutoff >=2026-06-27) surfaced exactly 5 genuinely-uncatalogued on-topic papers (absent from README By Date and the monthly archives by arxiv ID). 3 are opensource. Note: CRAMER had previously been partially catalogued (By Opensource row + affiliation rows + the July archive) but never received a proper By Date daily entry under its real arxiv ID 2608.25370 — that gap is closed here, so the opensource count increments by only 2 (REPREC, X-KGRank) -> 191.*
-
-1. **CRAMER: Control via Request-Aware Masking for Editing Recommenders**
-   * Affiliation: Renmin University of China — *(Zhiyuan Julian Su, Naihe Feng, Zhen Luther Qin, Ga Wu)* + Dalhousie University
-   * Link: [arxiv.org/abs/2608.25370](https://arxiv.org/abs/2608.25370) · [Code](https://github.com/zhiyuansu0326/CRAMER-ICML2026)
-   * Venue: ICML 2026; arXiv preprint, August 2026 (cs.IR / cs.AI / cs.LG; submitted 26 Aug 2026)
-   * TL;DR: Treats a user's natural-language request as a control signal that modulates frozen sequential-recommender backbone parameters through masking, enabling instant request-aware adaptation with minimal overhead (no retraining, no LLM prompt engineering).
-   * Key techniques:
-     - Request-aware masking that edits frozen backbone behavior on the fly in response to explicit user requests
-     - Control-theory framing: requests = control signals, backbone parameters = the plant to be modulated
-     - Enhanced controllability and cross-domain adaptability demonstrated on multiple large-scale benchmark datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/zhiyuansu0326/CRAMER-ICML2026](https://github.com/zhiyuansu0326/CRAMER-ICML2026) (ICML 2026 code release, documented)
-     - **Novelty: 7/10** — reframing request adaptation as control-theoretic parameter masking is a fresh angle vs. retraining / prompt-engineering baselines
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — beats four SOTA request-aware baselines across multiple metrics with minimal overhead
-     - **Impact: 7/10** — Renmin University of China / Dalhousie University; a new paradigm for request-aware sequential recommendation
-
-2. **REPREC: Representation Driven Parameter-Efficient Recommendation System**
-   * Affiliation: Ohio State University — *(Harshini Kavuru, Dwipam Katariya, Giri Iyengar, Pranab Mohanty, Kalanand Mishra, Raghu Machiraju)* + Capital One AI Foundations
-   * Link: [arxiv.org/abs/2607.24845](https://arxiv.org/abs/2607.24845) · [Code](https://github.com/phdbotcode/REPREC)
-   * Venue: arXiv preprint, July 2026 (cs.IR / cs.AI; submitted 24 Jul 2026)
-   * TL;DR: Conditions a frozen LLM using compact user-level representations via a small MLP injector that maps a fixed-size embedding from a frozen sequential encoder into learned soft tokens.
-   * Key techniques:
-     - Frozen-LLM + frozen-sequential-encoder; only the lightweight MLP injector is trained
-     - Compact soft-token conditioning (parameter-efficient; no LLM fine-tuning, distillation, or item-level conditioning over long histories)
-     - Short-history training retains 94–99% of full-history performance at a 1.50x per-epoch training speedup
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/phdbotcode/REPREC](https://github.com/phdbotcode/REPREC)
-     - **Novelty: 6/10** — a competent but incremental parameter-efficient conditioning take on LLM-based sequential recommendation
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — consistent gains across sequential encoders, LLM backbones, and user-activity levels
-     - **Impact: 6/10** — Ohio State University / Capital One; efficient deployment-oriented adaptation
-
-3. **Weather- and Location-Aware Agentic Dining Recommendation**
-   * Affiliation: Independent — *(Kadharmoideen Fadurudeen)*
-   * Link: [arxiv.org/abs/2608.07593](https://arxiv.org/abs/2608.07593)
-   * Venue: arXiv preprint, August 2026 (cs.HC / cs.AI / cs.IR; submitted 5 Aug 2026); 5 pages, working prototype
-   * TL;DR: An LLM-agent that orchestrates location + weather retrieval tools and reasons over the combined context to produce region-sensitive, weather-appropriate dining recommendations without per-region rule tables.
-   * Key techniques:
-     - Tool orchestration: Google location services + a weather service feeding an OpenAI LLM
-     - Region-specific weather-to-cuisine reasoning drawn from latent LLM world knowledge (no hand-crafted rules)
-     - Explicit limitations discussion: no formal user study, risk of cultural stereotyping in locality-based inference
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code repository
-     - **Novelty: 5/10** — a clean architectural pattern for environmental/cultural context in agentic rec, but proof-of-concept scale
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 4/10** — working prototype, no rigorous evaluation / user study
-     - **Impact: 4/10** — Independent; extensible reference pattern rather than a benchmarked system
-
-4. **Fair on the Surface? Benchmarking Hidden-Output Fairness Gaps in LLM Recommenders**
-   * Affiliation: University of Georgia — *(Chan Aristella Lu, Arya Fayyazi, Junhao Zhang, Saeid Shokoufa, Yue Xing, Zhen Xiang, Kyu Hyung Lee, Mehdi Kamal, Massoud Pedram)* + University of Southern California + Carnegie Mellon University + Michigan State University
-   * Link: [arxiv.org/abs/2608.08284](https://arxiv.org/abs/2608.08284)
-   * Venue: arXiv preprint, August 2026 (cs.AI; submitted 8 Aug 2026)
-   * TL;DR: FairGap, the first benchmark that jointly evaluates observable output shift (OBS) and hidden representation shift (IBS) in LLM recommenders via counterfactual identity probes — exposing pervasive hidden-output decoupling.
-   * Key techniques:
-     - Dual-level fairness audit: OBS (output) + IBS (internal representation) across gender / age / race
-     - Representation-Output Alignment (ROA) with quadrant diagnostics for user-level hidden-output mismatch
-     - Shows activation steering that cuts IBS up to 8x simultaneously worsens OBS — a fundamental internal/output fairness tension existing frameworks cannot diagnose
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — benchmark described in detail, but no public code repository linked
-     - **Novelty: 7/10** — first to jointly audit hidden representation shift alongside observable output in LLM recommenders
-     - **Fairness: 8/10** — directly targets fairness; reveals output-only audits miss a large hidden-mismatch user population
-     - **Robustness: 6/10** — applied to six open-weight LLM families across three domains with controlled counterfactual probes
-     - **Impact: 7/10** — University of Georgia / USC / CMU / Michigan State; reframes the fairness-evaluation agenda for LLM recommenders
-
-5. **X-KGRank: A Knowledge Graph RAG Framework for Explainable Recommendations**
-   * Affiliation: San Jose State University — *(Meenakshi Rajpurohit, Jainish Patel; Dept. of Computer Engineering)*
-   * Link: [arxiv.org/abs/2608.01732](https://arxiv.org/abs/2608.01732) · [Code](https://github.com/MeenakshiRajpurohit/graph-rag-recommend)
-   * Venue: arXiv preprint, August 2026 (cs.IR / cs.AI; submitted 3 Aug 2026)
-   * TL;DR: Unifies structural collaborative filtering (LightGCN over a MovieLens-1M knowledge graph in Neo4j) with LLM-based explanation via pattern mining and LLM re-ranking.
-   * Key techniques:
-     - Heterogeneous KG (9,762 nodes / 999,264 edges; RATED / HAS_GENRE / CO_RATED) persisted in Neo4j
-     - LightGCN ranker with content-aware SBERT initialization + rating-weighted BPR; popularity-selective routing grounds long-tail items (~50% fewer KG-augmented generations)
-     - +17.1% NDCG@10 / +14.6% MRR over a popularity baseline; a 1.5B model (Qwen2.5-1.5B) matches a 7B model (Mistral-7B) on explanation quality
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/MeenakshiRajpurohit/graph-rag-recommend](https://github.com/MeenakshiRajpurohit/graph-rag-recommend)
-     - **Novelty: 6/10** — a solid KG-RAG + LightGCN + LLM-reranking pipeline; engineering contribution more than conceptual novelty
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — evaluated on MovieLens-1M with three LLM backbones and a 99-sample protocol
-     - **Impact: 6/10** — San Jose State University; a reproducible explainable-rec baseline
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 200 papers as of October 06.
+**Count:** 203 papers as of October 08.
 
 | Score | Paper |
 | --- | --- |
@@ -1377,6 +1408,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
 | 7/10 | Skill Is Not Document: A Query-Conditional Benchmark and Two-Stage Retriever for LLM Agent Skill Routing (R3) |
 | 7/10 | SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation (SPRIG) |
+| 7/10 | FatsMB: From Agnostic to Specific: Latent Preference Diffusion for Multi-Behavior Sequential Recommendation (FatsMB) |
+| 7/10 | FLASH: Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment (FLASH) |
+| 7/10 | JBM-Diff: Joint Behavior-guided and Modality-coherence Conditional Graph Diffusion Denoising for Multi-Modal Recommendation (JBM-Diff) |
 | 7/10 | tau-Rec: A Verifiable Benchmark for Agentic Recommender Systems |
 | 7/10 | Teach Multimodal Recommendation Model to See via Personalized Visual Extraction and Adaptive Learning (REVEAL) |
 | 7/10 | ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation |
@@ -1502,7 +1536,6 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - PrefixMem / SID Encoder -- Pinterest
 - BONSAI / Decoding Trie Optimization -- MSU / Snap
 
-
 - GenRecEdit: Adapting Model Editing for Generative Recommendation with Cold-Start Items (GenRecEdit)
 - GBLA: Gated Bidirectional Linear Attention for Generative Retrieval (GBLA)
 - DRQ: Understanding SID Tokenizer Failures via Decoupled Residual Quantization (DRQ)
@@ -1600,6 +1633,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling (MuSeR) — Baidu / CityU HK / CUHK (hierarchical beam-search retrieval)
 
 - Beyond the Beam: Constructive Repair and Candidate Completion for Generative Recommendation (Beyond the Beam) — Beijing Institute of Technology
+
+- FLASH: Rethinking Semantic ID Construction for Generative Recommendation (FLASH) — U Illinois Chicago / NeurIPS 2026 (SimHash + parallel decoding)
 
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
@@ -1733,6 +1768,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec) — Central South University / Beihang / South China Univ. of Tech.
 
 - Reinforcement Learning with Conformal Action Sets: An Application to Sequential Recommendation (RLCP) — University of Pennsylvania, arXiv 2610.08743
+
+- DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation (DiffuReason) — Tencent (Think-then-Diffuse + GRPO), arXiv 2602.09744
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
 
