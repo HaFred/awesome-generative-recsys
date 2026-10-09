@@ -41,6 +41,7 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
+        Personalization Matters -- ByteDance / U Melbourne
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -58,6 +59,7 @@ mindmap
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
+        RecRSI -- U Hong Kong
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -68,8 +70,6 @@ mindmap
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
-        JBM-Diff -- Huazhong UST
-        FatsMB -- CAS / Kuaishou
 ```
 
 <div align="center">
@@ -89,6 +89,90 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers October 09
+
+*Friday, October 9, 2026. The live 24h arxiv window (papers dated Oct 8) carried only 3 strictly on-topic generative-recommendation papers (MARI, MGRASRec, Personalization Matters), below the 5-paper floor, so per the fallback we drew 2 more genuinely-new, on-topic papers from the last-3-month arxiv keyword pool (RecRSI, MediateRec). 2 are open-source. Total: 5 papers (2 opensource). By Opensource count 203 -> 205.*
+
+1. **Beyond Sequences: Distilling Structured Decision Memory for LLM Recommendation (MARI)**
+   * Affiliation: Alibaba Group — *(Leikun Liang, Guoshuai Wang, Xingsheng He, Yushan Han, Yunyi Xuan, Xiaoxiao Xu, Lin Qu)*
+   * Link: [arxiv.org/abs/2610.11501](https://arxiv.org/abs/2610.11501)
+   * Venue: arXiv preprint, October 2026 (cs.CL; submitted 8 Oct 2026)
+   * TL;DR: Prevailing LLM recommenders flatten heterogeneous user behaviors into homogeneous token sequences and lose the decision-making roles behind actions (e.g., trade-offs between price and quality), hurting "difficult-choice" cases; MARI instead archives users' past rationales as Structured Decision Memories in a Decision Memory Bank and retrieves them to ground LLM reasoning.
+   * Key techniques:
+     - Decision Memory Bank (DMB) stores Structured Decision Memories (SDMs) — concise records of goals, constraints, and trade-offs
+     - Post-Hoc Decision Distillation generates SDMs offline from heterogeneous behaviors and user-generated content
+     - Retrieval-augmented LLM reasoning decouples memory construction from online inference, keeping latency low
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code released
+     - **Novelty: 7/10** — frames decision evidence as explicit structured memories to augment LLM rec reasoning; a fresh angle on reasoning-aware rec but builds on LLM-rec + memory lines
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — extensive next-item + new Difficult Choice Prediction experiments, low latency overhead, but single-paper validation
+     - **Impact: 7/10** — Alibaba; practical reasoning-aware rec with interpretable, human-readable decision insights
+
+2. **Multimodal Graph Retrieval-Augmented Sequential Recommendation via Collaborative Filtering Paths (MGRASRec)**
+   * Affiliation: University of New South Wales, Sydney, Australia — *(Jason Marcell Setiadi, Xin Cao, Lina Yao)*
+   * Link: [arxiv.org/abs/2610.11228](https://arxiv.org/abs/2610.11228)
+   * Venue: arXiv preprint, October 2026 (cs.LG; submitted 8 Oct 2026)
+   * TL;DR: Existing multimodal sequential recommenders either ignore collaborative signals from neighbors or pay heavy compute for repeated MLLM inference over long histories; MGRASRec retrieves collaborative-filtering paths from a user-item graph (extended by multimodal similarity) and injects them into the MLLM prompt, enabling a single forward pass per candidate.
+   * Key techniques:
+     - Graph retrieval of structured CF paths conditioned on the candidate item, extended via multimodal similarity to increase coverage beyond exact co-interaction
+     - Surfaces the most candidate-relevant history items at no extra cost, removing recurrent summarization
+     - Unified augmented prompt for parameter-efficient fine-tuning of an MLLM (single forward pass per candidate)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code released
+     - **Novelty: 6/10** — combines graph RAG with MLLM sequential rec; collaborative-path prompting is a reasonable but incremental idea
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — evaluated on three public datasets with strong ranking-quality gains
+     - **Impact: 6/10** — academic (UNSW); multimodal sequential rec with practical single-pass inference
+
+3. **Personalization Matters: Long-Horizon Conversation Agent with User-Centric Information in Online Shopping Interactions**
+   * Affiliation: ByteDance — *(Rena Gao, Yue Dai, Hao Guan, Shengxiang Gao, Wangyang Wu, Yixin Shen, Jey Han Lau)* *(with University of Melbourne, AXON, University of Technology Sydney)*
+   * Link: [arxiv.org/abs/2610.11375](https://arxiv.org/abs/2610.11375) · [Code](https://github.com/RenaGao/Multimodel_RAG_Indexing)
+   * Venue: arXiv preprint, October 2026 (cs.MA; submitted 8 Oct 2026)
+   * TL;DR: Personalized conversational shopping needs preference consistency over multi-turn interactions where users reveal constraints gradually; the paper proposes a multi-agent multimodal RAG framework that decomposes dialogue-state tracking, recommendation retrieval, preference-aware reasoning, and response generation, and evaluates interaction quality with a trajectory-level protocol.
+   * Key techniques:
+     - Multi-agent multimodal RAG decomposing the shopping assistant into DST / rec-retrieval / reasoning / response roles
+     - Integrates product metadata, reviews, image-derived descriptions, and user historical reviews
+     - Trajectory-level evaluation across four dimensions: Global Preference Consistency, Cumulative Information Synthesis, Interaction Trajectory, Tone Consistency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/RenaGao/Multimodel_RAG_Indexing](https://github.com/RenaGao/Multimodel_RAG_Indexing): src/, data/, docs/, requirements.txt, .env.example, LICENSE; provides the multimodal RAG indexing + shopping-agent code and benchmark data. 0 stars, modest docs, agent orchestration not fully modularized, but code matches the paper's RAG approach
+     - **Novelty: 6/10** — multi-agent decomposition + user-centric retrieval for long-horizon shopping; trajectory-level protocol is a useful evaluation contribution
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 6/10** — automatic trajectory metrics on Amazon Reviews 2023 (4.82 vs 3.74) plus a small real-user study (n=5)
+     - **Impact: 6/10** — ByteDance + University of Melbourne; practical conversational-shopping personalization
+
+4. **Beyond Successor Accuracy: State Retention for Recursive Self-Improvement in Recommendation (RecRSI)**
+   * Affiliation: The University of Hong Kong — *(Jinfeng Xu, Zheyu Chen, Ziyue Peng, Zheng Lin, Wenhao Yuan, Jian Chen, Shujie Li, Edith Ngai)* *(with Hong Kong Polytechnic University, HKUST, University of Luxembourg)*
+   * Link: [arxiv.org/abs/2610.07105](https://arxiv.org/abs/2610.07105) · [Code](https://github.com/Jinfeng-Xu/RecRSI)
+   * Venue: arXiv preprint, October 2026 (cs.IR, cs.AI; submitted 5 Oct 2026)
+   * TL;DR: Recommendation recursive self-improvement (Rec-RSI) feeds recommender outputs into later training, but evaluating each round only by its latest model assumes the successor consolidates the update; the paper terms the residual complementary ranking "distributed progress" and shows retaining pre/post-update state improves learning.
+   * Key techniques:
+     - Formulates "distributed progress" — complementary ranking decisions retained across pre- and post-update models
+     - State retention that preserves useful signals from earlier rounds instead of overwriting them
+     - Analyzes when naive recursive training loses information the successor fails to consolidate
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/Jinfeng-Xu/RecRSI](https://github.com/Jinfeng-Xu/RecRSI): well-structured Python package (rec_rsi/ source, configs/, examples/, pyproject.toml, requirements.txt, LICENSE) reproducing the recursive self-improvement pipeline. Very new (created Oct 5 2026), only 2 stars, light docs/tests — good scaffolding, limited maturity
+     - **Novelty: 7/10** — rethinks how to credit progress across recursive training rounds; a conceptual + empirical contribution with a clear failure-mode diagnosis
+     - **Fairness: 0/10** — not fairness-focused
+     - **Robustness: 7/10** — experiments across rounds with ablation of retention; claims supported but single-paper
+     - **Impact: 6/10** — HK-university consortium; relevant to self-improving / continual rec training
+
+5. **Personal-Agent Mediated Recommendation with Cross-Platform User History (MediateRec)**
+   * Affiliation: University of California San Diego — *(Yu Xia, Jiangfan Zhang, Jun Xiao, Julian McAuley, Xiangjun Fan)* *(with Meta AI)*
+   * Link: [arxiv.org/abs/2610.07588](https://arxiv.org/abs/2610.07588)
+   * Venue: arXiv preprint, October 2026 (cs.AI, cs.LG; submitted 6 Oct 2026)
+   * TL;DR: As personal LLM agents act on the user's behalf across services, a platform recommender ranks candidates and a personal agent mediates the slate using authorized cross-platform history — but must balance beneficial rescues against harmful overrides; the paper formalizes this as Personal-Agent Mediated Recommendation, releases the MediateRec benchmark, and proposes PAMO, a counterfactually-masked policy-optimization that is provably locally optimal.
+   * Key techniques:
+     - Formalizes Personal-Agent Mediated Recommendation with a platform-agent information boundary
+     - MediateRec benchmark: scalable proxy cross-platform environments + a real cross-platform test under a controlled info boundary
+     - Personal Attribution Mediation Optimization (PAMO): counterfactually masks cross-platform history to estimate mediation support and reallocates rank-aware advantage mass under a platform-relative value floor (proven to preserve cutoff-level advantage mass)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — only a LaTeX manuscript repository exists; no implementation code released
+     - **Novelty: 8/10** — crisply formalizes the emerging personal-agent-mediated rec paradigm and gives a theoretically-grounded mediation optimizer with an optimality proof
+     - **Fairness: 3/10** — touches the rescue/harmful-override trade-off (a mild robustness/fairness-to-platform signal) but is not a fairness study
+     - **Robustness: 7/10** — benchmark with proxy + real cross-platform tests and theoretical guarantees; shows even strong proprietary LLMs introduce non-negligible harmful overrides
+     - **Impact: 7/10** — UC San Diego (McAuley) + Meta; timely for agentic, user-governed recommendation
 
 ### Papers October 08
 
@@ -1192,101 +1276,12 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Fairness: 0/10** — not fairness-focused
      - **Robustness: 7/10** — lower MSE than existing estimators at large samples; limitations under small samples / cascade behavior noted
      - **Impact: 6/10** — Waseda; OPE methodology for rec ranking
-### Papers September 28
-
-*Monday, September 28, 2026. arXiv active — the Monday Sep 28 cs.IR announcement batch (11 new submissions plus 10 cross-lists) carried five on-topic generative / LLM / agentic-rec papers absent from the repo: T-RoPE (Shopify) makes rotary position embeddings time-aware for sequential generative recommendation and lifts a 6B-interaction industrial dataset by 13–82%; RecToolBench (UVA / Jilin U / Squirrel AI / PolyU, opensource) is an MCP-based benchmark for tool-orchestration recommender agents under fuzzy intent; KuaFu (Tencent) is a unified behavior-compression layer deployed at billion scale (+1.37% GMV); Recommendation World Models (UBC et al.) frames target-aware slate selection as a utility-anchored world-model control problem; AgentRecommender (NII) builds customizable user-side recommenders from LLM-agent investigation with no extra data. Total: 5 papers (1 opensource).*
-
-1. **T-RoPE: Time-Aware Rotary Position Embedding for Sequential Recommendation**
-   * Affiliation: Shopify — *(Yang Liu, Shuying Sun, Akshay Soni, Zhong Wu, Linjun Yang)* + MIT (Noel Loo), Liquid AI (Ali Khanafer)
-   * Link: [arxiv.org/abs/2609.30576](https://arxiv.org/abs/2609.30576)
-   * Venue: arXiv preprint, September 2026 (cs.AI / cs.IR / cs.LG; submitted 24 Sep 2026)
-   * TL;DR: Replaces index-only RoPE rotation with timestamp-based angles, learnable temporal coefficients, multiscale frequency banks, shifted query alignment, and non-stationary key rotation, breaking standard RoPE's time-translation invariance for sequential generative recommendation.
-   * Key techniques:
-     - Time-aware RoPE rotates attention by real timestamps instead of interaction indices
-     - Learnable temporal coefficients + multiscale frequency banks capture behavioral cycles across scales and calendar phase
-     - Shifted query alignment and non-stationary key rotation break time-translation invariance (proved: standard RoPE even on timestamps cannot distinguish seasonal contexts)
-     - Linear-cost forward/backward algorithms (cost linear in sequence length and head dimension)
-     - Validated on 5 public benchmarks, a 6B-interaction industrial e-commerce dataset, and a Shop App online A/B test
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code or repository; proprietary data and production infrastructure
-     - **Novelty: 8/10** — first to prove and break RoPE's time-translation invariance in generative rec; clean theoretical + practical contribution
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 8/10** — best on every metric across 5 public datasets, +13–82% over HSTU+Time RAB on 6B industrial data, positive Shop App A/B (+0.33% CVR, +0.63% orders)
-     - **Impact: 9/10** — Shopify production deployment, strong empirical gains, widely applicable to large generative recommenders
-
-2. **RecToolBench: Benchmarking Recommendation-Specific Tool Orchestration under Fuzzy User Intent**
-   * Affiliation: University of Virginia — *(Xiao Chen)* + Jilin University, Squirrel AI Learning, The Hong Kong Polytechnic University
-   * Link: [arxiv.org/abs/2609.30717](https://arxiv.org/abs/2609.30717) · [Code](https://github.com/ShawnChenn/RecToolBench)
-   * Venue: EMNLP 2026; arXiv preprint, September 2026 (cs.IR; submitted 25 Sep 2026)
-   * TL;DR: An MCP-based benchmark (1,200+ executable tasks, 13 MCP servers, 32 tools across three rec domains) for evaluating tool-using recommender agents under fuzzy user instructions.
-   * Key techniques:
-     - Model Context Protocol (MCP) harness for recommendation-specific tool orchestration
-     - synthesize–fuzzify–judge pipeline that generates executable fuzzy recommendation tasks
-     - Rule-based execution checks + rubric-based LLM-as-judge evaluation of agent trajectories
-     - Coverage of single-tool, parallel, sequential, and hybrid tool orchestration
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/ShawnChenn/RecToolBench](https://github.com/ShawnChenn/RecToolBench): framework released (MCP servers, benchmark runner, L1–L4 eval scripts, agent executor), but the task-synthesis pipeline and dataset are withheld until paper acceptance; no stars yet, README-only documentation
-     - **Novelty: 7/10** — first MCP-based benchmark isolating tool orchestration under fuzzy intent for recommender agents
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — benchmark (not a method); shows syntactic-valid calls ≠ successful recs, but no downstream rec-quality robustness claim
-     - **Impact: 7/10** — UVA / Jilin U / Squirrel AI / PolyU; EMNLP 2026; concrete bottleneck identification for agentic recsys
-
-3. **KuaFu: Compressing Long User Behavior into Understanding at Billion Scale**
-   * Affiliation: Tencent — Tencent Advertising and Recommendation Platform — *(Jiahao Hui, Lin Zhu, Yishen Hu, et al.)*
-   * Link: [arxiv.org/abs/2609.31045](https://arxiv.org/abs/2609.31045)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.CL / cs.LG; submitted 25 Sep 2026)
-   * TL;DR: A unified behavior-compression layer that compresses each user behavior item into 2–4 tokens (≈10× token / 20× width), powering conversational agents, generative recommenders, and personalized ads at billion-user scale; deployed at Tencent (+1.37% GMV).
-   * Key techniques:
-     - Two-axis projector compresses each behavior item into 2–4 tokens of width 128–256 (per-item cache 10 KB → 0.5 KB)
-     - Fidelity-oriented four-stage training with layered intermediate evaluation
-     - Serves conversational agents, generative recommenders, and personalized advertising from one compressed representation
-     - Deployed on Tencent ad/rec platform for 10 months: +37–350% per-GPU throughput, saves 190 GPUs, +1.37% overall GMV
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code; industrial system at Tencent
-     - **Novelty: 7/10** — unified compression layer shared across conversational / gen-rec / ads tasks is a pragmatic industrial advance
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 8/10** — production-deployed 10 months at billion scale, beats prior compressors at same ratio (+17.7 EM OOD), 4B > 8B on RecBench
-     - **Impact: 9/10** — Tencent production, +1.37% GMV, 190 GPUs saved; high industrial relevance
-
-4. **Recommendation World Models for Future-State Control (UA-TWM)**
-   * Affiliation: The University of British Columbia, Canada — *(Jinfeng Xu, Victor C. M. Leung)* + Hong Kong Polytechnic University, HKUST, Peking University, University of Luxembourg, University of Malaya, The University of Hong Kong, Shenzhen University
-   * Link: [arxiv.org/abs/2609.30711](https://arxiv.org/abs/2609.30711)
-   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 25 Sep 2026)
-   * TL;DR: A utility-anchored world-model interface (UA-TWM) that models the future consequences of slate actions around a trained sequential ranker, enabling target-aware slate selection subject to utility constraints.
-   * Key techniques:
-     - Utility-anchored world-model interface constructs nearby slate actions and estimates their target-relevant consequences
-     - Reference slate fallback when no alternative qualifies under utility constraints
-     - Logged-replay instantiation: utility + target-gain estimates with calibrated failure-risk prediction
-     - Closed-loop instantiation: one-step state-action prediction, updates after observed feedback
-     - Transfer across 12 sequential backbones (MovieLens-25M, KuaiRand-Pure) + KuaiSim target-directed interaction
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code or repository found
-     - **Novelty: 8/10** — reframing slate selection as future-state control via a non-LLM world-model interface is a fresh angle
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — improves Recall@20 / NDCG@20 / future-state alignment for every matched logged backbone; risk-aware gating
-     - **Impact: 7/10** — UBC-led multi-institution collaboration; solid empirical transfer but offline / eval-sim only
-
-5. **AgentRecommender: LLM Agents Enable Customizable Recommender Systems on the User Side**
-   * Affiliation: National Institute of Informatics (NII), Japan — *(Ryoma Sato)*
-   * Link: [arxiv.org/abs/2609.31166](https://arxiv.org/abs/2609.31166)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.AI / cs.DB / cs.DL; submitted 25 Sep 2026)
-   * TL;DR: Leverages the investigation capability and internal knowledge of LLM agents to build customizable user-side recommender systems without additional user data, shifting control from platforms to users.
-   * Key techniques:
-     - LLM-agent investigation replaces hand-built user-side rec pipelines
-     - Users customize a recommender to their own preferences with no extra training data
-     - User-side paradigm counters platform lock-in, clickbait, filter bubbles, and fake news
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code repository for this paper found (a similarly named unrelated project exists)
-     - **Novelty: 7/10** — user-side, customizable rec via LLM-agent investigation is a distinct paradigm
-     - **Fairness: 5/10** — motivationally addresses filter bubbles / fake news / platform lock-in, but no fairness method or evaluation
-     - **Robustness: 3/10** — no offline or online empirical metrics disclosed; conceptual / position paper
-     - **Impact: 6/10** — NII; thought-provoking direction but unvalidated empirically
 
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 203 papers as of October 08.
+**Count:** 205 papers as of October 09.
 
 | Score | Paper |
 | --- | --- |
@@ -1363,6 +1358,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec) |
 | 7/10 | RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN) |
 | 7/10 | Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner) |
+| 7/10 | Beyond Successor Accuracy: State Retention for Recursive Self-Improvement in Recommendation (RecRSI) |
 | 7/10 | REPREC: Representation Driven Parameter-Efficient Recommendation System (REPREC) |
 | 7/10 | Can We Steer the Black-Box? Towards Controllability-Centric Evaluation of Recommender Systems with Collaborative Agents (CtrlBench-Rec) |
 | 7/10 | Closing the Long-Short View Gap in Sequential Recommendation without Cached History |
@@ -1442,6 +1438,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd) |
 | 6/10 | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) |
 | 6/10 | Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore) |
+| 6/10 | Personalization Matters: Long-Horizon Conversation Agent with User-Centric Information in Online Shopping Interactions (Personalization Matters) |
 | 6/10 | Trading Engagement for Sustainability: Carbon-Aware Re-ranking for E-commerce Recommendations |
 | 6/10 | Understanding and Debugging Failures in N-Gram-Based Generative Retrieval |
 | 6/10 | CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec) |
@@ -1770,6 +1767,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Reinforcement Learning with Conformal Action Sets: An Application to Sequential Recommendation (RLCP) — University of Pennsylvania, arXiv 2610.08743
 
 - DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation (DiffuReason) — Tencent (Think-then-Diffuse + GRPO), arXiv 2602.09744
+
+- Personal-Agent Mediated Recommendation with Cross-Platform User History (MediateRec) — UC San Diego / Meta (PAMO policy-optimization mediation) — arXiv 2610.07588
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
 

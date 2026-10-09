@@ -68,6 +68,9 @@
 - The Like Trap: Multi-Stage Poisoning against Agents in Similarity-based Recommendation Systems (Like Trap) — Michigan State University, arXiv 2609.27155
 - AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation (AgentWebRec) — Beihang University, arXiv 2610.01705
 
+- Personalization Matters: Long-Horizon Conversation Agent with User-Centric Information in Online Shopping Interactions (Personalization Matters) — ByteDance / University of Melbourne, arXiv 2610.11375
+- Personal-Agent Mediated Recommendation with Cross-Platform User History (MediateRec) — UC San Diego / Meta (PAMO policy-optimization mediation), arXiv 2610.07588
+
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 - GenRec: An LLM-Backed Recommendation Ranker at Netflix (GenRec)
@@ -188,6 +191,8 @@
 - When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation (When-the-Label) — Uber AI, arXiv 2609.39696 [opensource]
 
 - Adapting Generative Recommenders for Multi-Turn Interaction (INTEGER) — National Taiwan University / Johns Hopkins University, arXiv 2610.08136
+
+- Personalization Matters: Long-Horizon Conversation Agent with User-Centric Information in Online Shopping Interactions (Personalization Matters) — ByteDance / University of Melbourne, arXiv 2610.11375
 
 ### Cross-Domain
 - Cross-Country Code-Mixing for Generative Recommendation (CMRec)
@@ -747,6 +752,8 @@
 - Graph-Informed Semantic IDs (GrIS): Balancing Semantic and Collaborative Signals via Recursive Graph Partition (GrIS) — Huawei Ireland Research Centre, arXiv 2610.01533
 - SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation (SPRIG) — Johannes Kepler University Linz, CIKM 2026, arXiv 2610.06590 [opensource]
 
+- Multimodal Graph Retrieval-Augmented Sequential Recommendation via Collaborative Filtering Paths (MGRASRec) — University of New South Wales, arXiv 2610.11228
+
 ### Group Recommendation
 - AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation
 - Consensus vs. Dissent: Dynamic LLM Modeling of Subjective Preferences in Group Recommenders
@@ -1262,6 +1269,10 @@
 - System Attribution in LLM Brand Recommendations (Dmitrij Żatuchin) — EUAS / Rankfor.AI
 - Learning Robust Personalized Prompts for LLM-Driven Sequential Recommendation (LRPRec) — Zhejiang University, arXiv 2610.03923
 - MATE: Adaptive Long- and Short-Term User Memory for LLM-Based Recommendation (MATE) — Yonsei University, arXiv 2610.06050
+
+- Beyond Sequences: Distilling Structured Decision Memory for LLM Recommendation (MARI) — Alibaba Group, arXiv 2610.11501
+- Beyond Successor Accuracy: State Retention for Recursive Self-Improvement in Recommendation (RecRSI) — University of Hong Kong, arXiv 2610.07105
+
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
@@ -1434,6 +1445,9 @@
 - Reading the Mood: Emotion-Guided Book-to-Music Recommendation via CGANs and LLMs (SAGA-CDR) — National Technical University of Athens, SENTIRE 2026 (ICDM Workshops), arXiv 2610.06703
 
 - JBM-Diff: Joint Behavior-guided and Modality-coherence Conditional Graph Diffusion Denoising for Multi-Modal Recommendation (JBM-Diff) — Huazhong University of Science and Technology, arXiv 2604.03654
+
+- Multimodal Graph Retrieval-Augmented Sequential Recommendation via Collaborative Filtering Paths (MGRASRec) — University of New South Wales, arXiv 2610.11228
+
 ### Optimizer
 - MuonRec
 
@@ -1540,6 +1554,9 @@
 
 - ReMem: Multi-memory GRPO for Long-Context Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU, arXiv 2609.37311
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneReason / OneRec-V2) — Kuaishou; SIGIR 2026 challenge; arXiv 2609.39828
+
+- Beyond Sequences: Distilling Structured Decision Memory for LLM Recommendation (MARI) — Alibaba Group, arXiv 2610.11501
+
 ### Reinforcement Learning
 - FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
 - Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)
@@ -1587,6 +1604,8 @@
 - ReMem: Multi-memory GRPO for Long-Context Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU, arXiv 2609.37311
 
 - Reinforcement Learning with Conformal Action Sets: An Application to Sequential Recommendation (RLCP) — University of Pennsylvania, arXiv 2610.08743
+
+- Personal-Agent Mediated Recommendation with Cross-Platform User History (MediateRec) — UC San Diego / Meta (PAMO policy-optimization mediation), arXiv 2610.07588
 
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1871,6 +1890,9 @@
 - FatsMB: From Agnostic to Specific: Latent Preference Diffusion for Multi-Behavior Sequential Recommendation (FatsMB) — CAS / Kuaishou, arXiv 2602.23132
 - DiffSBR: Diffusion-based Latent Neighbor Generation for Session-based Recommendation (DiffSBR) — UESTC, arXiv 2601.03903
 - DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation (DiffuReason) — Tencent, arXiv 2602.09744
+
+- Multimodal Graph Retrieval-Augmented Sequential Recommendation via Collaborative Filtering Paths (MGRASRec) — University of New South Wales, arXiv 2610.11228
+
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 - Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges
