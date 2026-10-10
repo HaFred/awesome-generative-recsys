@@ -71,6 +71,8 @@
 - Personalization Matters: Long-Horizon Conversation Agent with User-Centric Information in Online Shopping Interactions (Personalization Matters) — ByteDance / University of Melbourne, arXiv 2610.11375
 - Personal-Agent Mediated Recommendation with Cross-Platform User History (MediateRec) — UC San Diego / Meta (PAMO policy-optimization mediation), arXiv 2610.07588
 
+- Delegation Asymmetry in Agentic Recommender Systems: Measuring Two-Sided Receptivity in Online Dating — University of Notre Dame / Fleamily, arXiv 2608.18058
+
 ### Beam Search / Constrained Decoding
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 - GenRec: An LLM-Backed Recommendation Ranker at Netflix (GenRec)
@@ -193,6 +195,8 @@
 - Adapting Generative Recommenders for Multi-Turn Interaction (INTEGER) — National Taiwan University / Johns Hopkins University, arXiv 2610.08136
 
 - Personalization Matters: Long-Horizon Conversation Agent with User-Centric Information in Online Shopping Interactions (Personalization Matters) — ByteDance / University of Melbourne, arXiv 2610.11375
+
+- Shape Your Feed: An LLM-based Agentic System for Conversational Recommendation (SYF) — Meta Platforms, arXiv 2608.06632
 
 ### Cross-Domain
 - Cross-Country Code-Mixing for Generative Recommendation (CMRec)
@@ -906,7 +910,7 @@
 - Prompt Generation Technical Report (PG)
 - An LLM-powered Agentic Recommendation System for Connected TV Content Discovery
 - Serving the Long Tail: Training-Free LLM Candidate Generation for Vacation Rental Marketplaces
-- Not Only NTP: Extending Training Signal Coverage for Generative Recommendation (NONTP)
+- Not Only NTP: Extending Training Signal Coverage for Generative Recommendation (NONTP) — Meituan, arXiv 2607.12277
 - MESH: Scaling Up Retrieval with Heterogeneous Content Unification (MESH)
 - PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest (PinEqualizer)
 - Probabilistic Residual Learning for Online Recommendations (PRL)
@@ -978,6 +982,8 @@
 
 - Optimizing Effective Training Time for Large-Scale Recommendation Systems — Meta, arXiv 2610.02057
 - When LLM-Inferred User Context Adds Value in Production Streaming Recommendation (LLM-Inferred-Context) — DePaul University / Comcast, arXiv 2609.38999
+
+- Efficient Clustering with Quality Guardrails for LLM-based Recommender Systems at Industry Scale — Amazon, arXiv 2607.19704
 
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
@@ -1272,6 +1278,9 @@
 
 - Beyond Sequences: Distilling Structured Decision Memory for LLM Recommendation (MARI) — Alibaba Group, arXiv 2610.11501
 - Beyond Successor Accuracy: State Retention for Recursive Self-Improvement in Recommendation (RecRSI) — University of Hong Kong, arXiv 2610.07105
+
+- CARA: Cognitive Adaptive Recommendation Agent — The Chinese University of Hong Kong / Tongji University, arXiv 2608.16919
+- CALMRec: Causally Aligned Language Memory for Long-Horizon Recommendation — Shenzhen University, arXiv 2607.23647
 
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1806,6 +1815,8 @@
 - The Like Trap: Multi-Stage Poisoning against Agents in Similarity-based Recommendation Systems (Like Trap) — Michigan State University, arXiv 2609.27155
 - ReliGRec: Reliability-Oriented LLM-Based Generative Recommendation via User-Risk-Aware Prompt Routing (ReliGRec) — weak-risk shilling-robust prompt routing
 
+- VirusCascade: Hijacking Collaborative Reflection in LLM-Powered Recommender Agents — Nanyang Technological University, arXiv 2609.38270
+
 ### Sequential Modeling / RoPE
 - LSF-SR: Latent Semantic Fusion for Sequential Recommendation via Flow-based Conditional Variational Autoencoders (LSF-SR) — National Yang Ming Chiao Tung University, arXiv 2609.29815
 - Learning from the Future: Privileged Self-Distillation for Sequential Recommendation (PSD)
@@ -1902,6 +1913,6 @@
 - Fortress: A Case Study in Stabilizing Search Recommendations
 
 ### Training Systems / NPU Optimization
-- Not Only NTP: Extending Training Signal Coverage for Generative Recommendation (NONTP)
+- Not Only NTP: Extending Training Signal Coverage for Generative Recommendation (NONTP) — Meituan, arXiv 2607.12277
 - TurboGR: An Accelerated Training System for Large-Scale Generative Recommendation
 

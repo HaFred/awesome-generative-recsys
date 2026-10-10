@@ -90,6 +90,114 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
+### Papers October 10
+
+*Saturday, October 10, 2026. The live 24h arxiv window (papers dated Oct 9–10) carried no strictly on-topic generative-recommendation papers — the weekend window was empty — so per the fallback rule we drew 6 genuinely-new, on-topic papers from the last-3-month arxiv keyword pool. Note: "Not Only NTP" (NONTP, 2607.12277, Meituan) was already indexed in the derived by-keyword / by_affiliation tables from an earlier run (without its arxiv ID recorded), so it is excluded here and its missing ID is fixed in the indexes instead. 0 are open-source. Total: 6 papers (0 opensource). By Opensource count stays 205.*
+
+1. **VirusCascade: Hijacking Collaborative Reflection in LLM-Powered Recommender Agents**
+   * Affiliation: Nanyang Technological University — College of Computing and Data Science *(Yurong Hao, Wen Zhou, Guowei Guan, Tiantong Wu, Fuyao Zhang, Wei Yang Bryan Lim)*
+   * Link: [arxiv.org/abs/2609.38270](https://arxiv.org/abs/2609.38270)
+   * Venue: arXiv preprint, September 2026 (cs.CR; submitted 29 Sep 2026); NDSS 2027
+   * TL;DR: LLM-powered agentic recommender systems (LLM-ARS) refine user/item states via a recurrent "collaborative reflection" loop; this paper exposes a systemic vulnerability where adversarial evidence injected into one agent is rationalised into a preference narrative, written to memory, and propagated to others ("reflection laundering" + "collaborative-reflection hijacking"), and proposes VirusCascade, the first black-box targeted-promotion attack on this paradigm.
+   * Key techniques:
+     - Defines "reflection laundering" (local rationalisation of injected evidence) and "collaborative-reflection hijacking" (system-wide escalation via multi-agent memory propagation)
+     - Identifies two exploitable properties: reflective persistence and cross-agent propagation
+     - VirusCascade jointly shapes semantic + structural attack surfaces for stealthy, black-box targeted promotion
+     - Evaluated on 4 real-world datasets across diverse LLM-ARS architectures; mean E@20 0.384, +0.185 over strongest baseline
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no code repository released
+     - **Novelty: 8/10** — first to characterise the recurrent multi-agent memory-amplification attack pathway in LLM-ARS
+     - **Fairness: 4/10** — pure attack paper; no fairness mitigations, though it motivates defensive fairness for exposure
+     - **Robustness: 7/10** — demonstrates a strong, stealthy attack; robustness of defenders is the open problem it raises
+     - **Impact: 7/10** — reframes agentic-RS security around memory propagation; likely influential for NDSS/RecSys security
+
+2. **Delegation Asymmetry in Agentic Recommender Systems: Measuring Two-Sided Receptivity in Online Dating**
+   * Affiliation: University of Notre Dame — Lucy Family Institute for Data & Society; Fleamily, Inc. *(Daria Leshchikova, Valentina V. Kuskova, Dmitry Zaytsev, Valerii Klimov)*
+   * Link: [arxiv.org/abs/2608.18058](https://arxiv.org/abs/2608.18058)
+   * Venue: arXiv preprint, August 2026 (cs.AI; submitted 18 Aug 2026)
+   * TL;DR: Studies whether users will accept not just delegating conversation to an agent but also receiving agent-mediated communication from others in matching platforms, using two large surveys (N=2,894 + N=2,617) and a latent-variable graded-response model showing "deployment" and "engagement" receptivity are distinct, with a systematic delegation asymmetry.
+   * Key techniques:
+     - Latent-variable measurement model (graded response model with latent regression) of agent receptivity
+     - Model comparison establishes send vs receive receptivity as separable constructs (rho=0.92, Delta BIC=52)
+     - Quantifies delegation asymmetry: deploy threshold -0.38 vs engage +0.32 (full +1.39); deployment propensity ~3x engagement
+     - Random-pairing counterfactual: only 4-13% of dyads combine deployment + engagement; reciprocity requirement halves volume; receive-receptivity routing triples per-contact engagement (AUC 0.88)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — survey-based, no code
+     - **Novelty: 7/10** — first to empirically separate "willingness to send" vs "receive" agent communication in agentic RS
+     - **Fairness: 6/10** — surfaces gender-directional imbalance in agentic matchmaking; recommends receptivity-aware design
+     - **Robustness: 6/10** — two-language surveys with partial measurement invariance; fielded on real platform
+     - **Impact: 7/10** — directly informs disclosure/opt-in mechanics for deploying agentic recommenders at scale
+
+3. **CARA: Cognitive Adaptive Recommendation Agent**
+   * Affiliation: The Chinese University of Hong Kong; Tongji University *(Weijun Gao, Jinyang Dong, Chuanru Ren, Hengxiao Li)*
+   * Link: [arxiv.org/abs/2608.16919](https://arxiv.org/abs/2608.16919)
+   * Venue: arXiv preprint, August 2026 (cs.IR / cs.AI; submitted 2 Aug 2026)
+   * TL;DR: Frames recommendation as a structured cognitive decision process jointly shaped by intuitive affective preference and deliberate rational evaluation, with a two-stage pipeline (candidate filtering + dual-perspective decision modeling) and a boundary-aware KTO strategy that prioritises informative preference signals.
+   * Key techniques:
+     - Cognitive two-mechanism formulation: affective preference + rational evaluation
+     - Two coordinated stages: coarse-grained candidate filtering then dual-perspective decision modeling
+     - Boundary-aware KTO (Kahneman-Tversky Optimization) prioritises instructions solvable occasionally but not consistently, increasing preference-signal density
+     - Evaluated on 3 Amazon Reviews domains; up to +10.15% over baseline
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no code released
+     - **Novelty: 7/10** — cognitively-inspired dual-mechanism recommendation with boundary-aware KTO
+     - **Fairness: 5/10** — not a focus; standard public datasets
+     - **Robustness: 5/10** — offline benchmarks only
+     - **Impact: 6/10** — offers a structured alternative to semantic-matching / end-to-end generation agents
+
+4. **CALMRec: Causally Aligned Language Memory for Long-Horizon Recommendation**
+   * Affiliation: Shenzhen University — *(Gengyu Zhan)*
+   * Link: [arxiv.org/abs/2607.23647](https://arxiv.org/abs/2607.23647)
+   * Venue: arXiv preprint, July 2026 (cs.LG / cs.AI; submitted 26 Jul 2026)
+   * TL;DR: A model-agnostic framework for long-horizon recommendation that converts item content/feedback into evidence-grounded semantic atoms and maintains separate short-term/long-term/exposure memories, using propensity-weighted updates and a conservative offline critic to combat feedback loops and optimise delayed satisfaction.
+   * Key techniques:
+     - Frozen multimodal LLM converts evidence into semantic atoms; separate short/long/exposure memories
+     - Propensity-weighted updates reduce policy-induced exposure bias
+     - Conservative offline critic reranks for delayed satisfaction under a behavior-support constraint
+     - Counterfactual-deletion checks on explanations; identification result provided
+     - +6.1% / +7.6% / +6.7% discounted long-term value over strongest alternative across 3 environments
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no code
+     - **Novelty: 8/10** — causally-aligned, memory-separated long-horizon LLM rec with exposure-bias correction
+     - **Fairness: 5/10** — addresses exposure-induced bias, not demographic fairness
+     - **Robustness: 6/10** — 10-20 seed ablations; no online test reported
+     - **Impact: 6/10** — model-agnostic, applicable to e-commerce/news/short-video
+
+5. **Efficient Clustering with Quality Guardrails for LLM-based Recommender Systems at Industry Scale**
+   * Affiliation: Amazon — *(Longshaokan Wang, Wai Tsang Keung, Punit Ghodasara, Roman Wang, Ali Dashti, Francesc Moreno-Noguer)*
+   * Link: [arxiv.org/abs/2607.19704](https://arxiv.org/abs/2607.19704)
+   * Venue: arXiv preprint, July 2026 (cs.LG; submitted 22 Jul 2026); RecSys 2026 Workshop
+   * TL;DR: A scalable two-stage clustering algorithm with provable per-sample guardrails (every sample shares a user-specified min embedding similarity and exact attribute match with its representative) that lets an LLM run only on cluster representatives, cutting cost 50x while preserving personalization in a 38M-customer deployment.
+   * Key techniques:
+     - Two-stage: Mini-batch K-Means initial clusters, then greedy representative selection satisfying guardrails
+     - Provable per-sample guarantee: min embedding similarity + exact attribute match
+     - Theoretical guarantees + complexity analysis; benchmarks vs common methods
+     - Deployed clustering 38M customers; 50x LLM cost/runtime reduction; A/B revenue/engagement gains
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code
+     - **Novelty: 7/10** — per-sample guardrails for clustering-as-LLM-prefix at industry scale
+     - **Fairness: 5/10** — guardrails prevent unsafe cross-group inheritance (e.g., age-appropriateness)
+     - **Robustness: 7/10** — scales to 38M; theoretical + empirical validation
+     - **Impact: 8/10** — concrete, deployed cost-reduction lever for LLM recommenders
+
+6. **Shape Your Feed: An LLM-based Agentic System for Conversational Recommendation (SYF)**
+   * Affiliation: Meta Platforms, Menlo Park, California, USA — *(Ziyun Xu, Bosen Ding, Yue Zhang, Ji Qi, Qingyuan Song, Jizhou Huang, Liwei Wang, Jefferey Santelli, Yue Weng, Qichao Que, Zhenheng Yang, Junfeng Pan, Linhong Zhu)*
+   * Link: [arxiv.org/abs/2608.06632](https://arxiv.org/abs/2608.06632)
+   * Venue: arXiv preprint, August 2026 (cs.AI; submitted 6 Aug 2026); RecSys 2026 Industrial Track
+   * TL;DR: An LLM-based agentic recommendation framework enabling real-time, multimodal co-curation of a content feed via a three-tier architecture (Perception / Serving / Self-Evolution Flows), grounded in a persistent Semantic Profile and aligned via DPO + LLM-as-a-Judge; 98.85% offline alignment accuracy and positive online A/B on production traffic.
+   * Key techniques:
+     - Three-tier: Perception Flow (intent from text/voice/UI), Serving Flow (agentic re-ranking/pruning on a Semantic Profile), Self-Evolution Flow (DPO + LLM-as-a-Judge alignment)
+     - Persistent Semantic Profile encoding evolving user preferences
+     - Offline alignment scoring 98.85% accuracy; large-scale online A/B on production traffic
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — industrial system, no public code
+     - **Novelty: 7/10** — end-to-end agentic feed co-curation with self-evolution via DPO/Judge
+     - **Fairness: 5/10** — not a focus; industrial deployment
+     - **Robustness: 6/10** — validated via online A/B; offline + online
+     - **Impact: 8/10** — production-scale agentic conversational recommendation at Meta
+
+---
+
 ### Papers October 09
 
 *Friday, October 9, 2026. The live 24h arxiv window (papers dated Oct 8) carried only 3 strictly on-topic generative-recommendation papers (MARI, MGRASRec, Personalization Matters), below the 5-paper floor, so per the fallback we drew 2 more genuinely-new, on-topic papers from the last-3-month arxiv keyword pool (RecRSI, MediateRec). 2 are open-source. Total: 5 papers (2 opensource). By Opensource count 203 -> 205.*
@@ -1131,157 +1239,11 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 8/10** — robust to initialization; improves codebook utilization & accuracy on multiple benchmarks; strong vs CAR
      - **Impact: 8/10** — Tsinghua / Huawei / USTC; strong SID contribution, high relevance to generative recommendation
 
----
-
-### Papers September 30
-
-*Wednesday, September 30, 2026. The Tuesday Sep 29 cs.IR announcement batch (submitted through Sep 29) carried three on-topic generative / LLM / agentic-rec papers absent from the repo: GRP v0.1 (Snap) is an industrial end-to-end generative recommendation paradigm that unifies retrieval, ranking, and reward modeling in one encoder-decoder model with an mGRPO reward objective and a progressive deployment path; ReMem (PolyU / NTU) builds long-context recommendation agents with OCR-based multimodal perception and a multi-memory GRPO variant; HELIX (TikTok) is a purified unified large-scale ranking architecture jointly scaling feature interaction and sequence modeling, lifting e-commerce video GMV ~6%. Total: 3 papers (0 opensource).*
-
-1. **GRP v0.1 Technical Report**
-   * Affiliation: Snap Inc. — GRP Team *(Wenfeng Zhuo, Vincent Xue, Charles Wei, et al.)*
-   * Link: [arxiv.org/abs/2609.36688](https://arxiv.org/abs/2609.36688)
-   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 29 Sep 2026)
-   * TL;DR: An industrial end-to-end generative recommendation paradigm (GRP, Snap) that unifies retrieval, ranking, and reward modeling in one encoder-decoder model with multimodal Semantic IDs and an mGRPO reward objective, deployed via a progressive path that slots the generator behind the existing funnel.
-   * Key techniques:
-     - Single encoder-decoder trunk decodes a slate of multimodal Semantic IDs block-wise and independently
-     - Jointly-trained multi-head prediction (MHP) ranking module, reused frozen as the reward model for RL post-training
-     - mGRPO: GRPO plus a one-sided reference-anchored margin that protects logged-target likelihood
-     - Progressive deployment: introduce as one retrieval source, retire beaten sources, let growing quota bypass early/late rankers
-     - Serving optimizations (asynchronously refreshed SID-to-item catalog) cut end-to-end retrieval latency 69%
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code; Snap industrial system
-     - **Novelty: 8/10** — the progressive E2E-deployment path + mGRPO margin is a pragmatic framing of the real "swap-overnight fails" gap
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 8/10** — online A/B across retrieval-only, early-ranking bypass, and source replacement; 69% latency cut; but online GMV lifts modest (0.46-2.56%)
-     - **Impact: 9/10** — Snap production; influential paradigm paper for industrial generative recommendation
-
-2. **ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents**
-   * Affiliation: The Hong Kong Polytechnic University — *(Haohao Qu, Yongcheng Jing, Chun Hin Chan, Shanru Lin)* + Nanyang Technological University *(Wenqi Fan, Dacheng Tao)*
-   * Link: [arxiv.org/abs/2609.37311](https://arxiv.org/abs/2609.37311)
-   * Venue: arXiv preprint, September 2026 (cs.AI / cs.IR; submitted 29 Sep 2026)
-   * TL;DR: A recommendation-agent framework combining OCR-based multimodal perception with a time-evolving dynamic memory and a multi-memory GRPO variant that propagates final-answer advantage to all intermediate conversations.
-   * Key techniques:
-     - OCR-based multimodal perception: reads item pages via screenshots, extracts structured info with an OCR tool (platform-agnostic vs raw-HTML parsing)
-     - Chunk-wise sequential memory update: fixed-size memory of informative interactions with linear inference cost and bounded context
-     - Multi-memory GRPO: propagates the final-answer advantage to all intermediate conversations contributing to the response
-     - Validated on three recommendation-agent tasks: searching, ranking, judging
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (work in progress)
-     - **Novelty: 7/10** — OCR perception + dynamic memory + multi-memory GRPO for RecAgents is a coherent, fresh agent pipeline
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — +5.16% avg over SOTA on 3 RecAgent tasks, but no online test and self-reported baselines; "work in progress"
-     - **Impact: 7/10** — PolyU / NTU; hot RecAgent + GRPO direction
-
-3. **HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation**
-   * Affiliation: TikTok — TikTok E-commerce Recommendation *(Yuntao Zheng, Miao Zhang, Yadong Ding, et al.)*
-   * Link: [arxiv.org/abs/2609.37183](https://arxiv.org/abs/2609.37183)
-   * Venue: arXiv preprint (technical report), September 2026 (cs.IR; submitted 29 Sep 2026)
-   * TL;DR: A purified and unified industrial ranking architecture that interleaves sequence retrieval and feature interaction with one-way information flow from reusable sequence states to candidate-conditioned mix-tokens, enabling asymmetric scaling of both axes; deployed on TikTok e-commerce (+~6% GMV/user).
-   * Key techniques:
-     - Jointly scales feature interaction and sequence modeling (each alone hits a limited scaling ceiling)
-     - Interleaves sequence retrieval and feature interaction, enforcing one-way flow from reusable sequence states to mix-tokens
-     - Amortizable user-side sequence computation; cross-depth communication between the two axes preserved
-     - Deployed in TikTok e-commerce; online A/B +~6% e-commerce video GMV per user
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code; TikTok industrial system
-     - **Novelty: 7/10** — the "joint scaling ceiling" insight and purified unified architecture is a pragmatic industrial advance
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 8/10** — production-deployed, consistent offline CTR/CVR AUC gains, +~6% online GMV
-     - **Impact: 9/10** — TikTok production deployment; high industrial relevance
-
-### Papers September 29
-
-*Tuesday, September 29, 2026. The Monday Sep 28 cs.IR announcement batch (submitted through Sep 28, announced Sep 29) carried five on-topic generative / diffusion / fairness / OPE papers absent from the repo: Eval4DiRec (UTS, opensource) is the first unified open-source evaluation framework for diffusion-based recommender systems covering 14 models; EvoSkillRec (Huawei Noah's Ark Lab / CityU HK) evolves recommender architectures via LLM-driven skill-genome promotion-and-reuse; SpeakGR (Imperial College London) preserves language generation while learning Semantic IDs for generative retrievers; Mult-BiW (Université de Montréal, ACM TOIS) mitigates popularity bias with multinomial-likelihood bi-weighting; ED-DR (Waseda) proposes examination-decomposed off-policy ranking evaluators. Total: 5 papers (1 opensource).*
-
-1. **Eval4DiRec: A Unified and Systematic Evaluation Framework for Diffusion-based Recommender Systems**
-   * Affiliation: University of Technology Sydney — *(Cong Wang, Shoujin Wang, Yishuo Li, Qi Zhang, Liang Hu, Wenpeng Lu)*
-   * Link: [arxiv.org/abs/2609.34404](https://arxiv.org/abs/2609.34404) · [Code](https://github.com/wangcong2001/Eval4DiRec)
-   * Venue: ACM TKDD (accepted); arXiv preprint, September 2026 (cs.IR / cs.AI; submitted 28 Sep 2026)
-   * TL;DR: The first unified and open-source evaluation framework for diffusion-based recommender systems, supporting 14 representative diffusion RS models across five scenarios with consistent, reproducible protocols.
-   * Key techniques:
-     - Unified evaluation harness for diffusion-based RSs (14 models, 5 recommendation scenarios)
-     - Standardized data processing, training configs, inference procedures, and evaluation protocols
-     - Empirical benchmarking exposing key factors / practical challenges in diffusion rec
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/wangcong2001/Eval4DiRec](https://github.com/wangcong2001/Eval4DiRec): first unified open-source eval framework for diffusion rec; supports 14 models; documentation/readme present but framework maturity and code-completeness across all 14 models not independently verified
-     - **Novelty: 7/10** — first systematic unified benchmark for diffusion-based RS; important but benchmarking-oriented
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — unified reproducible protocols; framework maturity and coverage TBD
-     - **Impact: 8/10** — ACM TKDD; establishes a fair-evaluation foundation for the fast-growing diffusion-rec area; high community value
-
-2. **EvoSkillRec: Skill-Genome Evolution for Recommender Architecture Discovery**
-   * Affiliation: Huawei Noah's Ark Lab — *(Xiaopeng Li, Kuo Cai, Bo Chen, Wenlin Zhang, Mengyang Ma, Yingyi Zhang, Zichuan Fu, Yu Yang, Qidong Liu, Yiyu Wang, Ruiming Tang, Wenwu Ou, Jiang Wu, Zhanbo Xu, Xiangyu Zhao)* + City University of Hong Kong
-   * Link: [arxiv.org/abs/2609.34552](https://arxiv.org/abs/2609.34552)
-   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 28 Sep 2026)
-   * TL;DR: A promotion-and-reuse framework that evolves recommender architectures via LLM-driven code evolution over atomic "skill genomes," with a constrained skill-space and an open-ended code-space plus an autoresearch controller.
-   * Key techniques:
-     - Decomposes recommenders into atomic executable skills; architectures as typed skill genomes (IO types, semantic annotations, code)
-     - Constrained skill-space: mutate / recombine / specialize / reuse validated skills
-     - Open-ended code-space: LLM planners + synthesizers invent new skill modules using prior evolution traces
-     - Autoresearch controller: evaluates, diagnoses, retrieves skills, promotes innovations, allocates proposal budget
-     - Validated on CTR prediction, multi-task, multi-domain learning, and FLOPs co-optimization in generative ranking
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code
-     - **Novelty: 8/10** — skill-genome promotion-and-reuse for cumulative architecture evolution is a fresh AutoML-for-rec angle
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — consistent gains across CTR / multi-task / multi-domain, but LLM-driven edits can be unstable
-     - **Impact: 8/10** — Huawei / CityU; directly relevant to industrial architecture automation and generative ranking
-
-3. **Can Generative Retrievers Learn Semantic IDs Without Forgetting How to Speak? (SpeakGR)**
-   * Affiliation: Imperial College London — *(Junchen Fu, Kleomenis Katevas, Vandana Rajan, Sofia Celi, Hamed Haddadi)*
-   * Link: [arxiv.org/abs/2609.35430](https://arxiv.org/abs/2609.35430)
-   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 28 Sep 2026)
-   * TL;DR: SpeakGR is a dual-objective framework that learns document Semantic IDs for generative retrieval while preserving the LLM's natural-language generation via on-policy forward-KL distillation, with an adaptive variant that tunes preservation strength by language drift.
-   * Key techniques:
-     - Supervised SID learning + speak-preserving regularization (on-policy distillation to a frozen original-model copy, forward KL over text vocab)
-     - Adaptive SpeakGR: dynamically adjusts preservation strength from observed language drift
-     - Reduces WikiText-2 forward KL by 81.3-93.8% (MS MARCO) and 81.2-85.2% (NQ) while retaining retrieval across 3 LLMs
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code linked
-     - **Novelty: 7/10** — explicitly addresses SID-learning language drift for interactive gen-retrieval; clean fix
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — large language-drift reduction while retaining retrieval across 3 LLMs
-     - **Impact: 7/10** — Imperial College London; relevant for gen-retrieval systems that also generate text
-
-4. **Mitigating Popularity Bias in Recommendation with Global Listwise Learning and Progressive Bi-Weighting (Mult-BiW)**
-   * Affiliation: Université de Montréal — *(Tianyu Zhu, Jiandong Ding, Yansong Shi, Guoqing Chen, Jian-Yun Nie)*
-   * Link: [arxiv.org/abs/2609.35041](https://arxiv.org/abs/2609.35041)
-   * Venue: ACM TOIS (accepted); arXiv preprint, September 2026 (cs.IR; submitted 28 Sep 2026)
-   * TL;DR: Mult-BiW mitigates popularity bias with a multinomial-likelihood IPS framework (Mult-IPS) plus a bi-weighting strategy (propensity + collection model, smoothed) and a progressive transition from representation learning to debiasing.
-   * Key techniques:
-     - Mult-IPS: multinomial likelihood + IPS for global, unbiased user preferences over the full item set
-     - Bi-Weighting (BiW): jointly uses propensity scores and a collection model with smoothing
-     - Theoretical bias upper bound and optimal collection-model form
-     - Progressive Bi-Weighting: gradually shifts from discriminative representation learning to popularity debiasing
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code linked
-     - **Novelty: 6/10** — a competent but incremental IPS-debiasing extension
-     - **Fairness: 8/10** — directly targets popularity-bias mitigation (debiasing)
-     - **Robustness: 7/10** — theoretical bias bound + progressive strategy; experiments on real datasets
-     - **Impact: 7/10** — ACM TOIS; solid debiasing contribution
-
-5. **Recommendation Ranking Off-Policy Evaluation under Ranking-Dependent Examination via Examination-Relevance Decomposition (ED-DR)**
-   * Affiliation: Waseda University, Japan — *(Riki Okamura, Toshiharu Sugawara)*
-   * Link: [arxiv.org/abs/2609.35034](https://arxiv.org/abs/2609.35034)
-   * Venue: arXiv preprint, September 2026 (cs.IR / cs.LG; submitted 28 Sep 2026)
-   * TL;DR: ED-DR proposes two off-policy ranking evaluators that decompose clicks into examination and relevance: LE-IIPS (corrects IIPS bias) and ED-DR (doubly robust), unbiased under ranking-dependent examination.
-   * Key techniques:
-     - Decomposes clicks into examination and relevance
-     - LE-IIPS: latent-examination independent IPS corrected by policy examination-probability ratios
-     - ED-DR: examination-decomposed doubly robust estimator
-     - Unbiased if examination probabilities are correct regardless of relevance, or under ranking-independent examination even if both estimates are inaccurate
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code linked
-     - **Novelty: 6/10** — examination-relevance decomposition for OPE; methodological but within established OPE lines
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — lower MSE than existing estimators at large samples; limitations under small samples / cascade behavior noted
-     - **Impact: 6/10** — Waseda; OPE methodology for rec ranking
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 205 papers as of October 09.
+**Count:** 205 papers as of October 10.
 
 | Score | Paper |
 | --- | --- |
