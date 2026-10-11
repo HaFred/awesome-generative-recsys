@@ -198,6 +198,7 @@
 
 - Shape Your Feed: An LLM-based Agentic System for Conversational Recommendation (SYF) — Meta Platforms, arXiv 2608.06632
 
+- JobCCC: A Constraint-Aware Conversational Job Recommendation Benchmark and Method (JobCCC) - East West University / UC San Diego, arXiv 2610.05787 [opensource]
 ### Cross-Domain
 - Cross-Country Code-Mixing for Generative Recommendation (CMRec)
 
@@ -726,6 +727,8 @@
 - Disentangling Paradigm, Identifier, and Decoding in Generative Retrieval (Disentangling Paradigm/Identifier/Decoding) — Artefact Research Center / Université d'Angers (LERIA), arXiv 2610.08716
 
 - Missed Targets: Training with Missed Targets in Generative Recommendation (Missed Targets) — Zhejiang University, arXiv 2610.10124
+
+- LIFT: Lifecycle-Aware Interaction Factorization for Unified Retrieval and Ranking (LIFT) - Beijing University of Posts and Telecommunications / Southeast University / Xiaohongshu, arXiv 2610.10556
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -1282,6 +1285,7 @@
 - CARA: Cognitive Adaptive Recommendation Agent — The Chinese University of Hong Kong / Tongji University, arXiv 2608.16919
 - CALMRec: Causally Aligned Language Memory for Long-Horizon Recommendation — Shenzhen University, arXiv 2607.23647
 
+- Textual User Taste: Natural-Language Taste Profiles at Spotify Scale (Textual User Taste) - Spotify, arXiv 2609.35285
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
@@ -1300,6 +1304,8 @@
 - IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
 
 - ReMem: Time-Evolving Dynamic Memory for Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU, arXiv 2609.37311
+
+- TIDE: How Can Recommendation Feedback Evolve Agent Memory? (TIDE) - Harbin Institute of Technology / Alibaba / Institute of Automation CAS, arXiv 2609.37544
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
 - L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
@@ -1457,11 +1463,14 @@
 
 - Multimodal Graph Retrieval-Augmented Sequential Recommendation via Collaborative Filtering Paths (MGRASRec) — University of New South Wales, arXiv 2610.11228
 
+- Seeing the Context: Image-Derived Contextual Signals for Recommendation (Seeing the Context) - Tel Aviv University, arXiv 2610.08407
+- OpticalRec: Treating Text as Visual Glyphs for Multimodal Recommendation (OpticalRec) - UC San Diego, arXiv 2610.05432
 ### Optimizer
 - MuonRec
 
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 
+- CutBCE: A Fused Binary Cross-Entropy Loss for Large-Vocabulary Sequential Recommendation (CutBCE) - Google, arXiv 2610.05559 [opensource]
 ### Re-ranking
 - FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
 - The Recall Ceiling of LLM Recommendation Reranking (RecallCeiling) — University of Southern California, arXiv 2609.27953
