@@ -90,6 +90,100 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
+### Papers October 12
+
+*Monday, October 12, 2026. The live 24h arXiv window (papers dated Oct 11-12, a weekend) carried no strictly on-topic generative-recommendation papers, so per the fallback rule we drew 5 genuinely-new, on-topic papers from the last-3-month arXiv keyword pool (Sep-Oct 2026). 0 are open-source. Note: two of the five (Guided SID, Forum Post Retrieval GR) were already catalogued in the keyword/affiliation indexes but were missing their README entries, so this run also backfills those. Total: 5 papers (0 opensource). By Opensource count stays 207.*
+
+1. **Beyond Semantic IDs: Finite-Beam Reachability and Continuous-Query Generation in Generative Recommendation**
+   * Affiliation: Yu Sun (corresponding author; affiliation not disclosed on arXiv) *(Yu Sun, Renkai Xiang, Zuodong Xiang, Junwei Zhou, Yike Zhang, Jianxin Zhang, Zhihao Zhu, Xiaoyu Cao, Hailu Xu)*
+   * Link: [arxiv.org/abs/2610.12977](https://arxiv.org/abs/2610.12977)
+   * Venue: arXiv preprint, October 2026 (cs.AI; submitted 9 Oct 2026)
+   * TL;DR: Shows finite-width beam search over discrete Semantic IDs bounds which held-out targets a generative recommender can ever return, and proposes two continuous-query paradigms (CQG-Single, CQG-AR) that drop the discrete SID vocabulary / beam while keeping autoregressive decoding.
+   * Key techniques:
+     - Distinguishes catalog-wide scoreability from empirical top-K support under finite-beam SID decoding
+     - CQG-Single: generates one continuous retrieval query in a single pass (no SID tokens, no code lookup, no discrete beam)
+     - CQG-AR: autoregressively generates continuous residual updates, retaining step-wise decoding without the SID item-token vocabulary
+     - Valid-prefix constrained decoding protocol unifies comparison with a TIGER-style baseline
+     - Depth ablation showing extra continuous refinement is non-monotonic for shallow accuracy
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 8/10** - reframes GR evaluation around finite-beam reachability; continuous-query paradigms remove the SID-specific reachability constraint
+     - **Fairness: 0/10** - not addressed
+     - **Robustness: 7/10** - 7 runs vs TIGER, ML-1M / Beauty / Sports, depth ablation
+     - **Impact: 8/10** - motivates decoupling output representation, AR modeling, and retrieval budget in GR
+
+2. **Autoregressive Retriever: Improving Query Understanding from Item Feedback for Universal Multimodal Retrieval (ARR)**
+   * Affiliation: Beijing Institute of Technology / Xiaohongshu *(Jianfei Zhao, Yifan Wang, Feng Zhang, Xin Sun, Chong Feng, Zhixing Tan, Yang Luo, Boyuan Pan, Xu Kai, Yao Hu)*
+   * Link: [arxiv.org/abs/2610.11666](https://arxiv.org/abs/2610.11666)
+   * Venue: arXiv preprint, October 2026 (cs.IR / cs.CV; submitted 8 Oct 2026; under review)
+   * TL;DR: ARR is a multimodal retriever that alternates retrieving an item and refining the query embedding from its content, learning both selection and use of feedback via SFT plus RL against a fixed item index.
+   * Key techniques:
+     - Alternates item retrieval and query-embedding update, then ranks with the final embedding
+     - Stepwise contrastive supervision (SFT) teaches the encoder to use feedback
+     - RL treats feedback items as actions, optimizes selection by the final reciprocal rank of a relevant item
+     - Query-side adapter enables optimization against a fixed item index
+     - Strong in-domain and zero-shot retrieval gains; feedback also improves the initial query embedding
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 7/10** - autoregressive retrieval loop with feedback as actions; query-side adapter for a fixed index
+     - **Fairness: 0/10** - not addressed
+     - **Robustness: 7/10** - in-domain and zero-shot benchmarks, analyses of the feedback effect
+     - **Impact: 6/10** - universal multimodal retrieval (not pure rec) but relevant to generative-retrieval feedback
+
+3. **Guiding the Coarse Levels of Semantic IDs Makes the Fine Levels Learnable (Guided SID)**
+   * Affiliation: Meta *(Bin Wang, Zhengyu Zhang)*
+   * Link: [arxiv.org/abs/2609.22227](https://arxiv.org/abs/2609.22227)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.CL / cs.LG; submitted 3 Sep 2026)
+   * TL;DR: Guided SID forces the coarse RQ-VAE levels to encode a predefined text-grounded, task-relevant attribute via deterministic supervised index assignment, making the fine levels learnable while keeping codebooks trainable.
+   * Key techniques:
+     - Pins coarse SID levels to a predefined categorical attribute (text-grounded, LLM-legible, task-relevant) via deterministic supervised index assignment
+     - Overrides nearest-neighbor selection with the attribute label while keeping codebooks learnable (reconstruction gradients retained)
+     - Trie-merge construction maps high-cardinality / set-valued attributes onto the fixed code budget with coherent merged buckets
+     - Matched end-to-end A/B on a 654-741M-identifier production catalog: recall@k up 1.36x at k=1, 1.39x at k=10; MRR 0.0260 -> 0.0355
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 8/10** - makes coarse SID levels meaningful by construction rather than via post-hoc alignment / RL
+     - **Fairness: 0/10** - not addressed
+     - **Robustness: 8/10** - production-scale A/B, collision/reconstruction matched or beaten, attribute prediction 4.2x more often
+     - **Impact: 8/10** - Meta production-catalog results; locates the effect in the restructured coarse code
+
+4. **From Valid to Useful: Post-Verification Acquisition for Recursive Self-Improving Recommendation (DA-RSIR)**
+   * Affiliation: Meta *(Tonmoy Hasan, Taylor Foust, Shao Tang, Leonardo Neves, Aman Gupta, Hiroto Udagawa, Helder Dias, Daniel Silva, Rohan Ramanath)*
+   * Link: [arxiv.org/abs/2610.04302](https://arxiv.org/abs/2610.04302)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 3 Oct 2026)
+   * TL;DR: DA-RSIR formulates which verified synthetic sequences train the next recursive self-improving recommender as post-verification acquisition, capping each source's contribution and ranking by model disagreement.
+   * Key techniques:
+     - Frames recursive self-improvement as generate -> verify -> acquire (post-verification acquisition)
+     - Caps each source sequence's contribution; ranks its verified sequences by prediction disagreement over augmented interactions
+     - Score derived from Bayesian Active Learning by Disagreement (BALD), estimated with MC dropout
+     - No extra labels, teacher model, or quality scorer required
+     - Improves on retain-all in all 24 comparisons; one DA-RSIR round beats 5 recursive rounds of retain-all
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 7/10** - separates verification from acquisition as a distinct control point in recursive self-improvement
+     - **Fairness: 0/10** - not addressed
+     - **Robustness: 8/10** - 4 datasets x 3 models x 2 metrics = 24 comparisons, statistically significant
+     - **Impact: 7/10** - practical gains for recursive self-improving sequential recommenders
+
+5. **Exploring Forum Post Retrieval with Generative Modeling**
+   * Affiliation: Meta (Facebook) *(Yang Li, Yaguang Liu, Heng Liu, Samson Komo, Jane Kou, Yulian Zhou, Gang Yang, Shubhojeet Sarkar, Gaurav Chakravorty, Yujie Liu, Haipeng Chen, Yonghuan Yang, Deepti Chheda, Yamin Wang, Mike Plumpe, Rish Tandon, Shengbo Guo)*
+   * Link: [arxiv.org/abs/2609.38646](https://arxiv.org/abs/2609.38646)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 29 Sep 2026)
+   * TL;DR: Explores generative recommendation on Facebook Forum by transferring cross-platform SIDs from Facebook Feed and SFT-ing a 3B instruction-tuned LM to generate SIDs directly from user context.
+   * Key techniques:
+     - Transfer along two axes: train on broader Facebook Groups engagements, reuse hierarchical prefix-based SIDs from cross-platform Facebook Feed instead of a Forum-specific tokenizer
+     - 3B-parameter instruction-tuned LM supervised-fine-tuned to generate SIDs from user context
+     - Systematic ablations on SID construction, user-history composition/length, and user-profile features
+     - Shows cross-platform SIDs transfer to a new, sparse-data recommendation surface
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 6/10** - practical transfer study of GR to a new surface; not a new method per se
+     - **Fairness: 0/10** - not addressed
+     - **Robustness: 6/10** - ablations on SID construction, history length, profile features
+     - **Impact: 7/10** - real-world Meta deployment guidance for GR on sparse surfaces
+
+---
+
 ### Papers October 11
 
 *Sunday, October 11, 2026. The live 24h arXiv window (papers dated Oct 10-11) carried no strictly on-topic generative-recommendation papers - the weekend window was empty - so per the fallback rule we drew 7 genuinely-new, on-topic papers from the last-3-month arXiv keyword pool. 2 are open-source (JobCCC, CutBCE). Total: 7 papers (2 opensource). By Opensource count rises 205 -> 207.*
@@ -1426,6 +1520,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 - FLASH: Rethinking Semantic ID Construction for Generative Recommendation (FLASH) — U Illinois Chicago / NeurIPS 2026 (SimHash + parallel decoding)
 
+- Beyond Semantic IDs: Finite-Beam Reachability and Continuous-Query Generation in Generative Recommendation (Beyond Semantic IDs) -- Yu Sun et al. (affiliation undisclosed on arXiv); arXiv 2610.12977 (continuous-query paradigms remove the SID finite-beam reachability constraint)
+
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
 - Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation (GESE) — Baidu (GSPO)
@@ -1562,6 +1658,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation (DiffuReason) — Tencent (Think-then-Diffuse + GRPO), arXiv 2602.09744
 
 - Personal-Agent Mediated Recommendation with Cross-Platform User History (MediateRec) — UC San Diego / Meta (PAMO policy-optimization mediation) — arXiv 2610.07588
+
+- From Valid to Useful: Post-Verification Acquisition for Recursive Self-Improving Recommendation (DA-RSIR) -- Meta; arXiv 2610.04302 (BALD / MC-dropout post-verification acquisition for recursive self-improving rec)
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
 

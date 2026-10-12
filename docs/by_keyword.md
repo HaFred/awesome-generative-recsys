@@ -1465,6 +1465,8 @@
 
 - Seeing the Context: Image-Derived Contextual Signals for Recommendation (Seeing the Context) - Tel Aviv University, arXiv 2610.08407
 - OpticalRec: Treating Text as Visual Glyphs for Multimodal Recommendation (OpticalRec) - UC San Diego, arXiv 2610.05432
+- Autoregressive Retriever: Improving Query Understanding from Item Feedback for Universal Multimodal Retrieval (ARR) -- Beijing Institute of Technology / Xiaohongshu; arXiv 2610.11666 (autoregressive retrieval loop with item-feedback refinement via SFT + RL)
+
 ### Optimizer
 - MuonRec
 
