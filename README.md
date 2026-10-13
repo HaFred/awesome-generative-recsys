@@ -41,7 +41,7 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
-        JobCCC -- East West U / UCSD
+        When-the-Label -- Sanjeev Suresh
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -87,6 +87,151 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 ## By Date
 
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
+### Papers October 13
+
+*Tuesday, October 13, 2026. The live last-24h arXiv window (papers dated Oct 12–13) carried no strictly on-topic generative-recommendation submissions in the recent cs.IR pool (the newest on-topic gen-rec preprint is dated Oct 9 and already indexed). Per the fallback rule we backfill 8 genuinely on-topic papers that were catalogued in the keyword/affiliation indexes by earlier runs but are missing their README daily entries, drawn from the Sep 30 – Oct 1 window. 1 is open-source (When-the-Label). Total: 8 papers (1 opensource). By Opensource count stays 207.*
+
+1. **Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)**
+   * Affiliation: Huawei Ireland Research Center *(Aleksei Medvedev, Alejandro Ariza-Casabona, Steven Derby, Gonzalo Fiz Pontiveros, Xinyang Shao, Florian Spiess)*
+   * Link: [arxiv.org/abs/2610.01533](https://arxiv.org/abs/2610.01533)
+   * Venue: arXiv preprint, October 2026 (cs.AI / cs.IR / cs.LG; submitted 1 Oct 2026)
+   * TL;DR: Reframes Semantic-ID construction as a recursive graph-clustering problem and proposes Graph-Informed Semantic IDs (GrIS), a unified hierarchical graph-partition framework that subsumes prior SID approaches.
+   * Key techniques:
+     - States SID construction as recursive clustering of a graph whose nodes carry semantic content and edges carry collaborative signal
+     - SID assignment becomes a hierarchical graph partition rather than a representation-learning read-off
+     - Unified framework subsuming RQ-VAE, residual quantization, and codebook-based SID methods
+     - Balances semantic and collaborative signals end-to-end through the partition objective
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 8/10** - reconceives SID construction as graph partitioning, a clean unification of prior methods
+     - **Fairness: 4/10** - not addressed
+     - **Robustness: 7/10** - unified framework compared against prior SID constructions
+     - **Impact: 8/10** - Huawei; reframes a core generative-retrieval building block
+
+2. **Decision-Oriented Recommendation Reranking: An Empirical Study of Jev**
+   * Affiliation: University of Rochester / Meta AI *(Hanjia Lyu, Yinglong Xia)*
+   * Link: [arxiv.org/abs/2609.40241](https://arxiv.org/abs/2609.40241)
+   * Venue: arXiv preprint, September 2026 (cs.IR / cs.CL; submitted 30 Sep 2026)
+   * TL;DR: A controlled empirical study of Jev (TypeSafe AI's "System One Model") for decision-oriented recommendation reranking, compared against recommendation-specific and LLM pointwise/listwise rerankers.
+   * Key techniques:
+     - Frames reranking as a structured choice among predefined candidate items
+     - Compares Jev (decision-oriented model) with recommendation-specific models and pointwise/listwise Qwen rerankers
+     - Controlled study isolating recommendation quality vs serving-efficiency tradeoff
+     - Analyzes when a lightweight decision model substitutes for an LLM reranker
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 6/10** - empirical characterization rather than a new method
+     - **Fairness: 3/10** - not addressed
+     - **Robustness: 7/10** - controlled comparisons across models and settings
+     - **Impact: 6/10** - practical reranking efficiency insight for deployed recsys
+
+3. **When LLM-Inferred User Context Adds Value in Production Streaming Recommendation**
+   * Affiliation: DePaul University / Comcast *(Milad Sabouri, Neeraj Sharma, Sardar Hamidian, Shaghayegh Agah)*
+   * Link: [arxiv.org/abs/2609.38999](https://arxiv.org/abs/2609.38999)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 30 Sep 2026)
+   * TL;DR: Evaluates semantic user-profiling strategies on a production streaming platform, characterizing when LLM-inferred natural-language context outperforms aggregate embeddings.
+   * Key techniques:
+     - Renders unstructured interaction history as a natural-language thematic user context via LLM
+     - Encodes the generated profile for use in place of an aggregate user embedding
+     - Compares semantic-profiling strategies against aggregate-embedding baselines on production data
+     - Characterizes conditions (domain level) under which generated profiles win
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 6/10** - systematic characterization of when LLM user context helps in production
+     - **Fairness: 4/10** - not addressed
+     - **Robustness: 7/10** - production streaming platform evaluation
+     - **Impact: 7/10** - directly relevant to deployed LLM-personalized streaming rec
+
+4. **AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation**
+   * Affiliation: Beihang University / HKUST (Guangzhou) *(Haoran Qiang, Guannan Liu, Liang Zhang, Junjie Wu)*
+   * Link: [arxiv.org/abs/2610.01705](https://arxiv.org/abs/2610.01705)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 1 Oct 2026)
+   * TL;DR: Recasts recommendation over a web of personal LLM agents as task-time bounded evidence acquisition and fusion; AgentWebRec grounds each user-item decision in item semantics plus private agent memory, querying neighbors only when local evidence is insufficient.
+   * Key techniques:
+     - Models the User-Agent Web-Platform pathway as distributed, opaque agent evidence
+     - Task-time evidence acquisition under a finite evidence budget (decide what to ask / keep)
+     - Grounds each decision in platform item semantics and the target user agent's private memory
+     - Conditionally queries neighboring user agents for complementary preference patterns
+     - Keeps underlying agent memories local (no central user profile transfer)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 8/10** - agent-web evidence-fusion framing for the agentic personalization era
+     - **Fairness: 4/10** - not addressed
+     - **Robustness: 6/10** - beats baselines on four InstructRec datasets; not a deployed system
+     - **Impact: 7/10** - relevant to agent-centric recommendation architectures
+
+5. **Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders (REPAIR)**
+   * Affiliation: Indian Institute of Technology Delhi (NeurIPS 2026) *(Parthiv Chatterjee, Dhiraj Golhar, Ummesalma Diwan, Sourish Dasgupta, Manjunath Joshi, Tanmoy Chakraborty)*
+   * Link: [arxiv.org/abs/2610.01270](https://arxiv.org/abs/2610.01270)
+   * Venue: NeurIPS 2026
+   * TL;DR: REPAIR recovers lost preference evidence from a frozen personalization encoder's cached per-timestep representations and adds a compact correction to the exposed preference state, improving 12 recommendation hosts without retraining encoder or head.
+   * Key techniques:
+     - Identifies the "recoverability gap" between compressed state and cached timestep representations
+     - Compares cached representations with the current preference state in a learned K-dimensional coordinate space
+     - Three temporal views: long-support, short-support, episodic-support
+     - Selectively retains relevant corrective patterns and adds aggregate correction before the task head
+     - Encoder-host repair reuses the existing forward computation (no history re-encoding)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 8/10** - post-compression state correction with a frozen encoder is a distinct practical angle
+     - **Fairness: 4/10** - not addressed
+     - **Robustness: 8/10** - 12 hosts x 4 datasets (MovieLens, PENS, MIND, Amazon 2023), thorough ablations
+     - **Impact: 8/10** - NeurIPS 2026; plug-in gain for deployed personalization encoders
+
+6. **Do Multilingual Encoders Produce Language-Consistent Semantic IDs?**
+   * Affiliation: Amazon / Rutgers University *(Abhinav Bohra, Anuj Bohra)*
+   * Link: [arxiv.org/abs/2610.01139](https://arxiv.org/abs/2610.01139)
+   * Venue: arXiv preprint, October 2026 (cs.IR / cs.CL; submitted 1 Oct 2026)
+   * TL;DR: Shows multilingual encoders do NOT yield language-consistent Semantic IDs; translation-induced embedding displacement breaks exact-prefix reachability across English/Spanish/Japanese Amazon ESCI listings.
+   * Key techniques:
+     - Tests whether translations of the same product keep their English SID prefix
+     - Measures residual-quantization sensitivity to translation-induced movement vs product-directed controls
+     - Compares English-only, 80/10/10, and equal-thirds quantizer fitting mixtures
+     - Finds balanced fitting makes codebook use uniform but further hurts cross-lingual prefix agreement
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 7/10** - empirically debunks the language-agnostic SID assumption for multilingual catalogs
+     - **Fairness: 5/10** - touches cross-lingual reachability/fairness of multilingual retrieval
+     - **Robustness: 7/10** - controlled experiments across 3 encoders and 3 fitting mixtures
+     - **Impact: 7/10** - important caveat for global e-commerce generative retrieval
+
+7. **When More Data Is Not Enough: The Context-Sufficiency Frontier in Generative AI Personalization**
+   * Affiliation: Independent Researchers *(Merieme Askour, Ayoub Merimi)*
+   * Link: [arxiv.org/abs/2610.00654](https://arxiv.org/abs/2610.00654)
+   * Venue: arXiv preprint, September 2026 (cs.AI; submitted 30 Sep 2026)
+   * TL;DR: Develops a theory of the "context-sufficiency frontier" for generative-AI personalization: once provider-side context becomes easy to supply, more context is not necessarily better.
+   * Key techniques:
+     - Distinguishes customer evidence (historical behavior) from provider context (what is possible/permitted/advisable now)
+     - Formalizes a context-sufficiency frontier where marginal context stops improving personalization
+     - Analyzes when added context helps vs dilutes the response
+     - Provides a decision lens for how much situational context to supply
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** - no public code released
+     - **Novelty: 7/10** - a theory of context sufficiency for generative personalization
+     - **Fairness: 5/10** - provider-context vs user-benefit tension is fairness-adjacent
+     - **Robustness: 5/10** - theoretical framing with limited empirical validation
+     - **Impact: 6/10** - conceptual tool for scoping generative-AI personalization
+
+8. **When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation (When-the-Label)**
+   * Affiliation: Independent Researcher (Sanjeev Suresh)
+   * Link: [arxiv.org/abs/2609.39696](https://arxiv.org/abs/2609.39696)
+   * Venue: RecSys Challenge 2026 Workshop (ACM RecSys 2026, Minneapolis); arXiv preprint, September 2026 (cs.IR; submitted 30 Sep 2026)
+   * TL;DR: Audits the RecSys Challenge 2026 TalkPlay benchmark and finds the official label contradicts the user's exact-song request in half of audited turns; a small training supplement closes most of the gap (+53.3% relative nDCG@20 on conflict turns).
+   * Key techniques:
+     - Audits the one place where label and request are directly comparable: exact-song-by-name requests
+     - Exact/version detector with a stratified precision audit
+     - Target-remap script reconstructs a request-satisfying evaluation slice from challenge data
+     - Training scripts for a specialist reranker and a matched-control reranker
+     - Releases annotations + tooling so the conflict slice is reported beside the official metric
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** - code at [github.com/Sanjeev-S/recsys2026-request-audit](https://github.com/Sanjeev-S/recsys2026-request-audit): audit artifacts, frozen protocol, training scripts for specialist & matched-control rerankers; small but complete and reproducible (1 GitHub star)
+     - **Novelty: 7/10** - exposes a label/request mismatch hidden by leaderboard averaging in synthetic CRS benchmarks
+     - **Fairness: 6/10** - audit of evaluation validity for conversational recommendation
+     - **Robustness: 7/10** - matched control, bootstrap, stratified audit verify the fix
+     - **Impact: 7/10** - RecSys Challenge 2026 workshop; practical evaluation fix for conversational music rec
 
 ---
 
@@ -1166,7 +1311,7 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 207 papers as of October 11.
+**Count:** 207 papers as of October 13.
 
 | Score | Paper |
 | --- | --- |
