@@ -155,6 +155,7 @@
 - Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking
 
 - A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR) — Yandex / AIRI / HSE; Barlow-Twins decorrelation for head/tail exposure control
+
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
 - SURF: Subtractive Updates for Recommender Forgetting (SURF)
@@ -199,6 +200,9 @@
 - Shape Your Feed: An LLM-based Agentic System for Conversational Recommendation (SYF) — Meta Platforms, arXiv 2608.06632
 
 - JobCCC: A Constraint-Aware Conversational Job Recommendation Benchmark and Method (JobCCC) - East West University / UC San Diego, arXiv 2610.05787 [opensource]
+- SafeCRS: Personalized Safety Alignment for LLM-Based Conversational Recommender Systems (SafeCRS) — UIC / UIUC / Amazon, KDD 2026 — arXiv 2603.03536 [opensource]
+- RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego — arXiv 2604.04457 [opensource]
+
 ### Cross-Domain
 - Cross-Country Code-Mixing for Generative Recommendation (CMRec)
 
@@ -285,6 +289,9 @@
 - FatsMB: From Agnostic to Specific: Latent Preference Diffusion for Multi-Behavior Sequential Recommendation (FatsMB) — CAS / Kuaishou, arXiv 2602.23132
 - DiffSBR: Diffusion-based Latent Neighbor Generation for Session-based Recommendation (DiffSBR) — UESTC, arXiv 2601.03903
 - DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation (DiffuReason) — Tencent (Think-then-Diffuse + GRPO), arXiv 2602.09744
+- CARD: Counterfactual Attention Regulation Diffusion for Diffusion-based Sequential Recommendation (CARD) — Sun Yat-sen University / Peng Cheng Laboratory, ICASSP 2026 — arXiv 2601.15673 [opensource]
+- DiffGRM: Diffusion-based Generative Recommendation Model (DiffGRM) — Kuaishou, WWW 2026 (masked discrete diffusion for SID generation) — arXiv 2510.21805 [opensource]
+
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
 - Building a privacy-preserving Federated Recommender system for mobile devices
@@ -429,6 +436,8 @@
 - Generate What You Can Trust: Content Credibility in Generative Recommenders (CreGR) — University of Technology Sydney, arXiv 2610.05670 [opensource]
 
 - Aligning Performance with Contribution: Towards Contribution-Aware Fair Recommendation (CPFR) — Shanghai University of Finance and Economics / Singapore University of Technology and Design, arXiv 2610.08245
+
+- SafeCRS: Personalized Safety Alignment for LLM-Based Conversational Recommender Systems (SafeCRS) — UIC / UIUC / Amazon, personalized safety alignment, KDD 2026 — arXiv 2603.03536 [opensource]
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -729,6 +738,7 @@
 - Missed Targets: Training with Missed Targets in Generative Recommendation (Missed Targets) — Zhejiang University, arXiv 2610.10124
 
 - LIFT: Lifecycle-Aware Interaction Factorization for Unified Retrieval and Ranking (LIFT) - Beijing University of Posts and Telecommunications / Southeast University / Xiaohongshu, arXiv 2610.10556
+
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -1286,6 +1296,7 @@
 - CALMRec: Causally Aligned Language Memory for Long-Horizon Recommendation — Shenzhen University, arXiv 2607.23647
 
 - Textual User Taste: Natural-Language Taste Profiles at Spotify Scale (Textual User Taste) - Spotify, arXiv 2609.35285
+
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
@@ -1306,6 +1317,7 @@
 - ReMem: Time-Evolving Dynamic Memory for Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU, arXiv 2609.37311
 
 - TIDE: How Can Recommendation Feedback Evolve Agent Memory? (TIDE) - Harbin Institute of Technology / Alibaba / Institute of Automation CAS, arXiv 2609.37544
+
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
 - L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
@@ -1362,6 +1374,7 @@
 
 - HELIX: Jointly Scaling Feature Interaction and Sequence Modeling (HELIX) - TikTok, arXiv 2609.37183
 - EvoSkillRec: Skill-Genome Evolution for Recommender Architecture Discovery (EvoSkillRec) - Huawei Noah's Ark Lab / City University of Hong Kong, arXiv 2609.34552
+
 ### Multi-behavior Recommendation
 
 - BITRec
@@ -1372,6 +1385,7 @@
 - MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment (MIMA)
 
 - FatsMB: From Agnostic to Specific: Latent Preference Diffusion for Multi-Behavior Sequential Recommendation (FatsMB) — CAS / Kuaishou, arXiv 2602.23132
+
 ### Multimodal
 - Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
 - MM-VeriRec: Failure-Guided Fusion for Verifiable Agentic Multimodal Recommendation — Independent Researcher, arXiv 2609.31718
@@ -1467,12 +1481,15 @@
 - OpticalRec: Treating Text as Visual Glyphs for Multimodal Recommendation (OpticalRec) - UC San Diego, arXiv 2610.05432
 - Autoregressive Retriever: Improving Query Understanding from Item Feedback for Universal Multimodal Retrieval (ARR) -- Beijing Institute of Technology / Xiaohongshu; arXiv 2610.11666 (autoregressive retrieval loop with item-feedback refinement via SFT + RL)
 
+- MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology, GRPO — arXiv 2603.06243 [opensource]
+
 ### Optimizer
 - MuonRec
 
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 
 - CutBCE: A Fused Binary Cross-Entropy Loss for Large-Vocabulary Sequential Recommendation (CutBCE) - Google, arXiv 2610.05559 [opensource]
+
 ### Re-ranking
 - FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
 - The Recall Ceiling of LLM Recommendation Reranking (RecallCeiling) — University of Southern California, arXiv 2609.27953
@@ -1627,6 +1644,10 @@
 
 - Personal-Agent Mediated Recommendation with Cross-Platform User History (MediateRec) — UC San Diego / Meta (PAMO policy-optimization mediation), arXiv 2610.07588
 
+- MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology, GRPO — arXiv 2603.06243 [opensource]
+- SafeCRS: Personalized Safety Alignment for LLM-Based Conversational Recommender Systems (SafeCRS) — UIC / UIUC / Amazon, Safe-GDPO, KDD 2026 — arXiv 2603.03536 [opensource]
+- RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego — arXiv 2604.04457 [opensource]
+
 ### Retrieval / Representation
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k)
@@ -1672,6 +1693,8 @@
 - Think Thrice Before Reranking: Multi-perspective Evidence and Reasoning Integration for Text Reranking (MERIT-Rank) — Honor Device Co., Ltd, arXiv 2609.20131
 - Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders (REPAIR) — IIIT Delhi, arXiv 2610.01270
 
+- RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego, retrieval-augmented generative CRS — arXiv 2604.04457 [opensource]
+
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
 - Principled Synthetic Data Enables the First Scaling Laws for LLMs in Recommendation (Scaling Laws)
@@ -1690,6 +1713,7 @@
 
 - HELIX: Rethinking Scaling Laws for Large-Scale Recommendation (HELIX) - TikTok, arXiv 2609.37183
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneReason / OneRec-V2) — Kuaishou; OneReason uses advanced RL to make CoT reasoning beneficial; SIGIR 2026 challenge; arXiv 2609.39828
+
 ### Semantic / Structured IDs
 - From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)
 - Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)
@@ -1815,6 +1839,8 @@
 - A Systematic Study of Semantic ID Spaces for Generative Information Retrieval (Semantic-ID Spaces) — Artefact Research Center / Université d'Angers (LERIA), arXiv 2610.08732
 
 - FLASH: Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment (FLASH) — U Illinois Chicago / NeurIPS 2026, arXiv 2610.07402
+- DiffGRM: Diffusion-based Generative Recommendation Model (DiffGRM) — Kuaishou, WWW 2026 (replaces AR decoder with masked discrete diffusion) — arXiv 2510.21805 [opensource]
+
 ### Security / Adversarial
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1914,6 +1940,8 @@
 - DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation (DiffuReason) — Tencent, arXiv 2602.09744
 
 - Multimodal Graph Retrieval-Augmented Sequential Recommendation via Collaborative Filtering Paths (MGRASRec) — University of New South Wales, arXiv 2610.11228
+
+- CARD: Counterfactual Attention Regulation Diffusion for Diffusion-based Sequential Recommendation (CARD) — Sun Yat-sen University, ICASSP 2026 — arXiv 2601.15673 [opensource]
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
