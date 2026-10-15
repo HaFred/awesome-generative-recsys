@@ -291,7 +291,7 @@
 - DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation (DiffuReason) — Tencent (Think-then-Diffuse + GRPO), arXiv 2602.09744
 - CARD: Counterfactual Attention Regulation Diffusion for Diffusion-based Sequential Recommendation (CARD) — Sun Yat-sen University / Peng Cheng Laboratory, ICASSP 2026 — arXiv 2601.15673 [opensource]
 - DiffGRM: Diffusion-based Generative Recommendation Model (DiffGRM) — Kuaishou, WWW 2026 (masked discrete diffusion for SID generation) — arXiv 2510.21805 [opensource]
-
+- OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation (OT-FlowRec) — Nanjing University of Science and Technology, arXiv 2610.16038
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
 - Building a privacy-preserving Federated Recommender system for mobile devices
@@ -438,7 +438,7 @@
 - Aligning Performance with Contribution: Towards Contribution-Aware Fair Recommendation (CPFR) — Shanghai University of Finance and Economics / Singapore University of Technology and Design, arXiv 2610.08245
 
 - SafeCRS: Personalized Safety Alignment for LLM-Based Conversational Recommender Systems (SafeCRS) — UIC / UIUC / Amazon, personalized safety alignment, KDD 2026 — arXiv 2603.03536 [opensource]
-
+- PR-entmax: Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective (PR-entmax) — Sber AI Lab / Lomonosov MSU, CIKM 2026 — arXiv 2610.17823
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 
@@ -627,7 +627,8 @@
 - Generate What You Can Trust: Content Credibility in Generative Recommenders (CreGR) — University of Technology Sydney, arXiv 2610.05670 [opensource]
 
 - Adapting Generative Recommenders for Multi-Turn Interaction (INTEGER) — National Taiwan University / Johns Hopkins University, arXiv 2610.08136
-
+- HASTE: Hierarchical and Attribute-aware Supervision for Generative Recommendation (HASTE) — Glance, arXiv 2610.17368
+- TacGR (UniSGR-V2): Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation (TacGR) — Alibaba International, arXiv 2610.16132
 ### Generative Retrieval / Ranking
 - OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender (OneTrans-V2) — ByteDance, arXiv 2609.28589
 - X-Rec Technical Report (X-Rec) — TikTok, arXiv 2609.29180
@@ -738,7 +739,8 @@
 - Missed Targets: Training with Missed Targets in Generative Recommendation (Missed Targets) — Zhejiang University, arXiv 2610.10124
 
 - LIFT: Lifecycle-Aware Interaction Factorization for Unified Retrieval and Ranking (LIFT) - Beijing University of Posts and Telecommunications / Southeast University / Xiaohongshu, arXiv 2610.10556
-
+- Bit-Factorized: Bit-Factorized Identifiers for Efficient Generative Retrieval (Bit-Factorized) — Leiden University / Radboud University, arXiv 2610.17467
+- WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat (WeGR) — Tencent (WeChat), arXiv 2610.16979
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -997,7 +999,8 @@
 - When LLM-Inferred User Context Adds Value in Production Streaming Recommendation (LLM-Inferred-Context) — DePaul University / Comcast, arXiv 2609.38999
 
 - Efficient Clustering with Quality Guardrails for LLM-based Recommender Systems at Industry Scale — Amazon, arXiv 2607.19704
-
+- WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat (WeGR) — Tencent (WeChat), arXiv 2610.16979
+- TacGR (UniSGR-V2): Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation (TacGR) — Alibaba International, arXiv 2610.16132
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1296,7 +1299,7 @@
 - CALMRec: Causally Aligned Language Memory for Long-Horizon Recommendation — Shenzhen University, arXiv 2607.23647
 
 - Textual User Taste: Natural-Language Taste Profiles at Spotify Scale (Textual User Taste) - Spotify, arXiv 2609.35285
-
+- Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix, NeurIPS 2026 PALM Workshop, arXiv 2610.15864
 ### Memory Augmentation
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
@@ -1482,7 +1485,7 @@
 - Autoregressive Retriever: Improving Query Understanding from Item Feedback for Universal Multimodal Retrieval (ARR) -- Beijing Institute of Technology / Xiaohongshu; arXiv 2610.11666 (autoregressive retrieval loop with item-feedback refinement via SFT + RL)
 
 - MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology, GRPO — arXiv 2603.06243 [opensource]
-
+- OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation (OT-FlowRec) — Nanjing University of Science and Technology, arXiv 2610.16038
 ### Optimizer
 - MuonRec
 
@@ -1840,7 +1843,10 @@
 
 - FLASH: Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment (FLASH) — U Illinois Chicago / NeurIPS 2026, arXiv 2610.07402
 - DiffGRM: Diffusion-based Generative Recommendation Model (DiffGRM) — Kuaishou, WWW 2026 (replaces AR decoder with masked discrete diffusion) — arXiv 2510.21805 [opensource]
-
+- Bit-Factorized: Bit-Factorized Identifiers for Efficient Generative Retrieval (Bit-Factorized) — Leiden University / Radboud University, arXiv 2610.17467
+- HASTE: Hierarchical and Attribute-aware Supervision for Generative Recommendation (HASTE) — Glance, arXiv 2610.17368
+- TacGR (UniSGR-V2): Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation (TacGR) — Alibaba International, arXiv 2610.16132
+- Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix, NeurIPS 2026 PALM Workshop, arXiv 2610.15864
 ### Security / Adversarial
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)
@@ -1942,7 +1948,7 @@
 - Multimodal Graph Retrieval-Augmented Sequential Recommendation via Collaborative Filtering Paths (MGRASRec) — University of New South Wales, arXiv 2610.11228
 
 - CARD: Counterfactual Attention Regulation Diffusion for Diffusion-based Sequential Recommendation (CARD) — Sun Yat-sen University, ICASSP 2026 — arXiv 2601.15673 [opensource]
-
+- PR-entmax: Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective (PR-entmax) — Sber AI Lab / Lomonosov MSU, CIKM 2026 — arXiv 2610.17823
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 - Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges

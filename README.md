@@ -40,8 +40,6 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
-        MLLMRec-R1 -- Hefei UoT
-        RAR -- UIUC
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -59,6 +57,7 @@ mindmap
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
+        PR-entmax -- Sber AI Lab
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -66,6 +65,7 @@ mindmap
         DACT -- Fudan U
         CHAP -- USTC
         DiffGRM -- Kuaishou
+        Bit-Factorized -- Leiden U
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -89,6 +89,131 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers October 15
+
+*Thursday, October 15, 2026. The live arXiv cs.IR recent-submission batch (announced Oct 14-15) surfaced 7 on-topic generative-recommendation papers, all new to the README: PR-entmax, Bit-Factorized, HASTE, WeGR, TacGR (UniSGR-V2), OT-FlowRec, and the Netflix beam-search-vs-MTP study. 2 are open-source (PR-entmax / Sber AI Lab, 7/10; Bit-Factorized / Leiden, 6/10). Total: 7 papers (2 opensource). By Opensource count 212 -> 214.*
+
+1. **PR-entmax: Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective**
+   * Affiliation: Sber AI Lab, Moscow, Russian Federation — *(Anton Pembek, Anton Klenitskiy, Alexander Savchenko, Alexey Vasilev; with Lomonosov MSU, HSE University)*
+   * Link: [arxiv.org/abs/2610.17823](https://arxiv.org/abs/2610.17823)
+   * Venue: CIKM 2026
+   * TL;DR: PR-entmax injects a sparse, popularity-aware prior directly into the loss's probability mapping so the set of items receiving non-zero gradient becomes context-dependent, reducing popularity bias without changing architecture or inference.
+   * Key techniques:
+     - Derives a sparse prior-regularized objective from a generalized variational principle
+     - Popularity-aware active support: which items get non-zero probability (and gradient) is set by contextual relevance AND item popularity
+     - At inference the prior is removed; ranking uses learned contextual relevance only
+     - No architectural change; drop-in loss modification for sequential rec
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — code at [github.com/Antondfger/Sparse-Prior-Regularized](https://github.com/Antondfger/Sparse-Prior-Regularized) (CIKM 2026 branch); clear repo + hyperparameters, but limited documentation/activity.
+     - **Novelty: 7/10** — reframes popularity debiasing as a sparse prior on the probability mapping rather than post-hoc re-ranking.
+     - **Fairness: 9/10** — directly targets popularity bias / exposure fairness in sequential rec.
+     - **Robustness: 7/10** — consistent across multiple benchmarks and sequential architectures.
+     - **Impact: 7/10** — CIKM 2026; practical, architecture-free debiasing drop-in.
+
+2. **Bit-Factorized: Computed, not Memorized — Bit-Factorized Identifiers for Efficient Generative Retrieval**
+   * Affiliation: Leiden University — *(I-Fan Lin, Suzan Verberne; with Zhen Zhang / Shandong University, Faegheh Hasibi / Radboud University)*
+   * Link: [arxiv.org/abs/2610.17467](https://arxiv.org/abs/2610.17467)
+   * Venue: arXiv preprint
+   * TL;DR: A numeric DocID design where each token is factorized into bits scored as their sum, so unseen documents stay scorable without retraining — cutting adaptation/retraining cost in generative retrieval.
+   * Key techniques:
+     - Bit-factorized DocIDs: each token = sequence of bits; token score = sum of its bits (model-derived meaning)
+     - Inherits LM knowledge so unseen-doc DocIDs are scorable without indexing-stage retraining
+     - Fewer decoding steps during beam search vs. longer string DocIDs
+     - Evaluated on NQ320K, TriviaQA, MS MARCO
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — code at [anonymous.4open.science/r/bit_factorized_token-2C13](https://anonymous.4open.science/r/bit_factorized_token-2C13/) (anonymous, pre-print; not a maintained GitHub repo, documentation minimal).
+     - **Novelty: 8/10** — factorizing DocID tokens into model-scored bits is a fresh numeric-identifier design.
+     - **Fairness: 3/10** — not addressed.
+     - **Robustness: 7/10** — >20pp Hit@10 on unseen docs, up to 7x lower latency, strong generalization.
+     - **Impact: 7/10** — generative-retrieval DocID design with clear deployment cost savings.
+
+3. **HASTE: Hierarchical and Attribute-aware Supervision for Generative Recommendation**
+   * Affiliation: Glance, Bengaluru, India — *(Tripti Shukla, Shwetha Somasundaram, Akshat Gupta, Rohit Garg, Paul Duff, Ian Anderson)*
+   * Link: [arxiv.org/abs/2610.17368](https://arxiv.org/abs/2610.17368)
+   * Venue: arXiv preprint
+   * TL;DR: HASTE adds hierarchical and attribute-specific supervision to semantic-ID generative recommendation, giving ~2x faster convergence and better long-tail performance without changing the AR decode.
+   * Key techniques:
+     - Hierarchical Loss supervises each level of the semantic-ID hierarchy (not just flat next-token CE)
+     - Attribute-Specific Losses preserve fine-grained item attributes via LM semantic knowledge
+     - ~2x faster convergence than standard causal cross-entropy
+     - Evaluated on a fashion benchmark + multiple Amazon domains
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code released.
+     - **Novelty: 7/10** — explicit hierarchical + attribute-level supervision for SID GR training efficiency / long-tail.
+     - **Fairness: 5/10** — improves long-tail representation (fairness-adjacent) but not a fairness method.
+     - **Robustness: 7/10** — consistent gains across datasets and item-frequency regimes.
+     - **Impact: 7/10** — practical training-efficiency win for SID-based GR.
+
+4. **WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat**
+   * Affiliation: Tencent (WeChat), China — *(Jiajun Han, Guoxin Ma, Liangsheng Xu, Ruiqi Yu, Yingdi Guo, Zongbing Wang, Xinhua Ye, Chenyan Hua, Xin Xie, Pengcheng Yang, Haijun Wu; with Felix)*
+   * Link: [arxiv.org/abs/2610.16979](https://arxiv.org/abs/2610.16979)
+   * Venue: arXiv preprint
+   * TL;DR: WeGR unifies generative retrieval for WeChat e-commerce search with a collapse-free collaborative SID tokenizer (CoCo-VAE) and a horizon-expanding RL objective (DHPO), deployed with +2.5% orders / -26% GPU online.
+   * Key techniques:
+     - CoCo-VAE: query-to-item + item-to-item collaborative signals with codebook-refresh / complementary regularization (anti-collapse)
+     - DHPO (Dynamic Horizon Policy Optimization): progressively expands reward + policy horizons to fight reward sparsity under exact-SID matching, no auxiliary reward model
+     - Two-month WeChat A/B: +2.539% orders, +1.508% CTR, +1.381% CVR, -25.5% CPU / -26.1% GPU
+     - Deployed across multiple WeChat search scenarios, billions of users
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — industrial system; no public code.
+     - **Novelty: 8/10** — collapse-free collaborative SID tokenizer + horizon-expanding RL for sparse-reward GR.
+     - **Fairness: 4/10** — not addressed.
+     - **Robustness: 8/10** — two-month online A/B at WeChat scale with infra savings.
+     - **Impact: 9/10** — production deployment at WeChat, strong online + infra gains.
+
+5. **TacGR (UniSGR-V2): Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation**
+   * Affiliation: Alibaba International Digital Commerce Group, Beijing, China — *(Jun Yang, Jiasi Chen, Jiawei Sun, Ziyue Guo, Jianan Yan, Tao Luo, Xiaoyi Zeng)*
+   * Link: [arxiv.org/abs/2610.16132](https://arxiv.org/abs/2610.16132)
+   * Venue: arXiv preprint
+   * TL;DR: TacGR anticipates a continuous target-side feature vector before decoding each semantic-ID codeword and crosses it with the prefix/user sequence, fixing the target-side feature vacuum in SID-based GR and improving online IPV/Order/GMV.
+   * Key techniques:
+     - Stepwise target-side feature anticipation: regress a continuous target representation inside the decoder
+     - Crossing with semantic prefix + user behavior sequence conditions generation and ranking
+     - Semantic-anchoring auxiliary tower + unidirectional visibility mask prevent collapse / noise propagation
+     - Gated convolutional denoising + pyramid memory funnel for long industrial histories
+     - Lazada online A/B: +0.79% IPV, +5.55% Order, +3.09% GMV
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — industrial; no public code.
+     - **Novelty: 8/10** — reconstructs a continuous target-side representation inside SID decoding to support both generation and ranking.
+     - **Fairness: 4/10** — not addressed.
+     - **Robustness: 8/10** — offline gains over OneRec/UniRec/UniSGR + online Lazada A/B.
+     - **Impact: 9/10** — production deployment at Lazada (Alibaba International) with clear online lift.
+
+6. **OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation**
+   * Affiliation: Nanjing University of Science and Technology, School of Computer Science and Engineering — *(Miao Sun)*
+   * Link: [arxiv.org/abs/2610.16038](https://arxiv.org/abs/2610.16038)
+   * Venue: arXiv preprint
+   * TL;DR: OT-FlowRec models multi-interest, multi-centric user preference via a mixture of parallel optimal-transport flows (flow matching), preserving a multi-peaked representation instead of collapsing to a unimodal average.
+   * Key techniques:
+     - Mixture of parallel interest-specific transport flows, each preserving a distinct interest cluster via an OT plan
+     - Geometric transport mechanism: minimum-cost paths from latent multi-interest distribution to target prototypes
+     - Progressive time-sampling warmup biases optimization toward final generation states (bridges flow fitting vs. top-k ranking)
+     - Implemented on RecBole; evaluated on three public multimodal-seqrec datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — uses RecBole but no own code released.
+     - **Novelty: 8/10** — multi-bridge flow matching with OT-guided interest disentanglement for multimodal seqrec.
+     - **Fairness: 3/10** — not addressed.
+     - **Robustness: 7/10** — outperforms SOTA baselines on three datasets.
+     - **Impact: 6/10** — solid multimodal-seqrec method; preprint, no deployment.
+
+7. **Netflix: Personalized LLM Recommendation with Semantic IDs — Autoregressive Beam Search vs. Multi-Token Prediction**
+   * Affiliation: Netflix Personalization Foundations Team — *(Sejoon Oh, Fernando Amat Gil, Evan Smothers, Dan Iter, Mark Thornburg, Dawit Mureja Argaw, Sourabh Medapati, Thea Wang, Ria Verma, Qiuling Xu, Harshit Syal, Ehsan Gholami, Moumita Bhattacharya, Ashish Rastogi)*
+   * Link: [arxiv.org/abs/2610.15864](https://arxiv.org/abs/2610.15864)
+   * Venue: NeurIPS 2026 PALM Workshop
+   * TL;DR: An industry-scale apples-to-apples comparison of single-head autoregressive beam search vs. multi-token prediction for SID generation in an LLM recommender: beam search wins on quality/QA while MTP wins only on raw throughput.
+   * Key techniques:
+     - Single instruction-tuned model unifies retrieval, content-QA, and instruction-following via SIDs
+     - New auxiliary ranking loss over the joint SID score to train the MTP objective
+     - Evaluated on a large streaming-media catalog with Qwen3-8B-scale training
+     - RL post-training to fix language regression from SID vocabulary expansion
+     - End-to-end vs. prior non-SID baseline: +77% cold-start ranking, +22% content-QA, +2.8x faster training
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — proprietary catalog; no code/model release.
+     - **Novelty: 7/10** — first industry-scale, controlled beam-search-vs-MTP comparison for SID LLM rec.
+     - **Fairness: 3/10** — not addressed.
+     - **Robustness: 7/10** — large-scale streaming catalog; language regression traced and addressed via RL.
+     - **Impact: 8/10** — NeurIPS workshop; major industrial practitioner study on SID generation paradigms.
 
 ### Papers October 14
 
@@ -1192,131 +1317,12 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 6/10** — Validated across Meta's production fleet (500+ models, 6 months).
      - **Impact: 8/10** — Large practical impact: +15.5% avg ETT, fleet-wide >90%; deployed at Meta scale.
 
-### Papers October 04
 
-*Sunday, October 4, 2026. The live last-24h arxiv cs.IR announcement window is empty (weekend — no Oct 3–4 batch), so per the fallback we drew 7 genuinely-new, on-topic generative / LLM / agentic / conversational recommendation papers from the arxiv keyword pools over the last ~3 months (Jul–Oct 2026). All 7 are closed-source. Total: 7 papers (0 opensource).*
-
-1. **Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems**
-   * Affiliation: Pinterest, Inc. — *(Christine Herlihy, Xumei Xi, Shloka Desai, Kevin Bannerman Hutchful, Pedro Silva)*
-   * Link: [arxiv.org/abs/2609.33073](https://arxiv.org/abs/2609.33073)
-   * Venue: KDD 2025 Workshop on Online and Adaptive Recommender Systems (OARS)
-   * TL;DR: Extends algorithmic-harm taxonomies to generative-model-augmented, non-conversational recommender systems, exposing novel causal drivers (e.g., sanitization) and offering a causal analysis of how harmful (input, output) subsets arise.
-   * Key techniques:
-     - Expanded taxonomy of algorithmic harms for generative-model-augmented recsys
-     - Separation of representational / quality-of-service harms from endogenous harms (e.g., sanitization when inputs misalign with designer objectives)
-     - Causal analysis of problematic subsets of the (input, output) joint distribution to guide detection/mitigation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code or benchmark released.
-     - **Novelty: 7/10** — Solid conceptual extension of harm taxonomies to the gen-augmented setting; no new method, but a needed framing.
-     - **Fairness: 9/10** — Core contribution is fairness/responsible-AI: taxonomizing novel harms in gen-augmented recsys.
-     - **Robustness: 6/10** — Causal/conceptual analysis; no empirical robustness evaluation across models or deployments.
-     - **Impact: 7/10** — Important responsible-AI framing for generative recsys; workshop venue tempers reach.
-
-2. **MM-VeriRec: Failure-Guided Fusion for Verifiable Agentic Multimodal Recommendation**
-   * Affiliation: Independent Research, United States — *(Yufeng Wang)*
-   * Link: [arxiv.org/abs/2609.31718](https://arxiv.org/abs/2609.31718)
-   * Venue: 1st Int'l Workshop on Agentic Multimodal Intelligence (AMI '26), co-located with ACM Multimedia 2026
-   * TL;DR: A verifiable agentic multimodal recommendation protocol with failure-guided fusion that detects hidden visual constraints, image-text mismatch, and abstains on impossible tasks.
-   * Key techniques:
-     - Tasks built from real movie-poster / product-image datasets with deterministic visual-attribute verification
-     - Failures converted into actionable labels: text-trap following, visual ignorance, false acceptance
-     - Adaptive attribute gate + failure-guided fusion that routes to the correct repair
-     - Transfer under a non-aligned gate: an independently derived leave-one-out CLIP detector still reaches 0.7028 / 0.6111 visual-grounded success
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released.
-     - **Novelty: 8/10** — Verifiable agentic multimodal rec with failure-guided fusion + abstention is a fresh angle on trustworthy multimodal rec.
-     - **Fairness: 5/10** — Not directly addressed.
-     - **Robustness: 8/10** — Verifier-aligned gating and ablation across LLM families show it handles hidden constraints and impossible tasks.
-     - **Impact: 7/10** — Strong benchmark + diagnostic loop for trustworthy agentic multimodal rec; workshop venue.
-
-3. **Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops**
-   * Affiliation: Spotify — *(Enrico Palumbo, Alexandre Tamborrino, Victor Ode, Ben Lacker, Adrià Casas Escoda, Jeremy Hopple, et al.)*
-   * Link: [arxiv.org/abs/2609.30297](https://arxiv.org/abs/2609.30297)
-   * Venue: RecSys 2026
-   * TL;DR: A multi-turn synthetic-data generation + self-improvement loop for conversational recommendation agents at Spotify, improving quality +8% over a highly optimized manual prompt and +14% user listening in online A/B.
-   * Key techniques:
-     - Single-turn prompt → realistic multi-turn conversation transformation for cold-start evaluation
-     - Variance-based contrastive optimization for agent planning
-     - Iterative refinement through a coding agent (self-improvement loop)
-     - Productionized with online A/B tests: +14% listening, +5% WAU, −5% skip rate vs. session-refinement-only experience
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Industrial system; no public code released.
-     - **Novelty: 7/10** — Practical novelty: synthetic-data + self-improvement loop for rec-agent planning; not a new architecture.
-     - **Fairness: 4/10** — Not addressed.
-     - **Robustness: 7/10** — Validated via online A/B at Spotify scale; real deployment evidence.
-     - **Impact: 9/10** — RecSys 2026, deployed at Spotify with strong online gains — high industry impact.
-
-4. **Overview and Analysis of the RecSys Challenge 2026: Conversational Music Recommendation**
-   * Affiliation: Sony Group Corporation, SiriusXM, Deezer Research, Amazon, Politecnico di Bari, Maastricht University — *(Seungheon Doh, Sergio Oramas, Bruno Sguerra, Abhinav Bohra, Claudio Pomo, Francesco Barile)*
-   * Link: [arxiv.org/abs/2609.33045](https://arxiv.org/abs/2609.33045)
-   * Venue: RecSys Challenge 2026 (RecSysChallenge '26)
-   * TL;DR: Organizer overview/analysis of the RecSys 2026 conversational music recommendation challenge (retrieve tracks + generate grounded response), analyzing 16 systems via retrieve–rerank–generate and exposing benchmark/eval limitations.
-   * Key techniques:
-     - Retrieve–rerank–generate framework for cross-system analysis
-     - Variance study of recommendation performance across users, requests, and dialogue contexts
-     - Identifies single-ground-truth relevance and teacher-forced synthetic-dialogue eval as benchmark limitations
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Challenge baseline referenced but no public code URL; dataset on HuggingFace/Codabench.
-     - **Novelty: 6/10** — Analysis/organizer paper, not a new method; but a defining shared benchmark for conversational rec.
-     - **Fairness: 5/10** — Discusses eval bias but no fairness method.
-     - **Robustness: 7/10** — Synthesizes lessons from 16 systems and surfaces protocol weaknesses.
-     - **Impact: 8/10** — Defines a major shared benchmark for conversational recommendation — high community impact.
-
-5. **Do Evidence-Reading Diagnostics Improve Interface Selection in Small LLM Recommenders?**
-   * Affiliation: Independent Researcher — *(Han Chen, Yingrui Li)*
-   * Link: [arxiv.org/abs/2609.37472](https://arxiv.org/abs/2609.37472)
-   * Venue: preprint
-   * TL;DR: Evidence-reading diagnostic prompts for small LLM recommenders do NOT meaningfully improve interface selection (NDCG@5 change within ±0.0019, below target); retrieved-similar-user evidence does help prompting.
-   * Key techniques:
-     - Baseline vs. augmented selector using six evidence-reading prompts over 6 small LLMs × 4 domains × 3,426 users
-     - Stability prompts varying wording and candidate order
-     - Chronological evaluation; 95% bootstrap intervals on NDCG@5
-     - Reveals answer-position and tie-response biases in small LLM recommenders
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Scripts/code referenced but no public repository URL.
-     - **Novelty: 6/10** — Rigorous negative-result / diagnostic study; reframes how to validate LLM-rec diagnostics.
-     - **Fairness: 4/10** — Not addressed.
-     - **Robustness: 7/10** — Careful bootstrap analysis and bias diagnostics; honest about non-effects.
-     - **Impact: 6/10** — Useful methodological caution for LLM-rec interface selection; preprint.
-
-6. **FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization**
-   * Affiliation: JPMorganChase — *(Arundeep Chinta, Lucas Vinh Tran, Jay Katukuri)*
-   * Link: [arxiv.org/abs/2609.31890](https://arxiv.org/abs/2609.31890)
-   * Venue: 2nd Workshop on Advances in Financial AI (ICLR 2026)
-   * TL;DR: FARE frames Share-of-Voice-constrained fair ranking as a deep RL problem with CTR uncertainty in the state, reducing SOV deviation from fairness targets while minimizing engagement loss.
-   * Key techniques:
-     - SOV-constrained ranking cast as constrained trade execution (analogous to algorithmic finance)
-     - Uncertainty (σ) explicitly in agent state/policy — larger adjustments where CTR is uncertain
-     - FARE-PC (uncertainty-weighted proportional control), FARE-ES (evolution strategies), FARE-PPO (policy gradient)
-     - Modular execution layer atop any black-box CTR model, no retraining
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released.
-     - **Novelty: 8/10** — RL framing of fair-exposure ranking with uncertainty-aware state is novel.
-     - **Fairness: 9/10** — Core contribution is fairness (SOV constraints) in personalization.
-     - **Robustness: 7/10** — Evaluated on synthetic data + KuaiRand-Pure; ES outperforms PPO.
-     - **Impact: 7/10** — Financial-services personalization with fairness guarantees; workshop venue.
-
-7. **On Evaluating and Improving Conversational Agents in Production**
-   * Affiliation: Zalando SE — *(Kasra Hosseini, Wen-Sen Cheng, Marco-Andrea Buchmann, Emir Mulabegovic, Weiwei Cheng)*
-   * Link: [arxiv.org/abs/2609.32092](https://arxiv.org/abs/2609.32092)
-   * Venue: preprint (cs.MA)
-   * TL;DR: An Evaluation Harness + Improvement Orchestrator for testing a production multi-agent shopping assistant via grounded user simulation, isolating real behavior changes from run-to-run noise.
-   * Key techniques:
-     - Evaluation Harness generates targeted assertions + a fixed cohort of customer scenarios, reproduces behavior via grounded user simulation
-     - Stored baseline from repeated runs of the unchanged system
-     - Improvement Orchestrator turns assertion results into hypotheses, compares isolated modifications via paired percentile bootstrap over scenario-level differences
-     - Human-approved revisions to future evaluations without altering past decisions
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Industrial framework; no public code released.
-     - **Novelty: 7/10** — Solid engineering-method contribution: harness/orchestrator for production conversational-agent evaluation.
-     - **Fairness: 4/10** — Not addressed.
-     - **Robustness: 8/10** — Handles LLM/retrieval stochasticity via bootstrap; distinguishes real gains from fluctuation.
-     - **Impact: 7/10** — Practical production eval framework at Zalando scale; preprint.
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 212 papers as of October 14.
+**Count:** 214 papers as of October 15.
 
 | Score | Paper |
 | --- | --- |
@@ -1530,7 +1536,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 3/10 | SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval (SAGE) |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
-| 1/10 | HCGRec: Hint-Conditioned Generative Recommendation with Semantic IDs (HCGRec) |
+| 7/10 | Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective (PR-entmax) — Sber AI Lab / Lomonosov MSU, CIKM 2026 — [github.com/Antondfger/Sparse-Prior-Regularized](https://github.com/Antondfger/Sparse-Prior-Regularized) |
+| 6/10 | Computed, not Memorized: Bit-Factorized Identifiers for Efficient Generative Retrieval (Bit-Factorized) — Leiden University / Radboud University — [anonymous.4open.science/r/bit_factorized_token-2C13](https://anonymous.4open.science/r/bit_factorized_token-2C13/) |
 
 ---
 
@@ -1677,6 +1684,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 - Beyond Semantic IDs: Finite-Beam Reachability and Continuous-Query Generation in Generative Recommendation (Beyond Semantic IDs) -- Yu Sun et al. (affiliation undisclosed on arXiv); arXiv 2610.12977 (continuous-query paradigms remove the SID finite-beam reachability constraint)
 
+- Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix, NeurIPS 2026 PALM Workshop
+- Computed, not Memorized: Bit-Factorized Identifiers for Efficient Generative Retrieval (Bit-Factorized) — Leiden University / Radboud University
+
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
 - Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation (GESE) — Baidu (GSPO)
@@ -1820,6 +1830,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology (GRPO)
 - SafeCRS: Personalized Safety Alignment for LLM-Based Conversational Recommender Systems (SafeCRS) — UIC / UIUC / Amazon, Safe-GDPO, KDD 2026
 - RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego
+- WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat (WeGR) — Tencent (WeChat), DHPO
+- Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix (RL post-training)
+
 See [Full keyword index](docs/by_keyword.md) for all other categories.
 
 ## By Affiliation
