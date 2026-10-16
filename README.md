@@ -43,6 +43,7 @@ mindmap
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
+        PsyBer-Agent -- XJTLU / Alibaba
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -65,11 +66,10 @@ mindmap
         DACT -- Fudan U
         CHAP -- USTC
         DiffGRM -- Kuaishou
-        Bit-Factorized -- Leiden U
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
-        SafeCRS -- UIC
+        HEM-Med -- Qilu U / UTS
 ```
 
 <div align="center">
@@ -89,6 +89,93 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers October 16
+
+*Friday, October 16, 2026. The live arXiv cs.IR recent-submission window (announced Oct 15-16) carried no strictly on-topic generative-recommendation papers in the recent pool, so per the fallback rule we drew 5 on-topic papers from the last-3-month keyword pool. 2 are open-source (HEM-Med / Qilu U of Tech & UTS, 6/10; PsyBer-Agent / XJTLU & Alibaba, 6/10). Total: 5 papers (2 opensource). By Opensource count 214 -> 216.*
+
+1. **Revisiting Generative vs. Dense Retrieval: A Static Value Prior Reverses the Gap**
+   * Affiliation: Shopify — *(Renbo Tu, Yang Liu, Shuying Sun)*
+   * Link: [arxiv.org/abs/2610.19065](https://arxiv.org/abs/2610.19065)
+   * Venue: arXiv preprint
+   * TL;DR: A static per-item value prior injected into a dense retriever reverses the previously reported generative-retrieval (semantic-ID LLM) advantage — a 14B SID-LLM underperforms a 47x smaller dense encoder once the prior is added.
+   * Key techniques:
+     - Like-for-like comparison of generative retrieval (autoregressive semantic-ID LLM) vs dense bi-encoder retrieval
+     - Static item-value prior (popularity/utility) added to dense-retriever scoring
+     - Shows the prior alone closes/reverses the gap attributed to generative modeling
+     - Controlled scaling study contrasting a 14B SID-LLM with a ~0.3B dense encoder
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code or benchmark released.
+     - **Novelty: 7/10** — Reframes the GR-vs-DR debate by exposing a confounded static-value prior as the real driver.
+     - **Fairness: 5/10** — Value prior is popularity-adjacent but not a fairness method per se.
+     - **Robustness: 7/10** — Consistent across multiple retrieval benchmarks and model scales.
+     - **Impact: 8/10** — Important counter-narrative questioning the empirical edge of semantic-ID generative retrieval.
+
+2. **TransX Technical Report: Scaling Sequence Transduction for Recommendation**
+   * Affiliation: LinkedIn — *(Da Xu, Liyan Fang, Divya Venugopalan, Sunny Hsu, Xukai Wang, Rishav Roy Chowdhury, Cindy Liang, Nishant Satya Lakshmikanth)*
+   * Link: [arxiv.org/abs/2610.20913](https://arxiv.org/abs/2610.20913)
+   * Venue: Technical Report (LinkedIn)
+   * TL;DR: A sequence-transduction framework that decouples encoding, behavior-memory, and candidate-fusion, explores offline generative recommendation, and lifts production CTR by +6.02% and conversion by +4.45% in A/B.
+   * Key techniques:
+     - Sequence-transduction paradigm separating representation encoding, behavior memory, and candidate fusion
+     - Offline generative-recommendation exploration built on the transduction backbone
+     - Production A/B validation on LinkedIn feed/relevance surfaces
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Industrial technical report; no public code.
+     - **Novelty: 7/10** — Transduction framing decoupling the rec pipeline stages at production scale.
+     - **Fairness: 4/10** — Not addressed.
+     - **Robustness: 8/10** — Validated via production A/B at LinkedIn scale.
+     - **Impact: 9/10** — Deployed industrial system with clear online gains.
+
+3. **HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation**
+   * Affiliation: Qilu University of Technology (Shandong Academy of Sciences) / University of Technology Sydney — *(Min Xiao, Jin Li, Shoujin Wang, Yeguang Zhen, Yishuo Li, Wenpeng Lu)*
+   * Link: [arxiv.org/abs/2610.20191](https://arxiv.org/abs/2610.20191)
+   * Venue: arXiv preprint
+   * TL;DR: A disentangled hierarchical agentic memory plus safety-aware set decoding for multi-center medication recommendation, improving safety while preserving accuracy across heterogeneous hospitals.
+   * Key techniques:
+     - Disentangled hierarchical memory (short/long-term, patient/center levels)
+     - Agentic memory write/read/reflect loop
+     - Safety-aware set decoding with clinical-constraint enforcement
+     - Evaluated across multiple medical centers
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — Code at [anonymous.4open.science/r/anonymous-HEM-Med-0935](https://anonymous.4open.science/r/anonymous-HEM-Med-0935/) (anonymous preprint; code present but limited docs/maintenance).
+     - **Novelty: 7/10** — Hierarchical agentic memory specialized for safety-critical multi-center medication rec.
+     - **Fairness: 6/10** — Multi-center setting implicitly addresses cross-site (population) fairness.
+     - **Robustness: 7/10** — Consistent gains across multiple clinical centers.
+     - **Impact: 6/10** — Safety-relevant medical domain; preprint, no deployment.
+
+4. **PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems**
+   * Affiliation: Xi'an Jiaotong-Liverpool University / University of Liverpool / Alibaba Group — *(Chong Zhang, Qijie Shen, Haichao Zhang, Can Wang, Xiaobo Jin, Jia Wang)*
+   * Link: [arxiv.org/abs/2610.13989](https://arxiv.org/abs/2610.13989)
+   * Venue: arXiv preprint
+   * TL;DR: A psychology-grounded user simulator (Psy-Engine) modeling three evolving latent user states, aligned via a User-Goal-Widget mechanism, enabling pre-deployment recommender evaluation without live traffic.
+   * Key techniques:
+     - Psy-Engine models three evolving latent psychological user states
+     - User-Goal-Widget (UGW) alignment couples user goals with recommender widget behavior
+     - Pre-deployment simulation of user-recommender interaction
+     - Offline A/B-style evaluation of recommendation policies
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — Code at [anonymous.4open.science/r/CC66F](https://anonymous.4open.science/r/CC66F/) (anonymous preprint; code present but limited docs/maintenance).
+     - **Novelty: 8/10** — Psychology-driven latent-state user model for rec simulation.
+     - **Fairness: 6/10** — Simulator enables probing biased recommendations pre-deployment.
+     - **Robustness: 7/10** — Stable across simulated user populations.
+     - **Impact: 7/10** — Useful pre-deployment evaluation harness for rec systems.
+
+5. **ARMED: Adaptive Retrieval-Augmented Medication Recommendation**
+   * Affiliation: UX Factory, Inc. (Seongnam-si, South Korea) / KAIST — *(Kyungkeon Chung, Se Un Park, Hyejin Lee, Junyoung Park)*
+   * Link: [arxiv.org/abs/2610.16440](https://arxiv.org/abs/2610.16440)
+   * Venue: ICTAI 2026
+   * TL;DR: An adaptive clinical RAG system with a retrieval-sufficiency controller that decides when external knowledge is actually needed for medication recommendation.
+   * Key techniques:
+     - Adaptive retrieval-augmented generation for medication recommendation
+     - Retrieval-sufficiency controller gates external knowledge retrieval
+     - Accepted at ICTAI 2026
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code released.
+     - **Novelty: 6/10** — Sufficiency-gated RAG for clinical medication rec.
+     - **Fairness: 4/10** — Not addressed.
+     - **Robustness: 6/10** — Evaluated on clinical datasets.
+     - **Impact: 6/10** — Clinical decision-support; workshop-level venue.
 
 ### Papers October 15
 
@@ -123,6 +210,8 @@ We only keep the last 10 days summary below, for the past records before these, 
      - Evaluated on NQ320K, TriviaQA, MS MARCO
    * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
      - **Opensource?: 6/10** — code at [anonymous.4open.science/r/bit_factorized_token-2C13](https://anonymous.4open.science/r/bit_factorized_token-2C13/) (anonymous, pre-print; not a maintained GitHub repo, documentation minimal).
+| 6/10 | HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / University of Technology Sydney — [anonymous.4open.science/r/anonymous-HEM-Med-0935](https://anonymous.4open.science/r/anonymous-HEM-Med-0935/) |
+| 6/10 | PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems (PsyBer-Agent) — Xi'an Jiaotong-Liverpool University / University of Liverpool / Alibaba Group — [anonymous.4open.science/r/CC66F](https://anonymous.4open.science/r/CC66F/) |
      - **Novelty: 8/10** — factorizing DocID tokens into model-scored bits is a fresh numeric-identifier design.
      - **Fairness: 3/10** — not addressed.
      - **Robustness: 7/10** — >20pp Hit@10 on unseen docs, up to 7x lower latency, strong generalization.
@@ -1194,135 +1283,11 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 7/10** — Plug-and-play across DRMs; validated on multiple datasets.
      - **Impact: 7/10** — A general framework for the fast-growing DRM line; strong empirical fairness gains.
 
-### Papers October 05
-
-*Monday, October 5, 2026. The live last-24h arxiv cs.IR announcement window carried only one on-topic generative-rec paper (AIMS, 2610.02600), so per the fallback we drew 6 more genuinely-new, on-topic generative / LLM / multimodal / agentic / security recommendation papers from the arxiv keyword pools over the last ~3 months (Jul-Oct 2026). 2 are open-source (AdaM-Rec, PQA). Total: 7 papers (2 opensource).*
-
-1. **When History Misleads: Asymmetric Margin Supervision for Instruction-Guided LLM Generative Recommendation**
-   * Affiliation: Duke University, Meta AI — *(Ming Yin, Yuhan Yang, Chen Chen, Xinyu Lin, Wentao Shi, Fangcong Yin, Chaofei Yang, Chao Yang, Jiyan Yang, Hui Zhang, Ning Jiang, Yiran Chen, Qifan Wang)*
-   * Link: [arxiv.org/abs/2610.02600](https://arxiv.org/abs/2610.02600)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 1 Oct 2026)
-   * TL;DR: Proposes AIMS, an asymmetric-margin supervision scheme for instruction-guided LLM generative recommendation that down-weights misleading historical interactions so the generative recommender does not over-fit spurious co-occurrence in the user's history.
-   * Key techniques:
-     - Instruction-guided generative recommendation formulation where free-text instructions modulate item generation
-     - Asymmetric margin loss that treats history-misleading (false-positive) items differently from genuine positives
-     - Decoupling of collaborative signal from noisy historical clicks via margin re-weighting
-     - Analysis of when/how historical engagement misleads generative ranking
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code or benchmark released.
-     - **Novelty: 7/10** — Fresh angle: explicit handling of misleading history in instruction-guided gen-rec via asymmetric margins.
-     - **Fairness: 5/10** — Not directly addressed.
-     - **Robustness: 8/10** — Core contribution is robustness to history noise/misleading engagement; ablation on history-quality perturbations.
-     - **Impact: 7/10** — Strong relevance to production gen-rec where historical clicks are noisy; preprint.
-
-2. **AdaM-Rec: Adaptive Modality Routing for Multimodal Recommendation**
-   * Affiliation: University of Queensland, Alibaba — *(Honghao Fu, Jiacheng Chen, Manxi Lin, Junjun Zheng, Xiangheng Kong, Yiwei Wang, Xin Yu, Miao Xu, Yuning Jiang, Yujun Cai)*
-   * Link: [arxiv.org/abs/2609.38455](https://arxiv.org/abs/2609.38455)
-   * Venue: NeurIPS 2026
-   * TL;DR: AdaM-Rec is an LLM-based framework for adaptive modality routing in multimodal recommendation that estimates per-query modality reliability via proxy recall tasks and routes textual vs. multimodal evidence with an agentic strategy.
-   * Key techniques:
-     - Structured natural-language item/user representations
-     - Proxy recall tasks that generate pseudo-queries pointing to the user's positive items to estimate modality reliability
-     - Agentic routing-strategy optimization over textual vs. multimodal evidence
-     - Routed recall + collaborative-item enrichment + relevance re-ranking
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/RomGai/AdaM-Rec](https://github.com/RomGai/AdaM-Rec): official NeurIPS-2026 code with README Get-Started/Data/Inference, requirements.txt, runnable run_pipe.py, sample data (Amazon Beauty/Clothing/Music via TAIRA); deductions: no checkpoints and relies on external LLM API (vLLM profiling reverted).
-     - **Novelty: 7/10** — Adaptive modality routing + proxy-recall reliability estimation is a fresh take on multimodal fusion.
-     - **Fairness: 5/10** — Not directly addressed.
-     - **Robustness: 6/10** — Benchmarked against SOTA multimodal recs; limited robustness stress-testing.
-     - **Impact: 7/10** — NeurIPS 2026; practical multimodal-rec framework with released code.
-
-3. **Reasoning with Evidence, Not Merely Rationales: Verifiable Preference Proofs for LLM-Based Recommendation**
-   * Affiliation: Yonsei University — *(Yu Hou, Nathaniel Kang, Pengkai Wang, Hua Li)*
-   * Link: [arxiv.org/abs/2610.02968](https://arxiv.org/abs/2610.02968)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 2 Oct 2026)
-   * TL;DR: PROVE-REC replaces unverifiable free-text rationales with verifiable preference proofs - structured, checkable evidence chains grounding an LLM recommender's decisions in retrieved user/item facts.
-   * Key techniques:
-     - Verifiable preference proofs as structured, machine-checkable evidence
-     - Separation of rationale generation from proof verification
-     - Grounding recommendations in retrievable user histories / item attributes
-     - Reliability evaluation of LLM-based recommendation under proof verification
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released.
-     - **Novelty: 8/10** — Reframing LLM-rec explainability around verifiable proofs rather than uncheckable rationales is novel.
-     - **Fairness: 6/10** — Proofs improve transparency/accountability but no explicit fairness method.
-     - **Robustness: 7/10** — Verification step guards against unsupported recommendations; evaluated for reliability.
-     - **Impact: 7/10** — Relevant to trustworthy LLM rec; preprint.
-
-4. **RankEvolve: A Reliable Multi-Agent Auto-Research Harness for Evolving Ranking Models**
-   * Affiliation: Meta — *(Zheng Chen, Linfeng Liu, Hong Li, Hong Yan)*
-   * Link: [arxiv.org/abs/2609.39551](https://arxiv.org/abs/2609.39551)
-   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 30 Sep 2026)
-   * TL;DR: RankEvolve is a multi-agent auto-research harness that autonomously proposes, implements, and evaluates changes to ranking models, evolving them reliably with guardrails (uses open-source HSTU as the benchmark backbone).
-   * Key techniques:
-     - Multi-agent orchestration (proposer / implementer / evaluator roles) for ranking-model research
-     - Reliability guardrails to keep auto-generated changes safe and reproducible
-     - Benchmarking on the open-source HSTU generative ranking model
-     - Closed-loop auto-research with experiment validation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released (uses open-source HSTU only as a benchmark).
-     - **Novelty: 7/10** — Auto-research agent harness specialized for evolving ranking models with guardrails.
-     - **Fairness: 5/10** — Not directly addressed.
-     - **Robustness: 6/10** — Guardrails target reproducibility/safety of auto-changes; empirical on HSTU.
-     - **Impact: 7/10** — Meta; points to autonomous ML-research tooling for ranking at scale.
-
-5. **The Like Trap: Multi-Stage Poisoning against Agents in Similarity-based Recommendation Systems**
-   * Affiliation: Michigan State University, Purdue University — *(Yue Xing, Pengfei He, Zitao Li)*
-   * Link: [arxiv.org/abs/2609.27155](https://arxiv.org/abs/2609.27155)
-   * Venue: arXiv preprint, September 2026 (cs.LG / cs.IR; submitted 22 Sep 2026)
-   * TL;DR: Exposes a multi-stage poisoning attack ('Like Trap') that manipulates similarity-based recommender agents by injecting coordinated fake engagements across stages to bias recommendations toward attacker-chosen items.
-   * Key techniques:
-     - Multi-stage poisoning pipeline targeting similarity-based recommendation agents
-     - Coordinated fake-engagement injection to distort item similarity graphs
-     - Stage-wise threat model separating data-poisoning from agent-exploitation
-     - Empirical demonstration of recommendation hijacking under the attack
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public attack/defense code released.
-     - **Novelty: 7/10** — Multi-stage (not single-shot) poisoning against similarity-based rec agents is a novel threat model.
-     - **Fairness: 6/10** — Security/adversarial focus; exposes integrity risks rather than fairness method.
-     - **Robustness: 4/10** — It is an attack paper - it demonstrates vulnerability, not a robustness improvement.
-     - **Impact: 6/10** — Important security warning for agentic similarity-based recs; preprint.
-
-6. **A Behavioral Trait Leaks into Preferences: Diagnosing Trait Interference in LLM User Simulators**
-   * Affiliation: KAIST — *(Chaehyun Kim, Sein Kim, Hongseok Kang, Chanyoung Park)*
-   * Link: [arxiv.org/abs/2609.25572](https://arxiv.org/abs/2609.25572)
-   * Venue: CIKM 2026 (short paper)
-   * TL;DR: PQA diagnoses 'trait interference' in LLM user simulators (where an amplified activity trait distorts preference boundaries) and proposes page-level quality anchoring to restore reliable simulator-based evaluation.
-   * Key techniques:
-     - Diagnosis of trait interference + evaluation invalidity in LLM user simulators
-     - Page-level quality anchoring (PQA) with a personalized anchor μ_u from user history
-     - ABOVE / NORMAL / BELOW page labeling before continue-or-exit decision
-     - Validation on Agent4Rec + SimUSER over MovieLens and Amazon CDs & Vinyl
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/chaehyun1/PQA](https://github.com/chaehyun1/PQA): official CIKM-2026 code with detailed README, requirements.txt, clear numbered pipeline for Agent4Rec + SimUSER; deductions: datasets/personas/recommendation-lists NOT included and depends on external simulators + GPT-4o-mini API.
-     - **Novelty: 7/10** — Identifies and names trait interference, a previously overlooked simulator failure mode.
-     - **Fairness: 6/10** — Improves evaluation validity; no explicit fairness method.
-     - **Robustness: 7/10** — Restores reliability of simulator-based rec evaluation under activity shifts.
-     - **Impact: 6/10** — CIKM 2026 short; directly useful for anyone using LLM user simulators.
-
-7. **Optimizing Effective Training Time for Large-Scale Recommendation Systems**
-   * Affiliation: Meta — *(Mingming Ding, Ruilin Chen, Yuzhen Huang, Hang Qi, Menglu Yu, San Tan, Damian Reeves, Boris Sarana, Kevin Tang, Satendra Gera, Gagan Jain, Sahil Shah, Vishwa Karia, Fuzail Khan, Yashasvi Makin, Edward Z. Yang, Oguz Ulgen, et al.)*
-   * Link: [arxiv.org/abs/2610.02057](https://arxiv.org/abs/2610.02057)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 1 Oct 2026)
-   * TL;DR: Introduces Effective Training Time (ETT%) as an operational metric and a fleet-scale set of training-stack optimizations that lifted Meta's recommendation-training ETT% from ~80% to >90% (avg +15.5% on benchmarks).
-   * Key techniques:
-     - ETT% metric instrumenting lifecycle overhead across the training fleet
-     - Communication elimination + pipeline overlap during trainer initialization
-     - Dynamic-shape handling, autotuning pruning, reusable PyTorch 2 compilation caches
-     - Asynchronous checkpointing + standalone model publishing + recovery-cost reduction
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released (industrial system paper).
-     - **Novelty: 6/10** — ETT% framing + full-stack optimization is solid engineering, not a new ML method.
-     - **Fairness: 4/10** — Not relevant.
-     - **Robustness: 6/10** — Validated across Meta's production fleet (500+ models, 6 months).
-     - **Impact: 8/10** — Large practical impact: +15.5% avg ETT, fleet-wide >90%; deployed at Meta scale.
-
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 214 papers as of October 15.
+**Count:** 216 papers as of October 16.
 
 | Score | Paper |
 | --- | --- |

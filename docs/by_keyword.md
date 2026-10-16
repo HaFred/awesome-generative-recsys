@@ -1,6 +1,8 @@
 # Papers by Keyword
 
 ### Agent / LLM Agent
+- PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems (PsyBer-Agent) — XJTLU / U Liverpool / Alibaba, arXiv 2610.13989
+- HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
 - Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems (AgentX-Model) — Kuaishou, arXiv 2609.30001
 - Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops — Spotify, arXiv 2609.30297
 - Effective Reinforcement Learning for Agentic Search by Recycling Zero-Variance Queries During Training
@@ -465,6 +467,7 @@
 - From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation — Kuaishou, arXiv 2608.21012
 
 ### Generative Recommendation / VAE
+- TransX Technical Report: Scaling Sequence Transduction for Recommendation (TransX) — LinkedIn, arXiv 2610.20913
 - Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation (Multi-Decoder OneRec)
 - Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs (OGR)
 - WhisperRec: Latent Reasoning for Efficient Foundation Recommendation Models (WhisperRec)
@@ -630,6 +633,7 @@
 - HASTE: Hierarchical and Attribute-aware Supervision for Generative Recommendation (HASTE) — Glance, arXiv 2610.17368
 - TacGR (UniSGR-V2): Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation (TacGR) — Alibaba International, arXiv 2610.16132
 ### Generative Retrieval / Ranking
+- Revisiting Generative vs. Dense Retrieval: A Static Value Prior Reverses the Gap (Static Value Prior) — Shopify, arXiv 2610.19065
 - OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender (OneTrans-V2) — ByteDance, arXiv 2609.28589
 - X-Rec Technical Report (X-Rec) — TikTok, arXiv 2609.29180
 - Beyond Matching: Category-Guided Latent Intent Reasoning for Generative Retrieval in E-Commerce (CaLIR)
@@ -784,6 +788,7 @@
 - IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
 
 ### Industrial
+- TransX Technical Report: Scaling Sequence Transduction for Recommendation (TransX) — LinkedIn, arXiv 2610.20913
 - Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops — Spotify, arXiv 2609.30297
 - On Evaluating and Improving Conversational Agents in Production — Zalando, arXiv 2609.32092
 - OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender (OneTrans-V2) — ByteDance, arXiv 2609.28589
@@ -1301,6 +1306,7 @@
 - Textual User Taste: Natural-Language Taste Profiles at Spotify Scale (Textual User Taste) - Spotify, arXiv 2609.35285
 - Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix, NeurIPS 2026 PALM Workshop, arXiv 2610.15864
 ### Memory Augmentation
+- HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
 - rEDMRec: Distilling Large Language Model Reasoning into an Editable Experience Memory for Recommendation (rEDMRec)
 - When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems (CoVeMem)
@@ -1652,6 +1658,7 @@
 - RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego — arXiv 2604.04457 [opensource]
 
 ### Retrieval / Representation
+- ARMED: Adaptive Retrieval-Augmented Medication Recommendation (ARMED) — UX Factory / KAIST, ICTAI 2026, arXiv 2610.16440
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k)
 - Training-Free LLM-Based Recommendation with Post-LLM Item Refinement Using Collaborative Signals (CoRRe)
@@ -1718,6 +1725,7 @@
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneReason / OneRec-V2) — Kuaishou; OneReason uses advanced RL to make CoT reasoning beneficial; SIGIR 2026 challenge; arXiv 2609.39828
 
 ### Semantic / Structured IDs
+- Revisiting Generative vs. Dense Retrieval: A Static Value Prior Reverses the Gap (Static Value Prior) — Shopify, arXiv 2610.19065
 - From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)
 - Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)
 
