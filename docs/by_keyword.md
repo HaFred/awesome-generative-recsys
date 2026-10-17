@@ -1305,6 +1305,8 @@
 
 - Textual User Taste: Natural-Language Taste Profiles at Spotify Scale (Textual User Taste) - Spotify, arXiv 2609.35285
 - Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix, NeurIPS 2026 PALM Workshop, arXiv 2610.15864
+- SharpRec: Sharpness-aware Model Merging with Salience Recovery for LLM-based Cross-Domain Sequential Recommendation (SharpRec) — Zhejiang University / Hangzhou Dianzi University, KDD 2026, arXiv 2607.25366
+- RES-MR: Risk-Aware Reasoning for Explainable and Safe Medication Recommendation (RES-MR) — Qilu University of Technology / UTS, SIGIR 2026, arXiv 2610.14474
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1868,6 +1870,7 @@
 
 - VirusCascade: Hijacking Collaborative Reflection in LLM-Powered Recommender Agents — Nanyang Technological University, arXiv 2609.38270
 
+- AlignPoison: Conditional Targeted Poisoning of Generative Recommenders via Decoding-Aligned Prefixes (AlignPoison) — UNC Chapel Hill / Notre Dame / Meta, arXiv 2610.14487
 ### Sequential Modeling / RoPE
 - LSF-SR: Latent Semantic Fusion for Sequential Recommendation via Flow-based Conditional Variational Autoencoders (LSF-SR) — National Yang Ming Chiao Tung University, arXiv 2609.29815
 - Learning from the Future: Privileged Self-Distillation for Sequential Recommendation (PSD)
@@ -1961,6 +1964,7 @@
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 - Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges
 
+- Behavior-Mining, Generative Conversations, and Collaborative Advisory: the Future of Travel and Tourism Recommender Systems (TTRS) — UAM Madrid / TU Munich / Free University of Bozen-Bolzano, arXiv 2610.08232
 ### Temporal Stability / Feature Pruning
 - Decomposing Staleness in Recommender Systems: A Dual-Filter Framework for Supersession and Decay (SDF)
 - Fortress: A Case Study in Stabilizing Search Recommendations

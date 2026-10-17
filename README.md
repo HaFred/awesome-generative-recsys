@@ -43,7 +43,6 @@ mindmap
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
-        PsyBer-Agent -- XJTLU / Alibaba
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -51,7 +50,6 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
-        CARD -- Sun Yat-sen U
       Efficient Decoding
         STATIC -- Google
       Optimization & Scaling
@@ -59,6 +57,7 @@ mindmap
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
         PR-entmax -- Sber AI Lab
+        SharpRec -- Zhejiang U / HDU
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -66,10 +65,11 @@ mindmap
         DACT -- Fudan U
         CHAP -- USTC
         DiffGRM -- Kuaishou
+        UniLang -- Google
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
-        HEM-Med -- Qilu U / UTS
+        RES-MR -- Qilu U of Tech / UTS
 ```
 
 <div align="center">
@@ -89,6 +89,95 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers October 17
+
+*Saturday, October 17, 2026. The live arXiv cs.IR recent-submission window (announced Oct 16-17) carried no strictly on-topic generative-recommendation papers in the recent pool, so per the fallback rule we drew 5 on-topic papers from the last-3-month keyword pool. 3 are open-source (SharpRec / Zhejiang University & Hangzhou Dianzi University, 6/10; RES-MR / Qilu University of Technology & UTS, 6.5/10; UniLang / Google, 6/10). Total: 5 papers (3 opensource). By Opensource count 216 -> 219.*
+
+1. **AlignPoison: Conditional Targeted Poisoning of Generative Recommenders via Decoding-Aligned Prefixes**
+   * Affiliation: University of North Carolina at Chapel Hill / University of Notre Dame / Meta — *(Zhuoxuan Zhang, Jinhao Duan, Xinyu Zhao, Jinduo Guo, Shuai Shao, Rui Li, Luke Simon, Zhun Deng, Tianlong Chen, Bo Sun)*
+   * Link: [arxiv.org/abs/2610.14487](https://arxiv.org/abs/2610.14487)
+   * Venue: arXiv preprint, October 2026 (cs.AI; submitted 10 Oct 2026)
+   * TL;DR: Generative recommenders (autoregressive SID decoding) are vulnerable to conditional targeted data poisoning — injecting fewer than 1% synthetic interaction histories with decoding-aligned prefixes boosts malicious-target promotion by up to 16.3 pp ASR lift under a black-box API threat model.
+   * Key techniques:
+     - Conditional targeted poisoning of end-to-end generative recommenders (backdoor-style, trigger-conditioned)
+     - Black-box threat model: only recommendation-API query access, no gradients or weights
+     - Decoding-aligned prefix discovery: prefixes both popular under the model's induced transition dynamics and strongly linked to a frequent trigger
+     - Entropy-regularized poison-budget allocation across candidate prefixes
+     - Evaluated on unimodal (Amazon) and multimodal (MicroLens-100K) generative recommendation benchmarks
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code or repository released (arXiv comment lists no code).
+     - **Novelty: 7/10** — First systematic study of conditional targeted poisoning specific to generative (autoregressive SID) recommenders; reframes poisoning via decoding alignment.
+     - **Fairness: 4/10** — Not a fairness method; notes poisoning can threaten platform fairness indirectly, but not a focus.
+     - **Robustness: 9/10** — Core contribution is exposing a decoding-dependent, context-sensitive poisoning vulnerability; strong empirical demonstration (0.5% ratio -> 36.7 pp ASR@10 lift; standard detectors catch <=1.2%).
+     - **Impact: 8/10** — Timely security concern as generative recommenders (OneRec, etc.) move to industrial deployment; clear practical attack surface.
+
+2. **SharpRec: Sharpness-aware Model Merging with Salience Recovery for LLM-based Cross-Domain Sequential Recommendation**
+   * Affiliation: Zhejiang University / Hangzhou Dianzi University — *(Huwei Ji, Jiajie Su, Yuyuan Li, Xiaohua Feng, Chaochao Chen)*
+   * Link: [arxiv.org/abs/2607.25366](https://arxiv.org/abs/2607.25366)
+   * Venue: KDD 2026 (Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining), arXiv preprint
+   * TL;DR: SharpRec lifts the performance ceiling of merged LLM-based cross-domain sequential recommenders via sharpness-aware geometric alignment (interference-free fusion) and preference salience activation (recovering target-domain distinctive features).
+   * Key techniques:
+     - LLM-based Cross-Domain Sequential Recommendation (CDSR) via model merging
+     - Sharpness-aware Geometric Alignment: a stable geometric foundation for interference-free fusion
+     - Preference Salience Activation: recovers the distinctive features essential for target-domain performance
+     - Addresses cross-domain knowledge conflict and multi-domain performance saturation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — Official code (github.com/muyiahhh/SharpRec) released with the KDD paper, but 0 stars, no license file, last pushed Jun 2026 (low activity).
+     - **Novelty: 7/10** — Combines sharpness-aware optimization with salience recovery to fix model-merging bottlenecks in LLM-based CDSR.
+     - **Fairness: 4/10** — Not addressed.
+     - **Robustness: 6/10** — Merging stability is improved, but robustness is not an evaluation axis.
+     - **Impact: 7/10** — KDD 2026, practical multi-domain LLM rec scenario; reproducible codebase.
+
+3. **RES-MR: Risk-Aware Reasoning for Explainable and Safe Medication Recommendation**
+   * Affiliation: Qilu University of Technology (Shandong Academy of Sciences) / University of Technology Sydney — *(Cong Wang, Jin Li, Shoujin Wang, Yishuo Li, Huilin Gu, Wenpeng Lu)*
+   * Link: [arxiv.org/abs/2610.14474](https://arxiv.org/abs/2610.14474)
+   * Venue: SIGIR 2026 (Proceedings of the 49th ACM SIGIR Conference on Research and Development in Information Retrieval), arXiv preprint, October 2026
+   * TL;DR: RES-MR is an LLM-based two-stage framework for safe medication recommendation — clinical-reasoning distillation from graph-retrieved knowledge, then risk-aware policy optimization that dynamically balances efficacy with patient-specific safety via reward shaping and clipping.
+   * Key techniques:
+     - LLM-based medication recommendation with explainability
+     - Explainable clinical reasoning distillation: fine-tune on synthesized reasoning trajectories grounded in patient-specific graph-retrieved knowledge
+     - Risk-aware policy optimization: disentangled drug factors build patient-specific reference prototypes (therapeutic features vs risk features to avoid)
+     - Risk boundary calibration via reward shaping and clipping
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6.5/10** — Official code + data (github.com/wangcong2001/RES-MR), 6 stars, but no license file.
+     - **Novelty: 7/10** — Personalized, patient-specific safety via risk-aware policy optimization is a clear advance for clinical recsys.
+     - **Fairness: 7/10** — Addresses vulnerable populations via heterogeneous (patient-specific) risk tolerance; safety/fairness-adjacent.
+     - **Robustness: 6/10** — Safety calibration helps, but not stress-tested for distribution shift.
+     - **Impact: 7/10** — SIGIR 2026, clinically relevant, code + data released; strong for medical recsys.
+
+4. **When Machines Speak (UniLang): A Unified Generative Framework for Integrating Machine-Native Symbols into Pretrained LLMs**
+   * Affiliation: Google Inc. — *(Su Yan, Rakesh Iyer)*
+   * Link: [arxiv.org/abs/2608.19529](https://arxiv.org/abs/2608.19529)
+   * Venue: arXiv preprint, August 2026 (cs.CL, cs.AI; submitted 20 Aug 2026)
+   * TL;DR: UniLang extends pretrained LLMs to treat discrete machine-native symbols (e.g., item IDs) as first-class generative units under a single autoregressive objective, and is evaluated on sequential recommendation and legal-precedent prediction — directly relevant to item-tokenization in generative retrieval.
+   * Key techniques:
+     - Unified generative framework bridging language modeling and structured prediction
+     - Expands the LLM vocabulary / embedding space with grounded machine-native representations
+     - Joint textual + symbolic autoregressive generation (no verbalization, no task-specific architecture)
+     - Evaluated on sequential recommendation and legal precedent prediction
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — Code (github.com/Stella-S-Yan/llm-internalization) released, 0 stars, no license, last pushed Sep 2026.
+     - **Novelty: 8/10** — Reframes item/entity symbols as native generative units; conceptually important for generative-retrieval tokenization.
+     - **Fairness: 4/10** — Not addressed.
+     - **Robustness: 6/10** — Not the focus.
+     - **Impact: 7/10** — From Google; touches the core item-symbol grounding problem of generative retrieval; reproducible on sequential recommendation.
+
+5. **Behavior-Mining, Generative Conversations, and Collaborative Advisory: the Future of Travel and Tourism Recommender Systems (TTRS)**
+   * Affiliation: Universidad Autónoma de Madrid / Technical University of Munich / Free University of Bozen-Bolzano — *(Alejandro Bellogín, Linus W. Dietz, Francesco Ricci, Pablo Sánchez)*
+   * Link: [arxiv.org/abs/2610.08232](https://arxiv.org/abs/2610.08232)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 6 Oct 2026)
+   * TL;DR: A position/vision paper arguing that generative AI forces travel & tourism recommender systems to evolve from prediction filters into flexible, transparent, multistakeholder advisory agents combining data mining, NLP, and generative conversations.
+   * Key techniques:
+     - Vision/position paper on Travel & Tourism Recommender Systems (TTRS)
+     - Identifies three limitations of current TTRS: outdated/sparse datasets, accuracy-over-novelty focus, failure to meet traveler needs
+     - Proposes generative-AI-driven redesign: flexible advisors, multimodal + NLP integration, transparent multistakeholder (traveler/supplier/platform/community) balancing
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — Vision paper, no code.
+     - **Novelty: 6/10** — Synthesizes trends and sets a research agenda; not a new method.
+     - **Fairness: 7/10** — Explicitly addresses multistakeholder balance including local communities and overtourism/sustainability.
+     - **Robustness: 4/10** — Not addressed.
+     - **Impact: 6/10** — From well-known recsys researchers; shapes the TTRS research agenda; moderate (preprint, vision).
 
 ### Papers October 16
 
@@ -1194,100 +1283,11 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 6/10** — Evaluated on 3 datasets × 3 backbones; robustness/stability of contribution estimates under sparse data not deeply stressed.
      - **Impact: 7/10** — New fairness perspective for sustainable recommendation ecosystems; model-agnostic and demonstrates a strong accuracy–fairness trade-off.
 
-### Papers October 06
-
-*Tuesday, October 6, 2026. The live last-24h arxiv cs.IR announcement window carried only 3 on-topic generative-rec papers (SPRIG, CreGR, SAGA-CDR), below the 5-paper floor, so per the fallback we drew 2 more genuinely-new, on-topic papers from the arxiv keyword pools over the last ~3 months (LRPRec, FairDiff). 2 are open-source (SPRIG, CreGR). Total: 5 papers (2 opensource).*
-
-1. **SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation**
-   * Affiliation: Johannes Kepler University Linz — *(Justin Hangoebl, Marta Moscati, Alessandro B. Melchiorre, Shah Nawaz, Markus Schedl)*
-   * Link: [arxiv.org/abs/2610.06590](https://arxiv.org/abs/2610.06590)
-   * Venue: CIKM 2026 (short paper), arXiv preprint, October 2026 (cs.IR; submitted 5 Oct 2026)
-   * TL;DR: SPRIG integrates content-derived Semantic IDs into knowledge-graph path reasoning, training on KG paths that terminate in items represented as discrete content-derived tokens — combining relational grounding with parameter-efficient SID item representations.
-   * Key techniques:
-     - Knowledge-graph path reasoning generative recommender (entity-relation path generation)
-     - Semantic IDs (hierarchically quantized discrete codes) replacing opaque item tokens
-     - KG paths terminating in discrete, content-derived SID tokens for compositional generalization
-     - Beam output postprocessor for SEM-tuple decoding; built as a fork of the hopwise library
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — Official MIT-licensed code (github.com/justinhangoebl/semantic-id-knowledge-graph-recommender), a well-structured fork of hopwise with a documented SPRIG model class, dataset, SEM tokenizer, and config.
-     - **Novelty: 7/10** — Clean fusion of SID item representation with KG path reasoning, addressing both lines' complementary limitations.
-     - **Fairness: 5/10** — Not directly addressed.
-     - **Robustness: 6/10** — Uses fewer parameters and lower compute than baselines; robustness is not the focus.
-     - **Impact: 7/10** — Strong fit for knowledge-rich domains (movies, music); reproducible MIT codebase.
-
-2. **Generate What You Can Trust: Content Credibility in Generative Recommenders (CreGR)**
-   * Affiliation: University of Technology Sydney — *(Zhuo Cai, Guanghao Wu, Shoujin Wang, Peilin Zhou, Victor W. Chu)*
-   * Link: [arxiv.org/abs/2610.05670](https://arxiv.org/abs/2610.05670)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 5 Oct 2026)
-   * TL;DR: CreGR is the first credible generative recommender that tackles content credibility across both GR stages — a credibility-aware tokenizer that disentangles credible/uncredible tokens, and an accuracy-preserving discrete-diffusion generator with an asymmetric masking strategy that suppresses uncredible-content tokens.
-   * Key techniques:
-     - Generative recommendation with semantic IDs (discrete token sequences)
-     - Credibility-aware tokenizer that learns discriminative tokens for credible vs. uncredible items
-     - Discrete-diffusion generator with asymmetric masking probability reduction for uncredible tokens
-     - Accuracy preservation: user-preference-signal tokens are left unaffected
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — Official code (github.com/iamZhuoCai/CreGR) with detailed README, run_pipeline.py, requirements.txt, but no license file and last commit 30 May 2026 (stale).
-     - **Novelty: 7/10** — First to explicitly address content credibility in generative recommenders across tokenization and generation.
-     - **Fairness: 9/10** — Core contribution is credibility/fairness (protecting users from fake news and related harms), explicitly optimized.
-     - **Robustness: 6/10** — Credibility handling helps robustness to malicious content; not stress-tested broadly.
-     - **Impact: 7/10** — Directly relevant to societal harms (fake news, platform reputation); practical discrete-diffusion design.
-
-3. **Reading the Mood: Emotion-Guided Book-to-Music Recommendation via CGANs and LLMs (SAGA-CDR)**
-   * Affiliation: National Technical University of Athens — *(Manousos Linardakis, Georgios Alexandridis)*
-   * Link: [arxiv.org/abs/2610.06703](https://arxiv.org/abs/2610.06703)
-   * Venue: SENTIRE 2026 (ICDM 2026 Workshops), arXiv preprint, October 2026 (cs.IR; submitted 5 Oct 2026)
-   * TL;DR: SAGA-CDR is a two-phase cross-domain recommender that pairs books with mood-matched music — transformer sentiment embeddings mapped across domains via a Conditional GAN (with a mask-conditioned, stochastic generator), then LLM-based valence-arousal emotion filtering.
-   * Key techniques:
-     - Cross-domain recommendation (book → music)
-     - Transformer-based sentiment embeddings from user reviews
-     - Conditional GAN with a mask-conditioned generator handling missing sentiment and injecting stochasticity
-     - LLM classification of books into valence-arousal emotional quadrants for candidate filtering
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released.
-     - **Novelty: 6/10** — Combines CGAN cross-domain transfer with LLM emotion alignment; a modest, incremental framing.
-     - **Fairness: 5/10** — Not directly addressed.
-     - **Robustness: 5/10** — Evaluated on Amazon (English) and Douban (Chinese, cross-lingual); robustness not stressed.
-     - **Impact: 5/10** — Niche cross-domain book-to-music scenario; workshop paper.
-
-4. **Learning Robust Personalized Prompts for LLM-Driven Sequential Recommendation (LRPRec)**
-   * Affiliation: Zhejiang University — *(Xiaolin Zheng, Qiyong Zhong, Jiajie Su, Xiang Chen)*
-   * Link: [arxiv.org/abs/2610.03923](https://arxiv.org/abs/2610.03923)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 2 Oct 2026)
-   * TL;DR: LRPRec is a learnable prompting framework for LLM-driven sequential recommendation that initializes continuous instruction prompts from discrete templates and injects a user preference embedding while constraining shared prompts within a trust region to prevent semantic drift.
-   * Key techniques:
-     - LLM-driven sequential recommendation as autoregressive generation conditioned on natural-language prompts
-     - Continuous instruction prompts initialized from discrete templates
-     - Personalized prompt injection: user behavior → preference embedding added to shared prompts
-     - Semantic drift constraint: trust-region regularization around initialization anchors
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released.
-     - **Novelty: 7/10** — Decouples stability (trust-region shared prompts) from expressiveness (additive personalization).
-     - **Fairness: 4/10** — Not addressed.
-     - **Robustness: 8/10** — Core contribution is robustness to prompt wording changes and semantic drift; main evaluation axis.
-     - **Impact: 6/10** — Removes manual prompt engineering for LLM sequential rec; solid empirical gains.
-
-5. **FairDiff: Mitigating the Self-Reinforcing Matthew Effect in Diffusion Recommender Models**
-   * Affiliation: Tsinghua University — *(Song-Li Wu¹, Xianquan Wang³, Zhaocheng Du², Weinan Gan², Jingyi Wang¹)* — also Huawei Noah's Ark Lab, University of Science and Technology of China
-   * Link: [arxiv.org/abs/2609.36671](https://arxiv.org/abs/2609.36671)
-   * Venue: arXiv preprint, September 2026 (cs.AI; submitted 29 Sep 2026)
-   * TL;DR: FairDiff exposes a self-reinforcing Matthew Effect in diffusion recommenders — driven by popularity-dominated loss and a structural prior mismatch that collapses reverse sampling toward popular items — and proposes a plug-and-play framework with Popularity Condition Guidance (inference-time reweighting) and a Semantic Calibration module (one-step optimal transport).
-   * Key techniques:
-     - Diffusion Recommender Models (DRMs) with forward/reverse denoising
-     - Popularity Condition Guidance (PCG): inference-time score-field reweighting that penalizes high-popularity regions
-     - Semantic Calibration (SC) module: one-step optimal transport bridging the prior mismatch
-     - Plug-and-play, architecture- and training-agnostic integration
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released.
-     - **Novelty: 8/10** — Identifies a unique generative-dynamics bias mechanism (prior mismatch) in DRMs, distinct from standard popularity bias.
-     - **Fairness: 9/10** — Core contribution is fairness (mitigating the Matthew Effect / long-tail suppression).
-     - **Robustness: 7/10** — Plug-and-play across DRMs; validated on multiple datasets.
-     - **Impact: 7/10** — A general framework for the fast-growing DRM line; strong empirical fairness gains.
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 216 papers as of October 16.
+**Count:** 219 papers as of October 17.
 
 | Score | Paper |
 | --- | --- |
@@ -1435,6 +1435,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | X-KGRank: A Knowledge Graph RAG Framework for Explainable Recommendations via Pattern Mining and LLM Re-Ranking (X-KGRank) |
 | 7/10 | RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation (RouteRec) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
+| 6.5/10 | RES-MR: Risk-Aware Reasoning for Explainable and Safe Medication Recommendation (RES-MR) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | PAPA: Online Personalized Active Preference Alignment (PAPA) |
 | 6/10 | A Behavioral Trait Leaks into Preferences: Diagnosing Trait Interference in LLM User Simulators (PQA) |
@@ -1462,6 +1463,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP) |
 | 6/10 | HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE) |
 | 6/10 | HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization |
+| 6/10 | SharpRec: Sharpness-aware Model Merging with Salience Recovery for LLM-based Cross-Domain Sequential Recommendation (SharpRec) |
+| 6/10 | UniLang: A Unified Generative Framework for Integrating Machine-Native Symbols into Pretrained LLMs (UniLang) |
 | 6/10 | Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations |
 | 7/10 | CARD: Counterfactual Attention Regulation Diffusion for Diffusion-based Sequential Recommendation (CARD) — Sun Yat-sen University / Peng Cheng Laboratory, ICASSP 2026 — [github.com/yanqilong3321/CARD](https://github.com/yanqilong3321/CARD) |
 | 7/10 | DiffGRM: Diffusion-based Generative Recommendation Model (DiffGRM) — Kuaishou, WWW 2026 — [github.com/liuzhao09/DiffGRM](https://github.com/liuzhao09/DiffGRM) |
