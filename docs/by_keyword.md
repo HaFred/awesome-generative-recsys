@@ -132,6 +132,8 @@
 - SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching (SequenceO1)
 - Dense Feature Representation over Sequence Modeling: A Solution to the KDD Cup 2026 UniRec Challenge (KDD Cup 2026 UniRec) — Z Lab (Chengdu), KDD Cup 2026 Tencent UniRec Challenge Workshop
 
+- RoleMix: Unifying Sequential and Non-Sequential Features via Semantic Tokenization for Post-Click Conversion Rate Prediction (RoleMix) — UESTC / Macau Polytechnic University / University of Liverpool, KDD Cup 2026 Tencent UniRec Challenge, arXiv 2607.22700
+
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -1307,6 +1309,8 @@
 - Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix, NeurIPS 2026 PALM Workshop, arXiv 2610.15864
 - SharpRec: Sharpness-aware Model Merging with Salience Recovery for LLM-based Cross-Domain Sequential Recommendation (SharpRec) — Zhejiang University / Hangzhou Dianzi University, KDD 2026, arXiv 2607.25366
 - RES-MR: Risk-Aware Reasoning for Explainable and Safe Medication Recommendation (RES-MR) — Qilu University of Technology / UTS, SIGIR 2026, arXiv 2610.14474
+- Vela: User Behavior as Supervision Sparks LLM Intelligence (Vela) — AllSpark at Xiaohongshu (RedNote), arXiv 2610.14709 [opensource]
+
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1659,6 +1663,9 @@
 - SafeCRS: Personalized Safety Alignment for LLM-Based Conversational Recommender Systems (SafeCRS) — UIC / UIUC / Amazon, Safe-GDPO, KDD 2026 — arXiv 2603.03536 [opensource]
 - RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego — arXiv 2604.04457 [opensource]
 
+- Many Right Answers, One Training Example: Removing Responder Noise from GRPO for LLM Recommenders (ReMaRk) — Nanyang Technological University, arXiv 2610.17771 [opensource]
+- SemPOI-RL: Aligning LLM Semantic Reasoning for Interpretable Out-of-Town POI Sequential Generation (SemPOI-RL) — Beihang University, arXiv 2608.30399 [opensource]
+
 ### Retrieval / Representation
 - ARMED: Adaptive Retrieval-Augmented Medication Recommendation (ARMED) — UX Factory / KAIST, ICTAI 2026, arXiv 2610.16440
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1857,6 +1864,8 @@
 - HASTE: Hierarchical and Attribute-aware Supervision for Generative Recommendation (HASTE) — Glance, arXiv 2610.17368
 - TacGR (UniSGR-V2): Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation (TacGR) — Alibaba International, arXiv 2610.16132
 - Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix, NeurIPS 2026 PALM Workshop, arXiv 2610.15864
+- LLM-based User-Product Relevance Evaluation for Dynamic Product Advertising (DPA Relevance) — Snap Inc., CIKM 2026, arXiv 2610.14550
+
 ### Security / Adversarial
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)

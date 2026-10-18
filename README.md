@@ -40,6 +40,8 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
+        ReMaRk -- NTU
+        SemPOI-RL -- Beihang U
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -50,6 +52,7 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
+        Vela -- Xiaohongshu
       Efficient Decoding
         STATIC -- Google
       Optimization & Scaling
@@ -57,7 +60,6 @@ mindmap
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
         PR-entmax -- Sber AI Lab
-        SharpRec -- Zhejiang U / HDU
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -65,11 +67,9 @@ mindmap
         DACT -- Fudan U
         CHAP -- USTC
         DiffGRM -- Kuaishou
-        UniLang -- Google
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
-        RES-MR -- Qilu U of Tech / UTS
 ```
 
 <div align="center">
@@ -87,6 +87,97 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 ## By Date
 
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
+### Papers October 18
+
+*Sunday, October 18, 2026. The live last-24h arXiv cs.IR window (announced Oct 17-18) carried no strictly on-topic generative-recommendation papers in the recent pool, so per the fallback rule we drew 5 on-topic papers from the last-3-month keyword pool. 3 are open-source (ReMaRk / Nanyang Technological University, 7/10; SemPOI-RL / Beihang University, 6/10; Vela / AllSpark at Xiaohongshu, 6/10). Total: 5 papers (3 opensource). By Opensource count 219 -> 222.*
+
+1. **ReMaRk: Many Right Answers, One Training Example: Removing Responder Noise from GRPO for LLM Recommenders**
+   * Affiliation: Nanyang Technological University, Singapore — *(Xin Li, Hao Jiang, Jinghao Guo, Weisi Lin, Chau Yuen)*
+   * Link: [arxiv.org/abs/2610.17771](https://arxiv.org/abs/2610.17771)
+   * Venue: arXiv preprint, October 2026 (cs.CL; submitted 13 Oct 2026)
+   * TL;DR: When an LLM recommender is trained with GRPO on threads where many replies name different items, the usual "one reply per example" recipe mostly rewards which reply was drawn (85% of advantage variance) rather than list quality; ReMaRk instead scores every list once against the union of all replies and samples each request equally, reaching 2,000-step recall in 25-53% of the steps.
+   * Key techniques:
+     - Responder-noise diagnosis: shows Rank-GRPO's per-example advantage variance is dominated (85%) by which reply was randomly drawn
+     - Union-reward RL: score a generated list once against the union of all responders' titles, one training example per request
+     - Budget-matched comparison: ReMaRk reaches the validation recall of 2,000 per-reply RL steps in 25-53% of the steps and never falls significantly behind Rank-GRPO
+     - Validated on 7 backbones x 3 datasets (Reddit movie/book/music); the same reward helps ProtoQA (approx 100 answers/question)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — Code released (github.com/LiXin97/ReMaRk) under Apache-2.0 with 23 checkpoints on Hugging Face and a CC BY-NC 4.0 data release; depends on third-party Rank-GRPO code/data not redistributed here.
+     - **Novelty: 8/10** — Reframes GRPO for recommenders as "train on the request, not on each answer" and exposes responder noise as the dominant advantage-variance source; a clean, general fix for RL with multiple valid answers.
+     - **Fairness: 0/10** — Not addressed.
+     - **Robustness: 7/10** — Evaluated across 7 LLM backbones and 3 datasets with consistent, significant gains and paired-bootstrap CIs.
+     - **Impact: 8/10** — Directly improves the state-of-the-art Rank-GRPO recipe; cheaper, more stable RL with broad applicability to any multi-answer recommendation/QA setting.
+
+2. **SemPOI-RL: Aligning LLM Semantic Reasoning for Interpretable Out-of-Town POI Sequential Generation**
+   * Affiliation: Beihang University — *(Yunqi Liu, Yang Zhang, Ruixing Zhang, Liangzhe Han, Yi Qiao, Tongyu Zhu, Leilei Sun)*
+   * Link: [arxiv.org/abs/2608.30399](https://arxiv.org/abs/2608.30399)
+   * Venue: arXiv preprint, August 2026 (cs.CL, cs.AI; submitted 31 Aug 2026)
+   * TL;DR: SemPOI-RL aligns an LLM's semantic reasoning with structured sequence generation for interpretable out-of-town POI recommendation: it infers destination-oriented travel styles in natural language, grounds them via a Semantic POI Alignment Module into a style-conditioned masked autoencoder, then RL-aligns styles with downstream sequence quality.
+   * Key techniques:
+     - LLM fine-tuning to infer destination-oriented travel styles from hometown trajectories, using natural language as an interpretable semantic intermediate
+     - Semantic POI Alignment Module (SPAM): grounds inferred styles into a style-conditioned masked autoencoder for position-aware trajectory generation
+     - Reinforcement learning with recommendation-oriented rewards to align LLM-generated styles with downstream sequence quality
+     - Interpretable style attribution across trip phases; evaluated on two real-world POI datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — Code released (github.com/Wind-Flipped/SemPOI-RL); no explicit license file and modest maintenance.
+     - **Novelty: 7/10** — Joins LLM semantic reasoning with structured POI generation via an interpretable natural-language style bridge and SPAM grounding; addresses out-of-town cross-city interest drift.
+     - **Fairness: 0/10** — Not addressed.
+     - **Robustness: 7/10** — Beats traditional recommenders and direct-LLM baselines on two real-world datasets with interpretable attributions.
+     - **Impact: 7/10** — Interpretable LLM-based POI/travel recommendation with a concrete RL-alignment recipe; practical for location-based services.
+
+3. **Vela: User Behavior as Supervision Sparks LLM Intelligence**
+   * Affiliation: AllSpark Team, Xiaohongshu (RedNote) — *(Yang Xiao, Yusong Sun, Haoyi Wu, Wenyang Hui, Weiqiang Hang, Luqing Wang, Zejian Wang, Zirui Tu, Jingsheng Mao, Shaobo Hu, Yang Luo, Jiale Guo, Jin Zhang, Yudan Liu, Zhaokai Luo, Ren Huan, Yao Hu, Chengyue Jiang, Wenjie Li, Chuan Mu)*
+   * Link: [arxiv.org/abs/2610.14709](https://arxiv.org/abs/2610.14709)
+   * Venue: arXiv preprint, October 2026 (cs.CL, cs.AI; submitted 10 Oct 2026)
+   * TL;DR: Vela turns anonymized real user-behavior histories (100,000 users) into roughly 75,000 trainable tasks across 91 templates, and fine-tuning Qwen3.6-35B-A3B on them lifts user-related tasks by up to 11.5 points and general benchmarks by about 4 points - showing user behavior is a scalable supervision source for LLM (and recommender) intelligence.
+   * Key techniques:
+     - User behavior as supervision: convert anonymized behavior records into trainable tasks and trajectories
+     - 91 real-world task templates across six behavior categories (views, searches, purchases, posts, follows, dislikes); 74 released
+     - Difficulty-based filtering and trajectory acceptance retain roughly 75,000 tasks with selected trajectories
+     - Fine-tuning Qwen3.6-35B-A3B; RL after fine-tuning outperforms RL-from-base by up to 7.7 points
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — Official repo (github.com/AllSpark-Research/Vela) releases 74 task templates and Composer/Scorer prompts, but not the training code or model weights.
+     - **Novelty: 7/10** — Proposes real-world user behavior as a scalable supervision signal distinct from static text/synthetic data; a task-template library for user understanding.
+     - **Fairness: 0/10** — Not addressed.
+     - **Robustness: 7/10** — Gains on 10 benchmarks (user-related + general) with a data-scaling study (4.7K to 75K examples).
+     - **Impact: 8/10** — Industrial-scale (Xiaohongshu/RedNote, 100K users) user-modeling framework with broad LLM-intelligence implications; strong, reproducible template release.
+
+4. **RoleMix: Unifying Sequential and Non-Sequential Features via Semantic Tokenization for Post-Click Conversion Rate Prediction**
+   * Affiliation: University of Electronic Science and Technology of China / Macau Polytechnic University / University of Liverpool — *(Wenan Wang, Qin Zhao, Zhixiang Lu)*
+   * Link: [arxiv.org/abs/2607.22700](https://arxiv.org/abs/2607.22700)
+   * Venue: KDD Cup 2026 Tencent UniRec Challenge, July 2026 (cs.AI; submitted 18 Jul 2026)
+   * TL;DR: RoleMix unifies sequential and non-sequential evidence through a shared role-preserving token interface for PCVR prediction - non-sequential fields become explicit semantic tokens, long behavior histories become sequence-query tokens via two-stage hierarchical window attention - reaching 83.648% online AUC (+1.953% over the official baseline) on the KDD Cup 2026 Tencent UniRec Challenge.
+   * Key techniques:
+     - Unified, role-preserving token interface preserving user/item/pairwise/dense/contextual/cross-feature roles
+     - Non-sequential fields converted into explicit semantic tokens
+     - Long behavior domains compressed into item- and context-aware sequence-query tokens via two-stage hierarchical window attention
+     - Stacked UniMixing-Lite blocks jointly refine global, semantic, and sequence-query tokens for PCVR
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code released (KDD Cup 2026 competition paper).
+     - **Novelty: 7/10** — A clean role-preserving token interface that unifies heterogeneous sequential/non-sequential signals; shows semantic tokenization yields the largest isolated PCVR gain.
+     - **Fairness: 0/10** — Not addressed.
+     - **Robustness: 7/10** — Large-scale KDD Cup industrial evaluation with ablation studies isolating each component.
+     - **Impact: 6/10** — Practical PCVR modeling at Tencent scale; a reusable tokenization principle for large-vocabulary industrial rec.
+
+5. **LLM-based User-Product Relevance Evaluation for Dynamic Product Advertising (DPA Relevance)**
+   * Affiliation: Snap Inc. — *(Wen Zhang, Xiao Bai, Hsiang-wei Chao, Mengfan Zhu, Tong Zhao, Mingxuan Ju, Xiaodong Liu, Congfei Zhang, Yunzhi Zhou, Yajun Wang, Jinchao Li, Yu Zhang)*
+   * Link: [arxiv.org/abs/2610.14550](https://arxiv.org/abs/2610.14550)
+   * Venue: CIKM 2026, October 2026 (cs.IR, cs.AI, cs.LG; submitted 10 Oct 2026)
+   * TL;DR: For offline evaluation of DPA retrieval, the metric compresses engagement history into intent representatives via Semantic-ID-grouped, event-stratified segmentation, then uses LLMs as semantic relevance judges per intent and aggregates a user-level score; an agentic human-aligned prompting framework distills teacher judgments into a student model, correlating strongly with online business metrics.
+   * Key techniques:
+     - Semantic-ID-grouped, event-stratified segmentation compresses engagement history into compact intent representatives
+     - LLM-as-judge relevance scoring of a recommended product against each intent, aggregated to a user-level relevance score
+     - Agentic, human-aligned prompting framework generating multi-category relevance guidelines
+     - Teacher-to-student distillation for scalable, cheap evaluation before A/B testing
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — No public code released (CIKM 2026 industrial paper).
+     - **Novelty: 7/10** — Combines Semantic-ID-grouped intent segmentation with an agentic LLM-judge and teacher-to-student distillation for offline DPA retrieval evaluation.
+     - **Fairness: 0/10** — Not addressed.
+     - **Robustness: 7/10** — Metric correlates with both offline and online business metrics, enabling faster DPA iteration.
+     - **Impact: 6/10** — Practical offline evaluation for Snap-scale DPA retrieval; reduces costly online A/B testing.
 
 ---
 
@@ -299,8 +390,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - Evaluated on NQ320K, TriviaQA, MS MARCO
    * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
      - **Opensource?: 6/10** — code at [anonymous.4open.science/r/bit_factorized_token-2C13](https://anonymous.4open.science/r/bit_factorized_token-2C13/) (anonymous, pre-print; not a maintained GitHub repo, documentation minimal).
-| 6/10 | HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / University of Technology Sydney — [anonymous.4open.science/r/anonymous-HEM-Med-0935](https://anonymous.4open.science/r/anonymous-HEM-Med-0935/) |
-| 6/10 | PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems (PsyBer-Agent) — Xi'an Jiaotong-Liverpool University / University of Liverpool / Alibaba Group — [anonymous.4open.science/r/CC66F](https://anonymous.4open.science/r/CC66F/) |
      - **Novelty: 8/10** — factorizing DocID tokens into model-scored bits is a fresh numeric-identifier design.
      - **Fairness: 3/10** — not addressed.
      - **Robustness: 7/10** — >20pp Hit@10 on unseen docs, up to 7x lower latency, strong generalization.
@@ -1192,102 +1281,11 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 7/10** — extensive experiments on four public datasets; KDD 2026
      - **Impact: 6/10** — University of Electronic Science and Technology of China; KDD 2026 session-based recommendation
 
-### Papers October 07
-
-*Wednesday, October 7, 2026. The live last-24h arxiv submission window (papers dated Oct 6) carried only 3 strictly on-topic generative-retrieval/recommendation papers (Semantic-ID Spaces, Disentangling Paradigm/Identifier/Decoding, INTEGER), below the 5-paper floor, so per the fallback we drew 2 more genuinely-new, on-topic sequential-recommendation / fairness papers from the same Oct 6 window (RLCP, CPFR). 0 are open-source. Total: 5 papers (0 opensource).*
-
-1. **A Systematic Study of Semantic ID Spaces for Generative Information Retrieval**
-   * Affiliation: Artefact Research Center, Paris, France; Université d'Angers (LERIA), France — *(Alexia Allal, Hicham Randrianarivo, Sylvain Lamprier)*
-   * Link: [arxiv.org/abs/2610.08732](https://arxiv.org/abs/2610.08732)
-   * Venue: arXiv preprint, October 2026 (cs.IR, cs.CL; submitted 6 Oct 2026)
-   * TL;DR: Proposes a unified design space that merges Product Quantization (PQ), Residual Quantization (RQ), and hybrid PQ×RQ variants for numerical DocIDs in Generative Information Retrieval, plus a suite of training-free intrinsic metrics that predict retrieval quality without full model training — enabling systematic analysis of DocID structural properties (hierarchy vs parallelism, length, codebook size) on MS MARCO 300K and NQ320K.
-   * Key techniques:
-     - Unified DocID framework spanning PQ, RQ, and hybrid PQ×RQ variants in one design space
-     - Training-free intrinsic metrics for DocID structural fidelity / quality (no full-model training)
-     - Controlled study of hierarchy vs parallelism, DocID length, and codebook size
-     - Empirical analysis on MS MARCO 300K and NQ320K
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released (empirical study; no repository found).
-     - **Novelty: 7/10** — A systematic, method-agnostic lens on DocID design; the unified PQ/RQ space and training-free metrics are genuinely useful for the SID community, though it studies rather than invents a method.
-     - **Fairness: 3/10** — Not addressed.
-     - **Robustness: 6/10** — Studies structural trade-offs extensively, but robustness under distribution shift is not the focus.
-     - **Impact: 7/10** — Directly relevant to every generative-recommendation / retrieval system that uses semantic IDs; training-free metrics save substantial compute in DocID iteration.
-
-2. **Disentangling Paradigm, Identifier, and Decoding in Generative Retrieval**
-   * Affiliation: Artefact Research Center, Paris, France; Université d'Angers (LERIA), France — *(Hicham Randrianarivo, Logan Renaud, Alexia Allal)*
-   * Link: [arxiv.org/abs/2610.08716](https://arxiv.org/abs/2610.08716)
-   * Venue: arXiv preprint, October 2026 (cs.IR, cs.CL; submitted 6 Oct 2026)
-   * TL;DR: Training autoregressive, masked-diffusion, and block-diffusion generative retrievers with RQ/PQ/random identifiers at a fixed budget, the study shows decoding choice alone shifts diffusion Hit@1 by 6.6–13.7 points, and proposes one-pass scoring that matches or beats generate-and-match in 11/12 settings — arguing paradigm comparisons must report each method at its own best decoding.
-   * Key techniques:
-     - Controlled isolation of paradigm (AR / masked-diffusion / block-diffusion) from identifier (RQ / PQ / random) and decoding
-     - Generate-and-match decoding for diffusion retrievers (generate an identifier, then retrieve closest corpus identifiers)
-     - One-pass scoring: a fully-masked identifier is scored once by its codes' probabilities — removes 46–83% of masked diffusion's deficit to beam search
-     - Empirical finding that random identifiers retain 83–90% of RQ Hit@1 (the models largely memorize query→identifier mappings)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released.
-     - **Novelty: 8/10** — Carefully disentangles three entangled design choices and introduces one-pass scoring as a strong, cheap diffusion decoding; a valuable methodological clarification.
-     - **Fairness: 3/10** — Not addressed.
-     - **Robustness: 7/10** — Exhaustive controlled experiments across paradigms, identifiers, and decodings; strong empirical rigor.
-     - **Impact: 8/10** — Challenges the "diffusion beats AR" narrative and sets a reporting standard (report each paradigm at its own best decoding); one-pass scoring is practically useful.
-
-3. **Adapting Generative Recommenders for Multi-Turn Interaction (INTEGER)**
-   * Affiliation: National Taiwan University — *(Yu-Chen Den, Zhi Rui Tam, Yung-Yu Shih, Shih-Hsin Wang, Yun-Nung Chen, Pu-Jen Cheng, Eugene Yang)*; Eugene Yang: Johns Hopkins University
-   * Link: [arxiv.org/abs/2610.08136](https://arxiv.org/abs/2610.08136)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 6 Oct 2026)
-   * TL;DR: INTEGER extends generative recommendation to multi-turn interaction so users can correct recommendations in-dialogue: a learned routing token decides when to recommend, history re-anchoring conditions items on both past behavior and the conversation, and behavioral replay prevents forgetting — improving Hit@10 by 13.3% on Amazon Beauty.
-   * Key techniques:
-     - Learned routing token for recommend-vs-converse decisions
-     - History re-anchoring: condition item generation on past behavior AND the dialogue context
-     - Behavioral replay with instruction-data rehearsal to prevent catastrophic forgetting during adaptation
-     - Intent-agnostic replacement over the item space to suppress rejected items
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released.
-     - **Novelty: 8/10** — Cleanly bridges generative recommendation and conversational recommendation; the routing token + re-anchoring + replay trio addresses a real gap (no in-conversation correction).
-     - **Fairness: 4/10** — Not directly addressed.
-     - **Robustness: 7/10** — Behavioral replay guards against forgetting; evaluated on Amazon Beauty and Toys with strong, consistent gains.
-     - **Impact: 8/10** — Practical path to deployable conversational generative recommenders; +13.3% Hit@10 on Amazon Beauty and beats its generative-recommender starting point.
-
-4. **Reinforcement Learning with Conformal Action Sets: An Application to Sequential Recommendation (RLCP)**
-   * Affiliation: University of Pennsylvania — *(Wenwen Si, Honghao Wei)*
-   * Link: [arxiv.org/abs/2610.08743](https://arxiv.org/abs/2610.08743)
-   * Venue: arXiv preprint, October 2026 (cs.LG, cs.AI; submitted 6 Oct 2026)
-   * TL;DR: RLCP adapts the retained action (slate) set per session using critic scores and an online conformal threshold, with a proven deterministic bound on proxy miss rate and an exact value-loss decomposition into filtering/selection losses; it reaches 1.11×–5.21× the catalog diversity of the strongest baseline across 19 configurations.
-   * Key techniques:
-     - Reinforcement Learning with Calibrated Pruning (RLCP)
-     - Online threshold from binary proxy-target feedback (does the retained set contain a target action?)
-     - Deterministic bound on the observed proxy miss rate along adaptive trajectories
-     - Exact decomposition of value loss into filtering and selection losses → finite session reward bound (no convergence required)
-     - Two RLCP implementations vs four RL baselines on KuaiRand-Pure and MovieLens 1M
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released.
-     - **Novelty: 7/10** — Connects conformal prediction / calibrated pruning to RL action-set adaptation with a clean theoretical decomposition; novel for sequential rec.
-     - **Fairness: 5/10** — Not fairness per se, but catalog diversity (a fairness-adjacent metric) is a core measured outcome.
-     - **Robustness: 8/10** — Provides formal miss-rate and reward bounds; theoretically grounded under explicit approximation conditions.
-     - **Impact: 7/10** — Model-agnostic action-set adaptation applicable to any sequential recommender; 1.11×–5.21× catalog diversity with no larger retained sets.
-
-5. **Aligning Performance with Contribution: Towards Contribution-Aware Fair Recommendation (CPFR)**
-   * Affiliation: Shanghai University of Finance and Economics, China — *(Shuai Zhang, Hui Fang, Zun Sun)*; Zhu Sun: Singapore University of Technology and Design
-   * Link: [arxiv.org/abs/2610.08245](https://arxiv.org/abs/2610.08245)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 6 Oct 2026)
-   * TL;DR: Contribution-Performance Fairness requires recommendation performance to align with users' estimated (training-dependent) contribution — building ordered user groups from interaction volume, loss alignment, and optimization intensity, and jointly optimizing accuracy with cross-group alignment and within-group equity; a game-theoretic analysis shows this strengthens contribution incentives.
-   * Key techniques:
-     - Contribution-Performance Fairness (CPFR) perspective: align performance with estimated contribution across groups, equitable within comparable-contribution users
-     - Training-dependent contribution estimation (interaction volume, loss alignment, optimization intensity)
-     - Ordered user-group construction from contribution
-     - Joint optimization of accuracy + cross-group alignment + within-group equity
-     - Game-theoretic analysis of contribution incentives; model-agnostic over 3 backbones × 3 datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released.
-     - **Novelty: 8/10** — A genuinely new fairness axis (contribution-performance alignment) distinct from parity-based notions; training-dependent contribution estimation is well-motivated.
-     - **Fairness: 9/10** — Core contribution is fairness: aligns benefits with users' model-learning contribution and protects against incentive misalignment.
-     - **Robustness: 6/10** — Evaluated on 3 datasets × 3 backbones; robustness/stability of contribution estimates under sparse data not deeply stressed.
-     - **Impact: 7/10** — New fairness perspective for sustainable recommendation ecosystems; model-agnostic and demonstrates a strong accuracy–fairness trade-off.
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 219 papers as of October 17.
+**Count:** 222 papers as of October 18.
 
 | Score | Paper |
 | --- | --- |
@@ -1505,7 +1503,12 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 | 7/10 | Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective (PR-entmax) — Sber AI Lab / Lomonosov MSU, CIKM 2026 — [github.com/Antondfger/Sparse-Prior-Regularized](https://github.com/Antondfger/Sparse-Prior-Regularized) |
+| 7/10 | ReMaRk: Many Right Answers, One Training Example: Removing Responder Noise from GRPO for LLM Recommenders (ReMaRk) — Nanyang Technological University — [github.com/LiXin97/ReMaRk](https://github.com/LiXin97/ReMaRk) |
 | 6/10 | Computed, not Memorized: Bit-Factorized Identifiers for Efficient Generative Retrieval (Bit-Factorized) — Leiden University / Radboud University — [anonymous.4open.science/r/bit_factorized_token-2C13](https://anonymous.4open.science/r/bit_factorized_token-2C13/) |
+| 6/10 | HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / University of Technology Sydney — [anonymous.4open.science/r/anonymous-HEM-Med-0935](https://anonymous.4open.science/r/anonymous-HEM-Med-0935/) |
+| 6/10 | PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems (PsyBer-Agent) — Xi'an Jiaotong-Liverpool University / University of Liverpool / Alibaba Group — [anonymous.4open.science/r/CC66F](https://anonymous.4open.science/r/CC66F/) |
+| 6/10 | SemPOI-RL: Aligning LLM Semantic Reasoning for Interpretable Out-of-Town POI Sequential Generation (SemPOI-RL) — Beihang University — [github.com/Wind-Flipped/SemPOI-RL](https://github.com/Wind-Flipped/SemPOI-RL) |
+| 6/10 | Vela: User Behavior as Supervision Sparks LLM Intelligence (Vela) — AllSpark at Xiaohongshu (RedNote) — [github.com/AllSpark-Research/Vela](https://github.com/AllSpark-Research/Vela) |
 
 ---
 
@@ -1802,6 +1805,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix (RL post-training)
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
+
+- Many Right Answers, One Training Example / Removing Responder Noise from GRPO for LLM Recommenders (ReMaRk) — Nanyang Technological University
+- SemPOI-RL: Aligning LLM Semantic Reasoning for Interpretable Out-of-Town POI Sequential Generation (SemPOI-RL) — Beihang University
 
 ## By Affiliation
 
