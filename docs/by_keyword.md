@@ -159,6 +159,7 @@
 - Single-Token Expected-Value Scoring for Cold-Start Candidate Ranking
 
 - A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR) — Yandex / AIRI / HSE; Barlow-Twins decorrelation for head/tail exposure control
+- DualGCN: Dual-Branch Graph Distillation with Semantic Priors for Robust Cold-Start Recommendation (DualGCN) — HKUST (Guangzhou), arXiv 2610.19578
 
 ### Concept Unlearning
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
@@ -1310,6 +1311,8 @@
 - SharpRec: Sharpness-aware Model Merging with Salience Recovery for LLM-based Cross-Domain Sequential Recommendation (SharpRec) — Zhejiang University / Hangzhou Dianzi University, KDD 2026, arXiv 2607.25366
 - RES-MR: Risk-Aware Reasoning for Explainable and Safe Medication Recommendation (RES-MR) — Qilu University of Technology / UTS, SIGIR 2026, arXiv 2610.14474
 - Vela: User Behavior as Supervision Sparks LLM Intelligence (Vela) — AllSpark at Xiaohongshu (RedNote), arXiv 2610.14709 [opensource]
+- QD-Rec: Open-Ended Evolution of Recommendations via Quality-Diversity (QD-Rec) — Sakana AI, arXiv 2610.23470
+- LSNR: Learned Sparse News Recommendations with Attentive User Modeling (LSNR) — University of Amsterdam, SIGIR-AP 2026
 
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
@@ -1389,6 +1392,7 @@
 
 - HELIX: Jointly Scaling Feature Interaction and Sequence Modeling (HELIX) - TikTok, arXiv 2609.37183
 - EvoSkillRec: Skill-Genome Evolution for Recommender Architecture Discovery (EvoSkillRec) - Huawei Noah's Ark Lab / City University of Hong Kong, arXiv 2609.34552
+- RecSoup: Efficient Model Merging Approach for Controllable Multi-Objective Recommendation (RecSoup) — Renmin University of China, CIKM 2026
 
 ### Multi-behavior Recommendation
 
@@ -1498,6 +1502,7 @@
 
 - MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology, GRPO — arXiv 2603.06243 [opensource]
 - OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation (OT-FlowRec) — Nanjing University of Science and Technology, arXiv 2610.16038
+- MMWave: Tackling the Modality Inhibitance Effect with Wavelet-based Modality Integration in Multi-modal Recommendation (MMWave) — NTU, IEEE TKDE 2026
 ### Optimizer
 - MuonRec
 
