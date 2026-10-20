@@ -66,10 +66,10 @@ mindmap
         FORGE SID -- Zhejiang U / Alibaba
         DACT -- Fudan U
         CHAP -- USTC
+        SAHL -- Chongqing U
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
-        MMWave -- NTU
 ```
 
 <div align="center">
@@ -87,6 +87,119 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 ## By Date
 
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
+### Papers October 20
+
+*Tuesday, October 20, 2026. The live arXiv cs.IR recent-submission batch (announced Oct 20, submitted Oct 17-19) surfaced 6 on-topic generative-recommendation papers that were new to the README (verified not already indexed): AGR, SID-Map, SAHL, PerCDR, DuoLM, OneChord. 1 is open-source (SAHL / Chongqing University, 7/10; PerCDR's linked repo is empty -> 0/10). Total: 6 papers (1 opensource). By Opensource count 226 -> 227.*
+
+1. **AGR: Agentic Generative Retrieval with Tool-Augmented Search**
+   * Affiliation: Kuaishou Technology & Fudan University — *(Ming Yang, Yaqi Yin, Zhibo Wang, Xiaoze Jiang, Jingwei Zhuo, Chao Zhang, Quanzhi Zhu, Weiguo Zheng, Liang Zeng, Yunfeng Zhao, Jiaqiang Liu, Kefeng Wang, Yupeng Huang, Kaiqiao Zhan, Xuanping Li)*
+   * Link: [arxiv.org/abs/2610.26831](https://arxiv.org/abs/2610.26831)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 19 Oct 2026)
+   * TL;DR: AGR interleaves Semantic-ID (SID) generation with on-demand feature acquisition via tools, deciding whether to invoke a tool, which feature to fetch, and where its observation influences decoding, steering generation toward feature-consistent SID branches; trained via SID pretraining + tool-augmented fine-tuning on feature-applicability / information-gain trajectories; validated on an industrial dataset, 3 public benchmarks, and an online A/B test.
+   * Key techniques:
+     - Tool-augmented generative retrieval paradigm interleaving SID decoding with on-demand feature acquisition
+     - Conditions on the request + decoded SID prefix to decide tool invocation, feature selection, and insertion point
+     - Builds tool-augmented trajectories from feature applicability + information gain along the SID hierarchy
+     - Two-stage training: SID pretraining then tool-augmented fine-tuning
+     - Online A/B test plus industrial + 3 public benchmarks
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (industrial Kuaishou paper; no code link)
+     - **Novelty: 8/10** — agentic/tool-augmented generative retrieval that adaptively decides when/which/where to acquire features; a fresh angle on feature injection for GR
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 7/10** — industrial + 3 public benchmarks + online A/B; limited ablation of which tools matter most
+     - **Impact: 8/10** — Kuaishou + Fudan; online A/B validates industrial relevance; directly relevant to SID-based generative retrieval
+
+2. **Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search**
+   * Affiliation: Alibaba (Taobao & Tmall Group) — *(Jianbo Zhu, Xing Fang, Xiaopeng Chu, Mingmin Jin, Jing Wang, Bokang Wang, Jiaqi Ye, Xiang Zhang)*
+   * Link: [arxiv.org/abs/2610.26105](https://arxiv.org/abs/2610.26105)
+   * Venue: arXiv preprint, October 2026 (cs.IR, cs.AI; submitted 19 Oct 2026)
+   * TL;DR: Studies SID-map updates in dynamic e-commerce generative retrieval; shows SID semantic drift degrades retrieval (masked at large beam sizes), remapped fraction monotonically tracks quality, and a topology-preserving policy (insert new / freeze old / warm-start) restores old-item HitRate +10% and new-item +109%, with a 3-week TmallAPP A/B (UCTCVR +0.29%, GMV +1.16%).
+   * Key techniques:
+     - 67-day controlled study of SID-map updates on large-scale e-commerce search logs
+     - Quantifies semantic drift: HitRate -41.78~-62.05% at beam 1, only -8.33~-10.85% at beam 1000
+     - Shows remapped-fraction is monotonic with retrieval quality (up to -42.66% at beam 1)
+     - Topology-preserving deployment principle: insert new-items, freeze old-items; warm-start when possible
+     - 3-week online A/B on TmallAPP
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (Alibaba industrial)
+     - **Novelty: 7/10** — systematic characterization of SID drift + a simple, effective topology-preserving update policy; more empirical diagnosis than new method
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 8/10** — 67-day logs, two non-overlapping update cycles, beam-size sweeps, online A/B
+     - **Impact: 8/10** — Alibaba/Tmall; directly actionable deployment principle with online GMV gain
+
+3. **Structure-Aligned History Learning with Subspace-Structured Semantic IDs for Generative Recommendation (SAHL)**
+   * Affiliation: Chongqing University — *(Kaiwen Wei, Kejun He, Jie Zhang, Xiaomian Kang, Yuming Yang, Aijia Zhou, Xie Zhou, Yining Wang, Nayu Liu, Li Jin, Zhenyang Li, Jiang Zhong, He Bai, Jingxuan Wei, Junnan Zhu)*
+   * Link: [arxiv.org/abs/2610.25093](https://arxiv.org/abs/2610.25093) · [Code](https://github.com/CQU-MM-Intelligent-Lab/SAHL)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 18 Oct 2026)
+   * TL;DR: SAHL reconnects quantization and history reconstruction by using the quantization structure directly for history learning: Semantic Residual Balanced Quantization (SRBQ) builds a balanced token-subspace-item hierarchy, and SAHL reconstructs history at those granularities with entropy-prioritized masking + curriculum optimization; +18.6-30.0% NDCG@10 over RPG and +2.7-6.0% over MHL on 4 Amazon categories.
+   * Key techniques:
+     - Semantic Residual Balanced Quantization (SRBQ): balanced token-subspace-item hierarchy (fixes imbalanced code assignment)
+     - Multi-granularity masked-history reconstruction following quantizer-defined groups
+     - Predictive-entropy prioritization of uncertain transitions
+     - Curriculum optimization shifting to inference-aligned next-item prediction
+     - 4 Amazon Review categories; vs RPG and MHL
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — github.com/CQU-MM-Intelligent-Lab/SAHL: official implementation with genrec/ source, scripts/run_sahl.sh, and a README documenting env/dataset/training/configs; thorough docs and complete code matching the paper, but no explicit LICENSE file and modest single-lab maintenance (last commit Sep 2026)
+     - **Novelty: 7/10** — aligns the quantization hierarchy with history-reconstruction granularity; balanced residual quantizer is a solid incremental idea
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 7/10** — 4 Amazon categories, controlled ablations on code balance and group-following; no significance tests
+     - **Impact: 7/10** — Chongqing University; clear SOTA over RPG/MHL; reproducible
+
+4. **When Semantics Fall Short: Persona-Guided Cross-Domain Sequential Recommendation with Large Language Models (PerCDR)**
+   * Affiliation: Beijing Jiaotong University — *(Jundong Chen, Honglei Zhang, Shuai An, Enneng Yang, Han Yu)* *(with Sun Yat-sen University, Nanyang Technological University)*
+   * Link: [arxiv.org/abs/2610.25221](https://arxiv.org/abs/2610.25221) · [Code](https://github.com/jundongchen13/PerCDR)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 18 Oct 2026)
+   * TL;DR: PerCDR shifts cross-domain sequential recommendation (CDSR) from global semantic bridging to persona-guided behavioral modeling: LLM-inferred personas globally guide transferable cross-domain behavior, local semantic relations enhance intra-domain modeling, then domain-preference adaptation refines; addresses semantic domain isolation + semantic-behavior inconsistency.
+   * Key techniques:
+     - LLM-inferred personas to globally guide transferable cross-domain behavioral patterns
+     - Local semantic relations enhance intra-domain behavioral modeling
+     - Domain preference adaptation for recommendation refinement
+     - User-centric (vs item-centric) paradigm addressing semantic domain isolation + semantic-behavior inconsistency
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — paper links github.com/jundongchen13/PerCDR but the repository is EMPTY (no code released); 0/10
+     - **Novelty: 7/10** — persona-guided, user-centric CDSR reframing of semantic-bridging limitations
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 6/10** — extensive experiments claimed but no public code to verify; standard CDSR benchmarks
+     - **Impact: 7/10** — BJTU + NTU; clean reframing of CDSR, relevant to cross-domain transfer
+
+5. **DuoLM: Fast and Effective Personalized Recommendation with Language Models**
+   * Affiliation: Google DeepMind — *(Jiang Wu [Independent Researcher], Yutong Song [UC Irvine], Hongbo Wang [Google DeepMind], Guanghe Cao [Google DeepMind], Jeff Liang [Oracle])*
+   * Link: [arxiv.org/abs/2610.24481](https://arxiv.org/abs/2610.24481)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 17 Oct 2026)
+   * TL;DR: DuoLM integrates a compact encoder LLM (offline item representations) with a personalized ranker LLM (combines item vectors + user history/feedback), trained end-to-end with recommendation supervision + teacher distillation; runtime accelerations (virtual token IDs, shared history, CUDA Graph replay) reach ~26,400 scores/s on one H100 (~60x vLLM teacher throughput) at comparable quality.
+   * Key techniques:
+     - Encoder LLM compresses item text into a single reusable hidden-state vector (offline)
+     - Personalized ranker LLM scores candidates using history + feedback with shared history KV
+     - End-to-end training with recommendation labels + frozen-teacher distillation
+     - Runtime: virtual token IDs for embedding access, shared history computation, CUDA Graph replay
+     - 26,400 candidate scores/s on H100 (~60x vLLM teacher), comparable quality
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (Google DeepMind / Oracle / UC Irvine; no repo link)
+     - **Novelty: 7/10** — clean separation of offline item encoding from online personalized ranking with CUDA-Graph replay; practical serving contribution
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 7/10** — H100 throughput benchmark vs vLLM teacher; quality comparable; single teacher
+     - **Impact: 8/10** — Google DeepMind; directly relevant to efficient LLM-based rec serving at scale
+
+6. **OneChord: Distill What You Rank, Recommend in One Pass**
+   * Affiliation: University of Chinese Academy of Sciences — *(Zesheng Li, Chengchang Pan, Honggang Qi)*
+   * Link: [arxiv.org/abs/2610.25805](https://arxiv.org/abs/2610.25805)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 19 Oct 2026)
+   * TL;DR: OneChord uses one learned, catalog-normalized fusion for next-item supervision, refinement distillation, and inference in semantic-ID recommendation; a shared parallel decoder produces joint SID evidence + item-matching scores, and a frozen denoiser supplies legal partial SIDs for refinement targets; transfers refinement into one-pass rec; +6.30% Recall@5 and +7.12% NDCG@5 over the strongest baseline on 6 Amazon datasets, 1.04-1.18x faster.
+   * Key techniques:
+     - "Distill what you rank" principle: one catalog-normalized fusion for supervision + distillation + inference
+     - Shared parallel decoder for joint SID evidence + item-matching scores
+     - Frozen denoiser supplies legal partial SIDs; student evaluates to build refined fused targets
+     - Theoretical conditions for preserving full-catalog Top-K selection
+     - 6 Amazon datasets; +6.30% Recall@5, +7.12% NDCG@5, 1.04-1.18x speedup
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code released (UCAS; no repo link)
+     - **Novelty: 8/10** — unifies ranking + distillation + inference into one pass with a clean "distill what you rank" principle and Top-K preservation theory
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 7/10** — 6 Amazon datasets, consistent gains, theoretical guarantees; no significance tests
+     - **Impact: 7/10** — UCAS; strong SOTA on semantic-ID rec with speedup; reproducible claim pending code
 
 ---
 
@@ -1080,204 +1193,11 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
-### Papers October 10
-
-*Saturday, October 10, 2026. The live 24h arxiv window (papers dated Oct 9–10) carried no strictly on-topic generative-recommendation papers — the weekend window was empty — so per the fallback rule we drew 6 genuinely-new, on-topic papers from the last-3-month arxiv keyword pool. Note: "Not Only NTP" (NONTP, 2607.12277, Meituan) was already indexed in the derived by-keyword / by_affiliation tables from an earlier run (without its arxiv ID recorded), so it is excluded here and its missing ID is fixed in the indexes instead. 0 are open-source. Total: 6 papers (0 opensource). By Opensource count stays 205.*
-
-1. **VirusCascade: Hijacking Collaborative Reflection in LLM-Powered Recommender Agents**
-   * Affiliation: Nanyang Technological University — College of Computing and Data Science *(Yurong Hao, Wen Zhou, Guowei Guan, Tiantong Wu, Fuyao Zhang, Wei Yang Bryan Lim)*
-   * Link: [arxiv.org/abs/2609.38270](https://arxiv.org/abs/2609.38270)
-   * Venue: arXiv preprint, September 2026 (cs.CR; submitted 29 Sep 2026); NDSS 2027
-   * TL;DR: LLM-powered agentic recommender systems (LLM-ARS) refine user/item states via a recurrent "collaborative reflection" loop; this paper exposes a systemic vulnerability where adversarial evidence injected into one agent is rationalised into a preference narrative, written to memory, and propagated to others ("reflection laundering" + "collaborative-reflection hijacking"), and proposes VirusCascade, the first black-box targeted-promotion attack on this paradigm.
-   * Key techniques:
-     - Defines "reflection laundering" (local rationalisation of injected evidence) and "collaborative-reflection hijacking" (system-wide escalation via multi-agent memory propagation)
-     - Identifies two exploitable properties: reflective persistence and cross-agent propagation
-     - VirusCascade jointly shapes semantic + structural attack surfaces for stealthy, black-box targeted promotion
-     - Evaluated on 4 real-world datasets across diverse LLM-ARS architectures; mean E@20 0.384, +0.185 over strongest baseline
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no code repository released
-     - **Novelty: 8/10** — first to characterise the recurrent multi-agent memory-amplification attack pathway in LLM-ARS
-     - **Fairness: 4/10** — pure attack paper; no fairness mitigations, though it motivates defensive fairness for exposure
-     - **Robustness: 7/10** — demonstrates a strong, stealthy attack; robustness of defenders is the open problem it raises
-     - **Impact: 7/10** — reframes agentic-RS security around memory propagation; likely influential for NDSS/RecSys security
-
-2. **Delegation Asymmetry in Agentic Recommender Systems: Measuring Two-Sided Receptivity in Online Dating**
-   * Affiliation: University of Notre Dame — Lucy Family Institute for Data & Society; Fleamily, Inc. *(Daria Leshchikova, Valentina V. Kuskova, Dmitry Zaytsev, Valerii Klimov)*
-   * Link: [arxiv.org/abs/2608.18058](https://arxiv.org/abs/2608.18058)
-   * Venue: arXiv preprint, August 2026 (cs.AI; submitted 18 Aug 2026)
-   * TL;DR: Studies whether users will accept not just delegating conversation to an agent but also receiving agent-mediated communication from others in matching platforms, using two large surveys (N=2,894 + N=2,617) and a latent-variable graded-response model showing "deployment" and "engagement" receptivity are distinct, with a systematic delegation asymmetry.
-   * Key techniques:
-     - Latent-variable measurement model (graded response model with latent regression) of agent receptivity
-     - Model comparison establishes send vs receive receptivity as separable constructs (rho=0.92, Delta BIC=52)
-     - Quantifies delegation asymmetry: deploy threshold -0.38 vs engage +0.32 (full +1.39); deployment propensity ~3x engagement
-     - Random-pairing counterfactual: only 4-13% of dyads combine deployment + engagement; reciprocity requirement halves volume; receive-receptivity routing triples per-contact engagement (AUC 0.88)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — survey-based, no code
-     - **Novelty: 7/10** — first to empirically separate "willingness to send" vs "receive" agent communication in agentic RS
-     - **Fairness: 6/10** — surfaces gender-directional imbalance in agentic matchmaking; recommends receptivity-aware design
-     - **Robustness: 6/10** — two-language surveys with partial measurement invariance; fielded on real platform
-     - **Impact: 7/10** — directly informs disclosure/opt-in mechanics for deploying agentic recommenders at scale
-
-3. **CARA: Cognitive Adaptive Recommendation Agent**
-   * Affiliation: The Chinese University of Hong Kong; Tongji University *(Weijun Gao, Jinyang Dong, Chuanru Ren, Hengxiao Li)*
-   * Link: [arxiv.org/abs/2608.16919](https://arxiv.org/abs/2608.16919)
-   * Venue: arXiv preprint, August 2026 (cs.IR / cs.AI; submitted 2 Aug 2026)
-   * TL;DR: Frames recommendation as a structured cognitive decision process jointly shaped by intuitive affective preference and deliberate rational evaluation, with a two-stage pipeline (candidate filtering + dual-perspective decision modeling) and a boundary-aware KTO strategy that prioritises informative preference signals.
-   * Key techniques:
-     - Cognitive two-mechanism formulation: affective preference + rational evaluation
-     - Two coordinated stages: coarse-grained candidate filtering then dual-perspective decision modeling
-     - Boundary-aware KTO (Kahneman-Tversky Optimization) prioritises instructions solvable occasionally but not consistently, increasing preference-signal density
-     - Evaluated on 3 Amazon Reviews domains; up to +10.15% over baseline
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no code released
-     - **Novelty: 7/10** — cognitively-inspired dual-mechanism recommendation with boundary-aware KTO
-     - **Fairness: 5/10** — not a focus; standard public datasets
-     - **Robustness: 5/10** — offline benchmarks only
-     - **Impact: 6/10** — offers a structured alternative to semantic-matching / end-to-end generation agents
-
-4. **CALMRec: Causally Aligned Language Memory for Long-Horizon Recommendation**
-   * Affiliation: Shenzhen University — *(Gengyu Zhan)*
-   * Link: [arxiv.org/abs/2607.23647](https://arxiv.org/abs/2607.23647)
-   * Venue: arXiv preprint, July 2026 (cs.LG / cs.AI; submitted 26 Jul 2026)
-   * TL;DR: A model-agnostic framework for long-horizon recommendation that converts item content/feedback into evidence-grounded semantic atoms and maintains separate short-term/long-term/exposure memories, using propensity-weighted updates and a conservative offline critic to combat feedback loops and optimise delayed satisfaction.
-   * Key techniques:
-     - Frozen multimodal LLM converts evidence into semantic atoms; separate short/long/exposure memories
-     - Propensity-weighted updates reduce policy-induced exposure bias
-     - Conservative offline critic reranks for delayed satisfaction under a behavior-support constraint
-     - Counterfactual-deletion checks on explanations; identification result provided
-     - +6.1% / +7.6% / +6.7% discounted long-term value over strongest alternative across 3 environments
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no code
-     - **Novelty: 8/10** — causally-aligned, memory-separated long-horizon LLM rec with exposure-bias correction
-     - **Fairness: 5/10** — addresses exposure-induced bias, not demographic fairness
-     - **Robustness: 6/10** — 10-20 seed ablations; no online test reported
-     - **Impact: 6/10** — model-agnostic, applicable to e-commerce/news/short-video
-
-5. **Efficient Clustering with Quality Guardrails for LLM-based Recommender Systems at Industry Scale**
-   * Affiliation: Amazon — *(Longshaokan Wang, Wai Tsang Keung, Punit Ghodasara, Roman Wang, Ali Dashti, Francesc Moreno-Noguer)*
-   * Link: [arxiv.org/abs/2607.19704](https://arxiv.org/abs/2607.19704)
-   * Venue: arXiv preprint, July 2026 (cs.LG; submitted 22 Jul 2026); RecSys 2026 Workshop
-   * TL;DR: A scalable two-stage clustering algorithm with provable per-sample guardrails (every sample shares a user-specified min embedding similarity and exact attribute match with its representative) that lets an LLM run only on cluster representatives, cutting cost 50x while preserving personalization in a 38M-customer deployment.
-   * Key techniques:
-     - Two-stage: Mini-batch K-Means initial clusters, then greedy representative selection satisfying guardrails
-     - Provable per-sample guarantee: min embedding similarity + exact attribute match
-     - Theoretical guarantees + complexity analysis; benchmarks vs common methods
-     - Deployed clustering 38M customers; 50x LLM cost/runtime reduction; A/B revenue/engagement gains
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code
-     - **Novelty: 7/10** — per-sample guardrails for clustering-as-LLM-prefix at industry scale
-     - **Fairness: 5/10** — guardrails prevent unsafe cross-group inheritance (e.g., age-appropriateness)
-     - **Robustness: 7/10** — scales to 38M; theoretical + empirical validation
-     - **Impact: 8/10** — concrete, deployed cost-reduction lever for LLM recommenders
-
-6. **Shape Your Feed: An LLM-based Agentic System for Conversational Recommendation (SYF)**
-   * Affiliation: Meta Platforms, Menlo Park, California, USA — *(Ziyun Xu, Bosen Ding, Yue Zhang, Ji Qi, Qingyuan Song, Jizhou Huang, Liwei Wang, Jefferey Santelli, Yue Weng, Qichao Que, Zhenheng Yang, Junfeng Pan, Linhong Zhu)*
-   * Link: [arxiv.org/abs/2608.06632](https://arxiv.org/abs/2608.06632)
-   * Venue: arXiv preprint, August 2026 (cs.AI; submitted 6 Aug 2026); RecSys 2026 Industrial Track
-   * TL;DR: An LLM-based agentic recommendation framework enabling real-time, multimodal co-curation of a content feed via a three-tier architecture (Perception / Serving / Self-Evolution Flows), grounded in a persistent Semantic Profile and aligned via DPO + LLM-as-a-Judge; 98.85% offline alignment accuracy and positive online A/B on production traffic.
-   * Key techniques:
-     - Three-tier: Perception Flow (intent from text/voice/UI), Serving Flow (agentic re-ranking/pruning on a Semantic Profile), Self-Evolution Flow (DPO + LLM-as-a-Judge alignment)
-     - Persistent Semantic Profile encoding evolving user preferences
-     - Offline alignment scoring 98.85% accuracy; large-scale online A/B on production traffic
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — industrial system, no public code
-     - **Novelty: 7/10** — end-to-end agentic feed co-curation with self-evolution via DPO/Judge
-     - **Fairness: 5/10** — not a focus; industrial deployment
-     - **Robustness: 6/10** — validated via online A/B; offline + online
-     - **Impact: 8/10** — production-scale agentic conversational recommendation at Meta
-
----
-
-### Papers October 09
-
-*Friday, October 9, 2026. The live 24h arxiv window (papers dated Oct 8) carried only 3 strictly on-topic generative-recommendation papers (MARI, MGRASRec, Personalization Matters), below the 5-paper floor, so per the fallback we drew 2 more genuinely-new, on-topic papers from the last-3-month arxiv keyword pool (RecRSI, MediateRec). 2 are open-source. Total: 5 papers (2 opensource). By Opensource count 203 -> 205.*
-
-1. **Beyond Sequences: Distilling Structured Decision Memory for LLM Recommendation (MARI)**
-   * Affiliation: Alibaba Group — *(Leikun Liang, Guoshuai Wang, Xingsheng He, Yushan Han, Yunyi Xuan, Xiaoxiao Xu, Lin Qu)*
-   * Link: [arxiv.org/abs/2610.11501](https://arxiv.org/abs/2610.11501)
-   * Venue: arXiv preprint, October 2026 (cs.CL; submitted 8 Oct 2026)
-   * TL;DR: Prevailing LLM recommenders flatten heterogeneous user behaviors into homogeneous token sequences and lose the decision-making roles behind actions (e.g., trade-offs between price and quality), hurting "difficult-choice" cases; MARI instead archives users' past rationales as Structured Decision Memories in a Decision Memory Bank and retrieves them to ground LLM reasoning.
-   * Key techniques:
-     - Decision Memory Bank (DMB) stores Structured Decision Memories (SDMs) — concise records of goals, constraints, and trade-offs
-     - Post-Hoc Decision Distillation generates SDMs offline from heterogeneous behaviors and user-generated content
-     - Retrieval-augmented LLM reasoning decouples memory construction from online inference, keeping latency low
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code released
-     - **Novelty: 7/10** — frames decision evidence as explicit structured memories to augment LLM rec reasoning; a fresh angle on reasoning-aware rec but builds on LLM-rec + memory lines
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — extensive next-item + new Difficult Choice Prediction experiments, low latency overhead, but single-paper validation
-     - **Impact: 7/10** — Alibaba; practical reasoning-aware rec with interpretable, human-readable decision insights
-
-2. **Multimodal Graph Retrieval-Augmented Sequential Recommendation via Collaborative Filtering Paths (MGRASRec)**
-   * Affiliation: University of New South Wales, Sydney, Australia — *(Jason Marcell Setiadi, Xin Cao, Lina Yao)*
-   * Link: [arxiv.org/abs/2610.11228](https://arxiv.org/abs/2610.11228)
-   * Venue: arXiv preprint, October 2026 (cs.LG; submitted 8 Oct 2026)
-   * TL;DR: Existing multimodal sequential recommenders either ignore collaborative signals from neighbors or pay heavy compute for repeated MLLM inference over long histories; MGRASRec retrieves collaborative-filtering paths from a user-item graph (extended by multimodal similarity) and injects them into the MLLM prompt, enabling a single forward pass per candidate.
-   * Key techniques:
-     - Graph retrieval of structured CF paths conditioned on the candidate item, extended via multimodal similarity to increase coverage beyond exact co-interaction
-     - Surfaces the most candidate-relevant history items at no extra cost, removing recurrent summarization
-     - Unified augmented prompt for parameter-efficient fine-tuning of an MLLM (single forward pass per candidate)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code released
-     - **Novelty: 6/10** — combines graph RAG with MLLM sequential rec; collaborative-path prompting is a reasonable but incremental idea
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — evaluated on three public datasets with strong ranking-quality gains
-     - **Impact: 6/10** — academic (UNSW); multimodal sequential rec with practical single-pass inference
-
-3. **Personalization Matters: Long-Horizon Conversation Agent with User-Centric Information in Online Shopping Interactions**
-   * Affiliation: ByteDance — *(Rena Gao, Yue Dai, Hao Guan, Shengxiang Gao, Wangyang Wu, Yixin Shen, Jey Han Lau)* *(with University of Melbourne, AXON, University of Technology Sydney)*
-   * Link: [arxiv.org/abs/2610.11375](https://arxiv.org/abs/2610.11375) · [Code](https://github.com/RenaGao/Multimodel_RAG_Indexing)
-   * Venue: arXiv preprint, October 2026 (cs.MA; submitted 8 Oct 2026)
-   * TL;DR: Personalized conversational shopping needs preference consistency over multi-turn interactions where users reveal constraints gradually; the paper proposes a multi-agent multimodal RAG framework that decomposes dialogue-state tracking, recommendation retrieval, preference-aware reasoning, and response generation, and evaluates interaction quality with a trajectory-level protocol.
-   * Key techniques:
-     - Multi-agent multimodal RAG decomposing the shopping assistant into DST / rec-retrieval / reasoning / response roles
-     - Integrates product metadata, reviews, image-derived descriptions, and user historical reviews
-     - Trajectory-level evaluation across four dimensions: Global Preference Consistency, Cumulative Information Synthesis, Interaction Trajectory, Tone Consistency
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/RenaGao/Multimodel_RAG_Indexing](https://github.com/RenaGao/Multimodel_RAG_Indexing): src/, data/, docs/, requirements.txt, .env.example, LICENSE; provides the multimodal RAG indexing + shopping-agent code and benchmark data. 0 stars, modest docs, agent orchestration not fully modularized, but code matches the paper's RAG approach
-     - **Novelty: 6/10** — multi-agent decomposition + user-centric retrieval for long-horizon shopping; trajectory-level protocol is a useful evaluation contribution
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 6/10** — automatic trajectory metrics on Amazon Reviews 2023 (4.82 vs 3.74) plus a small real-user study (n=5)
-     - **Impact: 6/10** — ByteDance + University of Melbourne; practical conversational-shopping personalization
-
-4. **Beyond Successor Accuracy: State Retention for Recursive Self-Improvement in Recommendation (RecRSI)**
-   * Affiliation: The University of Hong Kong — *(Jinfeng Xu, Zheyu Chen, Ziyue Peng, Zheng Lin, Wenhao Yuan, Jian Chen, Shujie Li, Edith Ngai)* *(with Hong Kong Polytechnic University, HKUST, University of Luxembourg)*
-   * Link: [arxiv.org/abs/2610.07105](https://arxiv.org/abs/2610.07105) · [Code](https://github.com/Jinfeng-Xu/RecRSI)
-   * Venue: arXiv preprint, October 2026 (cs.IR, cs.AI; submitted 5 Oct 2026)
-   * TL;DR: Recommendation recursive self-improvement (Rec-RSI) feeds recommender outputs into later training, but evaluating each round only by its latest model assumes the successor consolidates the update; the paper terms the residual complementary ranking "distributed progress" and shows retaining pre/post-update state improves learning.
-   * Key techniques:
-     - Formulates "distributed progress" — complementary ranking decisions retained across pre- and post-update models
-     - State retention that preserves useful signals from earlier rounds instead of overwriting them
-     - Analyzes when naive recursive training loses information the successor fails to consolidate
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/Jinfeng-Xu/RecRSI](https://github.com/Jinfeng-Xu/RecRSI): well-structured Python package (rec_rsi/ source, configs/, examples/, pyproject.toml, requirements.txt, LICENSE) reproducing the recursive self-improvement pipeline. Very new (created Oct 5 2026), only 2 stars, light docs/tests — good scaffolding, limited maturity
-     - **Novelty: 7/10** — rethinks how to credit progress across recursive training rounds; a conceptual + empirical contribution with a clear failure-mode diagnosis
-     - **Fairness: 0/10** — not fairness-focused
-     - **Robustness: 7/10** — experiments across rounds with ablation of retention; claims supported but single-paper
-     - **Impact: 6/10** — HK-university consortium; relevant to self-improving / continual rec training
-
-5. **Personal-Agent Mediated Recommendation with Cross-Platform User History (MediateRec)**
-   * Affiliation: University of California San Diego — *(Yu Xia, Jiangfan Zhang, Jun Xiao, Julian McAuley, Xiangjun Fan)* *(with Meta AI)*
-   * Link: [arxiv.org/abs/2610.07588](https://arxiv.org/abs/2610.07588)
-   * Venue: arXiv preprint, October 2026 (cs.AI, cs.LG; submitted 6 Oct 2026)
-   * TL;DR: As personal LLM agents act on the user's behalf across services, a platform recommender ranks candidates and a personal agent mediates the slate using authorized cross-platform history — but must balance beneficial rescues against harmful overrides; the paper formalizes this as Personal-Agent Mediated Recommendation, releases the MediateRec benchmark, and proposes PAMO, a counterfactually-masked policy-optimization that is provably locally optimal.
-   * Key techniques:
-     - Formalizes Personal-Agent Mediated Recommendation with a platform-agent information boundary
-     - MediateRec benchmark: scalable proxy cross-platform environments + a real cross-platform test under a controlled info boundary
-     - Personal Attribution Mediation Optimization (PAMO): counterfactually masks cross-platform history to estimate mediation support and reallocates rank-aware advantage mass under a platform-relative value floor (proven to preserve cutoff-level advantage mass)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — only a LaTeX manuscript repository exists; no implementation code released
-     - **Novelty: 8/10** — crisply formalizes the emerging personal-agent-mediated rec paradigm and gives a theoretically-grounded mediation optimizer with an optimality proof
-     - **Fairness: 3/10** — touches the rescue/harmful-override trade-off (a mild robustness/fairness-to-platform signal) but is not a fairness study
-     - **Robustness: 7/10** — benchmark with proxy + real cross-platform tests and theoretical guarantees; shows even strong proprietary LLMs introduce non-negligible harmful overrides
-     - **Impact: 7/10** — UC San Diego (McAuley) + Meta; timely for agentic, user-governed recommendation
-
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 226 papers as of October 19.
+**Count:** 227 papers as of October 20.
 
 | Score | Paper |
 | --- | --- |
@@ -1352,6 +1272,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation Mixture-of-Experts (IntBMoE)
 7/10 | Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) |
 | 7/10 | Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs (Quanta) |
+| 7/10 | Structure-Aligned History Learning with Subspace-Structured Semantic IDs for Generative Recommendation (SAHL) |
 | 7/10 | SURF: Subtractive Updates for Recommender Forgetting (SURF) |
 | 7/10 | Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec) |
 | 7/10 | RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN) |

@@ -226,6 +226,8 @@
 - Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR)
 - Reading the Mood: Emotion-Guided Book-to-Music Recommendation via CGANs and LLMs (SAGA-CDR) — National Technical University of Athens, SENTIRE 2026 (ICDM Workshops), arXiv 2610.06703
 
+- When Semantics Fall Short: Persona-Guided Cross-Domain Sequential Recommendation with Large Language Models (PerCDR) — Beijing Jiaotong University, arXiv 2610.25221
+
 ### Data Generation / Synthetic Data
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
 - One Sequential Recommendation Model Pretrained from Synthetic Priors Predicts Multiple Datasets (SRPFN)
@@ -635,6 +637,9 @@
 - Adapting Generative Recommenders for Multi-Turn Interaction (INTEGER) — National Taiwan University / Johns Hopkins University, arXiv 2610.08136
 - HASTE: Hierarchical and Attribute-aware Supervision for Generative Recommendation (HASTE) — Glance, arXiv 2610.17368
 - TacGR (UniSGR-V2): Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation (TacGR) — Alibaba International, arXiv 2610.16132
+- Structure-Aligned History Learning with Subspace-Structured Semantic IDs for Generative Recommendation (SAHL) — Chongqing University, arXiv 2610.25093
+- OneChord: Distill What You Rank, Recommend in One Pass (OneChord) — University of Chinese Academy of Sciences, arXiv 2610.25805
+
 ### Generative Retrieval / Ranking
 - Revisiting Generative vs. Dense Retrieval: A Static Value Prior Reverses the Gap (Static Value Prior) — Shopify, arXiv 2610.19065
 - OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender (OneTrans-V2) — ByteDance, arXiv 2609.28589
@@ -748,6 +753,9 @@
 - LIFT: Lifecycle-Aware Interaction Factorization for Unified Retrieval and Ranking (LIFT) - Beijing University of Posts and Telecommunications / Southeast University / Xiaohongshu, arXiv 2610.10556
 - Bit-Factorized: Bit-Factorized Identifiers for Efficient Generative Retrieval (Bit-Factorized) — Leiden University / Radboud University, arXiv 2610.17467
 - WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat (WeGR) — Tencent (WeChat), arXiv 2610.16979
+- AGR: Agentic Generative Retrieval with Tool-Augmented Search (AGR) — Kuaishou Technology & Fudan University, arXiv 2610.26831
+- Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search (SID-Map) — Alibaba, arXiv 2610.26105
+
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -1049,6 +1057,8 @@
 - Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR)
 - DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR)
 
+- DuoLM: Fast and Effective Personalized Recommendation with Language Models (DuoLM) — Google DeepMind, arXiv 2610.24481
+
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
 - SCoRD: Semantic-Assisted Continual Retriever-Reranker Distillation for LLM-Based Recommendation (SCoRD)
@@ -1064,6 +1074,8 @@
 - GEAR: Generative End-to-end Ad Retrieval at Douyin (GEAR) — ByteDance (Douyin); arXiv 2609.39327
 - Exploring Forum Post Retrieval with Generative Modeling — Meta (Facebook Forum); arXiv 2609.38646
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation — Kuaishou; SIGIR 2026 challenge; arXiv 2609.39828
+
+- OneChord: Distill What You Rank, Recommend in One Pass (OneChord) — University of Chinese Academy of Sciences, arXiv 2610.25805
 
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
@@ -1313,6 +1325,9 @@
 - Vela: User Behavior as Supervision Sparks LLM Intelligence (Vela) — AllSpark at Xiaohongshu (RedNote), arXiv 2610.14709 [opensource]
 - QD-Rec: Open-Ended Evolution of Recommendations via Quality-Diversity (QD-Rec) — Sakana AI, arXiv 2610.23470
 - LSNR: Learned Sparse News Recommendations with Attentive User Modeling (LSNR) — University of Amsterdam, SIGIR-AP 2026
+
+- When Semantics Fall Short: Persona-Guided Cross-Domain Sequential Recommendation with Large Language Models (PerCDR) — Beijing Jiaotong University, arXiv 2610.25221
+- DuoLM: Fast and Effective Personalized Recommendation with Language Models (DuoLM) — Google DeepMind, arXiv 2610.24481
 
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
@@ -1870,6 +1885,11 @@
 - TacGR (UniSGR-V2): Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation (TacGR) — Alibaba International, arXiv 2610.16132
 - Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix, NeurIPS 2026 PALM Workshop, arXiv 2610.15864
 - LLM-based User-Product Relevance Evaluation for Dynamic Product Advertising (DPA Relevance) — Snap Inc., CIKM 2026, arXiv 2610.14550
+
+- AGR: Agentic Generative Retrieval with Tool-Augmented Search (AGR) — Kuaishou Technology & Fudan University, arXiv 2610.26831
+- Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search (SID-Map) — Alibaba, arXiv 2610.26105
+- Structure-Aligned History Learning with Subspace-Structured Semantic IDs for Generative Recommendation (SAHL) — Chongqing University, arXiv 2610.25093
+- OneChord: Distill What You Rank, Recommend in One Pass (OneChord) — University of Chinese Academy of Sciences, arXiv 2610.25805
 
 ### Security / Adversarial
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
