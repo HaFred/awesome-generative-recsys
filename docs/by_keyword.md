@@ -162,6 +162,7 @@
 - DualGCN: Dual-Branch Graph Distillation with Semantic Priors for Robust Cold-Start Recommendation (DualGCN) — HKUST (Guangzhou), arXiv 2610.19578
 
 ### Concept Unlearning
+- Neighborhood-Aware Unlearning for Generative Recommendation (NAU) — BIFOLD & TU Berlin / University of Amsterdam, arXiv 2610.27232
 - TRACER: Token ReAssignment for Concept ERasure in Generative Recommendation (TRACER)
 - SURF: Subtractive Updates for Recommender Forgetting (SURF)
 
@@ -173,6 +174,7 @@
 - UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
 
 ### Conversational
+- Dialogue Generation for Conversational Recommendation Using User Search Interactions and Knowledge Graphs (SearCl) — KAIST & LG Electronics, arXiv 2610.25182
 - BanglaShop-CRS: A User-Centric Bangla Dataset for Conversational Recommendation (BanglaShop-CRS) — University of Vermont
 - Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops — Spotify, arXiv 2609.30297
 - On Evaluating and Improving Conversational Agents in Production — Zalando, arXiv 2609.32092
@@ -641,6 +643,7 @@
 - OneChord: Distill What You Rank, Recommend in One Pass (OneChord) — University of Chinese Academy of Sciences, arXiv 2610.25805
 
 ### Generative Retrieval / Ranking
+- Evolving Semantic Indexes for Generative Retrieval — Santa Clara University & Coupang, arXiv 2610.28568
 - Revisiting Generative vs. Dense Retrieval: A Static Value Prior Reverses the Gap (Static Value Prior) — Shopify, arXiv 2610.19065
 - OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender (OneTrans-V2) — ByteDance, arXiv 2609.28589
 - X-Rec Technical Report (X-Rec) — TikTok, arXiv 2609.29180
@@ -799,6 +802,7 @@
 - IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
 
 ### Industrial
+- EASformer: Environment-Action-State Alignment for Industrial Generative Ranking (EASformer) — Beihang University, arXiv 2610.27691
 - TransX Technical Report: Scaling Sequence Transduction for Recommendation (TransX) — LinkedIn, arXiv 2610.20913
 - Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops — Spotify, arXiv 2609.30297
 - On Evaluating and Improving Conversational Agents in Production — Zalando, arXiv 2609.32092
@@ -1088,6 +1092,7 @@
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 
 ### LLM-based Recommendation
+- Decision4Rec: A Jev-Inspired Framework of Decision Models on Knowledge and Active Graphs for Multi-Agent Recommender Systems (Decision4Rec) — University of Bari Aldo Moro, arXiv 2610.26035 [opensource]
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
 - Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops — Spotify, arXiv 2609.30297
 - Do Evidence-Reading Diagnostics Improve Interface Selection in Small LLM Recommenders? — Independent Researcher, arXiv 2609.37472
@@ -1754,6 +1759,7 @@
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneReason / OneRec-V2) — Kuaishou; OneReason uses advanced RL to make CoT reasoning beneficial; SIGIR 2026 challenge; arXiv 2609.39828
 
 ### Semantic / Structured IDs
+- SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs (SPAR) — UESTC & Alibaba, arXiv 2610.27898
 - Revisiting Generative vs. Dense Retrieval: A Static Value Prior Reverses the Gap (Static Value Prior) — Shopify, arXiv 2610.19065
 - From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)
 - Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)

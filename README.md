@@ -41,11 +41,11 @@ mindmap
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
         ReMaRk -- NTU
-        QD-Rec -- Sakana AI
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
         ReRankID -- Google
+        Decision4Rec -- U Bari
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -89,6 +89,116 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+---
+
+### Papers October 21
+
+*Wednesday, October 21, 2026. The live arXiv cs.IR window (announced Oct 21, submitted Oct 18-20) surfaced 6 on-topic generative-recommendation papers that were new to the README (verified not already indexed): Evolving Semantic Indexes for GR, SPAR, EASformer, Neighborhood-Aware Unlearning for GR, Decision4Rec, SearCl. 1 is open-source (Decision4Rec / University of Bari Aldo Moro, 7/10). Total: 6 papers (1 opensource). By Opensource count 227 -> 228.*
+
+1. **Evolving Semantic Indexes for Generative Retrieval**
+   * Affiliation: Santa Clara University & Coupang — *(Jinming Nian, Jyun-Yu Jiang, Henry Tsai, Yi Fang, Zhirong Liang)*
+   * Link: [arxiv.org/abs/2610.28568](https://arxiv.org/abs/2610.28568)
+   * Venue: arXiv preprint, October 2026 (cs.AI, cs.IR, cs.LG; submitted 20 Oct 2026)
+   * TL;DR: Introduces a framework that automatically improves generative-retrieval components (SID construction, collision handling, decoding, training recipes) via LLM-driven evolutionary program search over executable GR programs, using a locally served open-weight 31B model to mutate components and a 1M-parameter proxy decoder for fast feedback; lifts Recall@1 from 55.8% to 59.3% and Recall@100 from 85.8% to 90.6% on NQ320K.
+   * Key techniques:
+     - LLM-driven evolutionary program search over executable GR components (first application of this approach to GR)
+     - Locally served open-weight 31B model mutates SID construction, collision handling, decoding, and training recipes
+     - 1M-parameter proxy decoder gives fast downstream feedback instead of retraining the 1B target generator
+     - Evaluated on NQ320K, MSMARCO300K, and a multilingual e-commerce dataset
+     - Component study showing proxy reliability depends on which component is evolved
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (no code link on arXiv; GitHub repo search returns no matching repository)
+     - **Novelty: 8/10** — first to apply LLM-driven evolutionary program search to GR component design; reframes SID/decoding/training as optimizable programs
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 7/10** — strong results across NQ320K, MSMARCO300K and multilingual e-commerce; proxy-target rank correlation rho=0.90, but gains are on retrieval (not item recommendation) and use a single generator size
+     - **Impact: 8/10** — targets the core GR/GenRec bottleneck (semantic indexes); from Santa Clara University + Coupang (industrial e-commerce relevance)
+
+2. **SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs**
+   * Affiliation: University of Electronic Science and Technology of China (UESTC) & Alibaba — *(Chunrui Zhang, Gaoyun Lin, Chang Zhou, Zheng Hu, Qiran Song, Shimin Cai, Tao Zhou)*
+   * Link: [arxiv.org/abs/2610.27898](https://arxiv.org/abs/2610.27898)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 20 Oct 2026)
+   * TL;DR: SPAR jointly improves stepwise personalization and SID construction for SID-based generative recommendation; its PATH Decoder retrieves prefix-relevant evidence from compressed long-term user histories to personalize each decoding step, while a prefix-balanced SID construction reduces branch imbalance and popularity bias.
+   * Key techniques:
+     - PATH Decoder that retrieves prefix-relevant evidence from compressed long-term user history for per-step personalization
+     - Prefix-balanced Semantic ID construction to mitigate branch-selection errors and popularity bias
+     - Stepwise (token-level) personalization during autoregressive SID decoding
+     - Joint optimization of personalization and SID structure
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (no code link on arXiv; no public repository found)
+     - **Novelty: 7/10** — combines stepwise prefix-conditioned personalization with imbalance-aware SID construction; solid but incremental over prior SID-personalization work
+     - **Fairness: 0/10** — not directly addressed (popularity-bias mitigation is structural, not demographic fairness)
+     - **Robustness: 7/10** — addresses irreversible branch errors and head-path over-selection; ablation breadth not fully visible from abstract
+     - **Impact: 7/10** — SID-based generative recommendation is a core direction; from UESTC + Alibaba (industrial relevance)
+
+3. **EASformer: Environment-Action-State Alignment for Industrial Generative Ranking**
+   * Affiliation: Beihang University — *(Bohao Li, Dinglun Cao, Pengcheng Huang, Yingda Tang, Zhiting Zhao, Yi Cao, Jilei Fu, Miao Yan, Tianying Liu, Heng Chang, Bowen Du; with Harbin Institute of Technology, Shenzhen & Independent Researchers)*
+   * Link: [arxiv.org/abs/2610.27691](https://arxiv.org/abs/2610.27691)
+   * Venue: arXiv preprint, October 2026 (cs.AI; submitted 20 Oct 2026)
+   * TL;DR: EASformer is an industrial generative-ranking model that aligns Environment-Action-State semantics to reconcile the asymmetric representations of user behavior sequences (environment context + observed action) versus candidate-side non-sequential features (no observed action), improving unified generative ranking at scale.
+   * Key techniques:
+     - Environment-Action-State (EAS) alignment to reconcile asymmetric sequence vs non-sequential (NS) feature semantics
+     - Transformer-style backbone that tokenizes user behavior sequences and NS features jointly
+     - Unified generative-ranking formulation providing a scalable interface for long histories and heterogeneous features
+     - Industrial-scale modeling of environment/candidate asymmetries
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (no code link on arXiv; no public repository found)
+     - **Novelty: 7/10** — explicit EAS disentanglement for industrial generative ranking is a clear, targeted contribution
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 7/10** — industrial framing implies scale testing, but no online A/B result stated in the abstract
+     - **Impact: 7/10** — industrial generative ranking is high-value; from Beihang University + HIT Shenzhen
+
+4. **Neighborhood-Aware Unlearning for Generative Recommendation**
+   * Affiliation: BIFOLD & TU Berlin, Germany / University of Amsterdam, The Netherlands — *(Pierre Lubitzsch, Yubao Tang, Maarten de Rijke, Sebastian Schelter)*
+   * Link: [arxiv.org/abs/2610.27232](https://arxiv.org/abs/2610.27232)
+   * Venue: arXiv preprint, October 2026 (cs.IR, cs.LG; submitted 19 Oct 2026)
+   * TL;DR: Identifies local probability redistribution as a key failure mode of unlearning in SID-based generative recommenders (an unlearning update unintentionally degrades predictions for neighbors of forgotten items' SIDs); proposes Neighborhood-Aware Unlearning (NAU) that controls probability mass assigned to forgotten items' neighborhoods, restoring spam exposure while retaining >95% of retrained utility.
+   * Key techniques:
+     - Shows unlearning effects are locally structured and hidden by global metrics in SID-based GR
+     - Neighborhood-Aware Unlearning (NAU) augments interaction-level unlearning with explicit control over neighborhood probability mass
+     - Evaluated across 3 datasets x 4 SID tokenizers
+     - Restores spam-induced exposure toward the retrained reference while retaining >95% utility and recovering neighborhood utility lost by forget-and-repair
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (no code link on arXiv; no public repository found)
+     - **Novelty: 8/10** — first to characterize local probability redistribution as an unlearning failure mode in SID-based GenRec; NAU directly controls it
+     - **Fairness: 6/10** — addresses spam removal and user deletion requests (privacy/rights), a fairness-adjacent concern, though not demographic fairness
+     - **Robustness: 8/10** — 3 datasets x 4 tokenizers, strong utility-retention and neighborhood-recovery results
+     - **Impact: 8/10** — machine unlearning in GenRec is urgent under regulation; from TU Berlin/Amsterdam (strong IR groups)
+
+5. **Decision4Rec: A Jev-Inspired Framework of Decision Models on Knowledge and Active Graphs for Multi-Agent Recommender Systems**
+   * Affiliation: University of Bari Aldo Moro, Italy — *(Marco Polignano, Het Darshan Mehta, Pasquale Lops, Ernesto William De Luca, Giovanni Semeraro; with Otto-von-Guericke University Magdeburg & Leibniz Institute for Educational Media)*
+   * Link: [arxiv.org/abs/2610.26035](https://arxiv.org/abs/2610.26035)
+   * Venue: arXiv preprint, October 2026 (cs.AI, cs.CL, cs.IR; submitted 19 Oct 2026)
+   * TL;DR: An open, modular framework that makes LLM decision models (like the commercial Jev) useful for recommendation: a knowledge graph writes scenario logs as typed statements, an agent pool proposes candidates, a residual ranker keeps the best 30, and a decision model reads them via one typed-question interface; a trained 4B decision model beats the best baseline by 25-36% NDCG@10 on sparse Amazon catalogs.
+   * Key techniques:
+     - Knowledge graph logs recommendation scenarios as short typed statements ("sold: top 10%")
+     - Pool of agents proposes candidates; a residual ranker keeps the best 30
+     - Decision model (commercial Jev / open Kev / custom-trained) reads via one interface of typed questions
+     - Fusion step combines decision-model answers with the ranker score
+     - 4B decision model trained once on real choices of three scenarios
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/marcopoli/decision4rec](https://github.com/marcopoli/decision4rec): complete Python repo with source (`decision4rec/`), `configs/`, `tests/`, `docs/`, `scripts/`, README (10.7KB), CITATION.cff, CONTRIBUTING.md, LICENSE; freshly created (Oct 16 2026), only 2 stars, reproduction not independently verified, but structure and documentation are solid
+     - **Novelty: 6/10** — applies LLM decision models to recommendation via KG + agent pool + fusion; modular but not radically new
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 6/10** — 25-36% NDCG@10 gains on sparse Amazon catalogs + dense Steam, but most gain comes from the agent pool rather than the decision model; limited datasets
+     - **Impact: 6/10** — decision-model-as-recommender is a niche but interesting angle; academic (Bari/Magdeburg)
+
+6. **Dialogue Generation for Conversational Recommendation Using User Search Interactions and Knowledge Graphs (SearCl)**
+   * Affiliation: KAIST — *(Minsung Hwang, Donggyu Yoon, Gowoon Hwang, Kwanghee Jang, Joyce Jiyoung Whang; with LG Electronics)*
+   * Link: [arxiv.org/abs/2610.25182](https://arxiv.org/abs/2610.25182)
+   * Venue: arXiv preprint, October 2026 (cs.AI; submitted 18 Oct 2026)
+   * TL;DR: SearCl automatically generates conversational recommendation dialogues grounded in real user search/click behaviors by segmenting interactions into query sessions and deriving each recommendation target from content selected after a search query, then grounding the dialogue in a knowledge graph, reducing manual dialogue construction for CRS.
+   * Key techniques:
+     - SearCl pipeline segments user interactions into query sessions
+     - Derives each recommendation target from content selected after a search query
+     - Knowledge-graph grounding of the generated dialogues
+     - Automatic CRS dialogue generation from search-click sessions
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (no code link on arXiv; no public repository found)
+     - **Novelty: 6/10** — mines real search/click sessions + KG to synthesize grounded CRS dialogues; useful data-generation method but not a new recommendation model
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 6/10** — depends on quality of mined sessions and KG grounding; needs verification of dialogue fidelity
+     - **Impact: 6/10** — CRS data generation is useful for the community; from KAIST + LG Electronics
 
 ### Papers October 20
 
@@ -1197,7 +1307,7 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 227 papers as of October 20.
+**Count:** 228 papers as of October 21.
 
 | Score | Paper |
 | --- | --- |
@@ -1266,6 +1376,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro)
 7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
 | 7/10 | CutBCE: A Fused Binary Cross-Entropy Loss for Large-Vocabulary Sequential Recommendation (CutBCE) |
+| 7/10 | Decision4Rec: A Jev-Inspired Framework of Decision Models on Knowledge and Active Graphs for Multi-Agent Recommender Systems (Decision4Rec) |
 | 7/10 | JobCCC: A Constraint-Aware Conversational Job Recommendation Benchmark and Method (JobCCC) |
 | 7/10 | AdaM-Rec: Adaptive Modality Routing for Multimodal Recommendation (AdaM-Rec) |
 | 7/10 | A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR)
