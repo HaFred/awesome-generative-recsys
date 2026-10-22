@@ -1,6 +1,7 @@
 # Papers by Keyword
 
 ### Agent / LLM Agent
+- RecSys Factory: Bounding LLM Agent Autonomy to Decision Points in the Industrial Recommender Lifecycle (RecSys Factory) — Tencent, arXiv 2608.11241
 - PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems (PsyBer-Agent) — XJTLU / U Liverpool / Alibaba, arXiv 2610.13989
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
 - Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems (AgentX-Model) — Kuaishou, arXiv 2609.30001
@@ -76,6 +77,8 @@
 - Delegation Asymmetry in Agentic Recommender Systems: Measuring Two-Sided Receptivity in Online Dating — University of Notre Dame / Fleamily, arXiv 2608.18058
 
 ### Beam Search / Constrained Decoding
+- ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
+- Generative Recommenders Forget the Long Tail: Restoring Memorization in Retrieval and Ranking (CAPE) — USTC & Ant Group, arXiv 2610.29298
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 - GenRec: An LLM-Backed Recommendation Ranker at Netflix (GenRec)
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -106,6 +109,7 @@
 - UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
 
 ### CTR Prediction
+- FineSID: Progressive Learning from Content to Relevance to Personalization for CTR Prediction (FineSID) — Alibaba, arXiv 2610.29138
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
 - Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP)
 - Fine-Tuned LLM as a Complementary Predictor Improving Ads System
@@ -211,6 +215,7 @@
 - RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego — arXiv 2604.04457 [opensource]
 
 ### Cross-Domain
+- ATLAS: Learning to Recommend Across Unseen Domains (ATLAS) — Sony Research India, arXiv 2608.03899
 - Cross-Country Code-Mixing for Generative Recommendation (CMRec)
 
 - Breaking the Information Silo: Semantic Personas for Cross-Domain Recommendation (SPHERE)
@@ -643,6 +648,8 @@
 - OneChord: Distill What You Rank, Recommend in One Pass (OneChord) — University of Chinese Academy of Sciences, arXiv 2610.25805
 
 ### Generative Retrieval / Ranking
+- ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
+- Generative Recommenders Forget the Long Tail: Restoring Memorization in Retrieval and Ranking (CAPE) — USTC & Ant Group, arXiv 2610.29298
 - Evolving Semantic Indexes for Generative Retrieval — Santa Clara University & Coupang, arXiv 2610.28568
 - Revisiting Generative vs. Dense Retrieval: A Static Value Prior Reverses the Gap (Static Value Prior) — Shopify, arXiv 2610.19065
 - OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender (OneTrans-V2) — ByteDance, arXiv 2609.28589
@@ -802,6 +809,7 @@
 - IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
 
 ### Industrial
+- RecSys Factory: Bounding LLM Agent Autonomy to Decision Points in the Industrial Recommender Lifecycle (RecSys Factory) — Tencent, arXiv 2608.11241
 - EASformer: Environment-Action-State Alignment for Industrial Generative Ranking (EASformer) — Beihang University, arXiv 2610.27691
 - TransX Technical Report: Scaling Sequence Transduction for Recommendation (TransX) — LinkedIn, arXiv 2610.20913
 - Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops — Spotify, arXiv 2609.30297
@@ -1092,6 +1100,8 @@
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 
 ### LLM-based Recommendation
+- RecSys Factory: Bounding LLM Agent Autonomy to Decision Points in the Industrial Recommender Lifecycle (RecSys Factory) — Tencent, arXiv 2608.11241
+- ATLAS: Learning to Recommend Across Unseen Domains (ATLAS) — Sony Research India, arXiv 2608.03899
 - Decision4Rec: A Jev-Inspired Framework of Decision Models on Knowledge and Active Graphs for Multi-Agent Recommender Systems (Decision4Rec) — University of Bari Aldo Moro, arXiv 2610.26035 [opensource]
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
 - Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops — Spotify, arXiv 2609.30297
@@ -1759,6 +1769,8 @@
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneReason / OneRec-V2) — Kuaishou; OneReason uses advanced RL to make CoT reasoning beneficial; SIGIR 2026 challenge; arXiv 2609.39828
 
 ### Semantic / Structured IDs
+- ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
+- FineSID: Progressive Learning from Content to Relevance to Personalization for CTR Prediction (FineSID) — Alibaba, arXiv 2610.29138
 - SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs (SPAR) — UESTC & Alibaba, arXiv 2610.27898
 - Revisiting Generative vs. Dense Retrieval: A Static Value Prior Reverses the Gap (Static Value Prior) — Shopify, arXiv 2610.19065
 - From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)

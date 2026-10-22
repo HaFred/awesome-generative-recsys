@@ -59,7 +59,6 @@ mindmap
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
-        RecSoup -- Renmin U
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -67,6 +66,7 @@ mindmap
         DACT -- Fudan U
         CHAP -- USTC
         SAHL -- Chongqing U
+        ReGen -- XJTLU / Liverpool / PolyU
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -91,6 +91,100 @@ We only keep the last 10 days summary below, for the past records before these, 
 ---
 
 ---
+
+### Papers October 22
+
+*Thursday, October 22, 2026. The live arXiv cs.IR window (announced Oct 21-22, submitted Oct 21) surfaced only 2 strictly on-topic generative-recsys papers (Generative Recommenders Forget the Long Tail / CAPE, FineSID); the remaining 3 were drawn from the last-3-month keyword pool (ReGen, RecSys Factory, ATLAS) per the fallback. 1 is open-source (ReGen / XJTLU et al., 6/10). Total: 5 papers (1 opensource). By Opensource count 224 -> 225 (the running tally was drifted +4 vs the actual table; reset to the true row count).*
+
+1. **Generative Recommenders Forget the Long Tail: Restoring Memorization in Retrieval and Ranking (CAPE)**
+   * Affiliation: University of Science and Technology of China (USTC) & Ant Group — *(Xu Huang, Jiancan Wu, Hongzheng Qin, Jiawei Feng, Can Ye, Wencong Zeng, Fengze Li, Xiang Wang)*
+   * Link: [arxiv.org/abs/2610.29298](https://arxiv.org/abs/2610.29298)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 21 Oct 2026)
+   * TL;DR: Shows generative recommenders — beam search over semantic IDs for retrieval plus a shared likelihood for ranking — forget long-tail items twice (once by beam pruning, once by likelihood ranking), and proposes CAPE, a training-free co-occurrence-aware plug-in that restores item-level memorization at both stages.
+   * Key techniques:
+     - Beam search over semantic item identifiers performs retrieval; the same likelihood performs ranking
+     - Identifies two long-tail failure modes: (i) beam keeps identifier prefixes by subtree probability mass, pruning tail items early; (ii) likelihood ranks tail below head even when admitted
+     - Both reflect missing item-level memorization (direct co-occurrence recall) that collaborative filtering provides but shared-prefix generation lacks
+     - CAPE (Co-occurrence-Aware Pool Expansion): a memorization channel retrieves co-occurrence-supported tail items outside the beam and scores them with the frozen generator; memorization-calibrated ranking fuses generator likelihood with co-occurrence evidence
+     - Evaluated on two generative backbones over product and music domains
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (no code link on arXiv; GitHub search returns no matching repository)
+     - **Novelty: 8/10** — first to characterize long-tail forgetting in generative recommenders as missing item-level memorization; clean training-free CAPE plug-in
+     - **Fairness: 0/10** — not addressed (long-tail coverage, not demographic fairness)
+     - **Robustness: 7/10** — two generative backbones, product + music domains; training-free; evaluation limited to two domains
+     - **Impact: 8/10** — long-tail is a critical industrial concern as generative recommenders deploy; from USTC + Ant Group
+
+2. **FineSID: Progressive Learning from Content to Relevance to Personalization for CTR Prediction**
+   * Affiliation: Alibaba Group — *(Zhiguang Yang, Yulin Yang, Fuyu Lv, Dan Ou)*
+   * Link: [arxiv.org/abs/2610.29138](https://arxiv.org/abs/2610.29138)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 21 Oct 2026)
+   * TL;DR: FineSID unifies content tokenization, query–item semantic pretraining, and personalized post-training via fine-grained Semantic IDs (SIDs), aligning multimodal content with ID features and improving both CTR and core business metrics on Taobao-scale search.
+   * Key techniques:
+     - Pretrained multi-scale visual tokenizer and text tokenizers convert heterogeneous content into fine-grained Semantic IDs (SIDs)
+     - Full-parameter semantic pretraining under query–item relevance supervision builds a robust matching prior
+     - Personalized post-training with user click supervision captures implicit preferences
+     - Progressive Content → Relevance → Personalization sharing one fine-grained discrete representation, each stage preserving token-level access to content
+     - Offline and online Taobao-scale evaluation; improves within-product creative discrimination
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (Alibaba industrial; GitHub search finds only unrelated repositories)
+     - **Novelty: 7/10** — fine-grained SIDs + progressive three-stage learning; solid incremental improvement over coarse RQ-VAE quantization
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 7/10** — offline + online Taobao-scale results; strong claims but ablations live in the paper
+     - **Impact: 8/10** — Alibaba/Taobao industrial CTR with multimodal SIDs; directly relevant and deployment-adjacent
+
+3. **ReGen: Controllable Generative Recommendation via Guided Token Refinement**
+   * Affiliation: Xi'an Jiaotong-Liverpool University & University of Liverpool & The Hong Kong Polytechnic University — *(Haichao Zhang, Zhixuan Liang, Chong Zhang, Zixi Chen, Wen Wang, Jia Wang)*
+   * Link: [arxiv.org/abs/2610.28642](https://arxiv.org/abs/2610.28642) · [Code](https://github.com/zhang-haichao/ReGen)
+   * Venue: arXiv preprint, August 2026 (cs.IR; submitted 27 Aug 2026)
+   * TL;DR: ReGen reframes generative-recommendation decoding as parallel mask-filling (rather than left-to-right autoregressive) so control signals (e.g., accuracy vs. diversity) can be applied directly to high-level semantic tokens, with a topology-constrained tree enforcing valid Semantic-ID paths during beam-based inference.
+   * Key techniques:
+     - Reformulates SID generation as a mask-filling task predicting all tokens simultaneously instead of one by one
+     - Control signals applied directly to tokens with high-level semantics without retraining the model
+     - Topology-constrained tree iteratively corrects low-confidence predictions while strictly enforcing valid codebook paths during beam-based inference
+     - Favorable accuracy–diversity trade-off under moderate guidance while maintaining high validity of generated Semantic IDs
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/zhang-haichao/ReGen](https://github.com/zhang-haichao/ReGen): real repository with README, requirements.txt, and structured modules (quantization, recommendation, preprocessing, evaluation, experiments, asset) matching the paper's components, but 0 stars, no LICENSE file, last pushed Jan 2026 (stale relative to the Aug 2026 submission), single-author academic lab
+     - **Novelty: 8/10** — non-autoregressive parallel refinement for controllable generative recommendation is a clear departure from left-to-right decoding
+     - **Fairness: 0/10** — not addressed (controllable diversity is not demographic fairness)
+     - **Robustness: 7/10** — accuracy–diversity trade-off demonstrated with validity maintained; academic-scale evaluation, not industrial
+     - **Impact: 7/10** — controllable generative recommendation is an emerging industrial need; from XJTLU / Liverpool / PolyU; open-source
+
+4. **RecSys Factory: Bounding LLM Agent Autonomy to Decision Points in the Industrial Recommender Lifecycle**
+   * Affiliation: Tencent (FiT) — *(Dongyang Ao, Kaixiang Fang, Shijie Xu)*
+   * Link: [arxiv.org/abs/2608.11241](https://arxiv.org/abs/2608.11241)
+   * Venue: arXiv preprint, July 2026 (cs.AI; submitted 31 Jul 2026)
+   * TL;DR: RecSys Factory is an LLM-agent platform deployed 78 days across three Tencent recommender business lines that bounds agent autonomy to typed decision surfaces inside pre-committed pipelines, resolving the autonomy–determinism–efficiency trilemma for industrial recommender operations.
+   * Key techniques:
+     - Frames the autonomy–determinism–efficiency trilemma of deploying LLM agents into industrial recommender operations
+     - Design principle: autonomy at decision points, not over pipelines
+     - Runtime deconstructed into three host-emitted event sources (Claude Code Stop hooks, corporate-IM webhooks, workflow scheduler APIs) giving determinism and no long-running daemon during wait phases
+     - 29-file skill ecosystem (8,971 lines of SKILL.md) compiling into a 400-entry PitfallStore that confines autonomy to bounded typed decision surfaces
+     - Corporate-IM human-in-the-loop card protocol at the diagnostic-vs-execution boundary
+     - 78-day deployment across 3 heterogeneous Tencent business lines (1,624 CLI dispatches, ~83.7% success)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (Tencent industrial platform; no public repository)
+     - **Novelty: 7/10** — autonomy-at-decision-points framing plus a concrete industrial LLM-agent platform; a systems contribution more than a modeling one
+     - **Fairness: 0/10** — not addressed (mentions compliance, not fairness)
+     - **Robustness: 8/10** — 78-day real deployment across three lines; documents failure modes; genuinely industrial
+     - **Impact: 8/10** — Tencent industrial deployment of LLM agents in the recommender lifecycle; high practical relevance for agentic rec ops
+
+5. **ATLAS: Learning to Recommend Across Unseen Domains**
+   * Affiliation: Sony Research India — *(Pervez Shaik, Prosenjit Biswas, Abhinav Thorat, Ravi Kolla, Niranjan Pedanekar)*
+   * Link: [arxiv.org/abs/2608.03899](https://arxiv.org/abs/2608.03899)
+   * Venue: arXiv preprint, August 2026 (cs.IR; submitted 4 Aug 2026)
+   * TL;DR: ATLAS is a multi-source recommendation domain-generalization framework that learns a domain-invariant user–item representation from several heterogeneous source domains and zero-shot transfers to entirely unseen domains, using Gromov–Wasserstein alignment, an adversarial domain discriminator, and residual-vector-quantization (RVQ) discrete codes.
+   * Key techniques:
+     - Learns a shared, domain-invariant user–item representation from multiple disjoint source domains
+     - Gromov–Wasserstein alignment preserves how users relate to one another across domains
+     - Adversarial objective makes item representations indistinguishable across domains
+     - Residual Vector Quantization (RVQ) codebooks compress user and item embeddings into a discrete latent space, suppressing domain-specific variation
+     - Zero-shot recommendation on 10 unseen domains after training on 5 Amazon source domains (+24% average relative HitRate gain)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (Sony; GitHub search returns no matching repository)
+     - **Novelty: 7/10** — recommendation domain generalization (zero-shot to unseen domains) via a discrete-code domain-invariant representation; a solid contribution
+     - **Fairness: 0/10** — not addressed
+     - **Robustness: 7/10** — 5 source → 10 unseen domains with +24% average HitRate; comprehensive ablation and post-hoc analyses
+     - **Impact: 7/10** — Sony Research; zero-shot cross-domain recommendation is valuable; broad baseline comparison
 
 ### Papers October 21
 
@@ -1178,365 +1272,239 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
-### Papers October 11
-
-*Sunday, October 11, 2026. The live 24h arXiv window (papers dated Oct 10-11) carried no strictly on-topic generative-recommendation papers - the weekend window was empty - so per the fallback rule we drew 7 genuinely-new, on-topic papers from the last-3-month arXiv keyword pool. 2 are open-source (JobCCC, CutBCE). Total: 7 papers (2 opensource). By Opensource count rises 205 -> 207.*
-
-1. **Seeing the Context: Image-Derived Contextual Signals for Recommendation**
-   * Affiliation: Tel Aviv University - Coller School of Management *(Tal Cordova, et al.)*
-   * Link: [arxiv.org/abs/2610.08407](https://arxiv.org/abs/2610.08407)
-   * Venue: RecSys 2026 CARS Workshop; arXiv preprint, October 2026 (cs.IR; submitted 8 Oct 2026)
-   * TL;DR: Uses a vision-language model to extract contextual signals from item images and fuses them into recommenders via an ICE-Fuse module, boosting personalization where text metadata is sparse.
-   * Key techniques:
-     - VLM derives structured contextual descriptors from item images ("seeing the context")
-     - ICE-Fuse: a context fusion module integrating image-derived signals with collaborative / user features
-     - Targets cold and weak-text items where visual context carries missing signals
-     - Demonstrates gains from injecting visual context into recommendation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** - no public code released
-     - **Novelty: 6/10** - applies VLM-derived visual context to rec, a useful but incremental angle
-     - **Fairness: 5/10** - not fairness-focused, though visual context can dilute text bias
-     - **Robustness: 5/10** - single workshop study; limited ablations reported
-     - **Impact: 6/10** - RecSys CARS workshop; relevant to multimodal / cold-start rec
-
-2. **OpticalRec: Treating Text as Visual Glyphs for Multimodal Recommendation**
-   * Affiliation: UC San Diego - Department of Computer Science (Julian McAuley group) *(Yueqi Wang, et al.; with Alibaba, UIUC, HK PolyU, CUHK, Texas A&M)*
-   * Link: [arxiv.org/abs/2610.05432](https://arxiv.org/abs/2610.05432)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 7 Oct 2026)
-   * TL;DR: OpticalRec unifies text and image modalities by rendering text as visual glyph images and encoding both with a shared vision backbone, removing separate text towers in multimodal collaborative filtering.
-   * Key techniques:
-     - Renders textual item metadata into visual glyph images ("text-as-visual-glyph")
-     - Encodes both real images and rendered text with a single VLM / vision encoder
-     - Unified multimodal representation for collaborative filtering
-     - Avoids modality-specific encoders and cross-modal alignment heads
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** - no public code released
-     - **Novelty: 7/10** - text-as-visual-glyph unified encoding is a clean multimodal-unification idea
-     - **Fairness: 4/10** - not fairness-focused
-     - **Robustness: 5/10** - promising but single-model study; scaling not shown
-     - **Impact: 6/10** - UCSD / McAuley; relevant to multimodal rec unification
-
-3. **JobCCC: A Constraint-Aware Conversational Job Recommendation Benchmark and Method**
-   * Affiliation: East West University, Dhaka, Bangladesh *(Md Arman Hossain, et al.; with UC San Diego)*
-   * Link: [arxiv.org/abs/2610.05787](https://arxiv.org/abs/2610.05787)
-   * Venue: WSDM 2027 submission; arXiv preprint, October 2026 (cs.IR; submitted 7 Oct 2026)
-   * TL;DR: Introduces JobCCC, a benchmark for constraint-aware conversational job recommendation, plus W-SCAR, a method that tracks user-stated constraints across dialogue turns for more faithful job matches.
-   * Key techniques:
-     - JobCCC benchmark with explicit user constraints (location, salary, role) across multi-turn dialogue
-     - W-SCAR: constraint-aware response generation / ranking that tracks stated constraints
-     - Evaluates faithfulness of recommendations to user constraints in conversation
-     - Open-sourced dataset, code, and HuggingFace assets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** - [github.com/M-Jawad01/Conversational-Job-Recommendation-System-LLM](https://github.com/M-Jawad01/Conversational-Job-Recommendation-System-LLM) + HuggingFace; new, modest stars/validation
-     - **Novelty: 7/10** - explicit constraint-tracking for conversational job rec is a clear, useful framing
-     - **Fairness: 6/10** - constraint faithfulness relates to exposure / equity for job seekers
-     - **Robustness: 6/10** - benchmark + method; limited large-scale validation
-     - **Impact: 6/10** - practical job-rec domain; open resources aid reproducibility
-
-4. **CutBCE: A Fused Binary Cross-Entropy Loss for Large-Vocabulary Sequential Recommendation**
-   * Affiliation: Google - AI Hypercomputer *(Yaoyiran Li, et al.)*
-   * Link: [arxiv.org/abs/2610.05559](https://arxiv.org/abs/2610.05559)
-   * Venue: arXiv preprint, October 2026 (cs.LG / cs.AI / cs.AR / cs.IR; submitted 7 Oct 2026)
-   * TL;DR: CutBCE is a JAX / Pallas fused implementation of the binary cross-entropy loss for large-vocabulary sequential recommendation that avoids materializing the full vocab-sized gradient, cutting memory and speeding up training.
-   * Key techniques:
-     - Fused BCE loss kernel implemented in JAX / Pallas
-     - Avoids instantiating the large vocabulary-sized gradient tensor
-     - Targets the memory / time bottleneck of sampled-softmax / full BCE in industrial sequential rec
-     - Open-sourced in the RecML library (Google AI Hypercomputer)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** - [github.com/AI-Hypercomputer/RecML](https://github.com/AI-Hypercomputer/RecML); official Google library, but niche / early adoption
-     - **Novelty: 7/10** - practical fused-kernel reformulation of full-vocab BCE for rec
-     - **Fairness: 4/10** - not fairness-focused
-     - **Robustness: 7/10** - industrial (Google) systems-oriented; concrete efficiency gains
-     - **Impact: 7/10** - useful training-efficiency primitive for large-vocab sequential rec
-
-5. **TIDE: How Can Recommendation Feedback Evolve Agent Memory?**
-   * Affiliation: Harbin Institute of Technology *(Shanwen Mao, et al.; with Alibaba Group, Institute of Automation, CAS)*
-   * Link: [arxiv.org/abs/2609.37544](https://arxiv.org/abs/2609.37544)
-   * Venue: arXiv preprint, September 2026 (cs.AI; submitted 30 Sep 2026)
-   * TL;DR: TIDE studies how delayed recommendation feedback can evolve an agent's memory in a directed, trajectory-informed way (rather than passively appending observations), improving long-horizon agentic recommendation.
-   * Key techniques:
-     - Treats recommendation feedback as a signal to evolve (not just store) agent memory
-     - Trajectory-informed directed memory evolution from delayed feedback
-     - Addresses the temporal gap between action and observed feedback
-     - Frames memory as a learnable, feedback-driven structure for agentic rec
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** - no public code released
-     - **Novelty: 7/10** - directed, trajectory-informed memory evolution from delayed feedback is a fresh agentic-rec angle
-     - **Fairness: 5/10** - not fairness-focused
-     - **Robustness: 6/10** - conceptual + empirical on agentic-rec memory; early
-     - **Impact: 6/10** - relevant to the agentic-rec memory research thread
-
-6. **LIFT: Lifecycle-Aware Interaction Factorization for Unified Retrieval and Ranking**
-   * Affiliation: Beijing University of Posts and Telecommunications *(Keji Miao, et al.; with Southeast University, Xiaohongshu)*
-   * Link: [arxiv.org/abs/2610.10556](https://arxiv.org/abs/2610.10556)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 8 Oct 2026)
-   * TL;DR: LIFT factorizes user-item interactions with explicit lifecycle awareness (intent stages) to unify retrieval and ranking under one model, improving consistency across the funnel.
-   * Key techniques:
-     - Lifecycle-aware interaction factorization modeling intent stages
-     - Unified retrieval and ranking in a single generative / representation framework
-     - Bridges the retrieval-ranking gap with lifecycle signals
-     - Validated in an industrial (Xiaohongshu) recommendation setting
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** - no public code released
-     - **Novelty: 6/10** - lifecycle-aware factorization for unified retrieval/ranking is a reasonable incremental framing
-     - **Fairness: 5/10** - not fairness-focused
-     - **Robustness: 5/10** - industrial setting but limited public validation
-     - **Impact: 6/10** - Xiaohongshu production context; moderate relevance
-
-7. **Textual User Taste: Natural-Language Taste Profiles at Spotify Scale**
-   * Affiliation: Spotify *(Ghazal Fazelnia, et al.)*
-   * Link: [arxiv.org/abs/2609.35285](https://arxiv.org/abs/2609.35285)
-   * Venue: arXiv preprint, September 2026 (cs.AI; submitted 29 Sep 2026)
-   * TL;DR: Describes Spotify's deployment of natural-language "taste profiles" that summarize users' music preferences in text, used across millions of users to personalize recommendations.
-   * Key techniques:
-     - Natural-language user taste profiles derived from listening history
-     - Deployed to millions of Spotify users in production personalization
-     - Bridges free-text preference representation with rec serving
-     - Industrial scale with online deployment
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** - no public code; Spotify production system
-     - **Novelty: 6/10** - NL taste profiling at scale is an applied framing rather than a new method
-     - **Fairness: 6/10** - touches representation equity in personalization
-     - **Robustness: 6/10** - production deployment at millions of users implies real robustness
-     - **Impact: 8/10** - Spotify production at scale; high practical impact for personalization
-
----
-
 ## By Opensource
 
 Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted by score (highest first), then by title.
 
-**Count:** 228 papers as of October 21.
-
 | Score | Paper |
 | --- | --- |
 | 10/10 | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) |
-| 10/10 | RecRM-Bench: Benchmarking Multidimensional Reward Modeling for Agentic Recommender Systems |
 | 10/10 | MiniOneRec: An Open-Source Framework for Scaling Generative Recommendation |
+| 10/10 | RecRM-Bench: Benchmarking Multidimensional Reward Modeling for Agentic Recommender Systems |
+| 9/10 | [STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators |
+| 9/10 | Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
 | 9/10 | Bringing Reasoning to Generative Recommendation Through the Lens of Cascaded Ranking (CARE) |
-| 9/10 | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
+| 9/10 | DynamicPO: Dynamic Preference Optimization for Recommendation (DASFAA 2026) |
+| 9/10 | FORGE: Forming Semantic Identifiers for Generative Retrieval in Industrial Datasets |
 | 9/10 | LLM-as-a-Judge for Reliable and Explainable Offline Evaluation in Top-K Recommendation (LLM Judge) |
+| 9/10 | One Pass, Any Order: Position-Invariant Listwise Reranking for LLM-Based Recommendation (InvariRank) |
 | 9/10 | OpenOneRec Technical Report |
 | 9/10 | Rank-GRPO: Training LLM-based Conversational Recommender Systems with Reinforcement Learning (ConvRec-R1) |
-| 9/10 | The Pitfall of Scaling Up: Uncovering and Mitigating Popularity Bias Amplification in Scaling Transformer-based Recommenders (SPRINT) |
-| 9/10 | [STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators |
-| 9/10 | Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation |
-| 9/10 | FORGE: Forming Semantic Identifiers for Generative Retrieval in Industrial Datasets |
-| 9/10 | DynamicPO: Dynamic Preference Optimization for Recommendation (DASFAA 2026) |
-| 9/10 | Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
 | 9/10 | RPCBench: A Benchmark for Proactive Premise Critique in LLM-based Recommendation (RPCBench) |
+| 9/10 | Tencent Advertising Algorithm Challenge 2025: All-Modality Generative Recommendation |
+| 9/10 | The Pitfall of Scaling Up: Uncovering and Mitigating Popularity Bias Amplification in Scaling Transformer-based Recommenders (SPRINT) |
 | 8.5/10 | Factorized Latent Reasoning for LLM-based Recommendation (FLR) |
-| 8/10 | Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec) |
+| 8/10 | A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset (APG4RecSim) |
 | 8/10 | ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation |
+| 8/10 | Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec) |
 | 8/10 | APAO: Bridging the Training-Inference Gap in Generative Recommendation via Adaptive Prefix-Aware Optimization (APAO) |
+| 8/10 | Attention Calibration for Position-Fair Dense Information Retrieval |
 | 8/10 | BRIDGE: Behavior-Guided Candidate Calibration for Multimodal Recommendation |
-| 8/10 | Preference Shapes Relevance: Cross-component Hierarchical Semantic Alignment for Personalized Generative Retrieval (CHAP) |
+| 8/10 | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) |
+| 8/10 | Cold-Starts in Generative Recommendation: A Reproducibility Study (ColdGenRec) |
 | 8/10 | COPF: An Online Framework for Deployment-Stable Counterfactual Fairness in Evolving Graphs |
 | 8/10 | Credit-assigned Policy Gradient for Early Stage Retrieval in Two-stage Ranking (CA-PG) |
-| 8/10 | Mult-DPO: Multinomial Direct Preference Optimization for Recommender Systems |
-| 8/10 | MuonRec: Shifting the Optimizer Paradigm Beyond Adam in Scalable Generative Recommendation |
-| 8/10 | On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG) |
-| 8/10 | One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE) |
-| 8/10 | On the Memorization and Generalization of Generative Recommendation (MemGen-GR) |
-| 8/10 | ManCAR: Manifold-Constrained Latent Reasoning with Adaptive Test-Time Computation for Sequential Recommendation |
-| 8/10 | ProRL: Effective Reinforcement Learning for Proactive Recommendation via Rectified Policy Gradient Estimation (ProRL) |
-| 8/10 | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender |
-| 8/10 | SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents |
-| 8/10 | Self-Evolving Memory for Generative Recommendation |
-| 8/10 | SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation |
-| 8/10 | How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation? |
-| 8/10 | HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations |
-| 8/10 | Intuition-Guided Latent Reasoning for LLM-Based Recommendation (IntuRec) |
-| 8/10 | Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM) |
-| 8/10 | OneRec-Think: In-Text Reasoning for Generative Recommendation |
-| 8/10 | A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset (APG4RecSim) |
-| 8/10 | TRACE: A Conversational Framework for Sustainable Tourism Recommendation with Agentic Counterfactual Explanations |
-| 8/10 | TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation |
-| 8/10 | UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization |
-| 8/10 | Unleashing the Native Recommendation Potential: LLM-Based Generative Recommendation via Structured Term Identifiers (GRLM) |
-| 8/10 | UniRank: Benchmarking Ranking Models for Unified Sequential Modeling and Feature Interaction |
-| 8/10 | Dynamic Spectral Denoising with Global-Context Attention for Multi-Behavior Recommendation (SpectraMB) |
 | 8/10 | Differentiable Semantic ID for Generative Recommendation (DIGER) |
 | 8/10 | Do Generative Recommenders Deepen the Information Cocoon? A Closed-Loop Simulation with LLM-powered User Simulators (RecLoop) |
+| 8/10 | Drift-Aware Continual Tokenization for Generative Recommendation (DACT) |
+| 8/10 | Dynamic Spectral Denoising with Global-Context Attention for Multi-Behavior Recommendation (SpectraMB) |
+| 8/10 | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) |
 | 8/10 | From Noise to Order: Learning to Rank via Denoising Diffusion (DiffusionRank) |
 | 8/10 | GCIB: Graph Contrastive Information Bottleneck for Multi-Behavior Recommendation |
 | 8/10 | Generative Late-Interaction Embeddings For Visual Document Retrieval (GLIE) |
 | 8/10 | GPlan: Generative Spatiotemporal Intent Sequence Recommendation via Implicit Reasoning in Amap |
-| 8/10 | Expand More, Shrink Less: Shaping Effective-Rank Dynamics for Dense Scaling in Recommendation (RankElastor) |
-| 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
-| 8/10 | Attention Calibration for Position-Fair Dense Information Retrieval |
-| 8/10 | Cold-Starts in Generative Recommendation: A Reproducibility Study (ColdGenRec) |
-| 8/10 | Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO) |
-| 8/10 | Masked Diffusion for Generative Recommendation (MaskGR) |
 | 8/10 | Hierarchical Exponential-Gaussian Mixtures for Watch-Time Distribution Prediction (HEGM) |
+| 8/10 | How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation? |
+| 8/10 | HRPO: Hierarchical Residual Policy Optimization for Generative Recommendations |
+| 8/10 | Intuition-Guided Latent Reasoning for LLM-Based Recommendation (IntuRec) |
 | 8/10 | LSREP: A Longitudinal State-Replay Protocol for Evaluating Conversational Memory, with ICE v2 as an Audited Local-First Architecture (LSREP) |
+| 8/10 | ManCAR: Manifold-Constrained Latent Reasoning with Adaptive Test-Time Computation for Sequential Recommendation |
+| 8/10 | Masked Diffusion for Generative Recommendation (MaskGR) |
+| 8/10 | Mult-DPO: Multinomial Direct Preference Optimization for Recommender Systems |
+| 8/10 | MuonRec: Shifting the Optimizer Paradigm Beyond Adam in Scalable Generative Recommendation |
+| 8/10 | On the Memorization and Generalization of Generative Recommendation (MemGen-GR) |
+| 8/10 | On the Memorization Behavior of LLMs in Generative Recommendation: Observations, Implications, and Training Strategies (IIRG) |
+| 8/10 | One Polluted Page Is Enough: Evaluating Web Content Pollution in Generative Recommenders (FORGE) |
+| 8/10 | OneRec-Think: In-Text Reasoning for Generative Recommendation |
+| 8/10 | Preference Shapes Relevance: Cross-component Hierarchical Semantic Alignment for Personalized Generative Retrieval (CHAP) |
+| 8/10 | ProRL: Effective Reinforcement Learning for Proactive Recommendation via Rectified Policy Gradient Estimation (ProRL) |
+| 8/10 | RAGEAR: Retrieval-Augmented Graph-Enhanced Academic Recommender |
+| 8/10 | Rethinking Convolutional Networks for Attribute-Aware Sequential Recommendation (ConvRec) |
 | 8/10 | Retrieval, Scoring, and Decoding Shape Performance and Stability in LLM-based Conversational Recommendation (CRS-Performance) |
-| 8/10 | Drift-Aware Continual Tokenization for Generative Recommendation (DACT) |
-| 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro)
-7.5/10 | Generative Sequential Recommendation via Hierarchical Behavior Modeling (GAMER) |
-| 7/10 | CutBCE: A Fused Binary Cross-Entropy Loss for Large-Vocabulary Sequential Recommendation (CutBCE) |
-| 7/10 | Decision4Rec: A Jev-Inspired Framework of Decision Models on Knowledge and Active Graphs for Multi-Agent Recommender Systems (Decision4Rec) |
-| 7/10 | JobCCC: A Constraint-Aware Conversational Job Recommendation Benchmark and Method (JobCCC) |
+| 8/10 | SafeGEO: Understanding Generative Engine Optimization Risks in Recommendation Agents |
+| 8/10 | Self-Evolving Memory for Generative Recommendation |
+| 8/10 | SIDScope: A Diagnostic Resource for Semantic-ID Interfaces in Generative Recommendation |
+| 8/10 | TCA4Rec: Token-level Collaborative Alignment for LLM-based Generative Recommendation |
+| 8/10 | Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation (TDPM) |
+| 8/10 | TRACE: A Conversational Framework for Sustainable Tourism Recommendation with Agentic Counterfactual Explanations |
+| 8/10 | UniGRec: Unified Generative Recommendation with Soft Identifiers for End-to-End Optimization |
+| 8/10 | UniRank: Benchmarking Ranking Models for Unified Sequential Modeling and Feature Interaction |
+| 8/10 | Unleashing the Native Recommendation Potential: LLM-Based Generative Recommendation via Structured Term Identifiers (GRLM) |
+| 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro) |
+| 7/10 | A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR) |
 | 7/10 | AdaM-Rec: Adaptive Modality Routing for Multimodal Recommendation (AdaM-Rec) |
-| 7/10 | A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR)
-| 7/10 | IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation Mixture-of-Experts (IntBMoE)
-7/10 | Reproducing Transparent and Scrutable Recommendations: Exploring Open-Weight Models via Natural-Language User Profiles (Transparent UPR Repro) |
-| 7/10 | Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs (Quanta) |
-| 7/10 | Structure-Aligned History Learning with Subspace-Structured Semantic IDs for Generative Recommendation (SAHL) |
-| 7/10 | SURF: Subtractive Updates for Recommender Forgetting (SURF) |
 | 7/10 | Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec) |
-| 7/10 | RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN) |
-| 7/10 | Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner) |
-| 7/10 | Beyond Successor Accuracy: State Retention for Recursive Self-Improvement in Recommendation (RecRSI) |
-| 7/10 | REPREC: Representation Driven Parameter-Efficient Recommendation System (REPREC) |
-| 7/10 | Can We Steer the Black-Box? Towards Controllability-Centric Evaluation of Recommender Systems with Collaborative Agents (CtrlBench-Rec) |
-| 7/10 | Closing the Long-Short View Gap in Sequential Recommendation without Cached History |
-| 7/10 | The Best of Both Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H²Rec) |
+| 7/10 | An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS) |
+| 7/10 | Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking) |
 | 7/10 | Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation (OrthoRec) |
 | 7/10 | Beyond Noisy Signals: Dual-Level Denoising for Multi-modal Sequential Recommendation (DDMSR) |
-| 7/10 | Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF) |
+| 7/10 | Beyond Successor Accuracy: State Retention for Recursive Self-Improvement in Recommendation (RecRSI) |
+| 7/10 | Can We Steer the Black-Box? Towards Controllability-Centric Evaluation of Recommender Systems with Collaborative Agents (CtrlBench-Rec) |
+| 7/10 | CARD: Counterfactual Attention Regulation Diffusion for Diffusion-based Sequential Recommendation (CARD) — Sun Yat-sen University / Peng Cheng Laboratory, ICASSP 2026 — [github.com/yanqilong3321/CARD](https://github.com/yanqilong3321/CARD) |
+| 7/10 | Closing the Long-Short View Gap in Sequential Recommendation without Cached History |
+| 7/10 | CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation (CoFiRec) |
 | 7/10 | CRAMER: Control via Request-Aware Masking for Editing Recommenders (CRAMER) |
+| 7/10 | CutBCE: A Fused Binary Cross-Entropy Loss for Large-Vocabulary Sequential Recommendation (CutBCE) |
+| 7/10 | Decision4Rec: A Jev-Inspired Framework of Decision Models on Knowledge and Active Graphs for Multi-Agent Recommender Systems (Decision4Rec) |
+| 7/10 | Diagnosing and Mitigating Retrieval Bottlenecks in LLM-Based Cold-Start Recommendation (LHF) |
+| 7/10 | DiffGRM: Diffusion-based Generative Recommendation Model (DiffGRM) — Kuaishou, WWW 2026 — [github.com/liuzhao09/DiffGRM](https://github.com/liuzhao09/DiffGRM) |
+| 7/10 | Difficulty-Aware Semantic-ID Optimization for Generative Recommendation (DASO) |
+| 7/10 | DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR) |
+| 7/10 | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
+| 7/10 | Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP) |
+| 7/10 | Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval |
 | 7/10 | Empowering Compact LLMs with Fusion of Layer-wise Exits for Recommendation (FLEXRec) |
+| 7/10 | Enhancing Group Recommendation with Memory-Augmented Reasoning in LLM Agent (AGR) |
 | 7/10 | Eval4DiRec: A Unified and Systematic Evaluation Framework for Diffusion-based Recommender Systems (Eval4DiRec) |
 | 7/10 | Evo-Rec: Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec) |
 | 7/10 | Fast and Feasible: Permutation-based Constrained Reranking for Revenue Maximization (PermR) |
+| 7/10 | FatsMB: From Agnostic to Specific: Latent Preference Diffusion for Multi-Behavior Sequential Recommendation (FatsMB) |
 | 7/10 | FAVE: Flow-based Average Velocity Establishment for Sequential Recommendation |
 | 7/10 | FedHUR: Learning Hierarchical Utility-Guided Client Relations for Personalized Federated Recommendation |
+| 7/10 | FINALLY: A Dataset Recommender System for Recommender-Systems Research |
+| 7/10 | FLASH: Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment (FLASH) |
 | 7/10 | Generative Archetype-Grounded Item Representations for Sequential Recommendation (GenAIR) |
 | 7/10 | Harmonizing Semantic and Collaborative in LLMs: Reasoning-based Embedding Generator for Sequential Recommendation (ReaEmb) |
 | 7/10 | HyCoRec: Hypergraph-Enhanced Multi-Preference Learning for Alleviating Matthew Effect in Conversational Recommendation |
-| 7/10 | SIDInspector: A Mapping-First Diagnostic Resource for Semantic-ID Tokenizers |
+| 7/10 | IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation Mixture-of-Experts (IntBMoE) |
+| 7/10 | ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation |
+| 7/10 | Iterative Semantic Reasoning from Individual to Group Interests for Generative Recommendation with LLMs (ISRF) |
+| 7/10 | JBM-Diff: Joint Behavior-guided and Modality-coherence Conditional Graph Diffusion Denoising for Multi-Modal Recommendation (JBM-Diff) |
+| 7/10 | JobCCC: A Constraint-Aware Conversational Job Recommendation Benchmark and Method (JobCCC) |
 | 7/10 | Learning Decomposed Contextual Token Representations from Pretrained and Collaborative Signals for Generative Recommendation (DECOR) |
 | 7/10 | Learning Multiresolution Relevance for Hierarchical Generative Retrieval (RARS) |
 | 7/10 | Learning to Rotate: Temporal and Semantic Rotary Encoding for Sequential Modeling (SIREN-RoPE) |
 | 7/10 | LIME-Rec: Auditing Semantic Gains in Sequential Recommendation — A Lightweight Recovery Test |
 | 7/10 | MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory |
+| 7/10 | Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective (PR-entmax) — Sber AI Lab / Lomonosov MSU, CIKM 2026 — [github.com/Antondfger/Sparse-Prior-Regularized](https://github.com/Antondfger/Sparse-Prior-Regularized) |
 | 7/10 | Mixture-of-Experts Knowledge Graph Retrieval-Augmented Generation for Multi-Agent LLM-based Recommendation (MixRAGRec) |
+| 7/10 | MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology — [github.com/wangyu0627/MLLMRec-R1](https://github.com/wangyu0627/MLLMRec-R1) |
 | 7/10 | MLPs are Efficient Distilled Generative Recommenders (SID-MLP) |
 | 7/10 | OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework (OneSearch-V2) |
 | 7/10 | Popcorn: A Configurable Benchmark for Visual Evidence in Multimodal Movie Recommendation (Popcorn) |
 | 7/10 | Prompt Optimization for User Simulation in Conversational Recommender Systems (UserSimulator) |
+| 7/10 | Quanta: A Self-Contained Python Library for Hybrid Retrieval over Quantised Embeddings, Lexical Indexes, and Knowledge Graphs (Quanta) |
 | 7/10 | R3-VAE: Reference Vector-Guided Rating Residual Quantization VAE for Generative Recommendation |
-| 7/10 | RAMP: Robust Ad Recommendation Under Limited Personalized-Feature Availability via Masking and Alignment Pathways |
-| 7/10 | Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning |
-| 7/10 | RSIR: Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control (RSIR) |
-| 7/10 | Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair |
-| 7/10 | SAERec: Constructing Fine-grained Interpretable Intents Priors via Sparse Autoencoders for Recommendation (SAERec) |
-| 7/10 | Stream-aware Side Adaptation for Large Pre-trained Multimodal Embedding Models in Sequential Recommendation (Stresa) |
-| 7/10 | SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation (SynGR) |
-| 7/10 | Uncertainty-aware Generative Recommendation (UGR) |
-| 7/10 | Uncertainty and Fairness Awareness in LLM-Based Recommendation Systems |
-| 7/10 | URecJPQ: Memory-efficient Multimodal Recommendation Models through RecJPQ in Large-Scale Scenarios (URecJPQ) |
-| 7/10 | Who Owns the AI Recommendation? A Multi-Industry Empirical Map of Brand Category Ownership Across Large Language Models (LLM Brand) |
 | 7/10 | RAGR: Review-Augmented Generative Recommendation |
-| 7/10 | Dual-Stream MLP is All You Need for CTR Prediction (DS-MLP) |
-| 7/10 | Dual-Diffusional Generative Fashion Recommendation (DualFashion) |
+| 7/10 | RAMP: Robust Ad Recommendation Under Limited Personalized-Feature Availability via Masking and Alignment Pathways |
+| 7/10 | RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego — [github.com/Yueeeeeeee/RAR](https://github.com/Yueeeeeeee/RAR) |
+| 7/10 | Reasoning over Semantic IDs Enhances Generative Recommendation (SIDReasoner) |
+| 7/10 | Reasoning Reranking with Semantic IDs as the Sole Item Representation (ReRankID) — Google / University of Toronto — [github.com/lilv98/ReRankID](https://github.com/lilv98/ReRankID) |
+| 7/10 | Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning |
+| 7/10 | RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN) |
+| 7/10 | REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval |
+| 7/10 | ReMaRk: Many Right Answers, One Training Example: Removing Responder Noise from GRPO for LLM Recommenders (ReMaRk) — Nanyang Technological University — [github.com/LiXin97/ReMaRk](https://github.com/LiXin97/ReMaRk) |
+| 7/10 | Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources |
+| 7/10 | REPREC: Representation Driven Parameter-Efficient Recommendation System (REPREC) |
+| 7/10 | Reproducing FACTER: Fairness via Conformal Thresholding and Prompt Repair |
+| 7/10 | Rethinking Item Tokenization in Generative Recommenders: From Fixed Atoms to Semantic Subwords (SST) |
+| 7/10 | RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation (RouteRec) |
+| 7/10 | RSIR: Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control (RSIR) |
+| 7/10 | SAERec: Constructing Fine-grained Interpretable Intents Priors via Sparse Autoencoders for Recommendation (SAERec) |
+| 7/10 | SafeCRS: Personalized Safety Alignment for LLM-Based Conversational Recommender Systems (SafeCRS) — UIC / UIUC / Amazon, KDD 2026 — [github.com/xxyyffyeah/SafeCRS](https://github.com/xxyyffyeah/SafeCRS) |
+| 7/10 | SIDInspector: A Mapping-First Diagnostic Resource for Semantic-ID Tokenizers |
 | 7/10 | Skill Is Not Document: A Query-Conditional Benchmark and Two-Stage Retriever for LLM Agent Skill Routing (R3) |
 | 7/10 | SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation (SPRIG) |
-| 7/10 | FatsMB: From Agnostic to Specific: Latent Preference Diffusion for Multi-Behavior Sequential Recommendation (FatsMB) |
-| 7/10 | FLASH: Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment (FLASH) |
-| 7/10 | JBM-Diff: Joint Behavior-guided and Modality-coherence Conditional Graph Diffusion Denoising for Multi-Modal Recommendation (JBM-Diff) |
+| 7/10 | Stream-aware Side Adaptation for Large Pre-trained Multimodal Embedding Models in Sequential Recommendation (Stresa) |
+| 7/10 | Structure-Aligned History Learning with Subspace-Structured Semantic IDs for Generative Recommendation (SAHL) |
+| 7/10 | SURF: Subtractive Updates for Recommender Forgetting (SURF) |
+| 7/10 | SynGR: Unleashing the Potential of Cross-Modal Synergy for Generative Recommendation (SynGR) |
 | 7/10 | tau-Rec: A Verifiable Benchmark for Agentic Recommender Systems |
 | 7/10 | Teach Multimodal Recommendation Model to See via Personalized Visual Extraction and Adaptive Learning (REVEAL) |
-| 7/10 | ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation |
-| 7/10 | Are We Really Making Progress in Group Recommendation? Unmasking the Tie-Breaking Illusion (Tie-Breaking) |
-| 7/10 | Rethinking Item Tokenization in Generative Recommenders: From Fixed Atoms to Semantic Subwords (SST) |
-| 7/10 | Difficulty-Aware Semantic-ID Optimization for Generative Recommendation (DASO) |
-| 7/10 | CoFiRec: Coarse-to-Fine Tokenization for Generative Recommendation (CoFiRec) |
+| 7/10 | The Best of Both Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation (H²Rec) |
 | 7/10 | Towards Effective Structured Context Modeling for Conversational Recommender Systems via Dual-node Monte Carlo Tree Search (DREAMS) |
-| 7/10 | DoPR: Reusable Compressed Document Prefixes for Efficient LLM Reranking (DoPR) |
 | 7/10 | Two-Sided State-Space Models for Sequential Recommendation with Non-Random Multimodal Review Feedback (TS-SSM) |
-| 7/10 | Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources |
-| 7/10 | Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval |
-| 7/10 | FINALLY: A Dataset Recommender System for Recommender-Systems Research |
-| 7/10 | REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval |
-| 7/10 | An Efficient and Effective Agentic Group Shilling Attack on Recommender Systems (AGAS) |
-| 7/10 | Enhancing Group Recommendation with Memory-Augmented Reasoning in LLM Agent (AGR) |
-| 7/10 | Iterative Semantic Reasoning from Individual to Group Interests for Generative Recommendation with LLMs (ISRF) |
+| 7/10 | Uncertainty and Fairness Awareness in LLM-Based Recommendation Systems |
+| 7/10 | Uncertainty-aware Generative Recommendation (UGR) |
+| 7/10 | URecJPQ: Memory-efficient Multimodal Recommendation Models through RecJPQ in Large-Scale Scenarios (URecJPQ) |
+| 7/10 | Who Owns the AI Recommendation? A Multi-Industry Empirical Map of Brand Category Ownership Across Large Language Models (LLM Brand) |
 | 7/10 | X-KGRank: A Knowledge Graph RAG Framework for Explainable Recommendations via Pattern Mining and LLM Re-Ranking (X-KGRank) |
-| 7/10 | RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation (RouteRec) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6.5/10 | RES-MR: Risk-Aware Reasoning for Explainable and Safe Medication Recommendation (RES-MR) |
-| 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
-| 6/10 | PAPA: Online Personalized Active Preference Alignment (PAPA) |
 | 6/10 | A Behavioral Trait Leaks into Preferences: Diagnosing Trait Interference in LLM User Simulators (PQA) |
+| 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
 | 6/10 | Beyond Dense Connectivity: Explicit Sparsity for Scalable Recommendation (SSR) |
 | 6/10 | Beyond Uniform Token Training: A Multi-Target Framework for Learning Token-Weighted Objectives in Generative Recommenders (Beyond Uniform Token Training) |
 | 6/10 | CARD: Non-Uniform Quantization of Visual Semantic Unit for Generative Recommendation |
-| 6/10 | Generate What You Can Trust: Content Credibility in Generative Recommenders (CreGR) |
-| 6/10 | GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation |
-| 6/10 | Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd) |
-| 6/10 | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) |
-| 6/10 | Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore) |
-| 6/10 | Personalization Matters: Long-Horizon Conversation Agent with User-Centric Information in Online Shopping Interactions (Personalization Matters) |
-| 6/10 | Trading Engagement for Sustainability: Carbon-Aware Re-ranking for E-commerce Recommendations |
-| 6/10 | Understanding and Debugging Failures in N-Gram-Based Generative Retrieval |
 | 6/10 | CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation (CogRec) |
-| 6/10 | VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) |
-| 6/10 | From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM) |
-| 6/10 | Recommender System as Slow and Fast Thinkers (DS-Frame) |
-| 6/10 | Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance) |
-| 6/10 | Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling |
-| 6/10 | TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation |
-| 6/10 | Tlow: Flow-based Item Tokenizer for Recommendation (Tlow) |
+| 6/10 | Computed, not Memorized: Bit-Factorized Identifiers for Efficient Generative Retrieval (Bit-Factorized) — Leiden University / Radboud University — [anonymous.4open.science/r/bit_factorized_token-2C13](https://anonymous.4open.science/r/bit_factorized_token-2C13/) |
 | 6/10 | Diffusion Language Model for Recommendation (DLMRec) |
 | 6/10 | Empowering Cross-Domain Sequential Recommendation with Hybrid Tokenization and Serial-Parallel Decoding (GenCDSR) |
-| 6/10 | SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP) |
-| 6/10 | HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE) |
-| 6/10 | HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization |
-| 6/10 | SharpRec: Sharpness-aware Model Merging with Salience Recovery for LLM-based Cross-Domain Sequential Recommendation (SharpRec) |
-| 6/10 | UniLang: A Unified Generative Framework for Integrating Machine-Native Symbols into Pretrained LLMs (UniLang) |
 | 6/10 | Evaluating Brand Retrieval and Ranking in Large Language Model Recommendations |
-| 7/10 | CARD: Counterfactual Attention Regulation Diffusion for Diffusion-based Sequential Recommendation (CARD) — Sun Yat-sen University / Peng Cheng Laboratory, ICASSP 2026 — [github.com/yanqilong3321/CARD](https://github.com/yanqilong3321/CARD) |
-| 7/10 | DiffGRM: Diffusion-based Generative Recommendation Model (DiffGRM) — Kuaishou, WWW 2026 — [github.com/liuzhao09/DiffGRM](https://github.com/liuzhao09/DiffGRM) |
-| 7/10 | MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology — [github.com/wangyu0627/MLLMRec-R1](https://github.com/wangyu0627/MLLMRec-R1) |
-| 7/10 | SafeCRS: Personalized Safety Alignment for LLM-Based Conversational Recommender Systems (SafeCRS) — UIC / UIUC / Amazon, KDD 2026 — [github.com/xxyyffyeah/SafeCRS](https://github.com/xxyyffyeah/SafeCRS) |
-| 7/10 | RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego — [github.com/Yueeeeeeee/RAR](https://github.com/Yueeeeeeee/RAR) |
+| 6/10 | From Overlooked to Explored: Recovering Item Relations via Mixture of Perspectives for Sequential Recommendation (PRISM) |
+| 6/10 | Generate What You Can Trust: Content Credibility in Generative Recommenders (CreGR) |
+| 6/10 | GraphLoRA: Structure-Aware Low-Rank Adaptation for Large Language Model Recommendation |
+| 6/10 | HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / University of Technology Sydney — [anonymous.4open.science/r/anonymous-HEM-Med-0935](https://anonymous.4open.science/r/anonymous-HEM-Med-0935/) |
+| 6/10 | HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization |
+| 6/10 | HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE) |
+| 6/10 | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) |
+| 6/10 | Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore) |
+| 6/10 | PAPA: Online Personalized Active Preference Alignment (PAPA) |
+| 6/10 | Personalization Matters: Long-Horizon Conversation Agent with User-Centric Information in Online Shopping Interactions (Personalization Matters) |
+| 6/10 | PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems (PsyBer-Agent) — Xi'an Jiaotong-Liverpool University / University of Liverpool / Alibaba Group — [anonymous.4open.science/r/CC66F](https://anonymous.4open.science/r/CC66F/) |
+| 6/10 | QD-Rec: Open-Ended Evolution of Recommendations via Quality-Diversity (QD-Rec) — Sakana AI — [github.com/SakanaAI/QD-Rec](https://github.com/SakanaAI/QD-Rec) |
+| 6/10 | Recommender System as Slow and Fast Thinkers (DS-Frame) |
+| 6/10 | RecSoup: Efficient Model Merging Approach for Controllable Multi-Objective Recommendation (RecSoup) — Renmin University of China, CIKM 2026 — [github.com/35798642/RECSOUP](https://github.com/35798642/RECSOUP) |
+| 6/10 | ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — Xi'an Jiaotong-Liverpool University / University of Liverpool / The Hong Kong Polytechnic University — [github.com/zhang-haichao/ReGen](https://github.com/zhang-haichao/ReGen) |
+| 6/10 | Residual Dominance as a Structural Account of Last-Item Reliance in Causal Self-Attention Recommenders (Residual Dominance) |
+| 6/10 | Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling |
+| 6/10 | SemPOI-RL: Aligning LLM Semantic Reasoning for Interpretable Out-of-Town POI Sequential Generation (SemPOI-RL) — Beihang University — [github.com/Wind-Flipped/SemPOI-RL](https://github.com/Wind-Flipped/SemPOI-RL) |
+| 6/10 | SG-UMP: Sequence-Guided Universal Multimodal Prioritization Calculation Framework (SG-UMP) |
+| 6/10 | SharpRec: Sharpness-aware Model Merging with Salience Recovery for LLM-based Cross-Domain Sequential Recommendation (SharpRec) |
+| 6/10 | Tackling the Modality Inhibitance Effect with Wavelet-based Modality Integration in Multi-modal Recommendation (MMWave) — Nanyang Technological University, IEEE TKDE 2026 — [github.com/kennethorq/MMWave](https://github.com/kennethorq/MMWave) |
+| 6/10 | TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation |
+| 6/10 | Tlow: Flow-based Item Tokenizer for Recommendation (Tlow) |
+| 6/10 | Trading Engagement for Sustainability: Carbon-Aware Re-ranking for E-commerce Recommendations |
+| 6/10 | Understanding and Debugging Failures in N-Gram-Based Generative Retrieval |
+| 6/10 | UniLang: A Unified Generative Framework for Integrating Machine-Native Symbols into Pretrained LLMs (UniLang) |
+| 6/10 | Vela: User Behavior as Supervision Sparks LLM Intelligence (Vela) — AllSpark at Xiaohongshu (RedNote) — [github.com/AllSpark-Research/Vela](https://github.com/AllSpark-Research/Vela) |
+| 6/10 | VirtualMLE: A Virtual ML Engineer that Optimizes Sequential Recommenders (VirtualMLE) |
 | 6/10 | When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation (When-the-Label) |
+| 6/10 | Whole-Pool Setwise Reranking with Long-Context Language Models (WP-Setwise / DualEnd) |
 | 5.5/10 | PRISM: Purified Representation and Integrated Semantic Modeling for Generative Sequential Recommendation |
+| 5/10 | Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation (ANR-DiffRec) |
+| 5/10 | Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval |
 | 5/10 | ExPerT: Personalizing LLM Responses to Users' Domain Expertise via Query-Wise Semantic and Keystroke Behavioral Cues (ExPerT) |
 | 5/10 | From Feature Interaction to Feature Transport - A Unified Block for Scalable Recommendation Models (CRAFT) |
 | 5/10 | Gwhere: Guess Where You Go — Generative Next Point-of-Interest Recommendation in Amap (Gwhere) |
 | 5/10 | Hyperbolic RQ-VAE enhanced Generative Recommendation with Differential-Length Codebook Strategy (HG-Rec) |
+| 5/10 | Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR) |
 | 5/10 | LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation (LBR) |
 | 5/10 | OneReason Technical Report |
 | 5/10 | Progressive Alignment of Recommender Foundation Model through Multi-Phase Post-Training (Progressive FM Post-Training) |
+| 5/10 | SelfDR: Self-Distillation from Reasoning for LLM-Based Recommendation (SelfDR) |
 | 5/10 | SimGR: Escaping the Pitfalls of Generative Decoding in LLM-based Recommendation (SimGR) |
 | 5/10 | Think2Go: Generative Next POI Recommendation with LLM Reasoning (Think2Go) |
-| 5/10 | Adaptive Item-based Collaborative Structures via Noise Rescheduling in Diffusion for Generative Recommendation (ANR-DiffRec) |
-| 5/10 | Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval |
-| 5/10 | Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation (AMUR) |
-| 5/10 | SelfDR: Self-Distillation from Reasoning for LLM-Based Recommendation (SelfDR) |
-| 4/10 | Give the Long-tail More SPACE: Promoting Provider Fairness in Next POI Recommendation (SPACE) |
-| 4/10 | Towards Efficient Reasoning in LLM-Based Recommender Systems via Model Merging (REAM) |
-| 4/10 | Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation |
-| 4/10 | GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation |
-| 4/10 | RecRec: Recursive Refinement for Sequential Recommendation |
-| 4/10 | TRACER: Balancing Stability-Plasticity-Cognitivity Trilemma for LLM Enhanced Continual Recommendation (TRACER) |
 | 4/10 | Cascading Relevance-driven Recommendation Network for CTR Prediction in Trigger-Introduced Recommendation (CRRN) |
+| 4/10 | Give the Long-tail More SPACE: Promoting Provider Fairness in Next POI Recommendation (SPACE) |
+| 4/10 | GLASS: Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation |
+| 4/10 | Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation |
+| 4/10 | RecRec: Recursive Refinement for Sequential Recommendation |
+| 4/10 | Towards Efficient Reasoning in LLM-Based Recommender Systems via Model Merging (REAM) |
+| 4/10 | TRACER: Balancing Stability-Plasticity-Cognitivity Trilemma for LLM Enhanced Continual Recommendation (TRACER) |
+| 3/10 | Cheaper is Better: A Discount-Aware Network for Conversion Rate Prediction in E-commerce Recommendation System (DANet) |
+| 3/10 | EPIC: Explicit Posterior Item Conditioning for Semantic ID Diffusion Recommendation (EPIC) |
+| 3/10 | InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation (InforID) |
 | 3/10 | Mitigating Reward Hacking in LLM-based Recommendation: A Preference Optimization Approach (SIRIUS) |
 | 3/10 | PVTG / Personalized Video Thumbnail Generation |
-| 3/10 | STORM: Stepwise Token Optimization with Reward-Guided Beam Search |
-| 3/10 | Cheaper is Better: A Discount-Aware Network for Conversion Rate Prediction in E-commerce Recommendation System (DANet) |
-| 3/10 | Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) |
-| 3/10 | InforID: Adaptive Semantic Capacity Allocation for Parallel Generative Recommendation (InforID) |
-| 3/10 | TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute) |
-| 3/10 | EPIC: Explicit Posterior Item Conditioning for Semantic ID Diffusion Recommendation (EPIC) |
 | 3/10 | SAGE: Semantic Attribute Graphs for Multi-Entity Visual Retrieval (SAGE) |
+| 3/10 | STORM: Stepwise Token Optimization with Reward-Guided Beam Search |
+| 3/10 | Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation (TAA-k) |
+| 3/10 | TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation (TimeRoute) |
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
-| 7/10 | Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective (PR-entmax) — Sber AI Lab / Lomonosov MSU, CIKM 2026 — [github.com/Antondfger/Sparse-Prior-Regularized](https://github.com/Antondfger/Sparse-Prior-Regularized) |
-| 7/10 | ReMaRk: Many Right Answers, One Training Example: Removing Responder Noise from GRPO for LLM Recommenders (ReMaRk) — Nanyang Technological University — [github.com/LiXin97/ReMaRk](https://github.com/LiXin97/ReMaRk) |
-| 7/10 | Reasoning Reranking with Semantic IDs as the Sole Item Representation (ReRankID) — Google / University of Toronto — [github.com/lilv98/ReRankID](https://github.com/lilv98/ReRankID) |
-| 6/10 | Computed, not Memorized: Bit-Factorized Identifiers for Efficient Generative Retrieval (Bit-Factorized) — Leiden University / Radboud University — [anonymous.4open.science/r/bit_factorized_token-2C13](https://anonymous.4open.science/r/bit_factorized_token-2C13/) |
-| 6/10 | HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / University of Technology Sydney — [anonymous.4open.science/r/anonymous-HEM-Med-0935](https://anonymous.4open.science/r/anonymous-HEM-Med-0935/) |
-| 6/10 | PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems (PsyBer-Agent) — Xi'an Jiaotong-Liverpool University / University of Liverpool / Alibaba Group — [anonymous.4open.science/r/CC66F](https://anonymous.4open.science/r/CC66F/) |
-| 6/10 | SemPOI-RL: Aligning LLM Semantic Reasoning for Interpretable Out-of-Town POI Sequential Generation (SemPOI-RL) — Beihang University — [github.com/Wind-Flipped/SemPOI-RL](https://github.com/Wind-Flipped/SemPOI-RL) |
-| 6/10 | Vela: User Behavior as Supervision Sparks LLM Intelligence (Vela) — AllSpark at Xiaohongshu (RedNote) — [github.com/AllSpark-Research/Vela](https://github.com/AllSpark-Research/Vela) |
-| 6/10 | QD-Rec: Open-Ended Evolution of Recommendations via Quality-Diversity (QD-Rec) — Sakana AI — [github.com/SakanaAI/QD-Rec](https://github.com/SakanaAI/QD-Rec) |
-| 6/10 | RecSoup: Efficient Model Merging Approach for Controllable Multi-Objective Recommendation (RecSoup) — Renmin University of China, CIKM 2026 — [github.com/35798642/RECSOUP](https://github.com/35798642/RECSOUP) |
-| 6/10 | Tackling the Modality Inhibitance Effect with Wavelet-based Modality Integration in Multi-modal Recommendation (MMWave) — Nanyang Technological University, IEEE TKDE 2026 — [github.com/kennethorq/MMWave](https://github.com/kennethorq/MMWave) |
+
+**Count:** 225 papers as of October 22.
 
 ---
 
@@ -1685,6 +1653,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 - Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix, NeurIPS 2026 PALM Workshop
 - Computed, not Memorized: Bit-Factorized Identifiers for Efficient Generative Retrieval (Bit-Factorized) — Leiden University / Radboud University
+- Generative Recommenders Forget the Long Tail: Restoring Memorization in Retrieval and Ranking (CAPE) — University of Science and Technology of China & Ant Group, arXiv 2610.29298
+- ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — Xi'an Jiaotong-Liverpool University / University of Liverpool / The Hong Kong Polytechnic University, arXiv 2610.28642
 
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
