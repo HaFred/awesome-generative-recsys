@@ -92,6 +92,94 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
+### Papers October 26
+
+*Monday, October 26, 2026. The live arXiv cs.IR window (announced Oct 26) surfaced 3 strictly on-topic generative-recommendation papers (Deco / 2610.32980, Parallel KD / 2610.32943, TCBSA / 2610.32098). A broader cs.AI sweep added a 4th gen-rec paper (TGR-EvoDAG / 2610.32326, industrial Tencent). The entire last-3-month keyword pool is already catalogued, so the 5th paper is fairness-adjacent (FAIRGate / 2610.30359, UMass Boston) — disclosed as such. 0 are open-source. By Opensource count unchanged (228 — table is source of truth; prior "227" summary line was stale). Mindmap 30-cap held (no opensource papers).*
+
+1. **Separating Thinking from Spelling for Efficient Generative Recommendation (Deco)**
+   * Affiliation: Skolkovo Institute of Science and Technology / AIRI (Artificial Intelligence Research Institute) / HSE University, Moscow, Russia — *(Danil Gusak, Anna Volodkevich, Ivan Oseledets, Evgeny Frolov)*
+   * Link: [arxiv.org/abs/2610.32980](https://arxiv.org/abs/2610.32980)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: Deco decouples "thinking" (reading history) from "spelling" (writing the SID): the backbone condenses history into a compact next-item concept once, then a light KV-cached decoder runs the entire trie-constrained beam search — 3.2–8.6× throughput at a 50 ms p95 budget.
+   * Key techniques:
+     - Backbone reads each history item as one fused token and condenses the history once into a compact next-item concept
+     - A light KV-cached decoder conditioned on the concept and the generated prefix runs the entire beam search
+     - SIDs, the trie, and the autoregressive factorization stay unchanged (drop-in serving improvement)
+     - Cross-entropy alone approaches full-backbone accuracy; distillation improves it further
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 8/10** — clean decoupling of history encoding from SID writing/beam search, delegating beam search to a tiny decoder.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 7/10** — 7 datasets (e-commerce, movies, music), production-style serving pipeline under 50 ms p95; generates 1000 candidates faster than the teacher generates 100.
+     - **Impact: 8/10** — targets the dominant cost in deployed trie-constrained beam search; large practical upside for industrial generative rec.
+
+2. **Knowledge Distillation across Item and Code Spaces for Parallel Generative Recommendation**
+   * Affiliation: The Hong Kong University of Science and Technology — *(Yixuan Xu, Hailin Liu, Can Yang)* / University of Science and Technology of China — *(Linxiang Peng)*
+   * Link: [arxiv.org/abs/2610.32943](https://arxiv.org/abs/2610.32943)
+   * Venue: arXiv preprint (cs.IR; cs.LG)
+   * TL;DR: Two complementary knowledge-distillation objectives (IDM and CMM) transfer a sequential recommender's soft item-level distribution into parallel (non-autoregressive) semantic-ID generation, lifting Recall@10 +15.39% and NDCG@10 +8.28%.
+   * Key techniques:
+     - Parallel semantic-ID generation predicting all code positions simultaneously (no autoregressive prefix conditioning)
+     - Item Distribution Matching (IDM): reconstructs a catalogue-level item distribution from parallel code predictions, aligns with the teacher's item distribution
+     - Code Marginal Matching (CMM): projects the teacher's item probabilities onto each code position via fixed item-to-code assignments, matches the resulting code marginals
+     - Both preserve the student's parallel prediction structure
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 7/10** — addresses the item-space vs code-space mismatch for parallel SID generation via two distinct distillation objectives.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 6/10** — benchmark datasets, consistent SOTA outperformance; limited robustness/ablation beyond accuracy.
+     - **Impact: 7/10** — parallel SID generation is a key efficiency direction; +15% Recall@10 is substantial.
+
+3. **TGR-EvoDAG: A DAG-based Multi-Agent Code Evolution Framework for Generative Recommendation on Tencent**
+   * Affiliation: Tencent (Platform and Content Group, Shenzhen) / The Hong Kong Polytechnic University / McGill University / Independent Researcher — *(Junlin He, Junzhang Zhu, Yudong Li, Yihong Tang, Xuefeng Jiang, Wei Ma, Chengxiang Zhuo, Zang Li)*
+   * Link: [arxiv.org/abs/2610.32326](https://arxiv.org/abs/2610.32326)
+   * Venue: arXiv preprint (cs.AI)
+   * TL;DR: A DAG-structured multi-agent code-evolution framework that automatically evolves generative-recommendation model code; deployed at Tencent with +37.4% offline and +0.40% online CTR gains.
+   * Key techniques:
+     - DAG-structured multi-agent evolution of generative-rec code (coordinated agent roles over a directed acyclic graph)
+     - Targets Tencent's industrial generative recommendation pipeline
+     - Offline +37.4% and online +0.40% CTR at Tencent scale
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (industrial; Tencent).
+     - **Novelty: 7/10** — applies multi-agent code evolution (DAG orchestration) to generative-rec model development.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 6/10** — offline + online gains at Tencent; industrial validation but limited external reproducibility.
+     - **Impact: 8/10** — from Tencent, real online CTR lift; demonstrates agentic code-evolution for recsys production.
+
+4. **From Item Scores to Semantic Tokens: Test-Time Collaborative Adaptation for Generative Recommendation (TCBSA)**
+   * Affiliation: Tencent — *(Xing Tang, Xiuqiang He et al.)*
+   * Link: [arxiv.org/abs/2610.32098](https://arxiv.org/abs/2610.32098)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: A training-free test-time method that adapts the beam search of a generative recommender by collaboratively aligning item-score signals with semantic-token generation, improving ranking without retraining.
+   * Key techniques:
+     - Training-free test-time adaptation at beam-search / inference time
+     - Bridges item-level scores (from a conventional ranker) with semantic-token generation
+     - Collaborative adaptation refines candidate generation toward better-aligned items
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 7/10** — "test-time collaborative adaptation" connecting item scores to SID beam search without retraining.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 6/10** — test-time method, no retraining needed; validation scope not fully detailed in the abstract.
+     - **Impact: 7/10** — practical, deployment-friendly (no retrain) improvement for generative-rec serving.
+
+5. **FAIRGate: Agentic Runtime Policy Selection and Verified Repair for Fairer Recommendation Delivery**
+   * Affiliation: University of Massachusetts Boston (Department of Computer Science) — *(Navkar Jain, Enock Ayiku, Kenneth Fletcher)*
+   * Link: [arxiv.org/abs/2610.30359](https://arxiv.org/abs/2610.30359)
+   * Venue: Accepted at IRAI 2026
+   * TL;DR: FAIRGate is an agentic runtime controller that selects fairness-aware delivery policies and performs verified repair to improve fairness of recommendation delivery at serving time. *(Fairness-adjacent; included because the last-3-month gen-rec pool is already fully catalogued.)*
+   * Key techniques:
+     - Agentic runtime policy selection for recommendation delivery
+     - Verified repair loop to correct fairness violations
+     - Operates at delivery/serving time (runtime), not training
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 7/10** — frames fairness as a runtime agentic policy-selection + verified-repair problem for delivery.
+     - **Fairness: 9/10** — directly targets fairer recommendation delivery; core contribution.
+     - **Robustness: 5/10** — accepted workshop; verification mechanism described but empirical robustness not extensively benchmarked.
+     - **Impact: 6/10** — fairness-focused, workshop venue; relevant for responsible-delivery research.
+
+---
+
 ### Papers October 25
 
 *Sunday, October 25, 2026. Live arXiv cs.IR window empty (weekend gap; freshest entries dated Oct 22), so per the fallback rule all 5 papers were drawn from the last-3-month keyword pool. Disclosure: GRP v0.1, Eval4DiRec, OneTrans-V2, and RecToolBench were already covered in the Sep 29-30 daily sections (archived to docs/archive_by_month/2026_09.md) and re-surface here as fallback re-indexes; only RouteRec is a fresh index. 3 are open-source (Eval4DiRec, RecToolBench, RouteRec); of these, Eval4DiRec and RouteRec were already in the By Opensource index from September, so the index grows by +1 net (RecToolBench): 223 -> 224. Mindmap +3/-3 to hold the 30-node cap (gains RecToolBench / Eval4DiRec / RouteRec; drops ReRankID / Decision4Rec / UserArena).*
@@ -960,130 +1048,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 6/10** — Evaluated on clinical datasets.
      - **Impact: 6/10** — Clinical decision-support; workshop-level venue.
 
-### Papers October 15
-
-*Thursday, October 15, 2026. The live arXiv cs.IR recent-submission batch (announced Oct 14-15) surfaced 7 on-topic generative-recommendation papers, all new to the README: PR-entmax, Bit-Factorized, HASTE, WeGR, TacGR (UniSGR-V2), OT-FlowRec, and the Netflix beam-search-vs-MTP study. 2 are open-source (PR-entmax / Sber AI Lab, 7/10; Bit-Factorized / Leiden, 6/10). Total: 7 papers (2 opensource). By Opensource count 212 -> 214.*
-
-1. **PR-entmax: Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective**
-   * Affiliation: Sber AI Lab, Moscow, Russian Federation — *(Anton Pembek, Anton Klenitskiy, Alexander Savchenko, Alexey Vasilev; with Lomonosov MSU, HSE University)*
-   * Link: [arxiv.org/abs/2610.17823](https://arxiv.org/abs/2610.17823)
-   * Venue: CIKM 2026
-   * TL;DR: PR-entmax injects a sparse, popularity-aware prior directly into the loss's probability mapping so the set of items receiving non-zero gradient becomes context-dependent, reducing popularity bias without changing architecture or inference.
-   * Key techniques:
-     - Derives a sparse prior-regularized objective from a generalized variational principle
-     - Popularity-aware active support: which items get non-zero probability (and gradient) is set by contextual relevance AND item popularity
-     - At inference the prior is removed; ranking uses learned contextual relevance only
-     - No architectural change; drop-in loss modification for sequential rec
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — code at [github.com/Antondfger/Sparse-Prior-Regularized](https://github.com/Antondfger/Sparse-Prior-Regularized) (CIKM 2026 branch); clear repo + hyperparameters, but limited documentation/activity.
-     - **Novelty: 7/10** — reframes popularity debiasing as a sparse prior on the probability mapping rather than post-hoc re-ranking.
-     - **Fairness: 9/10** — directly targets popularity bias / exposure fairness in sequential rec.
-     - **Robustness: 7/10** — consistent across multiple benchmarks and sequential architectures.
-     - **Impact: 7/10** — CIKM 2026; practical, architecture-free debiasing drop-in.
-
-2. **Bit-Factorized: Computed, not Memorized — Bit-Factorized Identifiers for Efficient Generative Retrieval**
-   * Affiliation: Leiden University — *(I-Fan Lin, Suzan Verberne; with Zhen Zhang / Shandong University, Faegheh Hasibi / Radboud University)*
-   * Link: [arxiv.org/abs/2610.17467](https://arxiv.org/abs/2610.17467)
-   * Venue: arXiv preprint
-   * TL;DR: A numeric DocID design where each token is factorized into bits scored as their sum, so unseen documents stay scorable without retraining — cutting adaptation/retraining cost in generative retrieval.
-   * Key techniques:
-     - Bit-factorized DocIDs: each token = sequence of bits; token score = sum of its bits (model-derived meaning)
-     - Inherits LM knowledge so unseen-doc DocIDs are scorable without indexing-stage retraining
-     - Fewer decoding steps during beam search vs. longer string DocIDs
-     - Evaluated on NQ320K, TriviaQA, MS MARCO
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — code at [anonymous.4open.science/r/bit_factorized_token-2C13](https://anonymous.4open.science/r/bit_factorized_token-2C13/) (anonymous, pre-print; not a maintained GitHub repo, documentation minimal).
-     - **Novelty: 8/10** — factorizing DocID tokens into model-scored bits is a fresh numeric-identifier design.
-     - **Fairness: 3/10** — not addressed.
-     - **Robustness: 7/10** — >20pp Hit@10 on unseen docs, up to 7x lower latency, strong generalization.
-     - **Impact: 7/10** — generative-retrieval DocID design with clear deployment cost savings.
-
-3. **HASTE: Hierarchical and Attribute-aware Supervision for Generative Recommendation**
-   * Affiliation: Glance, Bengaluru, India — *(Tripti Shukla, Shwetha Somasundaram, Akshat Gupta, Rohit Garg, Paul Duff, Ian Anderson)*
-   * Link: [arxiv.org/abs/2610.17368](https://arxiv.org/abs/2610.17368)
-   * Venue: arXiv preprint
-   * TL;DR: HASTE adds hierarchical and attribute-specific supervision to semantic-ID generative recommendation, giving ~2x faster convergence and better long-tail performance without changing the AR decode.
-   * Key techniques:
-     - Hierarchical Loss supervises each level of the semantic-ID hierarchy (not just flat next-token CE)
-     - Attribute-Specific Losses preserve fine-grained item attributes via LM semantic knowledge
-     - ~2x faster convergence than standard causal cross-entropy
-     - Evaluated on a fashion benchmark + multiple Amazon domains
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code released.
-     - **Novelty: 7/10** — explicit hierarchical + attribute-level supervision for SID GR training efficiency / long-tail.
-     - **Fairness: 5/10** — improves long-tail representation (fairness-adjacent) but not a fairness method.
-     - **Robustness: 7/10** — consistent gains across datasets and item-frequency regimes.
-     - **Impact: 7/10** — practical training-efficiency win for SID-based GR.
-
-4. **WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat**
-   * Affiliation: Tencent (WeChat), China — *(Jiajun Han, Guoxin Ma, Liangsheng Xu, Ruiqi Yu, Yingdi Guo, Zongbing Wang, Xinhua Ye, Chenyan Hua, Xin Xie, Pengcheng Yang, Haijun Wu; with Felix)*
-   * Link: [arxiv.org/abs/2610.16979](https://arxiv.org/abs/2610.16979)
-   * Venue: arXiv preprint
-   * TL;DR: WeGR unifies generative retrieval for WeChat e-commerce search with a collapse-free collaborative SID tokenizer (CoCo-VAE) and a horizon-expanding RL objective (DHPO), deployed with +2.5% orders / -26% GPU online.
-   * Key techniques:
-     - CoCo-VAE: query-to-item + item-to-item collaborative signals with codebook-refresh / complementary regularization (anti-collapse)
-     - DHPO (Dynamic Horizon Policy Optimization): progressively expands reward + policy horizons to fight reward sparsity under exact-SID matching, no auxiliary reward model
-     - Two-month WeChat A/B: +2.539% orders, +1.508% CTR, +1.381% CVR, -25.5% CPU / -26.1% GPU
-     - Deployed across multiple WeChat search scenarios, billions of users
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — industrial system; no public code.
-     - **Novelty: 8/10** — collapse-free collaborative SID tokenizer + horizon-expanding RL for sparse-reward GR.
-     - **Fairness: 4/10** — not addressed.
-     - **Robustness: 8/10** — two-month online A/B at WeChat scale with infra savings.
-     - **Impact: 9/10** — production deployment at WeChat, strong online + infra gains.
-
-5. **TacGR (UniSGR-V2): Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation**
-   * Affiliation: Alibaba International Digital Commerce Group, Beijing, China — *(Jun Yang, Jiasi Chen, Jiawei Sun, Ziyue Guo, Jianan Yan, Tao Luo, Xiaoyi Zeng)*
-   * Link: [arxiv.org/abs/2610.16132](https://arxiv.org/abs/2610.16132)
-   * Venue: arXiv preprint
-   * TL;DR: TacGR anticipates a continuous target-side feature vector before decoding each semantic-ID codeword and crosses it with the prefix/user sequence, fixing the target-side feature vacuum in SID-based GR and improving online IPV/Order/GMV.
-   * Key techniques:
-     - Stepwise target-side feature anticipation: regress a continuous target representation inside the decoder
-     - Crossing with semantic prefix + user behavior sequence conditions generation and ranking
-     - Semantic-anchoring auxiliary tower + unidirectional visibility mask prevent collapse / noise propagation
-     - Gated convolutional denoising + pyramid memory funnel for long industrial histories
-     - Lazada online A/B: +0.79% IPV, +5.55% Order, +3.09% GMV
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — industrial; no public code.
-     - **Novelty: 8/10** — reconstructs a continuous target-side representation inside SID decoding to support both generation and ranking.
-     - **Fairness: 4/10** — not addressed.
-     - **Robustness: 8/10** — offline gains over OneRec/UniRec/UniSGR + online Lazada A/B.
-     - **Impact: 9/10** — production deployment at Lazada (Alibaba International) with clear online lift.
-
-6. **OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation**
-   * Affiliation: Nanjing University of Science and Technology, School of Computer Science and Engineering — *(Miao Sun)*
-   * Link: [arxiv.org/abs/2610.16038](https://arxiv.org/abs/2610.16038)
-   * Venue: arXiv preprint
-   * TL;DR: OT-FlowRec models multi-interest, multi-centric user preference via a mixture of parallel optimal-transport flows (flow matching), preserving a multi-peaked representation instead of collapsing to a unimodal average.
-   * Key techniques:
-     - Mixture of parallel interest-specific transport flows, each preserving a distinct interest cluster via an OT plan
-     - Geometric transport mechanism: minimum-cost paths from latent multi-interest distribution to target prototypes
-     - Progressive time-sampling warmup biases optimization toward final generation states (bridges flow fitting vs. top-k ranking)
-     - Implemented on RecBole; evaluated on three public multimodal-seqrec datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — uses RecBole but no own code released.
-     - **Novelty: 8/10** — multi-bridge flow matching with OT-guided interest disentanglement for multimodal seqrec.
-     - **Fairness: 3/10** — not addressed.
-     - **Robustness: 7/10** — outperforms SOTA baselines on three datasets.
-     - **Impact: 6/10** — solid multimodal-seqrec method; preprint, no deployment.
-
-7. **Netflix: Personalized LLM Recommendation with Semantic IDs — Autoregressive Beam Search vs. Multi-Token Prediction**
-   * Affiliation: Netflix Personalization Foundations Team — *(Sejoon Oh, Fernando Amat Gil, Evan Smothers, Dan Iter, Mark Thornburg, Dawit Mureja Argaw, Sourabh Medapati, Thea Wang, Ria Verma, Qiuling Xu, Harshit Syal, Ehsan Gholami, Moumita Bhattacharya, Ashish Rastogi)*
-   * Link: [arxiv.org/abs/2610.15864](https://arxiv.org/abs/2610.15864)
-   * Venue: NeurIPS 2026 PALM Workshop
-   * TL;DR: An industry-scale apples-to-apples comparison of single-head autoregressive beam search vs. multi-token prediction for SID generation in an LLM recommender: beam search wins on quality/QA while MTP wins only on raw throughput.
-   * Key techniques:
-     - Single instruction-tuned model unifies retrieval, content-QA, and instruction-following via SIDs
-     - New auxiliary ranking loss over the joint SID score to train the MTP objective
-     - Evaluated on a large streaming-media catalog with Qwen3-8B-scale training
-     - RL post-training to fix language regression from SID vocabulary expansion
-     - End-to-end vs. prior non-SID baseline: +77% cold-start ranking, +22% content-QA, +2.8x faster training
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — proprietary catalog; no code/model release.
-     - **Novelty: 7/10** — first industry-scale, controlled beam-search-vs-MTP comparison for SID LLM rec.
-     - **Fairness: 3/10** — not addressed.
-     - **Robustness: 7/10** — large-scale streaming catalog; language regression traced and addressed via RL.
-     - **Impact: 8/10** — NeurIPS workshop; major industrial practitioner study on SID generation paradigms.
 
 ## Papers Classic Must Read
 
@@ -1563,7 +1527,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 227 papers as of October 23.
+**Count:** 228 papers as of October 26.
 
 ---
 
@@ -1714,6 +1678,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Computed, not Memorized: Bit-Factorized Identifiers for Efficient Generative Retrieval (Bit-Factorized) — Leiden University / Radboud University
 - Generative Recommenders Forget the Long Tail: Restoring Memorization in Retrieval and Ranking (CAPE) — University of Science and Technology of China & Ant Group, arXiv 2610.29298
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — Xi'an Jiaotong-Liverpool University / University of Liverpool / The Hong Kong Polytechnic University, arXiv 2610.28642
+- Separating Thinking from Spelling for Efficient Generative Recommendation (Deco) — Skolkovo Institute of Science and Technology / AIRI / HSE University, arXiv 2610.32980
+- From Item Scores to Semantic Tokens: Test-Time Collaborative Adaptation for Generative Recommendation (TCBSA) — Tencent, arXiv 2610.32098
 
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)

@@ -459,6 +459,8 @@
 
 - SafeCRS: Personalized Safety Alignment for LLM-Based Conversational Recommender Systems (SafeCRS) — UIC / UIUC / Amazon, personalized safety alignment, KDD 2026 — arXiv 2603.03536 [opensource]
 - PR-entmax: Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective (PR-entmax) — Sber AI Lab / Lomonosov MSU, CIKM 2026 — arXiv 2610.17823
+- FAIRGate: Agentic Runtime Policy Selection and Verified Repair for Fairer Recommendation Delivery (FAIRGate) — University of Massachusetts Boston, arXiv 2610.30359
+
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 
@@ -1037,6 +1039,8 @@
 - Efficient Clustering with Quality Guardrails for LLM-based Recommender Systems at Industry Scale — Amazon, arXiv 2607.19704
 - WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat (WeGR) — Tencent (WeChat), arXiv 2610.16979
 - TacGR (UniSGR-V2): Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation (TacGR) — Alibaba International, arXiv 2610.16132
+- TGR-EvoDAG: A DAG-based Multi-Agent Code Evolution Framework for Generative Recommendation on Tencent (TGR-EvoDAG) — Tencent / HK PolyU / McGill, arXiv 2610.32326
+
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1099,6 +1103,7 @@
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation — Kuaishou; SIGIR 2026 challenge; arXiv 2609.39828
 
 - OneChord: Distill What You Rank, Recommend in One Pass (OneChord) — University of Chinese Academy of Sciences, arXiv 2610.25805
+- Knowledge Distillation across Item and Code Spaces for Parallel Generative Recommendation — The Hong Kong University of Science and Technology / USTC, arXiv 2610.32943
 
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
