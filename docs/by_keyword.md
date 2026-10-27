@@ -309,7 +309,8 @@
 - DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation (DiffuReason) — Tencent (Think-then-Diffuse + GRPO), arXiv 2602.09744
 - CARD: Counterfactual Attention Regulation Diffusion for Diffusion-based Sequential Recommendation (CARD) — Sun Yat-sen University / Peng Cheng Laboratory, ICASSP 2026 — arXiv 2601.15673 [opensource]
 - DiffGRM: Diffusion-based Generative Recommendation Model (DiffGRM) — Kuaishou, WWW 2026 (masked discrete diffusion for SID generation) — arXiv 2510.21805 [opensource]
-- OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation (OT-FlowRec) — Nanjing University of Science and Technology, arXiv 2610.16038
+- OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation (OT-FlowRec) — Nanjing University of Science and Technology, arXiv 2610.16038- DPE-Rec: Diversity-Preserving and Efficient Diffusion Language Model Recommendation for Bundle Construction (DPE-Rec) — Arizona State University, arXiv 2610.34700
+
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
 - Building a privacy-preserving Federated Recommender system for mobile devices
@@ -1104,6 +1105,7 @@
 
 - OneChord: Distill What You Rank, Recommend in One Pass (OneChord) — University of Chinese Academy of Sciences, arXiv 2610.25805
 - Knowledge Distillation across Item and Code Spaces for Parallel Generative Recommendation — The Hong Kong University of Science and Technology / USTC, arXiv 2610.32943
+- MuSID-KD: Multigranularity Knowledge Distillation for Generative Recommendation with Semantic IDs (MuSID-KD) — East China Normal University, arXiv 2610.35218
 
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
@@ -1788,6 +1790,7 @@
 
 - HELIX: Rethinking Scaling Laws for Large-Scale Recommendation (HELIX) - TikTok, arXiv 2609.37183
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneReason / OneRec-V2) — Kuaishou; OneReason uses advanced RL to make CoT reasoning beneficial; SIGIR 2026 challenge; arXiv 2609.39828
+- LoopGR: Parameter-Efficient Scaling for Generative Recommendation via Recurrent Depth (LoopGR) — Tencent, arXiv 2610.34157
 
 ### Semantic / Structured IDs
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]

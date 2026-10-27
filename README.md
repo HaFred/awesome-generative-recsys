@@ -55,12 +55,12 @@ mindmap
         Eval4DiRec -- Qilu UoT / UTS / Tongji
       Efficient Decoding
         STATIC -- Google
+        Octen-WebGR -- Octen AI
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
-        LoopRec -- Renmin U
-        RouteRec -- KAIST / SNU
+        MuSID-KD -- ECNU
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -91,6 +91,96 @@ We only keep the last 10 days summary below, for the past records before these, 
 ---
 
 ---
+
+### Papers October 27
+
+*Tuesday, October 27, 2026. The live arXiv cs.IR window (announced Oct 26, the freshest available) surfaced 4 strictly on-topic generative-recommendation papers (Octen-WebGR / 2610.35256, SLIDE / 2610.34764, DPE-Rec / 2610.34700, MuSID-KD / 2610.35218). The fifth paper (LoopGR / 2610.34157) is a strict gen-rec paper from the Oct 25 window that the Oct 25 daily run had missed (it used 3-month-pool re-hits as fallback) and is surfaced here via the missing-date fallback. 2 are open-source (Octen-WebGR / Octen, 7/10; MuSID-KD / ECNU, 6/10). By Opensource count 228 -> 230. Mindmap 30-cap held (+Octen-WebGR, +MuSID-KD; -LoopRec, -RouteRec).*
+
+1. **Octen-WebGR: Scaling Generative Retrieval to 200 Million Web Pages**
+   * Affiliation: Octen (Octen AI / Octen Team) — *(Guangwei Xu, Wenkai Zhang, Yawen Liu, Dongxu Zhang, Xijie Xu, Kuan Zou)*
+   * Link: [arxiv.org/abs/2610.35256](https://arxiv.org/abs/2610.35256)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: A generative retrieval framework that encodes 201 million web pages into a language model's parameters, generating a two-token semantic identifier constrained to a table of real URLs; reaches 59.6% top-1 on real navigational traffic vs 46.5% for a dense retriever, on a single 10GB GPU.
+   * Key techniques:
+     - Stores web pages in LM parameters; generates a 2-token SID constrained to a URL table
+     - Octen-WebGR-4B indexes 201M pages; evaluated on real post-training navigational traffic
+     - Complementary to embedding retrieval: GR shines on new phrasings of familiar pages, embedding on rare pages
+     - Scales sublinearly in model size vs index size; retrieval bounded by page exposure, not capacity
+     - Releases Octen-WebGR-4B / 0.6B with identifier tables and inference code
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — github.com/Octen-Team + huggingface.co/Octen; paper releases Octen-WebGR-4B/0.6B weights, identifier tables, and inference code; org actively maintained (search-API tooling), but a dedicated clean training/inference repo for WebGR not clearly found and reproducibility of the training pipeline unverified.
+     - **Novelty: 8/10** — pushes generative retrieval to web scale (200M pages) with a 2-token SID and a clear analysis of GR vs embedding complementarity.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 7/10** — real navigational traffic evaluation, scaling experiments to 32M URLs; single (proprietary click) training signal.
+     - **Impact: 9/10** — from a production search company, 59.6% top-1 at ~40x lower cost than frontier LLMs; strong industrial relevance for web-scale generative retrieval.
+
+2. **SLIDE: Search-to-List Item Distillation for Single-Rollout Generative Retrieval**
+   * Affiliation: Alibaba (Taobao & Tmall Group) — *(Tianyu Zhan (Zhejiang University, internship at Alibaba), Gui Ling, Ran Tao, Kunhai Lin, Tong Xiong, Wang Yang, Kaixuan Zhang, Zhihong Chen, Yuliang Yan, Dan Ou, Shengyu Zhang (Zhejiang University), Haihong Tang)*
+   * Link: [arxiv.org/abs/2610.34764](https://arxiv.org/abs/2610.34764)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: Decouples offline beam-search teacher search from online list generation: concatenates teacher-retrieved SIDs in beam-score order as list-wise distillation targets so the student generates the Top-K list in a single greedy pass, surpassing beam search with a stronger teacher.
+   * Key techniques:
+     - Identifies two beam-search limitations for list generation: broader search space and positional bias of scarce positives
+     - Teacher retrieves high-quality candidates via offline item-level beam search, providing conversion-relevant supervision
+     - SIDs concatenated in beam-score order form list-wise distillation targets -> single-trajectory generation
+     - Student generates Top-K in one greedy pass; decouples teacher scaling from deployment
+     - Supplementary RL experiments support list-level generation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (Alibaba industrial).
+     - **Novelty: 8/10** — clean search-to-list distillation turning beam-search retrieval into single-rollout list generation.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 7/10** — FORGE and Taobao Search experiments; surpasses beam-search reference with stronger teachers.
+     - **Impact: 8/10** — from Alibaba/Taobao, directly targets the dominant beam-search serving cost in generative retrieval.
+
+3. **DPE-Rec: Diversity-Preserving and Efficient Diffusion Language Model Recommendation for Bundle Construction**
+   * Affiliation: Arizona State University — *(Pingchuan Ma, Bohan Jiang, Chengshuai Zhao, Dawei Li, Huan Liu)*; Stevens Institute of Technology — *(Zhen Tan)*
+   * Link: [arxiv.org/abs/2610.34700](https://arxiv.org/abs/2610.34700)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: A diffusion-LLM framework for bundle completion that preserves diversity via semantic-fork-aware GRPO and improves efficiency via pseudo-trajectory distillation, reaching 63% better recommendation quality on average and 25.6x faster inference than prior generative-rec arts.
+   * Key techniques:
+     - Frames bundle construction as unordered generation; uses a diffusion LLM (bidirectional attention, multi-token reveal)
+     - Semantic-fork-aware GRPO: prioritizes semantic-fork decisions via autoregressive rollouts to preserve diversity
+     - Pseudo-trajectory distillation: concentrates learning on the trajectory-induced subspace for reliable multi-token decoding
+     - Fewer denoise steps with minimal quality loss
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 8/10** — applies diffusion LLMs to bundle construction with diversity-preserving GRPO; fresh angle on generative recommendation.
+     - **Fairness: 3/10** — not addressed.
+     - **Robustness: 7/10** — multiple bundle-construction benchmarks; 63% avg gain, 25.6x speedup.
+     - **Impact: 7/10** — diffusion-LLM recommendation is emerging; from ASU; solid empirical contribution.
+
+4. **MuSID-KD: Multigranularity Knowledge Distillation for Generative Recommendation with Semantic IDs**
+   * Affiliation: East China Normal University — *(Fengshi Zhang, Xiyan Ding, Wei Zhang)*; Fudan University — *(Shuxiao Xie)*
+   * Link: [arxiv.org/abs/2610.35218](https://arxiv.org/abs/2610.35218)
+   * Venue: arXiv preprint (cs.AI)
+   * TL;DR: A knowledge-distillation framework (HCDA + RIGD) that transfers a powerful generative teacher's candidate-distribution hierarchy and ranking impact into a lightweight SID student without changing its inference architecture, improving accuracy and prefix-marginal / pairwise ranking alignment.
+   * Key techniques:
+     - Hierarchical Candidate Distribution Alignment (HCDA): aligns candidate distributions at successive granularity levels (groups -> items) via shared-SID-prefix aggregation
+     - Ranking Impact Guided Levelwise Distillation (RIGD): allocates supervision by the reduction in pairwise ranking surrogate loss when a student score is replaced by the teacher's
+     - Preserves the student's online inference architecture (no extra decode cost)
+     - Evaluated on real-world rec datasets with three lightweight student architectures
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — code at anonymous.4open.science/r/m7k2-review-83f9/ (anonymous review repo, under double-blind review); matches the paper's KD method, but temporary/anonymous, no permanent org, documentation maturity unverified.
+     - **Novelty: 7/10** — multigranularity (hierarchical + ranking-impact) KD tailored to multi-token SID generation; addresses two concrete supervision gaps.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 6/10** — three student architectures on real datasets; gains shown but limited to the SID-KD setting.
+     - **Impact: 6/10** — practical lightweight-serving angle for generative rec; academic (ECNU/Fudan).
+
+5. **LoopGR: Parameter-Efficient Scaling for Generative Recommendation via Recurrent Depth**
+   * Affiliation: Tencent (Platform and Content Group) — *(Huizhe Zhang (Sun Yat-sen University), Yudong Li, Liang Chen (Sun Yat-sen University), Chengxiang Zhuo, Zang Li)*
+   * Link: [arxiv.org/abs/2610.34157](https://arxiv.org/abs/2610.34157)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: A parameter-efficient scaling framework that alternates a shared generative decoder with a lightweight context updater (recurrent depth), cutting model size by up to 52% vs an encoder-decoder baseline while improving generative-rec performance - establishing recurrent depth as a new scaling dimension.
+   * Key techniques:
+     - Hierarchical recurrent depth: shared generative decoder <-> lightweight context updater
+     - Recurrent trajectory self-distillation: distills a low-budget student from a high-budget teacher by aligning predictive distributions and evolution directions
+     - Reduces model size up to 52% while outperforming strong GR baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 8/10** — recurrent depth as a resource-efficient scaling dimension for generative recommendation.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 7/10** — consistent outperformance over strong GR baselines; 52% size reduction.
+     - **Impact: 8/10** — from Tencent, addresses the core scaling-vs-cost tension in deployed generative rec.
 
 ### Papers October 26
 
@@ -961,94 +1051,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 4/10** — Not addressed.
      - **Impact: 6/10** — From well-known recsys researchers; shapes the TTRS research agenda; moderate (preprint, vision).
 
-### Papers October 16
-
-*Friday, October 16, 2026. The live arXiv cs.IR recent-submission window (announced Oct 15-16) carried no strictly on-topic generative-recommendation papers in the recent pool, so per the fallback rule we drew 5 on-topic papers from the last-3-month keyword pool. 2 are open-source (HEM-Med / Qilu U of Tech & UTS, 6/10; PsyBer-Agent / XJTLU & Alibaba, 6/10). Total: 5 papers (2 opensource). By Opensource count 214 -> 216.*
-
-1. **Revisiting Generative vs. Dense Retrieval: A Static Value Prior Reverses the Gap**
-   * Affiliation: Shopify — *(Renbo Tu, Yang Liu, Shuying Sun)*
-   * Link: [arxiv.org/abs/2610.19065](https://arxiv.org/abs/2610.19065)
-   * Venue: arXiv preprint
-   * TL;DR: A static per-item value prior injected into a dense retriever reverses the previously reported generative-retrieval (semantic-ID LLM) advantage — a 14B SID-LLM underperforms a 47x smaller dense encoder once the prior is added.
-   * Key techniques:
-     - Like-for-like comparison of generative retrieval (autoregressive semantic-ID LLM) vs dense bi-encoder retrieval
-     - Static item-value prior (popularity/utility) added to dense-retriever scoring
-     - Shows the prior alone closes/reverses the gap attributed to generative modeling
-     - Controlled scaling study contrasting a 14B SID-LLM with a ~0.3B dense encoder
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code or benchmark released.
-     - **Novelty: 7/10** — Reframes the GR-vs-DR debate by exposing a confounded static-value prior as the real driver.
-     - **Fairness: 5/10** — Value prior is popularity-adjacent but not a fairness method per se.
-     - **Robustness: 7/10** — Consistent across multiple retrieval benchmarks and model scales.
-     - **Impact: 8/10** — Important counter-narrative questioning the empirical edge of semantic-ID generative retrieval.
-
-2. **TransX Technical Report: Scaling Sequence Transduction for Recommendation**
-   * Affiliation: LinkedIn — *(Da Xu, Liyan Fang, Divya Venugopalan, Sunny Hsu, Xukai Wang, Rishav Roy Chowdhury, Cindy Liang, Nishant Satya Lakshmikanth)*
-   * Link: [arxiv.org/abs/2610.20913](https://arxiv.org/abs/2610.20913)
-   * Venue: Technical Report (LinkedIn)
-   * TL;DR: A sequence-transduction framework that decouples encoding, behavior-memory, and candidate-fusion, explores offline generative recommendation, and lifts production CTR by +6.02% and conversion by +4.45% in A/B.
-   * Key techniques:
-     - Sequence-transduction paradigm separating representation encoding, behavior memory, and candidate fusion
-     - Offline generative-recommendation exploration built on the transduction backbone
-     - Production A/B validation on LinkedIn feed/relevance surfaces
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — Industrial technical report; no public code.
-     - **Novelty: 7/10** — Transduction framing decoupling the rec pipeline stages at production scale.
-     - **Fairness: 4/10** — Not addressed.
-     - **Robustness: 8/10** — Validated via production A/B at LinkedIn scale.
-     - **Impact: 9/10** — Deployed industrial system with clear online gains.
-
-3. **HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation**
-   * Affiliation: Qilu University of Technology (Shandong Academy of Sciences) / University of Technology Sydney — *(Min Xiao, Jin Li, Shoujin Wang, Yeguang Zhen, Yishuo Li, Wenpeng Lu)*
-   * Link: [arxiv.org/abs/2610.20191](https://arxiv.org/abs/2610.20191)
-   * Venue: arXiv preprint
-   * TL;DR: A disentangled hierarchical agentic memory plus safety-aware set decoding for multi-center medication recommendation, improving safety while preserving accuracy across heterogeneous hospitals.
-   * Key techniques:
-     - Disentangled hierarchical memory (short/long-term, patient/center levels)
-     - Agentic memory write/read/reflect loop
-     - Safety-aware set decoding with clinical-constraint enforcement
-     - Evaluated across multiple medical centers
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — Code at [anonymous.4open.science/r/anonymous-HEM-Med-0935](https://anonymous.4open.science/r/anonymous-HEM-Med-0935/) (anonymous preprint; code present but limited docs/maintenance).
-     - **Novelty: 7/10** — Hierarchical agentic memory specialized for safety-critical multi-center medication rec.
-     - **Fairness: 6/10** — Multi-center setting implicitly addresses cross-site (population) fairness.
-     - **Robustness: 7/10** — Consistent gains across multiple clinical centers.
-     - **Impact: 6/10** — Safety-relevant medical domain; preprint, no deployment.
-
-4. **PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems**
-   * Affiliation: Xi'an Jiaotong-Liverpool University / University of Liverpool / Alibaba Group — *(Chong Zhang, Qijie Shen, Haichao Zhang, Can Wang, Xiaobo Jin, Jia Wang)*
-   * Link: [arxiv.org/abs/2610.13989](https://arxiv.org/abs/2610.13989)
-   * Venue: arXiv preprint
-   * TL;DR: A psychology-grounded user simulator (Psy-Engine) modeling three evolving latent user states, aligned via a User-Goal-Widget mechanism, enabling pre-deployment recommender evaluation without live traffic.
-   * Key techniques:
-     - Psy-Engine models three evolving latent psychological user states
-     - User-Goal-Widget (UGW) alignment couples user goals with recommender widget behavior
-     - Pre-deployment simulation of user-recommender interaction
-     - Offline A/B-style evaluation of recommendation policies
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — Code at [anonymous.4open.science/r/CC66F](https://anonymous.4open.science/r/CC66F/) (anonymous preprint; code present but limited docs/maintenance).
-     - **Novelty: 8/10** — Psychology-driven latent-state user model for rec simulation.
-     - **Fairness: 6/10** — Simulator enables probing biased recommendations pre-deployment.
-     - **Robustness: 7/10** — Stable across simulated user populations.
-     - **Impact: 7/10** — Useful pre-deployment evaluation harness for rec systems.
-
-5. **ARMED: Adaptive Retrieval-Augmented Medication Recommendation**
-   * Affiliation: UX Factory, Inc. (Seongnam-si, South Korea) / KAIST — *(Kyungkeon Chung, Se Un Park, Hyejin Lee, Junyoung Park)*
-   * Link: [arxiv.org/abs/2610.16440](https://arxiv.org/abs/2610.16440)
-   * Venue: ICTAI 2026
-   * TL;DR: An adaptive clinical RAG system with a retrieval-sufficiency controller that decides when external knowledge is actually needed for medication recommendation.
-   * Key techniques:
-     - Adaptive retrieval-augmented generation for medication recommendation
-     - Retrieval-sufficiency controller gates external knowledge retrieval
-     - Accepted at ICTAI 2026
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code released.
-     - **Novelty: 6/10** — Sufficiency-gated RAG for clinical medication rec.
-     - **Fairness: 4/10** — Not addressed.
-     - **Robustness: 6/10** — Evaluated on clinical datasets.
-     - **Impact: 6/10** — Clinical decision-support; workshop-level venue.
-
-
 ## Papers Classic Must Read
 
 
@@ -1410,6 +1412,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Mixture-of-Experts Knowledge Graph Retrieval-Augmented Generation for Multi-Agent LLM-based Recommendation (MixRAGRec) |
 | 7/10 | MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology — [github.com/wangyu0627/MLLMRec-R1](https://github.com/wangyu0627/MLLMRec-R1) |
 | 7/10 | MLPs are Efficient Distilled Generative Recommenders (SID-MLP) |
+| 7/10 | Octen-WebGR: Scaling Generative Retrieval to 200 Million Web Pages (Octen-WebGR) — Octen, arXiv 2610.35256 |
 | 7/10 | OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework (OneSearch-V2) |
 | 7/10 | Popcorn: A Configurable Benchmark for Visual Evidence in Multimodal Movie Recommendation (Popcorn) |
 | 7/10 | Prompt Optimization for User Simulation in Conversational Recommender Systems (UserSimulator) |
@@ -1472,6 +1475,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE) |
 | 6/10 | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) |
 | 6/10 | Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore) |
+| 6/10 | MuSID-KD: Multigranularity Knowledge Distillation for Generative Recommendation with Semantic IDs (MuSID-KD) — East China Normal University, arXiv 2610.35218 |
 | 6/10 | PAPA: Online Personalized Active Preference Alignment (PAPA) |
 | 6/10 | Personalization Matters: Long-Horizon Conversation Agent with User-Centric Information in Online Shopping Interactions (Personalization Matters) |
 | 6/10 | PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems (PsyBer-Agent) — Xi'an Jiaotong-Liverpool University / University of Liverpool / Alibaba Group — [anonymous.4open.science/r/CC66F](https://anonymous.4open.science/r/CC66F/) |
@@ -1527,7 +1531,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 228 papers as of October 26.
+**Count:** 230 papers as of October 27.
 
 ---
 
@@ -1651,6 +1655,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - TM20K / 20K Sequence Modeling -- ByteDance
 - Preserving Item Semantics for Free / Centroid SID Init -- Snap Inc. / UMich
 - PushDualGen / LLM SID Push Rec -- Kuaishou
+- Octen-WebGR: Scaling Generative Retrieval to 200 Million Web Pages (Octen-WebGR) — Octen, arXiv 2610.35256
+- SLIDE: Search-to-List Item Distillation for Single-Rollout Generative Retrieval (SLIDE) — Alibaba (Taobao & Tmall Group), arXiv 2610.34764
 - MetaStrategy / Generative LLM Ranking Strategy -- Alibaba (Taobao)
 - TSPORec / Token Selection SeqRec -- ZJU / ByteDance
 - IntHQ / Multi-Task Generative Rec -- Amap / Alibaba
