@@ -77,6 +77,7 @@
 - Delegation Asymmetry in Agentic Recommender Systems: Measuring Two-Sided Receptivity in Online Dating — University of Notre Dame / Fleamily, arXiv 2608.18058
 
 - UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents (UserArena) — Leiden University / Renmin University of China / Alibaba Group / Institute of Computing Technology, CAS, arXiv 2610.30932 [opensource]
+- AutoRSE: Evaluating LLM Agents as Recommendation Engineers for Self-Evolving Recommender Systems (AutoRSE) — University of Science and Technology of China / National University of Singapore, arXiv 2610.37228 [opensource]
 
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -309,7 +310,9 @@
 - DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation (DiffuReason) — Tencent (Think-then-Diffuse + GRPO), arXiv 2602.09744
 - CARD: Counterfactual Attention Regulation Diffusion for Diffusion-based Sequential Recommendation (CARD) — Sun Yat-sen University / Peng Cheng Laboratory, ICASSP 2026 — arXiv 2601.15673 [opensource]
 - DiffGRM: Diffusion-based Generative Recommendation Model (DiffGRM) — Kuaishou, WWW 2026 (masked discrete diffusion for SID generation) — arXiv 2510.21805 [opensource]
-- OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation (OT-FlowRec) — Nanjing University of Science and Technology, arXiv 2610.16038- DPE-Rec: Diversity-Preserving and Efficient Diffusion Language Model Recommendation for Bundle Construction (DPE-Rec) — Arizona State University, arXiv 2610.34700
+- OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation (OT-FlowRec) — Nanjing University of Science and Technology, arXiv 2610.16038
+- DPE-Rec: Diversity-Preserving and Efficient Diffusion Language Model Recommendation for Bundle Construction (DPE-Rec) — Arizona State University, arXiv 2610.34700
+- When Diffusion Recommenders Stop Sampling: Preserving Generative Diversity (DARTS) — ISIR, Sorbonne Université, arXiv 2610.36954
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -382,6 +385,7 @@
 - When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation (When-the-Label) — Uber AI, arXiv 2609.39696 [opensource]
 
 - UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents (UserArena) — Leiden University / Renmin University of China / Alibaba Group / Institute of Computing Technology, CAS, arXiv 2610.30932 [opensource]
+- AutoRSE: Evaluating LLM Agents as Recommendation Engineers for Self-Evolving Recommender Systems (AutoRSE) — USTC / NUS, arXiv 2610.37228 [opensource]
 
 ### Fairness
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
@@ -776,6 +780,14 @@
 - WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat (WeGR) — Tencent (WeChat), arXiv 2610.16979
 - AGR: Agentic Generative Retrieval with Tool-Augmented Search (AGR) — Kuaishou Technology & Fudan University, arXiv 2610.26831
 - Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search (SID-Map) — Alibaba, arXiv 2610.26105
+- REGER: Modeling inter-item Relations with Semantic IDs for Generative Recommendation (REGER) — UESTC, arXiv 2610.37584
+- LESSRec: Level-Specific History Modeling for Semantic ID-Based Recommendation (LESSRec) — Chongqing University / Griffith University, arXiv 2610.37286
+- AutoRSE: Evaluating LLM Agents as Recommendation Engineers for Self-Evolving Recommender Systems (AutoRSE) — USTC / NUS, arXiv 2610.37228 [opensource]
+- KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation (KL-MOPD) — Zhejiang University / Alibaba Group, arXiv 2610.36973 [opensource]
+- PailitaoMMSearch2.0: Scaling Generative Retrieval to Unified End-to-End Multimodal Search (PailitaoMMSearch2.0) — Alibaba (Taobao), arXiv 2610.36958
+- When Diffusion Recommenders Stop Sampling: Preserving Generative Diversity (DARTS) — ISIR, Sorbonne Université, arXiv 2610.36954
+- Latent Residual Reasoning for Ranking in Generative Recommendation (Refiner) — USTC / Meituan / Renmin U / HKPolyU, arXiv 2610.36890
+- The Vocabulary Is Already Here: Adapting Pretrained Interpretable Features for Generative Recommendation (API) — Central South University / HKUST(GZ) / HKPolyU / QMUL / Microsoft, arXiv 2610.36763
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -1041,6 +1053,9 @@
 - WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat (WeGR) — Tencent (WeChat), arXiv 2610.16979
 - TacGR (UniSGR-V2): Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation (TacGR) — Alibaba International, arXiv 2610.16132
 - TGR-EvoDAG: A DAG-based Multi-Agent Code Evolution Framework for Generative Recommendation on Tencent (TGR-EvoDAG) — Tencent / HK PolyU / McGill, arXiv 2610.32326
+- KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation (KL-MOPD) — Zhejiang University / Alibaba Group, arXiv 2610.36973 [opensource]
+- PailitaoMMSearch2.0: Scaling Generative Retrieval to Unified End-to-End Multimodal Search (PailitaoMMSearch2.0) — Alibaba (Taobao), arXiv 2610.36958
+- Latent Residual Reasoning for Ranking in Generative Recommendation (Refiner) — USTC / Meituan / Renmin U / HKPolyU, arXiv 2610.36890
 
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
@@ -1086,6 +1101,7 @@
 
 - OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models (OneLatent) — Kuaishou Technology, arXiv 2610.30675
 - Think Harder Where It Matters: Item-Level Adaptive Recursion for Sequential Recommendation (LoopRec) — Renmin University of China, arXiv 2610.30128 [opensource]
+- KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation (KL-MOPD) — Zhejiang University / Alibaba Group, arXiv 2610.36973 [opensource]
 
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
@@ -1106,6 +1122,8 @@
 - OneChord: Distill What You Rank, Recommend in One Pass (OneChord) — University of Chinese Academy of Sciences, arXiv 2610.25805
 - Knowledge Distillation across Item and Code Spaces for Parallel Generative Recommendation — The Hong Kong University of Science and Technology / USTC, arXiv 2610.32943
 - MuSID-KD: Multigranularity Knowledge Distillation for Generative Recommendation with Semantic IDs (MuSID-KD) — East China Normal University, arXiv 2610.35218
+- REGER: Modeling inter-item Relations with Semantic IDs for Generative Recommendation (REGER) — University of Electronic Science and Technology of China, arXiv 2610.37584
+- KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation (KL-MOPD) — Zhejiang University / Alibaba Group, arXiv 2610.36973 [opensource]
 
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
@@ -1553,7 +1571,8 @@
 
 - MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology, GRPO — arXiv 2603.06243 [opensource]
 - OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation (OT-FlowRec) — Nanjing University of Science and Technology, arXiv 2610.16038
-- MMWave: Tackling the Modality Inhibitance Effect with Wavelet-based Modality Integration in Multi-modal Recommendation (MMWave) — NTU, IEEE TKDE 2026
+- MMWave: Tackling the Modality Inhibitance Effect with Wavelet-based Modality Integration in Multi-modal Recommendation (MMWave) — NTU, IEEE TKDE 2026- PailitaoMMSearch2.0: Scaling Generative Retrieval to Unified End-to-End Multimodal Search (PailitaoMMSearch2.0) — Alibaba (Taobao), arXiv 2610.36958
+
 ### Optimizer
 - MuonRec
 
@@ -1666,6 +1685,7 @@
 - Beyond Sequences: Distilling Structured Decision Memory for LLM Recommendation (MARI) — Alibaba Group, arXiv 2610.11501
 
 - OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models (OneLatent) — Kuaishou Technology, arXiv 2610.30675
+- Latent Residual Reasoning for Ranking in Generative Recommendation (Refiner) — USTC / Meituan / Renmin U / HKPolyU, arXiv 2610.36890
 
 ### Reinforcement Learning
 - FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
@@ -1934,6 +1954,9 @@
 - OneChord: Distill What You Rank, Recommend in One Pass (OneChord) — University of Chinese Academy of Sciences, arXiv 2610.25805
 
 - OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models (OneLatent) — Kuaishou Technology, arXiv 2610.30675
+- REGER: Modeling inter-item Relations with Semantic IDs for Generative Recommendation (REGER) — University of Electronic Science and Technology of China, arXiv 2610.37584
+- LESSRec: Level-Specific History Modeling for Semantic ID-Based Recommendation (LESSRec) — Chongqing University / Griffith University, arXiv 2610.37286
+- The Vocabulary Is Already Here: Adapting Pretrained Interpretable Features for Generative Recommendation (API) — Central South University / HKUST(GZ) / HKPolyU / QMUL / Microsoft, arXiv 2610.36763
 
 ### Security / Adversarial
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
