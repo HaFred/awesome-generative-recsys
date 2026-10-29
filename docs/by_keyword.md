@@ -492,6 +492,7 @@
 - From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation — Kuaishou, arXiv 2608.21012
 
 ### Generative Recommendation / VAE
+- Decision-Native Recommendation with Large Language Models (DICE) — USTC / Independent Researcher, arXiv 2610.34124
 - TransX Technical Report: Scaling Sequence Transduction for Recommendation (TransX) — LinkedIn, arXiv 2610.20913
 - Multi-Decoder OneRec: Controllable Generative Retrieval for Multi-Objective Industrial Recommendation (Multi-Decoder OneRec)
 - Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs (OGR)
@@ -663,6 +664,7 @@
 - From Scores to Safe Sets: Exact Safety-Constrained Decoding for Medication Recommendation (SafeSets) — Optum, arXiv 2610.29228
 
 ### Generative Retrieval / Ranking
+- PinGER: Token-Efficient Generative Retrieval with Semantic IDs (PinGER) — Pinterest, arXiv 2610.33435 [deployed in Related Pins]
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
 - Generative Recommenders Forget the Long Tail: Restoring Memorization in Retrieval and Ranking (CAPE) — USTC & Ant Group, arXiv 2610.29298
 - Evolving Semantic Indexes for Generative Retrieval — Santa Clara University & Coupang, arXiv 2610.28568
@@ -1136,6 +1138,7 @@
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 
 ### LLM-based Recommendation
+- LCM-Promo: An LLM-Based Uplift Model for Promotion Allocation (LCM-Promo) — Prosus / iFood, arXiv 2610.37570
 - RecSys Factory: Bounding LLM Agent Autonomy to Decision Points in the Industrial Recommender Lifecycle (RecSys Factory) — Tencent, arXiv 2608.11241
 - ATLAS: Learning to Recommend Across Unseen Domains (ATLAS) — Sony Research India, arXiv 2608.03899
 - Decision4Rec: A Jev-Inspired Framework of Decision Models on Knowledge and Active Graphs for Multi-Agent Recommender Systems (Decision4Rec) — University of Bari Aldo Moro, arXiv 2610.26035 [opensource]
@@ -1813,6 +1816,7 @@
 - LoopGR: Parameter-Efficient Scaling for Generative Recommendation via Recurrent Depth (LoopGR) — Tencent, arXiv 2610.34157
 
 ### Semantic / Structured IDs
+- JevRec: Linguistic Encoding with Jev-like Decision Modeling for LLM-based Generative Recommendation (JevRec) — Zhejiang University, arXiv 2610.36937
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
 - FineSID: Progressive Learning from Content to Relevance to Personalization for CTR Prediction (FineSID) — Alibaba, arXiv 2610.29138
 - SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs (SPAR) — UESTC & Alibaba, arXiv 2610.27898
@@ -1973,6 +1977,7 @@
 
 - AlignPoison: Conditional Targeted Poisoning of Generative Recommenders via Decoding-Aligned Prefixes (AlignPoison) — UNC Chapel Hill / Notre Dame / Meta, arXiv 2610.14487
 ### Sequential Modeling / RoPE
+- Compote: Collapse-Resistant Multiple Hypothesis Learning for Sequential Recommendation (Compote) — Criteo AI Lab / Sorbonne Université CNRS ISIR, arXiv 2610.37005
 - LSF-SR: Latent Semantic Fusion for Sequential Recommendation via Flow-based Conditional Variational Autoencoders (LSF-SR) — National Yang Ming Chiao Tung University, arXiv 2609.29815
 - Learning from the Future: Privileged Self-Distillation for Sequential Recommendation (PSD)
 - MIRAGE: Escaping the Euclidean Void (Manifold-Informed Flow Matching for Sequential Recommendation)

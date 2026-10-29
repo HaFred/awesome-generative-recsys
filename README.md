@@ -94,7 +94,7 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ### Papers October 29
 
-*Thursday, October 29, 2026. The live arXiv cs.IR window (announced Oct 27-29, the freshest available after the skipped Oct 28 run) surfaced 8 strictly on-topic generative-recommendation papers: REGER / 2610.37584, LESSRec / 2610.37286, AutoRSE / 2610.37228, KL-MOPD / 2610.36973, PailitaoMMSearch2.0 / 2610.36958, DARTS / 2610.36954, Refiner / 2610.36890, API / 2610.36763. 2 are open-source (AutoRSE / UESTC+NUS, 6/10; KL-MOPD / Zhejiang U + Alibaba, 7/10). By Opensource count 230 -> 232. Mindmap 30-cap held (+AutoRSE, +KL-MOPD; -MuSID-KD, -ReMaRk).*
+*Thursday, October 29, 2026. The live arXiv cs.IR window (announced Oct 27-29, the freshest available after the skipped Oct 28 run) surfaced 8 strictly on-topic generative-recommendation papers: REGER / 2610.37584, LESSRec / 2610.37286, AutoRSE / 2610.37228, KL-MOPD / 2610.36973, PailitaoMMSearch2.0 / 2610.36958, DARTS / 2610.36954, Refiner / 2610.36890, API / 2610.36763. 2 are open-source (AutoRSE / UESTC+NUS, 6/10; KL-MOPD / Zhejiang U + Alibaba, 7/10). By Opensource count 230 -> 232. Mindmap 30-cap held (+AutoRSE, +KL-MOPD; -MuSID-KD, -ReMaRk). A same-day follow-up pass adds 6 more on-topic papers (items 9-14): 2 from the live cs.IR window (LCM-Promo / 2610.37570, Compote / 2610.37005) and 4 from the 3-month keyword pool (JevRec / 2610.36937, PinGER / 2610.33435, RPSD / 2610.37281, Decision-Native / 2610.34124); all 6 are O0, so By Opensource count (232) and the mindmap are unchanged.*
 
 1. **REGER: Modeling inter-item Relations with Semantic IDs for Generative Recommendation**
    * Affiliation: University of Electronic Science and Technology of China (Chengdu, China) — *(Yuxi Huang, Silin Zhou, Chenhao Wang, Zihan Li, Gangming Guo, Pei Ke, Shen Gao, Shuo Shang)*
@@ -228,6 +228,108 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Fairness: 2/10** — not addressed.
      - **Robustness: 7/10** — competitive across backbones + decoding schemes; ablations on token budget / explainability.
      - **Impact: 7/10** — from Central South U / PolyU / Microsoft; offers a training-free, explainable SID alternative.
+
+9. **LCM-Promo: An LLM-Based Uplift Model for Promotion Allocation**
+   * Affiliation: Prosus (Amsterdam, Netherlands) & iFood (São Paulo, Brazil) — *(Nesta Midavaine, Floris Fok, Paulo Mendes, João Silva, Önder Akaçık, Dimas Lima, Zülküf Genç)*
+   * Link: [arxiv.org/abs/2610.37570](https://arxiv.org/abs/2610.37570)
+   * Venue: ECML PKDD 2026 (Industrial Track) — arXiv preprint
+   * TL;DR: An LLM-based uplift model for promotion allocation: a task-specific Large Commerce Model (LCM) finetuned on transactional data predicts monotonic promotion-response curves from single-token outputs, lifting conversion +1% and cutting promo cost −6% in a production churn-reactivation A/B.
+   * Key techniques:
+     - Task-specific Large Commerce Model (LCM): an LLM finetuned on transactional commerce data for user-intent + promotion-response prediction
+     - Interprets single-token outputs as conversion-threshold probabilities to learn monotonic promotion-response curves from production logs
+     - Conditions on session context (day, delivery shift) for allocation decisions
+     - Production A/B on churn reactivation: +1% conversion, −6% promo cost vs the Segment-EMA baseline
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found (industrial; Prosus/iFood).
+     - **Novelty: 6/10** — applies LLM uplift modeling to promo allocation with a clean single-token response-curve trick; incremental over uplift-modeling literature.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 6/10** — one production A/B (churn reactivation) with clear lifts; narrow scope, single surface.
+     - **Impact: 7/10** — from Prosus/iFood, real production uplift with measurable cost savings; strong industrial relevance.
+
+10. **Compote: Collapse-Resistant Multiple Hypothesis Learning For Sequential Recommendation**
+   * Affiliation: Criteo AI Lab (Paris, France) — *(Louis Castres Saint Martin, Clément Calauzènes, Alain Rakotomamonjy, Patrick Gallinari)*; Sorbonne Université, CNRS, ISIR (Paris, France) — *(Louis Castres Saint Martin, Alain Rakotomamonjy, Patrick Gallinari)*
+   * Link: [arxiv.org/abs/2610.37005](https://arxiv.org/abs/2610.37005)
+   * Venue: arXiv preprint (cs.IR / cs.LG)
+   * TL;DR: A collapse-resistant multi-hypothesis transformer for sequential recommendation that anneals from uniform supervision to winner-takes-all, forcing hypotheses to specialize into distinct catalogue regions; matches ID/generative/multi-interest baselines using item IDs alone.
+   * Key techniques:
+     - Multi-hypothesis transformer with an annealed objective: uniform supervision → winner-takes-all assignment
+     - Hypotheses specialize into distinct catalogue regions (max-entropy quantization partition in the population case; pooled scores preserve Bayes-optimal ranking)
+     - Generalization bound scaling logarithmically with the number of hypotheses
+     - Normalizer-free max-similarity inference; head-collapse prevented without extra capacity, ensembling, or routing
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 7/10** — principled multi-hypothesis training for seq rec with a clean annealing + theory; builds on multi-interest but adds collapse resistance.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 7/10** — 3 Amazon Reviews 2023 benchmarks; matched-capacity ablations isolate the annealed objective.
+     - **Impact: 6/10** — from Criteo/ISIR; solid seq-rec contribution, item-ID-only setting limits breadth.
+
+11. **JevRec: Linguistic Encoding with Jev-like Decision Modeling for LLM-based Generative Recommendation**
+   * Affiliation: Zhejiang University (Hangzhou, China) — *(Qiyong Zhong, Jiajie Su, Ming Yang, Li Zhang)*
+   * Link: [arxiv.org/abs/2610.36937](https://arxiv.org/abs/2610.36937)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: Variable-length linguistic semantic-ID encoding for generative recommendation: popular items get shorter SIDs, long-tail items get richer descriptions; a Jev-like decision model uses a dedicated length head plus a length-conditioned content head over a shared history representation.
+   * Key techniques:
+     - Linguistic encoding: variable-length SIDs from shared codebooks retaining frequency-dependent semantic prefixes (shorter for popular, richer for long-tail)
+     - Jev-like decision modeling: a dedicated head predicts a length distribution; content is generated conditioned on length, sharing the interaction-history representation
+     - Reduces gradient conflict between length and content prediction vs a shared output head
+     - Lower training and inference time than TIGER on 3 public datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 8/10** — variable-length linguistic SIDs + Jev-like length/content decoupling; a clean take on the uniform-SID problem.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 7/10** — 3 public datasets; efficiency + gradient-conflict analyses support the claim.
+     - **Impact: 7/10** — from Zhejiang U; directly improves the SID design that underpins much of GR.
+
+12. **PinGER: Token-Efficient Generative Retrieval with Semantic IDs**
+   * Affiliation: Pinterest (San Francisco, CA, USA) — *(Xinyi Li, Sujan Reddy Ale, Yi-Ping Hsu, Zelun Wang, Yilin Chen, Hanyu Li, Hanlin Lu, Arkin Dharawat, Lulu Yao, Yaxin Li, Bella Huang, Xiangyi Chen, Jaewon Yang, Jiajing Xu, Charles Rosenberg)*
+   * Link: [arxiv.org/abs/2610.33435](https://arxiv.org/abs/2610.33435)
+   * Venue: arXiv preprint (cs.IR); deployed at Pinterest (Related Pins)
+   * TL;DR: A deployed generative retriever that keeps SID outputs but makes input histories compact via an asymmetric attention mask (later items attend only to dense tokens), controllable generation (goal-conditioned + RL + prefix-diversity), and a wide-beam serving stack; lifts fresh-Pin saves +3.60% in production.
+   * Key techniques:
+     - Asymmetric attention mask over interleaved SID + dense tokens: supervised at every SID position but serves one token per item, computing the same function
+     - Controllable generation via goal-conditioned outputs, reinforcement learning, and a prefix-diversity penalty steering toward surface-specific goals and diverse candidates
+     - Serving stack for efficient wide-beam generation with decoding constrained to valid identifiers and host-local candidate resolution
+     - Deployed in Related Pins: +3.60% fresh-Pin saves, +0.62% overall saves, −0.7% latency, removes the replaced nearest-neighbor search
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (industrial; Pinterest).
+     - **Novelty: 8/10** — token-efficient generative retrieval that decouples training supervision from serving compute via asymmetric attention; deployed at scale.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 8/10** — production deployment with significant, measured online lifts; strong evidence.
+     - **Impact: 9/10** — from Pinterest, real production generative retrieval with latency reduction; high industrial impact.
+
+13. **RPSD: Retrieval-Privileged On-Policy Self-Distillation with Optimal Transport**
+   * Affiliation: Nagoya University — *(Dongyue Li, Zebang Cheng, Zhongyi Deng, Hongboxu, Yi Bin, Fei Ma)*; Shenzhen University; Sichuan Agricultural University; Guangdong Laboratory of AI and Digital Economy; Tongji University
+   * Link: [arxiv.org/abs/2610.37281](https://arxiv.org/abs/2610.37281)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: Retrieval-Privileged on-policy Self-Distillation for GRPO-style generative sequential recommendation: on-policy self-distillation turns a shared sequence-level advantage into token-specific credit using a teacher with privileged knowledge, and temporally-aware optimal transport injects cross-user collaborative evidence.
+   * Key techniques:
+     - On-policy self-distillation (OPSD): a teacher with privileged knowledge re-evaluates the student's on-policy response; the token-level student–teacher confidence difference reshapes the sequence-level advantage into token-specific credit (fixes credit-blind optimization)
+     - Collaborative grounding: temporally-aware optimal transport (OT) compares interaction trajectories across users via item similarity and temporal structure; diversity-aware selection retains complementary trajectories as privileged evidence (fixes collaborative-blind supervision)
+     - First to bring on-policy self-distillation to sequential recommendation and to use cross-user behavior as the privileged signal
+     - State-of-the-art across multiple real-world datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 8/10** — combines on-policy self-distillation + OT cross-user grounding to fix both credit- and collaborative-blindness in GRPO-style gen-rec.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 7/10** — multiple real-world datasets, SOTA claims; no public code to verify.
+     - **Impact: 7/10** — from a multi-institution group; targets the core GRPO credit-assignment weakness in gen-rec.
+
+14. **Decision-Native Recommendation with Large Language Models (DICE)**
+   * Affiliation: University of Science and Technology of China (Hefei, China) — *(Daoxuan Liu, Jiayi Liao, Jiancan Wu, An Zhang, Xiang Wang, Xiangnan He)*; Independent Researcher (Beijing, China) — *(An Zhang)*
+   * Link: [arxiv.org/abs/2610.34124](https://arxiv.org/abs/2610.34124)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: A decision-native recommendation paradigm (inspired by Jev) that jointly models item choice and recommendation confidence with LLM representations; DICE learns a personalized next-item distribution over supplied candidates with tree-structured attention for order-consistent scoring; ~6× faster than generation-based methods.
+   * Key techniques:
+     - Decision-native recommendation: jointly models item choice and explicit confidence from LLM representations; requires valid selection, reordering consistency, and accuracy-reflecting confidence
+     - DICE (Direct Item Choice Estimation): a personalized next-item distribution over supplied candidates; recommends the highest-scoring item with calibrated confidence
+     - Tree-structured attention shares history computation across isolated candidate branches for order-consistent scoring in a single forward pass
+     - Confidence supports selective recommendation (routing low-confidence examples to extra compute); up to ~6× speedup over generation-based methods
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 8/10** — reframes LLM-based rec as decision-native choice+confidence with order-consistency and calibration; clean paradigm shift.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 7/10** — 3 datasets, reordering-consistency + speedup evaluations; sound but LLM-representation dependent.
+     - **Impact: 8/10** — from USTC (Xiangnan He group); addresses core failure modes (order dependence, no confidence) of generation-based recsys.
 
 ---
 
@@ -1802,6 +1904,7 @@ See [Full keyword index](docs/by_keyword.md) for all other categories.
 - Many Right Answers, One Training Example / Removing Responder Noise from GRPO for LLM Recommenders (ReMaRk) — Nanyang Technological University
 - SemPOI-RL: Aligning LLM Semantic Reasoning for Interpretable Out-of-Town POI Sequential Generation (SemPOI-RL) — Beihang University
 - Reasoning Reranking with Semantic IDs as the Sole Item Representation (ReRankID) — Google / University of Toronto, arXiv 2610.22797
+- RPSD: Retrieval-Privileged On-Policy Self-Distillation with Optimal Transport (RPSD) — Nagoya University / Shenzhen University / Sichuan Agricultural University / Guangdong Laboratory of AI and Digital Economy / Tongji University, arXiv 2610.37281
 
 ## By Affiliation
 
