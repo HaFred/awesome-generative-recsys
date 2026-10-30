@@ -41,7 +41,6 @@ mindmap
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
         RecToolBench -- Jilin U / Squirrel AI / PolyU
-        AutoRSE -- USTC / NUS
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -56,6 +55,7 @@ mindmap
       Efficient Decoding
         STATIC -- Google
         Octen-WebGR -- Octen AI
+        PFA -- Zhejiang U / Alibaba
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
@@ -92,6 +92,97 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
+### Papers October 30
+
+*Friday, October 30, 2026. The live arXiv cs.IR window carried no strictly on-topic generative-recommendation submissions newer than the Oct 29 run (newest cs.IR preprints remain 2610.37584, announced Oct 27). The absolute-newest gen-rec preprints — 2610.37962 / 2610.37973 / 2610.38378 / 2610.39273 / 2610.39470 — were submitted Oct 27-29 but are cross-listed outside cs.IR and were missed by the Oct 29 pass. All 5 below are verified absent from README, the docs indexes, and the monthly archive. 1 is open-source (PFA / Zhejiang U + Alibaba, 7/10). By Opensource count 232 -> 233. Mindmap 30-cap held (+PFA to Efficient Decoding; -AutoRSE, the lowest-scoring leaf).*
+
+1. **RoFiGR: Coarse Routing, Fine Refinement via Level-Adaptive Distillation in Multimodal Generative Recommendation**
+   * Affiliation: Beijing University of Posts and Telecommunications / Kuaishou Technology, Beijing, China — *(Ji Dai, Zhipeng Wei, Zhuang Zhuang, Rongfeng Guo, Jie Chen, Quan Fang, Fei Pan)*
+   * Link: [arxiv.org/abs/2610.39470](https://arxiv.org/abs/2610.39470)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: A two-tree multimodal generative recommender that injects collaborative structure into both SID construction and generation via level-adaptive distillation — fixed coarse-level weights preserve routing supervision while a bounded adaptive residual allocates extra weight by teacher-student demand.
+   * Key techniques:
+     - Two-tree design aligning cumulative L1-L2 SID code vectors with frozen collaborative item embeddings
+     - Explicitly encodes item distance and source level into the serialized user history
+     - A sequential teacher supervises only legal coarse branches during generation
+     - Level-adaptive distillation: fixed coarse weights plus a bounded adaptive residual driven by teacher-student agreement
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 8/10** — clean collaborative-aware two-tree SID with level-adaptive distillation; fills the coarse-routing gap in multimodal GR.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 7/10** — three benchmarks (Instruments, Arts, Games), five ranking metrics, five-seed paired tests with Holm correction.
+     - **Impact: 7/10** — from BUPT / Kuaishou; strengthens multimodal generative recommendation.
+
+2. **PFA: Attention Can Be Progressively Focused in Long-Sequence Generative Recommendation**
+   * Affiliation: Zhejiang University (Hangzhou, China) / Alibaba Group — *(Pengjie Zhou, Weiqin Yang, Haibo Xing, Hao Deng, Jinxin Hu)*
+   * Link: [arxiv.org/abs/2610.39273](https://arxiv.org/abs/2610.39273)
+   * Venue: arXiv preprint (cs.IR)
+   * TL;DR: Progressively Focused Attention — an efficient sparse decoding framework for long-sequence GR that keeps full attention only at the first beam step, then reuses a shared cross-beam importance ranking and geometrically shrinks the token budget, cutting online latency while preserving semantics; validated with a 7-day online A/B on a large e-commerce ads platform.
+   * Key techniques:
+     - Empirical analysis of GR decoding attention -> progressive focusing and cross-step ranking consistency
+     - Full attention at the first decoding step, then cross-beam weighted aggregation to build a shared importance ranking
+     - Reorder the selected tokens' KV cache into a contiguous memory layout
+     - Geometric token-budget reduction in later decoding steps
+     - 7-day online A/B on a large-scale e-commerce advertising platform
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — anonymous.4open.science/r/PFA-review-088D: code released for review (anonymous submission repo, structure not fully auditable, no LICENSE visible); comparable to other anonymous-submission repos.
+     - **Novelty: 8/10** — turns an attention-pattern analysis into a practical contiguous-layout sparse decoding scheme for GR beam search.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 8/10** — two public benchmarks plus one large-scale industrial dataset plus a 7-day online A/B.
+     - **Impact: 8/10** — from Zhejiang U / Alibaba; strong production evidence for long-sequence GR serving.
+
+3. **Towards Reliable, Scalable, and Value-Aligned Generative Recommendation for Large-Scale Advertising (GR4AD-X)**
+   * Affiliation: Kuaishou — *(Yatong Xiao, Yibo Sheng, Lixiang Wang, Mingjie Sun, Yunhao Sha, Pengfei Zhang, Shengyu Wang, Peng Wang, Wenjin Wu, Peng Jiang)*
+   * Link: [arxiv.org/abs/2610.38378](https://arxiv.org/abs/2610.38378)
+   * Venue: arXiv preprint (cs.IR; cs.LG); under review
+   * TL;DR: GR4AD-X extends the deployed industrial GR4AD ad framework with reliable multi-path SID construction, serving-efficient multi-dimensional capacity scaling, and a unified value-aligned generation/discrimination stage (UniVGD: prefix-level reward optimization + value-guided beam pruning + discriminative reranking), lifting cumulative ad revenue +3.07% in online A/B on Kuaishou.
+   * Key techniques:
+     - Multi-Path SID assignment for deterministic-SID reliability against semantic-boundary sensitivity
+     - Multi-dimensional capacity scaling (width/depth/stream) instead of monolithic backbone growth, for a better effectiveness-efficiency trade-off under strict serving constraints
+     - UniVGD: prefix-level reward optimization, value-guided beam pruning, and discriminative reranking inside one model
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (industrial; Kuaishou).
+     - **Novelty: 7/10** — multi-path SID plus unified value-guided generation/discrimination reframes the value-credit-assignment problem in production GR.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 8/10** — large-scale online A/B on Kuaishou ads with strict latency/throughput constraints.
+     - **Impact: 8/10** — from Kuaishou; real production ad revenue gain (+3.07% cumulative).
+
+4. **Merge and Branch: Efficient Tree-Structured Supervised Fine-Tuning of LLMs for Recommendation**
+   * Affiliation: Georgia Institute of Technology (Atlanta, USA) — *(Yunqin Zhu, Yao Xie)*
+   * Link: [arxiv.org/abs/2610.37973](https://arxiv.org/abs/2610.37973)
+   * Venue: arXiv preprint (cs.IR; cs.AI)
+   * TL;DR: Merge and Branch (M&B) cuts LLM-based generative-rec SFT cost by merging each history item's SID+text into a few learned tokens and branching a shared compressed history to predict multiple target SIDs, with a tree FlashAttention that shares history compute and propagates every branch's gradient end-to-end and a tree KV cache for constrained decoding.
+   * Key techniques:
+     - Merge: compress each historical item's SID and text into a small number of learned tokens
+     - Branch: predict multiple target SIDs from the shared compressed history
+     - Shallow-wide tree layout plus tree FlashAttention (history computed once, gradients from all branches)
+     - Tree-structured KV cache extending history sharing to constrained decoding
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found.
+     - **Novelty: 8/10** — tree-structured SFT that amortizes expensive history encoding across multiple targets is a neat efficiency idea.
+     - **Fairness: 2/10** — not addressed.
+     - **Robustness: 7/10** — public benchmarks show quality gains plus substantial training/decoding efficiency improvements.
+     - **Impact: 7/10** — from Georgia Tech; tackles the input/output asymmetry of LLM-based rec SFT.
+
+5. **Statistical Detection of Positional Bias in LLM-Based Recommender Systems: Methodologies and Empirical Evidence**
+   * Affiliation: University of Granada (Spain) — *(Carlos Pelaez-Gonzalez, Francisco Herrera, Andres Herrera-Poyatos)*
+   * Link: [arxiv.org/abs/2610.37962](https://arxiv.org/abs/2610.37962)
+   * Venue: arXiv preprint (cs.IR; cs.AI)
+   * TL;DR: Studies positional bias in top-1 / single-turn LLM-based RS (RAG) - the recommended item's dependence on candidate order in the prompt - and proposes POB-ICM (contingency-matrix + Chi-square) and POB-UNBP (uniformity null model, permutation evaluation, stochastic decoding with guarantees); both reject positional independence in SOTA models and motivate auditing controls (order randomization, standardized prompting).
+   * Key techniques:
+     - POB-ICM: contingency-matrix analysis plus Chi-square independence testing
+     - POB-UNBP: uniformity null model under permutation, sample-efficient, stochastic decoding with formal statistical guarantees
+     - Controlled RAG testbed: real product catalog, fixed template, 2000 queries x 20 permutations = 40,000 instances
+     - Three metrics: permutation sensitivity, positional bias, strong positional bias
+     - Robustness analysis across candidate-set size and decoding temperature
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — abstract states source code is publicly released, but no verifiable public repository URL was located in this pass (treated as not-open until a repo is confirmed).
+     - **Novelty: 8/10** — rigorous statistical detection of prompt-order positional bias in LLM-RS with formal guarantees.
+     - **Fairness: 8/10** — directly measures and quantifies a positional (order) bias that undermines fairness/robustness of LLM recommenders.
+     - **Robustness: 8/10** — 40k-instance controlled study with robustness across candidate-set size and temperature.
+     - **Impact: 7/10** — from University of Granada; establishes positional bias as a measurable, reproducible property and motivates governance/auditing.
+
+---
 ### Papers October 29
 
 *Thursday, October 29, 2026. The live arXiv cs.IR window (announced Oct 27-29, the freshest available after the skipped Oct 28 run) surfaced 8 strictly on-topic generative-recommendation papers: REGER / 2610.37584, LESSRec / 2610.37286, AutoRSE / 2610.37228, KL-MOPD / 2610.36973, PailitaoMMSearch2.0 / 2610.36958, DARTS / 2610.36954, Refiner / 2610.36890, API / 2610.36763. 2 are open-source (AutoRSE / UESTC+NUS, 6/10; KL-MOPD / Zhejiang U + Alibaba, 7/10). By Opensource count 230 -> 232. Mindmap 30-cap held (+AutoRSE, +KL-MOPD; -MuSID-KD, -ReMaRk). A same-day follow-up pass adds 6 more on-topic papers (items 9-14): 2 from the live cs.IR window (LCM-Promo / 2610.37570, Compote / 2610.37005) and 4 from the 3-month keyword pool (JevRec / 2610.36937, PinGER / 2610.33435, RPSD / 2610.37281, Decision-Native / 2610.34124); all 6 are O0, so By Opensource count (232) and the mindmap are unchanged.*
@@ -1006,115 +1097,6 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
-### Papers October 19
-
-*Monday, October 19, 2026. The live arXiv cs.IR recent-submission window (announced Oct 14-19) surfaced 6 on-topic generative-recommendation papers that were new to the README (verified not already indexed); all drawn from the recent announcement batch (submitted Oct 12-16). 4 are open-source (ReRankID / Google & University of Toronto, 7/10; QD-Rec / Sakana AI, 6/10; RecSoup / Renmin University of China, 6/10; MMWave / Nanyang Technological University, 6/10). Total: 6 papers (4 opensource). By Opensource count 222 -> 226.*
-
-1. **Reasoning Reranking with Semantic IDs as the Sole Item Representation (ReRankID)**
-   * Affiliation: Google / University of Toronto — *(Zhenwei Tang, Jintao Liu, Di Bai, Xidong Wu, Xinwu Cheng)*
-   * Link: [arxiv.org/abs/2610.22797](https://arxiv.org/abs/2610.22797)
-   * Venue: arXiv preprint, October 2026 (cs.IR, cs.CL, cs.LG; submitted 16 Oct 2026)
-   * TL;DR: ReRankID builds a controlled testbed where LLM rerankers must reason and rerank a candidate slate shown only as Semantic IDs (no item text), and shows post-training (SFT, rejection-sampled self-training, on-policy distillation, verifier-based RL) is required to elicit real ranking behavior from SIDs; an 8B model trained with a graded ranking reward matches text-reading LLM rerankers whose prompts are ~20x longer.
-   * Key techniques:
-     - SID-only reranking testbed: history + slate rendered only as SIDs, with rendering, history length, and slate size varied one at a time
-     - Diagnosis: base models copy the input order instead of reranking, and readable metadata does not repair the failure
-     - Post-training methods compared: SFT, rejection-sampled self-training (RFT), on-policy distillation (OPD), and RL with verifiable rewards (RLVR)
-     - 8B RLVR model matches strong text-reading LLM rerankers at ~20x shorter prompts and ranks above random with no history at all
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — Code released (github.com/lilv98/ReRankID) plus a Hugging Face dataset (bench/SFT/RFT/OPD/RLVR data and per-user outputs); Apache-2.0; thorough data+code release, but brand-new (0 stars) and prompts/rationales are in Chinese.
-     - **Novelty: 8/10** — Isolates the "rank from SIDs alone" problem and shows RLVR-style post-training is what elicits it; a clean controlled study of SID-only reranking.
-     - **Fairness: 0/10** — Not addressed.
-     - **Robustness: 8/10** — Controlled sweeps over history length, slate size, and SID rendering; 8B vs 1.7B; paired rationale audit.
-     - **Impact: 8/10** — Directly relevant to generative recommenders that use SIDs (e.g., OpenOneRec); shows SID tokens carry behavioral signal usable for reranking.
-
-2. **QD-Rec: Open-Ended Evolution of Recommendations via Quality-Diversity**
-   * Affiliation: Sakana AI — *(Takashi Ishida, Taro Makino, Issa Sugiura)*
-   * Link: [arxiv.org/abs/2610.23470](https://arxiv.org/abs/2610.23470)
-   * Venue: arXiv preprint, October 2026 (cs.IR, cs.AI, cs.LG, cs.NE; submitted 16 Oct 2026)
-   * TL;DR: QD-Rec extends open-ended search (foundation-model-driven discovery) to recommendation for high-stakes decision-making, formalizing open-ended recommendation as building a diverse, high-quality archive of item-hypothesis pairs selected by a contextual bandit and generated by a foundation model from prior stepping stones.
-   * Key techniques:
-     - Quality-Diversity formulation: each recommendation is an item together with a natural-language hypothesis (why it fits the decision maker)
-     - Contextual bandit selects items; foundation model generates hypotheses from an archive of earlier ones kept as stepping stones
-     - Archive admission: a new item-hypothesis enters if it is novel or better than its nearest neighbor
-     - Evaluated on M&A, customer targeting, and paper/book recommendation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — Code released (github.com/SakanaAI/QD-Rec, Sakana AI official repo), but stars/license could not be confirmed via the GitHub API at integration time; reference implementation.
-     - **Novelty: 8/10** — Maps open-ended/quality-diversity search to recommendation and reframes rec as archive-building over reasons rather than a single ranked list.
-     - **Fairness: 0/10** — Not addressed.
-     - **Robustness: 7/10** — Across three domains (M&A, customer targeting, paper/book rec) it gives the highest mean quality and largest archive; baselines are limited.
-     - **Impact: 7/10** — An interesting paradigm for high-stakes decision recommendation; connects foundation-model open-endedness to RecSys.
-
-3. **RecSoup: Efficient Model Merging Approach for Controllable Multi-Objective Recommendation**
-   * Affiliation: Renmin University of China — *(Zidong Jia, Guofu Xie, Xiao Zhang)*
-   * Link: [arxiv.org/abs/2610.21220](https://arxiv.org/abs/2610.21220)
-   * Venue: CIKM 2026, October 2026 (cs.IR, cs.AI; submitted 15 Oct 2026)
-   * TL;DR: RecSoup does Controllable Multi-Objective Recommendation (CMOR) via model merging: it prunes to reduce cross-objective interference and then adaptively merges objective-specific models with a learnable preference-to-coefficient map, enabling dynamic trade-off control at inference with 165-228x faster latency than parameter-generation approaches.
-   * Key techniques:
-     - Two-stage CMOR via specialized model merging (reuse objective-specific models by parameter combination)
-     - Pruning strategy that jointly considers objective-specific importance and cross-objective relevance to mitigate parameter interference
-     - Learnable preference-to-coefficient mapping for dynamic trade-off control at inference (no joint retraining, no generative module)
-     - Theoretical proof that it navigates the full Pareto front without smoothness constraints
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — Code released (github.com/35798642/RECSOUP) for this CIKM 2026 paper, but it is a personal repo with no license file and 1 star; code available though modestly maintained.
-     - **Novelty: 7/10** — Applies model merging to CMOR and addresses the missing shared linear regime / cross-objective interference; with a theoretical Pareto-front claim.
-     - **Fairness: 0/10** — Not addressed.
-     - **Robustness: 7/10** — Multiple benchmarks; improved Pareto-front quality and controllability; compared against parameter-generation approaches.
-     - **Impact: 7/10** — Practical CMOR with large inference-speed gains; relevant to industrial multi-objective recommendation.
-
-4. **Tackling the Modality Inhibitance Effect with Wavelet-based Modality Integration in Multi-modal Recommendation (MMWave)**
-   * Affiliation: Nanyang Technological University, Singapore — *(Rongqing Kenneth Ong, Andy W. H. Khong)*
-   * Link: [arxiv.org/abs/2610.16229](https://arxiv.org/abs/2610.16229)
-   * Venue: IEEE TKDE 2026, October 2026 (cs.IR, cs.MM; submitted 12 Oct 2026)
-   * TL;DR: MMWave identifies the "modality inhibitance effect" - a performance drop when multi-modal recommenders move from dual- to tri-modal - and proposes a multi-scale wavelet recommender that extracts non-redundant modality features via wavelet decomposition, plus a structure-aware graph module and an adaptive modality regulator.
-   * Key techniques:
-     - Modality inhibitance effect: the newly added modality introduces modal-specific contamination and excessive redundancy, degrading existing MRSs
-     - Multi-scale wavelet (MMWave) decomposition (time & frequency) to keep only essential, non-redundant modality features
-     - Structure-aware multi-modal graph learning module capturing high-order latent item structure
-     - Adaptive modality regulator with a cross-weight integration strategy
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — Code released (github.com/kennethorq/MMWave) for this IEEE TKDE 2026 paper, but no license file and 1 star; code available though modestly maintained.
-     - **Novelty: 7/10** — Names and addresses the modality inhibitance effect; wavelet-based multi-scale integration for multi-modal recommendation.
-     - **Fairness: 0/10** — Not addressed.
-     - **Robustness: 7/10** — Four real-world datasets; component ablations.
-     - **Impact: 6/10** — A solid multi-modal recommendation contribution; IEEE TKDE.
-
-5. **Bridging the Topological Divide: Dual-Branch Graph Distillation with Semantic Priors for Robust Cold-Start Recommendation (DualGCN)**
-   * Affiliation: The Hong Kong University of Science and Technology (Guangzhou) — *(Yuanfeng Qiu)*
-   * Link: [arxiv.org/abs/2610.19578](https://arxiv.org/abs/2610.19578)
-   * Venue: arXiv preprint, October 2026 (cs.IR, cs.LG; submitted 14 Oct 2026)
-   * TL;DR: DualGCN is a dual-branch graph knowledge-distillation framework for strict cold-start recommendation: a teacher anchors item representations with a topology-smoothed semantic prior, and a semantic student branch aligns features to the collaborative space via residual mapping and a magnitude-agnostic cosine distillation objective, plus dynamic norm reconstruction for global-retrieval calibration.
-   * Key techniques:
-     - Decoupled two-stage training: a robust collaborative teacher with a topology-smoothed semantic prior, then a semantic student branch
-     - Residual mapping mechanism + magnitude-agnostic cosine distillation to align cold-start nodes without disrupting collaborative signals
-     - Dynamic norm reconstruction to calibrate the physical scales of novel vs warm items during global retrieval
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code link in the arXiv abstract/comments; 0/10.
-     - **Novelty: 7/10** — An asymmetric dual-branch distillation that decouples topology from semantics for strict cold-start.
-     - **Fairness: 0/10** — Not addressed.
-     - **Robustness: 6/10** — Three real-world benchmarks; but no error bars/significance tests and reviewers flag a possible PCA data-leakage risk that needs clarification.
-     - **Impact: 6/10** — Addresses a real cold-start representation collapse; credible but the leakage concern should be cleared.
-
-6. **LSNR: Learned Sparse News Recommendations with Attentive User Modeling**
-   * Affiliation: University of Amsterdam — *(David Vos, Andrew Yates, Maarten de Rijke)*
-   * Link: [arxiv.org/abs/2610.23510](https://arxiv.org/abs/2610.23510)
-   * Venue: SIGIR-AP 2026, October 2026 (cs.IR; submitted 16 Oct 2026)
-   * TL;DR: LSNR is a learned sparse approach for news recommendation that encodes each article independently and builds a sparse user vector via attention-based weighting of per-article sparse representations plus a dense-projected expansion, overcoming the concatenation/truncation bottlenecks of STAR and beating dense recommenders in short-history settings.
-   * Key techniques:
-     - Learned sparse representation per article (each article encoded independently)
-     - Attention-based aggregation of per-article sparse representations into a sparse user vector, plus a dense-projected expansion at the user level
-     - Serves from an index about an order of magnitude smaller than an uncompressed dense baseline
-     - Evaluated on the MIND and EBNeRD datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — No public code mentioned (SIGIR-AP 2026); 0/10.
-     - **Novelty: 7/10** — Attention-based learned sparse user modeling for news; addresses the concatenation and context-window truncation bottlenecks of existing learned-sparse recs.
-     - **Fairness: 0/10** — Not addressed.
-     - **Robustness: 7/10** — MIND + EBNeRD; ablation of the user encoder; gains hold even in short-history settings.
-     - **Impact: 7/10** — A practical learned-sparse news recommendation method; competitive with dense recommenders and better under short history.
-
----
-
-
-
 ## Papers Classic Must Read
 
 
@@ -1544,6 +1526,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | MuSID-KD: Multigranularity Knowledge Distillation for Generative Recommendation with Semantic IDs (MuSID-KD) — East China Normal University, arXiv 2610.35218 |
 | 6/10 | PAPA: Online Personalized Active Preference Alignment (PAPA) |
 | 6/10 | Personalization Matters: Long-Horizon Conversation Agent with User-Centric Information in Online Shopping Interactions (Personalization Matters) |
+| 7/10 | PFA: Attention Can Be Progressively Focused in Long-Sequence Generative Recommendation (PFA) — [anonymous.4open.science/r/PFA-review-088D](https://anonymous.4open.science/r/PFA-review-088D) |
 | 6/10 | PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems (PsyBer-Agent) — Xi'an Jiaotong-Liverpool University / University of Liverpool / Alibaba Group — [anonymous.4open.science/r/CC66F](https://anonymous.4open.science/r/CC66F/) |
 | 6/10 | QD-Rec: Open-Ended Evolution of Recommendations via Quality-Diversity (QD-Rec) — Sakana AI — [github.com/SakanaAI/QD-Rec](https://github.com/SakanaAI/QD-Rec) |
 | 6/10 | Recommender System as Slow and Fast Thinkers (DS-Frame) |
@@ -1597,7 +1580,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 232 papers as of October 29.
+**Count:** 233 papers as of October 30.
 
 ---
 ## By Keyword
@@ -1753,6 +1736,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - From Item Scores to Semantic Tokens: Test-Time Collaborative Adaptation for Generative Recommendation (TCBSA) — Tencent, arXiv 2610.32098
 
 - PailitaoMMSearch2.0: Scaling Generative Retrieval to Unified End-to-End Multimodal Search (PailitaoMMSearch2.0) — Alibaba (Taobao), arXiv 2610.36958
+
+- PFA: Attention Can Be Progressively Focused in Long-Sequence Generative Recommendation (PFA) — Zhejiang University / Alibaba Group, arXiv 2610.39273
+- GR4AD-X: Towards Reliable, Scalable, and Value-Aligned Generative Recommendation for Large-Scale Advertising (GR4AD-X) — Kuaishou, arXiv 2610.38378
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
 - Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation (GESE) — Baidu (GSPO)

@@ -111,6 +111,7 @@
 - OneLA: Scaling Linear-Attention Decoding to Large Beams in Generative Recommendation (OneLA)
 - UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
 
+- PFA: Attention Can Be Progressively Focused in Long-Sequence Generative Recommendation (PFA) — Zhejiang University / Alibaba Group, arXiv 2610.39273
 ### CTR Prediction
 - FineSID: Progressive Learning from Content to Relevance to Personalization for CTR Prediction (FineSID) — Alibaba, arXiv 2610.29138
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -466,6 +467,7 @@
 - PR-entmax: Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective (PR-entmax) — Sber AI Lab / Lomonosov MSU, CIKM 2026 — arXiv 2610.17823
 - FAIRGate: Agentic Runtime Policy Selection and Verified Repair for Fairer Recommendation Delivery (FAIRGate) — University of Massachusetts Boston, arXiv 2610.30359
 
+- Statistical Detection of Positional Bias in LLM-Based Recommender Systems (POB) — University of Granada, arXiv 2610.37962
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 
@@ -663,6 +665,10 @@
 
 - From Scores to Safe Sets: Exact Safety-Constrained Decoding for Medication Recommendation (SafeSets) — Optum, arXiv 2610.29228
 
+- RoFiGR: Coarse Routing, Fine Refinement via Level-Adaptive Distillation in Multimodal Generative Recommendation (RoFiGR) — Beijing University of Posts and Telecommunications / Kuaishou, arXiv 2610.39470
+- PFA: Attention Can Be Progressively Focused in Long-Sequence Generative Recommendation (PFA) — Zhejiang University / Alibaba Group, arXiv 2610.39273
+- GR4AD-X: Towards Reliable, Scalable, and Value-Aligned Generative Recommendation for Large-Scale Advertising (GR4AD-X) — Kuaishou, arXiv 2610.38378
+- Merge and Branch: Efficient Tree-Structured Supervised Fine-Tuning of LLMs for Recommendation (Merge and Branch) — Georgia Institute of Technology, arXiv 2610.37973
 ### Generative Retrieval / Ranking
 - PinGER: Token-Efficient Generative Retrieval with Semantic IDs (PinGER) — Pinterest, arXiv 2610.33435 [deployed in Related Pins]
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -1059,6 +1065,7 @@
 - PailitaoMMSearch2.0: Scaling Generative Retrieval to Unified End-to-End Multimodal Search (PailitaoMMSearch2.0) — Alibaba (Taobao), arXiv 2610.36958
 - Latent Residual Reasoning for Ranking in Generative Recommendation (Refiner) — USTC / Meituan / Renmin U / HKPolyU, arXiv 2610.36890
 
+- GR4AD-X: Towards Reliable, Scalable, and Value-Aligned Generative Recommendation for Large-Scale Advertising (GR4AD-X) — Kuaishou, arXiv 2610.38378
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1386,6 +1393,8 @@
 - OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models (OneLatent) — Kuaishou Technology, arXiv 2610.30675
 - BGAFlow: Bezier-Guided Adaptive Flow for Cross-domain Sequential Recommendation (BGAFlow) — Anhui University, arXiv 2610.30825
 
+- Merge and Branch: Efficient Tree-Structured Supervised Fine-Tuning of LLMs for Recommendation (Merge and Branch) — Georgia Institute of Technology, arXiv 2610.37973
+- Statistical Detection of Positional Bias in LLM-Based Recommender Systems (POB) — University of Granada, arXiv 2610.37962
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1576,6 +1585,7 @@
 - OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation (OT-FlowRec) — Nanjing University of Science and Technology, arXiv 2610.16038
 - MMWave: Tackling the Modality Inhibitance Effect with Wavelet-based Modality Integration in Multi-modal Recommendation (MMWave) — NTU, IEEE TKDE 2026- PailitaoMMSearch2.0: Scaling Generative Retrieval to Unified End-to-End Multimodal Search (PailitaoMMSearch2.0) — Alibaba (Taobao), arXiv 2610.36958
 
+- RoFiGR: Coarse Routing, Fine Refinement via Level-Adaptive Distillation in Multimodal Generative Recommendation (RoFiGR) — Beijing University of Posts and Telecommunications / Kuaishou, arXiv 2610.39470
 ### Optimizer
 - MuonRec
 
