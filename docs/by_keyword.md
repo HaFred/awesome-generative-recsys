@@ -217,6 +217,11 @@
 - JobCCC: A Constraint-Aware Conversational Job Recommendation Benchmark and Method (JobCCC) - East West University / UC San Diego, arXiv 2610.05787 [opensource]
 - SafeCRS: Personalized Safety Alignment for LLM-Based Conversational Recommender Systems (SafeCRS) — UIC / UIUC / Amazon, KDD 2026 — arXiv 2603.03536 [opensource]
 - RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego — arXiv 2604.04457 [opensource]
+- LightCRS: Lightweight Multi-Domain Conversational Recommendation System (LightCRS) — University of Sydney / Nankai University, arXiv 2610.26948
+- SimInter: Evidence-Grounded User Simulation with Interview-Based Profile Enrichment for Conversational Recommender Systems (SimInter) — University of Tehran, arXiv 2610.18308
+- Multi-Modal Semantic Expansion with Constrained LLM Reranking for Conversational Music Recommendation — NIT Kurukshetra / Queen Mary University of London, arXiv 2608.23484
+- LLM-as-a-Judge for Evaluating System Responses in Conversational Music Recommendation — KAIST / Spotify, arXiv 2607.25640
+- Two Views, One Voice: Evidence-Grounded Conversational Music Recommendation — Naver / Samsung, arXiv 2607.24846
 
 ### Cross-Domain
 - ATLAS: Learning to Recommend Across Unseen Domains (ATLAS) — Sony Research India, arXiv 2608.03899
@@ -387,6 +392,8 @@
 
 - UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents (UserArena) — Leiden University / Renmin University of China / Alibaba Group / Institute of Computing Technology, CAS, arXiv 2610.30932 [opensource]
 - AutoRSE: Evaluating LLM Agents as Recommendation Engineers for Self-Evolving Recommender Systems (AutoRSE) — USTC / NUS, arXiv 2610.37228 [opensource]
+- SimInter: Evidence-Grounded User Simulation with Interview-Based Profile Enrichment for Conversational Recommender Systems (SimInter) — University of Tehran, arXiv 2610.18308
+- LLM-as-a-Judge for Evaluating System Responses in Conversational Music Recommendation — KAIST / Spotify, arXiv 2607.25640
 
 ### Fairness
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
@@ -796,6 +803,7 @@
 - When Diffusion Recommenders Stop Sampling: Preserving Generative Diversity (DARTS) — ISIR, Sorbonne Université, arXiv 2610.36954
 - Latent Residual Reasoning for Ranking in Generative Recommendation (Refiner) — USTC / Meituan / Renmin U / HKPolyU, arXiv 2610.36890
 - The Vocabulary Is Already Here: Adapting Pretrained Interpretable Features for Generative Recommendation (API) — Central South University / HKUST(GZ) / HKPolyU / QMUL / Microsoft, arXiv 2610.36763
+- QueryAgent-R1: Bridging Query Generation and Product Retrieval for E-commerce Query Recommendation (QueryAgent-R1) — Alibaba International Digital Commerce Group, arXiv 2606.05671
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -1066,6 +1074,9 @@
 - Latent Residual Reasoning for Ranking in Generative Recommendation (Refiner) — USTC / Meituan / Renmin U / HKPolyU, arXiv 2610.36890
 
 - GR4AD-X: Towards Reliable, Scalable, and Value-Aligned Generative Recommendation for Large-Scale Advertising (GR4AD-X) — Kuaishou, arXiv 2610.38378
+- QueryAgent-R1: Bridging Query Generation and Product Retrieval for E-commerce Query Recommendation (QueryAgent-R1) — Alibaba International Digital Commerce Group, arXiv 2606.05671
+- NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model (NEXT) — Meta Platforms, arXiv 2607.24789
+
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
 - GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval (GRACE)
@@ -1143,6 +1154,7 @@
 - From Prompting to Behavioral Alignment: Personalized LLM Judges for Recommendation Evaluation
 
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
+- LLM-as-a-Judge for Evaluating System Responses in Conversational Music Recommendation — KAIST / Spotify, arXiv 2607.25640
 
 ### LLM-based Recommendation
 - LCM-Promo: An LLM-Based Uplift Model for Promotion Allocation (LCM-Promo) — Prosus / iFood, arXiv 2610.37570
@@ -1395,6 +1407,10 @@
 
 - Merge and Branch: Efficient Tree-Structured Supervised Fine-Tuning of LLMs for Recommendation (Merge and Branch) — Georgia Institute of Technology, arXiv 2610.37973
 - Statistical Detection of Positional Bias in LLM-Based Recommender Systems (POB) — University of Granada, arXiv 2610.37962
+- SimInter: Evidence-Grounded User Simulation with Interview-Based Profile Enrichment for Conversational Recommender Systems (SimInter) — University of Tehran, arXiv 2610.18308
+- NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model (NEXT) — Meta Platforms, arXiv 2607.24789
+- QueryAgent-R1: Bridging Query Generation and Product Retrieval for E-commerce Query Recommendation (QueryAgent-R1) — Alibaba International Digital Commerce Group, arXiv 2606.05671
+
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1586,6 +1602,11 @@
 - MMWave: Tackling the Modality Inhibitance Effect with Wavelet-based Modality Integration in Multi-modal Recommendation (MMWave) — NTU, IEEE TKDE 2026- PailitaoMMSearch2.0: Scaling Generative Retrieval to Unified End-to-End Multimodal Search (PailitaoMMSearch2.0) — Alibaba (Taobao), arXiv 2610.36958
 
 - RoFiGR: Coarse Routing, Fine Refinement via Level-Adaptive Distillation in Multimodal Generative Recommendation (RoFiGR) — Beijing University of Posts and Telecommunications / Kuaishou, arXiv 2610.39470
+- LightCRS: Lightweight Multi-Domain Conversational Recommendation System (LightCRS) — University of Sydney / Nankai University, arXiv 2610.26948
+- Multi-Modal Semantic Expansion with Constrained LLM Reranking for Conversational Music Recommendation — NIT Kurukshetra / Queen Mary University of London, arXiv 2608.23484
+- Two Views, One Voice: Evidence-Grounded Conversational Music Recommendation — Naver / Samsung, arXiv 2607.24846
+- NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model (NEXT) — Meta Platforms, arXiv 2607.24789
+
 ### Optimizer
 - MuonRec
 
@@ -1699,6 +1720,7 @@
 
 - OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models (OneLatent) — Kuaishou Technology, arXiv 2610.30675
 - Latent Residual Reasoning for Ranking in Generative Recommendation (Refiner) — USTC / Meituan / Renmin U / HKPolyU, arXiv 2610.36890
+- NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model (NEXT) — Meta Platforms, arXiv 2607.24789
 
 ### Reinforcement Learning
 - FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
