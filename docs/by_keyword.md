@@ -79,6 +79,8 @@
 - UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents (UserArena) — Leiden University / Renmin University of China / Alibaba Group / Institute of Computing Technology, CAS, arXiv 2610.30932 [opensource]
 - AutoRSE: Evaluating LLM Agents as Recommendation Engineers for Self-Evolving Recommender Systems (AutoRSE) — University of Science and Technology of China / National University of Singapore, arXiv 2610.37228 [opensource]
 
+- Try Before You Evolve: Ranking-Scored Trials for Recursive Self-Improvement of Recommender Systems (RecRSI-TBYE) — University of Science and Technology of China, arXiv 2610.39352
+
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
 - Generative Recommenders Forget the Long Tail: Restoring Memorization in Retrieval and Ranking (CAPE) — USTC & Ant Group, arXiv 2610.29298
@@ -1993,6 +1995,9 @@
 - REGER: Modeling inter-item Relations with Semantic IDs for Generative Recommendation (REGER) — University of Electronic Science and Technology of China, arXiv 2610.37584
 - LESSRec: Level-Specific History Modeling for Semantic ID-Based Recommendation (LESSRec) — Chongqing University / Griffith University, arXiv 2610.37286
 - The Vocabulary Is Already Here: Adapting Pretrained Interpretable Features for Generative Recommendation (API) — Central South University / HKUST(GZ) / HKPolyU / QMUL / Microsoft, arXiv 2610.36763
+
+- Distribution-Level Contrastive Supervision for Generative Recommendation (SODA) — University of Science and Technology of China / Upwork, RecSys 2026 [opensource] — arXiv 2603.00700
+- Unleash the Potential of Long Semantic IDs for Generative Recommendation (ACERec) — Southern University of Science and Technology / Xi'an Jiaotong University / Nanjing University, arXiv 2602.13573
 
 ### Security / Adversarial
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073

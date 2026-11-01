@@ -54,13 +54,13 @@ mindmap
         Eval4DiRec -- Qilu UoT / UTS / Tongji
       Efficient Decoding
         STATIC -- Google
-        Octen-WebGR -- Octen AI
         PFA -- Zhejiang U / Alibaba
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
         KL-MOPD -- Zhejiang U / Alibaba
+        SODA -- USTC / Upwork
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -89,6 +89,95 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers November 01
+
+*Sunday, November 1, 2026. The live arXiv cs.IR listing for Nov 1 (a Sunday — arXiv announces Mon–Fri) carried no new on-topic generative-recommendation preprints, so per the fallback rule papers were drawn from the last-3-month keyword pool. 5 genuinely-new on-topic papers were verified absent from README, the docs indexes, AND the monthly archive. 1 is open-source (SODA / USTC & Upwork, 7/10). By Opensource count 233 -> 234. Mindmap updated (added SODA; dropped Octen-WebGR to hold the 30-cap).*
+
+1. **Unified Generative Ranking for Heterogeneous E-commerce Recommendation**
+   * Affiliation: Alibaba Group, Hangzhou, China — *(Zonghe Shao, Huabin Chen, Sitong Lu, Fangmei Zhu, Yingcai Ma, Ge Fan, Jinguo Gao, Wei Shi, Yanfang Liu, Huiping Chu)*
+   * Link: [arxiv.org/abs/2610.39426](https://arxiv.org/abs/2610.39426)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 29 Oct 2026)
+   * TL;DR: UGR performs list-wise generative ranking over the full request-level multi-business heterogeneous candidate set (~1000 candidates in production) and directly generates multi-business ranking lists via candidate-aware autoregressive decoding; beyond exposure-sequence imitation it adds weighted SFT + permutation preference optimization and a training-time ad-debiasing tower while preserving GSP pricing at serving.
+   * Key techniques:
+     - Candidate-aware autoregressive decoding over ~1000 heterogeneous multi-business candidates
+     - Weighted supervised fine-tuning that leverages post-exposure feedback
+     - Permutation preference optimization from feedback-derived permutation preferences
+     - Training-time advertising debiasing tower + serving-time ad-value modeling (GSP-preserving)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (Alibaba industrial)
+     - **Novelty: 7/10** — generative ranking over full heterogeneous multi-business candidate sets with permutation preference optimization; practical but builds on generative-ranking + preference-optimization lines
+     - **Fairness: 2/10** — not addressed (ad-debiasing tower targets ad-exposure bias, not demographic fairness)
+     - **Robustness: 7/10** — offline ranking-quality gains plus online A/B on Taobao Guess You Like (+1.76% IPV, +3.29% volume, +2.10% GMV)
+     - **Impact: 9/10** — deployed A/B on Taobao at scale with real GMV lift; strong industrial relevance
+
+2. **R2QRec: Learning Recommendation Queries from Retrieval Feedback**
+   * Affiliation: Kuaishou Technology, Beijing, China / Hong Kong Baptist University — *(Weixin Chen, Shuchang Liu, Hailan Yang, Yuhan Zhao, Li Kang, Li Chen, et al.; 16 authors)*
+   * Link: [arxiv.org/abs/2610.39984](https://arxiv.org/abs/2610.39984)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 29 Oct 2026)
+   * TL;DR: R2QRec learns to generate recommendation queries from item interactions without query annotations: retrieval verification selects generated expressions that recover observed items as SFT targets, then policy refinement scores query sets by the observed item's rank in their fused list (log-rank feedback, KL penalty); only the query generator is trained.
+   * Key techniques:
+     - Fixed retriever + item index; only the query generator is trained (no learned reward model, no query annotations)
+     - Retrieval verification: keep generated expressions that recover observed items as SFT targets
+     - Policy refinement: rank-based (log-rank) feedback beyond the cutoff + KL penalty vs the supervised reference
+     - Reciprocal Rank Fusion (RRF) of query-set rankings; LoRA adapters
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (Kuaishou industrial)
+     - **Novelty: 8/10** — clean separation of query-expression learning from item location; retrieval verification + log-rank policy refinement with KL constraint, no annotations/reward model
+     - **Fairness: 2/10** — not addressed
+     - **Robustness: 7/10** — SOTA on three public datasets; generalization across generators and domains
+     - **Impact: 7/10** — from Kuaishou; query-based recommendation is industrially relevant
+
+3. **Try Before You Evolve: Ranking-Scored Trials for Recursive Self-Improvement of Recommender Systems**
+   * Affiliation: University of Science and Technology of China (USTC), Hefei, China — *(Xu Huang, Jiawei Feng, Jiancan Wu)*
+   * Link: [arxiv.org/abs/2610.39352](https://arxiv.org/abs/2610.39352)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 29 Oct 2026)
+   * TL;DR: RecRSI (Try-Before-You-Evolve) tackles delayed/unreliable ranking feedback in LLM-agent recursive self-improvement of recommenders: it generates diverse candidate edits and selects one for full retraining using early ranking feedback — each candidate gets a short trial (first steps of training) scored by full-ranking NDCG@10 on held-out probe users.
+   * Key techniques:
+     - LLM-agent proposes diverse candidate recipe edits from a diagnosis of the current model
+     - Ranking-scored short trials: first training steps scored by full-ranking NDCG@10 on probe users
+     - Selects the best candidate for full retraining; same retraining budget as baselines
+     - Evaluated on SASRec & HSTU over three datasets (CDs, Office, LastFM)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found (arXiv lists no repository)
+     - **Novelty: 8/10** — "try before you evolve" ranking-scored trials directly address the delayed/unreliable-feedback bottleneck in recommender RSI
+     - **Fairness: 3/10** — not a focus; RSI loops could amplify bias, unaddressed
+     - **Robustness: 7/10** — matches/exceeds baselines with the same retraining budget; on both Amazon datasets reaches in 1 round what baselines need 5
+     - **Impact: 8/10** — novel RSI paradigm from USTC (strong recsys group); addresses a real bottleneck
+
+4. **Distribution-Level Contrastive Supervision for Generative Recommendation**
+   * Affiliation: University of Science and Technology of China, Hefei, China / Upwork, Seattle, USA — *(Ziqi Xue, Yimeng Bai, Shuai Zhu, Jialei Li, Dingxian Wang, Frank Yang, Andrew Rabinovich, Pablo N. Mendes, et al.)*
+   * Link: [arxiv.org/abs/2603.00700](https://arxiv.org/abs/2603.00700)
+   * Venue: ACM RecSys 2026 (short paper); arXiv v2 Sep 2026
+   * TL;DR: SODA treats multi-level codebook probabilities as soft semantic targets and aligns recommender representations to them with a BPR-style contrastive objective (negative KL to positive, vs in-batch averaged negatives), enriching training with finer semantic cues while leaving decoding unchanged.
+   * Key techniques:
+     - Distribution-level (soft multi-level codebook) supervision instead of one-hot SID targets
+     - BPR-style contrastive alignment via negative KL divergence
+     - Plug-and-play auxiliary loss; decoding stage unchanged
+     - Applicable across diverse generative-recommendation backbones
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/freyasa/SODA](https://github.com/freyasa/SODA): official RecSys'26 code release (complete implementation)
+     - **Novelty: 8/10** — moves beyond code-level supervision to distribution-level contrastive alignment
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 7/10** — peer-reviewed RecSys'26; plug-and-play gains across backbones
+     - **Impact: 7/10** — accepted at RecSys'26 with code; broadly applicable supervision scheme
+
+5. **Unleash the Potential of Long Semantic IDs for Generative Recommendation**
+   * Affiliation: Southern University of Science and Technology / Xi'an Jiaotong University / Nanjing University — *(Ming Xia, Guoxin Ma, Zhiqin Zhou, Dongmin Huang)*
+   * Link: [arxiv.org/abs/2602.13573](https://arxiv.org/abs/2602.13573)
+   * Venue: arXiv preprint, under review (cs.IR; v2 Aug 2026)
+   * TL;DR: ACERec keeps the semantic richness of long Semantic IDs while staying efficient: an Attentive Token Merger compresses long SIDs into compact latent tokens, a dedicated Intent Token captures user intent, and a dual-granularity objective combines token-level generation with item-level intent-semantic alignment.
+   * Key techniques:
+     - Attentive Token Merger compresses long semantic IDs into compact latent tokens
+     - Dedicated Intent Token for user intent
+     - Dual-granularity objective: token-level generation + item-level intent-semantic alignment
+     - Breaks the short-ID efficiency vs long-ID expressiveness dilemma
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (under review; arXiv lists no repository)
+     - **Novelty: 9/10** — directly attacks the long-SID granularity-efficiency dilemma with a token merger + intent token + dual-granularity objective
+     - **Fairness: 2/10** — not addressed
+     - **Robustness: 8/10** — 9 real-world benchmarks, +12.92% NDCG@10 and +7.49% Recall@10 over strongest baselines
+     - **Impact: 8/10** — strong empirical gains on long semantic IDs; multi-institution
 
 ### Papers October 31
 
@@ -1033,113 +1122,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 7/10** — 5 source → 10 unseen domains with +24% average HitRate; comprehensive ablation and post-hoc analyses
      - **Impact: 7/10** — Sony Research; zero-shot cross-domain recommendation is valuable; broad baseline comparison
 
-### Papers October 21
-
-*Wednesday, October 21, 2026. The live arXiv cs.IR window (announced Oct 21, submitted Oct 18-20) surfaced 6 on-topic generative-recommendation papers that were new to the README (verified not already indexed): Evolving Semantic Indexes for GR, SPAR, EASformer, Neighborhood-Aware Unlearning for GR, Decision4Rec, SearCl. 1 is open-source (Decision4Rec / University of Bari Aldo Moro, 7/10). Total: 6 papers (1 opensource). By Opensource count 227 -> 228.*
-
-1. **Evolving Semantic Indexes for Generative Retrieval**
-   * Affiliation: Santa Clara University & Coupang — *(Jinming Nian, Jyun-Yu Jiang, Henry Tsai, Yi Fang, Zhirong Liang)*
-   * Link: [arxiv.org/abs/2610.28568](https://arxiv.org/abs/2610.28568)
-   * Venue: arXiv preprint, October 2026 (cs.AI, cs.IR, cs.LG; submitted 20 Oct 2026)
-   * TL;DR: Introduces a framework that automatically improves generative-retrieval components (SID construction, collision handling, decoding, training recipes) via LLM-driven evolutionary program search over executable GR programs, using a locally served open-weight 31B model to mutate components and a 1M-parameter proxy decoder for fast feedback; lifts Recall@1 from 55.8% to 59.3% and Recall@100 from 85.8% to 90.6% on NQ320K.
-   * Key techniques:
-     - LLM-driven evolutionary program search over executable GR components (first application of this approach to GR)
-     - Locally served open-weight 31B model mutates SID construction, collision handling, decoding, and training recipes
-     - 1M-parameter proxy decoder gives fast downstream feedback instead of retraining the 1B target generator
-     - Evaluated on NQ320K, MSMARCO300K, and a multilingual e-commerce dataset
-     - Component study showing proxy reliability depends on which component is evolved
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (no code link on arXiv; GitHub repo search returns no matching repository)
-     - **Novelty: 8/10** — first to apply LLM-driven evolutionary program search to GR component design; reframes SID/decoding/training as optimizable programs
-     - **Fairness: 0/10** — not addressed
-     - **Robustness: 7/10** — strong results across NQ320K, MSMARCO300K and multilingual e-commerce; proxy-target rank correlation rho=0.90, but gains are on retrieval (not item recommendation) and use a single generator size
-     - **Impact: 8/10** — targets the core GR/GenRec bottleneck (semantic indexes); from Santa Clara University + Coupang (industrial e-commerce relevance)
-
-2. **SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs**
-   * Affiliation: University of Electronic Science and Technology of China (UESTC) & Alibaba — *(Chunrui Zhang, Gaoyun Lin, Chang Zhou, Zheng Hu, Qiran Song, Shimin Cai, Tao Zhou)*
-   * Link: [arxiv.org/abs/2610.27898](https://arxiv.org/abs/2610.27898)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 20 Oct 2026)
-   * TL;DR: SPAR jointly improves stepwise personalization and SID construction for SID-based generative recommendation; its PATH Decoder retrieves prefix-relevant evidence from compressed long-term user histories to personalize each decoding step, while a prefix-balanced SID construction reduces branch imbalance and popularity bias.
-   * Key techniques:
-     - PATH Decoder that retrieves prefix-relevant evidence from compressed long-term user history for per-step personalization
-     - Prefix-balanced Semantic ID construction to mitigate branch-selection errors and popularity bias
-     - Stepwise (token-level) personalization during autoregressive SID decoding
-     - Joint optimization of personalization and SID structure
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (no code link on arXiv; no public repository found)
-     - **Novelty: 7/10** — combines stepwise prefix-conditioned personalization with imbalance-aware SID construction; solid but incremental over prior SID-personalization work
-     - **Fairness: 0/10** — not directly addressed (popularity-bias mitigation is structural, not demographic fairness)
-     - **Robustness: 7/10** — addresses irreversible branch errors and head-path over-selection; ablation breadth not fully visible from abstract
-     - **Impact: 7/10** — SID-based generative recommendation is a core direction; from UESTC + Alibaba (industrial relevance)
-
-3. **EASformer: Environment-Action-State Alignment for Industrial Generative Ranking**
-   * Affiliation: Beihang University — *(Bohao Li, Dinglun Cao, Pengcheng Huang, Yingda Tang, Zhiting Zhao, Yi Cao, Jilei Fu, Miao Yan, Tianying Liu, Heng Chang, Bowen Du; with Harbin Institute of Technology, Shenzhen & Independent Researchers)*
-   * Link: [arxiv.org/abs/2610.27691](https://arxiv.org/abs/2610.27691)
-   * Venue: arXiv preprint, October 2026 (cs.AI; submitted 20 Oct 2026)
-   * TL;DR: EASformer is an industrial generative-ranking model that aligns Environment-Action-State semantics to reconcile the asymmetric representations of user behavior sequences (environment context + observed action) versus candidate-side non-sequential features (no observed action), improving unified generative ranking at scale.
-   * Key techniques:
-     - Environment-Action-State (EAS) alignment to reconcile asymmetric sequence vs non-sequential (NS) feature semantics
-     - Transformer-style backbone that tokenizes user behavior sequences and NS features jointly
-     - Unified generative-ranking formulation providing a scalable interface for long histories and heterogeneous features
-     - Industrial-scale modeling of environment/candidate asymmetries
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (no code link on arXiv; no public repository found)
-     - **Novelty: 7/10** — explicit EAS disentanglement for industrial generative ranking is a clear, targeted contribution
-     - **Fairness: 0/10** — not addressed
-     - **Robustness: 7/10** — industrial framing implies scale testing, but no online A/B result stated in the abstract
-     - **Impact: 7/10** — industrial generative ranking is high-value; from Beihang University + HIT Shenzhen
-
-4. **Neighborhood-Aware Unlearning for Generative Recommendation**
-   * Affiliation: BIFOLD & TU Berlin, Germany / University of Amsterdam, The Netherlands — *(Pierre Lubitzsch, Yubao Tang, Maarten de Rijke, Sebastian Schelter)*
-   * Link: [arxiv.org/abs/2610.27232](https://arxiv.org/abs/2610.27232)
-   * Venue: arXiv preprint, October 2026 (cs.IR, cs.LG; submitted 19 Oct 2026)
-   * TL;DR: Identifies local probability redistribution as a key failure mode of unlearning in SID-based generative recommenders (an unlearning update unintentionally degrades predictions for neighbors of forgotten items' SIDs); proposes Neighborhood-Aware Unlearning (NAU) that controls probability mass assigned to forgotten items' neighborhoods, restoring spam exposure while retaining >95% of retrained utility.
-   * Key techniques:
-     - Shows unlearning effects are locally structured and hidden by global metrics in SID-based GR
-     - Neighborhood-Aware Unlearning (NAU) augments interaction-level unlearning with explicit control over neighborhood probability mass
-     - Evaluated across 3 datasets x 4 SID tokenizers
-     - Restores spam-induced exposure toward the retrained reference while retaining >95% utility and recovering neighborhood utility lost by forget-and-repair
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (no code link on arXiv; no public repository found)
-     - **Novelty: 8/10** — first to characterize local probability redistribution as an unlearning failure mode in SID-based GenRec; NAU directly controls it
-     - **Fairness: 6/10** — addresses spam removal and user deletion requests (privacy/rights), a fairness-adjacent concern, though not demographic fairness
-     - **Robustness: 8/10** — 3 datasets x 4 tokenizers, strong utility-retention and neighborhood-recovery results
-     - **Impact: 8/10** — machine unlearning in GenRec is urgent under regulation; from TU Berlin/Amsterdam (strong IR groups)
-
-5. **Decision4Rec: A Jev-Inspired Framework of Decision Models on Knowledge and Active Graphs for Multi-Agent Recommender Systems**
-   * Affiliation: University of Bari Aldo Moro, Italy — *(Marco Polignano, Het Darshan Mehta, Pasquale Lops, Ernesto William De Luca, Giovanni Semeraro; with Otto-von-Guericke University Magdeburg & Leibniz Institute for Educational Media)*
-   * Link: [arxiv.org/abs/2610.26035](https://arxiv.org/abs/2610.26035)
-   * Venue: arXiv preprint, October 2026 (cs.AI, cs.CL, cs.IR; submitted 19 Oct 2026)
-   * TL;DR: An open, modular framework that makes LLM decision models (like the commercial Jev) useful for recommendation: a knowledge graph writes scenario logs as typed statements, an agent pool proposes candidates, a residual ranker keeps the best 30, and a decision model reads them via one typed-question interface; a trained 4B decision model beats the best baseline by 25-36% NDCG@10 on sparse Amazon catalogs.
-   * Key techniques:
-     - Knowledge graph logs recommendation scenarios as short typed statements ("sold: top 10%")
-     - Pool of agents proposes candidates; a residual ranker keeps the best 30
-     - Decision model (commercial Jev / open Kev / custom-trained) reads via one interface of typed questions
-     - Fusion step combines decision-model answers with the ranker score
-     - 4B decision model trained once on real choices of three scenarios
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/marcopoli/decision4rec](https://github.com/marcopoli/decision4rec): complete Python repo with source (`decision4rec/`), `configs/`, `tests/`, `docs/`, `scripts/`, README (10.7KB), CITATION.cff, CONTRIBUTING.md, LICENSE; freshly created (Oct 16 2026), only 2 stars, reproduction not independently verified, but structure and documentation are solid
-     - **Novelty: 6/10** — applies LLM decision models to recommendation via KG + agent pool + fusion; modular but not radically new
-     - **Fairness: 0/10** — not addressed
-     - **Robustness: 6/10** — 25-36% NDCG@10 gains on sparse Amazon catalogs + dense Steam, but most gain comes from the agent pool rather than the decision model; limited datasets
-     - **Impact: 6/10** — decision-model-as-recommender is a niche but interesting angle; academic (Bari/Magdeburg)
-
-6. **Dialogue Generation for Conversational Recommendation Using User Search Interactions and Knowledge Graphs (SearCl)**
-   * Affiliation: KAIST — *(Minsung Hwang, Donggyu Yoon, Gowoon Hwang, Kwanghee Jang, Joyce Jiyoung Whang; with LG Electronics)*
-   * Link: [arxiv.org/abs/2610.25182](https://arxiv.org/abs/2610.25182)
-   * Venue: arXiv preprint, October 2026 (cs.AI; submitted 18 Oct 2026)
-   * TL;DR: SearCl automatically generates conversational recommendation dialogues grounded in real user search/click behaviors by segmenting interactions into query sessions and deriving each recommendation target from content selected after a search query, then grounding the dialogue in a knowledge graph, reducing manual dialogue construction for CRS.
-   * Key techniques:
-     - SearCl pipeline segments user interactions into query sessions
-     - Derives each recommendation target from content selected after a search query
-     - Knowledge-graph grounding of the generated dialogues
-     - Automatic CRS dialogue generation from search-click sessions
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (no code link on arXiv; no public repository found)
-     - **Novelty: 6/10** — mines real search/click sessions + KG to synthesize grounded CRS dialogues; useful data-generation method but not a new recommendation model
-     - **Fairness: 0/10** — not addressed
-     - **Robustness: 6/10** — depends on quality of mined sessions and KG grounding; needs verification of dialogue fidelity
-     - **Impact: 6/10** — CRS data generation is useful for the community; from KAIST + LG Electronics
 
 ## Papers Classic Must Read
 
@@ -1453,6 +1435,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | UniRank: Benchmarking Ranking Models for Unified Sequential Modeling and Feature Interaction |
 | 8/10 | Unleashing the Native Recommendation Potential: LLM-Based Generative Recommendation via Structured Term Identifiers (GRLM) |
 | 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro) |
+| 7/10 | Distribution-Level Contrastive Supervision for Generative Recommendation (SODA) — University of Science and Technology of China / Upwork, RecSys 2026 — [github.com/freyasa/SODA](https://github.com/freyasa/SODA) |
 | 7/10 | A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR) |
 | 7/10 | AdaM-Rec: Adaptive Modality Routing for Multimodal Recommendation (AdaM-Rec) |
 | 7/10 | Addressing Cross-Stage Decoupling of Semantic and Collaborative Signals in Generative Recommendation (SCRec) |
@@ -1624,7 +1607,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 233 papers as of October 30.
+**Count:** 234 papers as of November 01.
 
 ---
 ## By Keyword
@@ -1936,6 +1919,8 @@ See [Full keyword index](docs/by_keyword.md) for all other categories.
 - Reasoning Reranking with Semantic IDs as the Sole Item Representation (ReRankID) — Google / University of Toronto, arXiv 2610.22797
 - RPSD: Retrieval-Privileged On-Policy Self-Distillation with Optimal Transport (RPSD) — Nagoya University / Shenzhen University / Sichuan Agricultural University / Guangdong Laboratory of AI and Digital Economy / Tongji University, arXiv 2610.37281
 - IB-GRPO: Aligning LLM-based Learning Path Recommendation with Educational Objectives via Indicator-Based Group Relative Policy Optimization (IB-GRPO) — East China Normal University, arXiv 2601.14686
+- Unified Generative Ranking for Heterogeneous E-commerce Recommendation (UGR-Hetero) — Alibaba Group, arXiv 2610.39426 (permutation preference optimization + candidate-aware autoregressive decoding)
+- R2QRec: Learning Recommendation Queries from Retrieval Feedback — Kuaishou Technology / Hong Kong Baptist University, arXiv 2610.39984 (GRPO + RRF + LoRA)
 
 ## By Affiliation
 
