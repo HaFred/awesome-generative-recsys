@@ -80,6 +80,8 @@
 - AutoRSE: Evaluating LLM Agents as Recommendation Engineers for Self-Evolving Recommender Systems (AutoRSE) — University of Science and Technology of China / National University of Singapore, arXiv 2610.37228 [opensource]
 
 - Try Before You Evolve: Ranking-Scored Trials for Recursive Self-Improvement of Recommender Systems (RecRSI-TBYE) — University of Science and Technology of China, arXiv 2610.39352
+- Federated Recommender Agents (FedRecAgent) — POSTECH, arXiv 2610.39289
+
 
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -477,6 +479,8 @@
 - FAIRGate: Agentic Runtime Policy Selection and Verified Repair for Fairer Recommendation Delivery (FAIRGate) — University of Massachusetts Boston, arXiv 2610.30359
 
 - Statistical Detection of Positional Bias in LLM-Based Recommender Systems (POB) — University of Granada, arXiv 2610.37962
+- LLM Recommenders Produce Demographic Inequality Through Content Preferences — University of Zurich, arXiv 2610.41854 [opensource]
+
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
 
@@ -490,6 +494,8 @@
 - Personalized and Multi-View Representation for Federated Cold-Start Recommendation (PMFRec)
 - RegionFed: Federated Learning for Personalized Query Understanding in Heterogeneous Retail Environments (RegionFed)
 - FedHUR: Learning Hierarchical Utility-Guided Client Relations for Personalized Federated Recommendation (FedHUR)
+- Federated Recommender Agents (FedRecAgent) — POSTECH, arXiv 2610.39289
+
 
 ### Foundation Models
 - Principled Synthetic Data Enables the First Scaling Laws for LLMs in Recommendation (Scaling Laws)
@@ -678,6 +684,8 @@
 - PFA: Attention Can Be Progressively Focused in Long-Sequence Generative Recommendation (PFA) — Zhejiang University / Alibaba Group, arXiv 2610.39273
 - GR4AD-X: Towards Reliable, Scalable, and Value-Aligned Generative Recommendation for Large-Scale Advertising (GR4AD-X) — Kuaishou, arXiv 2610.38378
 - Merge and Branch: Efficient Tree-Structured Supervised Fine-Tuning of LLMs for Recommendation (Merge and Branch) — Georgia Institute of Technology, arXiv 2610.37973
+- Modeling Preference Dependencies with Directed Acyclic Graphs for Narrative-Driven Recommendation (PDG-F) — Institute of Information Engineering, CAS, arXiv 2610.37280
+
 ### Generative Retrieval / Ranking
 - PinGER: Token-Efficient Generative Retrieval with Semantic IDs (PinGER) — Pinterest, arXiv 2610.33435 [deployed in Related Pins]
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -806,6 +814,8 @@
 - Latent Residual Reasoning for Ranking in Generative Recommendation (Refiner) — USTC / Meituan / Renmin U / HKPolyU, arXiv 2610.36890
 - The Vocabulary Is Already Here: Adapting Pretrained Interpretable Features for Generative Recommendation (API) — Central South University / HKUST(GZ) / HKPolyU / QMUL / Microsoft, arXiv 2610.36763
 - QueryAgent-R1: Bridging Query Generation and Product Retrieval for E-commerce Query Recommendation (QueryAgent-R1) — Alibaba International Digital Commerce Group, arXiv 2606.05671
+- Read More, Reason Deeper: Latent Workspaces for Long-Sequence Recommendation (LWR) — Meta, arXiv 2610.39188
+
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -1412,6 +1422,9 @@
 - SimInter: Evidence-Grounded User Simulation with Interview-Based Profile Enrichment for Conversational Recommender Systems (SimInter) — University of Tehran, arXiv 2610.18308
 - NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model (NEXT) — Meta Platforms, arXiv 2607.24789
 - QueryAgent-R1: Bridging Query Generation and Product Retrieval for E-commerce Query Recommendation (QueryAgent-R1) — Alibaba International Digital Commerce Group, arXiv 2606.05671
+- LLM Recommenders Produce Demographic Inequality Through Content Preferences — University of Zurich, arXiv 2610.41854 [opensource]
+- Category-Anchored Large Language Models for Next POI Recommendation (ANCHOR) — Harbin Institute of Technology Shenzhen / City University of Hong Kong, arXiv 2610.39518
+
 
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
@@ -1723,6 +1736,8 @@
 - OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models (OneLatent) — Kuaishou Technology, arXiv 2610.30675
 - Latent Residual Reasoning for Ranking in Generative Recommendation (Refiner) — USTC / Meituan / Renmin U / HKPolyU, arXiv 2610.36890
 - NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model (NEXT) — Meta Platforms, arXiv 2607.24789
+- Modeling Preference Dependencies with Directed Acyclic Graphs for Narrative-Driven Recommendation (PDG-F) — Institute of Information Engineering, CAS, arXiv 2610.37280
+
 
 ### Reinforcement Learning
 - FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
@@ -2105,6 +2120,9 @@
 - PR-entmax: Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective (PR-entmax) — Sber AI Lab / Lomonosov MSU, CIKM 2026 — arXiv 2610.17823
 - BGAFlow: Bezier-Guided Adaptive Flow for Cross-domain Sequential Recommendation (BGAFlow) — Anhui University, arXiv 2610.30825
 - Think Harder Where It Matters: Item-Level Adaptive Recursion for Sequential Recommendation (LoopRec) — Renmin University of China, arXiv 2610.30128 [opensource]
+- Read More, Reason Deeper: Latent Workspaces for Long-Sequence Recommendation (LWR) — Meta, arXiv 2610.39188
+- Category-Anchored Large Language Models for Next POI Recommendation (ANCHOR) — Harbin Institute of Technology Shenzhen / City University of Hong Kong, arXiv 2610.39518
+
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey

@@ -40,7 +40,6 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
-        RecToolBench -- Jilin U / Squirrel AI / PolyU
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -70,6 +69,7 @@ mindmap
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
+        LLM-Demographic -- University of Zurich
 ```
 
 <div align="center">
@@ -89,6 +89,90 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers November 02
+
+*Monday, November 2, 2026. The live arXiv cs.IR listing for Nov 2 (a Monday announcement day) carried no strictly on-topic generative-recommendation preprints newer than the Oct 30 run already indexed, so per the fallback rule papers were drawn from the last-3-month keyword pool. 5 genuinely-new on-topic papers were verified absent from README, the docs indexes, AND the monthly archive. 1 is open-source (LLM Recommenders Produce Demographic Inequality / University of Zurich, 6/10). By Opensource count 234 -> 235. Mindmap updated (added LLM-Demographic under Feature Quality & Safety; dropped RecToolBench to hold the 30-leaf cap; all 3 layers retained).*
+
+1. **LLM Recommenders Produce Demographic Inequality Through Content Preferences**
+   * Affiliation: University of Zurich, Switzerland — *(Nicolò Pagan, Petter Törnberg, Christopher A. Bail, Christopher Barrie)*
+   * Link: [arxiv.org/abs/2610.41854](https://arxiv.org/abs/2610.41854)
+   * Venue: arXiv preprint, October 2026 (cs.CY; cs.SI; submitted 30 Oct 2026)
+   * TL;DR: LLM-based content recommenders surface demographic inequality through the content they surface, not through explicit demographics: a controlled experiment on 10,000 Twitter/X posts from 1,000 survey respondents with nine verified self-reported attributes shows that recommendation objectives and contextual framing systematically shift whose voices get amplified across demographic groups.
+   * Key techniques:
+     - Controlled recommendation experiment across 3 LLM providers, 6 recommendation objectives, 5 levels of contextual framing
+     - 10,000 Twitter/X posts linked to verified self-reported demographic characteristics (9 attributes)
+     - Audits demographic inequality emerging from content-preference modeling rather than explicit group membership
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/paganick/llm-recsys-twitter-yougov-PNAS](https://github.com/paganick/llm-recsys-twitter-yougov-PNAS): Python repo with README, recommendation/features/analysis/utils dirs and env files (0 stars at indexing; PNAS-linked release)
+     - **Novelty: 7/10** — reframes demographic bias in LLM recommenders as an emergent content-preference effect with a controlled multi-provider experimental design
+     - **Fairness: 9/10** — the paper's central contribution is a direct, empirical measurement of demographic inequality in LLM recs
+     - **Robustness: 7/10** — multi-provider (3), multi-objective (6), multi-framing (5) design with survey-linked ground truth
+     - **Impact: 8/10** — high relevance for auditing deployed LLM recommenders; PNAS-venue visibility
+
+2. **Category-Anchored Large Language Models for Next POI Recommendation**
+   * Affiliation: Harbin Institute of Technology, Shenzhen, China / City University of Hong Kong — *(Lexi Bai, Xiaopeng Zeng, Xun Zhou, Yuanshao Zhu, James Jianqiao Yu)*
+   * Link: [arxiv.org/abs/2610.39518](https://arxiv.org/abs/2610.39518)
+   * Venue: arXiv preprint, October 2026 (cs.AI; submitted 29 Oct 2026)
+   * TL;DR: ANCHOR addresses unreliable direct POI-identifier generation by LLMs (POIs are sparse, localized, long-tailed entities with weak NL semantics) via category-anchored prompting: it first anchors generation on venue categories, then grounds the final POI within the anchored category space for spatio-temporally consistent next-POI prediction.
+   * Key techniques:
+     - Category-anchored LLM prompting that decouples category reasoning from exact-POI decoding
+     - Textualized user trajectory encoding for LLM semantic reasoning
+     - Two-stage category-conditioned POI generation for sparse/long-tailed entities
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (arXiv lists no repository)
+     - **Novelty: 7/10** — clean fix to the POI-identifier generation unreliability via category anchoring
+     - **Fairness: 3/10** — not addressed (standard POI benchmark fairness not studied)
+     - **Robustness: 6/10** — evaluated on standard next-POI benchmarks; long-tail handling claimed but limited ablation detail
+     - **Impact: 6/10** — from HIT Shenzhen / CityU HK; practical LLM-POI direction
+
+3. **Federated Recommender Agents**
+   * Affiliation: POSTECH (Pohang University of Science and Technology), Pohang, South Korea — *(Jaehyung Lim, Woojoo Kim, Junyoung Kim, Dongha Kim, Wonbin Kweon, Hwanjo Yu)*
+   * Link: [arxiv.org/abs/2610.39289](https://arxiv.org/abs/2610.39289)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 29 Oct 2026)
+   * TL;DR: FedRecAgent formulates a federated setting where local LLM-powered recommender agents collaborate through natural-language knowledge while keeping interaction histories and personal memories local; it enables this collaboration without updating LLM parameters, tackling the central challenge of privacy-preserving cross-agent learning.
+   * Key techniques:
+     - Federated multi-agent recommendation with natural-language knowledge exchange
+     - Local interaction histories and personal memories kept private (no parameter sharing)
+     - Collaboration without fine-tuning the underlying LLM
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (arXiv lists no repository)
+     - **Novelty: 7/10** — federated formulation of LLM recommender agents with parameter-free collaboration
+     - **Fairness: 5/10** — privacy-preserving design implicitly supports user-fair data governance, but group fairness not evaluated
+     - **Robustness: 6/10** — method proposed with collaboration protocol; empirical depth on heterogeneous clients limited
+     - **Impact: 7/10** — from POSTECH (strong recsys group); addresses a real privacy bottleneck for agentic recs
+
+4. **Read More, Reason Deeper: Latent Workspaces for Long-Sequence Recommendation**
+   * Affiliation: Meta Platforms — *(Renzhi Wu, Li Sheng, Zikun Cui, Junjie Yang, Tai Guo, Keke Zhai, et al.)*
+   * Link: [arxiv.org/abs/2610.39188](https://arxiv.org/abs/2610.39188)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 29 Oct 2026)
+   * TL;DR: LWR (Latent Workspace Ranker) decouples evidence scaling from reasoning scaling for long-sequence recommendation: it keeps typed evidence in persistent banks and propagates a fixed-size candidate workspace through deeper reasoning layers, so later layers can revisit omitted evidence that one-shot selection would discard.
+   * Key techniques:
+     - Latent workspace: fixed-size persistent candidate/evidence banks across reasoning layers
+     - Decoupled evidence scaling (longer histories) from reasoning scaling (deeper interpretation)
+     - Revisit-able evidence avoiding one-shot selection's information loss
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (Meta industrial)
+     - **Novelty: 8/10** — clean decoupling of evidence vs reasoning scaling with a persistent latent workspace
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 7/10** — long-sequence benchmarks; principled motivation against coupled encoders
+     - **Impact: 8/10** — from Meta; long-sequence rec is an industrial pain point
+
+5. **Modeling Preference Dependencies with Directed Acyclic Graphs for Narrative-Driven Recommendation**
+   * Affiliation: Institute of Information Engineering, Chinese Academy of Sciences, Beijing, China / School of Cyber Security, University of Chinese Academy of Sciences / University of Melbourne / Independent Researcher — *(Mingzhe Lu, Jian Qin, Ruize Qin, Jinhao Liu, Yunpeng Li, Hang Su)*
+   * Link: [arxiv.org/abs/2610.37280](https://arxiv.org/abs/2610.37280)
+   * Venue: arXiv preprint, October 2026 (cs.IR; cs.CL; submitted 27 Oct 2026)
+   * TL;DR: PDG-F (Preference Dependency Graph Framework) treats narrative-driven recommendation as an explicit directed acyclic graph of preference dependencies, capturing how stated preferences hierarchically refine and condition one another — instead of flattening narratives into keyword bags or unconstrained generative queries.
+   * Key techniques:
+     - Directed acyclic graph (DAG) modeling of preference dependencies in free-form narratives
+     - Hierarchical refinement / contextualization of preferences as graph edges
+     - Narrative-driven recommendation framework centered on structured dependency graphs
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (arXiv lists no repository)
+     - **Novelty: 7/10** — structured DAG representation of narrative preference dependencies vs flat/generative baselines
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 6/10** — narrative benchmarks; structured-graph ablation limited
+     - **Impact: 6/10** — from IIE CAS; advances narrative-driven rec structuring
 
 ### Papers November 01
 
@@ -1027,102 +1111,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 6/10** — rigorous MIMIC-III experiments, multiple baselines, sensitivity sweep
      - **Impact: 5/10** — important for safe generative med-rec but narrow (frozen classifier, medication only)
 
----
-### Papers October 22
-
-*Thursday, October 22, 2026. The live arXiv cs.IR window (announced Oct 21-22, submitted Oct 21) surfaced only 2 strictly on-topic generative-recsys papers (Generative Recommenders Forget the Long Tail / CAPE, FineSID); the remaining 3 were drawn from the last-3-month keyword pool (ReGen, RecSys Factory, ATLAS) per the fallback. 1 is open-source (ReGen / XJTLU et al., 6/10). Total: 5 papers (1 opensource). By Opensource count 224 -> 225 (the running tally was drifted +4 vs the actual table; reset to the true row count).*
-
-1. **Generative Recommenders Forget the Long Tail: Restoring Memorization in Retrieval and Ranking (CAPE)**
-   * Affiliation: University of Science and Technology of China (USTC) & Ant Group — *(Xu Huang, Jiancan Wu, Hongzheng Qin, Jiawei Feng, Can Ye, Wencong Zeng, Fengze Li, Xiang Wang)*
-   * Link: [arxiv.org/abs/2610.29298](https://arxiv.org/abs/2610.29298)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 21 Oct 2026)
-   * TL;DR: Shows generative recommenders — beam search over semantic IDs for retrieval plus a shared likelihood for ranking — forget long-tail items twice (once by beam pruning, once by likelihood ranking), and proposes CAPE, a training-free co-occurrence-aware plug-in that restores item-level memorization at both stages.
-   * Key techniques:
-     - Beam search over semantic item identifiers performs retrieval; the same likelihood performs ranking
-     - Identifies two long-tail failure modes: (i) beam keeps identifier prefixes by subtree probability mass, pruning tail items early; (ii) likelihood ranks tail below head even when admitted
-     - Both reflect missing item-level memorization (direct co-occurrence recall) that collaborative filtering provides but shared-prefix generation lacks
-     - CAPE (Co-occurrence-Aware Pool Expansion): a memorization channel retrieves co-occurrence-supported tail items outside the beam and scores them with the frozen generator; memorization-calibrated ranking fuses generator likelihood with co-occurrence evidence
-     - Evaluated on two generative backbones over product and music domains
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (no code link on arXiv; GitHub search returns no matching repository)
-     - **Novelty: 8/10** — first to characterize long-tail forgetting in generative recommenders as missing item-level memorization; clean training-free CAPE plug-in
-     - **Fairness: 0/10** — not addressed (long-tail coverage, not demographic fairness)
-     - **Robustness: 7/10** — two generative backbones, product + music domains; training-free; evaluation limited to two domains
-     - **Impact: 8/10** — long-tail is a critical industrial concern as generative recommenders deploy; from USTC + Ant Group
-
-2. **FineSID: Progressive Learning from Content to Relevance to Personalization for CTR Prediction**
-   * Affiliation: Alibaba Group — *(Zhiguang Yang, Yulin Yang, Fuyu Lv, Dan Ou)*
-   * Link: [arxiv.org/abs/2610.29138](https://arxiv.org/abs/2610.29138)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 21 Oct 2026)
-   * TL;DR: FineSID unifies content tokenization, query–item semantic pretraining, and personalized post-training via fine-grained Semantic IDs (SIDs), aligning multimodal content with ID features and improving both CTR and core business metrics on Taobao-scale search.
-   * Key techniques:
-     - Pretrained multi-scale visual tokenizer and text tokenizers convert heterogeneous content into fine-grained Semantic IDs (SIDs)
-     - Full-parameter semantic pretraining under query–item relevance supervision builds a robust matching prior
-     - Personalized post-training with user click supervision captures implicit preferences
-     - Progressive Content → Relevance → Personalization sharing one fine-grained discrete representation, each stage preserving token-level access to content
-     - Offline and online Taobao-scale evaluation; improves within-product creative discrimination
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (Alibaba industrial; GitHub search finds only unrelated repositories)
-     - **Novelty: 7/10** — fine-grained SIDs + progressive three-stage learning; solid incremental improvement over coarse RQ-VAE quantization
-     - **Fairness: 0/10** — not addressed
-     - **Robustness: 7/10** — offline + online Taobao-scale results; strong claims but ablations live in the paper
-     - **Impact: 8/10** — Alibaba/Taobao industrial CTR with multimodal SIDs; directly relevant and deployment-adjacent
-
-3. **ReGen: Controllable Generative Recommendation via Guided Token Refinement**
-   * Affiliation: Xi'an Jiaotong-Liverpool University & University of Liverpool & The Hong Kong Polytechnic University — *(Haichao Zhang, Zhixuan Liang, Chong Zhang, Zixi Chen, Wen Wang, Jia Wang)*
-   * Link: [arxiv.org/abs/2610.28642](https://arxiv.org/abs/2610.28642) · [Code](https://github.com/zhang-haichao/ReGen)
-   * Venue: arXiv preprint, August 2026 (cs.IR; submitted 27 Aug 2026)
-   * TL;DR: ReGen reframes generative-recommendation decoding as parallel mask-filling (rather than left-to-right autoregressive) so control signals (e.g., accuracy vs. diversity) can be applied directly to high-level semantic tokens, with a topology-constrained tree enforcing valid Semantic-ID paths during beam-based inference.
-   * Key techniques:
-     - Reformulates SID generation as a mask-filling task predicting all tokens simultaneously instead of one by one
-     - Control signals applied directly to tokens with high-level semantics without retraining the model
-     - Topology-constrained tree iteratively corrects low-confidence predictions while strictly enforcing valid codebook paths during beam-based inference
-     - Favorable accuracy–diversity trade-off under moderate guidance while maintaining high validity of generated Semantic IDs
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — [github.com/zhang-haichao/ReGen](https://github.com/zhang-haichao/ReGen): real repository with README, requirements.txt, and structured modules (quantization, recommendation, preprocessing, evaluation, experiments, asset) matching the paper's components, but 0 stars, no LICENSE file, last pushed Jan 2026 (stale relative to the Aug 2026 submission), single-author academic lab
-     - **Novelty: 8/10** — non-autoregressive parallel refinement for controllable generative recommendation is a clear departure from left-to-right decoding
-     - **Fairness: 0/10** — not addressed (controllable diversity is not demographic fairness)
-     - **Robustness: 7/10** — accuracy–diversity trade-off demonstrated with validity maintained; academic-scale evaluation, not industrial
-     - **Impact: 7/10** — controllable generative recommendation is an emerging industrial need; from XJTLU / Liverpool / PolyU; open-source
-
-4. **RecSys Factory: Bounding LLM Agent Autonomy to Decision Points in the Industrial Recommender Lifecycle**
-   * Affiliation: Tencent (FiT) — *(Dongyang Ao, Kaixiang Fang, Shijie Xu)*
-   * Link: [arxiv.org/abs/2608.11241](https://arxiv.org/abs/2608.11241)
-   * Venue: arXiv preprint, July 2026 (cs.AI; submitted 31 Jul 2026)
-   * TL;DR: RecSys Factory is an LLM-agent platform deployed 78 days across three Tencent recommender business lines that bounds agent autonomy to typed decision surfaces inside pre-committed pipelines, resolving the autonomy–determinism–efficiency trilemma for industrial recommender operations.
-   * Key techniques:
-     - Frames the autonomy–determinism–efficiency trilemma of deploying LLM agents into industrial recommender operations
-     - Design principle: autonomy at decision points, not over pipelines
-     - Runtime deconstructed into three host-emitted event sources (Claude Code Stop hooks, corporate-IM webhooks, workflow scheduler APIs) giving determinism and no long-running daemon during wait phases
-     - 29-file skill ecosystem (8,971 lines of SKILL.md) compiling into a 400-entry PitfallStore that confines autonomy to bounded typed decision surfaces
-     - Corporate-IM human-in-the-loop card protocol at the diagnostic-vs-execution boundary
-     - 78-day deployment across 3 heterogeneous Tencent business lines (1,624 CLI dispatches, ~83.7% success)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (Tencent industrial platform; no public repository)
-     - **Novelty: 7/10** — autonomy-at-decision-points framing plus a concrete industrial LLM-agent platform; a systems contribution more than a modeling one
-     - **Fairness: 0/10** — not addressed (mentions compliance, not fairness)
-     - **Robustness: 8/10** — 78-day real deployment across three lines; documents failure modes; genuinely industrial
-     - **Impact: 8/10** — Tencent industrial deployment of LLM agents in the recommender lifecycle; high practical relevance for agentic rec ops
-
-5. **ATLAS: Learning to Recommend Across Unseen Domains**
-   * Affiliation: Sony Research India — *(Pervez Shaik, Prosenjit Biswas, Abhinav Thorat, Ravi Kolla, Niranjan Pedanekar)*
-   * Link: [arxiv.org/abs/2608.03899](https://arxiv.org/abs/2608.03899)
-   * Venue: arXiv preprint, August 2026 (cs.IR; submitted 4 Aug 2026)
-   * TL;DR: ATLAS is a multi-source recommendation domain-generalization framework that learns a domain-invariant user–item representation from several heterogeneous source domains and zero-shot transfers to entirely unseen domains, using Gromov–Wasserstein alignment, an adversarial domain discriminator, and residual-vector-quantization (RVQ) discrete codes.
-   * Key techniques:
-     - Learns a shared, domain-invariant user–item representation from multiple disjoint source domains
-     - Gromov–Wasserstein alignment preserves how users relate to one another across domains
-     - Adversarial objective makes item representations indistinguishable across domains
-     - Residual Vector Quantization (RVQ) codebooks compress user and item embeddings into a discrete latent space, suppressing domain-specific variation
-     - Zero-shot recommendation on 10 unseen domains after training on 5 Amazon source domains (+24% average relative HitRate gain)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (Sony; GitHub search returns no matching repository)
-     - **Novelty: 7/10** — recommendation domain generalization (zero-shot to unseen domains) via a discrete-code domain-invariant representation; a solid contribution
-     - **Fairness: 0/10** — not addressed
-     - **Robustness: 7/10** — 5 source → 10 unseen domains with +24% average HitRate; comprehensive ablation and post-hoc analyses
-     - **Impact: 7/10** — Sony Research; zero-shot cross-domain recommendation is valuable; broad baseline comparison
-
-
 ## Papers Classic Must Read
 
 
@@ -1548,6 +1536,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / University of Technology Sydney — [anonymous.4open.science/r/anonymous-HEM-Med-0935](https://anonymous.4open.science/r/anonymous-HEM-Med-0935/) |
 | 6/10 | HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization |
 | 6/10 | HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE) |
+| 6/10 | LLM Recommenders Produce Demographic Inequality Through Content Preferences — University of Zurich, arXiv 2610.41854 — [github.com/paganick/llm-recsys-twitter-yougov-PNAS](https://github.com/paganick/llm-recsys-twitter-yougov-PNAS) |
 | 6/10 | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) |
 | 6/10 | Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore) |
 | 6/10 | MuSID-KD: Multigranularity Knowledge Distillation for Generative Recommendation with Semantic IDs (MuSID-KD) — East China Normal University, arXiv 2610.35218 |
@@ -1607,7 +1596,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 234 papers as of November 01.
+**Count:** 235 papers as of November 02.
 
 ---
 ## By Keyword
