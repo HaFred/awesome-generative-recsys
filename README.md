@@ -51,6 +51,7 @@ mindmap
         SIDScope -- Huawei
         RPCBench -- Jilin University
         Eval4DiRec -- Qilu UoT / UTS / Tongji
+        RecRSI -- Shanghai Jiao Tong University
       Efficient Decoding
         STATIC -- Google
         PFA -- Zhejiang U / Alibaba
@@ -69,7 +70,6 @@ mindmap
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
-        LLM-Demographic -- University of Zurich
 ```
 
 <div align="center">
@@ -89,6 +89,110 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers November 03
+
+*Tuesday, November 3, 2026. The live arXiv cs.IR / cs.AI / cs.CL window for the last 24 hours (papers submitted Nov 2) carried 6 strictly on-topic generative-recommendation preprints, all verified absent from README, the docs indexes, and the monthly archive. 1 is open-source (RecRSI / Shanghai Jiao Tong University, 7/10). By Opensource count 235 -> 236. Mindmap updated (added RecRSI under Frameworks & Benchmarks; dropped LLM-Demographic to hold the 30-leaf cap; all 3 layers retained).*
+
+1. **Diverse-Teacher On-Policy Distillation for Generative Recommendation**
+   * Affiliation: University of Science and Technology of China (USTC), Hefei, China — *(Zhipeng Yi, Xinyu Lin, Minxuan Shan, Zipeng Chen, Yujiao Zhao, Chuanyu Xu, Wenjie Wang)*
+   * Link: [arxiv.org/abs/2611.03272](https://arxiv.org/abs/2611.03272)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 2 Nov 2026)
+   * TL;DR: Proposes a diverse-teacher on-policy distillation method for generative recommendation that mitigates the popularity bias aggravated by standard on-policy distillation, covering unpopular SID paths rarely generated or supervised by a single teacher.
+   * Key techniques:
+     - On-policy distillation (OPD) for generative recommendation (semantic-ID generation) providing denser token-level supervision than target-token-only objectives
+     - Identifies that OPD aggravates popularity bias: teacher feedback and student rollout both favor popular-item tokens, leaving unpopular SID paths rarely generated/supervised
+     - Diverse-teacher ensembling with diversity-aware regularization to cover unpopular-item token paths
+     - Popularity-debiased distillation loss balancing popular vs long-tail SID trajectories
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — reframes the popularity-bias problem of OPD in GR and proposes a diversity-aware mitigation
+     - **Fairness: 7/10** — directly targets popularity / long-tail bias introduced by distillation
+     - **Robustness: 6/10** — evaluated on SID-based GR benchmarks; limited extreme-long-tail ablations
+     - **Impact: 7/10** — relevant to industrial GR training where OPD is increasingly used
+
+2. **Preprocessing Choices in Fine-Tuning Data Matter: Utility and Demographic Sensitivity in LLM-Based Recommendation**
+   * Affiliation: Istanbul Technical University, Turkiye — *(Furkan Yasir Goksu, Yaren Yilmaz, Sule Gunduz Oguducu)*
+   * Link: [arxiv.org/abs/2611.03113](https://arxiv.org/abs/2611.03113)
+   * Venue: arXiv preprint, November 2026 (cs.IR; cs.CL; cs.LG; submitted 2 Nov 2026)
+   * TL;DR: Systematically studies how preprocessing choices in fine-tuning data (demographic-descriptor handling, output validity, prompt consistency) affect both utility and demographic fairness in a generative LLM-based recommender.
+   * Key techniques:
+     - Controlled generative LLM-based recommendation pipeline combining supervised fine-tuning, catalog, and generation
+     - Systematic variation of preprocessing choices (e.g., inclusion/format of demographic descriptors, output-format validation)
+     - Joint measurement of recommendation utility and demographic sensitivity (fairness)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 6/10** — an empirical study reframing data preprocessing as a utility/fairness lever
+     - **Fairness: 8/10** — central contribution is the demographic-sensitivity analysis
+     - **Robustness: 6/10** — controlled but single-pipeline; limited datasets
+     - **Impact: 6/10** — practical guidance for fair LLM-rec fine-tuning
+
+3. **PACERec: Progressive Adaptation of LLM Item Embeddings with Collaborative Evidence for Recommendation**
+   * Affiliation: Northeastern University, China (Shenyang) — *(Junzhao Huang, Xi Wu, Zihan Wang, Zijing Wang, Ming Wang, Kang Liu, Xiaocui Yang, Shi Feng, Daling Wang, Yifei Zhang, Ting Yang, Xurui Li)*
+   * Link: [arxiv.org/abs/2611.03068](https://arxiv.org/abs/2611.03068)
+   * Venue: arXiv preprint, November 2026 (cs.IR; cs.AI; submitted 2 Nov 2026)
+   * TL;DR: PACERec progressively adapts frozen LLM item embeddings to sequential recommendation by transferring preceding interaction contexts from frequent to long-tail items using collaborative evidence.
+   * Key techniques:
+     - LLM embeddings encode static item attributes for sequential recommendation (alleviating ID-embedding sparsity)
+     - Progressive adaptation that transfers preceding interaction contexts from frequent to long-tail items
+     - Collaborative-evidence-guided embedding adaptation under unevenly distributed behavioral evidence
+     - Context-transfer objective for long-tail items
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — explicit frequent->long-tail context transfer for LLM embeddings
+     - **Fairness: 6/10** — long-tail improvement implies fairness gain but not the explicit focus
+     - **Robustness: 6/10** — evaluated on sequential-rec benchmarks; moderate ablations
+     - **Impact: 7/10** — addresses the sparse-interaction limitation of LLM embeddings in rec
+
+4. **E-GenRM: Generative Reward Modeling for Open-Ended E-Commerce Shopping Agents**
+   * Affiliation: Alibaba (Taobao / Tmall Group), China — *(Ying Sun, Qiuyu Zhao, Xiao Wang, Xiyu Zhao, Gege Shi, Zenghui Sun, Jinsong Lan, Haihong Tang, Bo Zheng)*
+   * Link: [arxiv.org/abs/2611.03008](https://arxiv.org/abs/2611.03008)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 2 Nov 2026)
+   * TL;DR: E-GenRM is a generative reward model for open-ended e-commerce shopping agents that leverages naturally occurring user behavior to provide fine-grained, capability-improving reward signals beyond current bounded agent usage.
+   * Key techniques:
+     - Generative (not scalar) reward modeling tailored to e-commerce shopping agents
+     - Leverages naturally occurring user behavior across the shopping app as supervision
+     - Integrated reward framework for open-ended shopping-agent tasks (beyond bounded trajectories / known failures)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — generative reward model for shopping agents using natural user behavior
+     - **Fairness: 4/10** — not a focus
+     - **Robustness: 6/10** — industrial setting; evaluated on shopping-agent tasks
+     - **Impact: 8/10** — Alibaba industrial; high relevance to agentic e-commerce rec / RL
+
+5. **RecRSI: Mechanism-Guided Discovery of Recommendation Algorithms**
+   * Affiliation: Shanghai Jiao Tong University, China — *(Tingran Gan, Zhouziyue Lu, Dian Jin, Tao Li, Yang Gao, Ming Liu, Weiwen Liu, Jianghao Lin, Weinan Zhang, Yong Yu)*
+   * Link: [arxiv.org/abs/2611.02487](https://arxiv.org/abs/2611.02487)
+   * Venue: arXiv preprint, November 2026 (cs.IR; cs.AI; submitted 2 Nov 2026)
+   * TL;DR: RecRSI is an LLM-based research framework that organizes recommendation-algorithm discovery around mechanism hypotheses (MechSpace, Research Line, Mechanism Feedback) to automatically propose, implement, and evaluate candidate algorithms.
+   * Key techniques:
+     - MechSpace: derives implementable primitives and composition rules from the task source
+     - Research Line: develops/tests mechanism hypotheses linking a proposed mechanism change to a reference design, rationale, and expected observation
+     - Mechanism Feedback: carries outcomes and design context into subsequent proposals (recursive self-improvement)
+     - Built on SASRec / Amazon CDs&Vinyl with RecBole and a GRPO-based candidate-training backend
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/DynamisG210/RecRSI](https://github.com/DynamisG210/RecRSI): MIT-licensed Python package (src/recrsi) with pyproject.toml, CI tests, docs (host-setup / task-format), and a reproducible CPU demo that runs without API key or GPU; code structure matches the paper (MechSpace / Research Line / Mechanism Feedback, GRPO backend). Deductions: very new (2 stars), niche research-framework scope, limited community adoption
+     - **Novelty: 8/10** — frames recsys research as automated mechanism-hypothesis discovery with LLM agents + RL
+     - **Fairness: 4/10** — not a focus
+     - **Robustness: 6/10** — sandboxed execution (landlock / namespace); empirical breadth limited to the SASRec demo
+     - **Impact: 7/10** — novel auto-discovery paradigm; from SJTU / Meituan; open-source
+
+6. **Multi-Teacher Reasoning Distillation for LLM Recommendation with Self-Exploration**
+   * Affiliation: The Hong Kong Polytechnic University, Hong Kong SAR, China — *(Liangbo Ning, Siyuan Liang, Yi Zhou, Yifeng Zhang, Qing Li, Wenqi Fan, Dacheng Tao)*
+   * Link: [arxiv.org/abs/2611.02457](https://arxiv.org/abs/2611.02457)
+   * Venue: arXiv preprint, November 2026 (cs.IR; cs.AI; submitted 2 Nov 2026)
+   * TL;DR: Proposes multi-teacher reasoning distillation for LLM recommenders that distills reasoning trajectories from several complementary teachers and uses self-exploration to assess and select the most useful trajectories for downstream recommendation.
+   * Key techniques:
+     - Reasoning-augmented recommender that generates reasoning trajectories over historical interactions
+     - Multi-teacher distillation from several fixed teachers (breaks the single-teacher knowledge ceiling)
+     - Self-exploration: the student generates its own trajectories and assesses their utility before distilling (utility-aware selection)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — multi-teacher + self-exploration utility-aware distillation for reasoning rec
+     - **Fairness: 4/10** — not addressed
+     - **Robustness: 6/10** — evaluated on rec benchmarks; ablations on teacher selection
+     - **Impact: 7/10** — from PolyU / NTU; relevant to reasoning LLM recsys
+
 
 ### Papers November 02
 
@@ -1023,94 +1127,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 7/10** — 6 datasets, ranks 1st in 12/18; consistent
      - **Impact: 6/10** — CIKM 2026; solid academic contribution, generalizable
 
-### Papers October 23
-
-*Friday, October 23, 2026. The live arXiv cs.IR window (announced Oct 22-23) surfaced 3 strictly on-topic generative-recsys papers (OneLatent, UserArena, BGAFlow); below the 5-paper floor, so 2 more were drawn from the last-3-month keyword pool (LoopRec, From Scores to Safe Sets). 2 are open-source (UserArena / RecGPT-Team, LoopRec / Elpmis117). Total: 5 papers (2 opensource). By Opensource count 225 -> 227.*
-
-1. **OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models**
-   * Affiliation: Kuaishou Technology (Beijing, China)
-   * Link: [arxiv.org/abs/2610.30675](https://arxiv.org/abs/2610.30675)
-   * Venue: Preprint (arXiv); industrial paper (Kuaishou local-services advertising)
-   * TL;DR: Compresses explicit chain-of-thought reasoning into a few learnable latent tokens for foundation recommendation models, cutting inference cost ~17x while improving SID@64.
-   * Key techniques:
-     - Multi-View Adaptive CoT (MV-ACoT) teacher supervision exploring user interests from multiple perspectives
-     - Three-stage latent-token alignment to progressively internalize CoT traces into learnable latent tokens
-     - Multi-stage curriculum post-training to activate latent-token reasoning for downstream recommendation
-     - Production serving system + online A/B test in Kuaishou local-services advertising
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (deployed internally at Kuaishou)
-     - **Novelty: 8/10** — latent-reasoning compression for FRMs is a clean industrial recipe building on the latent-reasoning trend
-     - **Fairness: 4/10** — not addressed
-     - **Robustness: 6/10** — validated on industrial Kuaishou data + public Kuaishou LLM-Rec benchmark; single scenario (local-services ads)
-     - **Impact: 8/10** — +9.6% revenue lift in production A/B and 17x throughput; high industry relevance
-
-2. **UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents**
-   * Affiliation: Leiden University; Renmin University of China; Alibaba Group; Institute of Computing Technology, Chinese Academy of Sciences
-   * Link: [arxiv.org/abs/2610.30932](https://arxiv.org/abs/2610.30932)
-   * Venue: Preprint (arXiv)
-   * TL;DR: A real-world e-commerce interactive benchmark (64,729 sessions) with a production A/B-validated user simulator and On-Policy Trajectory Distillation (OPTD) for agentic recommendation.
-   * Key techniques:
-     - 64,729 real session trajectories from 11,010 users, 566,102 items, 13 action types
-     - Interactive environment + five-level evaluation (validity to local decisions to sequential behavior to personalization to outcomes)
-     - Offline validation against a controlled production A/B test
-     - OPTD: trajectory-level intent as dense teacher targets on student-generated rollouts
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — github.com/RecGPT-Team/UserArena: real repo with data, evaluation, optd, simulator, README, LICENSE; comprehensive but Non-Commercial Research License, partial held-out data (535 sessions), no pretrained weights
-     - **Novelty: 7/10** — bridges agentic-rec research and production with real-trajectory + A/B validation
-     - **Fairness: 5/10** — personalization evaluated, no explicit fairness/bias analysis
-     - **Robustness: 7/10** — validated against production A/B; strong realism
-     - **Impact: 7/10** — community benchmark for agentic rec; non-commercial license limits adoption
-
-3. **BGAFlow: Bezier-Guided Adaptive Flow for Cross-domain Sequential Recommendation**
-   * Affiliation: Anhui University, Hefei, China
-   * Link: [arxiv.org/abs/2610.30825](https://arxiv.org/abs/2610.30825)
-   * Venue: Submitted to TOIS (per arXiv HTML)
-   * TL;DR: Personalized cross-domain sequential recommendation that learns a residual flow guided by a conditional Bezier curve, with LLM-inferred user profiles and a personalized transfer horizon.
-   * Key techniques:
-     - Unified dual-domain pretraining with LLM-inferred user profiles
-     - Personalized horizon from latent interest overlap (per-user transfer extent)
-     - Conditional Bezier curve as geometric reference + residual flow refinement of preference trajectory
-     - Dynamic preference-feedback adjustment + trajectory regularization
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code released
-     - **Novelty: 7/10** — personalized horizon + Bezier-guided flow for adaptive cross-domain transfer is a fresh angle
-     - **Fairness: 4/10** — not addressed
-     - **Robustness: 6/10** — experiments on real-world datasets vs SOTA
-     - **Impact: 6/10** — solid academic cross-domain sequential rec contribution
-
-4. **Think Harder Where It Matters: Item-Level Adaptive Recursion for Sequential Recommendation (LoopRec)**
-   * Affiliation: Renmin University of China
-   * Link: [arxiv.org/abs/2610.30128](https://arxiv.org/abs/2610.30128)
-   * Venue: Preprint (arXiv)
-   * TL;DR: Replaces fixed-depth computation in sequential recommenders with item-level adaptive recursion - a weight-shared block with a lightweight gate that lets each item exit early or continue.
-   * Key techniques:
-     - Recursively applied weight-shared block with per-item exit-or-continue gate
-     - Learned per-item computational depth without auxiliary depth labels
-     - Adaptable to diverse backbone families (SASRec, BSARec, NextItNet, LRURec)
-     - Interpretable allocation aligned with oracle analysis (low-frequency & recent items get deeper compute)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — github.com/Elpmis117/LoopRec: structured src/ (model, utils), tests/, datasets/, LICENSE, README, requirements.txt, pytest.ini; multi-backbone; recent (Oct 2026), modest maturity, no pretrained weights
-     - **Novelty: 7/10** — item-level adaptive recursion for seq rec is a clean efficiency/quality trade-off
-     - **Fairness: 4/10** — not addressed
-     - **Robustness: 7/10** — consistent gains across 4 backbone families on public benchmarks
-     - **Impact: 6/10** — generalizable backbone-agnostic method; academic
-
-5. **From Scores to Safe Sets: Exact Safety-Constrained Decoding for Medication Recommendation**
-   * Affiliation: Optum
-   * Link: [arxiv.org/abs/2610.29228](https://arxiv.org/abs/2610.29228)
-   * Venue: Preprint (arXiv)
-   * TL;DR: Shows that even with a frozen clinical classifier, how medication scores are decoded into a DDI-constrained set (exact MILP global decoding vs local repair) materially changes the prediction.
-   * Key techniques:
-     - Exact global decoder via mixed-integer linear programming (MILP)
-     - Comparison vs greedy / degree-aware / 1-swap local repair on FLAME frozen scores (MIMIC-III)
-     - DDI constraint tightening sweep; accuracy-DDI trade-off analysis
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — reframes medication rec decoding as exact set-selection; builds on known DDI-repair literature
-     - **Fairness: 3/10** — not addressed (focus on safety/DDI)
-     - **Robustness: 6/10** — rigorous MIMIC-III experiments, multiple baselines, sensitivity sweep
-     - **Impact: 5/10** — important for safe generative med-rec but narrow (frozen classifier, medication only)
-
 ## Papers Classic Must Read
 
 
@@ -1488,6 +1504,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Reasoning Reranking with Semantic IDs as the Sole Item Representation (ReRankID) — Google / University of Toronto — [github.com/lilv98/ReRankID](https://github.com/lilv98/ReRankID) |
 | 7/10 | Rec-R1: Bridging Generative Large Language Models and User-Centric Recommendation Systems via Reinforcement Learning |
 | 7/10 | RecPFN: Prior-Fitted Networks for In-Context-Based Recommendations (RecPFN) |
+| 7/10 | RecRSI: Mechanism-Guided Discovery of Recommendation Algorithms (RecRSI) — Shanghai Jiao Tong University, China — [github.com/DynamisG210/RecRSI](https://github.com/DynamisG210/RecRSI) |
 | 7/10 | RecToolBench: Benchmarking Recommendation-Specific Tool Orchestration under Fuzzy User Intent |
 | 7/10 | REDSI: Addressing the Reproducibility and Evaluation Consistency of Differentiable Search Indexing for Document Retrieval |
 | 7/10 | ReMaRk: Many Right Answers, One Training Example: Removing Responder Noise from GRPO for LLM Recommenders (ReMaRk) — Nanyang Technological University — [github.com/LiXin97/ReMaRk](https://github.com/LiXin97/ReMaRk) |
@@ -1596,7 +1613,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 235 papers as of November 02.
+**Count:** 236 papers as of November 03.
 
 ---
 ## By Keyword

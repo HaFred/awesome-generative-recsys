@@ -81,6 +81,7 @@
 
 - Try Before You Evolve: Ranking-Scored Trials for Recursive Self-Improvement of Recommender Systems (RecRSI-TBYE) — University of Science and Technology of China, arXiv 2610.39352
 - Federated Recommender Agents (FedRecAgent) — POSTECH, arXiv 2610.39289
+- RecRSI: Mechanism-Guided Discovery of Recommendation Algorithms (RecRSI) — Shanghai Jiao Tong University, arXiv 2611.02487 [opensource]
 
 
 ### Beam Search / Constrained Decoding
@@ -480,6 +481,7 @@
 
 - Statistical Detection of Positional Bias in LLM-Based Recommender Systems (POB) — University of Granada, arXiv 2610.37962
 - LLM Recommenders Produce Demographic Inequality Through Content Preferences — University of Zurich, arXiv 2610.41854 [opensource]
+- Preprocessing Choices in Fine-Tuning Data Matter: Utility and Demographic Sensitivity in LLM-Based Recommendation (Preprocessing Choices) — Istanbul Technical University, arXiv 2611.03113
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -1156,6 +1158,7 @@
 - MuSID-KD: Multigranularity Knowledge Distillation for Generative Recommendation with Semantic IDs (MuSID-KD) — East China Normal University, arXiv 2610.35218
 - REGER: Modeling inter-item Relations with Semantic IDs for Generative Recommendation (REGER) — University of Electronic Science and Technology of China, arXiv 2610.37584
 - KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation (KL-MOPD) — Zhejiang University / Alibaba Group, arXiv 2610.36973 [opensource]
+- Diverse-Teacher On-Policy Distillation for Generative Recommendation (Diverse-Teacher) — University of Science and Technology of China, arXiv 2611.03272
 
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
@@ -1424,6 +1427,8 @@
 - QueryAgent-R1: Bridging Query Generation and Product Retrieval for E-commerce Query Recommendation (QueryAgent-R1) — Alibaba International Digital Commerce Group, arXiv 2606.05671
 - LLM Recommenders Produce Demographic Inequality Through Content Preferences — University of Zurich, arXiv 2610.41854 [opensource]
 - Category-Anchored Large Language Models for Next POI Recommendation (ANCHOR) — Harbin Institute of Technology Shenzhen / City University of Hong Kong, arXiv 2610.39518
+- PACERec: Progressive Adaptation of LLM Item Embeddings with Collaborative Evidence for Recommendation (PACERec) — Northeastern University, arXiv 2611.03068
+- E-GenRM: Generative Reward Modeling for Open-Ended E-Commerce Shopping Agents (E-GenRM) — Alibaba, arXiv 2611.03008
 
 
 ### Memory Augmentation
@@ -1737,6 +1742,7 @@
 - Latent Residual Reasoning for Ranking in Generative Recommendation (Refiner) — USTC / Meituan / Renmin U / HKPolyU, arXiv 2610.36890
 - NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model (NEXT) — Meta Platforms, arXiv 2607.24789
 - Modeling Preference Dependencies with Directed Acyclic Graphs for Narrative-Driven Recommendation (PDG-F) — Institute of Information Engineering, CAS, arXiv 2610.37280
+- Multi-Teacher Reasoning Distillation for LLM Recommendation with Self-Exploration (Multi-Teacher RD) — The Hong Kong Polytechnic University, arXiv 2611.02457
 
 
 ### Reinforcement Learning
