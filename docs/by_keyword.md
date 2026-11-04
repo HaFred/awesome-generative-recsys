@@ -84,6 +84,9 @@
 - RecRSI: Mechanism-Guided Discovery of Recommendation Algorithms (RecRSI) — Shanghai Jiao Tong University, arXiv 2611.02487 [opensource]
 
 
+- HARP: Training-Free Dual-Profile Agentic Communication for LLM-Based Recommendation (HARP) — Harbin Institute of Technology, Shenzhen / Great Bay University, arXiv 2611.05319 [opensource]
+- DualEvolve: Dual-Level Self-Evolution of Mechanism and Orchestration for Recommendation (DualEvolve) — Meituan, arXiv 2611.04439
+- tau-Rec-Books: A Disclosure-Controlled Benchmark for Requirement Elicitation in Agentic Recommender Systems (tau-Rec-Books) — Princeton University, arXiv 2611.04459 [opensource]
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
 - Generative Recommenders Forget the Long Tail: Restoring Memorization in Retrieval and Ranking (CAPE) — USTC & Ant Group, arXiv 2610.29298
@@ -117,6 +120,7 @@
 - UniPolicy: Unified Objective-Specific Policies for Generative Search Advertising (UniPolicy) — Meituan, arXiv 2609.20630
 
 - PFA: Attention Can Be Progressively Focused in Long-Sequence Generative Recommendation (PFA) — Zhejiang University / Alibaba Group, arXiv 2610.39273
+- ZeroGR: Filtering-First Constrained Decoding for Generative Recommendation (ZeroGR) — The University of Hong Kong / Kuaishou / Peking University, arXiv 2611.04715
 ### CTR Prediction
 - FineSID: Progressive Learning from Content to Relevance to Personalization for CTR Prediction (FineSID) — Alibaba, arXiv 2610.29138
 - DeRes: Decoupling Residual Stability and Adaptivity for Scalable CTR Prediction (DeRes)
@@ -400,6 +404,7 @@
 - SimInter: Evidence-Grounded User Simulation with Interview-Based Profile Enrichment for Conversational Recommender Systems (SimInter) — University of Tehran, arXiv 2610.18308
 - LLM-as-a-Judge for Evaluating System Responses in Conversational Music Recommendation — KAIST / Spotify, arXiv 2607.25640
 
+- tau-Rec-Books: A Disclosure-Controlled Benchmark for Requirement Elicitation in Agentic Recommender Systems (tau-Rec-Books) — Princeton University, arXiv 2611.04459 [opensource]
 ### Fairness
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
 - FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
@@ -688,6 +693,7 @@
 - Merge and Branch: Efficient Tree-Structured Supervised Fine-Tuning of LLMs for Recommendation (Merge and Branch) — Georgia Institute of Technology, arXiv 2610.37973
 - Modeling Preference Dependencies with Directed Acyclic Graphs for Narrative-Driven Recommendation (PDG-F) — Institute of Information Engineering, CAS, arXiv 2610.37280
 
+- SourceFlow: Collaborative Source Coupling for Flow-Based Recommendation (SourceFlow) — HKUST (Guangzhou) / Tencent, arXiv 2611.04455
 ### Generative Retrieval / Ranking
 - PinGER: Token-Efficient Generative Retrieval with Semantic IDs (PinGER) — Pinterest, arXiv 2610.33435 [deployed in Related Pins]
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -819,6 +825,8 @@
 - Read More, Reason Deeper: Latent Workspaces for Long-Sequence Recommendation (LWR) — Meta, arXiv 2610.39188
 
 
+- ReuseGR: Offline-Online Decoupled Generative Retrieval via Adaptive Prefix Reuse (ReuseGR) — Xidian University / Alibaba International, arXiv 2611.04259
+- OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer (OneTrans-GSR) — ByteDance, arXiv 2611.04720
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -1431,6 +1439,7 @@
 - E-GenRM: Generative Reward Modeling for Open-Ended E-Commerce Shopping Agents (E-GenRM) — Alibaba, arXiv 2611.03008
 
 
+- HARP: Training-Free Dual-Profile Agentic Communication for LLM-Based Recommendation (HARP) — Harbin Institute of Technology, Shenzhen / Great Bay University, arXiv 2611.05319 [opensource]
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1681,6 +1690,7 @@
 - Routing Between Generative and Collaborative User Profiles: A Serving-Time Gate for Controllable Novelty — DePaul University / Comcast Technology AI; arXiv 2609.39043
 - Decision-Oriented Recommendation Reranking: An Empirical Study of Jev (Jev) — University of Rochester / Meta AI, arXiv 2609.40241
 
+- OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer (OneTrans-GSR) — ByteDance, arXiv 2611.04720
 ### Reasoning
 - From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)
 - Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)
@@ -1802,6 +1812,8 @@
 - Many Right Answers, One Training Example: Removing Responder Noise from GRPO for LLM Recommenders (ReMaRk) — Nanyang Technological University, arXiv 2610.17771 [opensource]
 - SemPOI-RL: Aligning LLM Semantic Reasoning for Interpretable Out-of-Town POI Sequential Generation (SemPOI-RL) — Beihang University, arXiv 2608.30399 [opensource]
 
+- ReuseGR: Offline-Online Decoupled Generative Retrieval via Adaptive Prefix Reuse (ReuseGR) — Xidian University / Alibaba International, arXiv 2611.04259
+- OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer (OneTrans-GSR) — ByteDance, arXiv 2611.04720
 ### Retrieval / Representation
 - ARMED: Adaptive Retrieval-Augmented Medication Recommendation (ARMED) — UX Factory / KAIST, ICTAI 2026, arXiv 2610.16440
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)

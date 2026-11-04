@@ -43,6 +43,7 @@ mindmap
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
+        HARP -- HIT Shenzhen / Great Bay U
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -52,15 +53,14 @@ mindmap
         RPCBench -- Jilin University
         Eval4DiRec -- Qilu UoT / UTS / Tongji
         RecRSI -- Shanghai Jiao Tong University
+        tau-Rec-Books -- Princeton University
       Efficient Decoding
         STATIC -- Google
-        PFA -- Zhejiang U / Alibaba
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
         LION -- NUS / Meta
         KL-MOPD -- Zhejiang U / Alibaba
-        SODA -- USTC / Upwork
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
@@ -89,6 +89,130 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers November 04
+
+*Wednesday, November 4, 2026. The live arXiv cs.IR / cs.AI / cs.CL window for the last 24 hours (papers submitted Nov 3) carried 7 strictly on-topic generative-recommendation preprints, all verified absent from README, the docs indexes, and the monthly archive. 2 are open-source (HARP / Harbin Institute of Technology, Shenzhen, 7/10; tau-Rec-Books / Princeton University, 7/10). By Opensource count 236 -> 238. Mindmap updated (+HARP under Ranking & Reranking; +tau-Rec-Books under Frameworks & Benchmarks; dropped PFA and SODA to hold the 30-leaf cap; all 3 layers retained).*
+
+1. **ZeroGR: Filtering-First Constrained Decoding for Generative Recommendation**
+   * Affiliation: The University of Hong Kong, Hong Kong, China — *(Xiangrui Yang, Jiawei Yang, Liang Zeng, Daqian Ding, Ziqian Liu, Bing Tian, Cheng Peng, Yunfeng Zhao, Fangyu Zhang, Jiaqiang Liu, Xiao Liang, Yiming Qiu)* — with Peking University, Kuaishou Technology, Huazhong University of Science and Technology
+   * Link: [arxiv.org/abs/2611.04715](https://arxiv.org/abs/2611.04715)
+   * Venue: arXiv preprint, November 2026 (cs.DB; cs.IR; submitted 3 Nov 2026)
+   * TL;DR: ZeroGR is a filtering-first constrained-decoding system for generative recommendation that applies validity filtering before relevance scoring, using a step-sliced filtering index, shared-slot execution, and hybrid projection to cut GPU memory and accelerate the filtering/scoring pipeline by up to 9.9x.
+   * Key techniques:
+     - Filtering-first ordering: validity filtering before relevance scoring in constrained decoding (most sequences are invalid, so scoring-first wastes compute)
+     - Step-sliced filtering index: tailors data representations to each decoding step to reduce GPU memory
+     - Shared-slot execution: accelerates data exchange across pipeline stages
+     - Hybrid projection: adapts computation to workload patterns
+     - Layout-guided streaming construction for fast index refresh with limited serving interference
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — system-level insight (filter-first) for genrec constrained decoding
+     - **Fairness: 3/10** — not a focus
+     - **Robustness: 7/10** — extensive system evaluation; strong engineering but a single-system study
+     - **Impact: 7/10** — directly relevant to production genrec serving; from HKU / Kuaishou
+
+2. **ReuseGR: Offline-Online Decoupled Generative Retrieval via Adaptive Prefix Reuse**
+   * Affiliation: Xidian University, Xi'an, China — *(Xujing Wang, Yufeng Chen, Boxuan Zhang, Chao Wei, Cai Xu, Jie Zhao, Weiru Zhang, Wei Zhao, Ziyu Guan)* — with Alibaba International Digital Commerce Group; to appear WWW 2027
+   * Link: [arxiv.org/abs/2611.04259](https://arxiv.org/abs/2611.04259)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 3 Nov 2026); to appear WWW 2027
+   * TL;DR: ReuseGR decouples generative retrieval into an offline 7B planner that shares SID prefix sets across requests with the same query and a 0.5B online model that personalizes completion, reusing large-model computation while keeping retrieval personalized; uses Path KD and GRPO-based BudgetCut.
+   * Key techniques:
+     - Offline-online decoupling: query-level candidate planning (offline 7B) vs request-level personalized completion (online 0.5B)
+     - Adaptive prefix reuse: ReuseCut picks a cache depth per query by historical coverage
+     - Path-level knowledge distillation (Path KD): transfers 7B suffix-scoring knowledge to 0.5B
+     - BudgetCut: branch selection under a fixed budget, initialized by on-policy distillation and refined with GRPO
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 8/10** — prefix reuse for genret serving is a fresh efficiency angle
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 7/10** — industrial dataset plus a 14-day online A/B test
+     - **Impact: 8/10** — Alibaba International; online A/B gains (CTR +0.93%, revenue +1.05%)
+
+3. **OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer**
+   * Affiliation: ByteDance, China — *(Global E-Commerce Recommendation Foundation Team; Feng Cheng, Yu-Hsuan Huang, Fengyi Wang, Chaofan Zhou, Zhennan Zhu, Huan He, Bo Zhang, Ruoqi Zhang, Zhanfeng Mo, Ziwei Liu, Lanyi Li, Yifeng Pan, Junhua Long, Ziqiu Zhou, Yue Lin, Shaowei Liu)*
+   * Link: [arxiv.org/abs/2611.04720](https://arxiv.org/abs/2611.04720)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 3 Nov 2026)
+   * TL;DR: OneTrans-GSR reformulates reranking and mix-ranking (combining product cards, short videos, livestreams, and ads) as a unified generative slate-ranking problem solved by a single autoregressive transformer that extends the deployed OneTrans backbone, trained with a reward model and RL toward slate-level and long-term objectives, and deployed at ByteDance.
+   * Key techniques:
+     - Unified reranking plus mix-ranking as one generative slate-generation problem
+     - Single decoder-only policy extending the deployed OneTrans backbone
+     - Reward model evaluates complete slates; RL optimizes slate-level and long-term objectives
+     - Explicit business-constraint enforcement during decoding
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 8/10** — unifies heterogeneous slate generation into one learned policy
+     - **Fairness: 4/10** — not a focus (constraint enforcement is business-objective)
+     - **Robustness: 7/10** — deployed, large-scale online A/B (GMV/u +2.63%, advertiser value +2.06%, repurchase +2.03%, latency -13%)
+     - **Impact: 9/10** — ByteDance industrial deployment with strong online gains
+
+4. **SourceFlow: Collaborative Source Coupling for Flow-Based Recommendation**
+   * Affiliation: The Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China — *(Chenghao Wu, Yongqi Zhou, Jin Chen, Yifeng Zhou, Jinchang Zhu, Junwei Pan, Chao Zhou, Zhixiang Feng, Chengguo Yin, Menglin Yang)* — with Tencent Inc., Shenzhen, China
+   * Link: [arxiv.org/abs/2611.04455](https://arxiv.org/abs/2611.04455)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 3 Nov 2026); under review
+   * TL;DR: SourceFlow improves flow-based collaborative filtering by injecting collaborative structure directly into the source distribution (Neighborhood Coupling, Collaborative Consensus, Stretched Restoration) instead of conditioning the predictor, yielding a mean +15.7% relative Recall@10 gain over the strongest flow-based baseline.
+   * Key techniques:
+     - Flow-based collaborative filtering: learns a discrete path from a sampled source to observed interactions (few-step inference)
+     - Neighborhood Coupling: constructs displaced binary sources replacing historical items with collaborative alternatives
+     - Collaborative Consensus: refines replacement probabilities using evidence from users who share the observed item
+     - Stretched Restoration: retains replacements at late flow times during training
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — code will be released upon acceptance (not yet public)
+     - **Novelty: 8/10** — reframes source sampling as collaborative-structure modeling for flow-based rec
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 7/10** — five datasets with controlled experiments; flow-based method
+     - **Impact: 7/10** — Tencent; solid empirical gains in an emerging flow-based genrec direction
+
+5. **HARP: Training-Free Dual-Profile Agentic Communication for LLM-Based Recommendation**
+   * Affiliation: Harbin Institute of Technology, Shenzhen, China — *(Zhen Tao, Xun Zhou, Xuhui Chen, Ziyue Qiao, Qingqiang Sun)* — with Great Bay University; NeurIPS 2026
+   * Link: [arxiv.org/abs/2611.05319](https://arxiv.org/abs/2611.05319)
+   * Venue: NeurIPS 2026 (cs.IR; cs.AI; submitted 3 Nov 2026)
+   * TL;DR: HARP recasts LLM-based recommendation as agentic communication between user and item agents and adds three training-free operators (symmetric item profile, retrieval-time profile-level homophily gate, reflective profile update) to a frozen LLM backbone, lifting Hit@1 by 6.9%-24.0% over the strongest baseline.
+   * Key techniques:
+     - Four-stage agentic communication: BUILD, TRANSMIT, UNDERSTAND, SYNC
+     - Dual profiles: rule-extracted symmetric item profile (zero extra LLM calls) plus user profile
+     - Channel-decomposable profile-level homophily H(phi_u, phi_i) consumed at retrieval time (not inside the reranker prompt)
+     - Single-pass reflective profile update (in-context evolution, no gradient step)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/Jove-Zhen/HARP](https://github.com/Jove-Zhen/HARP): clear module structure (profiles / homophily / memory / models), per-dataset configs, conversion + run scripts, and a README with setup/usage that matches the paper (Build/Transmit/Understand/Sync); deductions: very new with few stars, niche LLM-rec scope, and no explicit LICENSE file in the repo
+     - **Novelty: 8/10** — agentic-communication framing plus training-free dual-profile homophily
+     - **Fairness: 4/10** — not a focus
+     - **Robustness: 7/10** — 4 public benchmarks with Holm-corrected p < 1e-9 and ablations
+     - **Impact: 7/10** — NeurIPS 2026; training-free and easy to adopt on a frozen LLM backbone
+
+6. **DualEvolve: Dual-Level Self-Evolution of Mechanism and Orchestration for Recommendation**
+   * Affiliation: Meituan, China — *(Tianqi Gao [Independent Researcher], Chenxu Wang, Wenxuan Yang, Yueqi Mou, Biao Tang, Ming Liu, Peng Yan)*
+   * Link: [arxiv.org/abs/2611.04439](https://arxiv.org/abs/2611.04439)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 3 Nov 2026)
+   * TL;DR: DualEvolve is a dual-level self-evolving LLM-agent framework for recommendation that co-evolves inner recommendation mechanisms (model / training code) and outer agent orchestration (harness / skill rules) using task feedback and execution traces, beating OpenEvolve and DeepEvolve in 64 of 64 setting-metric comparisons.
+   * Key techniques:
+     - Inner evolution: revises model and training code via task feedback to improve recommendation performance
+     - Outer evolution: scores the inner-loop experimental process, updates harness and skill rules, and adjusts orchestration choices from next-round scores
+     - Recursive self-improvement driven by both task performance and experimentation-quality signals
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — the paper links github.com/ToAdventure/dualevolve, but the repository returns 404 / is not publicly accessible (no usable public code)
+     - **Novelty: 8/10** — dual-level (mechanism + orchestration) co-evolution for rec agents
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 6/10** — four datasets across 16 settings, but a simulation-based agentic loop
+     - **Impact: 7/10** — Meituan; extends the OpenEvolve / DeepEvolve lineage to recommendation
+
+7. **tau-Rec-Books: A Disclosure-Controlled Benchmark for Requirement Elicitation in Agentic Recommender Systems**
+   * Affiliation: Princeton University, USA — *(Bharath Sivaram Narasimhan, Karthik R. Narasimhan)*
+   * Link: [arxiv.org/abs/2611.04459](https://arxiv.org/abs/2611.04459)
+   * Venue: arXiv preprint, November 2026 (cs.IR; cs.AI; cs.CL; submitted 3 Nov 2026); submitted to ECIR 2027 (Resource Track)
+   * TL;DR: tau-Rec-Books is a benchmark that evaluates how well agentic recommender agents elicit hidden user requirements (volunteer / mixed / hidden disclosure variants) over a 20k-book Wikidata catalog, with a rule-based simulated user and programmatic (non-LLM-judge) scoring.
+   * Key techniques:
+     - Disclosure-controlled tasks: requirements revealed volunteer / mixed / hidden
+     - Hidden requirements discoverable only by proposing books and inferring from accept/reject verdicts
+     - Rule-based deterministic simulated user plus programmatic verifiable scoring (no LLM judge)
+     - 450 tasks over a 20k-book catalog; extends the tau-Rec harness (also a movies track, RecSys 2026)
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/nbharaths/tau-rec](https://github.com/nbharaths/tau-rec): comprehensive MIT-licensed benchmark release (catalog pipeline, task generator, simulated user, validators, reference agents, full traces, analysis code, HuggingFace datasets, leaderboard, v2.0.0); deductions: it is a benchmark / data release rather than a core-method implementation, and the books track depends on external Wikidata
+     - **Novelty: 7/10** — controlled-disclosure benchmark for requirement elicitation in agentic CRS
+     - **Fairness: 4/10** — not a focus
+     - **Robustness: 7/10** — programmatically reproducible scoring across 4 agents and 2 interfaces, with mixed/hidden ablations
+     - **Impact: 7/10** — Princeton; extends the RecSys 2026 tau-Rec evaluation resource for agentic rec
+
 
 ### Papers November 03
 
@@ -1535,6 +1659,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents (UserArena) — Leiden University / Renmin University of China / Alibaba Group / Institute of Computing Technology, CAS — [github.com/RecGPT-Team/UserArena](https://github.com/RecGPT-Team/UserArena) |
 | 7/10 | Who Owns the AI Recommendation? A Multi-Industry Empirical Map of Brand Category Ownership Across Large Language Models (LLM Brand) |
 | 7/10 | X-KGRank: A Knowledge Graph RAG Framework for Explainable Recommendations via Pattern Mining and LLM Re-Ranking (X-KGRank) |
+| 7/10 | HARP: Training-Free Dual-Profile Agentic Communication for LLM-Based Recommendation (HARP) — Harbin Institute of Technology, Shenzhen / Great Bay University, NeurIPS 2026 — [github.com/Jove-Zhen/HARP](https://github.com/Jove-Zhen/HARP) |
+| 7/10 | tau-Rec-Books: A Disclosure-Controlled Benchmark for Requirement Elicitation in Agentic Recommender Systems (tau-Rec-Books) — Princeton University, arXiv 2611.04459 — [github.com/nbharaths/tau-rec](https://github.com/nbharaths/tau-rec) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6.5/10 | RES-MR: Risk-Aware Reasoning for Explainable and Safe Medication Recommendation (RES-MR) |
 | 6/10 | A Behavioral Trait Leaks into Preferences: Diagnosing Trait Interference in LLM User Simulators (PQA) |
@@ -1613,7 +1739,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 236 papers as of November 03.
+**Count:** 238 papers as of November 04.
 
 ---
 ## By Keyword
@@ -1772,6 +1898,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 - PFA: Attention Can Be Progressively Focused in Long-Sequence Generative Recommendation (PFA) — Zhejiang University / Alibaba Group, arXiv 2610.39273
 - BEAR: Towards Beam-Search-Aware Optimization for Recommendation with Large Language Models (BEAR) — Zhejiang University / The Chinese University of Hong Kong, Shenzhen / Hangzhou City University, arXiv 2601.22925
+- ZeroGR: Filtering-First Constrained Decoding for Generative Recommendation (ZeroGR) — The University of Hong Kong / Kuaishou / Peking University, arXiv 2611.04715
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
 - Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation (GESE) — Baidu (GSPO)
@@ -1928,6 +2055,8 @@ See [Full keyword index](docs/by_keyword.md) for all other categories.
 - Unified Generative Ranking for Heterogeneous E-commerce Recommendation (UGR-Hetero) — Alibaba Group, arXiv 2610.39426 (permutation preference optimization + candidate-aware autoregressive decoding)
 - R2QRec: Learning Recommendation Queries from Retrieval Feedback — Kuaishou Technology / Hong Kong Baptist University, arXiv 2610.39984 (GRPO + RRF + LoRA)
 
+- ReuseGR: Offline-Online Decoupled Generative Retrieval via Adaptive Prefix Reuse (ReuseGR) — Xidian University / Alibaba International, WWW 2027
+- OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer (OneTrans-GSR) — ByteDance, arXiv 2611.04720
 ## By Affiliation
 
 See [Papers by Affiliation](docs/by_affiliation.md).
