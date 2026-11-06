@@ -40,10 +40,11 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
+        LLM4Rec-CF-Bias -- UC San Diego
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
-        HARP -- HIT Shenzhen / Great Bay U
+        LMStaR -- Sorbonne U
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -51,8 +52,6 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
-        Eval4DiRec -- Qilu UoT / UTS / Tongji
-        RecRSI -- Shanghai Jiao Tong University
         tau-Rec-Books -- Princeton University
       Efficient Decoding
         STATIC -- Google
@@ -67,6 +66,7 @@ mindmap
         FORGE SID -- Zhejiang U / Alibaba
         DACT -- Fudan U
         CHAP -- USTC
+        OptST -- Shenzhen Tech U
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -89,6 +89,124 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers November 06
+
+*Friday, November 6, 2026. The live arXiv cs.IR window for the last 24 hours (papers submitted Nov 4-5) carried 7 strictly on-topic generative-recommendation preprints, all verified absent from README, the docs indexes, and the monthly archive. 3 are open-source (LLM4Rec-CF-Bias / UC San Diego, 6/10; OptST / Shenzhen Technology University, 7/10; LMStaR / Sorbonne University, 7/10). By Opensource count 238 -> 241. Mindmap updated (+LLM4Rec-CF-Bias under Reasoning & RL; +OptST under Semantic ID & Tokenization; +LMStaR under Ranking & Reranking; dropped HARP, Eval4DiRec, RecRSI to hold the 30-leaf cap; all 3 layers retained).*
+
+1. **BRIDGE: Bridging the Semantic Quantization Gap for Generative Recommendation**
+   * Affiliation: Kuaishou Technology, Beijing, China — *(Yatong Xiao, Mingjie Sun, Peng Wang, Wenjin Wu, Peng Jiang)*
+   * Link: [arxiv.org/abs/2611.07425](https://arxiv.org/abs/2611.07425)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 5 Nov 2026)
+   * TL;DR: BRIDGE exposes the Semantic Quantization Gap (SQG) — the decoder sees only discrete SIDs and loses the continuous structure (centroids, neighborhood geometry, level-wise entropy) that produced them — and bridges it via codebook-grounded latent reasoning, privileged EMA self-distillation, and effort-aware recurrence, lifting Recall@10/NDCG@10 by ~10% and eCPM by 0.65% in a one-week online A/B.
+   * Key techniques:
+     - Semantic Quantization Gap (SQG): grounding gap, neighborhood gap, and difficulty gap
+     - Codebook-grounded latent reasoning: inject frozen quantizer centroids as semantic anchors before SID generation
+     - Privileged EMA self-distillation: teacher transfers neighborhood-aware knowledge to an on-policy student, mitigating exposure bias
+     - Effort-aware recurrence: allocates more compute to early SID levels, less with depth
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (the GitHub "raochongzhi/BRIDGE" hit is an unrelated job-rec paper; this BRIDGE releases no code)
+     - **Novelty: 8/10** — names and attacks the SQG, a concrete bottleneck in SID-based generative recommendation
+     - **Fairness: 4/10** — neighborhood-gap analysis mitigates exposure bias, but not a core focus
+     - **Robustness: 7/10** — three Amazon benchmarks plus a one-week online A/B (eCPM +0.65%)
+     - **Impact: 8/10** — Kuaishou; direct online e-commerce advertising gain
+
+2. **OptST: Optimizing Semantic Tokenization for LLM-Enhanced Recommendation**
+   * Affiliation: Shenzhen Technology University, Shenzhen, China — *(Hanchong Chen, Jie Liu, Lingjie Li, Xiuqiang He, Xing Tang)* — with Shenzhen University, The Hong Kong Polytechnic University, McGill University
+   * Link: [arxiv.org/abs/2611.07523](https://arxiv.org/abs/2611.07523)
+   * Venue: Findings of WSDM 2027 (cs.IR; submitted 5 Nov 2026)
+   * TL;DR: OptST makes a frozen pretrained semantic tokenizer task-aware for downstream recommendation via a low-rank deformation (anchor-regularized) plus a straight-through estimator and an interaction-conditioned prefix-depth selector, lifting AUC across 4 datasets and 5 backbones without touching the encoder or codebooks.
+   * Key techniques:
+     - Low-rank deformation of the assignment geometry with an anchor regularizer (preserves pretrained semantics)
+     - Straight-through estimator: hard nearest-code at prediction, surrogate gradient to the deformation
+     - Interaction-conditioned prefix-depth selector: per-interaction token depth via a continue-or-stop STE + depth regularization
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/chchchchc1023/wsdm27-optst](https://github.com/chchchchc1023/wsdm27-optst): official implementation releasing prompts and generation settings; deductions: appears to ship prompts/settings rather than the full training pipeline, no explicit LICENSE spotted, niche scope
+     - **Novelty: 8/10** — task-aware semantic tokenization as an interface between LLM profiles and rec models
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 7/10** — four public datasets, five additional backbones, ablations
+     - **Impact: 7/10** — WSDM 2027; relevant to LLM-enhanced rec feature interfaces
+
+3. **Deliberate Latent Reasoning for Sequential Recommendation**
+   * Affiliation: Renmin University of China, Beijing, China — *(Haobo Zhang, Qiannan Zhu, Yutao Zhu, Zhicheng Dou)*
+   * Link: [arxiv.org/abs/2611.06521](https://arxiv.org/abs/2611.06521)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 4 Nov 2026)
+   * TL;DR: DESRec performs personalized latent reasoning for sequential recommendation: a reasoning-step selector picks the optimal depth per user during training, self-distillation compresses the most informative state into the final step, and progressive preference extraction segments history into variable-count milestones — beating 8 baselines on 6 datasets.
+   * Key techniques:
+     - Reasoning step selection module (optimal depth per user sequence)
+     - Self-distillation: compress the most informative state into the final reasoning step used as the inference representation
+     - Progressive preference extraction: variable-number history segmentation into latent milestones
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 8/10** — moves beyond fixed-depth latent reasoning to deliberate per-user depth
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 7/10** — six datasets, four backbones, eight baselines
+     - **Impact: 7/10** — Renmin University of China; strong sequential-rec results
+
+4. **Generative Retrieval under Real-Time Supply Constraints in Local Commerce**
+   * Affiliation: Tsinghua University, Beijing, China — *(Shaopeng Liang, Biao Zhang, Hongzhen Ye, Zeyang Hou, Ma Jiang, Jintao Tu, Zhijia Fang, Jianqiang Cao, Junxue Rao, Jia Jia)* — with a local-commerce / food-delivery platform
+   * Link: [arxiv.org/abs/2611.06323](https://arxiv.org/abs/2611.06323)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 4 Nov 2026; v2 5 Nov 2026)
+   * TL;DR: RTP-LLM does generative retrieval over a request-time supply snapshot for local commerce: it compiles eligible residual-quantization identifiers into a CSR prefix index, overlaps CPU compilation with model prefill, and shares the index across beams so infeasible (out-of-supply) merchants are pruned before beam capacity is spent.
+   * Key techniques:
+     - Request-time supply snapshot materialization (snapshot-relative identifier validity)
+     - CSR (compressed sparse row) prefix index compiled on CPU, overlapped with model prefill
+     - Index shared across beams; constraint states follow selected beam parents; legal expansions retain original-model log-probs
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — frames real-time supply as a decoding-constraint problem for GR in local commerce
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 6/10** — system/implementation study on three geo settings; does not establish compute savings at matched quality
+     - **Impact: 6/10** — practical industrial system, narrow scope (local retail / food delivery)
+
+5. **Item Representations Matter: Bridging Hard Semantic IDs and Soft Prototype Mixtures for Generative Retrieval**
+   * Affiliation: Meta Platforms, Inc., USA — *(Vicente Balmaseda, Dongqi Fu, Jiarui Feng, Ren Chen, Hanqing Zeng, Tianxin Wei, Yinglong Xia, Hong Li)* — with Texas A&M University (Tianbao Yang, Vicente Balmaseda)
+   * Link: [arxiv.org/abs/2611.05799](https://arxiv.org/abs/2611.05799)
+   * Venue: arXiv preprint, November 2026 (cs.IR; cs.LG; submitted 4 Nov 2026)
+   * TL;DR: CAP-Mix is a flow recommender that represents each item as a soft mixture of shared prototypes plus an item-specific vector (trained jointly, retained at inference), showing continuous recommenders can gain SID-like parameter tying without a discrete bottleneck — +6.9% HR@5 / +13.6% NDCG@5 over best baselines with 1.4-161x throughput.
+   * Key techniques:
+     - Soft prototype mixture: assignments, prototypes, and item vectors trained jointly
+     - Optional pretrained priors: SID responsibilities as an assignment prior; full content embedding initializes the item vector
+     - Flow-based generative retrieval with shared structure and no hard quantization
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code for CAP-Mix (only baseline repos cited)
+     - **Novelty: 8/10** — bridges hard SID and flat continuous tables via soft prototype mixtures
+     - **Fairness: 3/10** — not addressed
+     - **Robustness: 7/10** — six benchmarks, throughput analysis vs discrete baselines
+     - **Impact: 8/10** — Meta; reframes the hard-SID vs continuous trade-off
+
+6. **What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User**
+   * Affiliation: University of California, San Diego, USA — *(Zhuangsheng Li, Liang Dong, Yu Wu, Dailin Li, Yu Xia, Yunhan C. Zhang, Rui Cai, Yi Wu, Julian McAuley)*
+   * Link: [arxiv.org/abs/2611.07588](https://arxiv.org/abs/2611.07588)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 5 Nov 2026)
+   * TL;DR: Training LLM recommenders with collaborative-filtering (CF) rewards causes exposure collapse; the paper decomposes each CF score into an item-mean and a residual, shows the item-mean drives collapse, and proposes per-item centering / standardization that increases distinct top-1 items by up to 9.8x at comparable accuracy.
+   * Key techniques:
+     - Decompose CF reward into item-mean (average CF score across users) + residual (per-user deviation)
+     - Per-item centering: subtract the estimated item mean
+     - Per-item standardization: rescale the residual by its estimated standard deviation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [anonymous.4open.science/r/LLM4Rec-CF-Bias-27EF](https://anonymous.4open.science/r/LLM4Rec-CF-Bias-27EF/): code release for the reward corrections; deductions: anonymous, doc/quality unverifiable, no explicit LICENSE
+     - **Novelty: 8/10** — clean decomposition of why CF rewards cause exposure collapse
+     - **Fairness: 7/10** — directly targets exposure evenness / catalog coverage (item-side fairness)
+     - **Robustness: 7/10** — two datasets, two identifier schemes, controlled interventions
+     - **Impact: 8/10** — McAuley lab; directly actionable for RL-trained LLM recs
+
+7. **Learning to Rank Explanations for Recommendation with Language Models**
+   * Affiliation: Sorbonne University, Paris, France — *(Ben Kabongo)* — with AgroParisTech, UMR MIA Paris-Saclay, Palaiseau, France (Vincent Guigue)
+   * Link: [arxiv.org/abs/2611.04775](https://arxiv.org/abs/2611.04775)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 3 Nov 2026)
+   * TL;DR: LMStaR formulates personalized explanation ranking as dense retrieval: a query encoder represents user history + target-item metadata and a statement encoder maps candidate explanations into a shared space, jointly adapted via multi-positive contrastive learning — beating CLER by up to 8.25 NDCG@1 points.
+   * Key techniques:
+     - Fully text-based explanation-ranking as dense retrieval
+     - Query encoder (user history + item metadata) + statement encoder (candidate explanations)
+     - Multi-positive contrastive learning for personalized relevance
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/BenKabongo25/language-models-statement-ranking](https://github.com/BenKabongo25/language-models-statement-ranking): full code, data, and supplementary materials; deductions: niche explanation-ranking scope, single-maintainer repo
+     - **Novelty: 7/10** — adapts LMs to personalized statement ranking for explanations
+     - **Fairness: 4/10** — personalized relevance; not a fairness focus
+     - **Robustness: 7/10** — three datasets, five backbones, counterfactual analyses
+     - **Impact: 6/10** — explanation ranking niche; Sorbonne / AgroParisTech
+
 
 ### Papers November 04
 
@@ -1073,184 +1191,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 7/10** — consistent outperformance over strong GR baselines; 52% size reduction.
      - **Impact: 8/10** — from Tencent, addresses the core scaling-vs-cost tension in deployed generative rec.
 
-### Papers October 26
-
-*Monday, October 26, 2026. The live arXiv cs.IR window (announced Oct 26) surfaced 3 strictly on-topic generative-recommendation papers (Deco / 2610.32980, Parallel KD / 2610.32943, TCBSA / 2610.32098). A broader cs.AI sweep added a 4th gen-rec paper (TGR-EvoDAG / 2610.32326, industrial Tencent). The entire last-3-month keyword pool is already catalogued, so the 5th paper is fairness-adjacent (FAIRGate / 2610.30359, UMass Boston) — disclosed as such. 0 are open-source. By Opensource count unchanged (228 — table is source of truth; prior "227" summary line was stale). Mindmap 30-cap held (no opensource papers).*
-
-1. **Separating Thinking from Spelling for Efficient Generative Recommendation (Deco)**
-   * Affiliation: Skolkovo Institute of Science and Technology / AIRI (Artificial Intelligence Research Institute) / HSE University, Moscow, Russia — *(Danil Gusak, Anna Volodkevich, Ivan Oseledets, Evgeny Frolov)*
-   * Link: [arxiv.org/abs/2610.32980](https://arxiv.org/abs/2610.32980)
-   * Venue: arXiv preprint (cs.IR)
-   * TL;DR: Deco decouples "thinking" (reading history) from "spelling" (writing the SID): the backbone condenses history into a compact next-item concept once, then a light KV-cached decoder runs the entire trie-constrained beam search — 3.2–8.6× throughput at a 50 ms p95 budget.
-   * Key techniques:
-     - Backbone reads each history item as one fused token and condenses the history once into a compact next-item concept
-     - A light KV-cached decoder conditioned on the concept and the generated prefix runs the entire beam search
-     - SIDs, the trie, and the autoregressive factorization stay unchanged (drop-in serving improvement)
-     - Cross-entropy alone approaches full-backbone accuracy; distillation improves it further
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code found.
-     - **Novelty: 8/10** — clean decoupling of history encoding from SID writing/beam search, delegating beam search to a tiny decoder.
-     - **Fairness: 2/10** — not addressed.
-     - **Robustness: 7/10** — 7 datasets (e-commerce, movies, music), production-style serving pipeline under 50 ms p95; generates 1000 candidates faster than the teacher generates 100.
-     - **Impact: 8/10** — targets the dominant cost in deployed trie-constrained beam search; large practical upside for industrial generative rec.
-
-2. **Knowledge Distillation across Item and Code Spaces for Parallel Generative Recommendation**
-   * Affiliation: The Hong Kong University of Science and Technology — *(Yixuan Xu, Hailin Liu, Can Yang)* / University of Science and Technology of China — *(Linxiang Peng)*
-   * Link: [arxiv.org/abs/2610.32943](https://arxiv.org/abs/2610.32943)
-   * Venue: arXiv preprint (cs.IR; cs.LG)
-   * TL;DR: Two complementary knowledge-distillation objectives (IDM and CMM) transfer a sequential recommender's soft item-level distribution into parallel (non-autoregressive) semantic-ID generation, lifting Recall@10 +15.39% and NDCG@10 +8.28%.
-   * Key techniques:
-     - Parallel semantic-ID generation predicting all code positions simultaneously (no autoregressive prefix conditioning)
-     - Item Distribution Matching (IDM): reconstructs a catalogue-level item distribution from parallel code predictions, aligns with the teacher's item distribution
-     - Code Marginal Matching (CMM): projects the teacher's item probabilities onto each code position via fixed item-to-code assignments, matches the resulting code marginals
-     - Both preserve the student's parallel prediction structure
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code found.
-     - **Novelty: 7/10** — addresses the item-space vs code-space mismatch for parallel SID generation via two distinct distillation objectives.
-     - **Fairness: 2/10** — not addressed.
-     - **Robustness: 6/10** — benchmark datasets, consistent SOTA outperformance; limited robustness/ablation beyond accuracy.
-     - **Impact: 7/10** — parallel SID generation is a key efficiency direction; +15% Recall@10 is substantial.
-
-3. **TGR-EvoDAG: A DAG-based Multi-Agent Code Evolution Framework for Generative Recommendation on Tencent**
-   * Affiliation: Tencent (Platform and Content Group, Shenzhen) / The Hong Kong Polytechnic University / McGill University / Independent Researcher — *(Junlin He, Junzhang Zhu, Yudong Li, Yihong Tang, Xuefeng Jiang, Wei Ma, Chengxiang Zhuo, Zang Li)*
-   * Link: [arxiv.org/abs/2610.32326](https://arxiv.org/abs/2610.32326)
-   * Venue: arXiv preprint (cs.AI)
-   * TL;DR: A DAG-structured multi-agent code-evolution framework that automatically evolves generative-recommendation model code; deployed at Tencent with +37.4% offline and +0.40% online CTR gains.
-   * Key techniques:
-     - DAG-structured multi-agent evolution of generative-rec code (coordinated agent roles over a directed acyclic graph)
-     - Targets Tencent's industrial generative recommendation pipeline
-     - Offline +37.4% and online +0.40% CTR at Tencent scale
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (industrial; Tencent).
-     - **Novelty: 7/10** — applies multi-agent code evolution (DAG orchestration) to generative-rec model development.
-     - **Fairness: 2/10** — not addressed.
-     - **Robustness: 6/10** — offline + online gains at Tencent; industrial validation but limited external reproducibility.
-     - **Impact: 8/10** — from Tencent, real online CTR lift; demonstrates agentic code-evolution for recsys production.
-
-4. **From Item Scores to Semantic Tokens: Test-Time Collaborative Adaptation for Generative Recommendation (TCBSA)**
-   * Affiliation: Tencent — *(Xing Tang, Xiuqiang He et al.)*
-   * Link: [arxiv.org/abs/2610.32098](https://arxiv.org/abs/2610.32098)
-   * Venue: arXiv preprint (cs.IR)
-   * TL;DR: A training-free test-time method that adapts the beam search of a generative recommender by collaboratively aligning item-score signals with semantic-token generation, improving ranking without retraining.
-   * Key techniques:
-     - Training-free test-time adaptation at beam-search / inference time
-     - Bridges item-level scores (from a conventional ranker) with semantic-token generation
-     - Collaborative adaptation refines candidate generation toward better-aligned items
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code found.
-     - **Novelty: 7/10** — "test-time collaborative adaptation" connecting item scores to SID beam search without retraining.
-     - **Fairness: 2/10** — not addressed.
-     - **Robustness: 6/10** — test-time method, no retraining needed; validation scope not fully detailed in the abstract.
-     - **Impact: 7/10** — practical, deployment-friendly (no retrain) improvement for generative-rec serving.
-
-5. **FAIRGate: Agentic Runtime Policy Selection and Verified Repair for Fairer Recommendation Delivery**
-   * Affiliation: University of Massachusetts Boston (Department of Computer Science) — *(Navkar Jain, Enock Ayiku, Kenneth Fletcher)*
-   * Link: [arxiv.org/abs/2610.30359](https://arxiv.org/abs/2610.30359)
-   * Venue: Accepted at IRAI 2026
-   * TL;DR: FAIRGate is an agentic runtime controller that selects fairness-aware delivery policies and performs verified repair to improve fairness of recommendation delivery at serving time. *(Fairness-adjacent; included because the last-3-month gen-rec pool is already fully catalogued.)*
-   * Key techniques:
-     - Agentic runtime policy selection for recommendation delivery
-     - Verified repair loop to correct fairness violations
-     - Operates at delivery/serving time (runtime), not training
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code found.
-     - **Novelty: 7/10** — frames fairness as a runtime agentic policy-selection + verified-repair problem for delivery.
-     - **Fairness: 9/10** — directly targets fairer recommendation delivery; core contribution.
-     - **Robustness: 5/10** — accepted workshop; verification mechanism described but empirical robustness not extensively benchmarked.
-     - **Impact: 6/10** — fairness-focused, workshop venue; relevant for responsible-delivery research.
-
----
-
-### Papers October 25
-
-*Sunday, October 25, 2026. Live arXiv cs.IR window empty (weekend gap; freshest entries dated Oct 22), so per the fallback rule all 5 papers were drawn from the last-3-month keyword pool. Disclosure: GRP v0.1, Eval4DiRec, OneTrans-V2, and RecToolBench were already covered in the Sep 29-30 daily sections (archived to docs/archive_by_month/2026_09.md) and re-surface here as fallback re-indexes; only RouteRec is a fresh index. 3 are open-source (Eval4DiRec, RecToolBench, RouteRec); of these, Eval4DiRec and RouteRec were already in the By Opensource index from September, so the index grows by +1 net (RecToolBench): 223 -> 224. Mindmap +3/-3 to hold the 30-node cap (gains RecToolBench / Eval4DiRec / RouteRec; drops ReRankID / Decision4Rec / UserArena).*
-
-1. **GRP v0.1 Technical Report**
-   * Affiliation: Snap Inc.
-   * Link: [arxiv.org/abs/2609.36688](https://arxiv.org/abs/2609.36688)
-   * Venue: Technical Report (arXiv); industrial paper (Snap Inc.)
-   * TL;DR: A generative recommendation framework that unifies retrieval, ranking, and reward modeling in a single encoder-decoder, with mGRPO post-training; cuts end-to-end retrieval latency 69% and yields positive production A/B lifts at Snap.
-   * Key techniques:
-     - Single encoder-decoder that generates multimodal Semantic IDs and scores candidates with a jointly trained ranking module
-     - Frozen ranking module supplies rewards for reinforcement-learning post-training
-     - mGRPO: adds a reference-anchored margin to reward optimization to preserve logged-target likelihood
-     - Progressive deployment path (retrieval source to early-ranking bypass to replacement of weaker sources) with serving optimizations
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (technical report; deployed internally at Snap)
-     - **Novelty: 7/10** — unifies retrieval+ranking+reward in one model with mGRPO; solid industrial framing on the generative-rec trend
-     - **Fairness: 3/10** — not addressed
-     - **Robustness: 6/10** — offline ablations + online A/B (view time +0.46%, shares +0.77% retrieval-only; +0.82% view / +2.56% shares combined); lifts modest
-     - **Impact: 8/10** — from Snap, industrial scale, progressive-deployment story; high industry relevance
-
-2. **Eval4DiRec: A Unified and Systematic Evaluation Framework for Diffusion-based Recommender Systems**
-   * Affiliation: Qilu University of Technology (Shandong Academy of Sciences); University of Technology Sydney; Tongji University
-   * Link: [arxiv.org/abs/2609.34404](https://arxiv.org/abs/2609.34404)
-   * Venue: Accepted at ACM TKDD (arXiv preprint)
-   * TL;DR: The first unified open-source evaluation framework for diffusion-based recommender systems, supporting 14 models across 5 scenarios under reproducible protocols.
-   * Key techniques:
-     - Diffusion-aware plug-in framework (core / data / scenario / models / diffusion / engine / evaluation registries)
-     - Supports 14 diffusion-based RS (CF, sequential, multimodal, POI, cross-domain)
-     - Grouped YAML configs for reproducible, comparable experiments
-     - Extensive empirical benchmark exposing key factors affecting diffusion-rec performance
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — github.com/wangcong2001/Eval4DiRec: well-structured (registries, 14 models, README/requirements/example.sh/configs); raw data withheld until anonymity lifts; recent (Sep 2026), modest maturity
-     - **Novelty: 8/10** — first unified open-source evaluation benchmark for diffusion-based RS, closing the reproducibility gap
-     - **Fairness: 3/10** — not addressed
-     - **Robustness: 7/10** — unified protocols across 14 models; framework-level rigor
-     - **Impact: 7/10** — ACM TKDD; community-beneficial benchmarking tool for the diffusion-rec subfield
-
-3. **OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender**
-   * Affiliation: ByteDance (Global E-Commerce Recommendation Foundation Team)
-   * Link: [arxiv.org/abs/2609.28589](https://arxiv.org/abs/2609.28589)
-   * Venue: Preprint (arXiv); industrial paper (ByteDance)
-   * TL;DR: One Transformer unifies retrieval, pre-rank, and fine-rank via shared sequence encoding, in-model distillation, Decision-Conditioned Generative Retrieval (DCGR), and Sequence-Native Training; +9.74% GMV and 3.2x throughput at ByteDance scale.
-   * Key techniques:
-     - Single Transformer encodes the user sequence once as shared context for all three stages
-     - Joint training with in-model knowledge distillation (fine-rank to pre-rank)
-     - Sparse MoE backbone + muP-style parameterization for stable scaling
-     - DCGR: predicts a decision prefix and generates items conditioned on it, steering business objectives in one generative process
-     - SNT: organizes training around each user's lifelong behavior sequence
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code
-     - **Novelty: 8/10** — DCGR plus unified cascade is a neat, deployable industrial recipe for generative retrieval
-     - **Fairness: 3/10** — not addressed
-     - **Robustness: 7/10** — deployed at scale (+9.74% GMV, 3.2x throughput); joint-training attribution only partly separable (per third-party read)
-     - **Impact: 9/10** — ByteDance production, large GMV lift; high industry impact
-
-4. **RecToolBench: Benchmarking Recommendation-Specific Tool Orchestration under Fuzzy User Intent**
-   * Affiliation: Jilin University; Squirrel AI Learning; The Hong Kong Polytechnic University; University of Virginia (corresponding)
-   * Link: [arxiv.org/abs/2609.30717](https://arxiv.org/abs/2609.30717)
-   * Venue: EMNLP Findings 2026
-   * TL;DR: An MCP-based benchmark for evaluating tool-using recommender agents under fuzzy user intent, with 1,200+ tasks, 13 MCP servers, and 32 tools spanning single to hybrid orchestration.
-   * Key techniques:
-     - MCP-based benchmark across 3 recommendation domains, 13 servers, 32 tools
-     - Synthesize-fuzzify-judge pipeline that generates executable fuzzy-intent tasks
-     - Rule-based execution checks + rubric-based LLM evaluation of agent trajectories
-     - Identifies tool orchestration under fuzzy intent as a major agentic-rec bottleneck
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — github.com/ShawnChenn/RecToolBench: MCP servers, benchmark runner, L1-L4 eval scripts, MIT license; task-synthesis pipeline withheld until acceptance; recent (Aug 2026)
-     - **Novelty: 8/10** — first MCP-based tool-orchestration benchmark for recommender agents under fuzzy intent
-     - **Fairness: 4/10** — not a focus
-     - **Robustness: 7/10** — rule-based + LLM-judge evaluation, 1,200+ tasks, 3 domains; sound benchmarking rigor
-     - **Impact: 8/10** — EMNLP Findings 2026; fills a clear gap in agentic-recsys evaluation
-
-5. **RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation**
-   * Affiliation: Korea Advanced Institute of Science and Technology (KAIST); Seoul National University
-   * Link: [arxiv.org/abs/2609.39007](https://arxiv.org/abs/2609.39007)
-   * Venue: Accepted at CIKM 2026
-   * TL;DR: A sequential recommender that uses observed session behavior (tempo, item-group focus, repetition/carryover, popularity tendency) as the routing criterion for sparse Mixture-of-Experts, ranking 1st in 12 of 18 dataset-metric settings.
-   * Key techniques:
-     - Four behavioral-evidence summaries from sessionized histories as routing cues
-     - Macro/mid/micro scope routing: cue scores select expert groups, backbone state refines within group
-     - Validated to go beyond added capacity; routing aligns with observed behavior
-     - Evaluated on 6 public datasets (18 dataset-metric combinations)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — github.com/jy1559/RouteRec: very complete (src/routerec, 9 baselines, configs, docs/reproducibility.md, tests, CITATION.cff, Apache 2.0); datasets must be acquired externally; camera-ready release Aug 2026
-     - **Novelty: 7/10** — behavior-guided MoE routing for sequential rec; clean and well-executed
-     - **Fairness: 3/10** — not addressed
-     - **Robustness: 7/10** — 6 datasets, ranks 1st in 12/18; consistent
-     - **Impact: 6/10** — CIKM 2026; solid academic contribution, generalizable
-
 ## Papers Classic Must Read
 
 
@@ -1610,12 +1550,14 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Learning Multiresolution Relevance for Hierarchical Generative Retrieval (RARS) |
 | 7/10 | Learning to Rotate: Temporal and Semantic Rotary Encoding for Sequential Modeling (SIREN-RoPE) |
 | 7/10 | LIME-Rec: Auditing Semantic Gains in Sequential Recommendation — A Lightweight Recovery Test |
+| 7/10 | LMStaR: Language Models for Statement Ranking (LMStaR) — Sorbonne University, Paris, France / AgroParisTech, UMR MIA Paris-Saclay, arXiv 2611.04775 — [github.com/BenKabongo25/language-models-statement-ranking](https://github.com/BenKabongo25/language-models-statement-ranking) |
 | 7/10 | MemRetriever: Learning to Search, Reflect, and Retrieve from Long-Term Memory |
 | 7/10 | Mitigating Popularity Bias in Sequential Recommendations with Sparse Prior-Regularized Objective (PR-entmax) — Sber AI Lab / Lomonosov MSU, CIKM 2026 — [github.com/Antondfger/Sparse-Prior-Regularized](https://github.com/Antondfger/Sparse-Prior-Regularized) |
 | 7/10 | Mixture-of-Experts Knowledge Graph Retrieval-Augmented Generation for Multi-Agent LLM-based Recommendation (MixRAGRec) |
 | 7/10 | MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology — [github.com/wangyu0627/MLLMRec-R1](https://github.com/wangyu0627/MLLMRec-R1) |
 | 7/10 | MLPs are Efficient Distilled Generative Recommenders (SID-MLP) |
 | 7/10 | Octen-WebGR: Scaling Generative Retrieval to 200 Million Web Pages (Octen-WebGR) — Octen, arXiv 2610.35256 |
+| 7/10 | OptST: Optimizing Semantic Tokenization for LLM-Enhanced Recommendation (OptST) — Shenzhen Technology University / Shenzhen University / The Hong Kong Polytechnic University / McGill University, Findings of WSDM 2027 — [github.com/chchchchc1023/wsdm27-optst](https://github.com/chchchchc1023/wsdm27-optst) |
 | 7/10 | OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework (OneSearch-V2) |
 | 7/10 | Popcorn: A Configurable Benchmark for Visual Evidence in Multimodal Movie Recommendation (Popcorn) |
 | 7/10 | Prompt Optimization for User Simulation in Conversational Recommender Systems (UserSimulator) |
@@ -1680,6 +1622,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 6/10 | HyperTrace: Hypothesis-Based Preference Tracing for Online LLM Personalization |
 | 6/10 | HypRQ-VAE: Hyperbolic Item Indexing for Long-Tail-Aware Generative Recommender Systems (HypRQ-VAE) |
 | 6/10 | LLM Recommenders Produce Demographic Inequality Through Content Preferences — University of Zurich, arXiv 2610.41854 — [github.com/paganick/llm-recsys-twitter-yougov-PNAS](https://github.com/paganick/llm-recsys-twitter-yougov-PNAS) |
+| 6/10 | What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User (LLM4Rec-CF-Bias) — University of California, San Diego, USA, arXiv 2611.07588 — [anonymous.4open.science/r/LLM4Rec-CF-Bias-27EF](https://anonymous.4open.science/r/LLM4Rec-CF-Bias-27EF/) |
 | 6/10 | MARS: Multi-rate Aggregation of Recency Signals for Sequential Recommendation across Sparse and Dense Regimes (MARS) |
 | 6/10 | Mitigating Matthew Effect: Multi-Hypergraph Boosted Multi-Interest Self-Supervised Learning for Conversational Recommendation (HiCore) |
 | 6/10 | MuSID-KD: Multigranularity Knowledge Distillation for Generative Recommendation with Semantic IDs (MuSID-KD) — East China Normal University, arXiv 2610.35218 |
@@ -1739,7 +1682,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 238 papers as of November 04.
+**Count:** 241 papers as of November 06.
 
 ---
 ## By Keyword
@@ -2057,6 +2000,9 @@ See [Full keyword index](docs/by_keyword.md) for all other categories.
 
 - ReuseGR: Offline-Online Decoupled Generative Retrieval via Adaptive Prefix Reuse (ReuseGR) — Xidian University / Alibaba International, WWW 2027
 - OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer (OneTrans-GSR) — ByteDance, arXiv 2611.04720
+
+- What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User (LLM4Rec-CF-Bias) — UC San Diego, arXiv 2611.07588 [opensource]
+
 ## By Affiliation
 
 See [Papers by Affiliation](docs/by_affiliation.md).

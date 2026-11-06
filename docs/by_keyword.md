@@ -406,6 +406,7 @@
 
 - tau-Rec-Books: A Disclosure-Controlled Benchmark for Requirement Elicitation in Agentic Recommender Systems (tau-Rec-Books) — Princeton University, arXiv 2611.04459 [opensource]
 ### Fairness
+- What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User (LLM4Rec-CF-Bias) — University of California, San Diego, arXiv 2611.07588 [opensource]
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
 - FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
 - A Rank-One Popularity Component in Dot-Product Recommender Scores: Population Theory and Prior-Separation Evidence
@@ -695,6 +696,8 @@
 
 - SourceFlow: Collaborative Source Coupling for Flow-Based Recommendation (SourceFlow) — HKUST (Guangzhou) / Tencent, arXiv 2611.04455
 ### Generative Retrieval / Ranking
+- Generative Retrieval under Real-Time Supply Constraints in Local Commerce (RTP-LLM) — Tsinghua University, arXiv 2611.06323
+- Item Representations Matter: Bridging Hard Semantic IDs and Soft Prototype Mixtures for Generative Retrieval (CAP-Mix) — Meta Platforms, arXiv 2611.05799
 - PinGER: Token-Efficient Generative Retrieval with Semantic IDs (PinGER) — Pinterest, arXiv 2610.33435 [deployed in Related Pins]
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
 - Generative Recommenders Forget the Long Tail: Restoring Memorization in Retrieval and Ranking (CAPE) — USTC & Ant Group, arXiv 2610.29298
@@ -1180,6 +1183,7 @@
 - LLM-as-a-Judge for Evaluating System Responses in Conversational Music Recommendation — KAIST / Spotify, arXiv 2607.25640
 
 ### LLM-based Recommendation
+- Learning to Rank Explanations for Recommendation with Language Models (LMStaR) — Sorbonne University, arXiv 2611.04775 [opensource]
 - LCM-Promo: An LLM-Based Uplift Model for Promotion Allocation (LCM-Promo) — Prosus / iFood, arXiv 2610.37570
 - RecSys Factory: Bounding LLM Agent Autonomy to Decision Points in the Industrial Recommender Lifecycle (RecSys Factory) — Tencent, arXiv 2608.11241
 - ATLAS: Learning to Recommend Across Unseen Domains (ATLAS) — Sony Research India, arXiv 2608.03899
@@ -1692,6 +1696,7 @@
 
 - OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer (OneTrans-GSR) — ByteDance, arXiv 2611.04720
 ### Reasoning
+- Deliberate Latent Reasoning for Sequential Recommendation (DESRec) — Renmin University of China, arXiv 2611.06521
 - From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)
 - Learning Better Reasoning for Generative Recommendation with Semantic IDs (Evo-Rec)
 
@@ -1883,6 +1888,8 @@
 - LoopGR: Parameter-Efficient Scaling for Generative Recommendation via Recurrent Depth (LoopGR) — Tencent, arXiv 2610.34157
 
 ### Semantic / Structured IDs
+- BRIDGE: Bridging the Semantic Quantization Gap for Generative Recommendation (BRIDGE) — Kuaishou Technology, arXiv 2611.07425
+- OptST: Optimizing Semantic Tokenization for LLM-Enhanced Recommendation (OptST) — Shenzhen Technology University, arXiv 2611.07523 [opensource]
 - JevRec: Linguistic Encoding with Jev-like Decision Modeling for LLM-based Generative Recommendation (JevRec) — Zhejiang University, arXiv 2610.36937
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
 - FineSID: Progressive Learning from Content to Relevance to Personalization for CTR Prediction (FineSID) — Alibaba, arXiv 2610.29138
