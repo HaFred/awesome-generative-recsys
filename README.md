@@ -40,7 +40,6 @@ mindmap
         Mult-DPO -- UVA / Netflix / Cornell
         CA-PG -- Meta / Cornell
         ProRL -- Fudan U
-        LLM4Rec-CF-Bias -- UC San Diego
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
@@ -67,6 +66,7 @@ mindmap
         DACT -- Fudan U
         CHAP -- USTC
         OptST -- Shenzhen Tech U
+        MV-Thinker -- City University of Hong Kong / Tencent
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -87,6 +87,89 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 ## By Date
 
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
+### Papers November 07
+
+*Saturday, November 7, 2026. The live arXiv cs.IR/cs.CL/cs.AI/cs.LG window for the last 24 hours (Nov 6-7) carried **no** new generative-recommendation preprints — arXiv announces Mon–Fri, and the newest submissions are dated Nov 5 (already indexed on Nov 06). Per the fallback rule, this daily section draws 5 strictly on-topic generative-rec preprints from the recent backlog (late Oct–early Nov) in cs.AI/cs.CL that were verified absent from README, the docs indexes, and the monthly archive. 1 is open-source (MV-Thinker / City University of Hong Kong + Tencent, 7/10). By Opensource count 241 -> 242. Mindmap updated (+MV-Thinker under Semantic ID & Tokenization; dropped LLM4Rec-CF-Bias to hold the 30-leaf cap; all 3 layers retained).*
+
+1. **LatentRec: Do Recommenders Need to Think in Words? Latent Reasoning for Efficient LLM-Based Recommendation**
+   * Affiliation: Tencent, Shenzhen, Guangdong, China — *(Hongyang Su, Beibei Kong, Lei Cheng, Chengxiang Zhuo, Zang Li)*
+   * Link: [arxiv.org/abs/2611.07866](https://arxiv.org/abs/2611.07866)
+   * Venue: CIKM 2026 (Short Paper)
+   * TL;DR: LatentRec replaces inference-time chain-of-thought / latent reasoning with training-time per-step head supervision, so the reasoning module is discarded at deployment and latency drops 18.3x with no accuracy loss.
+   * Key techniques:
+     - Continuous Thought Module (2.5M params): K latent reasoning steps over the LLM hidden state during training
+     - Soft Token Selection: bridges the ~14x norm gap between hidden states and input embeddings
+     - Per-step Reasoning Loss (PRL): supervises every intermediate state through the prediction head against the first token of the target Semantic ID
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (CIKM short paper; no repository link released)
+     - **Novelty: 7/10** — reframes latent reasoning as training-time supervision rather than inference-time computation; neat "discard-at-inference" idea, but latent reasoning for rec is already an active area
+     - **Fairness: 3/10** — not a focus
+     - **Robustness: 7/10** — three Amazon benchmarks, consistent gains, 18.3x lower latency at batch=1
+     - **Impact: 7/10** — CIKM 2026, Tencent; directly addresses the latency-vs-reasoning tradeoff in production LLM recommenders
+
+2. **MV-Thinker: Think Globally, Generate Personally**
+   * Affiliation: City University of Hong Kong, Hong Kong, China — *(Yuxuan Hu, Yingyi Zhang, Wenlin Zhang, Chao Zhang, Haotian Nan, Ziwei Liu, Jiancheng Dong, Tongzhou Wu)* — with Tencent Platform and Content Group, Shenzhen, China (co-authors Beibei Kong, Lei Cheng, Chengxiang Zhuo, Zang Li)
+   * Link: [arxiv.org/abs/2611.02463](https://arxiv.org/abs/2611.02463)
+   * Venue: arXiv preprint, November 2026 (cs.AI)
+   * TL;DR: MV-Thinker coordinates full-history and recent-history views via multi-view temporal thinking and adapts decoder states per user via hierarchical residual adapters, improving both discriminative and generative rec baselines on four datasets.
+   * Key techniques:
+     - Multi-View Temporal Thinking: view-specific thinking queries/readers over overlapping full-history and recent-history views
+     - Hierarchical Residual Adaptation: nested residual adapters before the shared vocabulary projection for personalized SID decisions
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — code + datasets at [anonymous.4open.science/r/MV-Thinker](https://anonymous.4open.science/r/MV-Thinker); anonymous (double-blind) repo, no explicit license / maintenance maturity yet
+     - **Novelty: 8/10** — explicitly coordinates complementary temporal views and personalizes progressive SID decoding
+     - **Fairness: 4/10** — not a focus
+     - **Robustness: 7/10** — four public datasets, beats strong discriminative and generative baselines across ranking metrics
+     - **Impact: 7/10** — academic (CityU HK) + industrial (Tencent) backing; practical SID-generation improvement
+
+3. **HiGenTrans: Hierarchical LLM Knowledge Transfer for Generative Recommendation**
+   * Affiliation: The Hong Kong Polytechnic University, Hong Kong SAR, China — *(Zhuohang Jiang, Haohao Qu, Wenqi Fan, Qing Li)* — with Kuaishou Technology, Beijing, China (co-authors); first author's internship at Kuaishou
+   * Link: [arxiv.org/abs/2611.01129](https://arxiv.org/abs/2611.01129)
+   * Venue: arXiv preprint, October 2026 (cs.AI)
+   * TL;DR: HiGenTrans injects LLM knowledge into generative recommendation at three levels — input (semantic priming), representation (layer-wise transfer), and decision (Mixture-of-Experts beam reranking) — lifting Recall@10 by up to 12.9% and NDCG@10 by up to 33.7%.
+   * Key techniques:
+     - Global Semantic Priming (GSP): LLM-derived user representation as BOS embedding prior
+     - Hierarchical Representation Transfer (HRT): mean-centered projections + gated residuals into depth-matched GenRec layers
+     - Multi-Signal Decision Calibration (MDC): lightweight MoE calibrator reranking beam-search outputs using semantic relevance, generation confidence, candidate context
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 8/10** — hierarchical (input/representation/decision) LLM-to-GenRec knowledge transfer; MDC explicitly recalibrates beam-search ranking
+     - **Fairness: 4/10** — not a focus
+     - **Robustness: 7/10** — three public benchmarks, strong gains; features computed only from observable prefix (no leakage)
+     - **Impact: 8/10** — Kuaishou (major industrial GenRec player); large empirical lifts
+
+4. **UAGR: Utility-Aware Generative Recommendation**
+   * Affiliation: Kuaishou Technology, Beijing, China — *(Yang Hu, Duo Wang, Ning Li, Kang Li, Junda She, Chengcheng Guo, Kuo Cai, Bin Liu, Youhua Liu, Xiaoshuang Chen)*
+   * Link: [arxiv.org/abs/2611.02981](https://arxiv.org/abs/2611.02981)
+   * Venue: arXiv preprint, November 2026 (cs.LG); fully deployed on Kuaishou
+   * TL;DR: UAGR aligns both SID construction and beam decoding with downstream multi-objective utility, injecting item-level utility into SIDs and into beam scoring to avoid prematurely pruning high-utility paths; +0.206% online watch time at Kuaishou scale.
+   * Key techniques:
+     - Utility-Enriched Semantic Codes: inject item-level post-exposure utility into SIDs without increasing SID length or vocabulary, supporting incremental utility updates
+     - Utility-Guided Decoding: fuse multiple post-exposure outcome predictions into beam scoring, reducing premature pruning of high-utility paths
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (industrial, fully deployed)
+     - **Novelty: 8/10** — jointly fixes SID construction and beam decoding for utility alignment; tackles the premature-pruning failure mode
+     - **Fairness: 4/10** — utility-driven objective is not examined for fairness/long-tail side effects
+     - **Robustness: 8/10** — offline experiments + online A/B at Kuaishou scale (+0.206% watch time)
+     - **Impact: 9/10** — fully deployed in production at Kuaishou; concrete industrial impact
+
+5. **ICE: Beyond Independent Predictions — Learning the Browsing Journey for Sequence-Level Re-ranking**
+   * Affiliation: Alibaba Group (Taobao & Tmall), Hangzhou, China — *(Jiayi Zhang, Jingxin Hai, Zhenjia Ma, Hongbin Pei, Dagui Chen, Han Zhu, Jian Xu)*
+   * Link: [arxiv.org/abs/2611.07591](https://arxiv.org/abs/2611.07591)
+   * Venue: arXiv preprint, November 2026 (cs.IR)
+   * TL;DR: ICE replaces the Independent Behavior Modeling paradigm in Generator–Evaluator re-ranking with Joint Behavior Modeling (display -> impression -> click), cutting spurious context and capturing intra-sequence dependencies; +0.70% clicks and +3.67% revenue in a 14-day Taobao A/B.
+   * Key techniques:
+     - Joint Behavior Modeling (JBM): explicitly models display -> impression -> click to capture causal and competitive dependencies
+     - Impression-Click Evaluator (ICE): predicts browsing-depth distribution, suppresses unexposed-item context, click-distribution matching objective
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — reframes sequence-level re-ranking as joint impression/click modeling rather than independent per-item scoring
+     - **Fairness: 4/10** — not a focus
+     - **Robustness: 8/10** — diverse backbones, 14-day online A/B (Taobao +0.70% clicks, +3.67% revenue) and full-traffic deployment
+     - **Impact: 8/10** — Alibaba/Taobao production; strong online revenue uplift
 
 ---
 
@@ -1098,99 +1181,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 7/10** — 3 datasets, reordering-consistency + speedup evaluations; sound but LLM-representation dependent.
      - **Impact: 8/10** — from USTC (Xiangnan He group); addresses core failure modes (order dependence, no confidence) of generation-based recsys.
 
----
-
-
-### Papers October 27
-
-*Tuesday, October 27, 2026. The live arXiv cs.IR window (announced Oct 26, the freshest available) surfaced 4 strictly on-topic generative-recommendation papers (Octen-WebGR / 2610.35256, SLIDE / 2610.34764, DPE-Rec / 2610.34700, MuSID-KD / 2610.35218). The fifth paper (LoopGR / 2610.34157) is a strict gen-rec paper from the Oct 25 window that the Oct 25 daily run had missed (it used 3-month-pool re-hits as fallback) and is surfaced here via the missing-date fallback. 2 are open-source (Octen-WebGR / Octen, 7/10; MuSID-KD / ECNU, 6/10). By Opensource count 228 -> 230. Mindmap 30-cap held (+Octen-WebGR, +MuSID-KD; -LoopRec, -RouteRec).*
-
-1. **Octen-WebGR: Scaling Generative Retrieval to 200 Million Web Pages**
-   * Affiliation: Octen (Octen AI / Octen Team) — *(Guangwei Xu, Wenkai Zhang, Yawen Liu, Dongxu Zhang, Xijie Xu, Kuan Zou)*
-   * Link: [arxiv.org/abs/2610.35256](https://arxiv.org/abs/2610.35256)
-   * Venue: arXiv preprint (cs.IR)
-   * TL;DR: A generative retrieval framework that encodes 201 million web pages into a language model's parameters, generating a two-token semantic identifier constrained to a table of real URLs; reaches 59.6% top-1 on real navigational traffic vs 46.5% for a dense retriever, on a single 10GB GPU.
-   * Key techniques:
-     - Stores web pages in LM parameters; generates a 2-token SID constrained to a URL table
-     - Octen-WebGR-4B indexes 201M pages; evaluated on real post-training navigational traffic
-     - Complementary to embedding retrieval: GR shines on new phrasings of familiar pages, embedding on rare pages
-     - Scales sublinearly in model size vs index size; retrieval bounded by page exposure, not capacity
-     - Releases Octen-WebGR-4B / 0.6B with identifier tables and inference code
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — github.com/Octen-Team + huggingface.co/Octen; paper releases Octen-WebGR-4B/0.6B weights, identifier tables, and inference code; org actively maintained (search-API tooling), but a dedicated clean training/inference repo for WebGR not clearly found and reproducibility of the training pipeline unverified.
-     - **Novelty: 8/10** — pushes generative retrieval to web scale (200M pages) with a 2-token SID and a clear analysis of GR vs embedding complementarity.
-     - **Fairness: 2/10** — not addressed.
-     - **Robustness: 7/10** — real navigational traffic evaluation, scaling experiments to 32M URLs; single (proprietary click) training signal.
-     - **Impact: 9/10** — from a production search company, 59.6% top-1 at ~40x lower cost than frontier LLMs; strong industrial relevance for web-scale generative retrieval.
-
-2. **SLIDE: Search-to-List Item Distillation for Single-Rollout Generative Retrieval**
-   * Affiliation: Alibaba (Taobao & Tmall Group) — *(Tianyu Zhan (Zhejiang University, internship at Alibaba), Gui Ling, Ran Tao, Kunhai Lin, Tong Xiong, Wang Yang, Kaixuan Zhang, Zhihong Chen, Yuliang Yan, Dan Ou, Shengyu Zhang (Zhejiang University), Haihong Tang)*
-   * Link: [arxiv.org/abs/2610.34764](https://arxiv.org/abs/2610.34764)
-   * Venue: arXiv preprint (cs.IR)
-   * TL;DR: Decouples offline beam-search teacher search from online list generation: concatenates teacher-retrieved SIDs in beam-score order as list-wise distillation targets so the student generates the Top-K list in a single greedy pass, surpassing beam search with a stronger teacher.
-   * Key techniques:
-     - Identifies two beam-search limitations for list generation: broader search space and positional bias of scarce positives
-     - Teacher retrieves high-quality candidates via offline item-level beam search, providing conversion-relevant supervision
-     - SIDs concatenated in beam-score order form list-wise distillation targets -> single-trajectory generation
-     - Student generates Top-K in one greedy pass; decouples teacher scaling from deployment
-     - Supplementary RL experiments support list-level generation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (Alibaba industrial).
-     - **Novelty: 8/10** — clean search-to-list distillation turning beam-search retrieval into single-rollout list generation.
-     - **Fairness: 2/10** — not addressed.
-     - **Robustness: 7/10** — FORGE and Taobao Search experiments; surpasses beam-search reference with stronger teachers.
-     - **Impact: 8/10** — from Alibaba/Taobao, directly targets the dominant beam-search serving cost in generative retrieval.
-
-3. **DPE-Rec: Diversity-Preserving and Efficient Diffusion Language Model Recommendation for Bundle Construction**
-   * Affiliation: Arizona State University — *(Pingchuan Ma, Bohan Jiang, Chengshuai Zhao, Dawei Li, Huan Liu)*; Stevens Institute of Technology — *(Zhen Tan)*
-   * Link: [arxiv.org/abs/2610.34700](https://arxiv.org/abs/2610.34700)
-   * Venue: arXiv preprint (cs.IR)
-   * TL;DR: A diffusion-LLM framework for bundle completion that preserves diversity via semantic-fork-aware GRPO and improves efficiency via pseudo-trajectory distillation, reaching 63% better recommendation quality on average and 25.6x faster inference than prior generative-rec arts.
-   * Key techniques:
-     - Frames bundle construction as unordered generation; uses a diffusion LLM (bidirectional attention, multi-token reveal)
-     - Semantic-fork-aware GRPO: prioritizes semantic-fork decisions via autoregressive rollouts to preserve diversity
-     - Pseudo-trajectory distillation: concentrates learning on the trajectory-induced subspace for reliable multi-token decoding
-     - Fewer denoise steps with minimal quality loss
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code found.
-     - **Novelty: 8/10** — applies diffusion LLMs to bundle construction with diversity-preserving GRPO; fresh angle on generative recommendation.
-     - **Fairness: 3/10** — not addressed.
-     - **Robustness: 7/10** — multiple bundle-construction benchmarks; 63% avg gain, 25.6x speedup.
-     - **Impact: 7/10** — diffusion-LLM recommendation is emerging; from ASU; solid empirical contribution.
-
-4. **MuSID-KD: Multigranularity Knowledge Distillation for Generative Recommendation with Semantic IDs**
-   * Affiliation: East China Normal University — *(Fengshi Zhang, Xiyan Ding, Wei Zhang)*; Fudan University — *(Shuxiao Xie)*
-   * Link: [arxiv.org/abs/2610.35218](https://arxiv.org/abs/2610.35218)
-   * Venue: arXiv preprint (cs.AI)
-   * TL;DR: A knowledge-distillation framework (HCDA + RIGD) that transfers a powerful generative teacher's candidate-distribution hierarchy and ranking impact into a lightweight SID student without changing its inference architecture, improving accuracy and prefix-marginal / pairwise ranking alignment.
-   * Key techniques:
-     - Hierarchical Candidate Distribution Alignment (HCDA): aligns candidate distributions at successive granularity levels (groups -> items) via shared-SID-prefix aggregation
-     - Ranking Impact Guided Levelwise Distillation (RIGD): allocates supervision by the reduction in pairwise ranking surrogate loss when a student score is replaced by the teacher's
-     - Preserves the student's online inference architecture (no extra decode cost)
-     - Evaluated on real-world rec datasets with three lightweight student architectures
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 6/10** — code at anonymous.4open.science/r/m7k2-review-83f9/ (anonymous review repo, under double-blind review); matches the paper's KD method, but temporary/anonymous, no permanent org, documentation maturity unverified.
-     - **Novelty: 7/10** — multigranularity (hierarchical + ranking-impact) KD tailored to multi-token SID generation; addresses two concrete supervision gaps.
-     - **Fairness: 2/10** — not addressed.
-     - **Robustness: 6/10** — three student architectures on real datasets; gains shown but limited to the SID-KD setting.
-     - **Impact: 6/10** — practical lightweight-serving angle for generative rec; academic (ECNU/Fudan).
-
-5. **LoopGR: Parameter-Efficient Scaling for Generative Recommendation via Recurrent Depth**
-   * Affiliation: Tencent (Platform and Content Group) — *(Huizhe Zhang (Sun Yat-sen University), Yudong Li, Liang Chen (Sun Yat-sen University), Chengxiang Zhuo, Zang Li)*
-   * Link: [arxiv.org/abs/2610.34157](https://arxiv.org/abs/2610.34157)
-   * Venue: arXiv preprint (cs.IR)
-   * TL;DR: A parameter-efficient scaling framework that alternates a shared generative decoder with a lightweight context updater (recurrent depth), cutting model size by up to 52% vs an encoder-decoder baseline while improving generative-rec performance - establishing recurrent depth as a new scaling dimension.
-   * Key techniques:
-     - Hierarchical recurrent depth: shared generative decoder <-> lightweight context updater
-     - Recurrent trajectory self-distillation: distills a low-budget student from a high-budget teacher by aligning predictive distributions and evolution directions
-     - Reduces model size up to 52% while outperforming strong GR baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code found.
-     - **Novelty: 8/10** — recurrent depth as a resource-efficient scaling dimension for generative recommendation.
-     - **Fairness: 2/10** — not addressed.
-     - **Robustness: 7/10** — consistent outperformance over strong GR baselines; 52% size reduction.
-     - **Impact: 8/10** — from Tencent, addresses the core scaling-vs-cost tension in deployed generative rec.
-
 ## Papers Classic Must Read
 
 
@@ -1556,6 +1546,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | Mixture-of-Experts Knowledge Graph Retrieval-Augmented Generation for Multi-Agent LLM-based Recommendation (MixRAGRec) |
 | 7/10 | MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology — [github.com/wangyu0627/MLLMRec-R1](https://github.com/wangyu0627/MLLMRec-R1) |
 | 7/10 | MLPs are Efficient Distilled Generative Recommenders (SID-MLP) |
+| 7/10 | MV-Thinker: Think Globally, Generate Personally: Multi-View Thinking with Adaptive Generation for Generative Recommendation (MV-Thinker) — City University of Hong Kong / Tencent Platform and Content Group, arXiv 2611.02463 — [anonymous.4open.science/r/MV-Thinker](https://anonymous.4open.science/r/MV-Thinker) |
 | 7/10 | Octen-WebGR: Scaling Generative Retrieval to 200 Million Web Pages (Octen-WebGR) — Octen, arXiv 2610.35256 |
 | 7/10 | OptST: Optimizing Semantic Tokenization for LLM-Enhanced Recommendation (OptST) — Shenzhen Technology University / Shenzhen University / The Hong Kong Polytechnic University / McGill University, Findings of WSDM 2027 — [github.com/chchchchc1023/wsdm27-optst](https://github.com/chchchchc1023/wsdm27-optst) |
 | 7/10 | OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework (OneSearch-V2) |
