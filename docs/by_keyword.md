@@ -488,6 +488,7 @@
 - Statistical Detection of Positional Bias in LLM-Based Recommender Systems (POB) — University of Granada, arXiv 2610.37962
 - LLM Recommenders Produce Demographic Inequality Through Content Preferences — University of Zurich, arXiv 2610.41854 [opensource]
 - Preprocessing Choices in Fine-Tuning Data Matter: Utility and Demographic Sensitivity in LLM-Based Recommendation (Preprocessing Choices) — Istanbul Technical University, arXiv 2611.03113
+- The Popular Get More Popular: Auditing Brand Bias in Generative Search — Politecnico di Milano, arXiv 2611.07614
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -832,6 +833,7 @@
 - OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer (OneTrans-GSR) — ByteDance, arXiv 2611.04720
 
 - Utility-Aware Generative Recommendation (UAGR) — Kuaishou, arXiv 2611.02981
+- SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search (SPADE) — Meituan, arXiv 2611.04662
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation (Shallow-RHS)
@@ -1184,6 +1186,7 @@
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 - LLM-as-a-Judge for Evaluating System Responses in Conversational Music Recommendation — KAIST / Spotify, arXiv 2607.25640
 
+- IntentGEO: Intent-aware Generative Engine Optimization for Recommendation (IntentGEO) — Renmin University of China / National University of Singapore, arXiv 2611.04225
 ### LLM-based Recommendation
 - Learning to Rank Explanations for Recommendation with Language Models (LMStaR) — Sorbonne University, arXiv 2611.04775 [opensource]
 - LCM-Promo: An LLM-Based Uplift Model for Promotion Allocation (LCM-Promo) — Prosus / iFood, arXiv 2610.37570
@@ -2047,6 +2050,7 @@
 
 - MV-Thinker: Think Globally, Generate Personally: Multi-View Thinking with Adaptive Generation for Generative Recommendation (MV-Thinker) — City University of Hong Kong / Tencent, arXiv 2611.02463 [opensource]
 - HiGenTrans: Hierarchical LLM Knowledge Transfer for Generative Recommendation (HiGenTrans) — The Hong Kong Polytechnic University / Kuaishou, arXiv 2611.01129
+- SIDRec: End-to-End Semantic ID Representation and Modeling for Recommendation (SIDRec) — The Hong Kong Polytechnic University, arXiv 2611.01136
 ### Security / Adversarial
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
 - CoSimRec: Measuring Coordinated-Content Penetration in Recommender Feedback Loops (CoSimRec)

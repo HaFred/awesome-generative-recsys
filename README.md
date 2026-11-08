@@ -90,6 +90,92 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
+### Papers November 08
+
+*Sunday, November 8, 2026. The live arXiv cs.IR window for the last 24 hours (Nov 7–8) carried **no** new generative-recommendation preprints — arXiv announces Mon–Fri, and the newest submissions are dated Nov 5 (already indexed on Nov 06). Per the fallback rule, this daily section draws 5 strictly on-topic generative-rec preprints from the recent backlog (late Oct–early Nov 2026, cs.IR/cs.AI/cs.CY) that were verified absent from README, the docs indexes, and the monthly archive. Missing dates in the 10-day window (Nov 05, Oct 28) were checked: Nov 05 is represented by the brand-bias audit below and no further on-topic preprint was found for Oct 28. 0 are open-source (all five are very recent preprints, several from industry, with no public code released). By Opensource count unchanged (242). Mindmap unchanged (no new open-source papers; 30-leaf cap retained, all 3 layers kept).*
+
+1. **Where Beam Search Loses Top-Ranked Items: First-Step Coverage in Generative Recommendation**
+   * Affiliation: Ant Group, Hangzhou, China — *(Heng Yao)* — with Independent Researcher (Hanwei Zhu)
+   * Link: [arxiv.org/abs/2611.01072](https://arxiv.org/abs/2611.01072)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 31 Oct 2026)
+   * TL;DR: Identifies a "first-step coverage bottleneck" in beam-search decoding for generative recommendation (TIGER): every pruned exact top-10 path is first lost at the initial decoding step; reallocating beam width to the first SID position recovers wide-beam ranking at roughly half the prefix-capacity budget.
+   * Key techniques:
+     - First-step coverage bottleneck: empirical finding across 6 TIGER settings (3 domains × 2 SID constructions) that all pruned top-10 paths die at step 1
+     - Exact-catalog reference: isolates beam-search losses from model errors
+     - Controlled budget intervention: shifts beam width to the first SID position, raising Search Recall@10 by 0.96–10.90 pp at Beam-50's budget; reproduces Beam-100's top-10 at nominal budget 151 vs 301
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (5-page preprint; no repository released)
+     - **Novelty: 8/10** — reframes beam width as a per-position allocation problem and gives an actionable serving decision for gen-rec
+     - **Fairness: 3/10** — not a focus
+     - **Robustness: 7/10** — six settings, 77,373 test users, RQ-VAE tokenization; controlled larger-candidate experiments
+     - **Impact: 7/10** — directly affects the serving cost/quality tradeoff for deployed TIGER-style recommenders
+
+2. **SIDRec: End-to-End Semantic ID Representation and Modeling for Recommendation**
+   * Affiliation: The Hong Kong Polytechnic University, Hong Kong SAR, China — *(Zhuohang Jiang)* — with University of Electronic Science and Technology of China (Yongsen Pan), Southwest Jiaotong University (Zheng Hu), and others
+   * Link: [arxiv.org/abs/2611.01136](https://arxiv.org/abs/2611.01136)
+   * Venue: arXiv preprint, October 2026 (cs.IR, cs.AI; submitted 31 Oct 2026)
+   * TL;DR: SIDRec is an end-to-end recommendation-aware Semantic ID learning framework that jointly models content and collaborative signals and aligns SID construction with downstream recommendation objectives, fixing the semantic-mismatch and objective-mismatch limitations of prior SID methods.
+   * Key techniques:
+     - Recommendation-aware SID learning: end-to-end joint content + collaborative modeling
+     - Semantic–collaborative alignment: reduces mismatch between content semantics and collaborative preferences
+     - Objective alignment: aligns SID construction with downstream recommendation optimization
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (searched GitHub; the unrelated repo "sidivhub/Sidrec" is a JavaScript project, not this paper)
+     - **Novelty: 8/10** — end-to-end recommendation-aware SID construction targeting two concrete limitations
+     - **Fairness: 3/10** — not a focus
+     - **Robustness: 7/10** — multiple datasets and baselines reported
+     - **Impact: 7/10** — SID is core gen-rec infrastructure; academic (HK PolyU) contribution
+
+3. **SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search**
+   * Affiliation: Meituan, Beijing, China — *(Chenxu Wang)* — with one Independent co-author (Shuxian Bi)
+   * Link: [arxiv.org/abs/2611.04662](https://arxiv.org/abs/2611.04662)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 3 Nov 2026)
+   * TL;DR: SPADE frames proactive query recommendation on local-service apps as an open-set generation problem (vocabulary of millions), aligning user preference with fine-grained spatiotemporal context, covering long-tail intents, and diversifying candidates within a few slots.
+   * Key techniques:
+     - Open-set generative query recommendation: generates queries from a million-scale vocabulary
+     - Spatiotemporal preference alignment: fine-grained geographic + temporal context modeling
+     - Long-tail intent coverage and diversity enhancement within limited candidate slots
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (industrial Meituan; no repository released)
+     - **Novelty: 7/10** — frames local-search query rec as open-set generation with spatiotemporal + diversity constraints
+     - **Fairness: 4/10** — long-tail intent coverage partially addresses exposure; not a core focus
+     - **Robustness: 7/10** — industrial setting with online-oriented evaluation
+     - **Impact: 8/10** — Meituan production local search; practical generative ranking/retrieval
+
+4. **IntentGEO: Intent-aware Generative Engine Optimization for Recommendation**
+   * Affiliation: Renmin University of China, Beijing, China — *(Runlin Lei)* — with National University of Singapore (Shiqi Zhang, Xiaokui Xiao) and Zhewei Wei (Renmin University of China)
+   * Link: [arxiv.org/abs/2611.04225](https://arxiv.org/abs/2611.04225)
+   * Venue: arXiv preprint, November 2026 (cs.IR, cs.AI; submitted 3 Nov 2026)
+   * TL;DR: IntentGEO formulates intent-aware Generative Engine Optimization for recommendation, evaluating how changing user intent affects item visibility in LLM-generated responses, since a shared item description serves users with different decision goals.
+   * Key techniques:
+     - Intent-aware GEO: models visibility gain as dependent on user request / intent
+     - Intent formulation across dimensions (e.g., need specificity)
+     - Evaluation of how intent variation shifts item visibility in generative search
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (searched GitHub; no IntentGEO repository)
+     - **Novelty: 7/10** — extends GEO from content-centric to intent-aware for recommendation
+     - **Fairness: 5/10** — touches visibility equity across intents; not a deep fairness treatment
+     - **Robustness: 6/10** — evaluation-focused; limited method/baseline depth visible
+     - **Impact: 7/10** — GEO-for-rec is an emerging, practically relevant area; Renmin + NUS
+
+5. **The Popular Get More Popular: Auditing Brand Bias in Generative Search**
+   * Affiliation: Politecnico di Milano, Italy — *(Giorgio Monaco, Jacopo Lenti, Francesco Pierri)*
+   * Link: [arxiv.org/abs/2611.07614](https://arxiv.org/abs/2611.07614)
+   * Venue: arXiv preprint, November 2026 (cs.CY, cs.AI, cs.SI; submitted 5 Nov 2026)
+   * TL;DR: Audits brand popularity and familiarity bias in generative search engines, showing dominant brands are cited 1.4×–2.8× more and that authentic brand signatures give a ranking advantage content rewrites cannot overcome — a "rich-get-richer" dynamic with entry barriers.
+   * Key techniques:
+     - Two-dimensional brand-bias audit: popularity bias + familiarity (parametric-memory) bias
+     - Commercial-query evaluation across major generative engines (1,176 top brands)
+     - Controlled in-context experiments holding product attributes constant to isolate brand-signature effect
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code found (searched GitHub; none matching this audit)
+     - **Novelty: 7/10** — formalizes brand familiarity bias as a parametric-memory entry barrier in generative search
+     - **Fairness: 8/10** — directly audits provider/brand fairness and market-entry barriers
+     - **Robustness: 7/10** — large commercial-query sample plus controlled experiments
+     - **Impact: 7/10** — policy-relevant audit of LLM-driven product recommendations; Politecnico di Milano
+
+---
+
 ### Papers November 07
 
 *Saturday, November 7, 2026. The live arXiv cs.IR/cs.CL/cs.AI/cs.LG window for the last 24 hours (Nov 6-7) carried **no** new generative-recommendation preprints — arXiv announces Mon–Fri, and the newest submissions are dated Nov 5 (already indexed on Nov 06). Per the fallback rule, this daily section draws 5 strictly on-topic generative-rec preprints from the recent backlog (late Oct–early Nov) in cs.AI/cs.CL that were verified absent from README, the docs indexes, and the monthly archive. 1 is open-source (MV-Thinker / City University of Hong Kong + Tencent, 7/10). By Opensource count 241 -> 242. Mindmap updated (+MV-Thinker under Semantic ID & Tokenization; dropped LLM4Rec-CF-Bias to hold the 30-leaf cap; all 3 layers retained).*
@@ -1833,6 +1919,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - PFA: Attention Can Be Progressively Focused in Long-Sequence Generative Recommendation (PFA) — Zhejiang University / Alibaba Group, arXiv 2610.39273
 - BEAR: Towards Beam-Search-Aware Optimization for Recommendation with Large Language Models (BEAR) — Zhejiang University / The Chinese University of Hong Kong, Shenzhen / Hangzhou City University, arXiv 2601.22925
 - ZeroGR: Filtering-First Constrained Decoding for Generative Recommendation (ZeroGR) — The University of Hong Kong / Kuaishou / Peking University, arXiv 2611.04715
+- Where Beam Search Loses Top-Ranked Items: First-Step Coverage in Generative Recommendation — Ant Group, arXiv 2611.01072
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
 - Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation (GESE) — Baidu (GSPO)
