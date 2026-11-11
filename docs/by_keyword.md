@@ -79,6 +79,7 @@
 - Memory-Aware Multi-Agent Architecture with LLM-based Orchestration for Conversational Recommendation — Instituto de Ciência e Tecnologia Itaú, arXiv 2611.08718
 - IntentLens: Grounding Underspecified Multimodal Queries for Recommendation via Tool-Augmented Reasoning (IntentLens) — The Hong Kong Polytechnic University / LightSpeed, arXiv 2611.11346
 - SituRecBench: Evaluating Frontier Models as Situated Recommendation Assistants in 3D Environments (SituRecBench) — The Hong Kong Polytechnic University, arXiv 2611.10349
+- SHARP: Semantic Hierarchical Agentic Reasoning for Next POI Prediction with Dynamic Memory (SHARP) — UESTC, arXiv 2611.14220 (category predict agent + trajectory memory)
 
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -115,6 +116,7 @@
 - ZeroGR: Filtering-First Constrained Decoding for Generative Recommendation (ZeroGR) — The University of Hong Kong / Kuaishou / Peking University, arXiv 2611.04715
 - RoutingTrie: Metadata Routing for Constrained Generative Retrieval (RoutingTrie) — Shopify, arXiv 2611.11016
 - LEGIT: Live Eligibility Gating over Identifier Tries for Constrained Decoding of Heterogeneous Pages (LEGIT) — Uber Technologies, Inc., arXiv 2611.10357
+- FAIDER: Fairness-Aware Item-Level Decoding for Large Language Model Recommenders (FAIDER) — University of Illinois Urbana-Champaign, arXiv 2611.10285 (item-level hard/soft constrained decoding)
 
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
@@ -156,6 +158,7 @@
 - POI Recommendation with LLM-Augmented Multi-Graph Learning and Contrastive Alignment (LLM-MGCL)
 - Quality-Aware Collaborative Multi-Positive Contrastive Learning for Sequential Recommendation (QCMP-CL)
 - UFRec: Uncertainty-Guided Future Learning for Sequential Recommendation
+- LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation (LUMIR) — University of Klagenfurt, arXiv 2611.14004 [opensource]
 
 ### Conversational
 - Dialogue Generation for Conversational Recommendation Using User Search Interactions and Knowledge Graphs (SearCl) — KAIST & LG Electronics, arXiv 2610.25182
@@ -277,6 +280,7 @@
 - SELF-INDEX: Self-Evolving Search Index (SELF-INDEX) — Yonsei University, arXiv 2609.19656
 - Epistemic Warrant for LLM Recommendations: Characterizing the Basis for Reliance When Ground Truth Is Unavailable — Purdue University / University of Pennsylvania, arXiv 2609.04127
 - When More Data Is Not Enough: The Context-Sufficiency Frontier in Generative AI Personalization (Context-Sufficiency) — ABYAT, arXiv 2610.00654
+- From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations (CFX-Narratives) — Czech Technical University in Prague / University of Innsbruck, arXiv 2611.13914 [opensource]
 
 ### Diffusion
 - Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
@@ -386,6 +390,8 @@
 - tau-Rec-Books: A Disclosure-Controlled Benchmark for Requirement Elicitation in Agentic Recommender Systems (tau-Rec-Books) — Princeton University, arXiv 2611.04459 [opensource]
 - IntentLens: Grounding Underspecified Multimodal Queries for Recommendation via Tool-Augmented Reasoning (IntentLens) — The Hong Kong Polytechnic University / LightSpeed, arXiv 2611.11346
 - SituRecBench: Evaluating Frontier Models as Situated Recommendation Assistants in 3D Environments (SituRecBench) — The Hong Kong Polytechnic University, arXiv 2611.10349
+- Benchmarking LLM Next-Step Recommendations with Knowledge Space Theory (KST-Benchmark) — St.Gallen University of Teacher Education, arXiv 2611.13667 [opensource]
+- From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations (CFX-Narratives) — Czech Technical University in Prague / University of Innsbruck, arXiv 2611.13914 [opensource]
 
 ### Fairness
 - What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User (LLM4Rec-CF-Bias) — University of California, San Diego, arXiv 2611.07588 [opensource]
@@ -467,6 +473,8 @@
 - Preprocessing Choices in Fine-Tuning Data Matter: Utility and Demographic Sensitivity in LLM-Based Recommendation (Preprocessing Choices) — Istanbul Technical University, arXiv 2611.03113
 - The Popular Get More Popular: Auditing Brand Bias in Generative Search — Politecnico di Milano, arXiv 2611.07614
 - Not All Branches Are Equal: Adaptive Semantic ID Construction for Generative Recommendation (AST) — Ben-Gurion University of the Negev, arXiv 2611.11549
+- FAIDER: Fairness-Aware Item-Level Decoding for Large Language Model Recommenders (FAIDER) — University of Illinois Urbana-Champaign, arXiv 2611.10285 (conformal-calibrated counterfactual disparity control)
+- CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, arXiv 2611.08566 [opensource; -30% NDCG@10 for sparse-history users under uniform LLM reranking]
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -672,6 +680,8 @@
 - TS-GEAR: Taobao Shangou GEnerative Ad Retrieval (TS-GEAR) — Alibaba Group, arXiv 2611.12180
 - Not All Branches Are Equal: Adaptive Semantic ID Construction for Generative Recommendation (AST) — Ben-Gurion University of the Negev, arXiv 2611.11549
 - SepLRM: A Foundation Model Paradigm for Recommendation (SepLRM) — ByteDance, arXiv 2611.10356
+- SHARP: Semantic Hierarchical Agentic Reasoning for Next POI Prediction with Dynamic Memory (SHARP) — UESTC, arXiv 2611.14220 (RQ-VAE SIDs jointly optimized with a category-guided POI predictor)
+- RedMall: Generative Recommendation for Large-Scale E-commerce (RedMall) — Xiaohongshu / Tongji University, arXiv 2611.08519 (hierarchical SIDs + session-wise multi-target prediction)
 
 ### Generative Retrieval / Ranking
 - Generative Retrieval under Real-Time Supply Constraints in Local Commerce (RTP-LLM) — Tsinghua University, arXiv 2611.06323
@@ -1075,6 +1085,9 @@
 - RoutingTrie: Metadata Routing for Constrained Generative Retrieval (RoutingTrie) — Shopify, arXiv 2611.11016
 - LEGIT: Live Eligibility Gating over Identifier Tries for Constrained Decoding of Heterogeneous Pages (LEGIT) — Uber Technologies, Inc., arXiv 2611.10357
 - SepLRM: A Foundation Model Paradigm for Recommendation (SepLRM) — ByteDance, arXiv 2611.10356
+- CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, IAAI-27, arXiv 2611.08566 [opensource]
+- RedMall: Generative Recommendation for Large-Scale E-commerce (RedMall) — Xiaohongshu / Tongji University, arXiv 2611.08519
+- SeqFold: Timestamp-Addressable Compressed States for User Action Sequence Backbones (SeqFold) — Coupang, arXiv 2611.13704
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1092,6 +1105,7 @@
 - Birds of a Feather Cluster Nearby: A Proximity-Aware Geo-Codebook for Local Service Recommendation
 - Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
 - Recommender System as Slow and Fast Thinkers (DS-Frame)
+- CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, arXiv 2611.08566 [opensource]
 
 ### Inference Acceleration / Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
@@ -1125,6 +1139,7 @@
 - RoutingTrie: Metadata Routing for Constrained Generative Retrieval (RoutingTrie) — Shopify, arXiv 2611.11016
 - LEGIT: Live Eligibility Gating over Identifier Tries for Constrained Decoding of Heterogeneous Pages (LEGIT) — Uber Technologies, Inc., arXiv 2611.10357
 - SepLRM: A Foundation Model Paradigm for Recommendation (SepLRM) — ByteDance, arXiv 2611.10356
+- SeqFold: Timestamp-Addressable Compressed States for User Action Sequence Backbones (SeqFold) — Coupang, arXiv 2611.13704 (3,400x compressed timestamp-addressable user states)
 
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
@@ -1415,6 +1430,11 @@
 - IntentGEO: Intent-aware Generative Engine Optimization for Recommendation (IntentGEO) — Renmin University of China / National University of Singapore, arXiv 2611.04225
 - IntentLens: Grounding Underspecified Multimodal Queries for Recommendation via Tool-Augmented Reasoning (IntentLens) — The Hong Kong Polytechnic University / LightSpeed, arXiv 2611.11346
 - SituRecBench: Evaluating Frontier Models as Situated Recommendation Assistants in 3D Environments (SituRecBench) — The Hong Kong Polytechnic University, arXiv 2611.10349
+- LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation (LUMIR) — University of Klagenfurt, arXiv 2611.14004 [opensource]
+- From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations (CFX-Narratives) — Czech Technical University in Prague / University of Innsbruck, arXiv 2611.13914 [opensource]
+- Benchmarking LLM Next-Step Recommendations with Knowledge Space Theory (KST-Benchmark) — St.Gallen University of Teacher Education, arXiv 2611.13667 [opensource]
+- CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, arXiv 2611.08566 [opensource]
+- FAIDER: Fairness-Aware Item-Level Decoding for Large Language Model Recommenders (FAIDER) — University of Illinois Urbana-Champaign, arXiv 2611.10285
 
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
@@ -1491,6 +1511,7 @@
 - MixRAGRec: MoE KG-RAG for Multi-Agent LLM Recommendation
 - OneMall
 - RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation (RouteRec) — KAIST / Seoul National University, arXiv 2609.39007 [opensource]
+- RedMall: Generative Recommendation for Large-Scale E-commerce (RedMall) — Xiaohongshu / Tongji University, arXiv 2611.08519 (sparse mixture-of-experts generative recommender)
 
 ### Multi-behavior Recommendation
 - BITRec
@@ -1601,6 +1622,7 @@
 - NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model (NEXT) — Meta Platforms, arXiv 2607.24789
 - IntentLens: Grounding Underspecified Multimodal Queries for Recommendation via Tool-Augmented Reasoning (IntentLens) — The Hong Kong Polytechnic University / LightSpeed, arXiv 2611.11346
 - SituRecBench: Evaluating Frontier Models as Situated Recommendation Assistants in 3D Environments (SituRecBench) — The Hong Kong Polytechnic University, arXiv 2611.10349
+- LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation (LUMIR) — University of Klagenfurt, arXiv 2611.14004 [opensource]
 
 ### Optimizer
 - MuonRec
@@ -1656,6 +1678,7 @@
 - Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking (ICE) — Alibaba (Taobao), arXiv 2611.07591
 - Memory-Aware Multi-Agent Architecture with LLM-based Orchestration for Conversational Recommendation — Instituto de Ciência e Tecnologia Itaú, arXiv 2611.08718
 - IntentLens: Grounding Underspecified Multimodal Queries for Recommendation via Tool-Augmented Reasoning (IntentLens) — The Hong Kong Polytechnic University / LightSpeed, arXiv 2611.11346
+- CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, IAAI-27, arXiv 2611.08566 [opensource]
 
 ### Reasoning
 - Deliberate Latent Reasoning for Sequential Recommendation (DESRec) — Renmin University of China, arXiv 2611.06521
@@ -1768,6 +1791,7 @@
 - ReuseGR: Offline-Online Decoupled Generative Retrieval via Adaptive Prefix Reuse (ReuseGR) — Xidian University / Alibaba International, arXiv 2611.04259
 - OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer (OneTrans-GSR) — ByteDance, arXiv 2611.04720
 - TS-GEAR: Taobao Shangou GEnerative Ad Retrieval (TS-GEAR) — Alibaba Group, arXiv 2611.12180
+- RedMall: Generative Recommendation for Large-Scale E-commerce (RedMall) — Xiaohongshu / Tongji University, arXiv 2611.08519 (GRPO + auxiliary LambdaRank loss)
 
 ### Retrieval / Representation
 - ARMED: Adaptive Retrieval-Augmented Medication Recommendation (ARMED) — UX Factory / KAIST, ICTAI 2026, arXiv 2610.16440
@@ -1815,6 +1839,8 @@
 - Think Thrice Before Reranking: Multi-perspective Evidence and Reasoning Integration for Text Reranking (MERIT-Rank) — Honor Device Co., Ltd, arXiv 2609.20131
 - Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders (REPAIR) — IIIT Delhi, arXiv 2610.01270
 - RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego, retrieval-augmented generative CRS — arXiv 2604.04457 [opensource]
+- LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation (LUMIR) — University of Klagenfurt, arXiv 2611.14004 [opensource]
+- SeqFold: Timestamp-Addressable Compressed States for User Action Sequence Backbones (SeqFold) — Coupang, arXiv 2611.13704
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -2001,6 +2027,9 @@
 - TS-GEAR: Taobao Shangou GEnerative Ad Retrieval (TS-GEAR) — Alibaba Group, arXiv 2611.12180
 - Not All Branches Are Equal: Adaptive Semantic ID Construction for Generative Recommendation (AST) — Ben-Gurion University of the Negev, arXiv 2611.11549
 - RoutingTrie: Metadata Routing for Constrained Generative Retrieval (RoutingTrie) — Shopify, arXiv 2611.11016
+- SHARP: Semantic Hierarchical Agentic Reasoning for Next POI Prediction with Dynamic Memory (SHARP) — UESTC, arXiv 2611.14220 (RQ-VAE SIDs)
+- SeqFold: Timestamp-Addressable Compressed States for User Action Sequence Backbones (SeqFold) — Coupang, arXiv 2611.13704 (Lookup-Free Quantization of user states)
+- RedMall: Generative Recommendation for Large-Scale E-commerce (RedMall) — Xiaohongshu / Tongji University, arXiv 2611.08519 (SID encoder for layer-wise dependencies)
 
 ### Sequential Modeling / RoPE
 - Compote: Collapse-Resistant Multiple Hypothesis Learning for Sequential Recommendation (Compote) — Criteo AI Lab / Sorbonne Université CNRS ISIR, arXiv 2610.37005
@@ -2089,6 +2118,8 @@
 - Think Harder Where It Matters: Item-Level Adaptive Recursion for Sequential Recommendation (LoopRec) — Renmin University of China, arXiv 2610.30128 [opensource]
 - Read More, Reason Deeper: Latent Workspaces for Long-Sequence Recommendation (LWR) — Meta, arXiv 2610.39188
 - Category-Anchored Large Language Models for Next POI Recommendation (ANCHOR) — Harbin Institute of Technology Shenzhen / City University of Hong Kong, arXiv 2610.39518
+- LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation (LUMIR) — University of Klagenfurt, arXiv 2611.14004 [opensource]
+- SeqFold: Timestamp-Addressable Compressed States for User Action Sequence Backbones (SeqFold) — Coupang, arXiv 2611.13704
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey

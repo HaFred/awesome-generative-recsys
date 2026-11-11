@@ -43,6 +43,8 @@ mindmap
       Ranking & Reranking
         InvariRank -- RMIT
         LLM-as-Judge -- CityU HK
+        CFX-Narratives -- Czech Technical U in Prague
+        CascadeRec -- Workday AI Research
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
@@ -50,23 +52,21 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
-        tau-Rec-Books -- Princeton University
+        KST-Benchmark -- St.Gallen U of Teacher Education
       Efficient Decoding
         STATIC -- Google
       Optimization & Scaling
         MuonRec -- SJTU / Kuaishou
         Tencent Advertising -- Tencent
-        LION -- NUS / Meta
-        KL-MOPD -- Zhejiang U / Alibaba
     Feature Layer: Item Representation & Tokenization
       Semantic ID & Tokenization
         Latte -- UCSD
         FORGE SID -- Zhejiang U / Alibaba
         DACT -- Fudan U
         CHAP -- USTC
-        OptST -- Shenzhen Tech U
         MV-Thinker -- City University of Hong Kong / Tencent
         Semantic-ID-Tutorial -- Huawei Ireland / UCD
+        LUMIR -- University of Klagenfurt
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -87,6 +87,156 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 ## By Date
 
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
+### Papers November 11
+
+*Wednesday, November 11, 2026. The live arXiv 24-hour window (the Wednesday cs.IR announcement; submissions dated 10 Nov) surfaced only 4 strictly on-topic generative / LLM-recommendation preprints — SHARP / 2611.14220, LUMIR / 2611.14004, SeqFold / 2611.13704 and CFX-Narratives / 2611.13914 — **below the 5-paper floor, so the fallback chain was applied and is disclosed here**. (1) Missing dates inside the README's 10-day window were checked: `date_list = [2026-11-05]` (there is still no `### Papers November 05` section); that date supplies CascadeRec / 2611.08566 and RedMall / 2611.08519. (2) Papers published from the last summary date (November 10) through today were searched, yielding FAIDER / 2611.10285 (v2 posted 10 Nov) and the KST next-step-recommendation benchmark / 2611.13667. (3) The last-3-month keyword pool was checked for further gaps. 8 papers total, all verified absent from README.md, both docs indexes and every monthly archive (991-ID dedup set). 4 are open-source (CFX-Narratives 8/10; LUMIR, KST-Benchmark and CascadeRec 7/10), so By Opensource count 243 -> 247. Mindmap 30-leaf cap held (+4 leaves; dropped four tied-lowest 7/10 leaves — LION, KL-MOPD, tau-Rec-Books, OptST; all three layers retained). Excluded from the live window as off-topic: the taxonomy-induction agent TIGA / 2611.13966, feature-invariant A/B scaling laws / 2611.13539, the information-seeking post-training survey / 2611.14149 and the tourism data-quality position paper / 2611.13972.*
+
+1. **SHARP: Semantic Hierarchical Agentic Reasoning for Next POI Prediction with Dynamic Memory**
+   * Affiliation: University of Electronic Science and Technology of China, Chengdu, China — *(Yuhang Zhan, Silin Zhou, Zhuo Chen, Haoxiang Lei, Yunren Feng, Lisi Chen, Shuo Shang)*
+   * Link: [arxiv.org/abs/2611.14220](https://arxiv.org/abs/2611.14220)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 10 Nov 2026)
+   * TL;DR: An agentic hierarchical next-POI recommender that predicts the next category first with dynamic trajectory memory, then generates the POI from RQ-VAE semantic IDs conditioned on that category.
+   * Key techniques:
+     - Trajectory memory agent keeps a dynamic mobility-pattern bank that tracks behavioural drift without unbounded LLM context growth
+     - Multi-granularity time-aware category transition graphs with global and time-conditioned views preserve temporal regularities lost to global aggregation
+     - Category predict agent fuses graph evidence with trajectory memory to propose likely next categories
+     - RQ-VAE semantic IDs (SIDs) give POIs discrete generative representations, jointly optimized end-to-end with a category-guided POI predictor
+     - Average gains of +5.29 pts Acc@5 and +4.52 pts Acc@10 over the strongest baseline on three real-world datasets
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (no repository or artifact link in the paper or on arXiv)
+     - **Novelty: 8/10** — couples LLM agentic category reasoning, dynamic memory and RQ-VAE SIDs in one generative POI pipeline rather than bolting an LLM onto a graph model
+     - **Fairness: 3/10** — no exposure, popularity, cold-start or demographic analysis; POI datasets only
+     - **Robustness: 8/10** — three real-world datasets, two accuracy metrics and an explicit memory/graph ablation story
+     - **Impact: 7/10** — strong academic result on next-POI generation; no industrial deployment or released artifact yet
+
+2. **LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation**
+   * Affiliation: University of Klagenfurt, Klagenfurt am Wörthersee, Austria — *(Zehui Wang, Wolfram Höpken, Dietmar Jannach)*
+   * Link: [arxiv.org/abs/2611.14004](https://arxiv.org/abs/2611.14004)
+   * Venue: DaQuaMRec Workshop co-located with ACM RecSys 2026; arXiv preprint, November 2026 (cs.IR / cs.LG / cs.MM)
+   * TL;DR: Learns reusable POI representations once with LLM-based semantic unification plus contrastive interaction-aware fusion, then plugs them into several sequential recommendation backbones.
+   * Key techniques:
+     - Heterogeneous modalities (metadata, reviews, photos) are semantically unified into one textual representation space using LLMs
+     - Interaction-aware cross-modal fusion trained with contrastive objectives, decoupled from any downstream model architecture or loss
+     - Sequential interaction signals enter as a structural constraint on representation learning rather than as a task-specific head
+     - Evaluated across multiple next-POI sequential backbones (GRU4Rec, SASRec, BERT4Rec) on accuracy and beyond-accuracy metrics
+     - Public code plus a Hugging Face Yelp multimodal recommendation dataset release
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/wzehui/LUMIR](https://github.com/wzehui/LUMIR) + HF dataset: 118 files with full backbones, evaluation metrics (coverage, Gini, novelty, serendipity, NDCG) and a readable README matching the paper; no LICENSE, no pinned environment/requirements file, 0 stars, last push Aug 2026 and no CI or issue activity
+     - **Novelty: 7/10** — decoupling representation learning from downstream optimization is a clean reframing, though LLM-unified multimodal fusion itself is well trodden
+     - **Fairness: 5/10** — reports beyond-accuracy metrics including coverage and Gini, but no demographic or exposure-fairness audit
+     - **Robustness: 8/10** — multiple sequential backbones, several datasets/modalities, both accuracy and beyond-accuracy evaluation
+     - **Impact: 6/10** — workshop paper with reusable code and data; useful building block rather than a paradigm shift
+
+3. **SeqFold: Timestamp-Addressable Compressed States for User Action Sequence Backbones**
+   * Affiliation: Coupang, Mountain View, United States — *(Mianwei Zhou, Duo Zhang, Henry Tsai, Yuqi Zheng, Jian Li et al.)*
+   * Link: [arxiv.org/abs/2611.13704](https://arxiv.org/abs/2611.13704)
+   * Venue: arXiv preprint, November 2026 (cs.AI / cs.SI; submitted 10 Nov 2026)
+   * TL;DR: Exports a frozen long-history user-sequence backbone as timestamp-addressable discrete codes, so downstream generative/ranking models can reuse the state at any past timestamp at 3,400x less storage.
+   * Key techniques:
+     - Multi-layer hidden states of a frozen long-history backbone are compressed with Lookup-Free Quantization into compact discrete codes
+     - Task-specific decoders map the shared codes into flexible embedding spaces for many downstream objectives instead of retraining one representation per task
+     - Timestamp-addressable export: the state at time t summarizes only actions before t, avoiding label leakage in training backfill
+     - Fused streaming implementation updates the fusion recurrence after every action but materializes states only at target timestamps
+     - Large-scale proprietary evaluation: 3,400x per-state storage reduction while preserving most downstream ranking quality
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (industrial system; proprietary datasets and no repository link)
+     - **Novelty: 8/10** — reframes sequence-backbone reuse as quantized, timestamp-addressable state export rather than another encoder or objective
+     - **Fairness: 2/10** — no bias, exposure or group-level analysis; purely an infrastructure contribution
+     - **Robustness: 8/10** — large-scale proprietary evaluation with an explicit storage-vs-ranking-quality trade-off and a streaming implementation
+     - **Impact: 8/10** — directly addresses the cost of long user histories in industrial generative/ranking stacks; Coupang deployment relevance
+
+4. **From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations**
+   * Affiliation: Faculty of Information Technology, Czech Technical University in Prague, Prague, Czechia — *(Vojtech Cahlik)* — with the Department of Computer Science, University of Innsbruck, Austria
+   * Link: [arxiv.org/abs/2611.13914](https://arxiv.org/abs/2611.13914)
+   * Venue: CIKM 2026 (ACM, Rome, Italy); arXiv preprint, November 2026 (cs.AI / cs.IR)
+   * TL;DR: Uses preference-optimized LLMs to turn long counterfactual edit lists for recommender outputs into short, human-readable narratives about higher-level preference patterns.
+   * Key techniques:
+     - LLM mediators summarize raw counterfactual explanation (CFX) interaction edits into concise natural-language preference narratives
+     - Correctness, informativeness and linguistic quality are optimized with preference optimization rather than generic prompting
+     - Human-calibrated metrics derived from separately human-labeled datasets replace the usual edit-count-only evaluation
+     - Tested across multiple counterfactual generators (LXR, SPINRec) and backbone language models on MovieLens-1M
+     - Packaged pipeline with dataset export, evaluation scripts and human-feedback model calculation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/vcahlik/from-counterfactual-edits-to-human-narratives](https://github.com/vcahlik/from-counterfactual-edits-to-human-narratives): MIT licensed, pyproject.toml, packaged `recsys_nle` source, human-labeled datasets, reproduction/shell scripts and CIKM'26 DOI badges; actively pushed 11 Nov 2026; 0 stars and no CI badge keep it below a perfect score
+     - **Novelty: 7/10** — shifts CFX evaluation from edit minimality to user-centred narrative quality, a genuine gap in explainable RecSys
+     - **Fairness: 4/10** — transparency/actionability is user-facing, but protected groups and exposure disparity are not studied
+     - **Robustness: 8/10** — multiple CFX generators, multiple LLMs, human-calibrated metrics and released data
+     - **Impact: 7/10** — CIKM'26 with full reproducibility; likely to become a reference evaluation for generative explanations
+
+5. **Benchmarking LLM Next-Step Recommendations with Knowledge Space Theory**
+   * Affiliation: Institute of Educational Psychology, St.Gallen University of Teacher Education (PHSG), St. Gallen, Switzerland — *(Peter Steiner, Jan Hochweber)*
+   * Link: [arxiv.org/abs/2611.13667](https://arxiv.org/abs/2611.13667)
+   * Venue: arXiv preprint, November 2026 (cs.AI; submitted 10 Nov 2026)
+   * TL;DR: Uses Knowledge Space Theory to derive admissible knowledge states as a formal reference set for scoring LLM-generated next-step recommendations.
+   * Key techniques:
+     - Derives all admissible knowledge states and their complete immediate next-step sets from a task catalogue plus a prerequisite relation
+     - Scores generated recommendation sets by exact-set agreement against that formal reference instead of human preference labels
+     - 2,400 responses from six models across four mathematics domains, four prompt conditions and two catalogue orders
+     - Exact-set accuracy 61.3% (descriptions) -> 62.8% (reconstruct prerequisites) -> 96.3% (supplied relations) -> 98.2% (full knowledge space), with 85.25% cross-order agreement
+     - Released companion notebook, ground-truth domain files and reproduced result tables with a reproducibility script
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/pstnr/Benchmarking-LLM-Next-Step-Recommendations-with-Knowledge-Space-Theory](https://github.com/pstnr/Benchmarking-LLM-Next-Step-Recommendations-with-Knowledge-Space-Theory): 26 files, Jupyter companion, reproduce.py, domain ground truth, verification/result CSVs, LICENSE/CITATION.cff; raw LLM responses are not shipped and the README still says no arXiv ID exists, so documentation lags the preprint
+     - **Novelty: 6/10** - KST as a formal reference for LLM recommendation sets is a neat idea, but the benchmark is narrow and mostly an evaluation methodology
+     - **Fairness: 4/10** — reports model/domain variance and order-consistency, but no learner or demographic fairness analysis
+     - **Robustness: 7/10** — 2,400 controlled responses, four prompt conditions, two catalogue orders, reproducible companion; single educational domain family
+     - **Impact: 5/10** — useful for educational recommenders; limited relevance to industrial generative RecSys
+
+6. **CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation**
+   * Affiliation: Workday AI Research, United States — *(Kai Zhao, Guilin Zhang, Xiang Cheng, Xiquan Cui, Henry Heng, Xu Chu, Alet Blanken)*
+   * Link: [arxiv.org/abs/2611.08566](https://arxiv.org/abs/2611.08566)
+   * Venue: IAAI-27 (Oral); arXiv preprint, November 2026 (cs.IR / cs.AI / cs.LG; submitted 5 Nov 2026)
+   * TL;DR: A production two-tier LLM reranking cascade that escalates only the requests likely to benefit from expensive inference, cutting cost ~10% while documenting where LLM reranking actually hurts cold users.
+   * Key techniques:
+     - Lightweight Tier-1 model reranks every request; a router escalates selected requests to a Tier-2 procedure (self-consistency sampling, multi-path reasoning or a larger model)
+     - Segment-gated rollout instead of blanket escalation, motivated by domain-dependent segment benefit
+     - Public-benchmark evaluation on MovieLens-1M and Amazon-Electronics with paired-bootstrap confidence intervals, since tenant data cannot be released
+     - Reports that uniform LLM reranking drops NDCG@10 by up to 30% for sparse-history users and that escalating cold users can amplify the loss
+     - Production A/B over a month on AWS EKS / GKE: ~10% inference-cost reduction with no observed quality regression and minimal latency impact, plus serving-layer parsing-failure handling
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/GuilinDev/llm-cascade-reranking](https://github.com/GuilinDev/llm-cascade-reranking): complete offline pipeline (src routers/llm/metrics, scripts, requirements.txt, cached Tier-1 outputs, all IAAI experiment JSONs and figure scripts) matching the paper; no LICENSE, 0 stars, no CI, and proprietary tenant data is necessarily withheld
+     - **Novelty: 7/10** — adaptive compute routing for LLM reranking is not new in general, but the segment-gated deployment and negative cold-user finding are concrete
+     - **Fairness: 7/10** — explicitly quantifies harm to sparse-history users (-30% NDCG@10) and refuses to escalate them, a real user-group fairness analysis
+     - **Robustness: 9/10** — month-long production A/B plus public benchmarks, significance testing, latency accounting and explicit failure-mode discussion
+     - **Impact: 8/10** — IAAI-27 Oral with a deployed system and an actionable caution against blanket LLM reranking
+
+7. **RedMall: Generative Recommendation for Large-Scale E-commerce**
+   * Affiliation: Xiaohongshu Inc., Shanghai, China — *(Kunyang Zhou)* — with Tongji University
+   * Link: [arxiv.org/abs/2611.08519](https://arxiv.org/abs/2611.08519)
+   * Venue: arXiv preprint (cs.IR), work in progress, October/November 2026
+   * TL;DR: An industrial generative recommender that treats Semantic IDs as hierarchical objects, adds session-wise multi-target prediction, and combines GRPO with a LambdaRank loss for list-wise alignment.
+   * Key techniques:
+     - Lightweight SID encoder explicitly models layer-wise dependencies, fixing the usual flattening of SIDs into one-dimensional token sequences
+     - Sparse mixture-of-experts, dual gated attention and multi-target prediction scale the model and optimize session-wise rather than next-token-only recommendation
+     - Exposure-aware loss treats exposed-but-unclicked items as explicit negative feedback
+     - Group Relative Policy Optimization augmented with an auxiliary LambdaRank loss aligns generated lists with both real user feedback and ranking objectives
+     - Four public datasets (Amazon Beauty/Toys/Food, MovieLens-1M) plus online A/B: +2.24% ADVV and +0.59% CTR in e-commerce advertising
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (industrial work-in-progress system; no repository link)
+     - **Novelty: 8/10** — combining SID layer-wise encoding, session-wise multi-target prediction and ranking-aware GRPO in one deployed GR stack is a substantive integration
+     - **Fairness: 4/10** - exposure-aware negatives acknowledge presentation bias, but no item-exposure or group fairness analysis
+     - **Robustness: 9/10** — four public datasets, all reported Recall/NDCG metrics and online A/B tests with business KPIs
+     - **Impact: 9/10** — rare end-to-end industrial GR design with measured advertising revenue/CTR lifts at large e-commerce scale
+
+8. **FAIDER: Fairness-Aware Item-Level Decoding for Large Language Model Recommenders**
+   * Affiliation: University of Illinois Urbana-Champaign, Urbana, United States — *(Ziwei Wu, Jingrui He)*
+   * Link: [arxiv.org/abs/2611.10285](https://arxiv.org/abs/2611.10285)
+   * Venue: arXiv preprint (cs.AI; v1 6 Nov 2026, v2 10 Nov 2026)
+   * TL;DR: Controls counterfactual demographic disparity in LLM recommenders at decoding time by selecting complete item candidates, without access to model weights or full-vocabulary logits.
+   * Key techniques:
+     - Separates the definition of a fairness violation from how strongly generation is constrained
+     - Conformal-inspired empirical calibration fixes a cross-group semantic-disparity threshold from sampled item continuations
+     - Online decoding applies either hard filtering or a soft penalty with dual-inspired feedback to hit a prescribed violation rate
+     - Pathwise guarantee: under uniform enforceability, the soft decoder's empirical violation rate exceeds the target by at most O(1/T)
+     - Soft variant improves both measured semantic fairness and ranking quality over prompt-repair baselines, with a better fairness–utility trade-off than the hard variant
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (no repository or artifact link in the v2 paper or on arXiv)
+     - **Novelty: 8/10** — item-level constrained decoding with conformal calibration is a genuinely different access model from tuning-based fairness fixes
+     - **Fairness: 10/10** — the entire contribution is a measurable, theoretically bounded counterfactual demographic-disparity control with fairness–utility evaluation
+     - **Robustness: 8/10** — formal guarantee plus multiple recommendation benchmarks, LLM backbones and hard/soft ablation
+     - **Impact: 7/10** — strong fairness methodology for black-box LLM recommenders; academic rather than deployed
 
 ---
 
@@ -657,6 +807,7 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 7/10** — three datasets, five backbones, counterfactual analyses
      - **Impact: 6/10** — explanation ranking niche; Sorbonne / AgroParisTech
 
+---
 
 ### Papers November 04
 
@@ -781,6 +932,7 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 7/10** — programmatically reproducible scoring across 4 agents and 2 interfaces, with mixed/hidden ablations
      - **Impact: 7/10** — Princeton; extends the RecSys 2026 tau-Rec evaluation resource for agentic rec
 
+---
 
 ### Papers November 03
 
@@ -885,6 +1037,7 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Robustness: 6/10** — evaluated on rec benchmarks; ablations on teacher selection
      - **Impact: 7/10** — from PolyU / NTU; relevant to reasoning LLM recsys
 
+---
 
 ### Papers November 02
 
@@ -969,6 +1122,8 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Fairness: 3/10** — not addressed
      - **Robustness: 6/10** — narrative benchmarks; structured-graph ablation limited
      - **Impact: 6/10** — from IIE CAS; advances narrative-driven rec structuring
+
+---
 
 ### Papers November 01
 
@@ -1058,163 +1213,6 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Fairness: 2/10** — not addressed
      - **Robustness: 8/10** — 9 real-world benchmarks, +12.92% NDCG@10 and +7.49% Recall@10 over strongest baselines
      - **Impact: 8/10** — strong empirical gains on long semantic IDs; multi-institution
-
-### Papers October 31
-
-*Saturday, October 31, 2026. The live arXiv cs.IR window (papers dated Oct 30-31) carried no strictly on-topic generative-recommendation submissions newer than the Oct 30 run (the 5 newest cs.IR preprints, 2610.39470/39273/38378/37973/37962, were already indexed Oct 30). Per the fallback rule we drew 9 genuinely-new on-topic papers from the last-3-month keyword pool. All 9 were verified absent from README, the docs indexes, AND the monthly archive (5 of the initially scoped candidates were dropped because they had already been indexed and archived by a prior run). 0 are open-source (no public code). By Opensource count unchanged (233). Mindmap unchanged (it tracks only open-source papers).*
-
-1. **LightCRS: Lightweight Multi-Domain Conversational Recommendation System**
-   * Affiliation: University of Sydney, NSW, Australia / Nankai University, Tianjin, China — *(He Ma, Lan You, Qiyang Wu, Chen Liu)*
-   * Link: [arxiv.org/abs/2610.26948](https://arxiv.org/abs/2610.26948)
-   * Venue: arXiv preprint (cs.IR; cs.MM); under review
-   * TL;DR: A lightweight query-conditioned framework for unified multi-domain multimodal conversational recommendation: offline-frozen multimodal product encoders plus a shared 5.3M-parameter query-conditioned cross-attention fusion module and an inter-candidate Transformer, evaluated on a new 25-domain MM-R2A-25 benchmark built from Reddit dialogues and Amazon listings (HR@1 +35.4% over the strongest baseline, 266x lower per-query latency).
-   * Key techniques:
-     - Precompute multimodal product representations offline with frozen encoders
-     - A compact 5.3M-parameter query-conditioned cross-attention fusion shared across all domains
-     - Inter-candidate Transformer for joint candidate comparison
-     - MM-R2A-25: a 25-domain benchmark pairing Reddit recommendation dialogues with Amazon product listings
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code released.
-     - **Novelty: 8/10** — clean multi-domain cost-accuracy solution via a tiny shared fusion module over frozen encoders.
-     - **Fairness: 2/10** — not addressed.
-     - **Robustness: 7/10** — 25-domain benchmark with HR@1/NDCG@5/MRR.
-     - **Impact: 7/10** — from U Sydney / Nankai; tackles the per-domain VLM scaling problem in multimodal CRS.
-
-2. **SimInter: Evidence-Grounded User Simulation with Interview-Based Profile Enrichment for Conversational Recommender Systems**
-   * Affiliation: University of Tehran, Tehran, Iran — *(Erfan Shahabi, Amirhossein Roshandel, Mohammad Sadegh Sadeghi, Azadeh Shakery; Shakery also Institute for Research in Fundamental Sciences, IPM)*
-   * Link: [arxiv.org/abs/2610.18308](https://arxiv.org/abs/2610.18308)
-   * Venue: arXiv preprint (cs.CL; cs.IR); under review
-   * TL;DR: A CRS user-simulation pipeline that enriches static profiles with implicit behavioral attributes (decision style, aspect-level preferences, domain expertise) via synthetic two-agent LLM interviews grounded in the user's statistical profile and history, with a turn-level audit agent flagging fabrication and stereotyping; on 300 simulated ReDial users it raises aspect entropy 0.859 to 1.619 and humans support 94.3% of enriched claims.
-   * Key techniques:
-     - Two-agent synthetic interview for profile enrichment
-     - Grounding in the user's statistical profile and historical conversational evidence
-     - Turn-level audit agent flagging potential fabrication and stereotyping
-     - Evaluation against the KBRD and UniCRS recommenders
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (cites Tencent Hy3 as a component, not the paper's own repo).
-     - **Novelty: 8/10** — grounds profile enrichment in interviews with an explicit fabrication/stereotyping auditor.
-     - **Fairness: 3/10** — the audit agent explicitly counters stereotyping.
-     - **Robustness: 7/10** — 300 users, 100 matched subset, paired tests with Holm-adjusted p < 0.001, human evaluation.
-     - **Impact: 7/10** — improves CRS evaluation reliability via richer, audited simulators.
-
-3. **Multi-Modal Semantic Expansion with Constrained LLM Reranking for Conversational Music Recommendation**
-   * Affiliation: NIT Kurukshetra, India / Queen Mary University of London, UK — *(Naman Garg, Sarika Jain, George Fazekas)*
-   * Link: [arxiv.org/abs/2608.23484](https://arxiv.org/abs/2608.23484)
-   * Venue: ACM RecSys 2026 TalkPlayData Challenge
-   * TL;DR: Team Semiintelligencn's RecSys 2026 TalkPlayData solution: a three-stage conversational music recommender - multi-modal retrieval over seven dense spaces (CF-BPR, Qwen3, CLAP audio, SigLIP visual) plus BM25 fused by Reciprocal Rank Fusion with differential-evolution-tuned weights (+19.5% MRR), lightweight reranking, and persona-diversified GPT-4o-mini response generation; finds that unconstrained LLM artist injection causes -18.9% nDCG while conservative injection on 9 sessions is best.
-   * Key techniques:
-     - Seven-space multi-modal retrieval with decay-weighted centroids
-     - Weighted Reciprocal Rank Fusion tuned by differential evolution
-     - History filtering, popularity smoothing, and catalog diversity penalization
-     - Persona-diversified response generation with GPT-4o-mini
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code released.
-     - **Novelty: 6/10** — solid challenge engineering rather than a new method.
-     - **Fairness: 3/10** — catalog diversity penalization.
-     - **Robustness: 7/10** — Blind A/B, 500-session dev split, ablation of injection strategies.
-     - **Impact: 7/10** — RecSys 2026 challenge; a practical warning about unconstrained LLM injection harming nDCG.
-
-4. **LLM-as-a-Judge for Evaluating System Responses in Conversational Music Recommendation**
-   * Affiliation: KAIST (Graduate School of Culture Technology), South Korea / Spotify — *(Seungheon Doh, Bruno Sguerra, Sergio Oramas, Elena V. Epure, Juhan Nam)*
-   * Link: [arxiv.org/abs/2607.25640](https://arxiv.org/abs/2607.25640)
-   * Venue: ACM RecSys 2026
-   * TL;DR: The first user study to empirically assess LLM-as-a-judge for evaluating conversational recommender responses: 20 multi-turn music sessions, four instruction-tuned LLMs, 400 ratings from 20 domain experts on Personalization Quality and Explanation Quality; LLM judges show moderate alignment with humans and outperform reference-based baselines, with guidance on model scale and conditioning.
-   * Key techniques:
-     - User study with 20 expert annotators and 400 ratings
-     - Two evaluation dimensions: Personalization Quality and Explanation Quality
-     - Bootstrapped correlation analysis against human judgments
-     - Analysis of judge performance by model scale and conditioning information
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code released.
-     - **Novelty: 7/10** — first empirical reliability study of LLM-judges for CRS responses.
-     - **Fairness: 4/10** — expert-anchored evaluation mitigates judge bias.
-     - **Robustness: 8/10** — 20 annotators, bootstrapped correlation, multiple LLM judges.
-     - **Impact: 8/10** — RecSys 2026; directly informs CRS evaluation practice.
-
-5. **NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model**
-   * Affiliation: Meta Platforms, Inc., USA — *(Yuming Liu, Hongye Yang, Harrison Zhao, Ellie Zhu, Bokai Cao, Lei Huang, Lizhu Zhang, Xiangjun Fan)*
-   * Link: [arxiv.org/abs/2607.24789](https://arxiv.org/abs/2607.24789)
-   * Venue: arXiv preprint (cs.IR; cs.CV; cs.LG); under review
-   * TL;DR: NEXT (Next-interest EXploration Transformer), a reasoning-driven video recommender that infers a viewer's next intent from the just-watched video and retrieves follow-ups via an Item-to-Intent-to-Item formulation; trains NEXT-8B, a purpose-built 8B VLM with Perception-Enhanced RL, Distribution-Aligned SFT, and GRPO, deployed at Meta as an additional retrieval path with +0.53% watch time and +0.51% distinct video exposure.
-   * Key techniques:
-     - Item-to-Intent-to-Item reasoning formulation beyond co-engagement correlation
-     - NEXT-8B three-stage recipe: Perception-Enhanced RL, Distribution-Aligned SFT, GRPO
-     - Intent-query generation for implicit continuations
-     - Production deployment as an additional retrieval path
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code released.
-     - **Novelty: 8/10** — compact VLM as a production reasoning engine for next-interest exploration.
-     - **Fairness: 3/10** — not a focus.
-     - **Robustness: 8/10** — best single-model DocVQA, production A/B with significance tests, LLM-as-judge.
-     - **Impact: 9/10** — Meta production deployment at social-media scale.
-
-6. **Two Views, One Voice: Evidence-Grounded Conversational Music Recommendation**
-   * Affiliation: Naver, South Korea / Samsung, South Korea — *(Sungwook Yoo, Sewook Yoo)*
-   * Link: [arxiv.org/abs/2607.24846](https://arxiv.org/abs/2607.24846)
-   * Venue: ACM RecSys Challenge 2026 (Proceedings of the Recommender Systems Challenge 2026)
-   * TL;DR: Team swyoo's 3rd-place (Blind-B industry) RecSys 2026 TalkPlayData solution that decouples retrieval and response generation into separate pipelines linked only by ranked tracks and metadata; retrieval combines a hybrid lexical-dense pool with a Qwen-8B-adapted pool and LightGBM calibration, then an evidence-grounded propose-assign-select (PAS) framework structures responses (2nd on the explanation-quality leaderboard).
-   * Key techniques:
-     - Decoupled retrieval and response pipelines connected via ranked tracks and metadata
-     - Hybrid lexical-dense pool plus a Qwen-8B-adapted retrieval pool
-     - LightGBM candidate calibration
-     - Evidence-grounded propose-assign-select (PAS) response structuring
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code released.
-     - **Novelty: 7/10** — clean decoupling of retrieval and generation with evidence-grounded structuring.
-     - **Fairness: 3/10** — evidence-grounded generation improves explanation credibility.
-     - **Robustness: 7/10** — RecSys Challenge Blind-B and explanation-quality leaderboard.
-     - **Impact: 7/10** — RecSys 2026 challenge; near-best explanation reliability.
-
-7. **QueryAgent-R1: Bridging Query Generation and Product Retrieval for E-Commerce Query Recommendation**
-   * Affiliation: Alibaba International Digital Commerce Group — *(Dike Sun, Zheng Zou, Jingtong Zang, Qi Sun, Huaipeng Zhao, Tao Luo, Xiaoyi Zeng)*
-   * Link: [arxiv.org/abs/2606.05671](https://arxiv.org/abs/2606.05671)
-   * Venue: arXiv preprint (cs.CL); under review
-   * TL;DR: QueryAgent-R1, a memory-augmented agentic framework for e-commerce query recommendation that grounds query generation in real inventory retrieval (chain-of-retrieval) and adds a consistency reward in agentic RL to jointly optimize query relevance and downstream conversion; a memory-abstraction module enables efficient user profiling; +2.9% query CTR and +3.1% guided CVR in online A/B.
-   * Key techniques:
-     - Memory-augmented agentic query generation grounded in inventory retrieval
-     - Chain-of-retrieval optimization
-     - Consistency reward in agentic RL (query relevance + downstream engagement)
-     - Memory-abstraction module for efficient user profiling
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (uses verl / FAISS / vLLM internally).
-     - **Novelty: 8/10** — chain-of-retrieval alignment between query generation and real products.
-     - **Fairness: 2/10** — not addressed.
-     - **Robustness: 8/10** — proprietary and public datasets plus online A/B.
-     - **Impact: 8/10** — Alibaba production; aligns query rec with conversion.
-
-8. **BEAR: Towards Beam-Search-Aware Optimization for Recommendation with Large Language Models**
-   * Affiliation: Zhejiang University, Hangzhou, China / The Chinese University of Hong Kong, Shenzhen / Hangzhou City University — *(Weiqin Yang, Bohao Wang, Zhenxiang Xu, Jiawei Chen, Shengjia Zhang, Jingbang Chen, Canghong Jin, Can Wang)*
-   * Link: [arxiv.org/abs/2601.22925](https://arxiv.org/abs/2601.22925)
-   * Venue: arXiv preprint (cs.IR); under review
-   * TL;DR: BEAR (Beam-SEarch-Aware Regularization) fixes the training-inference inconsistency in LLM recommenders that decode with beam search at inference: SFT optimizes overall positive probability, but greedy pruning can discard a positive item whose prefix probability is insufficient. BEAR enforces a relaxed necessary condition - each token of a positive item must rank within the top-B candidates at every decoding step - with negligible overhead; four datasets show clear gains. (Code to be released upon acceptance.)
-   * Key techniques:
-     - Identifies the beam-search training-inference inconsistency
-     - Relaxed necessary condition: every positive token in the top-B candidates per step
-     - Avoids simulating beam search per instance (computationally prohibitive)
-     - Negligible overhead versus standard SFT
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — code promised on acceptance, not yet public.
-     - **Novelty: 9/10** — directly targets the SFT-vs-beam-search mismatch in GR/LLM rec.
-     - **Fairness: 2/10** — not addressed.
-     - **Robustness: 8/10** — four real-world datasets.
-     - **Impact: 8/10** — Zhejiang U; directly applicable to GR/LLM-rec beam-search decoding.
-
-9. **IB-GRPO: Aligning LLM-based Learning Path Recommendation with Educational Objectives via Indicator-Based Group Relative Policy Optimization**
-   * Affiliation: East China Normal University, Shanghai, China — *(Shuai Wang, Yaoming Yang, Bingdong Li, Hao Hao, Aimin Zhou)*
-   * Link: [arxiv.org/abs/2601.14686](https://arxiv.org/abs/2601.14686)
-   * Venue: arXiv preprint (cs.AI); under review
-   * TL;DR: IB-GRPO (Indicator-Based Group Relative Policy Optimization) aligns LLM-based learning-path recommendation with pedagogical objectives (Zone of Proximal Development) under sparse, delayed feedback; it builds hybrid expert demonstrations via Genetic Algorithm search and teacher RL, warm-starts with SFT, and uses an Iε + Iε+ dominance indicator for multi-objective group-relative advantages; it improves over RL/LLM baselines on ASSIST09 and Junyi with a Qwen2.5-7B backbone.
-   * Key techniques:
-     - Hybrid expert demonstrations via GA search and teacher RL agents
-     - SFT warm-start of the LLM
-     - Within-session ZPD alignment score for difficulty scheduling
-     - Indicator-based (Iε + Iε+) dominance for multi-objective group-relative advantage
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code released.
-     - **Novelty: 8/10** — indicator-based multi-objective GRPO for learning-path rec.
-     - **Fairness: 3/10** — ZPD-aware difficulty scheduling addresses learner fairness.
-     - **Robustness: 7/10** — ASSIST09, Junyi, KES simulator with Qwen2.5-7B.
-     - **Impact: 6/10** — East China Normal U; niche learning-path domain but a clean multi-objective GRPO recipe.
 
 ---
 
@@ -1530,6 +1528,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | UniRank: Benchmarking Ranking Models for Unified Sequential Modeling and Feature Interaction |
 | 8/10 | Unleashing the Native Recommendation Potential: LLM-Based Generative Recommendation via Structured Term Identifiers (GRLM) |
 | 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro) |
+| 8/10 | From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations (CFX-Narratives) — Czech Technical University in Prague / University of Innsbruck, CIKM 2026, arXiv 2611.13914 — [github.com/vcahlik/from-counterfactual-edits-to-human-narratives](https://github.com/vcahlik/from-counterfactual-edits-to-human-narratives) |
 | 7/10 | Distribution-Level Contrastive Supervision for Generative Recommendation (SODA) — University of Science and Technology of China / Upwork, RecSys 2026 — [github.com/freyasa/SODA](https://github.com/freyasa/SODA) |
 | 7/10 | A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR) |
 | 7/10 | AdaM-Rec: Adaptive Modality Routing for Multimodal Recommendation (AdaM-Rec) |
@@ -1632,6 +1631,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | HARP: Training-Free Dual-Profile Agentic Communication for LLM-Based Recommendation (HARP) — Harbin Institute of Technology, Shenzhen / Great Bay University, NeurIPS 2026 — [github.com/Jove-Zhen/HARP](https://github.com/Jove-Zhen/HARP) |
 | 7/10 | tau-Rec-Books: A Disclosure-Controlled Benchmark for Requirement Elicitation in Agentic Recommender Systems (tau-Rec-Books) — Princeton University, arXiv 2611.04459 — [github.com/nbharaths/tau-rec](https://github.com/nbharaths/tau-rec) |
 | 7/10 | PFA: Attention Can Be Progressively Focused in Long-Sequence Generative Recommendation (PFA) — [anonymous.4open.science/r/PFA-review-088D](https://anonymous.4open.science/r/PFA-review-088D) |
+| 7/10 | LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation (LUMIR) — University of Klagenfurt, arXiv 2611.14004 — [github.com/wzehui/LUMIR](https://github.com/wzehui/LUMIR) |
+| 7/10 | Benchmarking LLM Next-Step Recommendations with Knowledge Space Theory (KST-Benchmark) — St.Gallen University of Teacher Education, arXiv 2611.13667 — [github.com/pstnr/Benchmarking-LLM-Next-Step-Recommendations-with-Knowledge-Space-Theory](https://github.com/pstnr/Benchmarking-LLM-Next-Step-Recommendations-with-Knowledge-Space-Theory) |
+| 7/10 | CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, IAAI-27, arXiv 2611.08566 — [github.com/GuilinDev/llm-cascade-reranking](https://github.com/GuilinDev/llm-cascade-reranking) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6.5/10 | RES-MR: Risk-Aware Reasoning for Explainable and Safe Medication Recommendation (RES-MR) |
 | 6/10 | AutoRSE: Evaluating LLM Agents as Recommendation Engineers for Self-Evolving Recommender Systems (AutoRSE) — University of Science and Technology of China / National University of Singapore, arXiv 2610.37228 |
@@ -1711,7 +1713,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 243 papers as of November 09.
+**Count:** 247 papers as of November 11.
 
 ---
 
@@ -1876,6 +1878,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Search-Aware On-Policy Self-Distillation with Sibling Alignment for Generative Recommendation (SA-OPSD) — Kuaishou Technology / University of Amsterdam / HUST, arXiv 2611.01568
 - RoutingTrie: Metadata Routing for Constrained Generative Retrieval (RoutingTrie) — Shopify, arXiv 2611.11016
 - LEGIT: Live Eligibility Gating over Identifier Tries for Constrained Decoding of Heterogeneous Pages (LEGIT) — Uber Technologies, Inc., arXiv 2611.10357
+- FAIDER: Fairness-Aware Item-Level Decoding for Large Language Model Recommenders (FAIDER) — UIUC, arXiv 2611.10285 — item-level constrained decoding with conformal fairness calibration
 
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
@@ -2016,14 +2019,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 
 - From Valid to Useful: Post-Verification Acquisition for Recursive Self-Improving Recommendation (DA-RSIR) -- Meta; arXiv 2610.04302 (BALD / MC-dropout post-verification acquisition for recursive self-improving rec)
 
-
 - MLLMRec-R1: Incentivizing Reasoning Capability in LLMs for Multimodal Sequential Recommendation (MLLMRec-R1) — Hefei University of Technology (GRPO)
 - SafeCRS: Personalized Safety Alignment for LLM-Based Conversational Recommender Systems (SafeCRS) — UIC / UIUC / Amazon, Safe-GDPO, KDD 2026
 - RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego
 - WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat (WeGR) — Tencent (WeChat), DHPO
 - Personalized LLM Recommendation with Semantic IDs: Autoregressive Beam Search vs. Multi-Token Prediction (Netflix SID Study) — Netflix (RL post-training)
-
-See [Full keyword index](docs/by_keyword.md) for all other categories.
 
 - Many Right Answers, One Training Example / Removing Responder Noise from GRPO for LLM Recommenders (ReMaRk) — Nanyang Technological University
 - SemPOI-RL: Aligning LLM Semantic Reasoning for Interpretable Out-of-Town POI Sequential Generation (SemPOI-RL) — Beihang University
@@ -2039,6 +2039,10 @@ See [Full keyword index](docs/by_keyword.md) for all other categories.
 - What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User (LLM4Rec-CF-Bias) — UC San Diego, arXiv 2611.07588 [opensource]
 - Generative Search and Recommendation at Shopify (SID-LLM) — Shopify, arXiv 2611.08804 [RL improves judged search relevance]
 - TS-GEAR: Taobao Shangou GEnerative Ad Retrieval (TS-GEAR) — Alibaba Group, arXiv 2611.12180 [GMPO / GRPO]
+- RedMall: Generative Recommendation for Large-Scale E-commerce (RedMall) — Xiaohongshu / Tongji University, arXiv 2611.08519 (GRPO + auxiliary LambdaRank for list-wise generative ranking)
+- CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, arXiv 2611.08566 [opensource; segment-gated inference routing]
+
+See [Full keyword index](docs/by_keyword.md) for all other categories.
 
 ---
 
