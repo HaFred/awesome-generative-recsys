@@ -80,6 +80,10 @@
 - IntentLens: Grounding Underspecified Multimodal Queries for Recommendation via Tool-Augmented Reasoning (IntentLens) — The Hong Kong Polytechnic University / LightSpeed, arXiv 2611.11346
 - SituRecBench: Evaluating Frontier Models as Situated Recommendation Assistants in 3D Environments (SituRecBench) — The Hong Kong Polytechnic University, arXiv 2611.10349
 - SHARP: Semantic Hierarchical Agentic Reasoning for Next POI Prediction with Dynamic Memory (SHARP) — UESTC, arXiv 2611.14220 (category predict agent + trajectory memory)
+- PMRecBench: A Benchmark for Personalization in Recommendation Agents under Multimodal Queries (PMRecBench) — University College London / University of Amsterdam, arXiv 2611.06349
+- Learning to Adjudicate: Verifier-Guided Multi-Agent Reasoning for E-Commerce Relevance (CADRE) — Tsinghua University / Alibaba International, arXiv 2611.02758
+- EvoRec-DRT: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees (EvoRec-DRT) — Kuaishou, arXiv 2611.01977
+- MAREval: A Multi-Agent Framework for Evaluating Natural Language Recommendation Explanations (MAREval) — Walmart Global Tech, arXiv 2610.36389
 
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -281,6 +285,8 @@
 - Epistemic Warrant for LLM Recommendations: Characterizing the Basis for Reliance When Ground Truth Is Unavailable — Purdue University / University of Pennsylvania, arXiv 2609.04127
 - When More Data Is Not Enough: The Context-Sufficiency Frontier in Generative AI Personalization (Context-Sufficiency) — ABYAT, arXiv 2610.00654
 - From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations (CFX-Narratives) — Czech Technical University in Prague / University of Innsbruck, arXiv 2611.13914 [opensource]
+- Do Search-Augmented Recommenders Use the Latest Search Episode? (FocalSwap) — Huawei Technologies Co., Ltd., arXiv 2611.06044 [opensource]
+- PMRecBench: A Benchmark for Personalization in Recommendation Agents under Multimodal Queries (PMRecBench) — University College London / University of Amsterdam, arXiv 2611.06349 (personalization imbalance audit)
 
 ### Diffusion
 - Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
@@ -392,6 +398,9 @@
 - SituRecBench: Evaluating Frontier Models as Situated Recommendation Assistants in 3D Environments (SituRecBench) — The Hong Kong Polytechnic University, arXiv 2611.10349
 - Benchmarking LLM Next-Step Recommendations with Knowledge Space Theory (KST-Benchmark) — St.Gallen University of Teacher Education, arXiv 2611.13667 [opensource]
 - From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations (CFX-Narratives) — Czech Technical University in Prague / University of Innsbruck, arXiv 2611.13914 [opensource]
+- PMRecBench: A Benchmark for Personalization in Recommendation Agents under Multimodal Queries (PMRecBench) — University College London / University of Amsterdam, arXiv 2611.06349
+- MILES-Rec: Uncovering Implicit Intents from Mobility Behaviors for Cross-Domain POI Recommendation (MILES-Rec) — AMAP / Alibaba Group, arXiv 2610.41319 [MILES-Bench]
+- MAREval: A Multi-Agent Framework for Evaluating Natural Language Recommendation Explanations (MAREval) — Walmart Global Tech, arXiv 2610.36389
 
 ### Fairness
 - What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User (LLM4Rec-CF-Bias) — University of California, San Diego, arXiv 2611.07588 [opensource]
@@ -501,6 +510,7 @@
 - IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation MoE (IntBMoE) — Alibaba (AMap); deployed in AMap generative rec, arXiv 2609.21346
 - From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation — Kuaishou, arXiv 2608.21012
 - SepLRM: A Foundation Model Paradigm for Recommendation (SepLRM) — ByteDance, arXiv 2611.10356
+- PRISM-Meta: Personalized Item Representations in User History (PRISM-Meta) — Meta MRS, arXiv 2610.39175
 
 ### Generative Recommendation / VAE
 - Decision-Native Recommendation with Large Language Models (DICE) — USTC / Independent Researcher, arXiv 2610.34124
@@ -817,6 +827,8 @@
 - TS-GEAR: Taobao Shangou GEnerative Ad Retrieval (TS-GEAR) — Alibaba Group, arXiv 2611.12180
 - RoutingTrie: Metadata Routing for Constrained Generative Retrieval (RoutingTrie) — Shopify, arXiv 2611.11016
 - LEGIT: Live Eligibility Gating over Identifier Tries for Constrained Decoding of Heterogeneous Pages (LEGIT) — Uber Technologies, Inc., arXiv 2611.10357
+- MILES-Rec: Uncovering Implicit Intents from Mobility Behaviors for Cross-Domain POI Recommendation (MILES-Rec) — AMAP / Alibaba Group, arXiv 2610.41319
+- CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -1088,6 +1100,11 @@
 - CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, IAAI-27, arXiv 2611.08566 [opensource]
 - RedMall: Generative Recommendation for Large-Scale E-commerce (RedMall) — Xiaohongshu / Tongji University, arXiv 2611.08519
 - SeqFold: Timestamp-Addressable Compressed States for User Action Sequence Backbones (SeqFold) — Coupang, arXiv 2611.13704
+- Learning to Adjudicate: Verifier-Guided Multi-Agent Reasoning for E-Commerce Relevance (CADRE) — Tsinghua University / Alibaba International, arXiv 2611.02758
+- EvoRec-DRT: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees (EvoRec-DRT) — Kuaishou, arXiv 2611.01977
+- MILES-Rec: Uncovering Implicit Intents from Mobility Behaviors for Cross-Domain POI Recommendation (MILES-Rec) — AMAP / Alibaba Group, arXiv 2610.41319
+- MAREval: A Multi-Agent Framework for Evaluating Natural Language Recommendation Explanations (MAREval) — Walmart Global Tech, arXiv 2610.36389
+- PRISM-Meta: Personalized Item Representations in User History (PRISM-Meta) — Meta MRS, arXiv 2610.39175
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1106,6 +1123,7 @@
 - Conditional Memory Enhanced Item Representation for Generative Recommendation (ComeIR)
 - Recommender System as Slow and Fast Thinkers (DS-Frame)
 - CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, arXiv 2611.08566 [opensource]
+- CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323
 
 ### Inference Acceleration / Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
@@ -1127,6 +1145,8 @@
 - RecoGEM: A Serving System for Production-Scale Generative Recommendation (RecoGEM) — The University of Hong Kong / Kuaishou, arXiv 2611.12296
 - LEGIT: Live Eligibility Gating over Identifier Tries for Constrained Decoding of Heterogeneous Pages (LEGIT) — Uber Technologies, Inc., arXiv 2611.10357
 - SepLRM: A Foundation Model Paradigm for Recommendation (SepLRM) — ByteDance, arXiv 2611.10356
+- CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323
+- Learning to Adjudicate: Verifier-Guided Multi-Agent Reasoning for E-Commerce Relevance (CADRE) — Tsinghua University / Alibaba International, arXiv 2611.02758 (offline teacher to lightweight online student)
 
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
@@ -1173,6 +1193,7 @@
 - From Prompting to Behavioral Alignment: Personalized LLM Judges for Recommendation Evaluation
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
 - LLM-as-a-Judge for Evaluating System Responses in Conversational Music Recommendation — KAIST / Spotify, arXiv 2607.25640
+- MAREval: A Multi-Agent Framework for Evaluating Natural Language Recommendation Explanations (MAREval) — Walmart Global Tech, arXiv 2610.36389 (Chain-of-Debate planner + Monte Carlo arbitration)
 
 ### LLM-based Recommendation
 - Learning to Rank Explanations for Recommendation with Language Models (LMStaR) — Sorbonne University, arXiv 2611.04775 [opensource]
@@ -1435,6 +1456,11 @@
 - Benchmarking LLM Next-Step Recommendations with Knowledge Space Theory (KST-Benchmark) — St.Gallen University of Teacher Education, arXiv 2611.13667 [opensource]
 - CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, arXiv 2611.08566 [opensource]
 - FAIDER: Fairness-Aware Item-Level Decoding for Large Language Model Recommenders (FAIDER) — University of Illinois Urbana-Champaign, arXiv 2611.10285
+- PMRecBench: A Benchmark for Personalization in Recommendation Agents under Multimodal Queries (PMRecBench) — University College London / University of Amsterdam, arXiv 2611.06349
+- Learning to Adjudicate: Verifier-Guided Multi-Agent Reasoning for E-Commerce Relevance (CADRE) — Tsinghua University / Alibaba International, arXiv 2611.02758
+- EvoRec-DRT: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees (EvoRec-DRT) — Kuaishou, arXiv 2611.01977
+- MAREval: A Multi-Agent Framework for Evaluating Natural Language Recommendation Explanations (MAREval) — Walmart Global Tech, arXiv 2610.36389
+- CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323
 
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
@@ -1454,6 +1480,8 @@
 - ReMem: Time-Evolving Dynamic Memory for Recommendation Agents (ReMem) - Hong Kong Polytechnic University / NTU, arXiv 2609.37311
 - TIDE: How Can Recommendation Feedback Evolve Agent Memory? (TIDE) - Harbin Institute of Technology / Alibaba / Institute of Automation CAS, arXiv 2609.37544
 - Memory-Aware Multi-Agent Architecture with LLM-based Orchestration for Conversational Recommendation — Instituto de Ciência e Tecnologia Itaú, arXiv 2611.08718
+- EvoRec-DRT: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees (EvoRec-DRT) — Kuaishou, arXiv 2611.01977 (long / short / working memory + reflection tree)
+- CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323 (reusable item memory)
 
 ### Model / Architecture
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
@@ -1623,6 +1651,7 @@
 - IntentLens: Grounding Underspecified Multimodal Queries for Recommendation via Tool-Augmented Reasoning (IntentLens) — The Hong Kong Polytechnic University / LightSpeed, arXiv 2611.11346
 - SituRecBench: Evaluating Frontier Models as Situated Recommendation Assistants in 3D Environments (SituRecBench) — The Hong Kong Polytechnic University, arXiv 2611.10349
 - LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation (LUMIR) — University of Klagenfurt, arXiv 2611.14004 [opensource]
+- PMRecBench: A Benchmark for Personalization in Recommendation Agents under Multimodal Queries (PMRecBench) — University College London / University of Amsterdam, arXiv 2611.06349
 
 ### Optimizer
 - MuonRec
@@ -1740,6 +1769,9 @@
 - Multi-Teacher Reasoning Distillation for LLM Recommendation with Self-Exploration (Multi-Teacher RD) — The Hong Kong Polytechnic University, arXiv 2611.02457
 - Rethinking Latent Reasoning for Generative Recommendation (PHiT) — Beihang University / Baidu, arXiv 2611.09006
 - IntentLens: Grounding Underspecified Multimodal Queries for Recommendation via Tool-Augmented Reasoning (IntentLens) — The Hong Kong Polytechnic University / LightSpeed, arXiv 2611.11346
+- Learning to Adjudicate: Verifier-Guided Multi-Agent Reasoning for E-Commerce Relevance (CADRE) — Tsinghua University / Alibaba International, arXiv 2611.02758
+- MILES-Rec: Uncovering Implicit Intents from Mobility Behaviors for Cross-Domain POI Recommendation (MILES-Rec) — AMAP / Alibaba Group, arXiv 2610.41319
+- EvoRec-DRT: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees (EvoRec-DRT) — Kuaishou, arXiv 2611.01977
 
 ### Reinforcement Learning
 - FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
@@ -1792,6 +1824,8 @@
 - OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer (OneTrans-GSR) — ByteDance, arXiv 2611.04720
 - TS-GEAR: Taobao Shangou GEnerative Ad Retrieval (TS-GEAR) — Alibaba Group, arXiv 2611.12180
 - RedMall: Generative Recommendation for Large-Scale E-commerce (RedMall) — Xiaohongshu / Tongji University, arXiv 2611.08519 (GRPO + auxiliary LambdaRank loss)
+- Learning to Adjudicate: Verifier-Guided Multi-Agent Reasoning for E-Commerce Relevance (CADRE) — Tsinghua University / Alibaba International, arXiv 2611.02758 (multi-turn GRPO + successful-experience replay)
+- MILES-Rec: Uncovering Implicit Intents from Mobility Behaviors for Cross-Domain POI Recommendation (MILES-Rec) — AMAP / Alibaba Group, arXiv 2610.41319 (intent-aligned GRPO + two-level credit assignment)
 
 ### Retrieval / Representation
 - ARMED: Adaptive Retrieval-Augmented Medication Recommendation (ARMED) — UX Factory / KAIST, ICTAI 2026, arXiv 2610.16440
@@ -1841,6 +1875,8 @@
 - RAR: Retrieval Augmented Conversational Recommendation with Reinforcement Learning (RAR) — UIUC / Google DeepMind / UC San Diego, retrieval-augmented generative CRS — arXiv 2604.04457 [opensource]
 - LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation (LUMIR) — University of Klagenfurt, arXiv 2611.14004 [opensource]
 - SeqFold: Timestamp-Addressable Compressed States for User Action Sequence Backbones (SeqFold) — Coupang, arXiv 2611.13704
+- PRISM-Meta: Personalized Item Representations in User History (PRISM-Meta) — Meta MRS, arXiv 2610.39175
+- CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -1859,6 +1895,7 @@
 - HELIX: Rethinking Scaling Laws for Large-Scale Recommendation (HELIX) - TikTok, arXiv 2609.37183
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneReason / OneRec-V2) — Kuaishou; OneReason uses advanced RL to make CoT reasoning beneficial; SIGIR 2026 challenge; arXiv 2609.39828
 - LoopGR: Parameter-Efficient Scaling for Generative Recommendation via Recurrent Depth (LoopGR) — Tencent, arXiv 2610.34157
+- PRISM-Meta: Personalized Item Representations in User History (PRISM-Meta) — Meta MRS, arXiv 2610.39175 (sequence-length normalized-entropy power law, exponent 0.468)
 
 ### Security / Adversarial
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
@@ -2120,6 +2157,8 @@
 - Category-Anchored Large Language Models for Next POI Recommendation (ANCHOR) — Harbin Institute of Technology Shenzhen / City University of Hong Kong, arXiv 2610.39518
 - LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation (LUMIR) — University of Klagenfurt, arXiv 2611.14004 [opensource]
 - SeqFold: Timestamp-Addressable Compressed States for User Action Sequence Backbones (SeqFold) — Coupang, arXiv 2611.13704
+- PRISM-Meta: Personalized Item Representations in User History (PRISM-Meta) — Meta MRS, arXiv 2610.39175
+- Do Search-Augmented Recommenders Use the Latest Search Episode? (FocalSwap) — Huawei Technologies Co., Ltd., arXiv 2611.06044 [opensource]
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
