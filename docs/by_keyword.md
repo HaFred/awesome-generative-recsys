@@ -85,6 +85,8 @@
 - EvoRec-DRT: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees (EvoRec-DRT) — Kuaishou, arXiv 2611.01977
 - MAREval: A Multi-Agent Framework for Evaluating Natural Language Recommendation Explanations (MAREval) — Walmart Global Tech, arXiv 2610.36389
 - SimRec: Learning to Search, Ask, and Recommend from Simulated Interaction (SimRec) — Zhejiang University / Tsinghua University / Hikvision, arXiv 2611.15426 [opensource]
+- Learning Complementary Agent Groups via Task Hypergraphs for Next-POI Recommendation with Missing Modalities (CATH) — Swinburne University of Technology, arXiv 2610.25801
+- Agent Memory as Recommendation: Recommender-System Design for Long-Term Memory of LLM Agents (AgentMemRec) — Fudan University, arXiv 2610.34673
 
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -331,6 +333,7 @@
 - OT-FlowRec: Optimal Transport-Guided Multi-Bridge Flow for Multimodal Sequential Recommendation (OT-FlowRec) — Nanjing University of Science and Technology, arXiv 2610.16038
 - DPE-Rec: Diversity-Preserving and Efficient Diffusion Language Model Recommendation for Bundle Construction (DPE-Rec) — Arizona State University, arXiv 2610.34700
 - When Diffusion Recommenders Stop Sampling: Preserving Generative Diversity (DARTS) — ISIR, Sorbonne Université, arXiv 2610.36954
+- BrowseFlow: Sparse Event Flow Matching for Generative User Simulation (BrowseFlow) — Tsinghua University / Taobao & Tmall Group of Alibaba, arXiv 2610.41374 (conditional discrete flow matching over sparse key events)
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -412,6 +415,8 @@
 - SurvEval: Listwise Re-Ranking Evaluator via Survival-Based Exposure and Multi-Objective Value Modeling (SurvEval) — Intuit Credit Karma, arXiv 2611.15434
 - Measuring, Revealing and Mitigating Harmful Content Propagation in Recommender Systems (MitiHarm) — City University of Hong Kong, IEEE TPAMI, arXiv 2611.15160 [opensource]
 - ReAlign: Reward-Guided Preference Alignment for Generative Re-Ranking (ReAlign) — Intuit Credit Karma, arXiv 2611.15445
+- Robustness Analysis of Pareto-based Joint Evaluation of Fairness and Relevance in Recommender Systems (DPFR) — University of Copenhagen, arXiv 2610.27850 [opensource; ACM TORS]
+- BrowseFlow: Sparse Event Flow Matching for Generative User Simulation (BrowseFlow) — Tsinghua University / Alibaba, arXiv 2610.41374 (TaobaoBrowse benchmark)
 
 ### Fairness
 - What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User (LLM4Rec-CF-Bias) — University of California, San Diego, arXiv 2611.07588 [opensource]
@@ -498,6 +503,8 @@
 - ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through Item Reachability (ReSID) — Alibaba International / Nankai University, arXiv 2611.16404 [opensource]
 - Measuring, Revealing and Mitigating Harmful Content Propagation in Recommender Systems (MitiHarm) — City University of Hong Kong, IEEE TPAMI, arXiv 2611.15160 [opensource]
 - KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation (KuaiRecV2) — USTC / Kuaishou, NeurIPS 2026, arXiv 2611.16795
+- Robustness Analysis of Pareto-based Joint Evaluation of Fairness and Relevance in Recommender Systems (DPFR) — University of Copenhagen, arXiv 2610.27850
+- PACT: Defending Recommendation against Promotional News Rewriting via Attack-Diverse Score Consistency (PACT) — Waseda University, arXiv 2611.00972 (exposure manipulation by LLM rewrites)
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -853,6 +860,7 @@
 - ReAlign: Reward-Guided Preference Alignment for Generative Re-Ranking (ReAlign) — Intuit Credit Karma, arXiv 2611.15445
 - SurvEval: Listwise Re-Ranking Evaluator via Survival-Based Exposure and Multi-Objective Value Modeling (SurvEval) — Intuit Credit Karma, arXiv 2611.15434
 - TraGR: From Tokens to Behaviors (TraGR) — Tongji University / CUHK / Kuaishou / Fudan University, arXiv 2611.16159
+- WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search (WeSearch) — Tencent Inc., arXiv 2611.00530 (query-specific clusters instead of fixed hierarchical SIDs; 100% production traffic)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -1134,6 +1142,7 @@
 - KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation (KuaiRecV2) — USTC / Kuaishou, NeurIPS 2026, arXiv 2611.16795
 - ReAlign: Reward-Guided Preference Alignment for Generative Re-Ranking (ReAlign) — Intuit Credit Karma, arXiv 2611.15445
 - SurvEval: Listwise Re-Ranking Evaluator via Survival-Based Exposure and Multi-Objective Value Modeling (SurvEval) — Intuit Credit Karma, arXiv 2611.15434
+- WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search (WeSearch) — Tencent Inc., arXiv 2611.00530 (+0.68% CTR, 41% lower retrieval cost)
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1513,6 +1522,7 @@
 - Memory-Aware Multi-Agent Architecture with LLM-based Orchestration for Conversational Recommendation — Instituto de Ciência e Tecnologia Itaú, arXiv 2611.08718
 - EvoRec-DRT: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees (EvoRec-DRT) — Kuaishou, arXiv 2611.01977 (long / short / working memory + reflection tree)
 - CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323 (reusable item memory)
+- Agent Memory as Recommendation: Recommender-System Design for Long-Term Memory of LLM Agents (AgentMemRec) — Fudan University, arXiv 2610.34673
 
 ### Model / Architecture
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
@@ -1867,6 +1877,8 @@
 - ReAlign: Reward-Guided Preference Alignment for Generative Re-Ranking (ReAlign) — Intuit Credit Karma, arXiv 2611.15445
 - KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation (KuaiRecV2) — USTC / Kuaishou, NeurIPS 2026, arXiv 2611.16795
 - TraGR: From Tokens to Behaviors (TraGR) — Tongji University / CUHK / Kuaishou / Fudan University, arXiv 2611.16159
+- Beyond Temporal Proximity: Explanatory World Models for Credit Assignment in Reinforcement Learning (EWM) — Spotify, arXiv 2610.13504 (industry-scale generative recommender)
+- Learning Complementary Agent Groups via Task Hypergraphs for Next-POI Recommendation with Missing Modalities (CATH) — Swinburne University of Technology, arXiv 2610.25801
 
 ### Retrieval / Representation
 - ARMED: Adaptive Retrieval-Augmented Medication Recommendation (ARMED) — UX Factory / KAIST, ICTAI 2026, arXiv 2610.16440
@@ -1950,6 +1962,7 @@
 - VirusCascade: Hijacking Collaborative Reflection in LLM-Powered Recommender Agents — Nanyang Technological University, arXiv 2609.38270
 - AlignPoison: Conditional Targeted Poisoning of Generative Recommenders via Decoding-Aligned Prefixes (AlignPoison) — UNC Chapel Hill / Notre Dame / Meta, arXiv 2610.14487
 - Measuring, Revealing and Mitigating Harmful Content Propagation in Recommender Systems (MitiHarm) — City University of Hong Kong, IEEE TPAMI, arXiv 2611.15160 [opensource]
+- PACT: Defending Recommendation against Promotional News Rewriting via Attack-Diverse Score Consistency (PACT) — Waseda University / ZOZO NEXT, arXiv 2611.00972
 
 ### Semantic / Structured IDs
 - BRIDGE: Bridging the Semantic Quantization Gap for Generative Recommendation (BRIDGE) — Kuaishou Technology, arXiv 2611.07425
@@ -2113,6 +2126,7 @@
 - TriGen: A Generative Paradigm for Trigger-Induced Recommendation (TriGen) — Alibaba International Digital Commerce Group, arXiv 2611.16395
 - ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through Item Reachability (ReSID) — Alibaba International / Nankai University, arXiv 2611.16404 [opensource]
 - KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation (KuaiRecV2) — USTC / Kuaishou, NeurIPS 2026, arXiv 2611.16795
+- WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search (WeSearch) — Tencent Inc., arXiv 2611.00530 (critique of fixed hierarchical Semantic IDs for multi-topic documents)
 
 ### Sequential Modeling / RoPE
 - Compote: Collapse-Resistant Multiple Hypothesis Learning for Sequential Recommendation (Compote) — Criteo AI Lab / Sorbonne Université CNRS ISIR, arXiv 2610.37005
@@ -2208,6 +2222,7 @@
 - TraGR: From Tokens to Behaviors (TraGR) — Tongji University / CUHK / Kuaishou / Fudan University, arXiv 2611.16159
 - TriGen: A Generative Paradigm for Trigger-Induced Recommendation (TriGen) — Alibaba International Digital Commerce Group, arXiv 2611.16395
 - KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation (KuaiRecV2) — USTC / Kuaishou, NeurIPS 2026, arXiv 2611.16795
+- MIDA: Multi-Interest Decoding with Adaptive Aggregation for Session-based Recommendation (MIDA) — University of Technology Sydney, IEEE TKDE 2026, arXiv 2610.34192
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey

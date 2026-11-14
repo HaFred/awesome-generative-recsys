@@ -53,6 +53,7 @@ mindmap
         SIDScope -- Huawei
         RPCBench -- Jilin University
         FocalSwap -- Huawei Technologies
+        DPFR -- University of Copenhagen
       Efficient Decoding
         STATIC -- Google
         ReSID -- Alibaba International / Nankai U
@@ -69,7 +70,6 @@ mindmap
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
-        MitiHarm -- CityU HK / Dalian U of Tech
 ```
 
 <div align="center">
@@ -87,6 +87,156 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 ## By Date
 
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
+### Papers November 14
+
+*Saturday, November 14, 2026. The live arXiv 24-hour window is EMPTY: every `/list/<cat>/new` page still reads "Showing new listings for Friday, 13 November 2026" (arXiv announces Mon-Fri), the Atom feed returns 0 entries for `submittedDate:[202611130000 TO 202611142359]` across all categories, and the Friday announcement was already fully indexed by the November 13 run. Per the fallback chain: `date_list = [2026-11-05]` (the only missing date inside the 10-day window; that day's cs.IR submissions are all RAG / dense-retrieval / agent-safety work with no on-topic generative-recommendation preprint), the second date-section title (November 12) through today yielded nothing new, so step 3 drew 8 strictly on-topic papers from the last-3-month pool. All 8 were verified absent from README.md, both docs indexes and every monthly archive (1026-ID master dedup set). **1 is open-source** (DPFR / University of Copenhagen, 7/10), so By Opensource count 251 -> 252 and the 30-leaf mindmap cap was held by dropping the lowest-scored leaf MitiHarm (6/10); all three layers retained. Two advertised code leads were dead or unrelated: MIDA's `github.com/downw/MIDA_Rec` returns 404, and the "PACT" repositories surfaced on GitHub belong to unrelated robotics / agent-protocol projects. Re-hit avoided: PrismRec 2608.26579 surfaced in the diffusion-recommendation sweep but is already archived (2026_08 / 2026_09), so it was not re-added. Excluded as off-topic: the Nov 05 RAG / dense-retrieval cluster, vector-index and LLM-as-a-Judge papers, and medical Semantic-ID coding papers 2610.19301 / 2610.18672.*
+
+1. **WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search**
+   * Affiliation: WeChat Search Group, Tencent Inc., China — *(Kepu Zhang, Yuzhe Cai, Yue Shu, Dawei Chen, Jinhai Zhu, Yuan Xu, Zehua Dai, Tongke Ni, Ziyao Chen, Chen Fu, Jie Shao, Chao Wang, Xiangmin Wang, Ruifeng Zhao, Rongchun Yao, Jie Yin, Weixin Qiu, Nan Song, Junyang Li, Fan Li, Quanchao Hui, Yulong Ou, Qiang Chen, Hao Cao, Sen Yang)*
+   * Link: [arxiv.org/abs/2611.00530](https://arxiv.org/abs/2611.00530)
+   * Venue: arXiv preprint, October 2026 (cs.IR / cs.CL; submitted 31 Oct 2026)
+   * TL;DR: Replaces fixed hierarchical Semantic IDs with query-specific cluster retrieval followed by in-cluster document ranking, giving a billion-scale production semantic retrieval path that refreshes weekly or daily without rebuilding a global identifier tree.
+   * Key techniques:
+     - Argument that fixed hierarchical SIDs assume one coherent semantic path per document, which breaks for multi-topic documents; candidate pruning is decoupled from fine-grained relevance modelling
+     - Retrieve query-relevant clusters first, then rank atomic documents only inside the resulting query-specific candidate space
+     - Relevance-aware training plus compact document representations and incremental index updates enable weekly (or daily) model refreshes on a continuously evolving corpus
+     - Deployed as the primary semantic retrieval path in WeChat Search alongside a lexical syntax tree, on corpora from hundreds of millions to billions of documents
+     - One-month full-traffic A/B: +0.68% CTR, +2.27% per-user article clicks, 41% lower retrieval resource cost and 19 ms lower graphic-text retrieval latency; now serving 100% of production traffic
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (industrial Tencent deployment; arXiv lists no repository)
+     - **Novelty: 7/10** — a direct challenge to the fixed-SID assumption behind generative retrieval, replacing the global identifier tree with a per-query candidate space
+     - **Fairness: 3/10** — no exposure, popularity or group-level analysis; query-conditioned cluster pruning could systematically favour head content
+     - **Robustness: 8/10** — billion-scale corpora, incremental index refreshes, one-week A/B sweeps and a one-month full-traffic A/B with stable gains; no failure-mode or drift analysis
+     - **Impact: 9/10** — fully deployed at 100% of WeChat Search production traffic with measured CTR, cost and latency wins at Tencent scale
+
+2. **PACT: Defending Recommendation against Promotional News Rewriting via Attack-Diverse Score Consistency**
+   * Affiliation: Waseda University, Tokyo, Japan — *(Chongxian Chen, Fan Mo, Xin Fan, Hayato Yamana)* — with ZOZO NEXT, Inc.
+   * Link: [arxiv.org/abs/2611.00972](https://arxiv.org/abs/2611.00972)
+   * Venue: arXiv preprint, October 2026 (cs.IR; 11 pages; submitted 31 Oct 2026)
+   * TL;DR: A model-agnostic training defense that makes a news recommender's relevance score invariant to LLM-rewritten promotional headlines, without any architecture change or test-time filtering.
+   * Key techniques:
+     - Pooled Attack Consistency Training: pools offline, fact-checked rewrites from multiple LLM generators and multiple attack strategies (stylistic prompting through reinforcement feedback)
+     - Samples a constant number of variants per training visit to give an unbiased estimator of the pool-wide consistency objective under a fixed compute budget
+     - Aligns original and rewritten ranking scores inside the same user context, jointly with click supervision; decouples relevance estimation from superficial rhetorical variation
+     - Zero extra latency at serving time, since no test-time filtering or architectural modification is required
+     - Nine experimental settings across three recommendation backbones and three unseen-generator attacks; up to 3.0 points lower promotion rate than the strongest defense, with clean utility essentially intact
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; the similarly named GitHub "PACT" repositories are unrelated robotics / agent-protocol projects
+     - **Novelty: 7/10** — attack-diverse pooling with an unbiased constant-budget estimator is a cleaner formulation than single-generator adversarial training
+     - **Fairness: 5/10** — suppresses manipulation-driven exposure inflation, which is an exposure-fairness concern, but there is no demographic or provider-group parity analysis
+     - **Robustness: 9/10** — nine settings, three backbones, unseen-generator and unseen-strategy holdouts, adaptive white-box retraining, plus a clean-utility check
+     - **Impact: 7/10** — Waseda / ZOZO NEXT study with a deployable zero-latency recipe, but no production A/B evidence
+
+3. **BrowseFlow: Sparse Event Flow Matching for Generative User Simulation**
+   * Affiliation: Department of Automation, Tsinghua University, Beijing, China — *(Yitian Pang, Jiayi Zhang, Zhenjia Ma, Xiaowei Yue, Dagui Chen, Jian Xu)* — with Taobao & Tmall Group of Alibaba
+   * Link: [arxiv.org/abs/2610.41374](https://arxiv.org/abs/2610.41374)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 30 Oct 2026)
+   * TL;DR: A conditional discrete flow-matching simulator that generates whole browsing responses as a browsing extent plus a sparse ordered set of key events, modelling the stochastic and long-tailed structure that stepwise next-action simulators miss.
+   * Key techniques:
+     - Represents each response by its browsing extent and an ordered sequence of sparse key events (clicks / likes), directly modelling their counts and locations under exposure constraints
+     - Probabilistic extent prediction combined with discrete flow matching over key events; random event retention defines probability paths over partial sequences and transition-rate matching learns stochastic insertion dynamics
+     - Uses the energy score, a proper scoring rule, to evaluate both response fidelity and generated variability, plus Wasserstein distance between key-event count distributions
+     - Introduces TaobaoBrowse, a benchmark pairing real recommendation contexts with fine-grained browsing trajectories
+     - Best distributional performance across three datasets, addressing both stochastic responses to the same feed and sparse key-event supervision
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; neither the arXiv abstract nor the HTML links a repository or dataset release
+     - **Novelty: 8/10** — discrete flow matching over sparse key events with extent-conditioned probability paths is a genuinely new generative formulation of user simulation for recommender evaluation
+     - **Fairness: 3/10** — no exposure, popularity or demographic fairness analysis; generative fidelity is the only objective
+     - **Robustness: 8/10** — three datasets, a purpose-built industrial benchmark, proper scoring rules and count-distribution distances rather than single-trajectory accuracy
+     - **Impact: 8/10** — Tsinghua / Alibaba Taobao collaboration with a realistic simulator that could underpin closed-loop generative-recommender evaluation
+
+4. **MIDA: Multi-Interest Decoding with Adaptive Aggregation for Session-based Recommendation**
+   * Affiliation: University of Technology Sydney, Sydney, Australia — *(Linjiang Guo, Nitin Bisht, Shiqing Wu, Guandong Xu)* — with City University of Macao, Macao, China and The Education University of Hong Kong, Hong Kong, China
+   * Link: [arxiv.org/abs/2610.34192](https://arxiv.org/abs/2610.34192)
+   * Venue: IEEE Transactions on Knowledge and Data Engineering (TKDE), 2026 — DOI 10.1109/TKDE.2026.3740693; arXiv preprint, October 2026 (cs.IR; submitted 25 Oct 2026)
+   * TL;DR: An encoder-agnostic decoder that fixes the long-session accuracy collapse of session-based recommenders by clustering raw item embeddings into multiple interests and gating persistent versus evolving intent.
+   * Key techniques:
+     - Two-space decoupling: differentiable multi-interest clustering runs on raw item embeddings so semantic groupings are not distorted by encoder relational bias; encoder outputs are reserved for attention-based aggregation
+     - Dynamic clustering with a learnable differentiable similarity threshold, requiring no preset number of interests; dimension subsampling keeps the pairwise estimate cheap
+     - Stability branch over earlier cluster-enhanced items versus plasticity branch anchored on the last item, fused by a gate conditioned on both branch representations and average cluster size
+     - Plug-in decoder replaces only the final aggregation step of any GRU / GNN / Transformer backbone, with a controlled protocol that holds each encoder fixed
+     - Four benchmarks; gains grow on long sessions (16+ items), with up to 2.65x faster inference than AttenMixer-style decoders
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — the paper's `github.com/downw/MIDA_Rec` returns 404, so no public code is available despite the code claim
+     - **Novelty: 7/10** — relocating multi-interest modelling from the encoder to the decoder, with a raw-embedding clustering space, is a clean reframing of the long-session problem
+     - **Fairness: 3/10** — no bias, exposure or popularity analysis; the stability/plasticity split optimizes accuracy only
+     - **Robustness: 8/10** — controlled encoder-held-fixed evaluation across three architecture families, four datasets, explicit session-length bins and an efficiency study
+     - **Impact: 8/10** — published in IEEE TKDE; an encoder-agnostic decoder is unusually easy to adopt in existing session recommenders
+
+5. **Beyond Temporal Proximity: Explanatory World Models for Credit Assignment in Reinforcement Learning**
+   * Affiliation: Spotify — *(Oriol Corcoll, Qiyao Wei, Ciarán Mark Gilligan-Lee)* — with University of Cambridge
+   * Link: [arxiv.org/abs/2610.13504](https://arxiv.org/abs/2610.13504)
+   * Venue: arXiv preprint, October 2026 (cs.LG / cs.AI / cs.IR; submitted 9 Oct 2026)
+   * TL;DR: Replaces time-discounted credit assignment in long-horizon generative recommenders with explanation-based attribution, redistributing reward to the earlier actions that plausibly caused a delayed outcome while preserving the undiscounted episode return.
+   * Key techniques:
+     - Explanatory World Models (EWM): a frontier language model produces explanations identifying which earlier events plausibly contributed to a realized outcome
+     - Conservative hierarchical operator recursively redistributes reward from those explanations while keeping the undiscounted episode return unchanged
+     - Three explanation variants operationalized from Halpern's actual causation, Lombrozo's explanatory simplicity and Deutsch's hard-to-vary explanations
+     - Evaluation on Crafter and WordCraft (long-horizon control), the public KuaiRand sequential-recommendation benchmark, and an industry-scale generative recommender
+     - Beats PPO and LaRe on delayed-reward control, SFT / LaRe offline and A2C online on KuaiRand, and improves Recall plus behavioural proxies in an industrial GR offline evaluation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; the only GitHub links in the HTML point to the third-party EasyRL4Rec utilities used for baselines
+     - **Novelty: 8/10** — using LLM explanations as a structured, reusable credit-assignment signal for generative recommenders is a fresh alternative to temporal discounting
+     - **Fairness: 3/10** — no fairness or exposure analysis; reward redistribution targets sample efficiency only
+     - **Robustness: 8/10** — two controlled RL benchmarks, a public rec benchmark with offline and online protocols, an industry-scale GR, and multiple strong RL baselines
+     - **Impact: 8/10** — Spotify-backed work aimed squarely at long-horizon RL for generative recommendation, with an industry-scale evaluation
+
+6. **Agent Memory as Recommendation: Recommender-System Design for Long-Term Memory of LLM Agents (AgentMemRec)**
+   * Affiliation: Fudan University, Shanghai, China — *(Xinyu Zhang, Weiwei Sun)*
+   * Link: [arxiv.org/abs/2610.34673](https://arxiv.org/abs/2610.34673)
+   * Venue: arXiv preprint, October 2026 (cs.IR / cs.AI / cs.CL; 12 pages, 3 figures, 8 tables; submitted 26 Oct 2026)
+   * TL;DR: Formalizes LLM-agent long-term memory selection as budgeted slate recommendation — request as user, stored memories as items, context window as slate — and ports the recommender cascade to it without any LLM call at selection time.
+   * Key techniques:
+     - Recasts memory retrieval into a recommender-cascade design space and factorizes accuracy into the completeness controlled by each stage
+     - Candidate generation, learning-to-rank and slate construction adapted from recommender systems; no per-history note/graph construction with hundreds to thousands of LLM calls
+     - Explicit per-request cost budget and multi-session questions requiring all of their evidence
+     - On LongMemEval multi-session questions, beats A-Mem, HippoRAG 2, DynamicRAG and T-Mem by 10-31 accuracy points; matches a 64-call LLM reranker at 3.2x lower serving cost
+     - On LoCoMo outperforms Mem0 and Zep with no LLM call at write time; the factorization attributes gains to slates that more often hold all required evidence
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (arXiv lists no repository)
+     - **Novelty: 8/10** — the budgeted-slate formalization is a genuinely cross-pollinating move from recommender-system design into LLM agent memory
+     - **Fairness: 3/10** — no bias or exposure analysis; slate completeness is the only objective
+     - **Robustness: 8/10** — two benchmarks, six strong memory baselines, an explicit cost-accuracy comparison and a stage-wise attribution of the gains
+     - **Impact: 7/10** — a Fudan study with a 3.2x serving-cost result, but limited to academic memory benchmarks
+
+7. **Learning Complementary Agent Groups via Task Hypergraphs for Next-POI Recommendation with Missing Modalities (CATH)**
+   * Affiliation: Swinburne University of Technology, Melbourne, VIC, Australia — *(Jinze Wang, Yuze Liu, Liang Yuan, Gaoyuan Du, Xiaohang Xu, Yong Xiang, Jiong Jin)* — with Australian Catholic University, University of Tennessee, University of Tokyo, Deakin University
+   * Link: [arxiv.org/abs/2610.25801](https://arxiv.org/abs/2610.25801)
+   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 19 Oct 2026)
+   * TL;DR: Learns to select complementary LLM-agent groups for next-POI requests with missing text or images, using a task hypergraph to share candidate-linked findings and a cost-aware policy optimization over a fixed base ranking.
+   * Key techniques:
+     - Task hypergraph whose nodes are agents with distinct processing roles; each hyperedge records the selected group, its analysis goal and the target POIs
+     - Request-, task- and already-selected-member-conditioned group selection policy, with candidate-linked result sharing during execution
+     - Completed tasks update candidate states and agent memories within the request; a shared ranking head turns states into corrections to a fixed base ranking
+     - Supervised ranking trains the executor, then policy optimization accounts explicitly for computation cost
+     - Natural-missingness experiments on Gowalla-CA, Foursquare-NYC and Foursquare-TKY give 8.4-9.1% relative NDCG@20 gains over HyperAgent4POI, plus extra-masking and quality-cost analyses
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code (arXiv lists no repository)
+     - **Novelty: 8/10** — learning which agents to compose per request through a task hypergraph, rather than a fixed agent ensemble, is a distinctive agentic-rec design
+     - **Fairness: 4/10** — handling missing modalities helps under-documented POIs, but no demographic or exposure-parity analysis is reported
+     - **Robustness: 8/10** — three datasets under natural missingness, additional masking stress tests, group-selection / execution ablations and explicit quality-cost tradeoffs
+     - **Impact: 7/10** — consistent 8-9% NDCG@20 gains over a strong agentic baseline, but academic POI benchmarks only
+
+8. **Robustness Analysis of Pareto-based Joint Evaluation of Fairness and Relevance in Recommender Systems (DPFR)**
+   * Affiliation: University of Copenhagen, Copenhagen, Denmark — *(Theresia Veronika Rampisela, Maria Maistro, Tuukka Ruotsalo, Christina Lioma)* — with LUT University, Lahti, Finland
+   * Link: [arxiv.org/abs/2610.27850](https://arxiv.org/abs/2610.27850)
+   * Venue: ACM Transactions on Recommender Systems (TORS), accepted; arXiv preprint, October 2026 (cs.IR; submitted 20 Oct 2026); extension of the WWW 2025 paper arXiv:2502.11921
+   * TL;DR: Audits the robustness of Distance-to-Pareto-Frontier, a joint fairness-and-relevance evaluator, showing existing single-measure proxies are unreliable and giving guidelines for evaluating both objectives simultaneously.
+   * Key techniques:
+     - DPFR scores a system by its distance from a Pareto frontier built from relevance and fairness measures over user-item interaction data
+     - Frontier generation via the Oracle2Fair algorithm, checked against true frontiers from exhaustive brute-force enumeration using Generational Distance
+     - Modular design: works with existing relevance and fairness measures rather than requiring a bespoke metric
+     - Robustness suite with artificial recommendations, varying fairness-relevance tradeoffs, and agreement analysis against simple measures
+     - Experiments over 4 recommenders, 3 fairness-aware re-rankers and 6 real-world datasets, revealing inconsistent associations between existing measures and DPFR
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/theresiavr/robustness-DPFR-recsys-evaluation](https://github.com/theresiavr/robustness-DPFR-recsys-evaluation): MIT, 19 files (7 Python scripts, 9 notebooks, README, LICENSE) with a script-by-script README mapping every analysis in the paper, plus a companion [WWW'25 repo](https://github.com/theresiavr/DPFR-recsys-evaluation) covering data, preprocessing, training, hyperparameter tuning and reranking. Deductions: 0 stars, notebook-driven with no packaged module, pinned requirements, tests or CI, datasets not bundled, last push Jun 2026
+     - **Novelty: 6/10** — a robustness extension of an already published WWW 2025 measure rather than a new evaluation paradigm
+     - **Fairness: 9/10** — joint fairness-relevance evaluation and the unreliability of fairness proxies are the paper's central concern
+     - **Robustness: 9/10** — 4 recommenders x 3 fairness-aware re-rankers x 6 datasets, brute-force frontier validation, artificial recommendations and tradeoff sweeps
+     - **Impact: 7/10** — ACM TORS acceptance plus reproducible code makes this a usable reference methodology, though it is evaluation-only
 
 ---
 
@@ -1232,111 +1382,6 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
-### Papers November 03
-
-*Tuesday, November 3, 2026. The live arXiv cs.IR / cs.AI / cs.CL window for the last 24 hours (papers submitted Nov 2) carried 6 strictly on-topic generative-recommendation preprints, all verified absent from README, the docs indexes, and the monthly archive. 1 is open-source (RecRSI / Shanghai Jiao Tong University, 7/10). By Opensource count 235 -> 236. Mindmap updated (added RecRSI under Frameworks & Benchmarks; dropped LLM-Demographic to hold the 30-leaf cap; all 3 layers retained).*
-
-1. **Diverse-Teacher On-Policy Distillation for Generative Recommendation**
-   * Affiliation: University of Science and Technology of China (USTC), Hefei, China — *(Zhipeng Yi, Xinyu Lin, Minxuan Shan, Zipeng Chen, Yujiao Zhao, Chuanyu Xu, Wenjie Wang)*
-   * Link: [arxiv.org/abs/2611.03272](https://arxiv.org/abs/2611.03272)
-   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 2 Nov 2026)
-   * TL;DR: Proposes a diverse-teacher on-policy distillation method for generative recommendation that mitigates the popularity bias aggravated by standard on-policy distillation, covering unpopular SID paths rarely generated or supervised by a single teacher.
-   * Key techniques:
-     - On-policy distillation (OPD) for generative recommendation (semantic-ID generation) providing denser token-level supervision than target-token-only objectives
-     - Identifies that OPD aggravates popularity bias: teacher feedback and student rollout both favor popular-item tokens, leaving unpopular SID paths rarely generated/supervised
-     - Diverse-teacher ensembling with diversity-aware regularization to cover unpopular-item token paths
-     - Popularity-debiased distillation loss balancing popular vs long-tail SID trajectories
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — reframes the popularity-bias problem of OPD in GR and proposes a diversity-aware mitigation
-     - **Fairness: 7/10** — directly targets popularity / long-tail bias introduced by distillation
-     - **Robustness: 6/10** — evaluated on SID-based GR benchmarks; limited extreme-long-tail ablations
-     - **Impact: 7/10** — relevant to industrial GR training where OPD is increasingly used
-
-2. **Preprocessing Choices in Fine-Tuning Data Matter: Utility and Demographic Sensitivity in LLM-Based Recommendation**
-   * Affiliation: Istanbul Technical University, Turkiye — *(Furkan Yasir Goksu, Yaren Yilmaz, Sule Gunduz Oguducu)*
-   * Link: [arxiv.org/abs/2611.03113](https://arxiv.org/abs/2611.03113)
-   * Venue: arXiv preprint, November 2026 (cs.IR; cs.CL; cs.LG; submitted 2 Nov 2026)
-   * TL;DR: Systematically studies how preprocessing choices in fine-tuning data (demographic-descriptor handling, output validity, prompt consistency) affect both utility and demographic fairness in a generative LLM-based recommender.
-   * Key techniques:
-     - Controlled generative LLM-based recommendation pipeline combining supervised fine-tuning, catalog, and generation
-     - Systematic variation of preprocessing choices (e.g., inclusion/format of demographic descriptors, output-format validation)
-     - Joint measurement of recommendation utility and demographic sensitivity (fairness)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 6/10** — an empirical study reframing data preprocessing as a utility/fairness lever
-     - **Fairness: 8/10** — central contribution is the demographic-sensitivity analysis
-     - **Robustness: 6/10** — controlled but single-pipeline; limited datasets
-     - **Impact: 6/10** — practical guidance for fair LLM-rec fine-tuning
-
-3. **PACERec: Progressive Adaptation of LLM Item Embeddings with Collaborative Evidence for Recommendation**
-   * Affiliation: Northeastern University, China (Shenyang) — *(Junzhao Huang, Xi Wu, Zihan Wang, Zijing Wang, Ming Wang, Kang Liu, Xiaocui Yang, Shi Feng, Daling Wang, Yifei Zhang, Ting Yang, Xurui Li)*
-   * Link: [arxiv.org/abs/2611.03068](https://arxiv.org/abs/2611.03068)
-   * Venue: arXiv preprint, November 2026 (cs.IR; cs.AI; submitted 2 Nov 2026)
-   * TL;DR: PACERec progressively adapts frozen LLM item embeddings to sequential recommendation by transferring preceding interaction contexts from frequent to long-tail items using collaborative evidence.
-   * Key techniques:
-     - LLM embeddings encode static item attributes for sequential recommendation (alleviating ID-embedding sparsity)
-     - Progressive adaptation that transfers preceding interaction contexts from frequent to long-tail items
-     - Collaborative-evidence-guided embedding adaptation under unevenly distributed behavioral evidence
-     - Context-transfer objective for long-tail items
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — explicit frequent->long-tail context transfer for LLM embeddings
-     - **Fairness: 6/10** — long-tail improvement implies fairness gain but not the explicit focus
-     - **Robustness: 6/10** — evaluated on sequential-rec benchmarks; moderate ablations
-     - **Impact: 7/10** — addresses the sparse-interaction limitation of LLM embeddings in rec
-
-4. **E-GenRM: Generative Reward Modeling for Open-Ended E-Commerce Shopping Agents**
-   * Affiliation: Alibaba (Taobao / Tmall Group), China — *(Ying Sun, Qiuyu Zhao, Xiao Wang, Xiyu Zhao, Gege Shi, Zenghui Sun, Jinsong Lan, Haihong Tang, Bo Zheng)*
-   * Link: [arxiv.org/abs/2611.03008](https://arxiv.org/abs/2611.03008)
-   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 2 Nov 2026)
-   * TL;DR: E-GenRM is a generative reward model for open-ended e-commerce shopping agents that leverages naturally occurring user behavior to provide fine-grained, capability-improving reward signals beyond current bounded agent usage.
-   * Key techniques:
-     - Generative (not scalar) reward modeling tailored to e-commerce shopping agents
-     - Leverages naturally occurring user behavior across the shopping app as supervision
-     - Integrated reward framework for open-ended shopping-agent tasks (beyond bounded trajectories / known failures)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — generative reward model for shopping agents using natural user behavior
-     - **Fairness: 4/10** — not a focus
-     - **Robustness: 6/10** — industrial setting; evaluated on shopping-agent tasks
-     - **Impact: 8/10** — Alibaba industrial; high relevance to agentic e-commerce rec / RL
-
-5. **RecRSI: Mechanism-Guided Discovery of Recommendation Algorithms**
-   * Affiliation: Shanghai Jiao Tong University, China — *(Tingran Gan, Zhouziyue Lu, Dian Jin, Tao Li, Yang Gao, Ming Liu, Weiwen Liu, Jianghao Lin, Weinan Zhang, Yong Yu)*
-   * Link: [arxiv.org/abs/2611.02487](https://arxiv.org/abs/2611.02487)
-   * Venue: arXiv preprint, November 2026 (cs.IR; cs.AI; submitted 2 Nov 2026)
-   * TL;DR: RecRSI is an LLM-based research framework that organizes recommendation-algorithm discovery around mechanism hypotheses (MechSpace, Research Line, Mechanism Feedback) to automatically propose, implement, and evaluate candidate algorithms.
-   * Key techniques:
-     - MechSpace: derives implementable primitives and composition rules from the task source
-     - Research Line: develops/tests mechanism hypotheses linking a proposed mechanism change to a reference design, rationale, and expected observation
-     - Mechanism Feedback: carries outcomes and design context into subsequent proposals (recursive self-improvement)
-     - Built on SASRec / Amazon CDs&Vinyl with RecBole and a GRPO-based candidate-training backend
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/DynamisG210/RecRSI](https://github.com/DynamisG210/RecRSI): MIT-licensed Python package (src/recrsi) with pyproject.toml, CI tests, docs (host-setup / task-format), and a reproducible CPU demo that runs without API key or GPU; code structure matches the paper (MechSpace / Research Line / Mechanism Feedback, GRPO backend). Deductions: very new (2 stars), niche research-framework scope, limited community adoption
-     - **Novelty: 8/10** — frames recsys research as automated mechanism-hypothesis discovery with LLM agents + RL
-     - **Fairness: 4/10** — not a focus
-     - **Robustness: 6/10** — sandboxed execution (landlock / namespace); empirical breadth limited to the SASRec demo
-     - **Impact: 7/10** — novel auto-discovery paradigm; from SJTU / Meituan; open-source
-
-6. **Multi-Teacher Reasoning Distillation for LLM Recommendation with Self-Exploration**
-   * Affiliation: The Hong Kong Polytechnic University, Hong Kong SAR, China — *(Liangbo Ning, Siyuan Liang, Yi Zhou, Yifeng Zhang, Qing Li, Wenqi Fan, Dacheng Tao)*
-   * Link: [arxiv.org/abs/2611.02457](https://arxiv.org/abs/2611.02457)
-   * Venue: arXiv preprint, November 2026 (cs.IR; cs.AI; submitted 2 Nov 2026)
-   * TL;DR: Proposes multi-teacher reasoning distillation for LLM recommenders that distills reasoning trajectories from several complementary teachers and uses self-exploration to assess and select the most useful trajectories for downstream recommendation.
-   * Key techniques:
-     - Reasoning-augmented recommender that generates reasoning trajectories over historical interactions
-     - Multi-teacher distillation from several fixed teachers (breaks the single-teacher knowledge ceiling)
-     - Self-exploration: the student generates its own trajectories and assesses their utility before distilling (utility-aware selection)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — multi-teacher + self-exploration utility-aware distillation for reasoning rec
-     - **Fairness: 4/10** — not addressed
-     - **Robustness: 6/10** — evaluated on rec benchmarks; ablations on teacher selection
-     - **Impact: 7/10** — from PolyU / NTU; relevant to reasoning LLM recsys
-
----
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1652,6 +1697,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro) |
 | 8/10 | From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations (CFX-Narratives) — Czech Technical University in Prague / University of Innsbruck, CIKM 2026, arXiv 2611.13914 — [github.com/vcahlik/from-counterfactual-edits-to-human-narratives](https://github.com/vcahlik/from-counterfactual-edits-to-human-narratives) |
 | 8/10 | SimRec: Learning to Search, Ask, and Recommend from Simulated Interaction (SimRec) — Zhejiang University / Tsinghua University / Hikvision Research Institute, arXiv 2611.15426 — [github.com/ZJU-REAL/SimRec](https://github.com/ZJU-REAL/SimRec) |
+| 7/10 | Robustness Analysis of Pareto-based Joint Evaluation of Fairness and Relevance in Recommender Systems (DPFR) — University of Copenhagen, arXiv 2610.27850 — [github.com/theresiavr/robustness-DPFR-recsys-evaluation](https://github.com/theresiavr/robustness-DPFR-recsys-evaluation) |
 | 7/10 | Distribution-Level Contrastive Supervision for Generative Recommendation (SODA) — University of Science and Technology of China / Upwork, RecSys 2026 — [github.com/freyasa/SODA](https://github.com/freyasa/SODA) |
 | 7/10 | A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR) |
 | 7/10 | AdaM-Rec: Adaptive Modality Routing for Multimodal Recommendation (AdaM-Rec) |
@@ -1837,7 +1883,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 251 papers as of November 13.
+**Count:** 252 papers as of November 14.
 
 ---
 
@@ -2006,6 +2052,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through Item Reachability (ReSID) — Alibaba International / Nankai University, arXiv 2611.16404 [opensource; popularity-debiased beam search + partial SID matching]
 - From Tokens to Behaviors: Rethinking Generative Recommendation for User Trajectory Prediction (TraGR) — Tongji University / CUHK / Kuaishou, arXiv 2611.16159 (parallel behaviour-level SID decoding replaces serial token decoding)
 - TriGen: A Generative Paradigm for Trigger-Induced Recommendation (TriGen) — Alibaba International, arXiv 2611.16395 (position-specific trigger guidance at every SID decoding level)
+- MIDA: Multi-Interest Decoding with Adaptive Aggregation for Session-based Recommendation (MIDA) — University of Technology Sydney, arXiv 2610.34192 (encoder-agnostic decoder-side interest clustering replaces recency-biased last-item decoding)
 
 ### RL / Reinforcement Learning
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
@@ -2173,6 +2220,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - SimRec: Learning to Search, Ask, and Recommend from Simulated Interaction (SimRec) — Zhejiang University / Tsinghua University / Hikvision, arXiv 2611.15426 [opensource; GRPO over the full tool-use trajectory]
 - ReAlign: Reward-Guided Preference Alignment for Generative Re-Ranking (ReAlign) — Intuit Credit Karma, arXiv 2611.15445 (reward-guided post-training of a candidate-aware autoregressive generator)
 - KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation (KuaiRecV2) — USTC / Kuaishou, NeurIPS 2026, arXiv 2611.16795 (multi-task reward balancing rubric)
+- Beyond Temporal Proximity: Explanatory World Models for Credit Assignment in Reinforcement Learning (EWM) — Spotify / University of Cambridge, arXiv 2610.13504 (explanation-based reward redistribution for long-horizon generative recommenders)
+- Learning Complementary Agent Groups via Task Hypergraphs for Next-POI Recommendation with Missing Modalities (CATH) — Swinburne University of Technology, arXiv 2610.25801 (cost-aware policy optimization over LLM agent-group selection)
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
 
