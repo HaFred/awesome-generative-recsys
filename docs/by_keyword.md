@@ -87,6 +87,8 @@
 - SimRec: Learning to Search, Ask, and Recommend from Simulated Interaction (SimRec) — Zhejiang University / Tsinghua University / Hikvision, arXiv 2611.15426 [opensource]
 - Learning Complementary Agent Groups via Task Hypergraphs for Next-POI Recommendation with Missing Modalities (CATH) — Swinburne University of Technology, arXiv 2610.25801
 - Agent Memory as Recommendation: Recommender-System Design for Long-Term Memory of LLM Agents (AgentMemRec) — Fudan University, arXiv 2610.34673
+- G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands (G-CAST) — Alibaba Group, arXiv 2611.17814 (governed reward evolution + checkpoint transition)
+- ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 [opensource]
 
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -127,6 +129,7 @@
 - ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through Item Reachability (ReSID) — Alibaba International / Nankai University, arXiv 2611.16404 [opensource]
 - TraGR: From Tokens to Behaviors (TraGR) — Tongji University / CUHK / Kuaishou / Fudan University, arXiv 2611.16159
 - TriGen: A Generative Paradigm for Trigger-Induced Recommendation (TriGen) — Alibaba International Digital Commerce Group, arXiv 2611.16395
+- RecMem: Recurrent Memory Compression for Long-Sequence Generative Recommendation (RecMem) — Shanghai Jiao Tong University / Taobao & Tmall Group of Alibaba, arXiv 2611.17921
 
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
@@ -156,6 +159,8 @@
 - IDs That Mean Something: A Hands-On Tutorial on Semantic IDs for Recommender Systems (Semantic-ID-Tutorial) — Huawei Ireland Research Center / UCD, CIKM 2026, arXiv 2611.04140 [opensource]
 - Beyond Semantic IDs: Atomic Creator Tokens for Large-Scale Generative Recommendation (ACT) — Meta Platforms, arXiv 2611.00323
 - Not All Branches Are Equal: Adaptive Semantic ID Construction for Generative Recommendation (AST) — Ben-Gurion University of the Negev, arXiv 2611.11549
+- INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences (INTENT) — KTH AI Society, arXiv 2611.13069 [opensource; 7-cell novelty benchmark]
+- UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation (UNIQUE) — Beihang University / Baidu Inc., arXiv 2609.23718
 
 ### Concept Unlearning
 - Neighborhood-Aware Unlearning for Generative Recommendation (NAU) — BIFOLD & TU Berlin / University of Amsterdam, arXiv 2610.27232
@@ -265,6 +270,8 @@
 - RSIR: Can Recommender Systems Teach Themselves? A Recursive Self-Improving Framework with Fidelity Control (RSIR)
 - SAGE (Tabular Data Generation)
 - World Model-Guided Reinforcement Learning via Counterfactual User Engagement Simulation (WMG-RL)
+- G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands (G-CAST) — Alibaba Group, arXiv 2611.17814 (governed reward evolution + checkpoint transition)
+- ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 [opensource]
 
 ### Denoising
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -296,6 +303,9 @@
 - ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through Item Reachability (ReSID) — Alibaba International / Nankai University, arXiv 2611.16404 [opensource]
 - Measuring, Revealing and Mitigating Harmful Content Propagation in Recommender Systems (MitiHarm) — City University of Hong Kong, IEEE TPAMI, arXiv 2611.15160 [opensource]
 - ReAlign: Reward-Guided Preference Alignment for Generative Re-Ranking (ReAlign) — Intuit Credit Karma, arXiv 2611.15445
+- RACE: Ranking-Uncertainty Aware Capacity-Adaptive Customization for Efficient Sequential Recommendation (RACE) — Zhejiang University / Huawei Technologies, WSDM 2027, arXiv 2611.18244
+- INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences (INTENT) — KTH AI Society, arXiv 2611.13069 [opensource; 7-cell novelty benchmark]
+- Learning from How Users Interpret: Personalizing Recommendation Explanation Order — Paris-Dauphine University / PSL, arXiv 2611.08785
 
 ### Diffusion
 - Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
@@ -334,6 +344,7 @@
 - DPE-Rec: Diversity-Preserving and Efficient Diffusion Language Model Recommendation for Bundle Construction (DPE-Rec) — Arizona State University, arXiv 2610.34700
 - When Diffusion Recommenders Stop Sampling: Preserving Generative Diversity (DARTS) — ISIR, Sorbonne Université, arXiv 2610.36954
 - BrowseFlow: Sparse Event Flow Matching for Generative User Simulation (BrowseFlow) — Tsinghua University / Taobao & Tmall Group of Alibaba, arXiv 2610.41374 (conditional discrete flow matching over sparse key events)
+- Pathwise Alignment for Collaborative Filtering: Bilateral Conditional Flow Regularization (PACF) — University of Technology Sydney / Hong Kong Polytechnic University, arXiv 2610.15506
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -417,6 +428,9 @@
 - ReAlign: Reward-Guided Preference Alignment for Generative Re-Ranking (ReAlign) — Intuit Credit Karma, arXiv 2611.15445
 - Robustness Analysis of Pareto-based Joint Evaluation of Fairness and Relevance in Recommender Systems (DPFR) — University of Copenhagen, arXiv 2610.27850 [opensource; ACM TORS]
 - BrowseFlow: Sparse Event Flow Matching for Generative User Simulation (BrowseFlow) — Tsinghua University / Alibaba, arXiv 2610.41374 (TaobaoBrowse benchmark)
+- ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 [opensource]
+- INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences (INTENT) — KTH AI Society, arXiv 2611.13069 [opensource; 7-cell novelty benchmark]
+- Learning from How Users Interpret: Personalizing Recommendation Explanation Order — Paris-Dauphine University / PSL, arXiv 2611.08785
 
 ### Fairness
 - What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User (LLM4Rec-CF-Bias) — University of California, San Diego, arXiv 2611.07588 [opensource]
@@ -532,6 +546,7 @@
 - From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation — Kuaishou, arXiv 2608.21012
 - SepLRM: A Foundation Model Paradigm for Recommendation (SepLRM) — ByteDance, arXiv 2611.10356
 - PRISM-Meta: Personalized Item Representations in User History (PRISM-Meta) — Meta MRS, arXiv 2610.39175
+- INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences (INTENT) — KTH AI Society, arXiv 2611.13069 [opensource; 7-cell novelty benchmark]
 
 ### Generative Recommendation / VAE
 - Decision-Native Recommendation with Large Language Models (DICE) — USTC / Independent Researcher, arXiv 2610.34124
@@ -718,6 +733,9 @@
 - ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through Item Reachability (ReSID) — Alibaba International / Nankai University, arXiv 2611.16404 [opensource]
 - KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation (KuaiRecV2) — USTC / Kuaishou, NeurIPS 2026, arXiv 2611.16795
 - ReAlign: Reward-Guided Preference Alignment for Generative Re-Ranking (ReAlign) — Intuit Credit Karma, arXiv 2611.15445
+- RecMem: Recurrent Memory Compression for Long-Sequence Generative Recommendation (RecMem) — Shanghai Jiao Tong University / Taobao & Tmall Group of Alibaba, arXiv 2611.17921
+- UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation (UNIQUE) — Beihang University / Baidu Inc., arXiv 2609.23718
+- Pathwise Alignment for Collaborative Filtering: Bilateral Conditional Flow Regularization (PACF) — University of Technology Sydney / Hong Kong Polytechnic University, arXiv 2610.15506
 
 ### Generative Retrieval / Ranking
 - Generative Retrieval under Real-Time Supply Constraints in Local Commerce (RTP-LLM) — Tsinghua University, arXiv 2611.06323
@@ -861,6 +879,7 @@
 - SurvEval: Listwise Re-Ranking Evaluator via Survival-Based Exposure and Multi-Objective Value Modeling (SurvEval) — Intuit Credit Karma, arXiv 2611.15434
 - TraGR: From Tokens to Behaviors (TraGR) — Tongji University / CUHK / Kuaishou / Fudan University, arXiv 2611.16159
 - WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search (WeSearch) — Tencent Inc., arXiv 2611.00530 (query-specific clusters instead of fixed hierarchical SIDs; 100% production traffic)
+- UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation (UNIQUE) — Beihang University / Baidu Inc., arXiv 2609.23718
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -1143,6 +1162,8 @@
 - ReAlign: Reward-Guided Preference Alignment for Generative Re-Ranking (ReAlign) — Intuit Credit Karma, arXiv 2611.15445
 - SurvEval: Listwise Re-Ranking Evaluator via Survival-Based Exposure and Multi-Objective Value Modeling (SurvEval) — Intuit Credit Karma, arXiv 2611.15434
 - WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search (WeSearch) — Tencent Inc., arXiv 2611.00530 (+0.68% CTR, 41% lower retrieval cost)
+- G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands (G-CAST) — Alibaba Group, arXiv 2611.17814 (governed reward evolution + checkpoint transition)
+- UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation (UNIQUE) — Beihang University / Baidu Inc., arXiv 2609.23718
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1163,6 +1184,7 @@
 - CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, arXiv 2611.08566 [opensource]
 - CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323
 - ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through Item Reachability (ReSID) — Alibaba International / Nankai University, arXiv 2611.16404 [opensource]
+- UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation (UNIQUE) — Beihang University / Baidu Inc., arXiv 2609.23718
 
 ### Inference Acceleration / Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
@@ -1186,6 +1208,8 @@
 - SepLRM: A Foundation Model Paradigm for Recommendation (SepLRM) — ByteDance, arXiv 2611.10356
 - CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323
 - Learning to Adjudicate: Verifier-Guided Multi-Agent Reasoning for E-Commerce Relevance (CADRE) — Tsinghua University / Alibaba International, arXiv 2611.02758 (offline teacher to lightweight online student)
+- RecMem: Recurrent Memory Compression for Long-Sequence Generative Recommendation (RecMem) — Shanghai Jiao Tong University / Taobao & Tmall Group of Alibaba, arXiv 2611.17921
+- RACE: Ranking-Uncertainty Aware Capacity-Adaptive Customization for Efficient Sequential Recommendation (RACE) — Zhejiang University / Huawei Technologies, WSDM 2027, arXiv 2611.18244
 
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
@@ -1501,6 +1525,9 @@
 - MAREval: A Multi-Agent Framework for Evaluating Natural Language Recommendation Explanations (MAREval) — Walmart Global Tech, arXiv 2610.36389
 - CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323
 - SimRec: Learning to Search, Ask, and Recommend from Simulated Interaction (SimRec) — Zhejiang University / Tsinghua University / Hikvision, arXiv 2611.15426 [opensource]
+- G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands (G-CAST) — Alibaba Group, arXiv 2611.17814 (governed reward evolution + checkpoint transition)
+- ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 [opensource]
+- Learning from How Users Interpret: Personalizing Recommendation Explanation Order — Paris-Dauphine University / PSL, arXiv 2611.08785
 
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
@@ -1523,6 +1550,7 @@
 - EvoRec-DRT: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees (EvoRec-DRT) — Kuaishou, arXiv 2611.01977 (long / short / working memory + reflection tree)
 - CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323 (reusable item memory)
 - Agent Memory as Recommendation: Recommender-System Design for Long-Term Memory of LLM Agents (AgentMemRec) — Fudan University, arXiv 2610.34673
+- RecMem: Recurrent Memory Compression for Long-Sequence Generative Recommendation (RecMem) — Shanghai Jiao Tong University / Taobao & Tmall Group of Alibaba, arXiv 2611.17921
 
 ### Model / Architecture
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
@@ -1577,6 +1605,10 @@
 - TriGen: A Generative Paradigm for Trigger-Induced Recommendation (TriGen) — Alibaba International Digital Commerce Group, arXiv 2611.16395
 - ReAlign: Reward-Guided Preference Alignment for Generative Re-Ranking (ReAlign) — Intuit Credit Karma, arXiv 2611.15445
 - SurvEval: Listwise Re-Ranking Evaluator via Survival-Based Exposure and Multi-Objective Value Modeling (SurvEval) — Intuit Credit Karma, arXiv 2611.15434
+- RecMem: Recurrent Memory Compression for Long-Sequence Generative Recommendation (RecMem) — Shanghai Jiao Tong University / Taobao & Tmall Group of Alibaba, arXiv 2611.17921
+- RACE: Ranking-Uncertainty Aware Capacity-Adaptive Customization for Efficient Sequential Recommendation (RACE) — Zhejiang University / Huawei Technologies, WSDM 2027, arXiv 2611.18244
+- UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation (UNIQUE) — Beihang University / Baidu Inc., arXiv 2609.23718
+- Pathwise Alignment for Collaborative Filtering: Bilateral Conditional Flow Regularization (PACF) — University of Technology Sydney / Hong Kong Polytechnic University, arXiv 2610.15506
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -1879,6 +1911,7 @@
 - TraGR: From Tokens to Behaviors (TraGR) — Tongji University / CUHK / Kuaishou / Fudan University, arXiv 2611.16159
 - Beyond Temporal Proximity: Explanatory World Models for Credit Assignment in Reinforcement Learning (EWM) — Spotify, arXiv 2610.13504 (industry-scale generative recommender)
 - Learning Complementary Agent Groups via Task Hypergraphs for Next-POI Recommendation with Missing Modalities (CATH) — Swinburne University of Technology, arXiv 2610.25801
+- G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands (G-CAST) — Alibaba Group, arXiv 2611.17814 (governed reward evolution + checkpoint transition)
 
 ### Retrieval / Representation
 - ARMED: Adaptive Retrieval-Augmented Medication Recommendation (ARMED) — UX Factory / KAIST, ICTAI 2026, arXiv 2610.16440
@@ -1930,6 +1963,7 @@
 - SeqFold: Timestamp-Addressable Compressed States for User Action Sequence Backbones (SeqFold) — Coupang, arXiv 2611.13704
 - PRISM-Meta: Personalized Item Representations in User History (PRISM-Meta) — Meta MRS, arXiv 2610.39175
 - CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323
+- Pathwise Alignment for Collaborative Filtering: Bilateral Conditional Flow Regularization (PACF) — University of Technology Sydney / Hong Kong Polytechnic University, arXiv 2610.15506
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -2127,6 +2161,7 @@
 - ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through Item Reachability (ReSID) — Alibaba International / Nankai University, arXiv 2611.16404 [opensource]
 - KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation (KuaiRecV2) — USTC / Kuaishou, NeurIPS 2026, arXiv 2611.16795
 - WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search (WeSearch) — Tencent Inc., arXiv 2611.00530 (critique of fixed hierarchical Semantic IDs for multi-topic documents)
+- UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation (UNIQUE) — Beihang University / Baidu Inc., arXiv 2609.23718
 
 ### Sequential Modeling / RoPE
 - Compote: Collapse-Resistant Multiple Hypothesis Learning for Sequential Recommendation (Compote) — Criteo AI Lab / Sorbonne Université CNRS ISIR, arXiv 2610.37005
@@ -2223,6 +2258,10 @@
 - TriGen: A Generative Paradigm for Trigger-Induced Recommendation (TriGen) — Alibaba International Digital Commerce Group, arXiv 2611.16395
 - KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation (KuaiRecV2) — USTC / Kuaishou, NeurIPS 2026, arXiv 2611.16795
 - MIDA: Multi-Interest Decoding with Adaptive Aggregation for Session-based Recommendation (MIDA) — University of Technology Sydney, IEEE TKDE 2026, arXiv 2610.34192
+- RecMem: Recurrent Memory Compression for Long-Sequence Generative Recommendation (RecMem) — Shanghai Jiao Tong University / Taobao & Tmall Group of Alibaba, arXiv 2611.17921
+- RACE: Ranking-Uncertainty Aware Capacity-Adaptive Customization for Efficient Sequential Recommendation (RACE) — Zhejiang University / Huawei Technologies, WSDM 2027, arXiv 2611.18244
+- INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences (INTENT) — KTH AI Society, arXiv 2611.13069 [opensource; 7-cell novelty benchmark]
+- UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation (UNIQUE) — Beihang University / Baidu Inc., arXiv 2609.23718
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey

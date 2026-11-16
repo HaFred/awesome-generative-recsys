@@ -53,7 +53,8 @@ mindmap
         SIDScope -- Huawei
         RPCBench -- Jilin University
         FocalSwap -- Huawei Technologies
-        DPFR -- University of Copenhagen
+        INTENT -- KTH AI Society
+        ShopMind -- Peking U / Alibaba
       Efficient Decoding
         STATIC -- Google
         ReSID -- Alibaba International / Nankai U
@@ -66,7 +67,6 @@ mindmap
         FORGE SID -- Zhejiang U / Alibaba
         DACT -- Fudan U
         CHAP -- USTC
-        LUMIR -- University of Klagenfurt
       Feature Quality & Safety
         SafeGEO -- U Toronto / UCSD
         MemGen-GR -- CMU / UCSD / Meta
@@ -87,6 +87,158 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 ## By Date
 
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
+### Papers November 16
+
+*Monday, November 16, 2026. The live arXiv 24-hour window is NON-EMPTY: every `/list/<cat>/new` page reads "Showing new listings for Monday, 16 November 2026" (15 cs.IR entries plus the cs.AI / cs.LG / cs.CL / cs.MM cross-listings, submissions dated 13 Nov), yet only 3 strictly on-topic, genuinely new generative-recommendation preprints appeared (RecMem, RACE, G-CAST) — **below the 5-paper floor, so the fallback chain was applied and is disclosed here**. (1) Missing dates inside the README's 10-day window were checked: `date_list = [2026-11-05, 2026-11-15]`; 15 Nov is a Sunday with no arXiv announcement, and the 05 Nov sweep returned exactly one unindexed recommender paper (2611.08785), while that day's gen-rec cluster (SteerGR / 2611.08790, CascadeRec / 2611.08566, BRIDGE / 2611.07425, OptST / 2611.07523, LatentRec / 2611.07866) is already indexed. (2) Papers published from the last summary date (the second date-section title, November 13) through today were searched; only the same Monday-announcement trio surfaced. (3) The last-3-month keyword pool was therefore used, giving 4 more strictly on-topic new papers (ShopMind / 2611.11897, INTENT / 2611.13069, UNIQUE / 2609.23718, PACF / 2610.15506). All 8 were verified absent from README.md, both docs indexes and every monthly archive (1037-ID master dedup set). **2 are open-source** (INTENT 8/10, ShopMind 7/10), so By Opensource count 252 -> 254; the mindmap's 30-leaf cap was held by dropping the two tied-lowest 7/10 leaves (DPFR, LUMIR), with all three layers retained. Re-hit handled rather than duplicated: LEGIT / 2611.10357 reappeared in Monday's cs.IR listing as a v2 cross-list, so its existing November 10 entry got a side note plus `re-hit: 1`. GR4AD-X / 2610.38378 surfaced in the web sweep but is already in the docs indexes, so it was not re-added. Excluded as off-topic: CPGRec+ / 2604.14586 (v5 TOIS GNN game-rec), the federated LLM-rec cross-list / 2604.14833 (already archived in 2026_05), and the RAG / screenshot-retrieval / e-commerce-cache-ranking cluster in Monday's cs.IR listing.*
+
+1. **RecMem: Recurrent Memory Compression for Long-Sequence Generative Recommendation**
+   * Affiliation: Shanghai Jiao Tong University — *(Haoyi Hu, Gaoyang Guo, Yunjia Xi, Wen Chen, Weiwen Liu, Jian Wu, Yuning Jiang, Weinan Zhang)* — with Taobao & Tmall Group of Alibaba
+   * Link: [arxiv.org/abs/2611.17921](https://arxiv.org/abs/2611.17921)
+   * Venue: NeurIPS 2026 (arXiv preprint, cs.IR; submitted 13 Nov 2026)
+   * TL;DR: Compresses a user's entire interaction history into a fixed set of recurrent memory slots, so a generative recommender decodes from a 216-token context instead of 1,200 tokens while retaining ~88% of long-sequence Recall@10.
+   * Key techniques:
+     - Three design desiderata: space invariance, semantic fidelity and lifelong evolvability of the compressed user state
+     - Bifurcated encoder-decoder with shared lower layers and slot-wise forget-gated memory updates over historical segments
+     - Recommendation supervision plus stream-consistency training aligning predictions from sequential and packed processing orders
+     - Horizon-independent bound on state discrepancy derived from contraction and approximate semigroup consistency
+     - MerRec: 16 memory slots / 216-token decoder context vs 1,200 tokens for HSTU-1200, retaining 87.9% of Recall@10 and 97.0% of Recall@200, beating PHSTU and recent-only / retrieval baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; the paper links only the public MerRec Hugging Face dataset (huggingface.co/datasets/mercari-us/merrec), not an implementation
+     - **Novelty: 8/10** — recurrent memory compression with a formal horizon-independent discrepancy bound is a new way to make long-history generative decoding length-invariant
+     - **Fairness: 3/10** — no exposure, popularity or group-level analysis; a fixed 16-slot bottleneck could disproportionately discard tail-user history
+     - **Robustness: 8/10** — theory plus MerRec comparisons against HSTU-1200, PHSTU, recent-only and retrieval baselines, with distant-history ablations showing archived interactions still carry signal
+     - **Impact: 9/10** — NeurIPS 2026 with Alibaba Taobao & Tmall co-authors; a 5.5x decoder-context reduction at ~88% recall directly targets the dominant long-sequence GR serving cost
+
+2. **RACE: Ranking-Uncertainty Aware Capacity-Adaptive Customization for Efficient Sequential Recommendation**
+   * Affiliation: Zhejiang University — *(Tianqi Liu, Kaipu Sun, Kairui Fu, Wenkai Wang, Sihao Liu, Hui Zang, Ran Chen, Tao Wang, Shengyu Zhang)* — with Huawei Technologies Co., Ltd.
+   * Link: [arxiv.org/abs/2611.18244](https://arxiv.org/abs/2611.18244)
+   * Venue: WSDM 2027 Main Conference (arXiv preprint, cs.IR; submitted 13 Nov 2026)
+   * TL;DR: Turns the model's own list-wise ranking uncertainty into a per-instance compute budget, slimming both channels and input sequence on the fly instead of applying one uniform compression ratio to every user.
+   * Key techniques:
+     - Capacity-Complexity Mismatch diagnosis: uniform compression wastes compute on simple instances and starves complex ones
+     - List-wise ranking-uncertainty metric derived from the distributional stability of top-K predictions, used as a measurable proxy for instance complexity
+     - Lightweight early-layer uncertainty predictor trained by self-supervision so the budget is known before the full forward pass
+     - Hypernetwork-style channel sensitivity extractor identifies parameter redundancy for instance-specific slimming
+     - Importance-aware progressive sequence filtering removes data redundancy; evaluated on four public datasets for accuracy, efficiency and adaptability
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (WSDM 2027 submission; no repository link in the paper or abstract)
+     - **Novelty: 8/10** — using ranking uncertainty as a proactive resource allocator, and adapting both parameters and input length per instance, is a fresh angle on efficient sequential recommendation
+     - **Fairness: 3/10** — no fairness analysis; per-user adaptive compute budgets could systematically give simpler or lower-activity users lower model capacity
+     - **Robustness: 8/10** — four datasets, a self-supervised uncertainty predictor, ablations, and joint accuracy / efficiency / adaptability reporting rather than a single metric
+     - **Impact: 8/10** — WSDM 2027 main-conference acceptance with Huawei collaboration; directly deployable for resource-constrained real-time serving
+
+3. **G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands**
+   * Affiliation: Alibaba Group — *(Yuechun Yu, Wenzheng Kong, Xiaofeng Mao, Jin Zhang)* — 1688 Yuancai B2B procurement agent
+   * Link: [arxiv.org/abs/2611.17814](https://arxiv.org/abs/2611.17814)
+   * Venue: arXiv preprint, November 2026 (cs.AI / cs.IR; submitted 13 Nov 2026)
+   * TL;DR: Converts daily production traffic into governed, reward-routed self-training data so a deployed LLM shopping agent keeps up with demand drift and harness evolution without losing already-accepted behaviours.
+   * Key techniques:
+     - Two drift problems addressed jointly: demand drift (new categories / intents / complexity) and harness evolution (new tools, skills and operating procedures)
+     - Reward-routed, entropy-prioritized data orchestration turns production evidence into training batches
+     - Governed reward evolution requires each proposed reward change to name the scoring error it fixes and pass validation before training
+     - Governed checkpoint transition under cumulative evaluation gates every model update so new capabilities do not regress previously accepted behaviour
+     - Deployed in Yuancai (cai.1688.com), Alibaba 1688's B2B procurement agent; ablations isolate the data-orchestration and reward-evolution contributions
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (industrial Alibaba deployment; no repository link)
+     - **Novelty: 7/10** — governed, contract-aware reward evolution and cumulative-evaluation checkpoint gating are a distinctive twist on continual self-training for agentic recommenders
+     - **Fairness: 3/10** — no bias, exposure or seller-side equity analysis; reward routing could concentrate on high-volume demand segments
+     - **Robustness: 8/10** — production experiments plus ablations, with explicit regression preservation checks under drifting demand and an evolving tool harness
+     - **Impact: 8/10** — already deployed on Alibaba 1688; a concrete harness-level RL / self-training recipe for production recommendation agents
+
+4. **ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation**
+   * Affiliation: Peking University, State Key Laboratory of General Artificial Intelligence — *(Peixuan Hou, Bin Chen, Li He, Jian Xu, Xiuli Ma, Guojie Song)* — with Alibaba Group
+   * Link: [arxiv.org/abs/2611.11897](https://arxiv.org/abs/2611.11897)
+   * Venue: arXiv preprint, November 2026 (cs.AI / cs.IR; submitted 9 Nov 2026)
+   * TL;DR: Models a shopper's evolving mental state (beliefs, uncertainties, intentions) and selects actions through short-horizon rollouts scored by a pretrained Behavior Critic, instead of predicting the next action directly from history.
+   * Key techniques:
+     - Theory-of-Mind-inspired mental world model that continuously updates latent beliefs, uncertainties and intentions across the shopping session
+     - Candidate action generation plus short-horizon rollouts over behavioural and mental-state trajectories
+     - Action selection jointly optimizing individual consistency and behavioural realism
+     - Pretrained Behavior Critic learned from real shopping trajectories; optional LlamaFactory LoRA reward-model checkpoint at inference
+     - Anonymous code release: shopmind_simulate.py CLI, shopmind/ cognition + planning + policy + world modules, behavior_critic / behavior_selection packages, setup and dependency-check scripts
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [anonymous.4open.science/r/ShopMind-0E94](https://anonymous.4open.science/r/ShopMind-0E94): README documents the full repo layout, conda/venv install, data and model prep and simulation CLI; 8+ source files verified live (shopmind_simulate.py ~26 KB, shopmind_visualize.py, scripts/, behavior_critic/, behavior_selection/, environment.yml, requirements-server.txt). Held below 8/10: no LICENSE, no datasets or checkpoints shipped, requires an external OpenAI-compatible endpoint plus a separately obtained critic LoRA, and the anonymous host has no maintenance history
+     - **Novelty: 8/10** — explicit belief / uncertainty / intention state with rollout-based selection and a learned realism critic is a substantive step beyond next-action imitation user simulators
+     - **Fairness: 3/10** — no demographic or exposure fairness evaluation; persona realism is measured but not audited for subgroup skew
+     - **Robustness: 7/10** — personalized-consistency and behavioural-realism checks plus a dependency-check script, but reproducibility depends on an undocumented external LLM endpoint and an unshipped critic checkpoint
+     - **Impact: 7/10** — PKU + Alibaba LLM user simulator with runnable code; useful for agentic recommender evaluation, though no benchmark adoption yet
+
+5. **INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences**
+   * Affiliation: KTH AI Society — *(Mattias Kvist, Erik Lidman Hillbom, Edoardo de Cal, Davis Siemens, Adam Fredriksson, Rickard Brüel-Gabrielsson)* — with Unbox AI and MIT
+   * Link: [arxiv.org/abs/2611.13069](https://arxiv.org/abs/2611.13069)
+   * Venue: MFMB workshop at ICAIF '26 (arXiv preprint, cs.LG; submitted 9 Nov 2026)
+   * TL;DR: A public benchmark that scores next-action prediction in seven cells defined by whether the user, the time period and the target item appeared in training, exposing how differently models rank once any of the three is new.
+   * Key techniques:
+     - Seven evaluation cells crossing seen / unseen users, in-sample / out-of-time periods and seen / new target items
+     - Audit of 59 public dataset families retains five; the most common disqualifying defect is a missing calendar timestamp
+     - One pre-registered per-dataset cutoff rule fixed before any model is evaluated, since no date lies inside all five datasets
+     - Parameter-free "repeat last item" control shows that on three datasets most post-cutoff score loss reflects changed behaviour rather than the model
+     - Reference results: transformer leads on seen items after the cutoff but scores zero on new items; every cell holds at least 111,769 users summed over datasets
+     - Public pipeline, split definitions and per-cell user counts released under Apache-2.0
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/kthaisociety/intent](https://github.com/kthaisociety/intent): Apache-2.0 with LICENSE + NOTICE, 487 files, pyproject.toml, uv.lock, CI workflow, tests/, docs/, packages/, .pre-commit config and AGENTS.md; pushed 9 Nov 2026, matching the paper. Kept below 9/10: 1 star, no release tag or frozen leaderboard, and dataset access depends on external sources
+     - **Novelty: 8/10** — a pre-registered seven-cell protocol that separates novelty in users, time and items is a genuinely stricter evaluation than the usual last-event holdout
+     - **Fairness: 6/10** — cold-start / new-user / new-item cells explicitly report group-level performance gaps, so unequal service quality is measurable; no demographic fairness analysis
+     - **Robustness: 9/10** — out-of-sample, out-of-time and cold-start splits, a parameter-free control, pre-registered cutoffs, five retained datasets with ≥111,769 users per cell, and a fully public pipeline
+     - **Impact: 8/10** — a reusable public benchmark for foundation models on user event sequences (MFMB / ICAIF '26), relevant well beyond banking data
+
+6. **Learning from How Users Interpret: Personalizing Recommendation Explanation Order**
+   * Affiliation: Paris-Dauphine University, PSL Research University, UMR CNRS 7243 LAMSADE — *(Deo Munduku, Elsa Negre)*
+   * Link: [arxiv.org/abs/2611.08785](https://arxiv.org/abs/2611.08785)
+   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 5 Nov 2026)
+   * TL;DR: Shows that ordering identical explanation sentences according to a user's own historical interpretation profile lifts objective comprehension to 86.5% vs 63.9-73.0% for donor, population and LLM-generated profiles, even though recommendation acceptance does not move.
+   * Key techniques:
+     - Historical profiles built from prior textual interpretations along three dimensions: information selection, relative salience and relational organization (partially via co-mobilization)
+     - Four organization procedures compared: OWN historical profile, DONOR profile, population profile (POP) and a PROFILE LLM procedure using the historical profile
+     - Explanatory content and wording held fixed so only organization varies — isolates the effect of ordering
+     - Controlled within-participant study with 122 participants; post-exposure objective comprehension as primary outcome, mixed-effects analyses
+     - OWN 86.5% correct vs DONOR 66.0%, POP 63.9%, PROFILE LLM 73.0%; no reliable overall condition effect on recommendation acceptance
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code or dataset available (controlled human-subject study; individual responses deliberately not published for privacy)
+     - **Novelty: 6/10** — personalizing explanation *order* rather than content is a small but genuinely under-explored lever, though the method is a profile-matching procedure rather than a generative model
+     - **Fairness: 5/10** — the 20-point comprehension gap between OWN and population profiles quantifies who is disadvantaged by one-size-fits-all ordering, but no demographic subgroup analysis is reported
+     - **Robustness: 7/10** — within-participant design, four conditions, mixed-effects statistics; limited to one study, no replication on a live recommender and no acceptance effect
+     - **Impact: 5/10** — niche HCI result with no reported venue; actionable for explanation UIs but unlikely to shift generative-recommendation modelling
+
+7. **UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation**
+   * Affiliation: Beihang University — *(Zhuang Liu, Yongkang Fu, Zuodong Yang, Guangxing Chen, Zonggang Wu, Yuqi Lu, Shouke Qin, Shantao Li, Maolin Wang)* — work done during an internship at Baidu Inc.
+   * Link: [arxiv.org/abs/2609.23718](https://arxiv.org/abs/2609.23718)
+   * Venue: arXiv preprint, September 2026 (cs.IR; submitted 20 Sep 2026); deployed at Mobile Baidu
+   * TL;DR: Replaces the split retrieval-ranking pipeline with one early-fusion architecture that does generative code-based retrieval and target-aware ranking over a single-layer flat quantization, deployed across three Mobile Baidu feed surfaces.
+   * Key techniques:
+     - Single-layer flat quantization avoids the instability of hierarchical quantization in candidate generation
+     - Generative code-based retrieval and target-aware ranking unified in one early-fusion model with a shared representation and end-to-end training
+     - Balanced quantization mechanism mitigates codebook imbalance and improves long-tail representation
+     - Offline retrieval and ranking evaluations plus codebook-balance analysis against hierarchical quantization
+     - Online A/B on Mobile Baidu homepage feed, discovery page and short-video scenarios: +0.96% total watch duration, +1.08% total distribution volume, with notable gains for new and highly active users
+     - Production serving measurements: 89 ms P99 latency and 44.23% online inference MFU
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available (production Baidu system; no repository link)
+     - **Novelty: 7/10** — collapsing retrieval and ranking into one early-fusion model over flat codes is a clean architectural departure from the two-stage generative-retrieval stack
+     - **Fairness: 5/10** — balanced codebook allocation and explicit long-tail / new-user improvements partly address exposure concentration, but no group-level fairness metric is reported
+     - **Robustness: 9/10** — offline retrieval + ranking evaluation, codebook analysis, multi-surface online A/B tests, and P99 latency / MFU serving measurements at Baidu scale
+     - **Impact: 9/10** — production deployment across three Mobile Baidu feeds with measured watch-time and distribution gains; a credible unified generative retrieval + ranking reference point
+
+8. **Pathwise Alignment for Collaborative Filtering: Bilateral Conditional Flow Regularization**
+   * Affiliation: University of Technology Sydney, Australian Artificial Intelligence Institute — *(Zhiwei Li, Guodong Long, Chengqi Zhang, Jing Jiang)* — with The Hong Kong Polytechnic University
+   * Link: [arxiv.org/abs/2610.15506](https://arxiv.org/abs/2610.15506)
+   * Venue: arXiv preprint, October 2026 (cs.IR / cs.LG; submitted 11 Oct 2026)
+   * TL;DR: Regularizes matrix factorization with a shared conditional flow network that connects user and item embeddings along a path, supplying the cross-user constraints that sparse BPR feedback is missing — then discards the network so inference stays as cheap as plain MF.
+   * Key techniques:
+     - Bilateral conditional flow: one network shared by all training pairs predicts the user-to-item step at interpolated points, reversed and scaled for sampled negatives
+     - Trajectory consistency term pulls each user's predicted path to end at the observed item
+     - Both flow-matching and trajectory-consistency terms also update the embeddings, so the network is thrown away after training and MF inference cost is unchanged
+     - Theoretical result: a network with bounded input sensitivity can accurately fit users who share an item only if their embeddings are close, so those users constrain one another
+     - Highest performance across seven datasets against eleven discriminative and generative baselines, with the largest gains over MF where feedback is sparsest
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public PACF implementation; the paper's only GitHub link (github.com/westlake-repl/NineRec) is a third-party dataset / baseline repository
+     - **Novelty: 8/10** — flow-matching regularization along user-to-item paths plus a supporting identifiability-style bound is an elegant bridge between generative flow models and classical MF
+     - **Fairness: 4/10** — largest gains occur for the sparsest users, which implicitly helps cold / low-activity users, but there is no explicit fairness or popularity-bias evaluation
+     - **Robustness: 8/10** — seven datasets, eleven baselines, theory, and an inference-cost argument; no industrial deployment or drift analysis
+     - **Impact: 7/10** — strong generative / flow-based CF results with a proof, but no venue, deployment or released code yet
 
 ---
 
@@ -765,6 +917,7 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Impact: 8/10** — metadata-constrained SID generation is a common industrial failure mode; the +28.6-point Hit@100 result is likely to be replicated
 
 5. **LEGIT: Live Eligibility Gating over Identifier Tries for Constrained Decoding of Heterogeneous Pages**
+   * [Also published on 2026-11-16] — re-hit: 1
    * Affiliation: Uber Technologies, Inc. — *(Felix Fang, Zheng Liu, Robert Saliba)*
    * Link: [arxiv.org/abs/2611.10357](https://arxiv.org/abs/2611.10357)
    * Venue: arXiv preprint, under review, November 2026 (cs.IR / cs.LG / cs.PF; submitted 7 Nov 2026)
@@ -1257,131 +1410,6 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
-### Papers November 04
-
-*Wednesday, November 4, 2026. The live arXiv cs.IR / cs.AI / cs.CL window for the last 24 hours (papers submitted Nov 3) carried 7 strictly on-topic generative-recommendation preprints, all verified absent from README, the docs indexes, and the monthly archive. 2 are open-source (HARP / Harbin Institute of Technology, Shenzhen, 7/10; tau-Rec-Books / Princeton University, 7/10). By Opensource count 236 -> 238. Mindmap updated (+HARP under Ranking & Reranking; +tau-Rec-Books under Frameworks & Benchmarks; dropped PFA and SODA to hold the 30-leaf cap; all 3 layers retained).*
-
-1. **ZeroGR: Filtering-First Constrained Decoding for Generative Recommendation**
-   * Affiliation: The University of Hong Kong, Hong Kong, China — *(Xiangrui Yang, Jiawei Yang, Liang Zeng, Daqian Ding, Ziqian Liu, Bing Tian, Cheng Peng, Yunfeng Zhao, Fangyu Zhang, Jiaqiang Liu, Xiao Liang, Yiming Qiu)* — with Peking University, Kuaishou Technology, Huazhong University of Science and Technology
-   * Link: [arxiv.org/abs/2611.04715](https://arxiv.org/abs/2611.04715)
-   * Venue: arXiv preprint, November 2026 (cs.DB; cs.IR; submitted 3 Nov 2026)
-   * TL;DR: ZeroGR is a filtering-first constrained-decoding system for generative recommendation that applies validity filtering before relevance scoring, using a step-sliced filtering index, shared-slot execution, and hybrid projection to cut GPU memory and accelerate the filtering/scoring pipeline by up to 9.9x.
-   * Key techniques:
-     - Filtering-first ordering: validity filtering before relevance scoring in constrained decoding (most sequences are invalid, so scoring-first wastes compute)
-     - Step-sliced filtering index: tailors data representations to each decoding step to reduce GPU memory
-     - Shared-slot execution: accelerates data exchange across pipeline stages
-     - Hybrid projection: adapts computation to workload patterns
-     - Layout-guided streaming construction for fast index refresh with limited serving interference
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 7/10** — system-level insight (filter-first) for genrec constrained decoding
-     - **Fairness: 3/10** — not a focus
-     - **Robustness: 7/10** — extensive system evaluation; strong engineering but a single-system study
-     - **Impact: 7/10** — directly relevant to production genrec serving; from HKU / Kuaishou
-
-2. **ReuseGR: Offline-Online Decoupled Generative Retrieval via Adaptive Prefix Reuse**
-   * Affiliation: Xidian University, Xi'an, China — *(Xujing Wang, Yufeng Chen, Boxuan Zhang, Chao Wei, Cai Xu, Jie Zhao, Weiru Zhang, Wei Zhao, Ziyu Guan)* — with Alibaba International Digital Commerce Group; to appear WWW 2027
-   * Link: [arxiv.org/abs/2611.04259](https://arxiv.org/abs/2611.04259)
-   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 3 Nov 2026); to appear WWW 2027
-   * TL;DR: ReuseGR decouples generative retrieval into an offline 7B planner that shares SID prefix sets across requests with the same query and a 0.5B online model that personalizes completion, reusing large-model computation while keeping retrieval personalized; uses Path KD and GRPO-based BudgetCut.
-   * Key techniques:
-     - Offline-online decoupling: query-level candidate planning (offline 7B) vs request-level personalized completion (online 0.5B)
-     - Adaptive prefix reuse: ReuseCut picks a cache depth per query by historical coverage
-     - Path-level knowledge distillation (Path KD): transfers 7B suffix-scoring knowledge to 0.5B
-     - BudgetCut: branch selection under a fixed budget, initialized by on-policy distillation and refined with GRPO
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 8/10** — prefix reuse for genret serving is a fresh efficiency angle
-     - **Fairness: 3/10** — not addressed
-     - **Robustness: 7/10** — industrial dataset plus a 14-day online A/B test
-     - **Impact: 8/10** — Alibaba International; online A/B gains (CTR +0.93%, revenue +1.05%)
-
-3. **OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer**
-   * Affiliation: ByteDance, China — *(Global E-Commerce Recommendation Foundation Team; Feng Cheng, Yu-Hsuan Huang, Fengyi Wang, Chaofan Zhou, Zhennan Zhu, Huan He, Bo Zhang, Ruoqi Zhang, Zhanfeng Mo, Ziwei Liu, Lanyi Li, Yifeng Pan, Junhua Long, Ziqiu Zhou, Yue Lin, Shaowei Liu)*
-   * Link: [arxiv.org/abs/2611.04720](https://arxiv.org/abs/2611.04720)
-   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 3 Nov 2026)
-   * TL;DR: OneTrans-GSR reformulates reranking and mix-ranking (combining product cards, short videos, livestreams, and ads) as a unified generative slate-ranking problem solved by a single autoregressive transformer that extends the deployed OneTrans backbone, trained with a reward model and RL toward slate-level and long-term objectives, and deployed at ByteDance.
-   * Key techniques:
-     - Unified reranking plus mix-ranking as one generative slate-generation problem
-     - Single decoder-only policy extending the deployed OneTrans backbone
-     - Reward model evaluates complete slates; RL optimizes slate-level and long-term objectives
-     - Explicit business-constraint enforcement during decoding
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available
-     - **Novelty: 8/10** — unifies heterogeneous slate generation into one learned policy
-     - **Fairness: 4/10** — not a focus (constraint enforcement is business-objective)
-     - **Robustness: 7/10** — deployed, large-scale online A/B (GMV/u +2.63%, advertiser value +2.06%, repurchase +2.03%, latency -13%)
-     - **Impact: 9/10** — ByteDance industrial deployment with strong online gains
-
-4. **SourceFlow: Collaborative Source Coupling for Flow-Based Recommendation**
-   * Affiliation: The Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China — *(Chenghao Wu, Yongqi Zhou, Jin Chen, Yifeng Zhou, Jinchang Zhu, Junwei Pan, Chao Zhou, Zhixiang Feng, Chengguo Yin, Menglin Yang)* — with Tencent Inc., Shenzhen, China
-   * Link: [arxiv.org/abs/2611.04455](https://arxiv.org/abs/2611.04455)
-   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 3 Nov 2026); under review
-   * TL;DR: SourceFlow improves flow-based collaborative filtering by injecting collaborative structure directly into the source distribution (Neighborhood Coupling, Collaborative Consensus, Stretched Restoration) instead of conditioning the predictor, yielding a mean +15.7% relative Recall@10 gain over the strongest flow-based baseline.
-   * Key techniques:
-     - Flow-based collaborative filtering: learns a discrete path from a sampled source to observed interactions (few-step inference)
-     - Neighborhood Coupling: constructs displaced binary sources replacing historical items with collaborative alternatives
-     - Collaborative Consensus: refines replacement probabilities using evidence from users who share the observed item
-     - Stretched Restoration: retains replacements at late flow times during training
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — code will be released upon acceptance (not yet public)
-     - **Novelty: 8/10** — reframes source sampling as collaborative-structure modeling for flow-based rec
-     - **Fairness: 3/10** — not addressed
-     - **Robustness: 7/10** — five datasets with controlled experiments; flow-based method
-     - **Impact: 7/10** — Tencent; solid empirical gains in an emerging flow-based genrec direction
-
-5. **HARP: Training-Free Dual-Profile Agentic Communication for LLM-Based Recommendation**
-   * Affiliation: Harbin Institute of Technology, Shenzhen, China — *(Zhen Tao, Xun Zhou, Xuhui Chen, Ziyue Qiao, Qingqiang Sun)* — with Great Bay University; NeurIPS 2026
-   * Link: [arxiv.org/abs/2611.05319](https://arxiv.org/abs/2611.05319)
-   * Venue: NeurIPS 2026 (cs.IR; cs.AI; submitted 3 Nov 2026)
-   * TL;DR: HARP recasts LLM-based recommendation as agentic communication between user and item agents and adds three training-free operators (symmetric item profile, retrieval-time profile-level homophily gate, reflective profile update) to a frozen LLM backbone, lifting Hit@1 by 6.9%-24.0% over the strongest baseline.
-   * Key techniques:
-     - Four-stage agentic communication: BUILD, TRANSMIT, UNDERSTAND, SYNC
-     - Dual profiles: rule-extracted symmetric item profile (zero extra LLM calls) plus user profile
-     - Channel-decomposable profile-level homophily H(phi_u, phi_i) consumed at retrieval time (not inside the reranker prompt)
-     - Single-pass reflective profile update (in-context evolution, no gradient step)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/Jove-Zhen/HARP](https://github.com/Jove-Zhen/HARP): clear module structure (profiles / homophily / memory / models), per-dataset configs, conversion + run scripts, and a README with setup/usage that matches the paper (Build/Transmit/Understand/Sync); deductions: very new with few stars, niche LLM-rec scope, and no explicit LICENSE file in the repo
-     - **Novelty: 8/10** — agentic-communication framing plus training-free dual-profile homophily
-     - **Fairness: 4/10** — not a focus
-     - **Robustness: 7/10** — 4 public benchmarks with Holm-corrected p < 1e-9 and ablations
-     - **Impact: 7/10** — NeurIPS 2026; training-free and easy to adopt on a frozen LLM backbone
-
-6. **DualEvolve: Dual-Level Self-Evolution of Mechanism and Orchestration for Recommendation**
-   * Affiliation: Meituan, China — *(Tianqi Gao [Independent Researcher], Chenxu Wang, Wenxuan Yang, Yueqi Mou, Biao Tang, Ming Liu, Peng Yan)*
-   * Link: [arxiv.org/abs/2611.04439](https://arxiv.org/abs/2611.04439)
-   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 3 Nov 2026)
-   * TL;DR: DualEvolve is a dual-level self-evolving LLM-agent framework for recommendation that co-evolves inner recommendation mechanisms (model / training code) and outer agent orchestration (harness / skill rules) using task feedback and execution traces, beating OpenEvolve and DeepEvolve in 64 of 64 setting-metric comparisons.
-   * Key techniques:
-     - Inner evolution: revises model and training code via task feedback to improve recommendation performance
-     - Outer evolution: scores the inner-loop experimental process, updates harness and skill rules, and adjusts orchestration choices from next-round scores
-     - Recursive self-improvement driven by both task performance and experimentation-quality signals
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — the paper links github.com/ToAdventure/dualevolve, but the repository returns 404 / is not publicly accessible (no usable public code)
-     - **Novelty: 8/10** — dual-level (mechanism + orchestration) co-evolution for rec agents
-     - **Fairness: 3/10** — not addressed
-     - **Robustness: 6/10** — four datasets across 16 settings, but a simulation-based agentic loop
-     - **Impact: 7/10** — Meituan; extends the OpenEvolve / DeepEvolve lineage to recommendation
-
-7. **tau-Rec-Books: A Disclosure-Controlled Benchmark for Requirement Elicitation in Agentic Recommender Systems**
-   * Affiliation: Princeton University, USA — *(Bharath Sivaram Narasimhan, Karthik R. Narasimhan)*
-   * Link: [arxiv.org/abs/2611.04459](https://arxiv.org/abs/2611.04459)
-   * Venue: arXiv preprint, November 2026 (cs.IR; cs.AI; cs.CL; submitted 3 Nov 2026); submitted to ECIR 2027 (Resource Track)
-   * TL;DR: tau-Rec-Books is a benchmark that evaluates how well agentic recommender agents elicit hidden user requirements (volunteer / mixed / hidden disclosure variants) over a 20k-book Wikidata catalog, with a rule-based simulated user and programmatic (non-LLM-judge) scoring.
-   * Key techniques:
-     - Disclosure-controlled tasks: requirements revealed volunteer / mixed / hidden
-     - Hidden requirements discoverable only by proposing books and inferring from accept/reject verdicts
-     - Rule-based deterministic simulated user plus programmatic verifiable scoring (no LLM judge)
-     - 450 tasks over a 20k-book catalog; extends the tau-Rec harness (also a movies track, RecSys 2026)
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/nbharaths/tau-rec](https://github.com/nbharaths/tau-rec): comprehensive MIT-licensed benchmark release (catalog pipeline, task generator, simulated user, validators, reference agents, full traces, analysis code, HuggingFace datasets, leaderboard, v2.0.0); deductions: it is a benchmark / data release rather than a core-method implementation, and the books track depends on external Wikidata
-     - **Novelty: 7/10** — controlled-disclosure benchmark for requirement elicitation in agentic CRS
-     - **Fairness: 4/10** — not a focus
-     - **Robustness: 7/10** — programmatically reproducible scoring across 4 agents and 2 interfaces, with mixed/hidden ablations
-     - **Impact: 7/10** — Princeton; extends the RecSys 2026 tau-Rec evaluation resource for agentic rec
-
----
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1647,6 +1675,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 9/10 | The Pitfall of Scaling Up: Uncovering and Mitigating Popularity Bias Amplification in Scaling Transformer-based Recommenders (SPRINT) |
 | 9/10 | ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through Item Reachability (ReSID) — Alibaba International Digital Commerce Group / Nankai University, arXiv 2611.16404 — [github.com/Gabriel-reina/ReSID](https://github.com/Gabriel-reina/ReSID) |
 | 8.5/10 | Factorized Latent Reasoning for LLM-based Recommendation (FLR) |
+| 8/10 | INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences (INTENT) — KTH AI Society, arXiv 2611.13069 — [github.com/kthaisociety/intent](https://github.com/kthaisociety/intent) |
 | 8/10 | A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset (APG4RecSim) |
 | 8/10 | ACE: Anisotropy-Controllable Embedding for LLM-enhanced Sequential Recommendation |
 | 8/10 | Adaptive Autoguidance for Item-Side Fairness in Diffusion Recommender Systems (A2G-DiffRec) |
@@ -1697,6 +1726,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro) |
 | 8/10 | From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations (CFX-Narratives) — Czech Technical University in Prague / University of Innsbruck, CIKM 2026, arXiv 2611.13914 — [github.com/vcahlik/from-counterfactual-edits-to-human-narratives](https://github.com/vcahlik/from-counterfactual-edits-to-human-narratives) |
 | 8/10 | SimRec: Learning to Search, Ask, and Recommend from Simulated Interaction (SimRec) — Zhejiang University / Tsinghua University / Hikvision Research Institute, arXiv 2611.15426 — [github.com/ZJU-REAL/SimRec](https://github.com/ZJU-REAL/SimRec) |
+| 7/10 | ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 — [anonymous.4open.science/r/ShopMind-0E94](https://anonymous.4open.science/r/ShopMind-0E94) |
 | 7/10 | Robustness Analysis of Pareto-based Joint Evaluation of Fairness and Relevance in Recommender Systems (DPFR) — University of Copenhagen, arXiv 2610.27850 — [github.com/theresiavr/robustness-DPFR-recsys-evaluation](https://github.com/theresiavr/robustness-DPFR-recsys-evaluation) |
 | 7/10 | Distribution-Level Contrastive Supervision for Generative Recommendation (SODA) — University of Science and Technology of China / Upwork, RecSys 2026 — [github.com/freyasa/SODA](https://github.com/freyasa/SODA) |
 | 7/10 | A Redundancy Reduction Approach for Controllable Sequential Recommendations (BT-SR) |
@@ -1883,7 +1913,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 252 papers as of November 14.
+**Count:** 254 papers as of November 16.
 
 ---
 
@@ -2053,8 +2083,11 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - From Tokens to Behaviors: Rethinking Generative Recommendation for User Trajectory Prediction (TraGR) — Tongji University / CUHK / Kuaishou, arXiv 2611.16159 (parallel behaviour-level SID decoding replaces serial token decoding)
 - TriGen: A Generative Paradigm for Trigger-Induced Recommendation (TriGen) — Alibaba International, arXiv 2611.16395 (position-specific trigger guidance at every SID decoding level)
 - MIDA: Multi-Interest Decoding with Adaptive Aggregation for Session-based Recommendation (MIDA) — University of Technology Sydney, arXiv 2610.34192 (encoder-agnostic decoder-side interest clustering replaces recency-biased last-item decoding)
+- RecMem: Recurrent Memory Compression for Long-Sequence Generative Recommendation (RecMem) — Shanghai Jiao Tong University / Taobao & Tmall Group of Alibaba, arXiv 2611.17921 (16 fixed memory slots + 216-token decoder context replace long-history decoding)
 
 ### RL / Reinforcement Learning
+- G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands (G-CAST) — Alibaba Group, arXiv 2611.17814 (reward-routed self-training + governed reward evolution, deployed on 1688 Yuancai)
+- ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 [opensource; Behavior Critic reward model + short-horizon rollouts]
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)
 - Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation (GESE) — Baidu (GSPO)
 - Safety as a Constraint: Fine-Tuning a LLM Recommender to Explain Itself — Netflix / UPenn (constrained GRPO)
