@@ -91,6 +91,8 @@
 - ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 [opensource]
 - Reflection Is Not Always Worth It: Budgeted Reflection Allocation for Recommendation Agents (BRAVE) — The University of British Columbia / HK PolyU, WSDM 2027, arXiv 2611.19847 [opensource]
 - GuardAgent: A Memory-Augmented Agentic Framework for Adaptive Detection of Adversarial Promotions in LLM-Based Recommendation (GuardAgent) — University of New South Wales / CSIRO, WSDM 2027, arXiv 2611.22274
+- MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (near-line Qwen3-0.6B agent generates per-user seven-dimensional cascade configs)
+- MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems (MLE Agents) — Meta Platforms, NeurIPS 2026 AutoMLR Workshop oral, arXiv 2611.23910 (human-on-the-loop agent loop over 1,097 ranking experiments)
 
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -135,6 +137,7 @@
 - Cluster-Guided Decoding with Trust-Region Constraints for Personalized Recommendation (CG2R) — Amazon, arXiv 2611.22163
 - Efficient Wide-Beam Generative Retrieval with Model-Native Trie Decoding and Shared-Context Attention (Trie-Head) — LinkedIn, arXiv 2611.22309
 - IntentGR: Enhancing Intent for End-to-End Personalized Generative Retrieval in Search (IntentGR) — Zhejiang University / Alibaba International Digital Commerce Group, WSDM 2027 Findings, arXiv 2611.22788
+- Optimize the Cob, Then the Kernel: Optimizing Beam Search for Generative Recommendation Inference (Cob/Kernel) — Huawei Technologies Co., Ltd., arXiv 2611.23339 (Tree Attention + static KV + vocabulary-constrained decoding, up to 25x vs vLLM on Ascend NPUs)
 
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
@@ -269,6 +272,7 @@
 - Dense Feature Representation over Sequence Modeling: A Solution to the KDD Cup 2026 UniRec Challenge (KDD Cup 2026 UniRec) — Z Lab (Chengdu), KDD Cup 2026 Tencent UniRec Challenge Workshop
 - RoleMix: Unifying Sequential and Non-Sequential Features via Semantic Tokenization for Post-Click Conversion Rate Prediction (RoleMix) — UESTC / Macau Polytechnic University / University of Liverpool, KDD Cup 2026 Tencent UniRec Challenge, arXiv 2607.22700
 - TokenFormer V2: Breaking the Resolution-Complexity Dilemma in Unified Recommendation (TokenFormer V2) — Tencent, arXiv 2611.19074
+- X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction (X-split Argus) — Yandex, arXiv 2611.24283 (candidate-independent reusable history tokens, +4.65% ACV online)
 
 ### Data Generation / Synthetic Data
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
@@ -315,6 +319,8 @@
 - INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences (INTENT) — KTH AI Society, arXiv 2611.13069 [opensource; 7-cell novelty benchmark]
 - Learning from How Users Interpret: Personalizing Recommendation Explanation Order — Paris-Dauphine University / PSL, arXiv 2611.08785
 - Better Rankers, Worse Retrievers: The Hidden Cost of RL Post-Training in Generative Recommendation — HKUST / Trip.com Group, arXiv 2611.22838
+- CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710 (counterfactual catalog-partition utility separates observation availability from predictive usefulness)
+- ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation (ReflectRec) — Sungkyunkwan University / NAVER Corp., EMNLP 2026, arXiv 2611.23969 (ValScore diagnoses downstream module effects)
 
 ### Diffusion
 - Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
@@ -354,6 +360,7 @@
 - When Diffusion Recommenders Stop Sampling: Preserving Generative Diversity (DARTS) — ISIR, Sorbonne Université, arXiv 2610.36954
 - BrowseFlow: Sparse Event Flow Matching for Generative User Simulation (BrowseFlow) — Tsinghua University / Taobao & Tmall Group of Alibaba, arXiv 2610.41374 (conditional discrete flow matching over sparse key events)
 - Pathwise Alignment for Collaborative Filtering: Bilateral Conditional Flow Regularization (PACF) — University of Technology Sydney / Hong Kong Polytechnic University, arXiv 2610.15506
+- CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710 (reliability-conditioned discrete diffusion recommender with counterfactual utility supervision)
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -443,6 +450,7 @@
 - CARE: Contrastive-Anchored Residual Encoding with Listwise Reconstruction for Retrieval-Oriented Semantic IDs (CARE-SID) — Tencent, arXiv 2611.20721
 - Label-Free Detection of Structural Bias in LLM-Based Recommender Systems via Randomized Paraphrasing: The Case of Verbosity (Verbose-Bias) — University of Granada, arXiv 2611.18878
 - Deal With It: On Better Schedules for Listwise Reranking (DealRank) — Mixedbread / National Institute of Informatics, arXiv 2611.22392 [opensource]
+- MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems (MLE Agents) — Meta Platforms, NeurIPS 2026 AutoMLR Workshop oral, arXiv 2611.23910 (objective calibrated to match online impact across 1,097 experiments)
 
 ### Fairness
 - What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User (LLM4Rec-CF-Bias) — University of California, San Diego, arXiv 2611.07588 [opensource]
@@ -533,6 +541,7 @@
 - PACT: Defending Recommendation against Promotional News Rewriting via Attack-Diverse Score Consistency (PACT) — Waseda University, arXiv 2611.00972 (exposure manipulation by LLM rewrites)
 - Label-Free Detection of Structural Bias in LLM-Based Recommender Systems via Randomized Paraphrasing: The Case of Verbosity (Verbose-Bias) — University of Granada, arXiv 2611.18878
 - GuardAgent: A Memory-Augmented Agentic Framework for Adaptive Detection of Adversarial Promotions in LLM-Based Recommendation (GuardAgent) — University of New South Wales / CSIRO, WSDM 2027, arXiv 2611.22274
+- PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University, EMNLP 2026, arXiv 2611.23236 [opensource; relational fidelity defends sensitive attributes against inversion attacks]
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -757,6 +766,8 @@
 - More Than a Score: Reinforcement Learning with Verbalized Feedback for Generative Recommendation (VerRec) — Tencent Inc. / NUS / CUHK, arXiv 2611.22410
 - IntentGR: Enhancing Intent for End-to-End Personalized Generative Retrieval in Search (IntentGR) — Zhejiang University / Alibaba International Digital Commerce Group, WSDM 2027 Findings, arXiv 2611.22788
 - Better Rankers, Worse Retrievers: The Hidden Cost of RL Post-Training in Generative Recommendation — HKUST / Trip.com Group, arXiv 2611.22838
+- CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710
+- Optimize the Cob, Then the Kernel: Optimizing Beam Search for Generative Recommendation Inference (Cob/Kernel) — Huawei Technologies Co., Ltd., arXiv 2611.23339
 
 ### Generative Retrieval / Ranking
 - Generative Retrieval under Real-Time Supply Constraints in Local Commerce (RTP-LLM) — Tsinghua University, arXiv 2611.06323
@@ -936,6 +947,7 @@
 - Graph-Informed Semantic IDs (GrIS): Balancing Semantic and Collaborative Signals via Recursive Graph Partition (GrIS) — Huawei Ireland Research Centre, arXiv 2610.01533
 - SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation (SPRIG) — Johannes Kepler University Linz, CIKM 2026, arXiv 2610.06590 [opensource]
 - Multimodal Graph Retrieval-Augmented Sequential Recommendation via Collaborative Filtering Paths (MGRASRec) — University of New South Wales, arXiv 2610.11228
+- PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University, EMNLP 2026, arXiv 2611.23236 (static vocabulary-level semantic graph propagates prototype obfuscation anchors)
 
 ### Group Recommendation
 - AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation
@@ -1193,6 +1205,9 @@
 - CLEAR: Legible and Steerable Recommendation via Grounded Natural-Language Interests (CLEAR) — Meta, arXiv 2611.19110
 - TokenFormer V2: Breaking the Resolution-Complexity Dilemma in Unified Recommendation (TokenFormer V2) — Tencent, arXiv 2611.19074
 - CARE: Contrastive-Anchored Residual Encoding with Listwise Reconstruction for Retrieval-Oriented Semantic IDs (CARE-SID) — Tencent, arXiv 2611.20721
+- MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (two-week A/B across five Taobao scenarios, >10M daily users, +7.34% GMV)
+- MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems (MLE Agents) — Meta Platforms, arXiv 2611.23910 (autonomous model changes on production search rankers)
+- X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction (X-split Argus) — Yandex, arXiv 2611.24283 (deployed at ~100k requests/s in a real-time bidding system)
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1244,6 +1259,8 @@
 - RACE: Ranking-Uncertainty Aware Capacity-Adaptive Customization for Efficient Sequential Recommendation (RACE) — Zhejiang University / Huawei Technologies, WSDM 2027, arXiv 2611.18244
 - KVUse: Reusable-KV User Memory for Efficient LLM Recommenders (KVUse) — Meta Recommendation Systems (MRS), arXiv 2611.21920
 - Efficient Wide-Beam Generative Retrieval with Model-Native Trie Decoding and Shared-Context Attention (Trie-Head) — LinkedIn, arXiv 2611.22309
+- Optimize the Cob, Then the Kernel: Optimizing Beam Search for Generative Recommendation Inference (Cob/Kernel) — Huawei Technologies Co., Ltd., arXiv 2611.23339
+- X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction (X-split Argus) — Yandex, arXiv 2611.24283 (offline history compression + teacher logit distillation)
 
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
@@ -1259,6 +1276,8 @@
 - SeqFold: Timestamp-Addressable Compressed States for User Action Sequence Backbones (SeqFold) — Coupang, arXiv 2611.13704 (3,400x compressed timestamp-addressable user states)
 - KVUse: Reusable-KV User Memory for Efficient LLM Recommenders (KVUse) — Meta Recommendation Systems (MRS), arXiv 2611.21920
 - Efficient Wide-Beam Generative Retrieval with Model-Native Trie Decoding and Shared-Context Attention (Trie-Head) — LinkedIn, arXiv 2611.22309
+- Optimize the Cob, Then the Kernel: Optimizing Beam Search for Generative Recommendation Inference (Cob/Kernel) — Huawei Technologies Co., Ltd., arXiv 2611.23339 (static KV allocation + loop-unrolled dispatch on Ascend NPUs)
+- MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (asynchronous config cache in iGraph; cascade never waits for LLM inference)
 
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
@@ -1283,6 +1302,7 @@
 - Diverse-Teacher On-Policy Distillation for Generative Recommendation (Diverse-Teacher) — University of Science and Technology of China, arXiv 2611.03272
 - Search-Aware On-Policy Self-Distillation with Sibling Alignment for Generative Recommendation (SA-OPSD) — Kuaishou Technology, arXiv 2611.01568
 - Generative Search and Recommendation at Shopify (SID-LLM) — Shopify, arXiv 2611.08804
+- X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction (X-split Argus) — Yandex, arXiv 2611.24283 (teacher click logits from uncompressed history supervise the compressor)
 
 ### LLM-as-Judge
 - Statistically Reliable LLM-Based Ranking Evaluation via Prediction-Powered Inference (PRECISE)
@@ -1569,6 +1589,8 @@
 - KVUse: Reusable-KV User Memory for Efficient LLM Recommenders (KVUse) — Meta Recommendation Systems (MRS), arXiv 2611.21920
 - GuardAgent: A Memory-Augmented Agentic Framework for Adaptive Detection of Adversarial Promotions in LLM-Based Recommendation (GuardAgent) — University of New South Wales / CSIRO, WSDM 2027, arXiv 2611.22274
 - Deal With It: On Better Schedules for Listwise Reranking (DealRank) — Mixedbread / National Institute of Informatics, arXiv 2611.22392 [opensource]
+- ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation (ReflectRec) — Sungkyunkwan University / NAVER Corp., EMNLP 2026, arXiv 2611.23969
+- PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University, EMNLP 2026, arXiv 2611.23236 [opensource]
 
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
@@ -1773,6 +1795,7 @@
 - SituRecBench: Evaluating Frontier Models as Situated Recommendation Assistants in 3D Environments (SituRecBench) — The Hong Kong Polytechnic University, arXiv 2611.10349
 - LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation (LUMIR) — University of Klagenfurt, arXiv 2611.14004 [opensource]
 - PMRecBench: A Benchmark for Personalization in Recommendation Agents under Multimodal Queries (PMRecBench) — University College London / University of Amsterdam, arXiv 2611.06349
+- CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710 (audiovisual / visual / textual streams under controlled missingness and semantic conflict)
 
 ### Optimizer
 - MuonRec
@@ -1832,6 +1855,7 @@
 - ReAlign: Reward-Guided Preference Alignment for Generative Re-Ranking (ReAlign) — Intuit Credit Karma, arXiv 2611.15445
 - SurvEval: Listwise Re-Ranking Evaluator via Survival-Based Exposure and Multi-Objective Value Modeling (SurvEval) — Intuit Credit Karma, arXiv 2611.15434
 - Deal With It: On Better Schedules for Listwise Reranking (DealRank) — Mixedbread / National Institute of Informatics, arXiv 2611.22392 [opensource]
+- MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (per-user reranker settings inside the seven-dimensional cascade action)
 
 ### Reasoning
 - Deliberate Latent Reasoning for Sequential Recommendation (DESRec) — Renmin University of China, arXiv 2611.06521
@@ -1898,6 +1922,7 @@
 - EvoRec-DRT: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees (EvoRec-DRT) — Kuaishou, arXiv 2611.01977
 - Learning to Reason with Predictive Gains for Generative Recommendation (GainReason) — Renmin University of China / Alibaba International, arXiv 2611.21441 [opensource]
 - More Than a Score: Reinforcement Learning with Verbalized Feedback for Generative Recommendation (VerRec) — Tencent Inc. / NUS / CUHK, arXiv 2611.22410
+- ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation (ReflectRec) — Sungkyunkwan University / NAVER Corp., EMNLP 2026, arXiv 2611.23969 (verifier-guided conditional regeneration of CoT preference notes)
 
 ### Reinforcement Learning
 - FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
@@ -1964,6 +1989,8 @@
 - Reflection Is Not Always Worth It: Budgeted Reflection Allocation for Recommendation Agents (BRAVE) — The University of British Columbia / HK PolyU, WSDM 2027, arXiv 2611.19847 [opensource]
 - More Than a Score: Reinforcement Learning with Verbalized Feedback for Generative Recommendation (VerRec) — Tencent Inc. / NUS / CUHK, arXiv 2611.22410
 - Better Rankers, Worse Retrievers: The Hidden Cost of RL Post-Training in Generative Recommendation — HKUST / Trip.com Group, arXiv 2611.22838
+- MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (FAPO + GRPO with Sandbox replay and a frozen reward model)
+- PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University, EMNLP 2026, arXiv 2611.23236 [opensource; multi-reward GRPO]
 
 ### Retrieval / Representation
 - ARMED: Adaptive Retrieval-Augmented Medication Recommendation (ARMED) — UX Factory / KAIST, ICTAI 2026, arXiv 2610.16440
@@ -2017,6 +2044,7 @@
 - CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval (CRIM) — Tsinghua University / Alibaba International, arXiv 2610.35323
 - Pathwise Alignment for Collaborative Filtering: Bilateral Conditional Flow Regularization (PACF) — University of Technology Sydney / Hong Kong Polytechnic University, arXiv 2610.15506
 - Cluster-Guided Decoding with Trust-Region Constraints for Personalized Recommendation (CG2R) — Amazon, arXiv 2611.22163
+- ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation (ReflectRec) — Sungkyunkwan University / NAVER Corp., EMNLP 2026, arXiv 2611.23969 (Forward-Look retrieval of behaviorally similar users)
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -2051,6 +2079,7 @@
 - Measuring, Revealing and Mitigating Harmful Content Propagation in Recommender Systems (MitiHarm) — City University of Hong Kong, IEEE TPAMI, arXiv 2611.15160 [opensource]
 - PACT: Defending Recommendation against Promotional News Rewriting via Attack-Diverse Score Consistency (PACT) — Waseda University / ZOZO NEXT, arXiv 2611.00972
 - GuardAgent: A Memory-Augmented Agentic Framework for Adaptive Detection of Adversarial Promotions in LLM-Based Recommendation (GuardAgent) — University of New South Wales / CSIRO, WSDM 2027, arXiv 2611.22274
+- PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University, EMNLP 2026, arXiv 2611.23236 [opensource; inversion-attack defense on item semantic embeddings]
 
 ### Semantic / Structured IDs
 - BRIDGE: Bridging the Semantic Quantization Gap for Generative Recommendation (BRIDGE) — Kuaishou Technology, arXiv 2611.07425
@@ -2221,6 +2250,7 @@
 - Efficient Wide-Beam Generative Retrieval with Model-Native Trie Decoding and Shared-Context Attention (Trie-Head) — LinkedIn, arXiv 2611.22309
 - IntentGR: Enhancing Intent for End-to-End Personalized Generative Retrieval in Search (IntentGR) — Zhejiang University / Alibaba International Digital Commerce Group, WSDM 2027 Findings, arXiv 2611.22788
 - Better Rankers, Worse Retrievers: The Hidden Cost of RL Post-Training in Generative Recommendation — HKUST / Trip.com Group, arXiv 2611.22838
+- CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710 (tokenwise allocation over partially masked SID states)
 
 ### Sequential Modeling / RoPE
 - Compote: Collapse-Resistant Multiple Hypothesis Learning for Sequential Recommendation (Compote) — Criteo AI Lab / Sorbonne Université CNRS ISIR, arXiv 2610.37005
@@ -2321,6 +2351,7 @@
 - RACE: Ranking-Uncertainty Aware Capacity-Adaptive Customization for Efficient Sequential Recommendation (RACE) — Zhejiang University / Huawei Technologies, WSDM 2027, arXiv 2611.18244
 - INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences (INTENT) — KTH AI Society, arXiv 2611.13069 [opensource; 7-cell novelty benchmark]
 - UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation (UNIQUE) — Beihang University / Baidu Inc., arXiv 2609.23718
+- X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction (X-split Argus) — Yandex, arXiv 2611.24283 (autoregressive feedback prediction over compressed long-history tokens)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
@@ -2335,3 +2366,4 @@
 ### Training Systems / NPU Optimization
 - Not Only NTP: Extending Training Signal Coverage for Generative Recommendation (NONTP) — Meituan, arXiv 2607.12277
 - TurboGR: An Accelerated Training System for Large-Scale Generative Recommendation
+- Optimize the Cob, Then the Kernel: Optimizing Beam Search for Generative Recommendation Inference (Cob/Kernel) — Huawei Technologies Co., Ltd., arXiv 2611.23339 (TorchAir graph compilation + operator fusion on Ascend NPUs)
