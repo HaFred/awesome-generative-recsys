@@ -90,6 +90,138 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
+### Papers November 21
+
+*Saturday, November 21, 2026. This run fired at 01:13 HKT, before arXiv's 09:00 HKT announcement, so the live `/list/<cat>/new` window across all five categories is the still-current "Showing new listings for Friday, 20 November 2026" (30 cs.IR entries plus cs.AI / cs.LG / cs.CL / cs.MM cross-lists, 742 unique IDs) — the unindexed November 20 announcement covering submissions dated 18-19 Nov. 7 strictly on-topic, genuinely new generative-recommendation / generative-retrieval / LLM-recommendation / industrial rec-systems preprints surfaced, **above the 5-paper floor, so no fallback chain and no `date_list` were needed**. All 7 were verified absent from README.md, both docs indexes and every monthly archive (1088-ID master dedup set). **0 are open-source**: LQ-Rec's only `github.com` URL is the third-party P5 baseline, and no repository, Hugging Face artifact or anonymous release exists for the other six — so By Opensource stays at 258 (date advanced to November 21) and the 30-leaf mindmap is unchanged with all three layers retained. One re-hit: KiS / 2611.19320 resurfaced as a cs.IR cross-list in today's listing, so its existing Nov 17 entry got `[Also published on 2026-11-21] — re-hit: 1` instead of a duplicate. The batch is retrieval- and systems-heavy: two semantic-ID / continuous generative-retrieval papers (LQ-Rec, CACO), one whole-page generative re-ranker, one text-based gen-rec popularity-bias audit, one production LLM-embedding retrieval stack, and two industrial long-sequence / agentic ranking systems. Excluded as off-topic: MMIntentFlow / 2611.20448 (v2-renamed multimodal search with no generative decoding), the RAG / dense-retrieval / agent-harness cluster (2611.25071, 2611.25229, 2611.25247, 2611.25582, 2611.25691, 2611.25845, 2611.26019), 2611.26609 (Variants of Beam Search for DiskANN — ANN graph theory, not recommendation decoding), and the diffusion-LM / generative-fundamentals cluster (2611.25763, 2611.25895, 2611.26055, 2611.26627).*
+
+1. **LQ-Rec: Late Quantization for Sequential Recommendation**
+   * Affiliation: Toyota Motor North America — *(Satoshi Koide)* — with UC San Diego (Yueqi Wang, Julian McAuley)
+   * Link: [arxiv.org/abs/2611.25256](https://arxiv.org/abs/2611.25256)
+   * Venue: ICDM 2026 (IEEE International Conference on Data Mining; arXiv preprint, cs.IR, submitted 18 Nov 2026)
+   * TL;DR: Moving discretization from the input side to the output (item) side of generative retrieval decouples model error from quantization error, so ranking quality improves monotonically with semantic-ID length and one model supports anytime compression without retraining.
+   * Key techniques:
+     - Late Quantization (LQ): the encoder and scoring rule operate in continuous space; only items are stored and matched as SIDs produced by an end-to-end-trained residual quantizer
+     - Additive error decomposition (Proposition 1), separable optimization (Proposition 4) and a pairwise ordering theorem / Recall@K bound that jointly bound the quantization-induced ranking drop
+     - Removes the O((MN)^2) attention memory and O(bM) beam-search forward-pass scaling that confine autoregressive SID decoders to short codes
+     - Anytime compression: a single trained model tunes ranking quality against inference cost by varying SID length at serving time, with no retraining
+     - Four public 5-core benchmarks: Recall@10 / NDCG@10 improve monotonically with SID length, beat TIGER / RPG / VQ-Rec baselines (+19% Recall@10 on Toys vs RPG) and generalize better on a memorization/generalization partition
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; the only GitHub URL in the paper (github.com/jeykigung/P5) is the third-party P5 baseline used for comparison
+     - **Novelty: 9/10** — relocating quantization to the output side with provable additive error decomposition and monotonic SID-length scaling is a genuinely new reframing of generative retrieval for sequential recommendation
+     - **Fairness: 3/10** — no exposure, popularity or cohort analysis; the memorization/generalization partition is a robustness stratification, not fairness
+     - **Robustness: 8/10** — four public benchmarks, theory-backed guarantees, anytime compression without retraining and a memorization/generalization partition; no production deployment or cross-domain stress test
+     - **Impact: 8/10** — ICDM 2026, Toyota Motor North America + UC San Diego (Julian McAuley); SID-length scaling is a central blocker for deployed generative recommenders
+
+2. **CACO: Coverage-Aware Coordinated Optimization for Continuous Generative Retrieval**
+   * Affiliation: Hunan University — *(Pan Zhang)* — with Huazhong Agricultural University and Beijing-based collaborators (Nan Zhuang, Yongkang Zhang, Kun Xú, Zhongtao Jiang, Zhiwei Wang, Kun Xǔ, Youhuan Li)
+   * Link: [arxiv.org/abs/2611.25738](https://arxiv.org/abs/2611.25738)
+   * Venue: arXiv preprint, cs.IR (submitted 19 Nov 2026; 21 pages, 16 figures, 12 tables)
+   * TL;DR: A label-free post-training framework coordinates the multiple queries sampled by frozen flow-matching / diffusion generative retrievers toward complementary ANN neighborhoods, cutting query overlap and lifting set-level recall at almost no extra latency.
+   * Key techniques:
+     - Empirical retrieval frequencies across sampled reference queries serve as a relevance proxy for a label-free coverage objective (30-of-30 backbone-dataset recall gains in offline greedy selection)
+     - Coordinated query adjustment network: inter-query bidirectional attention + gated relative directions, bounded tangent-space projection and spherical retraction
+     - Tangential antithetic perturbations with counterfactual single-query replacement give an unbiased gradient estimator of smoothed set coverage across non-differentiable top-K ANN search
+     - Negligible serving overhead: +0.5%-3.0% inference latency, inter-query overlap down 53.3%-64.9%
+     - Eight public benchmarks and an in-house 24-partition streaming industrial dataset; Recall@100 up to +23.7%, Recall@400 up to +23.9% over the strongest baseline
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; no repository, anonymous artifact or checkpoint link in the paper
+     - **Novelty: 8/10** — a coverage-aware coordinated optimizer over frozen continuous generative retrievers with an unbiased estimator through discrete ANN search is a fresh, well-formulated contribution
+     - **Fairness: 3/10** — no exposure, popularity or cohort fairness analysis; complementary coverage is a retrieval-geometry objective
+     - **Robustness: 9/10** — 30 backbone-dataset settings, eight public benchmarks, a 24-partition streaming industrial dataset, three training seeds, overlap and latency sweeps, plus an unbiasedness argument
+     - **Impact: 8/10** — large reported recall gains on continuous flow-matching / diffusion generative retrieval with an industrial dataset; university-led, no venue yet
+
+3. **Learning Generative Ranking Policies for Whole-Page Optimization**
+   * Affiliation: Meta Platforms, Inc. — *(Chen Qiu, Zhigang Hua, Qi Xu, Jizhe Zhang, Sha Hua, Ren Mao, Luke Simon)*
+   * Link: [arxiv.org/abs/2611.25527](https://arxiv.org/abs/2611.25527)
+   * Venue: arXiv preprint, cs.IR / cs.AI / cs.LG (submitted 19 Nov 2026)
+   * TL;DR: Whole-page policy improvement replaces uniform page-level credit and fixed imitation targets with per-position targets derived from complete-page scores, so a generative re-ranker learns what is best for the whole page rather than each item in isolation.
+   * Key techniques:
+     - One local page-level objective that repeatedly moves the current generator toward higher-scoring pages; proved to improve under exact updates and converge to the optimal page score for repeated exact full updates
+     - Exact decomposition into one training target per position, comparing candidates at the same partial page by the scores of the complete pages they lead to
+     - Alternating search guided by the current generator with learning from complete-page scores, so targets stay current as the generator improves
+     - At serving time the trained generator emits pages without any evaluator queries; beats prefix-score beam search at every tested width with lower measured generation time
+     - KuaiRand-1K and RL4RS-SeqSlate (multi-objective selection + constrained ordering), an industrial logged-page dataset, and a synthetic benchmark with a known optimal page
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; implementation choices are disclosed in an appendix but no artifact is released
+     - **Novelty: 8/10** — exact per-position decomposition of a whole-page objective plus improvement/convergence proofs fixes two concrete limitations of prior generative re-ranking work
+     - **Fairness: 3/10** — no exposure, provider or cohort fairness analysis; multi-objective page scores are not fairness constraints
+     - **Robustness: 8/10** — two public datasets, an industrial logged-page set, a synthetic benchmark with known optimum, ablations and a beam-search latency comparison; no online A/B reported
+     - **Impact: 8/10** — Meta Platforms; whole-page generative re-ranking is directly applicable to production feeds, though no venue or deployment is stated
+
+4. **Generative News Recommendation Reproduces Popularity: A Memorization-Based Analysis**
+   * Affiliation: Nikkei Inc., Tokyo, Japan — *(Shotaro Ishihara)*
+   * Link: [arxiv.org/abs/2611.25606](https://arxiv.org/abs/2611.25606)
+   * Venue: ABCSS 2026 — 11th International Workshop on Application of Big Data for Computational Social Science @ IEEE BigData 2026
+   * TL;DR: Continually training a Llama 3 8B title generator on ~20 million real news browsing sessions makes it memorize frequency-repeated titles and reproduce a more concentrated, less diverse distribution than the logs themselves — a memorization pathway for popularity bias in generative recommendation.
+   * Key techniques:
+     - Text-based generative recommendation where article titles are both item representation and generation target, so popularity appears as repeated lexical strings
+     - Operationalized pathway: target frequency -> verbatim / edit-distance memorization -> emission across a wider range of prompts -> concentrated output distribution
+     - Approximately 20 million browsing sessions from a Japanese news service; instruction-tuned Llama 3 8B under continual training, no popularity-obfuscated public benchmark
+     - Exploratory target-level deduplication condition reduces memorization and concentration but also shrinks the training set and lowers accuracy (documented accuracy-diversity trade-off / data-size confound)
+     - Frames news diversity as a civic outcome distinct from catalog coverage in entertainment / e-commerce recommendation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; proprietary session logs and no released checkpoint (the paper names a Llama3-nikkei-genrec-dedup model but does not release it)
+     - **Novelty: 7/10** — connecting popularity bias in generative recommendation to string-level memorization, and measuring the full frequency -> memorization -> generation pathway on real logs, is a genuinely fresh angle
+     - **Fairness: 8/10** — directly studies popularity bias, output concentration and information diversity on a news platform, with an explicit normative framing; no demographic group-parity audit
+     - **Robustness: 7/10** — 20M real sessions, three-part pathway analysis, verbatim and approximate memorization measures and a deduplication ablation; single model, single news service, correlations are described as moderate
+     - **Impact: 8/10** — Nikkei Inc., IEEE BigData 2026 workshop; strong societal relevance for news recommenders and a concrete caution for text-based gen-rec training pipelines
+
+5. **From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation**
+   * Affiliation: Autodesk, San Francisco, CA, USA — *(Zhixiong Hu, Meng Li, Maggie Zhang, Deborshi Goswami, David Bailey, James Bradley)*
+   * Link: [arxiv.org/abs/2611.26096](https://arxiv.org/abs/2611.26096)
+   * Venue: arXiv preprint, cs.IR / cs.LG (submitted 19 Nov 2026)
+   * TL;DR: LSER adds session- and history-level LLM embeddings as auxiliary user-side features in the retrieval-stage user tower of autodesk.com, with a nearline serving path that refreshes the vectors asynchronously as behaviour changes.
+   * Key techniques:
+     - LLM Session Embedding Retrieval (LSER): pretrained-LLM session / history embeddings injected alongside learned sequence encoders in the retrieval user tower
+     - Nearline asynchronous refresh of sequential and LLM-derived user vectors keeps user-side embeddings fresh under real-time behaviour
+     - Heterogeneous multi-content-type catalog (customer stories, product pages, industry pages, learning content) with sparse, fast-changing user behaviour
+     - Ablation study across the full catalog isolates the incremental value of the LLM features; optional learned item-ID embedding disabled in production
+     - Production-grade serving: user vectors computed offline/nearline, retrieval-stage integration with production latency and freshness constraints
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; a deployed production system on autodesk.com
+     - **Novelty: 6/10** — incremental over LEARN / TreeBridge / LLM-embedding sequential-recommendation integration; the contribution is production feasibility evidence rather than a new algorithm
+     - **Fairness: 3/10** — no fairness analysis; long-tail coverage is motivation but not audited as exposure or group parity
+     - **Robustness: 7/10** — full-catalog ablation and a nearline serving path with real freshness constraints; no quantified online lift reported and only one site / catalog
+     - **Impact: 7/10** — Autodesk production content recommendation; practical evidence that LLM embeddings can be integrated into retrieval without serving regressions, but no venue or public numbers
+
+6. **DNA: Unlocking Depth Scaling in CTR Models**
+   * Affiliation: Alibaba Group / Taobao Search, Hangzhou, China — *(Caiyuan Li, Wenjie Wu, Yuheng Huang, Xiao Zhou, Silu Zhou, Ke Chen, Zinan Zhao, Xinrui Zeng, Hanmo Xu, Chaoqun Song, Hua Zong, Zongyuan Wu, et al.)*
+   * Link: [arxiv.org/abs/2611.25659](https://arxiv.org/abs/2611.25659)
+   * Venue: arXiv preprint, cs.IR (submitted 19 Nov 2026; 10 pages, 5 figures); DNA-4 deployed in Taobao search
+   * TL;DR: Dual-stream Nexus Attention lets the long user-behaviour sequence itself evolve with depth instead of repeatedly re-reading a fixed K/V sequence, restoring AUC gains where stacked cross-attention saturates — deployed in Taobao search with +0.8% CTR / +0.5% GMV online.
+   * Key techniques:
+     - Diagnosis: stacking cross-attention 16 -> 28 layers on Taobao search adds only 0.02 pt AUC, because every layer reads the same projected behaviour sequence
+     - Dual-stream Nexus Attention: the request representation reads the sequence, then each behaviour token attends to the updated request and updates itself, so the next layer reads a request-shaped sequence
+     - The sequence update runs once per request and is shared by all candidates; both reads and the update stay linear in sequence length
+     - At comparable forward FLOPs, +0.08 to +0.26 pt AUC over cross-attention stacks, with gains continuing in the depth range where those stacks level off
+     - DNA-4 deployed in Taobao search; online A/B against the production CrossAttn-2 control: +0.8% CTR, +0.5% GMV
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; Alibaba / Taobao industrial ranking system
+     - **Novelty: 7/10** — a clean bottleneck diagnosis plus a bidirectional request-sequence co-evolution mechanism; incremental over DIN / LONGER / HSTU-style long-sequence attention but non-obvious
+     - **Fairness: 2/10** — pure ranking quality / efficiency work, no fairness or exposure analysis
+     - **Robustness: 9/10** — production Taobao search deployment, online A/B with CTR / GMV lifts, FLOP-matched comparisons and a depth-saturation sweep; single platform and no public dataset replication
+     - **Impact: 8/10** — Alibaba Group production deployment; long-behaviour-sequence depth scaling sits directly on the generative sequential-recommendation line, though no venue
+
+7. **Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models**
+   * Affiliation: Meta, Inc. — *(Chang Yang, Yao Xuan, Wendan Yan, Nhat Le, Jiang Liu, Longhao Jin, Peggy Yao, Alireza Vahdatpour, Djordje Gligorijevic)*
+   * Link: [arxiv.org/abs/2611.26531](https://arxiv.org/abs/2611.26531)
+   * Venue: arXiv preprint, cs.IR (submitted 19 Nov 2026); optimized models launched in production
+   * TL;DR: An end-to-end agentic system has LLM agents propose cross features and deterministic tools execute experiments, then tunes feature selection across a fleet of ranking models under shared pipeline-cost and per-model QPS budgets — +0.31% normalized entropy and a +0.20% primary online metric in A/B.
+   * Key techniques:
+     - LLM agents shortlist cross features from a combinatorial space; several importance methods rank candidates and feature blending merges rankings via Pareto fronts across tasks for multi-task models
+     - An LLM Researcher agent tunes feature selection in 10-25 asynchronous trials under resource caps; hours-to-days experiment feedback bounds the trial budget
+     - Deterministic tools execute experiments and verify hypotheses; a trimming step keeps pipeline cost within budget
+     - Shared fleet-level pipeline cost and per-model serving QPS are explicit constraints (1/QPS entered as an upper-bound cap)
+     - Production: +0.31% normalized entropy on average within each model's budget, trimming cuts pipeline cost 2.3% with no regression beyond measurement noise, +0.20% primary online metric after launch
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; the agent harness and fleet tooling are internal to Meta
+     - **Novelty: 6/10** — an empirical agentic-systems integration rather than a new learning algorithm; the cost-aware Pareto blending and trial budget are the distinctive parts
+     - **Fairness: 2/10** — no fairness analysis; resource constraints are efficiency, not equity
+     - **Robustness: 8/10** — multiple production models, 10-25 asynchronous trials per model, explicit cost caps, trimming with noise-level regression bounds, and online A/B; workshop-length evidence with run-to-run noise caveats
+     - **Impact: 7/10** — Meta, Inc. fleet-scale ranking infrastructure, models launched; directly relevant to harness-level / agentic optimization of recommender systems, but no venue
+
+---
+
 ### Papers November 20
 
 *Friday, November 20, 2026. This run fired at 01:05 HKT, before arXiv's 09:00 HKT announcement, so the live `/list/<cat>/new` window is the still-current "Showing new listings for Thursday, 19 November 2026" across all five categories (cs.IR 21 entries plus cs.AI / cs.LG / cs.CL / cs.MM cross-lists) — the unindexed November 19 announcement covering submissions dated 17-18 Nov. 7 strictly on-topic, genuinely new generative-recommendation / generative-retrieval / LLM-recommendation / industrial rec-systems preprints surfaced, **above the 5-paper floor, so no fallback chain and no `date_list` were needed**. All 7 were verified absent from README.md, both docs indexes and every monthly archive (1048-ID master dedup set). **1 is open-source** (PGPO / Zhejiang University, 8/10), so By Opensource count 257 -> 258; the mindmap's 30-leaf cap was held by dropping the lowest-scoring leaf GainReason (7/10), with all three layers retained (Decision 12 / Representation 11 / Feature 7). No re-hits: none of the 7 arXiv IDs appear in README.md, and the legacy cross-lists that also surfaced in today's listing (2603.20422, 2606.00740, 2606.02883, 2606.29959, 2607.19987, 2608.21274, 2610.25096, 2611.18179) are docs-/archive-only, so no `[Also published on ...]` side notes were added. Name collision handled: today's Taobao paper is indexed as `MARS-TR` to distinguish it from the already-indexed `MARS` (Multi-rate Aggregation of Recency Signals, Fudan University) and `Agentic Recommender System with Hierarchical Belief-State Memory (MARS)`. PGPO's arXiv v1 line reads 26 Aug 2026 (its EMNLP 2026 acceptance timeline), but it appears as a primary cs.IR new listing on 19 Nov with its MIT code pushed 19 Nov, so it is counted in today's window. Excluded as off-topic: 2611.23626 (binary rating-scale design), 2611.24849 (executable program judges for relevance labeling), 2611.23606 (VIBRA cross-modal retrieval), 2611.23296 / 2611.23858 (ranking for requirements review / robotic grasping), and the agent-harness / speculative-decoding / diffusion-fundamentals cluster; 2611.22838 (Better Rankers, Worse Retrievers) reappeared in same-day web digests but is already indexed on Nov 18 and was not re-added.*
@@ -443,6 +575,7 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Impact: 8/10** — USTC + Kuaishou (Guorui Zhou, Kun Gai, Defu Lian); RL stability is a central blocker for production generative recommenders
 
 5. **Keep it Simple! A Multiple-Choice Task can Benefit Generative Recommendation**
+   * [Also published on 2026-11-21] — re-hit: 1
    * Affiliation: National Taiwan University — *(Wei-Hsiang Huang, Jyun-Yu Jiang, Pu-Jen Cheng)* — with Coupang
    * Link: [arxiv.org/abs/2611.19320](https://arxiv.org/abs/2611.19320)
    * Venue: arXiv preprint, cs.IR (submitted 14 Nov 2026)
@@ -1267,157 +1400,6 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
-### Papers November 10
-
-*Tuesday, November 10, 2026. The live arXiv 24-hour window (the Tuesday cs.IR announcement, 35 entries; submissions dated Nov 7-9 after the weekend cutoff) surfaced 8 strictly on-topic generative-recommendation / generative-retrieval / LLM-recommendation preprints, all verified absent from README.md, both docs indexes and the monthly archive (983-ID dedup set) — above the 5-paper floor, so the fallback chain was not needed. The batch is unusually systems-heavy: two production serving stacks (RecoGEM, SepLRM), two trie / constrained-decoding papers (RoutingTrie, LEGIT), two SID pipelines (TS-GEAR, AST) and two LLM/VLM recommendation benchmarks (IntentLens, SituRecBench). 0 are open-source: seven have no code link at all, RoutingTrie only promises a future release, and SituRecBench's linked GitHub repository is an empty placeholder with a project page and dataset link. By Opensource count unchanged (243). Mindmap unchanged (no new open-source papers; 30-leaf cap retained, all three layers kept).*
-
-1. **RecoGEM: A Serving System for Production-Scale Generative Recommendation**
-   * Affiliation: The University of Hong Kong, Hong Kong, China — *(Xiangrui Yang)* — with Kuaishou Technology, Peking University and Renmin University of China
-   * Link: [arxiv.org/abs/2611.12296](https://arxiv.org/abs/2611.12296)
-   * Venue: arXiv preprint, November 2026 (cs.DC / cs.AI / cs.IR; submitted 9 Nov 2026)
-   * TL;DR: A production serving system that decouples GR-specific runtime duties from the execution engine and re-optimizes attention, candidate selection and execution planning for short-token, large-candidate autoregressive SID decoding.
-   * Key techniques:
-     - Runtime-engine decoupling moves candidate-state transitions and live artifact updates into a dedicated runtime, leaving the engine free for tensor execution
-     - Engine exploits GR's short token sequences, large candidate populations and predictable step shapes to specialize self-attention and candidate selection
-     - Execution planning co-schedules the dependent decode steps of a request under interactive latency budgets instead of reusing LLM request scheduling assumptions
-     - Deployed for over nine months across production lines serving hundreds of millions of users and more than ten GR model families
-     - On OneModel workloads: over 1,000 QPS per serving instance, P99 latency below 35 ms and 2.88x throughput over representative baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (industrial production serving stack; no repository or artifact link in the paper)
-     - **Novelty: 8/10** — first serving architecture built around GR's decode topology rather than adapted from an LLM serving stack; the runtime/engine split is the distinctive idea
-     - **Fairness: 2/10** — no exposure, popularity, cold-start or demographic analysis; a pure systems contribution
-     - **Robustness: 9/10** — nine months of production traffic, 10+ model families, explicit P99/QPS measurements and comparison against representative baselines
-     - **Impact: 9/10** — directly addresses the main blocker for industrial GR adoption; likely to become a reference point for GR inference infrastructure
-
-2. **TS-GEAR: Taobao Shangou GEnerative Ad Retrieval**
-   * Affiliation: Alibaba Group, Shanghai, China — *(Guofeng Tong, Xu Zhang, Guangliang Yu, Haiqiang Wang et al.)*
-   * Link: [arxiv.org/abs/2611.12180](https://arxiv.org/abs/2611.12180)
-   * Venue: arXiv preprint, November 2026 (cs.IR / cs.AI / cs.CL; submitted 9 Nov 2026)
-   * TL;DR: Generative ad retrieval for on-demand delivery that makes geographic reachability part of the semantic ID itself, conditions history on query and location, and optimizes the whole retrieved set with a deduplicated marginal-advantage GRPO variant.
-   * Key techniques:
-     - Geo-Semantic ID splits merchant identifiers into geographic prefixes and semantic suffixes, turning delivery reachability into a prediction target instead of a non-differentiable post-generation truncation
-     - Query-Geo Target Attention aggregates history with the real-time query and location as dual targets, encoding each behavior's own location in its attention key
-     - GMPO (Group Marginal Policy Optimization) rewrites GRPO advantages with a deduplicated group reward and marginal advantage, removing redundant near-duplicates without an auxiliary diversity loss
-     - Set-level supervision replaces independent per-sequence scoring, matching how the candidate set is actually evaluated
-     - Deployed online with a lightweight 0.1B backbone over 150 million queries/day: +3.8% ad impressions and +4.2% ad revenue, with gains on HitRate and geographic validity
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (production advertising system; catalog and behavioral data proprietary)
-     - **Novelty: 8/10** - geo-prefixed SIDs plus set-level marginal-advantage policy optimization is a genuinely new combination for constrained generative retrieval
-     - **Fairness: 5/10** — explicitly corrects region/query-conditioned interest bias and hard-invalid-candidate handling, but reports no item-exposure or merchant-fairness analysis
-     - **Robustness: 9/10** — offline HitRate plus geographic-validity evaluation and a large-scale online A/B with revenue and impression lifts
-     - **Impact: 9/10** — rare evidence that generative retrieval respects hard business constraints at 150M-query/day scale with measurable revenue gain
-
-3. **Not All Branches Are Equal: Adaptive Semantic ID Construction for Generative Recommendation**
-   * Affiliation: Ben-Gurion University of the Negev, Beer Sheva, Israel — *(Guy Hadad, Haggai Roitman, Bracha Shapira)*
-   * Link: [arxiv.org/abs/2611.11549](https://arxiv.org/abs/2611.11549)
-   * Venue: RecSys '26 (20th ACM Conference on Recommender Systems); arXiv preprint, November 2026 (cs.IR / cs.LG; submitted 8 Nov 2026)
-   * TL;DR: Replaces fixed-codebook residual quantization with a silhouette-driven divisive clustering tree whose branch factor adapts at every node, producing semantic IDs that are genuine hierarchical paths.
-   * Key techniques:
-     - Reformulates SIDs as prefix-conditioned hierarchical paths, exposing a mismatch with RQ-VAE / hierarchical VQ's assumption of level-wise independent token semantics
-     - Adaptive Silhouette Tree (AST): top-down divisive clustering that chooses the number of branches per node by maximizing the silhouette coefficient
-     - Adaptive branching yields fine partitions in dense embedding regions and compact groupings in homogeneous ones, unlike fixed branching factors
-     - Constrained variants enforce a minimum probability mass during splitting to improve supervision for long-tail items
-     - Evaluated on five Amazon Review datasets of varying size and domain against strong baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (no GitHub, Zenodo or artifact link in the paper or on arXiv)
-     - **Novelty: 8/10** — a clean conceptual critique of fixed-codebook quantization plus a simple, geometrically motivated tree tokenizer in its place
-     - **Fairness: 6/10** — explicitly designs minimum-mass splits to improve long-tail item supervision, though no exposure/calibration audit is reported
-     - **Robustness: 8/10** — five datasets across domains and sizes, constrained-vs-unconstrained ablations and comparisons with strong quantization baselines
-     - **Impact: 7/10** — RecSys '26 publication on a bottleneck almost every SID-based recommender shares; academic rather than deployed impact so far
-
-4. **RoutingTrie: Metadata Routing for Constrained Generative Retrieval**
-   * Affiliation: Shopify — *(Darshan Fofadiya, Yang Liu, Shuying Sun, Kyumin Park, Juhana Kangaspunta)*
-   * Link: [arxiv.org/abs/2611.11016](https://arxiv.org/abs/2611.11016)
-   * Venue: arXiv preprint, November 2026 (cs.IR / cs.LG; submitted 7 Nov 2026)
-   * TL;DR: Pushes metadata constraints ahead of beam selection by indexing each metadata field over a shared SID trie, so constrained generative retrieval stops wasting decode budget on ineligible candidates.
-   * Key techniques:
-     - One shared catalog SID trie plus compact per-field metadata indexes in either Dense Bitset or Sparse List representation
-     - A derived storage-cost formula selects the cheaper index representation for a given field value distribution
-     - Field probes test whether requested values occur below each candidate trie edge; the combined mask guides beam selection during decoding
-     - ShopTrie, a configurable synthetic benchmark, measures storage and CPU/GPU probe cost across metadata distributions
-     - Production replay lifts Hit@100 from 67.5% to 96.1% (+28.6 points) with only 1.1 ms added latency
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available yet: the paper only promises ("will release") the ShopTrie generator, benchmark scripts and CPU/Triton GPU kernels; no repository URL is given
-     - **Novelty: 8/10** — moving constraint checking from post-generation filtering into the trie/beam interface is a crisp systems insight with an analytic storage model
-     - **Fairness: 3/10** — no bias, exposure or eligibility-disparity analysis; constraints are treated purely as business rules
-     - **Robustness: 8/10** — synthetic benchmark across field distributions, CPU and GPU probing microbenchmarks, and a production replay with latency accounting
-     - **Impact: 8/10** — metadata-constrained SID generation is a common industrial failure mode; the +28.6-point Hit@100 result is likely to be replicated
-
-5. **LEGIT: Live Eligibility Gating over Identifier Tries for Constrained Decoding of Heterogeneous Pages**
-   * [Also published on 2026-11-16, 2026-11-18] — re-hit: 2
-   * Affiliation: Uber Technologies, Inc. — *(Felix Fang, Zheng Liu, Robert Saliba)*
-   * Link: [arxiv.org/abs/2611.10357](https://arxiv.org/abs/2611.10357)
-   * Venue: arXiv preprint, under review, November 2026 (cs.IR / cs.LG / cs.PF; submitted 7 Nov 2026)
-   * TL;DR: Enforces per-request, per-token eligibility and no-duplicate rules while a generative recommender decodes an entire results page, using CPU trie walks that overlap GPU model execution.
-   * Key techniques:
-     - Whole-page decoding: a single pass writes stores and their menu items, so every generated SID must name a real, deliverable, non-repeated item belonging to the store above it
-     - Depth-first numbering of trie leaves turns live eligibility, repetition and parent-child rules into range lookups over one store trie and one item trie
-     - Every generated page passes an independent catalog check for exact constraint satisfaction
-     - Direct GPU trie walking makes each token about 5x slower than unconstrained decoding; 36 implementations and hardware counters attribute this to kernel launches and CPU-GPU waits
-     - Fastest design walks the trie on the CPU while the GPU runs the model, needs no custom kernel, and cuts time per output token by 65.9% (to ~1.7x unconstrained cost) on one NVIDIA B200
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (industrial system under review; no repository link in the paper)
-     - **Novelty: 8/10** — formalizes live eligibility gating for page-level generative decoding and replaces grammar-constrained decoding with range lookups
-     - **Fairness: 3/10** — eligibility is a business constraint; no fairness, exposure or merchant-side equity evaluation
-     - **Robustness: 9/10** — 36 implementations, hardware-counter attribution, ablation study and an independent correctness check on every generated page
-     - **Impact: 8/10** - a practical recipe (CPU trie + GPU model overlap, no custom kernel) for anyone shipping constrained GR decoding
-
-6. **SepLRM: A Foundation Model Paradigm for Recommendation**
-   * Affiliation: ByteDance — *(Di Chen, Xijun Xiao, Qin Ren et al.)* — with Institute of Software, Chinese Academy of Sciences
-   * Link: [arxiv.org/abs/2611.10356](https://arxiv.org/abs/2611.10356)
-   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 7 Nov 2026)
-   * TL;DR: Splits one large recommendation model into a shared encoder-decoder foundation model that exports candidate-independent KV caches and many lightweight vertical models, avoiding repeated long-sequence encoding across stages and scenarios.
-   * Key techniques:
-     - Identifies reusable sequence encoding as the scaling bottleneck when distinct E2E LRMs recompute long behaviors for every stage and business scenario
-     - RFM exports its final-layer encoder state as a shared KV cache that is independent of downstream candidate offers, preserving fine-grained behavioral information better than user embeddings or candidate-specific logits
-     - Each vertical model builds candidate-conditioned queries over the same KV cache, retaining the query-KV interaction of its E2E counterpart for high-fidelity capability transfer
-     - Co-designed cache compression, training/serving workflows and LG-Store, a distributed storage system for KV caches
-     - Three large-scale datasets show state-of-the-art offline performance with an approximately 100% transfer rate and transferability across model iterations
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (industrial foundation-model stack; no repository link in the paper)
-     - **Novelty: 9/10** — separating a recomodel at the native KV-cache interface, rather than at embeddings or logits, is an original architectural move with a clean systems formulation
-     - **Fairness: 3/10** — no bias, exposure or long-tail fairness analysis; the contribution is efficiency and transfer
-     - **Robustness: 8/10** — three large-scale datasets, ~100% transfer measurement, cross-iteration transfer tests and a purpose-built storage layer
-     - **Impact: 9/10** — KV-cache reuse as a shared foundation-model interface could reshape how multi-stage industrial recommenders are trained and served
-
-7. **IntentLens: Grounding Underspecified Multimodal Queries for Recommendation via Tool-Augmented Reasoning**
-   * Affiliation: The Hong Kong Polytechnic University — *(Xiao Chen)* — with LightSpeed
-   * Link: [arxiv.org/abs/2611.11346](https://arxiv.org/abs/2611.11346)
-   * Venue: NeurIPS 2026; arXiv preprint, November 2026 (cs.IR; submitted 8 Nov 2026)
-   * TL;DR: A ground-then-rank framework that resolves vague image-plus-text recommendation requests by having a multimodal LLM use visual tools, user memory and item-attribute retrieval before a lightweight ranker scores candidates.
-   * Key techniques:
-     - Targets underspecified multimodal queries where key visual attributes, personalized preferences and item-side constraints stay implicit
-     - Shared MLLM infers latent user intent from image-text input while augmenting each candidate item with fine-grained, query-conditioned evidence
-     - Tool set combines visual tools, a user memory module and item attribute retrieval; grounding happens before user-item matching
-     - Lightweight ranker scores the grounded representations, keeping the expensive MLLM off the per-candidate scoring path
-     - Two new benchmarks, GoogleReview-MMTool and Yelp-MMTool, with strong generalization to unseen categories and datasets
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available (no GitHub or benchmark release link in the paper or on arXiv)
-     - **Novelty: 8/10** — formalizes underspecified multimodal recommendation and makes query-conditioned evidence generation a first-class grounding step
-     - **Fairness: 4/10** — user memory personalizes intent but there is no bias, popularity or demographic fairness evaluation
-     - **Robustness: 8/10** — two purpose-built benchmarks, comparisons with MLLM and retrieval baselines, and explicit cross-category/cross-dataset generalization tests
-     - **Impact: 8/10** — NeurIPS 2026 venue plus two reusable benchmarks for an increasingly common assistant-style recommendation setting
-
-8. **SituRecBench: Evaluating Frontier Models as Situated Recommendation Assistants in 3D Environments**
-   * Affiliation: The Hong Kong Polytechnic University, Department of Computing — *(Jingtong Yang)* — with Sichuan University
-   * Link: [arxiv.org/abs/2611.10349](https://arxiv.org/abs/2611.10349)
-   * Venue: arXiv preprint, November 2026 (cs.AI / cs.CL / cs.CV / cs.IR / cs.LG; submitted 7 Nov 2026)
-   * TL;DR: An interactive benchmark that evaluates vision-language models as recommendation assistants sharing a user's egocentric 3D view, jointly testing preference elicitation, visual grounding and navigation.
-   * Key techniques:
-     - Recasts recommendation as situated assistance: the assistant elicits preferences, grounds suggestions in the shared scene and guides the user to items through dialogue
-     - High-fidelity 3D shopping environments (supermarkets, home furnishing stores) with role-specific observations and actions for user simulation
-     - Unified interactive protocol scores dialogue quality, recommendation utility and navigation effectiveness together
-     - Public artifact set: project page with leaderboards, Hugging Face dataset link and docs; 2 environments, 479 catalog products and 200 hidden shopping goals
-     - Experiments expose persistent spatial-grounding and preference-elicitation failures in frontier VLMs
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code available: the linked github.com/SituRec/SituRecBench repository is an empty placeholder (0 files, no README, no LICENSE, no commits); only the project page, leaderboard and dataset link are live, and the main demo is still "coming soon"
-     - **Novelty: 8/10** — first benchmark to combine spatial navigation, visual grounding and multi-turn social interaction for recommendation assistants
-     - **Fairness: 4/10** — unified protocol covers diverse simulated goals, but no demographic or exposure fairness analysis
-     - **Robustness: 7/10** — multiple environments and metrics with frontier-model baselines, yet hidden goals, a pending demo and no released code limit independent verification
-     - **Impact: 7/10** — useful new evaluation surface for embodied / assistant recommenders, contingent on the promised artifact release
-
----
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1925,7 +1907,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 258 papers as of November 20.
+**Count:** 258 papers as of November 21.
 
 ---
 
@@ -2103,6 +2085,9 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - IntentGR: Enhancing Intent for End-to-End Personalized Generative Retrieval in Search (IntentGR) — Zhejiang University / Alibaba International, WSDM 2027 Findings, arXiv 2611.22788
 - Optimize the Cob, Then the Kernel: Optimizing Beam Search for Generative Recommendation Inference (Cob/Kernel) — Huawei Technologies Co., Ltd., arXiv 2611.23339 (Tree Attention beam concatenation + vocabulary-constrained decoding on Ascend NPUs)
 - CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710 (reliability-gated discrete SID diffusion over exact feasible catalog support)
+- LQ-Rec: Late Quantization for Sequential Recommendation (LQ-Rec) — Toyota Motor North America / UC San Diego, ICDM 2026, arXiv 2611.25256 (output-side residual quantization removes O(bM) beam-search encoder passes; anytime SID-length compression)
+- CACO: Coverage-Aware Coordinated Optimization for Continuous Generative Retrieval (CACO) — Hunan University, arXiv 2611.25738 (coordinated flow-matching / diffusion query generation for complementary parallel ANN coverage)
+- Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (whole-page policy improvement generator beats prefix-score beam search at every tested width)
 
 ### RL / Reinforcement Learning
 - G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands (G-CAST) — Alibaba Group, arXiv 2611.17814 (reward-routed self-training + governed reward evolution, deployed on 1688 Yuancai)
@@ -2281,6 +2266,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Better Rankers, Worse Retrievers: The Hidden Cost of RL Post-Training in Generative Recommendation — HKUST / Trip.com Group, arXiv 2611.22838
 - PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University, EMNLP 2026, arXiv 2611.23236 [opensource; GRPO with dissimilarity / structural-consistency / semantic-constraint rewards]
 - MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (Confidence-aware SFT + FAPO + GRPO with Sandbox replay for per-user pipeline orchestration)
+- Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (whole-page policy improvement with per-position complete-page targets; outperforms representative RL algorithms)
+- Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models — Meta, Inc., arXiv 2611.26531 (LLM Researcher agent tunes feature selection in 10-25 async trials under cost caps; launched with +0.20% online metric)
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
 

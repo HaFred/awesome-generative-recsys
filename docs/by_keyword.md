@@ -93,6 +93,7 @@
 - GuardAgent: A Memory-Augmented Agentic Framework for Adaptive Detection of Adversarial Promotions in LLM-Based Recommendation (GuardAgent) — University of New South Wales / CSIRO, WSDM 2027, arXiv 2611.22274
 - MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (near-line Qwen3-0.6B agent generates per-user seven-dimensional cascade configs)
 - MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems (MLE Agents) — Meta Platforms, NeurIPS 2026 AutoMLR Workshop oral, arXiv 2611.23910 (human-on-the-loop agent loop over 1,097 ranking experiments)
+- Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models — Meta, Inc., arXiv 2611.26531 (LLM Researcher agent + deterministic tools tune cross-feature selection in 10-25 async trials under shared resource caps)
 
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -138,6 +139,9 @@
 - Efficient Wide-Beam Generative Retrieval with Model-Native Trie Decoding and Shared-Context Attention (Trie-Head) — LinkedIn, arXiv 2611.22309
 - IntentGR: Enhancing Intent for End-to-End Personalized Generative Retrieval in Search (IntentGR) — Zhejiang University / Alibaba International Digital Commerce Group, WSDM 2027 Findings, arXiv 2611.22788
 - Optimize the Cob, Then the Kernel: Optimizing Beam Search for Generative Recommendation Inference (Cob/Kernel) — Huawei Technologies Co., Ltd., arXiv 2611.23339 (Tree Attention + static KV + vocabulary-constrained decoding, up to 25x vs vLLM on Ascend NPUs)
+- LQ-Rec: Late Quantization for Sequential Recommendation (LQ-Rec) — Toyota Motor North America / UC San Diego, ICDM 2026, arXiv 2611.25256 (output-side residual quantization removes O(bM) beam-search encoder passes; anytime SID-length compression)
+- CACO: Coverage-Aware Coordinated Optimization for Continuous Generative Retrieval (CACO) — Hunan University, arXiv 2611.25738 (coordinated flow-matching / diffusion query generation for parallel ANN coverage)
+- Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (whole-page policy improvement generator beats prefix-score beam search at every tested width)
 
 ### Cold-Start
 - Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling
@@ -273,6 +277,7 @@
 - RoleMix: Unifying Sequential and Non-Sequential Features via Semantic Tokenization for Post-Click Conversion Rate Prediction (RoleMix) — UESTC / Macau Polytechnic University / University of Liverpool, KDD Cup 2026 Tencent UniRec Challenge, arXiv 2607.22700
 - TokenFormer V2: Breaking the Resolution-Complexity Dilemma in Unified Recommendation (TokenFormer V2) — Tencent, arXiv 2611.19074
 - X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction (X-split Argus) — Yandex, arXiv 2611.24283 (candidate-independent reusable history tokens, +4.65% ACV online)
+- DNA: Unlocking Depth Scaling in CTR Models (DNA) — Alibaba Group / Taobao Search, arXiv 2611.25659 (Dual-stream Nexus Attention lets long behaviour sequences evolve with depth; deployed, +0.8% CTR / +0.5% GMV online)
 
 ### Data Generation / Synthetic Data
 - From Clicks to Intent: Cross-Platform Session Embeddings with LLM-Distilled Taxonomy for Financial Services Recommendations
@@ -321,6 +326,7 @@
 - Better Rankers, Worse Retrievers: The Hidden Cost of RL Post-Training in Generative Recommendation — HKUST / Trip.com Group, arXiv 2611.22838
 - CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710 (counterfactual catalog-partition utility separates observation availability from predictive usefulness)
 - ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation (ReflectRec) — Sungkyunkwan University / NAVER Corp., EMNLP 2026, arXiv 2611.23969 (ValScore diagnoses downstream module effects)
+- Generative News Recommendation Reproduces Popularity: A Memorization-Based Analysis — Nikkei Inc., ABCSS2026 @ IEEE BigData 2026, arXiv 2611.25606 (string-level memorization as a mechanism behind popularity concentration in text-based gen-rec)
 
 ### Diffusion
 - Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
@@ -361,6 +367,7 @@
 - BrowseFlow: Sparse Event Flow Matching for Generative User Simulation (BrowseFlow) — Tsinghua University / Taobao & Tmall Group of Alibaba, arXiv 2610.41374 (conditional discrete flow matching over sparse key events)
 - Pathwise Alignment for Collaborative Filtering: Bilateral Conditional Flow Regularization (PACF) — University of Technology Sydney / Hong Kong Polytechnic University, arXiv 2610.15506
 - CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710 (reliability-conditioned discrete diffusion recommender with counterfactual utility supervision)
+- CACO: Coverage-Aware Coordinated Optimization for Continuous Generative Retrieval (CACO) — Hunan University, arXiv 2611.25738 (coverage-aware post-training over frozen flow-matching / diffusion query generators, up to +23.7% Recall@100)
 
 ### Distributed Training / Systems
 - Efficient and Robust Online Learning to Rank in Decentralized Systems (RankGuard)
@@ -542,6 +549,7 @@
 - Label-Free Detection of Structural Bias in LLM-Based Recommender Systems via Randomized Paraphrasing: The Case of Verbosity (Verbose-Bias) — University of Granada, arXiv 2611.18878
 - GuardAgent: A Memory-Augmented Agentic Framework for Adaptive Detection of Adversarial Promotions in LLM-Based Recommendation (GuardAgent) — University of New South Wales / CSIRO, WSDM 2027, arXiv 2611.22274
 - PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University, EMNLP 2026, arXiv 2611.23236 [opensource; relational fidelity defends sensitive attributes against inversion attacks]
+- Generative News Recommendation Reproduces Popularity: A Memorization-Based Analysis — Nikkei Inc., arXiv 2611.25606 (popularity-bias / information-diversity audit of a text-based generative news recommender on ~20M sessions)
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -768,6 +776,10 @@
 - Better Rankers, Worse Retrievers: The Hidden Cost of RL Post-Training in Generative Recommendation — HKUST / Trip.com Group, arXiv 2611.22838
 - CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710
 - Optimize the Cob, Then the Kernel: Optimizing Beam Search for Generative Recommendation Inference (Cob/Kernel) — Huawei Technologies Co., Ltd., arXiv 2611.23339
+- LQ-Rec: Late Quantization for Sequential Recommendation (LQ-Rec) — Toyota Motor North America / UC San Diego, ICDM 2026, arXiv 2611.25256
+- Generative News Recommendation Reproduces Popularity: A Memorization-Based Analysis — Nikkei Inc., arXiv 2611.25606
+- Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527
+- From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation (LSER) — Autodesk, arXiv 2611.26096
 
 ### Generative Retrieval / Ranking
 - Generative Retrieval under Real-Time Supply Constraints in Local Commerce (RTP-LLM) — Tsinghua University, arXiv 2611.06323
@@ -917,6 +929,9 @@
 - Keep it Simple! A Multiple-Choice Task can Benefit Generative Recommendation (KiS) — National Taiwan University / Coupang, arXiv 2611.19320
 - Efficient Wide-Beam Generative Retrieval with Model-Native Trie Decoding and Shared-Context Attention (Trie-Head) — LinkedIn, arXiv 2611.22309
 - IntentGR: Enhancing Intent for End-to-End Personalized Generative Retrieval in Search (IntentGR) — Zhejiang University / Alibaba International Digital Commerce Group, WSDM 2027 Findings, arXiv 2611.22788
+- LQ-Rec: Late Quantization for Sequential Recommendation (LQ-Rec) — Toyota Motor North America / UC San Diego, ICDM 2026, arXiv 2611.25256 (non-autoregressive SID retrieval with additive error decomposition)
+- CACO: Coverage-Aware Coordinated Optimization for Continuous Generative Retrieval (CACO) — Hunan University, arXiv 2611.25738 (set-level coverage optimization over continuous generative retrievers)
+- From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation (LSER) — Autodesk, arXiv 2611.26096 (LLM session embeddings as auxiliary retrieval-stage user features)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -1208,6 +1223,9 @@
 - MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (two-week A/B across five Taobao scenarios, >10M daily users, +7.34% GMV)
 - MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems (MLE Agents) — Meta Platforms, arXiv 2611.23910 (autonomous model changes on production search rankers)
 - X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction (X-split Argus) — Yandex, arXiv 2611.24283 (deployed at ~100k requests/s in a real-time bidding system)
+- From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation (LSER) — Autodesk, arXiv 2611.26096 (production content recommendation on autodesk.com with nearline LLM-embedding refresh)
+- DNA: Unlocking Depth Scaling in CTR Models (DNA) — Alibaba Group / Taobao Search, arXiv 2611.25659 (DNA-4 deployed in Taobao search, +0.8% CTR / +0.5% GMV online)
+- Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models — Meta, Inc., arXiv 2611.26531 (launched; +0.20% primary online metric, 2.3% lower pipeline cost)
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1232,6 +1250,9 @@
 - Reflection Is Not Always Worth It: Budgeted Reflection Allocation for Recommendation Agents (BRAVE) — The University of British Columbia / HK PolyU, WSDM 2027, arXiv 2611.19847 [opensource]
 - KVUse: Reusable-KV User Memory for Efficient LLM Recommenders (KVUse) — Meta Recommendation Systems (MRS), arXiv 2611.21920
 - Deal With It: On Better Schedules for Listwise Reranking (DealRank) — Mixedbread / National Institute of Informatics, arXiv 2611.22392 [opensource]
+- LQ-Rec: Late Quantization for Sequential Recommendation (LQ-Rec) — Toyota Motor North America / UC San Diego, ICDM 2026, arXiv 2611.25256 (anytime compression; removes O((MN)^2) attention memory of AR SID decoding)
+- CACO: Coverage-Aware Coordinated Optimization for Continuous Generative Retrieval (CACO) — Hunan University, arXiv 2611.25738 (+0.5%-3.0% inference latency for set-coverage gains)
+- Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (no evaluator queries at serving; lower generation time than prefix-score beam search)
 
 ### Inference Acceleration / Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
@@ -1278,6 +1299,8 @@
 - Efficient Wide-Beam Generative Retrieval with Model-Native Trie Decoding and Shared-Context Attention (Trie-Head) — LinkedIn, arXiv 2611.22309
 - Optimize the Cob, Then the Kernel: Optimizing Beam Search for Generative Recommendation Inference (Cob/Kernel) — Huawei Technologies Co., Ltd., arXiv 2611.23339 (static KV allocation + loop-unrolled dispatch on Ascend NPUs)
 - MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (asynchronous config cache in iGraph; cascade never waits for LLM inference)
+- From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation (LSER) — Autodesk, arXiv 2611.26096 (nearline asynchronous user-vector refresh for production retrieval)
+- Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models — Meta, Inc., arXiv 2611.26531 (pipeline-cost / QPS caps; trimming cuts pipeline cost 2.3%)
 
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
@@ -1591,6 +1614,8 @@
 - Deal With It: On Better Schedules for Listwise Reranking (DealRank) — Mixedbread / National Institute of Informatics, arXiv 2611.22392 [opensource]
 - ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation (ReflectRec) — Sungkyunkwan University / NAVER Corp., EMNLP 2026, arXiv 2611.23969
 - PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University, EMNLP 2026, arXiv 2611.23236 [opensource]
+- Generative News Recommendation Reproduces Popularity: A Memorization-Based Analysis — Nikkei Inc., arXiv 2611.25606 (Llama 3 8B continually trained to generate next article titles)
+- From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation (LSER) — Autodesk, arXiv 2611.26096 (pretrained-LLM session / history embeddings)
 
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
@@ -1675,6 +1700,7 @@
 - UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation (UNIQUE) — Beihang University / Baidu Inc., arXiv 2609.23718
 - Pathwise Alignment for Collaborative Filtering: Bilateral Conditional Flow Regularization (PACF) — University of Technology Sydney / Hong Kong Polytechnic University, arXiv 2610.15506
 - TokenFormer V2: Breaking the Resolution-Complexity Dilemma in Unified Recommendation (TokenFormer V2) — Tencent, arXiv 2611.19074
+- DNA: Unlocking Depth Scaling in CTR Models (DNA) — Alibaba Group / Taobao Search, arXiv 2611.25659 (Dual-stream Nexus Attention, sequence-update once per request, linear complexity)
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -1856,6 +1882,7 @@
 - SurvEval: Listwise Re-Ranking Evaluator via Survival-Based Exposure and Multi-Objective Value Modeling (SurvEval) — Intuit Credit Karma, arXiv 2611.15434
 - Deal With It: On Better Schedules for Listwise Reranking (DealRank) — Mixedbread / National Institute of Informatics, arXiv 2611.22392 [opensource]
 - MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (per-user reranker settings inside the seven-dimensional cascade action)
+- Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (whole-page policy improvement for generative re-ranking / slate generation)
 
 ### Reasoning
 - Deliberate Latent Reasoning for Sequential Recommendation (DESRec) — Renmin University of China, arXiv 2611.06521
@@ -1991,6 +2018,8 @@
 - Better Rankers, Worse Retrievers: The Hidden Cost of RL Post-Training in Generative Recommendation — HKUST / Trip.com Group, arXiv 2611.22838
 - MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (FAPO + GRPO with Sandbox replay and a frozen reward model)
 - PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University, EMNLP 2026, arXiv 2611.23236 [opensource; multi-reward GRPO]
+- Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (iterative policy improvement with per-position complete-page targets; outperforms representative RL algorithms)
+- Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models — Meta, Inc., arXiv 2611.26531 (agentic trial-based optimization under shared cost constraints)
 
 ### Retrieval / Representation
 - ARMED: Adaptive Retrieval-Augmented Medication Recommendation (ARMED) — UX Factory / KAIST, ICTAI 2026, arXiv 2610.16440
@@ -2045,6 +2074,8 @@
 - Pathwise Alignment for Collaborative Filtering: Bilateral Conditional Flow Regularization (PACF) — University of Technology Sydney / Hong Kong Polytechnic University, arXiv 2610.15506
 - Cluster-Guided Decoding with Trust-Region Constraints for Personalized Recommendation (CG2R) — Amazon, arXiv 2611.22163
 - ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation (ReflectRec) — Sungkyunkwan University / NAVER Corp., EMNLP 2026, arXiv 2611.23969 (Forward-Look retrieval of behaviorally similar users)
+- CACO: Coverage-Aware Coordinated Optimization for Continuous Generative Retrieval (CACO) — Hunan University, arXiv 2611.25738 (set-level retrieval geometry / complementary item coverage)
+- From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation (LSER) — Autodesk, arXiv 2611.26096 (session / history LLM embeddings as auxiliary user-side retrieval features)
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -2064,6 +2095,7 @@
 - KUAISHOU Explorer LLM-Rec Challenge 2026: Reasoning Generative Recommendation (OneReason / OneRec-V2) — Kuaishou; OneReason uses advanced RL to make CoT reasoning beneficial; SIGIR 2026 challenge; arXiv 2609.39828
 - LoopGR: Parameter-Efficient Scaling for Generative Recommendation via Recurrent Depth (LoopGR) — Tencent, arXiv 2610.34157
 - PRISM-Meta: Personalized Item Representations in User History (PRISM-Meta) — Meta MRS, arXiv 2610.39175 (sequence-length normalized-entropy power law, exponent 0.468)
+- DNA: Unlocking Depth Scaling in CTR Models (DNA) — Alibaba Group / Taobao Search, arXiv 2611.25659 (depth keeps improving where cross-attention stacks saturate: 16 -> 28 layers adds only 0.02 pt AUC)
 
 ### Security / Adversarial
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
@@ -2251,6 +2283,7 @@
 - IntentGR: Enhancing Intent for End-to-End Personalized Generative Retrieval in Search (IntentGR) — Zhejiang University / Alibaba International Digital Commerce Group, WSDM 2027 Findings, arXiv 2611.22788
 - Better Rankers, Worse Retrievers: The Hidden Cost of RL Post-Training in Generative Recommendation — HKUST / Trip.com Group, arXiv 2611.22838
 - CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710 (tokenwise allocation over partially masked SID states)
+- LQ-Rec: Late Quantization for Sequential Recommendation (LQ-Rec) — Toyota Motor North America / UC San Diego, ICDM 2026, arXiv 2611.25256 (item-side residual quantizer; additive error decomposition + pairwise ordering theorem)
 
 ### Sequential Modeling / RoPE
 - Compote: Collapse-Resistant Multiple Hypothesis Learning for Sequential Recommendation (Compote) — Criteo AI Lab / Sorbonne Université CNRS ISIR, arXiv 2610.37005
@@ -2352,6 +2385,9 @@
 - INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences (INTENT) — KTH AI Society, arXiv 2611.13069 [opensource; 7-cell novelty benchmark]
 - UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation (UNIQUE) — Beihang University / Baidu Inc., arXiv 2609.23718
 - X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction (X-split Argus) — Yandex, arXiv 2611.24283 (autoregressive feedback prediction over compressed long-history tokens)
+- LQ-Rec: Late Quantization for Sequential Recommendation (LQ-Rec) — Toyota Motor North America / UC San Diego, ICDM 2026, arXiv 2611.25256
+- DNA: Unlocking Depth Scaling in CTR Models (DNA) — Alibaba Group / Taobao Search, arXiv 2611.25659 (long user behaviour sequences evolve with depth)
+- From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation (LSER) — Autodesk, arXiv 2611.26096
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
