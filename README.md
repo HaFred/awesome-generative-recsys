@@ -32,14 +32,13 @@ mindmap
   root((Awesome Generative RecSys))
     Decision Layer: LLM in Recommendation Chain
       Reasoning & RL
+        WAR-CRAFT -- UIUC / HUST / MBZUAI
         Rank-GRPO -- Netflix
         DynamicPO -- USTC
         BLADE -- USTC
         SPRINT -- UTS
         CARE -- NUS / USTC
         Mult-DPO -- UVA / Netflix / Cornell
-        CA-PG -- Meta / Cornell
-        ProRL -- Fudan U
         SimRec -- Zhejiang U / Tsinghua U / Hikvision
       Ranking & Reranking
         InvariRank -- RMIT
@@ -52,8 +51,9 @@ mindmap
         RecRM-Bench -- Shenzhen U
         SIDScope -- Huawei
         RPCBench -- Jilin University
-        FocalSwap -- Huawei Technologies
         INTENT -- KTH AI Society
+        RELAY -- UCAS
+        DualClusterNet -- SJTU / ECNU
       Efficient Decoding
         STATIC -- Google
         ReSID -- Alibaba International / Nankai U
@@ -219,6 +219,152 @@ We only keep the last 10 days summary below, for the past records before these, 
      - **Fairness: 2/10** — no fairness analysis; resource constraints are efficiency, not equity
      - **Robustness: 8/10** — multiple production models, 10-25 asynchronous trials per model, explicit cost caps, trimming with noise-level regression bounds, and online A/B; workshop-length evidence with run-to-run noise caveats
      - **Impact: 7/10** — Meta, Inc. fleet-scale ranking infrastructure, models launched; directly relevant to harness-level / agentic optimization of recommender systems, but no venue
+
+*Second run for 2026-11-21 at 23:29 HKT. The live `/list/<cat>/new` window still reads "Showing new listings for Friday, 20 November 2026" across all five categories — already fully indexed by the 01:13 run above — so the strict 24h window yielded **0 genuinely new papers**. The required fallback chain was applied and is disclosed here: (1) missing-date `date_list = [2026-11-15, 2026-11-19]` (Sat/Sun have no arXiv announcement; 19 Nov's listing was already covered), (2) from the 2nd section date (20 Nov) to today — no new on-topic papers, (3) the last-3-month pool. The 8 papers below were drawn from step 3 and all verified absent from the 1108-ID master dedup set (README + both docs indexes + every monthly archive). **3 are open-source** (WAR-CRAFT 6/10, RELAY 7/10, DualClusterNet 6/10), so By Opensource goes 258 -> 261 and the 30-leaf mindmap was kept capped by dropping three tied-lowest 8/10 leaves while retaining all three layers. Excluded as off-topic: the RAG / dense-retrieval / GEO cluster (prompt injection, voting-advice, patent search, SQL-retrieval), opinion-dynamics work without a recommender, and diffusion/quantization fundamentals.*
+
+8. **Axia: Data-Efficient Scaling-Law Discovery for Recommendation Systems via Coupled Hyperparameter Scaling**
+   * Affiliation: Meta — *(John Martabano Landy, Louis C. Tiao, Yao Xuan, Luc Kien Hang, Rupinder P. Khandpur, Arvind M. Vepa, Srinidhi Raghavendran, et al.)*
+   * Link: [arxiv.org/abs/2611.05643](https://arxiv.org/abs/2611.05643)
+   * Venue: arXiv preprint, cs.LG (submitted 3 Nov 2026)
+   * TL;DR: An automated system discovers the scaling law of an arbitrary ranking/recommendation model from a small number of informative runs by fitting surrogates over a low-dimensional "scaling layer" of coupled architecture hyperparameters, then returns a Pareto frontier for compute allocation across a heterogeneous model fleet.
+   * Key techniques:
+     - Scaling layer groups primitive architecture parameters into semantically coherent groups that co-vary, inducing a mapping from low-dimensional hyper-hyperparameters to the full architecture space
+     - Axia fits scaling-informed surrogates, selects configurations via a posterior-based acquisition criterion, and returns a Pareto frontier from which per-model operating points are validated
+     - Fleet-level evaluation protocol on a fixed representative model set under matched trial budgets makes refinements to either component measurable
+     - Replaces exhaustive sweeps with a small number of informative runs; uncertainty-aware inverse design of model configurations under a scaling budget
+     - 34 model iterations across two development cycles on Meta's ads ranking and retrieval system: +0.66% mean offline normalized entropy, +0.36% cumulative online lift
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; internal Meta ads ranking/retrieval infrastructure
+     - **Novelty: 7/10** — a scaling layer plus Bayesian acquisition for inverse design of ranking-model scaling laws is a fresh systems contribution, though it transfers the scaling-law framing from LLMs
+     - **Fairness: 2/10** — pure compute-allocation / efficiency work; no exposure or group fairness analysis
+     - **Robustness: 8/10** — 34 iterations over two cycles, fleet-level matched-budget protocol and online A/B; evidence is from a single company ecosystem
+     - **Impact: 8/10** — Meta ads ranking/retrieval; scaling laws for recsys is a fast-moving topic, but no venue is stated
+
+9. **URED: Recycling High-Scored Unexposed Candidates for Efficient Discovery in Taobao Feed Recommendation**
+   * Affiliation: Taobao & Tmall Group (Alibaba) — *(Ge Fan, Kai Meng, Huiping Chu, et al.)*
+   * Link: [arxiv.org/abs/2611.05997](https://arxiv.org/abs/2611.05997)
+   * Venue: arXiv preprint, cs.IR (submitted 4 Nov 2026); deployed on Taobao feed for over six months
+   * TL;DR: A training-free, recall-stage system re-injects items that were scored highly but never exposed to drive user discovery, adding under 1% latency and requiring no model retraining.
+   * Key techniques:
+     - Production-validated diagnosis: naive boosting injects cold, information-poor candidates that rankers systematically over-estimate, buying no discovery gain while risking engagement
+     - High-scored-but-unexposed items form an underexploited pool that is both relevant and reliably predictable; aggregated over a 30-day horizon
+     - Lightweight recall-time re-injection pipeline spanning offline storage, distributed aggregation and low-latency online serving — a single O(1) lookup per request
+     - Online A/B: +3.47% discovered categories, +8.47% content richness, +2.62% completed video views, +0.36% total views (n.s.); 13.9x platform-average discovery rate
+     - Ablations: a one-day window collapses discovery gain to +0.55% (n.s.), and random injection without score filtering gives no gain and trends negative on engagement
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; deployed internal Taobao system
+     - **Novelty: 7/10** — reframing discarded unexposed-but-high-scored signals as a discovery pool is a clean, non-obvious systems insight, though the mechanism is simple once identified
+     - **Fairness: 5/10** — directly targets discovery / exposure diversity for users, but no formal provider- or group-fairness audit
+     - **Robustness: 9/10** — six months serving tens of millions of DAU, online A/B with engagement guards, and two pointed ablations isolating both design pillars; single platform
+     - **Impact: 8/10** — Taobao feed production deployment with quantified discovery and engagement effects; directly relevant to the exploration-exploitation trade-off in industrial recsys
+
+10. **WAR-CRAFT: Refining Web API Recommendations through Requirement Auditing**
+   * Affiliation: University of Illinois Urbana-Champaign — *(Zishuo Xu)* — with Huazhong University of Science and Technology and Mohamed bin Zayed University of Artificial Intelligence
+   * Link: [arxiv.org/abs/2611.00564](https://arxiv.org/abs/2611.00564)
+   * Venue: arXiv preprint, cs.IR (submitted 31 Oct 2026)
+   * TL;DR: A post-recommendation refinement framework that audits a frozen web-API recommender's output against provider documentation and fills uncovered requirements with a catalog-constrained, abstaining resolver.
+   * Key techniques:
+     - Refinement as three decisions using only the request, catalog and provider docs, with no retraining of the upstream recommender
+     - An LLM jointly judges candidate APIs to remove unsupported or subsumed items, then audits the remaining set against a requirement checklist derived from the request
+     - A fine-tuned catalog-constrained Resolver proposes a catalog API or abstains for each uncovered requirement; an independent documentation check admits only supported proposals
+     - ProgrammableWeb with 7 heterogeneous upstream recommenders: mean SetF1 0.558 -> 0.644, above the best of 5 refinement baselines (+62.5% of the gap); functional redundancy roughly halved (0.127 -> 0.065)
+     - Gains range from +2.2 points on generative recommenders to +18.2 on fixed-cutoff rankers; holds at matched set sizes, so not explained by set-size calibration
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/ZsXu-enrico/WAR-CRAFT](https://github.com/ZsXu-enrico/WAR-CRAFT): 7 files covering the joint audit, role writer, commit verifier, resolver training and functional-role judge — code matches the method, but no LICENSE, no pyproject/requirements, no bundled data and a minimal README; partial, lightly maintained release
+     - **Novelty: 7/10** — treating recommendation refinement as documentation-grounded joint auditing plus an abstaining, catalog-constrained resolver is a distinct framing over the frozen model
+     - **Fairness: 2/10** — no exposure or group fairness analysis; redundancy and coverage are set-level quality metrics
+     - **Robustness: 6/10** — seven upstream recommenders, five baselines and a matched-set-size control on one benchmark (ProgrammableWeb); LLM-judge reliability is not deeply stress-tested
+     - **Impact: 6/10** — practical LLM-based refinement for API/mashup recommendation on a narrow catalog; no venue or production deployment stated
+
+11. **RELAY: One Query, Two Roles for Sequential Recommendation**
+   * Affiliation: University of Chinese Academy of Sciences — *(Zesheng Li, Chengchang Pan, Honggang Qi)*
+   * Link: [arxiv.org/abs/2610.36000](https://arxiv.org/abs/2610.36000)
+   * Venue: arXiv preprint, cs.IR (submitted 26 Oct 2026)
+   * TL;DR: A compact sequential recommender in which a single learned query simultaneously forms a semantic preference representation and routes direct-history and transition evidence into candidate scores, producing a full-catalog ranking in one forward pass.
+   * Key techniques:
+     - One query, two roles: semantic readout and behavioral-memory routing share history selection, linking preference representation directly to the evidence used in scoring
+     - Candidate-conditioned gates calibrate the direct-history and transition-memory channels per candidate
+     - Both roles trained with a single catalog likelihood; final ranking produced in one forward pass at low inference cost
+     - Full-catalog experiments on six datasets: highest Recall@5 and NDCG@5 on every dataset, +14.22% and +17.88% on average over the previous best
+     - 2.044M predictor parameters (65.12% smaller) with 1.75-1.79x inference speedup over the previous best model
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/LIZESHENG13/RELAY](https://github.com/LIZESHENG13/RELAY): MIT-licensed, 40 files with a packaged `src/relay` module, pyproject, configs for six datasets, docs/REPRODUCIBILITY.md plus verification/smoke JSON and a CI workflow — reproducible and well-structured, but no bundled datasets or checkpoints and only 1 star at indexing time
+     - **Novelty: 7/10** — reusing one query as both semantic readout and behavioral-memory router is a tidy unification, incremental over shared-representation sequential recommenders
+     - **Fairness: 3/10** — no exposure, popularity or cohort fairness analysis
+     - **Robustness: 8/10** — full-catalog (not sampled) evaluation on six datasets with matched parameter/speed comparisons; no online deployment
+     - **Impact: 7/10** — strong accuracy and efficiency gains for full-catalog sequential recommendation, but university-only and no venue stated
+
+12. **BehaveRec: When Does Long-Term Behavioral History Help Sequential Recommendation?**
+   * Affiliation: Walmart Global Tech — *(Aysenur Inan, Reza Yousefi Maragheh, Jayesh Uddhav Kudase, Selene Xu, Kaushiki Nag, Jianpeng Xu, Sushant Kumar)*
+   * Link: [arxiv.org/abs/2610.36239](https://arxiv.org/abs/2610.36239)
+   * Venue: arXiv preprint, cs.IR (submitted 26 Oct 2026)
+   * TL;DR: A controlled study of when long-term history and community signals actually help sequential recommendation, yielding a user-level deployment threshold rather than assuming more history is always better.
+   * Key techniques:
+     - Three-signal framework: a causal session transformer, a bidirectional User History Encoder over a 90-day window, and a GraphSAGE module over a user-user graph built from behavioral-embedding similarity rather than item co-occurrence
+     - A learned gate blends the three signals per user
+     - On 137M sequences from 12.6M users: +3.2% R@5 over SASRec, with a larger-capacity SASRec still trailing by +2.5%, ruling out capacity as the explanation
+     - Dose-response by history length: negligible advantage below ~10 interactions, growing monotonically to +0.017 R@5 for users with 101+ events; corroborated across one industrial and three public datasets
+     - Establishes a category-level-intent deployment threshold; a single-run full item-vocabulary check is directionally mixed and scoped as an open question
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; Walmart industrial dataset and system
+     - **Novelty: 6/10** — the three-signal gated design is incremental, but the user-level "when does history help" framing and explicit deployment threshold are useful
+     - **Fairness: 3/10** — stratifies by user history length, but this is a personalization-quality analysis, not a fairness audit
+     - **Robustness: 8/10** — 137M sequences, a capacity-matched baseline, a dose-response study and four datasets, with the mixed item-level result honestly flagged
+     - **Impact: 7/10** — actionable deployment guidance for long-sequence recommenders from a large industrial setting; no venue stated
+
+13. **DualClusterNet: Personalized Pattern-Space Composition for Next-POI Recommendation**
+   * Affiliation: Shanghai Jiao Tong University — *(Ziyang Su, Guanjie Zheng, Linghe Kong)* — with East China Normal University (Jilin Hu)
+   * Link: [arxiv.org/abs/2611.03726](https://arxiv.org/abs/2611.03726)
+   * Venue: arXiv preprint, cs.IR (submitted 1 Nov 2026)
+   * TL;DR: A causal next-POI recommender that composes two population-shared prototype dictionaries — pattern and spatial mixtures — with a user-conditioned branch so mobility routines shared across users can be adapted to individual preferences.
+   * Key techniques:
+     - Soft routers retrieve pattern and spatial prototype mixtures at each observed prefix; a factorized multiplicative interaction couples them
+     - Feature-wise affine modulation adapts the shared representation, while a separate user-conditioned branch with an additive-projective gate retains individual variation
+     - Prediction head combines the representation with a learned first-order transition term and ranks the complete training POI vocabulary
+     - Evaluated on NYC and TKY under a training-only vocabulary and an original-final-target protocol that neither bridges unknown POIs nor substitutes earlier targets
+     - Uniform protocol shared across all model entry points; code, data hashes and checkpoint/result SHA256 recorded for auditability
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [anonymous.4open.science/r/DualClusterNet-F4EE](https://anonymous.4open.science/r/DualClusterNet-F4EE/): verified live code with a detailed protocol README, audit/update scripts and a unified train-only engine (proxy-fetched README.md and main.py return HTTP 200); no LICENSE, no bundled datasets, anonymous identity and only single-seed results, so reproducibility is partial
+     - **Novelty: 7/10** — composing two shared prototype dictionaries with a user-conditioned residual branch is a distinct take on population-shared mobility patterns
+     - **Fairness: 3/10** — no exposure or demographic fairness audit; personalization is modelled but not evaluated for equity
+     - **Robustness: 5/10** — strict original-final-target protocol and full-vocabulary ranking are good practice, but results are single-seed and limited to two cities
+     - **Impact: 6/10** — solid next-POI contribution with auditable code; no venue stated and modest scale
+
+14. **Reversing Polarization through Tolerance-Aware Recommendation and Adaptive Diversification**
+   * Affiliation: The Chinese University of Hong Kong, Shenzhen — *(Zhanzhan Zhao, Shuqi Zhao, Zichen Fan)* — with the Georgia Institute of Technology (Dana Randall)
+   * Link: [arxiv.org/abs/2610.40289](https://arxiv.org/abs/2610.40289)
+   * Venue: arXiv preprint, cs.SI (submitted 29 Oct 2026)
+   * TL;DR: Two recommendation design principles — tolerance-aware exposure and adaptive diversification — are shown capable of reversing, not merely slowing, opinion polarization in agent-based and LLM-agent simulated social platforms.
+   * Key techniques:
+     - Builds on the Attraction-Repulsion model of opinion dynamics to study polarization reversal as an exposure-design problem
+     - Tolerance-aware recommendation learns each individual's tolerance for disagreement and reduces exposure beyond that tolerance; adaptive diversification broadens exposure for extreme agents while keeping moderates more personalized
+     - Agent-based experiments show highly personalized recommendations intensify polarization under polarized initial conditions; tolerance awareness alone mainly slows it, while combining both can push polarization below its starting level and restore consensus under suitable conditions
+     - Adds persistent extreme influencers and a spiral-of-silence mechanism to test robustness to social pressure and selective participation
+     - Repeats the study on a simulated platform of 100 LLM-driven agents across three runs to check findings beyond predefined opinion-update rules
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 8/10** — targeting polarization *reversal* rather than mitigation, with a per-user tolerance construct and an LLM-agent replication, is a genuinely fresh recommender-fairness angle
+     - **Fairness: 9/10** — the paper is squarely about exposure diversity, opinion polarization and social harm, with multiple mechanisms and an explicit normative objective
+     - **Robustness: 6/10** — multiple mechanisms and an LLM-agent replication over three runs, but all evidence is simulation-based with no field or user study
+     - **Impact: 6/10** — strong societal relevance for responsible recommendation; cs.SI preprint with no venue stated
+
+15. **IncVNM: An Interactive Recommender System with Incrementally Learned von Neumann-Morgenstern Utility**
+   * Affiliation: Xi'an Jiaotong University — *(Jiaxin Wei, Jia Liu)*
+   * Link: [arxiv.org/abs/2611.01786](https://arxiv.org/abs/2611.01786)
+   * Venue: arXiv preprint, cs.IR (submitted 1 Nov 2026)
+   * TL;DR: An interactive recommender that incrementally learns a user-specific von Neumann-Morgenstern utility over outcome distributions from ordinal click feedback, so recommendations respect both the full outcome distribution and the user's risk attitude.
+   * Key techniques:
+     - Recommends products whose outcomes are random, where value depends on the whole outcome distribution and the user's attitude toward risk rather than a single expected rating
+     - Converts click order within a displayed list into pairwise comparisons between outcome distributions
+     - Updates the nominal VNM utility by minimizing deviation from the previous estimate while incorporating new comparisons, giving an incremental per-user fit from ordinary browsing
+     - An entropy-regularized sampling policy balances exploitation of the learned utility against exploration for more preference information
+     - Rolling-window experiments under varying response-error probabilities: substantially outperforms expected-return, mean-variance, discounted-UCB and distribution-aware BPR baselines
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available
+     - **Novelty: 7/10** — incrementally learning a VNM utility from ordinal click order is a principled departure from expected-utility point estimates in recommendation
+     - **Fairness: 3/10** — no exposure or group fairness analysis; personalization is utility-based but not audited for equity
+     - **Robustness: 6/10** — rolling-window evaluation with varied response-error probabilities and four baselines; scale and real-traffic validation are limited
+     - **Impact: 5/10** — a theoretically grounded interactive-recommendation idea with modest experimental scope and no venue stated
 
 ---
 
@@ -1718,6 +1864,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro) |
 | 8/10 | From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations (CFX-Narratives) — Czech Technical University in Prague / University of Innsbruck, CIKM 2026, arXiv 2611.13914 — [github.com/vcahlik/from-counterfactual-edits-to-human-narratives](https://github.com/vcahlik/from-counterfactual-edits-to-human-narratives) |
 | 8/10 | SimRec: Learning to Search, Ask, and Recommend from Simulated Interaction (SimRec) — Zhejiang University / Tsinghua University / Hikvision Research Institute, arXiv 2611.15426 — [github.com/ZJU-REAL/SimRec](https://github.com/ZJU-REAL/SimRec) |
+| 7/10 | RELAY: One Query, Two Roles for Sequential Recommendation (RELAY) — University of Chinese Academy of Sciences, arXiv 2610.36000 — [github.com/LIZESHENG13/RELAY](https://github.com/LIZESHENG13/RELAY) |
+| 7/10 | WAR-CRAFT: Refining Web API Recommendations through Requirement Auditing (WAR-CRAFT) — University of Illinois Urbana-Champaign / HUST / MBZUAI, arXiv 2611.00564 — [github.com/ZsXu-enrico/WAR-CRAFT](https://github.com/ZsXu-enrico/WAR-CRAFT) |
 | 7/10 | Learning to Reason with Predictive Gains for Generative Recommendation (GainReason) — Renmin University of China / Alibaba International Digital Commerce Group, arXiv 2611.21441 — [github.com/easonzyli/GainReason](https://github.com/easonzyli/GainReason) |
 | 7/10 | Reflection Is Not Always Worth It: Budgeted Reflection Allocation for Recommendation Agents (BRAVE) — The University of British Columbia / The Hong Kong Polytechnic University, WSDM 2027, arXiv 2611.19847 — [github.com/Jinfeng-Xu/BRAVE](https://github.com/Jinfeng-Xu/BRAVE) |
 | 7/10 | ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 — [anonymous.4open.science/r/ShopMind-0E94](https://anonymous.4open.science/r/ShopMind-0E94) |
@@ -1829,6 +1977,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, IAAI-27, arXiv 2611.08566 — [github.com/GuilinDev/llm-cascade-reranking](https://github.com/GuilinDev/llm-cascade-reranking) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6.5/10 | RES-MR: Risk-Aware Reasoning for Explainable and Safe Medication Recommendation (RES-MR) |
+| 6/10 | DualClusterNet: Personalized Pattern-Space Composition for Next-POI Recommendation (DualClusterNet) — Shanghai Jiao Tong University / East China Normal University, arXiv 2611.03726 — [anonymous.4open.science/r/DualClusterNet-F4EE](https://anonymous.4open.science/r/DualClusterNet-F4EE/) |
 | 6/10 | AutoRSE: Evaluating LLM Agents as Recommendation Engineers for Self-Evolving Recommender Systems (AutoRSE) — University of Science and Technology of China / National University of Singapore, arXiv 2610.37228 |
 | 6/10 | A Behavioral Trait Leaks into Preferences: Diagnosing Trait Interference in LLM User Simulators (PQA) |
 | 6/10 | Beyond Centralization: User-Controlled Federated Recommendations |
@@ -1907,7 +2056,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 258 papers as of November 21.
+**Count:** 261 papers as of November 21.
 
 ---
 
@@ -2268,6 +2417,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - MARS Technical Report (MARS-TR) — Taobao & Tmall Group / Alibaba, arXiv 2611.24006 (Confidence-aware SFT + FAPO + GRPO with Sandbox replay for per-user pipeline orchestration)
 - Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (whole-page policy improvement with per-position complete-page targets; outperforms representative RL algorithms)
 - Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models — Meta, Inc., arXiv 2611.26531 (LLM Researcher agent tunes feature selection in 10-25 async trials under cost caps; launched with +0.20% online metric)
+- IncVNM: An Interactive Recommender System with Incrementally Learned von Neumann-Morgenstern Utility — Xi'an Jiaotong University, arXiv 2611.01786 (entropy-regularized sampling policy trades exploitation of learned utility against preference exploration)
 
 See [Full keyword index](docs/by_keyword.md) for all other categories.
 
