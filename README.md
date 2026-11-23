@@ -32,7 +32,6 @@ mindmap
   root((Awesome Generative RecSys))
     Decision Layer: LLM in Recommendation Chain
       Reasoning & RL
-        WAR-CRAFT -- UIUC / HUST / MBZUAI
         Rank-GRPO -- Netflix
         DynamicPO -- USTC
         BLADE -- USTC
@@ -42,6 +41,7 @@ mindmap
         SimRec -- Zhejiang U / Tsinghua U / Hikvision
       Ranking & Reranking
         InvariRank -- RMIT
+        TravelPlanner-Agent -- University of Moratuwa / WSO2
         DealRank -- Mixedbread / NII
         LLM-as-Judge -- CityU HK
     Representation Layer: Model Training & Optimization
@@ -52,8 +52,8 @@ mindmap
         SIDScope -- Huawei
         RPCBench -- Jilin University
         INTENT -- KTH AI Society
-        RELAY -- UCAS
         FLADRec -- Skolkovo / HSE / Sber AI Lab
+        Neg-Cand-ID -- Michigan State University / Intuit
       Efficient Decoding
         STATIC -- Google
         ReSID -- Alibaba International / Nankai U
@@ -89,6 +89,153 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
 
 ---
+
+### Papers November 23
+
+*Monday, November 23, 2026. The live 24-hour window is Monday’s cs.IR announcement (17 cs.IR entries across new / cross / replacement submissions; 824 unique IDs over all five categories), but it yielded no strictly on-topic genuinely-new gen-rec preprint: the four new submissions are cold-start cross-model latent retrieval (2611.26919), expert finding (2611.26921), industrial product/ratio feature interactions (2611.27514) and entity-matching embeddings (2611.27910), all outside the generative-rec/LLM-rec remit. The full fallback chain was therefore applied and is disclosed here. (1) Missing dates in the current README gave `date_list = [2026-11-15, 2026-11-19]`: 15 Nov is a Sunday with no announcement and the 19 Nov announcement was already covered by the Nov 20 run. (2) Searching from the second date-section title (`### Papers November 21`) to today surfaced nothing new on-topic. (3) The last-3-month arXiv UI + WebSearch keyword pool yielded 8 strictly on-topic, genuinely new generative-recommendation / LLM-recommendation / personalized-retrieval / agentic-rec preprints, all verified absent from the 1140-ID master dedup set (README + both docs indexes + all monthly archives). **2 are open-source**: TravelPlanner-Agent / 2611.25531 (6/10) and Neg-Cand-ID / 2610.07708 (7/10), so By Opensource goes 262 -> 264 and the mindmap’s 30-leaf cap is held by dropping WAR-CRAFT and RELAY (both 7/10) to make room; all three layers survive (Decision 11 / Representation 12 / Feature 7). No re-hits: the already-indexed replacement submissions in today’s cs.IR listing (CogRec 2607.24402, Tokens-are-All-You-Need 2607.24865, TS-GEAR 2611.12180, STARK 2611.25705) live only in the monthly archives, not as README entries. Excluded as off-topic: the RAG / dense-retrieval / agent-harness cluster, diffusion / quantization fundamentals, medical-AI evaluation surveys and the vector-search systems cluster.*
+
+1. **LM-based Personalized Travel Planner**
+   * Affiliation: University of Moratuwa, Sri Lanka — *(Amandi Nimasha)* — with WSO2, Sri Lanka
+   * Link: [arxiv.org/abs/2611.25531](https://arxiv.org/abs/2611.25531)
+   * Venue: arXiv preprint, cs.AI, submitted 19 Nov 2026
+   * TL;DR: A supervising chatbot orchestrates specialised agents for query formulation, real-time data retrieval, schedule validation and constraint-aware itinerary generation, with a deterministic multi-dimensional score driving iterative refinement instead of free-form LLM self-critique.
+   * Key techniques:
+     - Supervising chatbot agent coordinates four specialised sub-agents for modular execution
+     - Deterministic multi-dimensional scoring framework supplies objective refinement signals on top of LLM reasoning
+     - External API calls provide real-time data while iterative refinement enforces hard budget and constraint satisfaction
+     - On TravelPlanner: +10% Budget Constraint, +25% wider constraint-set and +45% personalised planning over the ReAct baseline
+     - Official code: github.com/nimashaklaa/TravelPlanner_Research on the feedback-agent branch
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — github.com/nimashaklaa/TravelPlanner_Research holds 33 files on its `feedback-agent` branch (agents/{calendar,data_retrieval,feedback,itinerary,query_builder,query_checker}.py, main.py, config.py, requirements.txt, a 20-row dataset sample and 11 appendix PDFs); the code matches the multi-agent framework and is runnable, but the README is a single line, there is no LICENSE and the last push predates the paper (Apr 2026).
+     - **Novelty: 6/10** — hierarchical multi-agent decomposition plus deterministic scoring is a competent orchestration recipe rather than a new recommendation model.
+     - **Fairness: 1/10** — no bias, exposure or demographic analysis; personalisation is measured only through constrained-planning accuracy.
+     - **Robustness: 5/10** — one TravelPlanner benchmark and three constraint categories with no online A/B or cross-domain transfer test.
+     - **Impact: 5/10** — substantial gains over ReAct on a public benchmark, with no venue acceptance or deployed system claimed.
+
+2. **SEMPA: Self-Evolving Dual-Role Deliberation for Medication Recommendation from Clinical Records**
+   * Affiliation: The Chinese University of Hong Kong — *(Jiyue Jiang, co-first with Yu Lei)* — with Carnegie Mellon University, The Hong Kong Polytechnic University and Peking University Third Hospital
+   * Link: [arxiv.org/abs/2611.18615](https://arxiv.org/abs/2611.18615)
+   * Venue: arXiv preprint, cs.IR, arXiv ID 2611.18615
+   * TL;DR: A training-free Proposer-Critic agent pair argues over medication candidates in multiple rounds, grounds each candidate with molecular retrieval and evolves both natural-language policies contrastively under a semantic-anchor constraint, while rule-based checks enforce DDI and contraindication safety.
+   * Key techniques:
+     - Multi-round adversarial Proposer/Critic deliberation replaces single-pass LLM recommendation
+     - Molecular-aware retrieval grounds every proposed medication in drug evidence
+     - Contrastive policy evolution under a semantic-anchor constraint improves both agents across cases without gradient updates
+     - Rule-based DDI and contraindication checkers enforce hard safety constraints
+     - On 100 MIMIC-IV encounters: Jaccard 0.3116, F1 0.7295, DDI rate 0.0172 (+57.7% F1 and -77.5% DDI vs the strongest supervised baseline); six-backbone study
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; no repository or artifact linked from the paper.
+     - **Novelty: 8/10** — training-free, self-evolving dual-role deliberation with contrastive anchored policy evolution is a substantive shift from both frozen supervised models and single-pass LLM pipelines.
+     - **Fairness: 2/10** — safety (DDI, contraindications) is enforced explicitly, but there is no group-fairness or demographic-bias audit.
+     - **Robustness: 6/10** — two LLM judges and a six-backbone study isolate framework effects from a specific model, but evidence rests on 100 MIMIC-IV encounters from a single centre.
+     - **Impact: 6/10** — safety-critical recommendation setting with large F1 and DDI gains, though no clinical deployment or venue acceptance is stated.
+
+3. **Yuanbao-Reranker: Document-Grounded Synthesis and Preference Distillation for Text Reranking**
+   * Affiliation: Yuanbao Search, Tencent Inc. — *(Hongyuan Xu)*
+   * Link: [arxiv.org/abs/2611.10405](https://arxiv.org/abs/2611.10405)
+   * Venue: arXiv preprint, cs.IR, submitted 7 Nov 2026
+   * TL;DR: A family of 0.6B/4B/8B dense rerankers on the Qwen3 backbone is trained from 2.75M synthetic ranking groups built by document-grounded, query-type-guided synthesis plus a three-stage curation funnel, then lifted to state of the art by bounded hinge losses and layerwise adaptive merging.
+   * Key techniques:
+     - Answer-first and query-type-guided document-grounded synthesis generates diverse, verifiable supervision
+     - Three-stage curation verifies positive support, removes semantic redundancy and balances source-by-length quotas
+     - Teacher-score margin screening over real retrieval pools yields Hard / Medium / Moderate negative tiers and 2.75M 1:3 ranking groups
+     - Joint pointwise relevance cross-entropy and bounded minimum-gap hinge over positive-negative and negative-negative pairs
+     - Cross-scale and same-scale distillation with layerwise adaptive model merging; SOTA averages of 70.96 (0.6B), 73.63 (4B, beating its 8B teacher) and 74.21 (8B) across CMTEB-R, MMTEB-R, BEIR, MLDR and MTEB-Code
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code; the two GitHub URLs in the paper (Alibaba-NLP/Multi-CPR and apple/ml-qrecc) are third-party baselines, not a release of Yuanbao-Reranker.
+     - **Novelty: 7/10** — bounded min-gap hinge over both positive-negative and negative-negative pairs, combined with tiered hard negatives and adaptive merging, is a well-constructed training recipe.
+     - **Fairness: 1/10** — no bias or fairness analysis; quotas balance source and length, not demographic or exposure groups.
+     - **Robustness: 8/10** — five heterogeneous benchmarks, multiple first-stage retrievers and three model scales with consistent cross-tier wins.
+     - **Impact: 8/10** — deployed in Tencent Yuanbao Search with SOTA results that generalise across languages, domains and document lengths.
+
+4. **PEARL: Prediction Error-Adaptive Regularized Learning for Selective Forgetting under Partial Preference Drift**
+   * Affiliation: AWS — *(Rashmi Gangadharaiah, Balakrishnan Narayanaswamy)*
+   * Link: [arxiv.org/abs/2611.05842](https://arxiv.org/abs/2611.05842)
+   * Venue: arXiv preprint, cs.LG, submitted 4 Nov 2026
+   * TL;DR: PEARL reverses neural-bandit confidence only along feature directions where predictions are surprisingly wrong, so personalised recommendation and LLM response selection forget stale preferences without discarding still-valid ones; regret scales with the number of shifted users rather than the whole population.
+   * Key techniques:
+     - Prediction-error-adaptive Gram update reverses confidence along surprising-error feature directions and leaves other directions intact
+     - Three theorems: non-adaptive policies suffer linear regret after a shift, no fixed exploration rate works in both regimes, and PEARL regret scales with shifted users N_s
+     - Evaluated on PRISM, a 1,500-user / 21-LLM personalised response-selection benchmark
+     - +4.0 points over greedy and +2.5 points over the best neural-bandit baseline (p<0.001), with parity to greedy under stable preferences
+     - Frozen LLM weights; a ~100K-parameter MLP selector runs in milliseconds on CPU and works with any API model
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; no repository or artifact linked from the paper.
+     - **Novelty: 8/10** — directional Gram-matrix reversal for partial drift is a clean, theoretically grounded departure from uniform sliding-window or discounted forgetting.
+     - **Fairness: 2/10** — drift is tracked per user but there is no group-fairness or exposure metric.
+     - **Robustness: 8/10** — three regret theorems plus strong and significant empirical gains, with an explicit stable-preference control showing no regression.
+     - **Impact: 7/10** — AWS work on a practical, model-agnostic selector that keeps LLM weights frozen and runs at millisecond CPU cost.
+
+5. **RecGroupMemory: Feedback-Aware Cohort Memory for E-Commerce Recommendation**
+   * Affiliation: Taobao & Tmall Group (Alibaba) — *(Wendong Zhang)*
+   * Link: [arxiv.org/abs/2611.02453](https://arxiv.org/abs/2611.02453)
+   * Venue: arXiv preprint, cs.IR, submitted 2 Nov 2026
+   * TL;DR: RecGroupMemory supplies group-level user profiles and advice to an orchestration LLM for recommendation planning, and revises decision guidance from the previous day’s feedback while validation checks keep the underlying source values untouched.
+   * Key techniques:
+     - Cohort-level memory supplies group profiles and advice to an orchestration LLM for recommendation planning
+     - Memory construction is separated from feedback-based revision so yesterday’s outcomes update guidance without corrupting observations
+     - Validation checks hold selected source values fixed across revisions
+     - Online comparison on low-purchasing-power Taobao users: guided-transaction user counts rise 1.58% with memory and 1.78% with memory plus feedback versus no memory
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; no repository or artifact linked from the paper.
+     - **Novelty: 6/10** — the memory-construction/feedback-revision split with source-value validation is a pragmatic workflow design rather than a new ranking model.
+     - **Fairness: 2/10** — the cohort is chosen by the business team, but no fairness metric is reported; low-purchasing-power users are the study population, not an equity analysis.
+     - **Robustness: 5/10** — an online comparison is valuable, but scope is one business-selected user segment with no offline ablations reported in the abstract.
+     - **Impact: 7/10** — deployed online at Taobao with a concrete guided-transaction uplift in a hard-to-serve segment.
+
+6. **User Embeddings are Superpositions of Interpretable Behavioral Modes**
+   * Affiliation: Amazon — *(Jonathan Kozaczuk)*
+   * Link: [arxiv.org/abs/2611.08487](https://arxiv.org/abs/2611.08487)
+   * Venue: arXiv preprint, cs.LG, submitted 5 Nov 2026 (v2 7 Nov 2026)
+   * TL;DR: User embeddings are reframed as sparse superpositions of behavioural modes; a sparse autoencoder recovers modes from classical and transformer-based embeddings and auto-names them in natural language, enabling zero-shot audience retrieval on embeddings never trained on text.
+   * Key techniques:
+     - Superposition hypothesis predicts linear user embeddings decompose into sparse interpretable behavioural modes and extends approximately to deep representations
+     - Sparse autoencoders (and classical sparse baselines) recover modes; recovered modes are auto-named and queried in natural language
+     - Validation against synthetic ground truth shows SAEs recover modes better than classical sparse methods
+     - Applied to classical and transformer-based user embeddings from two real-world datasets with zero-shot audience retrieval and characterisation
+     - Post-hoc and model-agnostic: no change to the upstream embedding system
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; no repository or artifact linked from the paper.
+     - **Novelty: 8/10** — importing sparse-dictionary / superposition analysis into user-embedding interpretability and pairing it with natural-language audience retrieval is a fresh angle.
+     - **Fairness: 3/10** — interpretable modes can support auditing, but the paper reports no formal bias or fairness evaluation.
+     - **Robustness: 6/10** — synthetic ground-truth validation plus two real-world datasets and two embedding families, with an explicitly post-hoc model-agnostic design.
+     - **Impact: 6/10** — Amazon research addressing a core opacity problem in rec/personalisation embeddings, with no production rollout claimed.
+
+7. **Evidence Before Sampling: Interpretable Implicit Negative Candidate Discovery for Recommendation**
+   * Affiliation: Michigan State University — *(Shreya Rajpal)* — with Intuit
+   * Link: [arxiv.org/abs/2610.07708](https://arxiv.org/abs/2610.07708)
+   * Venue: WSDM 2027, arXiv preprint, cs.IR, submitted 6 Oct 2026
+   * TL;DR: Implicit negative candidates are discovered only where observed customer behaviour supports them: symbolic rules are scored by support, informativeness and product relevance, then interpreted by an LLM under business objectives so negative sampling is evidence-based rather than arbitrary.
+   * Key techniques:
+     - Symbolic rules encode behavioural patterns that justify treating unobserved interactions as negatives
+     - Rules scored on support, informativeness and product relevance and ranked by evidence strength
+     - An LLM interprets retained rules using business objectives and domain knowledge for an auditable final report
+     - Industrial B2B setting plus five public recommendation datasets; higher negative precision than evaluated baselines
+     - Symbolic selection lifts downstream test PR-AUC 12.5% over random selection at four negatives per positive
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — github.com/Shreyarajpal12/Neg-Cand-ID is the official WSDM 2027 release: 42 files with README, conditions/, experiments/, models/, prep/ and analysis/ modules plus reproducible scripts; no LICENSE, 0 stars, last pushed 5 Oct 2026.
+     - **Novelty: 7/10** — separating candidate validity from downstream recommendation quality and enforcing evidence-backed symbolic rules is a distinct take on negative sampling.
+     - **Fairness: 4/10** — business-aligned, interpretable evidence improves auditability of training labels, but no demographic or exposure fairness metric is evaluated.
+     - **Robustness: 7/10** — industrial B2B case plus five public datasets, with candidate-quality evaluation decoupled from downstream PR-AUC.
+     - **Impact: 7/10** — WSDM 2027 paper with a concrete +12.5% PR-AUC gain in sparse, skewed real-world recommendation settings.
+
+8. **Action-On-Item Preference Flow: A Shared Event Schema for Predictive and Generative Personalization (PerTIDE)**
+   * Affiliation: Dhirubhai Ambani University — *(Parthiv Chatterjee)* — with the Indian Institute of Technology Delhi
+   * Link: [arxiv.org/abs/2610.01375](https://arxiv.org/abs/2610.01375)
+   * Venue: NeurIPS 2026, arXiv preprint, cs.LG, submitted 1 Oct 2026
+   * TL;DR: An action-on-item schema pairs a mapped interaction role with a content embedding so one memory-update mechanism can serve both next-item prediction and personalised generation across movie, news and dialogue histories, with theoretical invariance and bounded-state guarantees.
+   * Key techniques:
+     - Action-on-item schema maps native interaction roles to a shared event format carrying a content embedding
+     - Invariance to native relabelling, bounded state changes under item-embedding perturbations and a pooled-training bound under compatibility conditions
+     - Multi-Timescale State Hypothesis (MTSH) governs how evidence enters, persists and is consumed
+     - PerTIDE implements MTSH with action gating, three state-space traces, fusion and command-conditioned readout
+     - On PENS the same encoder serves next-news prediction and personalised headline generation; frozen source-trained core beats a random core by 15.23 MRR after target fitting, and PerTIDE holds a 4.12 MRR edge on MIND
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; author-prepared NeurIPS 2026 archival manuscript with no repository linked.
+     - **Novelty: 8/10** — a shared action-on-item event schema that provably transfers memory updates between predictive and generative consumers is a genuinely new formulation.
+     - **Fairness: 2/10** — no group-fairness analysis; robustness is studied as representational invariance, not distributional equity.
+     - **Robustness: 8/10** — formal invariance and bounded-update results plus cross-source PENS-to-MovieLens transfer and targeted readout/trace interventions.
+     - **Impact: 7/10** — NeurIPS 2026 acceptance and a unifying memory layer for predictive and generative personalisation.
 
 ### Papers November 22
 
@@ -1389,157 +1536,6 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
-### Papers November 12
-
-*Thursday, November 12, 2026. The live arXiv 24-hour window was empty: arXiv's newest announcement is still the Wednesday 11 November listing (29 cs.IR entries plus the cs.AI / cs.LG / cs.CL / cs.MM cross-listings), all of which were covered by yesterday's run, and the Thursday announcement had not been published by 23:05 HKT. **Below the 5-paper floor, so the fallback chain was applied and is disclosed here.** (1) Missing dates inside the README's 10-day window were checked: `date_list = [2026-11-05]` (there is still no `### Papers November 05` section); that date was re-searched and yielded no strictly on-topic unindexed preprint — SID-LLM / 2611.08804, SteerGR / 2611.08790, CascadeRec / 2611.08566, RedMall / 2611.08519, BRIDGE / 2611.07425, OptST / 2611.07523, LatentRec / 2611.07866, ICE / 2611.07591, the CF-bias fix / 2611.07588, the brand-bias audit / 2611.07614 and Tasteply / 2611.07851 are all already indexed or were explicitly excluded. (2) Papers published from the last summary date (the second date-section title, November 10) through today were searched; no new on-topic preprint appeared — the remaining Nov 9-10 items are table retrieval, sentence embeddings, A/B scaling laws, review-informativeness distillation and RAG. (3) The last-3-month keyword pool was therefore used, giving 8 strictly on-topic, genuinely new papers submitted 26 Oct - 4 Nov. All 8 were verified absent from README.md, both docs indexes and every monthly archive (1008-ID master dedup set). 1 is open-source (FocalSwap 8/10), so By Opensource count 247 -> 248 and the mindmap 30-leaf cap was held by dropping the lowest-scored leaf (MV-Thinker, 7/10); all three layers retained. Excluded as off-topic: SlimFM / 2611.11013 (LLM-enhanced CTR), the LLM pseudo-label review audit / 2611.13797, Tasteply / 2611.07851 and the RAG / reranking-only papers of the same window.*
-
-1. **PMRecBench: A Benchmark for Personalization in Recommendation Agents under Multimodal Queries**
-   * Affiliation: University College London, London, United Kingdom — *(Xiaoyu Zhang, Yougang Lyu, Bin Wu, Sahan Bulathwela, Emine Yilmaz)* — with University of Amsterdam
-   * Link: [arxiv.org/abs/2611.06349](https://arxiv.org/abs/2611.06349)
-   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 4 Nov 2026)
-   * TL;DR: The first benchmark that pairs quality-controlled image-text queries with the same users' real interaction histories, exposing a "personalization imbalance" in multimodal recommendation agents.
-   * Key techniques:
-     - 510 image-text queries across clothing and movies derived from consistent behavioral patterns in real user records, with reference images and targets tied to actual interactions
-     - Diagnostic candidate pools: items the user rated highly but that violate the query, and items satisfying the query but never rated highly
-     - Separates requirement understanding from preference following instead of scoring only top-k ranking quality
-     - Controlled contrast of personalization signals alone vs. personalization plus a multimodal query; stronger commercial backbones do not fix the imbalance
-     - Image-interpretation analysis showing agents can over-weight visual resemblance to the reference image over evidence from user history
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — the paper points to `github.com/zxd-octopus/PMRecBench-Public` for data and evaluation code, but that repository returns 404 (no public release yet)
-     - **Novelty: 8/10** — first benchmark to jointly test multimodal requirement satisfaction and history-grounded personalization
-     - **Fairness: 6/10** — explicitly diagnoses the degradation of preference following and builds diagnostic pools that expose systematically neglected user evidence; no protected-group analysis
-     - **Robustness: 8/10** — diagnostic pools over two domains, several agents and backbones, plus an image-interpretation analysis
-     - **Impact: 7/10** — reframes how multimodal recommendation agents are evaluated, but the benchmark data is not actually public yet
-
-2. **Do Search-Augmented Recommenders Use the Latest Search Episode?**
-   * [Also published on 2026-11-17] — re-hit: 1
-   * Affiliation: Huawei Technologies Co., Ltd. — *(Jiandong Ding)*
-   * Link: [arxiv.org/abs/2611.06044](https://arxiv.org/abs/2611.06044)
-   * Venue: arXiv preprint, November 2026 (cs.IR / cs.LG; submitted 4 Nov 2026)
-   * TL;DR: A controlled swap audit showing that estimates of how much search-augmented recommenders rely on the latest search episode depend heavily on which control is used to mask search inputs.
-   * Key techniques:
-     - FocalSwap alters only the latest search slot or all search inputs while holding target, candidates, pre-search history and the scorer fixed
-     - Neutral masks are contrasted with category/profile-matched observed-search replacements, recording rank changes, RR gains and preference for the true focal search
-     - A planted signal and GenSAR's current-query task act as positive controls proving the audit detects known input dependence
-     - Evaluated on KuaiSAR and Qilin plus three independently trained UniSAR checkpoints and SESRec checkpoints from the released implementations
-     - Five alternative donor assignments per checkpoint on a 66,139-row common surface; paired RR gaps +2.770e-3 to +6.604e-3; neutral masks change 59.7-61.7% of target ranks vs. 44.1-44.8% for matched replacements
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 8/10** — [github.com/jdding/focalswap](https://github.com/jdding/focalswap): MIT licensed, `pyproject.toml` + `requirements.txt`, packaged `focalswap` source, 53 Python files, unit tests, examples, 160+ evidence artifacts and scripts that regenerate the paper's tables/figures, CITATION.cff and a reproducibility quickstart; 0 stars, no CI, and checkpoint reruns need the original proprietary datasets
-     - **Novelty: 7/10** — reframes an attribution question as a control-design problem rather than proposing another recommender
-     - **Fairness: 3/10** — no exposure, popularity or group-level analysis; a diagnostic of input dependence only
-     - **Robustness: 9/10** — three independent checkpoints, five donor assignments per checkpoint, planted-signal positive control, two datasets and several control families
-     - **Impact: 6/10** — a rigorous, fully reusable audit toolkit, but a single-author study with no deployment evidence
-
-3. **Learning to Adjudicate: Verifier-Guided Multi-Agent Reasoning for E-Commerce Relevance**
-   * Affiliation: Tsinghua Shenzhen International Graduate School, Tsinghua University, Shenzhen, China — *(Shi Shu, Hao Chen, Baopu Qiu, Chao Wei, Weiru Zhang, Xiu Li, Xiaoyi Zeng)* — with Alibaba International Digital Commerce Group
-   * Link: [arxiv.org/abs/2611.02758](https://arxiv.org/abs/2611.02758)
-   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 2 Nov 2026)
-   * TL;DR: A verifier-guided multi-agent debate framework that adjudicates conflicting evidence in LLM-based e-commerce relevance judgment, then distills its decisions into a lightweight online student.
-   * Key techniques:
-     - Three expert agents sharing a frozen backbone analyze product attributes, user intent and business rules in separate contexts
-     - A trainable Verifier scores the supporting evidence against the applicable matching criteria and triggers targeted clarification when experts disagree
-     - Multi-turn group relative policy optimization with successful-experience replay mixes trajectories with correct terminal labels into later updates
-     - CADRE serves as an offline teacher whose relevance judgments are distilled into a lightweight student for efficient online serving
-     - Offline evaluation plus online A/B tests on an e-commerce search advertising platform
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (verl and LLaMA-Factory are cited only as the training infrastructure, not a release of CADRE)
-     - **Novelty: 8/10** — casts LLM relevance labeling as an adjudication problem with a learned verifier and evidence-driven debate
-     - **Fairness: 3/10** — no bias or exposure analysis; business-rule matching criteria only
-     - **Robustness: 8/10** — explicit disagreement handling, replay-GRPO, offline and online A/B evidence
-     - **Impact: 8/10** — evaluated on a live e-commerce search advertising platform with reported business and relevance gains
-
-4. **EvoRec: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees**
-   * Affiliation: Kuaishou, Beijing, China — *(Mengting Li, Long Zhang, Hao Jiang, Sheng Yu, Fei Pan, Peng Jiang)*
-   * Link: [arxiv.org/abs/2611.01977](https://arxiv.org/abs/2611.01977)
-   * Venue: arXiv preprint, November 2026 (cs.IR; submitted 1 Nov 2026)
-   * TL;DR: Kuaishou's self-evolving agentic recommender replaces the fixed cascade with need inference, adaptive planning, execution and a dynamic reflection tree that repairs failures without parameter updates.
-   * Key techniques:
-     - Need Agent infers user needs from long-term, short-term and working memory; Planning Agent allocates retrieval budget between Behavior Continuation and Need Satisfaction and chooses tools plus ranking-fusion weights
-     - Acting Executor executes the plan and records decision traces for later reflection
-     - Dynamic Reflection Tree localizes failures in need inference, planning or previous repairs, proposes personalized corrections and validates them by replay
-     - Verified repairs update working memory and are distilled into reusable cross-user strategies, so the system improves without parameter updates
-     - Kuaishou local-services ads: +15.7% Hit@50 over the strongest baseline, +13.1% Hit@50 from hierarchical reflection among previously repaired users; seven-day online A/B +4.6% ad revenue and +3.5% CTCVR
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — the project page has a disabled "Code" button; no repository or artifact released
-     - **Novelty: 9/10** — end-to-end decision control plus replay-validated self-repair is a genuinely new agentic recommendation loop
-     - **Fairness: 4/10** — corrections are personalized at the user level, but no protected-group or exposure audit
-     - **Robustness: 8/10** — offline gains, a hierarchical-reflection ablation and a seven-day online A/B with a high-intent-user breakdown
-     - **Impact: 9/10** — industrial deployment on Kuaishou local-services advertising with measured revenue and CTCVR lifts
-
-5. **MILES-Rec: Uncovering Implicit Intents from Mobility Behaviors for Cross-Domain POI Recommendation**
-   * Affiliation: AMAP, Alibaba Group — *(Yi Zou, Wei Luo, Xuewen Zhang, Zhuang Yan, Pengjie Wang)*
-   * Link: [arxiv.org/abs/2610.41319](https://arxiv.org/abs/2610.41319)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 30 Oct 2026)
-   * TL;DR: Turns heterogeneous map-behavior logs into prioritized natural-language service queries for cross-domain POI recommendation, optimized with intent-aligned GRPO.
-   * Key techniques:
-     - Progressive reasoning demonstrations synthesize user profiles and map histories for situation understanding, intent expansion and query prioritization
-     - Intent-aligned GRPO rewards query relevance and ranked service coverage from subsequent user interactions while penalizing redundancy and excessive response length
-     - Two-level credit assignment combines shared list-level advantages with query-specific advantages so individual query quality and list-level complementarity are optimized together
-     - MILES-Bench constructed from real interaction logs of a large-scale mapping platform, covering both rich and sparse behavioral histories
-     - Consistent POI retrieval and semantic-alignment gains across four backbone sizes against general-purpose LLMs and specialized recommendation baselines
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code; MILES-Bench is built from proprietary AMAP logs and is not released
-     - **Novelty: 8/10** — reframes POI recommendation as generating and optimizing a prioritized natural-language query list
-     - **Fairness: 4/10** — sparse vs. rich behavioral history is evaluated, but no demographic or provider-exposure analysis
-     - **Robustness: 8/10** — four backbone scales, rich/sparse history splits, a new industrial benchmark and multiple baselines
-     - **Impact: 8/10** — AMAP / Alibaba cross-domain POI surface with a new benchmark and measurable industrial relevance
-
-6. **PRISM: Personalized Item Representations in User History**
-   * Affiliation: Meta MRS — *(Renzhi Wu, Zikun Cui, Junjie Yang, Li Sheng, Yongjun Xie, Jerry Fu, Nipun Mathur, Sri Reddy, Hong Li)*
-   * Link: [arxiv.org/abs/2610.39175](https://arxiv.org/abs/2610.39175)
-   * Venue: arXiv preprint, October 2026 (cs.IR / cs.AI; submitted 29 Oct 2026)
-   * TL;DR: Makes each history item's embedding user-specific by compressing the upstream ranking model's tower states, giving sequential recommenders a new sequence-length scaling dimension.
-   * Key techniques:
-     - Reuses upstream ranking computation so an item's history embedding expresses its relationship to the user instead of a shared ID/content embedding
-     - Autoencoder jointly compresses all layer states of a user tower, a user-item tower and same-request candidate mixing into one embedding per scored pair
-     - Personalized item representations are replayed as history inputs to downstream sequential models
-     - On Surface 1, a billion-scale recommendation surface, average downstream normalized entropy improves by -0.15% vs. -0.07% for VISTA at similar history lengths
-     - Empirical sequence-length scaling law over 26-240 events: NE gain follows a fitted power law with exponent 0.468, rising from 0.06% to 0.17%
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (industrial Meta system on proprietary data)
-     - **Novelty: 7/10** — moving personalization into the history inputs themselves is a clean reframing of sequential recommendation representations
-     - **Fairness: 3/10** — no bias, exposure or cold-start subgroup analysis
-     - **Robustness: 8/10** — billion-scale surface, a VISTA comparison at matched history lengths and a fitted sequence-length scaling law
-     - **Impact: 8/10** — a Meta production surface with a new scaling axis that generalizes to long user histories
-
-7. **MAREval: A Multi-Agent Framework for Evaluating Natural Language Recommendation Explanations**
-   * Affiliation: Walmart Global Tech, Sunnyvale, CA, USA — *(Reza Yousefi Maragheh, Jayesh Uddhav Kudase, Aysenur Inan, Ramin Giahi, Kai Zhao, Parth Parikh, Jianpeng Xu, Jason Cho, Evren Korpeoglu, Sushant Kumar)*
-   * Link: [arxiv.org/abs/2610.36389](https://arxiv.org/abs/2610.36389)
-   * Venue: arXiv preprint, October 2026 (cs.AI / cs.IR; submitted 26 Oct 2026)
-   * TL;DR: A structured multi-agent LLM evaluator for natural-language recommendation explanations that clears a large production human-annotation gate where single-agent judges fall short.
-   * Key techniques:
-     - Planner agent uses a Chain-of-Debate prompting strategy to coordinate evaluation roles and enforce logically consistent evaluation plans
-     - Moderator agent mitigates prompt drift across discussion rounds; arbitrator agent aggregates outputs over multiple evaluation rounds
-     - Monte Carlo sampling over evaluation rounds reduces variance and improves alignment with human judgment
-     - Evaluated on public TopicalChat and a proprietary e-commerce recommendation dataset with repeated-trial stability analysis
-     - Large human-annotation gate plus online A/B tests showing statistically significant engagement and revenue improvements
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code and no released proprietary dataset
-     - **Novelty: 7/10** — role-structured debate plus Monte Carlo arbitration is a solid engineering advance over single-agent LLM judges
-     - **Fairness: 5/10** — trust and transparency are user-facing and human-calibrated, but there is no protected-group or exposure study
-     - **Robustness: 8/10** — public and proprietary datasets, repeated-trial stability, a human-annotation gate and online A/B tests
-     - **Impact: 8/10** — production-quality evaluator at Walmart with measured online engagement gains
-
-8. **CRIM: Composable and Reusable Item Memory for Efficient Personalized Retrieval**
-   * Affiliation: Tsinghua University, Beijing, China / Alibaba International Digital Commerce Group — *(Haolin Li, Haipeng Zhang, Mang Li, Zhaohui Xia, Xun Zhu, Miao Li, Yu Zhang, Ji Wu)*
-   * Link: [arxiv.org/abs/2610.35323](https://arxiv.org/abs/2610.35323)
-   * Venue: arXiv preprint, October 2026 (cs.IR / cs.CL; submitted 26 Oct 2026)
-   * TL;DR: Caches each item once as reusable continuous memory tokens so LLM personalized retrieval stops re-encoding the same item text on every request.
-   * Key techniques:
-     - Separates item-level semantic encoding from request-level history modeling
-     - Learnable summary tokens compress each item into compact continuous memories; segment-level REC readout tokens add predictive supervision inside the interaction history
-     - User- and query-independent memories are composed in interaction order at inference, with an optional query, into a personalized retrieval representation
-     - Joint training mixes cached memories with a few sampled live re-encodings, with periodic cache refreshes to keep item and request encoders aligned
-     - New LazSeq dataset; MovieLens-1M, Qilin and LazSeq evaluation with a cost analysis showing state-of-the-art retrieval at substantially lower inference cost
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — the paper only promises "we will publicly release our code and dataset"; no repository exists yet
-     - **Novelty: 8/10** — factoring item semantics out of request encoding is a clean, systems-aware redesign of LLM personalized retrieval
-     - **Fairness: 3/10** — no bias or exposure analysis
-     - **Robustness: 8/10** — three datasets including a new benchmark, re-encoding-rate ablations and an explicit inference-cost analysis
-     - **Impact: 8/10** — directly targets the inference cost of long-history LLM recommenders in an industrial setting
-
----
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1858,6 +1854,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro) |
 | 8/10 | From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations (CFX-Narratives) — Czech Technical University in Prague / University of Innsbruck, CIKM 2026, arXiv 2611.13914 — [github.com/vcahlik/from-counterfactual-edits-to-human-narratives](https://github.com/vcahlik/from-counterfactual-edits-to-human-narratives) |
 | 8/10 | SimRec: Learning to Search, Ask, and Recommend from Simulated Interaction (SimRec) — Zhejiang University / Tsinghua University / Hikvision Research Institute, arXiv 2611.15426 — [github.com/ZJU-REAL/SimRec](https://github.com/ZJU-REAL/SimRec) |
+| 7/10 | Evidence Before Sampling: Interpretable Implicit Negative Candidate Discovery for Recommendation (Neg-Cand-ID) — Michigan State University / Intuit, WSDM 2027, arXiv 2610.07708 — [github.com/Shreyarajpal12/Neg-Cand-ID](https://github.com/Shreyarajpal12/Neg-Cand-ID) |
 | 7/10 | Cross-Domain Sequential Recommendation with Representation-Level User Transfer (FLADRec) — Skolkovo Institute of Science and Technology / HSE / Sber AI Lab, CIKM 2026, arXiv 2610.35550 — [github.com/aa-samra/fladrec](https://github.com/aa-samra/fladrec) |
 | 7/10 | RELAY: One Query, Two Roles for Sequential Recommendation (RELAY) — University of Chinese Academy of Sciences, arXiv 2610.36000 — [github.com/LIZESHENG13/RELAY](https://github.com/LIZESHENG13/RELAY) |
 | 7/10 | WAR-CRAFT: Refining Web API Recommendations through Requirement Auditing (WAR-CRAFT) — University of Illinois Urbana-Champaign / HUST / MBZUAI, arXiv 2611.00564 — [github.com/ZsXu-enrico/WAR-CRAFT](https://github.com/ZsXu-enrico/WAR-CRAFT) |
@@ -1972,6 +1969,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, IAAI-27, arXiv 2611.08566 — [github.com/GuilinDev/llm-cascade-reranking](https://github.com/GuilinDev/llm-cascade-reranking) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6.5/10 | RES-MR: Risk-Aware Reasoning for Explainable and Safe Medication Recommendation (RES-MR) |
+| 6/10 | LM-based Personalized Travel Planner (TravelPlanner-Agent) — University of Moratuwa / WSO2, arXiv 2611.25531 — [github.com/nimashaklaa/TravelPlanner_Research](https://github.com/nimashaklaa/TravelPlanner_Research) |
 | 6/10 | DualClusterNet: Personalized Pattern-Space Composition for Next-POI Recommendation (DualClusterNet) — Shanghai Jiao Tong University / East China Normal University, arXiv 2611.03726 — [anonymous.4open.science/r/DualClusterNet-F4EE](https://anonymous.4open.science/r/DualClusterNet-F4EE/) |
 | 6/10 | AutoRSE: Evaluating LLM Agents as Recommendation Engineers for Self-Evolving Recommender Systems (AutoRSE) — University of Science and Technology of China / National University of Singapore, arXiv 2610.37228 |
 | 6/10 | A Behavioral Trait Leaks into Preferences: Diagnosing Trait Interference in LLM User Simulators (PQA) |
@@ -2051,7 +2049,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 262 papers as of November 22.
+**Count:** 264 papers as of November 23.
 
 ---
 
@@ -2234,6 +2232,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (whole-page policy improvement generator beats prefix-score beam search at every tested width)
 
 ### RL / Reinforcement Learning
+- PEARL: Prediction Error-Adaptive Regularized Learning for Selective Forgetting under Partial Preference Drift (PEARL) — AWS, arXiv 2611.05842 (prediction-error-adaptive neural contextual bandit reverses confidence only along drifted feature directions)
 - G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands (G-CAST) — Alibaba Group, arXiv 2611.17814 (reward-routed self-training + governed reward evolution, deployed on 1688 Yuancai)
 - ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 [opensource; Behavior Critic reward model + short-horizon rollouts]
 - VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search (VARG) — Taobao & Tmall / USTC (Prefix-GRPO)

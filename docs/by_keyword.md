@@ -96,6 +96,8 @@
 - Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models — Meta, Inc., arXiv 2611.26531 (LLM Researcher agent + deterministic tools tune cross-feature selection in 10-25 async trials under shared resource caps)
 - WAR-CRAFT: Refining Web API Recommendations through Requirement Auditing (WAR-CRAFT) — UIUC / HUST / MBZUAI, arXiv 2611.00564 (LLM audit + abstaining resolver agents refine a frozen recommender)
 - Reversing Polarization through Tolerance-Aware Recommendation and Adaptive Diversification — CUHK Shenzhen / Georgia Tech, arXiv 2610.40289 (100 LLM-driven agents in a simulated social platform)
+- LM-based Personalized Travel Planner (TravelPlanner-Agent) — University of Moratuwa / WSO2, arXiv 2611.25531 (supervising chatbot orchestrates query/retrieval/validation/itinerary agents with deterministic multi-dimensional refinement scoring; 6/10 opensource)
+- SEMPA: Self-Evolving Dual-Role Deliberation for Medication Recommendation from Clinical Records (SEMPA) — Chinese University of Hong Kong / CMU / HK PolyU / Peking University Third Hospital, arXiv 2611.18615 (training-free Proposer-Critic deliberation with molecular retrieval and semantic-anchored contrastive policy evolution)
 
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -293,6 +295,7 @@
 - G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands (G-CAST) — Alibaba Group, arXiv 2611.17814 (governed reward evolution + checkpoint transition)
 - ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 [opensource]
 - More Than a Score: Reinforcement Learning with Verbalized Feedback for Generative Recommendation (VerRec) — Tencent Inc. / NUS / CUHK, arXiv 2611.22410
+- Evidence Before Sampling: Interpretable Implicit Negative Candidate Discovery for Recommendation (Neg-Cand-ID) — Michigan State University / Intuit, WSDM 2027, arXiv 2610.07708 (support/informativeness/product-relevance scored symbolic rules interpreted by an LLM; 42-file official code, 7/10 opensource)
 
 ### Denoising
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -463,6 +466,7 @@
 - Label-Free Detection of Structural Bias in LLM-Based Recommender Systems via Randomized Paraphrasing: The Case of Verbosity (Verbose-Bias) — University of Granada, arXiv 2611.18878
 - Deal With It: On Better Schedules for Listwise Reranking (DealRank) — Mixedbread / National Institute of Informatics, arXiv 2611.22392 [opensource]
 - MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems (MLE Agents) — Meta Platforms, NeurIPS 2026 AutoMLR Workshop oral, arXiv 2611.23910 (objective calibrated to match online impact across 1,097 experiments)
+- User Embeddings are Superpositions of Interpretable Behavioral Modes (User Embeddings SAE) — Amazon, arXiv 2611.08487 (synthetic ground-truth mode recovery plus two real-world datasets, model-agnostic post-hoc audit of rec embeddings)
 
 ### Fairness
 - What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User (LLM4Rec-CF-Bias) — University of California, San Diego, arXiv 2611.07588 [opensource]
@@ -556,6 +560,7 @@
 - PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University, EMNLP 2026, arXiv 2611.23236 [opensource; relational fidelity defends sensitive attributes against inversion attacks]
 - Generative News Recommendation Reproduces Popularity: A Memorization-Based Analysis — Nikkei Inc., arXiv 2611.25606 (popularity-bias / information-diversity audit of a text-based generative news recommender on ~20M sessions)
 - Reversing Polarization through Tolerance-Aware Recommendation and Adaptive Diversification — CUHK Shenzhen / Georgia Tech, arXiv 2610.40289 (tolerance-aware exposure + adaptive diversification reverse polarization; LLM-agent replication)
+- Evidence Before Sampling: Interpretable Implicit Negative Candidate Discovery for Recommendation (Neg-Cand-ID) — Michigan State University / Intuit, WSDM 2027, arXiv 2610.07708 (evidence-backed, business-aligned interpretable negative labels; auditability of training signals)
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -1240,6 +1245,8 @@
 - Inherit4Rec: Parameter Inheritance for Efficient Scaling of Recommendation Models — Kuaishou, D2D growth + D2S SMoE conversion
 - PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn — DPO-style multi-negative intent retrieval
 - USDB: Scaling Storage for Next-Generation Recommender Systems at ByteDance — CascadeLSM sequence store, -85.8% write latency
+- RecGroupMemory: Feedback-Aware Cohort Memory for E-Commerce Recommendation (RecGroupMemory) — Taobao & Tmall / Alibaba, arXiv 2611.02453 (online low-purchasing-power cohort, +1.78% guided transaction users with memory + feedback)
+- Yuanbao-Reranker: Document-Grounded Synthesis and Preference Distillation for Text Reranking (Yuanbao-Reranker) — Yuanbao Search / Tencent, arXiv 2611.10405 (deployed reranker family, +8.52% end-to-end answer quality in Yuanbao Search)
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1636,6 +1643,8 @@
 - Generative News Recommendation Reproduces Popularity: A Memorization-Based Analysis — Nikkei Inc., arXiv 2611.25606 (Llama 3 8B continually trained to generate next article titles)
 - From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation (LSER) — Autodesk, arXiv 2611.26096 (pretrained-LLM session / history embeddings)
 - WAR-CRAFT: Refining Web API Recommendations through Requirement Auditing (WAR-CRAFT) — UIUC / HUST / MBZUAI, arXiv 2611.00564 (LLM joint audit + catalog-constrained resolver over a frozen web-API recommender)
+- RecGroupMemory: Feedback-Aware Cohort Memory for E-Commerce Recommendation (RecGroupMemory) — Taobao & Tmall / Alibaba, arXiv 2611.02453 (cohort memory separated from feedback-based revision with source-value validation, online +1.78% guided transaction users)
+- PEARL: Prediction Error-Adaptive Regularized Learning for Selective Forgetting under Partial Preference Drift (PEARL) — AWS, arXiv 2611.05842 (prediction-error-adaptive neural contextual bandit forgets only drifted feature directions for personalised LLM response selection)
 
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
@@ -1662,6 +1671,8 @@
 - KVUse: Reusable-KV User Memory for Efficient LLM Recommenders (KVUse) — Meta Recommendation Systems (MRS), arXiv 2611.21920
 - GuardAgent: A Memory-Augmented Agentic Framework for Adaptive Detection of Adversarial Promotions in LLM-Based Recommendation (GuardAgent) — University of New South Wales / CSIRO, WSDM 2027, arXiv 2611.22274
 - Recall Begets Recall: Recurrent Memory Ranking for Personalized LLMs (ReMind) — compound cueing + sufficiency predictor
+- RecGroupMemory: Feedback-Aware Cohort Memory for E-Commerce Recommendation (RecGroupMemory) — Taobao & Tmall / Alibaba, arXiv 2611.02453 (cohort-level group profiles stored as memory, revised by prior-day feedback with validation checks)
+- Action-On-Item Preference Flow: A Shared Event Schema for Predictive and Generative Personalization (PerTIDE) — Dhirubhai Ambani University / IIT Delhi, NeurIPS 2026, arXiv 2610.01375 (shared reusable user-memory update mechanism across movie, news and dialogue histories)
 
 ### Model / Architecture
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
@@ -1728,6 +1739,7 @@
 - IncVNM: An Interactive Recommender System with Incrementally Learned von Neumann-Morgenstern Utility — Xi'an Jiaotong University, arXiv 2611.01786 (incremental VNM utility over outcome distributions)
 - DP-Rec: Towards Dynamic Patching for Efficient Long-Sequence Recommendation — RecSys 2026, entropy-surprise latent patches
 - Inherit4Rec: Parameter Inheritance for Efficient Scaling of Recommendation Models — hybrid growth + load-balanced SMoE conversion
+- Action-On-Item Preference Flow: A Shared Event Schema for Predictive and Generative Personalization (PerTIDE) — Dhirubhai Ambani University / IIT Delhi, NeurIPS 2026, arXiv 2610.01375 (action-on-item event schema with three state-space traces feeds both next-item prediction and personalised headline generation)
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -1912,6 +1924,7 @@
 - Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (whole-page policy improvement for generative re-ranking / slate generation)
 - WAR-CRAFT: Refining Web API Recommendations through Requirement Auditing (WAR-CRAFT) — UIUC / HUST / MBZUAI, arXiv 2611.00564 (post-recommendation set refinement: audit, resolver, documentation check)
 - Recall Begets Recall: Recurrent Memory Ranking for Personalized LLMs (ReMind) — recurrent candidate-memory reranking
+- Yuanbao-Reranker: Document-Grounded Synthesis and Preference Distillation for Text Reranking (Yuanbao-Reranker) — Yuanbao Search / Tencent, arXiv 2611.10405 (0.6B/4B/8B Qwen3 dense rerankers from 2.75M curation-funnel groups, bounded min-gap hinge and layerwise merging; SOTA 74.21 Avg)
 
 ### Reasoning
 - Deliberate Latent Reasoning for Sequential Recommendation (DESRec) — Renmin University of China, arXiv 2611.06521
@@ -2051,6 +2064,7 @@
 - Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (iterative policy improvement with per-position complete-page targets; outperforms representative RL algorithms)
 - Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models — Meta, Inc., arXiv 2611.26531 (agentic trial-based optimization under shared cost constraints)
 - IncVNM: An Interactive Recommender System with Incrementally Learned von Neumann-Morgenstern Utility — Xi'an Jiaotong University, arXiv 2611.01786 (entropy-regularized sampling policy trades exploitation for preference exploration)
+- PEARL: Prediction Error-Adaptive Regularized Learning for Selective Forgetting under Partial Preference Drift (PEARL) — AWS, arXiv 2611.05842 (regret scales with shifted users N_s, not whole population; beats greedy +4.0 pts on PRISM)
 
 ### Retrieval / Representation
 - ARMED: Adaptive Retrieval-Augmented Medication Recommendation (ARMED) — UX Factory / KAIST, ICTAI 2026, arXiv 2610.16440
@@ -2111,6 +2125,7 @@
 - RELAY: One Query, Two Roles for Sequential Recommendation (RELAY) — University of Chinese Academy of Sciences, arXiv 2610.36000 (full-catalog ranking in one forward pass, 65% smaller predictor)
 - Candidate-dependent residual routing trades top-of-list accuracy for recall in sequential recommendation — candidate-conditioned history routing
 - PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn — exposure-conditioned multi-negative contrastive objective
+- User Embeddings are Superpositions of Interpretable Behavioral Modes (User Embeddings SAE) — Amazon, arXiv 2611.08487 (sparse autoencoders recover named behavioural modes from user embeddings enabling zero-shot natural-language audience retrieval)
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -2432,6 +2447,7 @@
 - Cross-Domain Sequential Recommendation with Representation-Level User Transfer (FLADRec) — CIKM 2026, adapter-based user-transfer
 - DP-Rec: Towards Dynamic Patching for Efficient Long-Sequence Recommendation — RecSys 2026, dynamic latent patching
 - Candidate-dependent residual routing trades top-of-list accuracy for recall in sequential recommendation — paired-seed diagnostic on REES46
+- Action-On-Item Preference Flow: A Shared Event Schema for Predictive and Generative Personalization (PerTIDE) — Dhirubhai Ambani University / IIT Delhi, NeurIPS 2026, arXiv 2610.01375 (multi-timescale state-space traces over shared action-on-item events, PENS-to-MovieLens transfer +15.23 MRR)
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
