@@ -98,6 +98,8 @@
 - Reversing Polarization through Tolerance-Aware Recommendation and Adaptive Diversification — CUHK Shenzhen / Georgia Tech, arXiv 2610.40289 (100 LLM-driven agents in a simulated social platform)
 - LM-based Personalized Travel Planner (TravelPlanner-Agent) — University of Moratuwa / WSO2, arXiv 2611.25531 (supervising chatbot orchestrates query/retrieval/validation/itinerary agents with deterministic multi-dimensional refinement scoring; 6/10 opensource)
 - SEMPA: Self-Evolving Dual-Role Deliberation for Medication Recommendation from Clinical Records (SEMPA) — Chinese University of Hong Kong / CMU / HK PolyU / Peking University Third Hospital, arXiv 2611.18615 (training-free Proposer-Critic deliberation with molecular retrieval and semantic-anchored contrastive policy evolution)
+- MADRec: Reliable Multi-Agent Reasoning with Evidence-Grounded Debate for Recommendation (MADRec) — Hefei University of Technology / Tongji University — TOIS, arXiv 2611.28604
+- Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents (Weight Coding) — Pinterest, Inc. — arXiv 2611.29613
 
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -231,6 +233,7 @@
 - Two Views, One Voice: Evidence-Grounded Conversational Music Recommendation — Naver / Samsung, arXiv 2607.24846
 - Memory-Aware Multi-Agent Architecture with LLM-based Orchestration for Conversational Recommendation — Instituto de Ciência e Tecnologia Itaú, arXiv 2611.08718
 - SituRecBench: Evaluating Frontier Models as Situated Recommendation Assistants in 3D Environments (SituRecBench) — The Hong Kong Polytechnic University, arXiv 2611.10349
+- Needwise: Generation-Free Conversational Recommendation from Need-Level Typed Decisions (Needwise) — Adobe Research / Adobe Inc. — arXiv 2611.31175
 
 ### Cross-Domain
 - ATLAS: Learning to Recommend Across Unseen Domains (ATLAS) — Sony Research India, arXiv 2608.03899
@@ -252,6 +255,7 @@
 - When Semantics Fall Short: Persona-Guided Cross-Domain Sequential Recommendation with Large Language Models (PerCDR) — Beijing Jiaotong University, arXiv 2610.25221
 - BGAFlow: Bezier-Guided Adaptive Flow for Cross-domain Sequential Recommendation (BGAFlow) — Anhui University, arXiv 2610.30825
 - Cross-Domain Sequential Recommendation with Representation-Level User Transfer (FLADRec) — CIKM 2026
+- Beyond Knowledge Transfer: How User Overlap Shapes Diversity in Cross-Domain Recommendation (DivCDR) — Hong Kong Baptist University / Shenzhen University — WSDM 2027, arXiv 2611.30156
 
 ### CTR Prediction
 - FineSID: Progressive Learning from Content to Relevance to Personalization for CTR Prediction (FineSID) — Alibaba, arXiv 2610.29138
@@ -296,6 +300,7 @@
 - ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 [opensource]
 - More Than a Score: Reinforcement Learning with Verbalized Feedback for Generative Recommendation (VerRec) — Tencent Inc. / NUS / CUHK, arXiv 2611.22410
 - Evidence Before Sampling: Interpretable Implicit Negative Candidate Discovery for Recommendation (Neg-Cand-ID) — Michigan State University / Intuit, WSDM 2027, arXiv 2610.07708 (support/informativeness/product-relevance scored symbolic rules interpreted by an LLM; 42-file official code, 7/10 opensource)
+- From Head to Tail: LLM-Augmented Sequential Recommendation and Trade-off Optimization (From Head to Tail) — Applied AI Research, Comcast / Carnegie Mellon University — GRAIL 2026, arXiv 2611.31052
 
 ### Denoising
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -335,6 +340,7 @@
 - ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation (ReflectRec) — Sungkyunkwan University / NAVER Corp., EMNLP 2026, arXiv 2611.23969 (ValScore diagnoses downstream module effects)
 - Generative News Recommendation Reproduces Popularity: A Memorization-Based Analysis — Nikkei Inc., ABCSS2026 @ IEEE BigData 2026, arXiv 2611.25606 (string-level memorization as a mechanism behind popularity concentration in text-based gen-rec)
 - Candidate-dependent residual routing trades top-of-list accuracy for recall in sequential recommendation — NDCG@10 flat, Recall@10 +1.81%, MRR -1.09%
+- Beyond Relevance: An Empirical Study of Multimodal LLMs for Diversity-Aware Recommendation Reranking (Beyond Relevance) — Amazon — arXiv 2611.28379
 
 ### Diffusion
 - Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
@@ -561,6 +567,9 @@
 - Generative News Recommendation Reproduces Popularity: A Memorization-Based Analysis — Nikkei Inc., arXiv 2611.25606 (popularity-bias / information-diversity audit of a text-based generative news recommender on ~20M sessions)
 - Reversing Polarization through Tolerance-Aware Recommendation and Adaptive Diversification — CUHK Shenzhen / Georgia Tech, arXiv 2610.40289 (tolerance-aware exposure + adaptive diversification reverse polarization; LLM-agent replication)
 - Evidence Before Sampling: Interpretable Implicit Negative Candidate Discovery for Recommendation (Neg-Cand-ID) — Michigan State University / Intuit, WSDM 2027, arXiv 2610.07708 (evidence-backed, business-aligned interpretable negative labels; auditability of training signals)
+- Beyond Relevance: An Empirical Study of Multimodal LLMs for Diversity-Aware Recommendation Reranking (Beyond Relevance) — Amazon — arXiv 2611.28379
+- Beyond Knowledge Transfer: How User Overlap Shapes Diversity in Cross-Domain Recommendation (DivCDR) — Hong Kong Baptist University / Shenzhen University — WSDM 2027, arXiv 2611.30156
+- From Head to Tail: LLM-Augmented Sequential Recommendation and Trade-off Optimization (From Head to Tail) — Applied AI Research, Comcast / Carnegie Mellon University — GRAIL 2026, arXiv 2611.31052
 
 ### Feature Selection
 - LeAP: Learnable Adaptive Permutation for Feature Selection in Heterogeneous and Sparse Recommender Systems (LeAP)
@@ -944,6 +953,8 @@
 - LQ-Rec: Late Quantization for Sequential Recommendation (LQ-Rec) — Toyota Motor North America / UC San Diego, ICDM 2026, arXiv 2611.25256 (non-autoregressive SID retrieval with additive error decomposition)
 - CACO: Coverage-Aware Coordinated Optimization for Continuous Generative Retrieval (CACO) — Hunan University, arXiv 2611.25738 (set-level coverage optimization over continuous generative retrievers)
 - From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation (LSER) — Autodesk, arXiv 2611.26096 (LLM session embeddings as auxiliary retrieval-stage user features)
+- Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents (Weight Coding) — Pinterest, Inc. — arXiv 2611.29613
+- PROSPER: LLMs as Sparse Retrievers for First-Stage Product Search (PROSPER) — Institute of Computing Technology, Chinese Academy of Sciences / University of Amsterdam / Taobao & Tmall Group (Alibaba) — WSDM 2027, arXiv 2611.28645
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -1247,6 +1258,8 @@
 - USDB: Scaling Storage for Next-Generation Recommender Systems at ByteDance — CascadeLSM sequence store, -85.8% write latency
 - RecGroupMemory: Feedback-Aware Cohort Memory for E-Commerce Recommendation (RecGroupMemory) — Taobao & Tmall / Alibaba, arXiv 2611.02453 (online low-purchasing-power cohort, +1.78% guided transaction users with memory + feedback)
 - Yuanbao-Reranker: Document-Grounded Synthesis and Preference Distillation for Text Reranking (Yuanbao-Reranker) — Yuanbao Search / Tencent, arXiv 2611.10405 (deployed reranker family, +8.52% end-to-end answer quality in Yuanbao Search)
+- Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents (Weight Coding) — Pinterest, Inc. — arXiv 2611.29613
+- PROSPER: LLMs as Sparse Retrievers for First-Stage Product Search (PROSPER) — Institute of Computing Technology, Chinese Academy of Sciences / University of Amsterdam / Taobao & Tmall Group (Alibaba) — WSDM 2027, arXiv 2611.28645
 
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
@@ -1275,6 +1288,8 @@
 - CACO: Coverage-Aware Coordinated Optimization for Continuous Generative Retrieval (CACO) — Hunan University, arXiv 2611.25738 (+0.5%-3.0% inference latency for set-coverage gains)
 - Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (no evaluator queries at serving; lower generation time than prefix-score beam search)
 - USDB: Scaling Storage for Next-Generation Recommender Systems at ByteDance — partial dumps and projected long-history reads
+- MoR4Rec: Mixture-of-Recursion for Sequential Recommendation (MoR4Rec) — University of Delhi / K.R. Mangalam University / NIT Warangal — arXiv 2611.29462
+- Needwise: Generation-Free Conversational Recommendation from Need-Level Typed Decisions (Needwise) — Adobe Research / Adobe Inc. — arXiv 2611.31175
 
 ### Inference Acceleration / Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
@@ -1304,6 +1319,7 @@
 - Efficient Wide-Beam Generative Retrieval with Model-Native Trie Decoding and Shared-Context Attention (Trie-Head) — LinkedIn, arXiv 2611.22309
 - Optimize the Cob, Then the Kernel: Optimizing Beam Search for Generative Recommendation Inference (Cob/Kernel) — Huawei Technologies Co., Ltd., arXiv 2611.23339
 - X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction (X-split Argus) — Yandex, arXiv 2611.24283 (offline history compression + teacher logit distillation)
+- Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents (Weight Coding) — Pinterest, Inc. — arXiv 2611.29613
 
 ### Infrastructure / Serving
 - FlashVector: Agent for Hierarchical Model Serving Stack Optimization (FlashVector) — Stanford University / Unity
@@ -1326,6 +1342,7 @@
 - Axia: Data-Efficient Scaling-Law Discovery for Recommendation Systems via Coupled Hyperparameter Scaling — Meta, arXiv 2611.05643 (fleet-level compute allocation under matched trial budgets)
 - URED: Recycling High-Scored Unexposed Candidates for Efficient Discovery in Taobao Feed Recommendation — Taobao & Tmall Group (Alibaba), arXiv 2611.05997 (O(1) recall-time lookup, <1% added latency, no retraining)
 - USDB: Scaling Storage for Next-Generation Recommender Systems at ByteDance — unified streaming/batch sequence storage at ByteDance
+- Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents (Weight Coding) — Pinterest, Inc. — arXiv 2611.29613
 
 ### Knowledge Distillation
 - BAHSD: Bridging the Long-tail Gap via Adaptive Distillation in Black-box Sequential Recommendation (BAHSD)
@@ -1645,6 +1662,12 @@
 - WAR-CRAFT: Refining Web API Recommendations through Requirement Auditing (WAR-CRAFT) — UIUC / HUST / MBZUAI, arXiv 2611.00564 (LLM joint audit + catalog-constrained resolver over a frozen web-API recommender)
 - RecGroupMemory: Feedback-Aware Cohort Memory for E-Commerce Recommendation (RecGroupMemory) — Taobao & Tmall / Alibaba, arXiv 2611.02453 (cohort memory separated from feedback-based revision with source-value validation, online +1.78% guided transaction users)
 - PEARL: Prediction Error-Adaptive Regularized Learning for Selective Forgetting under Partial Preference Drift (PEARL) — AWS, arXiv 2611.05842 (prediction-error-adaptive neural contextual bandit forgets only drifted feature directions for personalised LLM response selection)
+- Beyond Relevance: An Empirical Study of Multimodal LLMs for Diversity-Aware Recommendation Reranking (Beyond Relevance) — Amazon — arXiv 2611.28379
+- MADRec: Reliable Multi-Agent Reasoning with Evidence-Grounded Debate for Recommendation (MADRec) — Hefei University of Technology / Tongji University — TOIS, arXiv 2611.28604
+- From Head to Tail: LLM-Augmented Sequential Recommendation and Trade-off Optimization (From Head to Tail) — Applied AI Research, Comcast / Carnegie Mellon University — GRAIL 2026, arXiv 2611.31052
+- Needwise: Generation-Free Conversational Recommendation from Need-Level Typed Decisions (Needwise) — Adobe Research / Adobe Inc. — arXiv 2611.31175
+- PROSPER: LLMs as Sparse Retrievers for First-Stage Product Search (PROSPER) — Institute of Computing Technology, Chinese Academy of Sciences / University of Amsterdam / Taobao & Tmall Group (Alibaba) — WSDM 2027, arXiv 2611.28645
+- WASP: Continual Weight Adaptation for Streaming LLM Personalization (WASP) — The University of Texas at Austin / Tsinghua University / National University of Singapore — arXiv 2611.30134
 
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
@@ -1673,6 +1696,7 @@
 - Recall Begets Recall: Recurrent Memory Ranking for Personalized LLMs (ReMind) — compound cueing + sufficiency predictor
 - RecGroupMemory: Feedback-Aware Cohort Memory for E-Commerce Recommendation (RecGroupMemory) — Taobao & Tmall / Alibaba, arXiv 2611.02453 (cohort-level group profiles stored as memory, revised by prior-day feedback with validation checks)
 - Action-On-Item Preference Flow: A Shared Event Schema for Predictive and Generative Personalization (PerTIDE) — Dhirubhai Ambani University / IIT Delhi, NeurIPS 2026, arXiv 2610.01375 (shared reusable user-memory update mechanism across movie, news and dialogue histories)
+- WASP: Continual Weight Adaptation for Streaming LLM Personalization (WASP) — The University of Texas at Austin / Tsinghua University / National University of Singapore — arXiv 2611.30134
 
 ### Model / Architecture
 - Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization (AMRS)
@@ -1740,6 +1764,10 @@
 - DP-Rec: Towards Dynamic Patching for Efficient Long-Sequence Recommendation — RecSys 2026, entropy-surprise latent patches
 - Inherit4Rec: Parameter Inheritance for Efficient Scaling of Recommendation Models — hybrid growth + load-balanced SMoE conversion
 - Action-On-Item Preference Flow: A Shared Event Schema for Predictive and Generative Personalization (PerTIDE) — Dhirubhai Ambani University / IIT Delhi, NeurIPS 2026, arXiv 2610.01375 (action-on-item event schema with three state-space traces feeds both next-item prediction and personalised headline generation)
+- MoR4Rec: Mixture-of-Recursion for Sequential Recommendation (MoR4Rec) — University of Delhi / K.R. Mangalam University / NIT Warangal — arXiv 2611.29462
+- Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents (Weight Coding) — Pinterest, Inc. — arXiv 2611.29613
+- PROSPER: LLMs as Sparse Retrievers for First-Stage Product Search (PROSPER) — Institute of Computing Technology, Chinese Academy of Sciences / University of Amsterdam / Taobao & Tmall Group (Alibaba) — WSDM 2027, arXiv 2611.28645
+- WASP: Continual Weight Adaptation for Streaming LLM Personalization (WASP) — The University of Texas at Austin / Tsinghua University / National University of Singapore — arXiv 2611.30134
 
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
@@ -1748,6 +1776,7 @@
 - OneMall
 - RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation (RouteRec) — KAIST / Seoul National University, arXiv 2609.39007 [opensource]
 - RedMall: Generative Recommendation for Large-Scale E-commerce (RedMall) — Xiaohongshu / Tongji University, arXiv 2611.08519 (sparse mixture-of-experts generative recommender)
+- MoR4Rec: Mixture-of-Recursion for Sequential Recommendation (MoR4Rec) — University of Delhi / K.R. Mangalam University / NIT Warangal — arXiv 2611.29462
 
 ### Multi-behavior Recommendation
 - BITRec
@@ -1861,6 +1890,7 @@
 - LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation (LUMIR) — University of Klagenfurt, arXiv 2611.14004 [opensource]
 - PMRecBench: A Benchmark for Personalization in Recommendation Agents under Multimodal Queries (PMRecBench) — University College London / University of Amsterdam, arXiv 2611.06349
 - CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710 (audiovisual / visual / textual streams under controlled missingness and semantic conflict)
+- Beyond Relevance: An Empirical Study of Multimodal LLMs for Diversity-Aware Recommendation Reranking (Beyond Relevance) — Amazon — arXiv 2611.28379
 
 ### Optimizer
 - MuonRec
@@ -1925,6 +1955,9 @@
 - WAR-CRAFT: Refining Web API Recommendations through Requirement Auditing (WAR-CRAFT) — UIUC / HUST / MBZUAI, arXiv 2611.00564 (post-recommendation set refinement: audit, resolver, documentation check)
 - Recall Begets Recall: Recurrent Memory Ranking for Personalized LLMs (ReMind) — recurrent candidate-memory reranking
 - Yuanbao-Reranker: Document-Grounded Synthesis and Preference Distillation for Text Reranking (Yuanbao-Reranker) — Yuanbao Search / Tencent, arXiv 2611.10405 (0.6B/4B/8B Qwen3 dense rerankers from 2.75M curation-funnel groups, bounded min-gap hinge and layerwise merging; SOTA 74.21 Avg)
+- Beyond Relevance: An Empirical Study of Multimodal LLMs for Diversity-Aware Recommendation Reranking (Beyond Relevance) — Amazon — arXiv 2611.28379
+- MADRec: Reliable Multi-Agent Reasoning with Evidence-Grounded Debate for Recommendation (MADRec) — Hefei University of Technology / Tongji University — TOIS, arXiv 2611.28604
+- Needwise: Generation-Free Conversational Recommendation from Need-Level Typed Decisions (Needwise) — Adobe Research / Adobe Inc. — arXiv 2611.31175
 
 ### Reasoning
 - Deliberate Latent Reasoning for Sequential Recommendation (DESRec) — Renmin University of China, arXiv 2611.06521
@@ -1993,6 +2026,7 @@
 - More Than a Score: Reinforcement Learning with Verbalized Feedback for Generative Recommendation (VerRec) — Tencent Inc. / NUS / CUHK, arXiv 2611.22410
 - ReflectRec: Cycle-Consistency Preference Verification for LLM-based Recommendation (ReflectRec) — Sungkyunkwan University / NAVER Corp., EMNLP 2026, arXiv 2611.23969 (verifier-guided conditional regeneration of CoT preference notes)
 - Recall Begets Recall: Recurrent Memory Ranking for Personalized LLMs (ReMind) — self-terminating recall loop
+- MADRec: Reliable Multi-Agent Reasoning with Evidence-Grounded Debate for Recommendation (MADRec) — Hefei University of Technology / Tongji University — TOIS, arXiv 2611.28604
 
 ### Reinforcement Learning
 - FARE: Deep Reinforcement Learning for Fair Exposure Constrained Uncertainty-Aware Financial Content Personalization (FARE) — JPMorganChase, arXiv 2609.31890
@@ -2126,6 +2160,9 @@
 - Candidate-dependent residual routing trades top-of-list accuracy for recall in sequential recommendation — candidate-conditioned history routing
 - PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn — exposure-conditioned multi-negative contrastive objective
 - User Embeddings are Superpositions of Interpretable Behavioral Modes (User Embeddings SAE) — Amazon, arXiv 2611.08487 (sparse autoencoders recover named behavioural modes from user embeddings enabling zero-shot natural-language audience retrieval)
+- MADRec: Reliable Multi-Agent Reasoning with Evidence-Grounded Debate for Recommendation (MADRec) — Hefei University of Technology / Tongji University — TOIS, arXiv 2611.28604
+- Beyond Knowledge Transfer: How User Overlap Shapes Diversity in Cross-Domain Recommendation (DivCDR) — Hong Kong Baptist University / Shenzhen University — WSDM 2027, arXiv 2611.30156
+- PROSPER: LLMs as Sparse Retrievers for First-Stage Product Search (PROSPER) — Institute of Computing Technology, Chinese Academy of Sciences / University of Amsterdam / Taobao & Tmall Group (Alibaba) — WSDM 2027, arXiv 2611.28645
 
 ### Scaling Laws
 - Farewell to Item IDs: Unlocking the Scaling Potential of Large Ranking Models via Semantic Tokens (TRM)
@@ -2448,6 +2485,8 @@
 - DP-Rec: Towards Dynamic Patching for Efficient Long-Sequence Recommendation — RecSys 2026, dynamic latent patching
 - Candidate-dependent residual routing trades top-of-list accuracy for recall in sequential recommendation — paired-seed diagnostic on REES46
 - Action-On-Item Preference Flow: A Shared Event Schema for Predictive and Generative Personalization (PerTIDE) — Dhirubhai Ambani University / IIT Delhi, NeurIPS 2026, arXiv 2610.01375 (multi-timescale state-space traces over shared action-on-item events, PENS-to-MovieLens transfer +15.23 MRR)
+- MoR4Rec: Mixture-of-Recursion for Sequential Recommendation (MoR4Rec) — University of Delhi / K.R. Mangalam University / NIT Warangal — arXiv 2611.29462
+- From Head to Tail: LLM-Augmented Sequential Recommendation and Trade-off Optimization (From Head to Tail) — Applied AI Research, Comcast / Carnegie Mellon University — GRAIL 2026, arXiv 2611.31052
 
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
