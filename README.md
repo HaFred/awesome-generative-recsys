@@ -42,18 +42,18 @@ mindmap
       Ranking & Reranking
         InvariRank -- RMIT
         DealRank -- Mixedbread / NII
+        UF2O -- KAIST
         LLM-as-Judge -- CityU HK
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
         MiniOneRec -- USTC
         OpenOneRec -- Kuaishou
         RecRM-Bench -- Shenzhen U
-        SIDScope -- Huawei
         RPCBench -- Jilin University
         INTENT -- KTH AI Society
-        FLADRec -- Skolkovo / HSE / Sber AI Lab
-        Neg-Cand-ID -- Michigan State University / Intuit
         DivCDR -- Hong Kong Baptist University / Shenzhen University
+        RecUQ -- UW-Madison / UCLA / Northwestern
+        RecipeADQA -- Hiroshima University
       Efficient Decoding
         STATIC -- Google
         ReSID -- Alibaba International / Nankai U
@@ -87,6 +87,137 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 ## By Date
 
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
+### Papers November 25
+
+*Wednesday, November 25, 2026. The live 24-hour window is Wednesday's cs.IR announcement (9 new, 12 cross and 7 replacement cs.IR entries; 802 unique IDs over all five categories). Seven strictly on-topic, genuinely new generative-recommendation / LLM-recommendation / candidate-ranking papers surfaced — above the 5-paper floor, so no fallback chain and no `date_list` were needed. Five are primary cs.IR submissions (SIDECAR, LazUnirec, UF2O, RecUQ, MELODI); C3H and RecipeADQA are new-to-repo cross-listings from cs.CR and cs.CL respectively. All seven were verified absent from the 1,168-ID master dedup set (README + both docs indexes + all monthly archives). **3 are open-source**: RecUQ / 2611.33036 (9/10), RecipeADQA / 2611.31259 (8/10) and UF2O / 2611.31951 (7/10), so By Opensource goes 265 -> 268 and the 30-leaf mindmap drops FLADRec and Neg-Cand-ID (both 7/10) plus SIDScope (8/10) to make room; all three layers survive (Decision 11 / Representation 12 / Feature 7). C3H's advertised `github.com/GuoweiGuan666/C3H` is a README-only project page whose own status says the source code is not yet available, so it scores 0/10. Two re-hits: CACO / 2611.25738 and TravelPlanner-Agent / 2611.25531 resurfaced as replacement/cross-list submissions and got side notes on their existing entries instead of duplicates. Excluded as off-topic: agentic search reranking / 2611.32917, agentic-retrieval query obfuscation / 2611.31344, multimodal evidence embeddings / 2611.32203, conversational memory / 2611.33124 and the broader RAG / dense-retrieval cluster.*
+1. **Speculative Decoding for Semantic-ID-Based Generative Recommendations (SIDECAR)**
+   * Affiliation: Etsy Inc., Brooklyn, NY, USA — *(Harshal A. Chaudhari)*
+   * Link: [arxiv.org/abs/2611.32855](https://arxiv.org/abs/2611.32855)
+   * Venue: arXiv preprint, cs.IR (submitted 24 Nov 2026; 33 pages, 19 figures)
+   * TL;DR: SIDECAR scores a whole draft tree of semantic-ID candidates in one tree-attention pass and certifies the exact top-K, falling back to branch-and-bound only on trie branches that can still change the result.
+   * Key techniques:
+     - Approximate draft candidates scored jointly with a single tree-attention model call, memory permitting
+     - Probability upper bounds for every unexplored SID prefix, enabling exact-top-K certification when the draft contains the winners
+     - Branch-and-bound fallback that expands only result-changing trie parts, certifying within at most L calls for any draft
+     - A announced (1 + delta) per-rank approximation factor under a budget of M tokens per call and Y calls
+     - Serving-side early stop once the announced quality factor or a latency limit is reached, unlike fixed-width beam search
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; no repository or artifact is linked from the paper
+     - **Novelty: 9/10** — couples speculative drafting with an exact top-K certificate and an explicit approximation factor for SID generative retrieval
+     - **Fairness: 3/10** — no bias, exposure or provider-side fairness analysis; the guarantee is purely decoding-accuracy and latency based
+     - **Robustness: 9/10** — formal bounds hold for arbitrary drafts and model sharpness, with worst-case cost bounded by standard beam search
+     - **Impact: 9/10** — directly targets the production wide-beam serving bottleneck in industrial semantic-ID recommenders, with a 33-page technical treatment
+
+2. **LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation**
+   * Affiliation: Alibaba International Digital Commerce Group, Beijing, China — *(Xiaodong Li, Junfeng Zhang, Shichao Nie, Ziyue Guo, Yiming Liu, Xinxin Xu, Xurong Li, Jinyuan Dang, Zhanming Ou, Jianan Yan, Tao Luo, Xiaoyi Zeng)*
+   * Link: [arxiv.org/abs/2611.32590](https://arxiv.org/abs/2611.32590)
+   * Venue: arXiv preprint, cs.IR (submitted 24 Nov 2026)
+   * TL;DR: A single Transformer serves both retrieval and ranking with task-shared and task-private parameters, resolving gradient conflict through LoRA-modulated attention, sparse task-aware MoE and uncertainty-guided updates.
+   * Key techniques:
+     - LoRA-modulated attention sharing attention parameters across retrieval and ranking while preserving task-private adapters
+     - Task-adaptive sparse mixture-of-experts in the FFN with shared and private experts to reduce gradient interference
+     - Uncertainty estimation of each task's gradient reliability to choose a more trustworthy update direction under conflict
+     - Knowledge distillation from the ranking task to the retrieval task for cross-task transfer
+     - Offline experiments plus online A/B testing on a deployed multi-scenario industrial recommender
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; no repository is linked from the paper
+     - **Novelty: 7/10** — the unified retrieval-and-ranking idea is established, but the combination of private LoRA attention, task-adaptive MoE and gradient-reliability guidance is new
+     - **Fairness: 4/10** — multi-scenario coverage is considered, but no exposure-parity, demographic or provider fairness audit is reported
+     - **Robustness: 7/10** — offline results are backed by online A/B and deployment, though no cross-platform or distribution-shift study is given
+     - **Impact: 8/10** — deployed in Alibaba International's multi-scenario recommendation system with reported platform gains
+
+3. **User-Adaptive Fusion of Multiple Foundation Models for Recommender Systems (UF2O)**
+   * Affiliation: KAIST, Seoul, Republic of Korea — *(Sunwoo Kim, Hyunjin Hwang, Geon Lee, Kyungho Kim, Kijung Shin)*
+   * Link: [arxiv.org/abs/2611.31951](https://arxiv.org/abs/2611.31951)
+   * Venue: WSDM 2027 (Main Track); arXiv preprint, cs.IR (submitted 24 Nov 2026)
+   * TL;DR: UF2O gives every foundation model its own recommendation view and learns user-specific fusion weights at the score level, so heterogeneous models can be combined without aligning their embedding spaces.
+   * Key techniques:
+     - Separate recommendation view per foundation model, with user-specific contribution weights
+     - Score-level fusion that mixes heterogeneous foundation models without representation alignment
+     - Temperature-controlled user attention over foundation-model scores
+     - Joint evaluation over four foundation models on four Amazon 2023 review datasets
+     - Static and sequential recommendation settings, up to 7% over the strongest fusion baseline
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 7/10** — [github.com/kswoo97/UFFO](https://github.com/kswoo97/UFFO) contains both static and sequential model files, a README with exact run commands, a supplementary PDF and a dataset link; deductions: only 6 files, no LICENSE, no tests or packaging, datasets hosted externally on Dropbox
+     - **Novelty: 7/10** — per-user, score-level fusion across heterogeneous foundation models is a clean alternative to representation-level alignment
+     - **Fairness: 5/10** — adapting fusion to each user is personalization rather than a fairness intervention; no protected-group or exposure analysis
+     - **Robustness: 7/10** — four datasets, four foundation models and both static and sequential protocols, though all are public Amazon reviews
+     - **Impact: 7/10** — WSDM 2027 main-track paper with released code and a practical recipe for multi-foundation-model recommenders
+
+4. **Towards Realistic Evaluation of Uncertainty Quantification for LLM-Based Recommender Systems (RecUQ)**
+   * Affiliation: University of Wisconsin–Madison — *(Hao Wu, Tianyi Chen, Qiancheng Yang, Xiao Luo)* — with Northwestern University, University of California, Los Angeles and The University of North Carolina at Chapel Hill *(Sipeng Chen, Weikai Li, Hang Zhou, Yizhou Sun, Wei Wang)*
+   * Link: [arxiv.org/abs/2611.33036](https://arxiv.org/abs/2611.33036)
+   * Venue: Transactions on Machine Learning Research (TMLR), 11/2026; arXiv preprint, cs.IR (submitted 24 Nov 2026)
+   * TL;DR: RecUQ fixes the issued ranking so eight heterogeneous uncertainty monitors can be compared as record-level detectors under one output contract, exposing monitor-ordering changes across LLM backbones.
+   * Key techniques:
+     - Fixed-ranking protocol over frozen 20-candidate LLM rankings, separating monitor evaluation from the ranking itself
+     - Shared output contract for eight heterogeneous uncertainty signals, including ranking-aligned Top10Mass and perturbation-based measures
+     - Two evaluation tasks: top-10 error detection and identifying which control yields the larger clipped NDCG@10 drop
+     - Four recommendation datasets crossed with two LLM backbones, with popularity-tail condition analysis
+     - Released frozen rankings, scores, manifests and CPU-only reproduction pipeline
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 9/10** — [github.com/haowu0916edisonwu/recuq-benchmark](https://github.com/haowu0916edisonwu/recuq-benchmark) has 335 files, 73 Python modules, CITATION.cff, data licenses, reproducibility guides, a hash-validated `make validate` / `make reproduce` pipeline and frozen artifacts; deductions: custom license marker, no GPU regeneration out of the box, 2 stars
+     - **Novelty: 8/10** — fixing the ranking to make incomparable UQ signals directly comparable is a well-targeted benchmark design
+     - **Fairness: 6/10** — popularity-tail targets are analyzed explicitly, but no demographic or provider fairness notion is evaluated
+     - **Robustness: 9/10** — four datasets, two backbones, paired controls and hash-checked frozen artifacts make the comparison repeatable
+     - **Impact: 8/10** — TMLR publication plus a reproducible benchmark for uncertainty monitoring of LLM rankers
+
+5. **MELODI: Similarity-Identity Decoupling for Lightweight Ranking**
+   * Affiliation: Amazon International Machine Learning, Melbourne, Australia — *(Quoc Phong Nguyen, Vuong Le, Volodymyr Vaskovych, Julien Monteil)*
+   * Link: [arxiv.org/abs/2611.31940](https://arxiv.org/abs/2611.31940)
+   * Venue: arXiv preprint, cs.IR (submitted 24 Nov 2026)
+   * TL;DR: MELODI splits candidate scoring into a target-history similarity branch and a target-only identity branch, proving an equivalence that permits a cheaper pooled-similarity computation at large candidate counts.
+   * Key techniques:
+     - Similarity-identity decoupling for latency-constrained candidate ranking
+     - Proof that linearity of the similarity operator in its history argument makes similarity-then-pool and pool-then-similarity equivalent
+     - Target-conditioned multi-head history pooling with a single residual-free cross layer linear in the pooled-history input
+     - Problem-dependent identity branch carrying target-only information
+     - Request-local history reuse lowering measured processor latency at large candidate counts
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; no repository is linked from the paper
+     - **Novelty: 7/10** — the linearity condition justifying pooled similarity is a useful theoretical handle on target-aware ranking efficiency
+     - **Fairness: 3/10** — no bias, exposure or demographic fairness analysis
+     - **Robustness: 7/10** — public benchmarks plus two large-scale industrial datasets with AUPRC, NDCG, recall and processor-latency measurements
+     - **Impact: 7/10** — Amazon work with measured latency wins in a deployment-relevant candidate-ranking setting
+
+6. **C3H: Compression-to-Consensus Criteria Hijacking in Multimodal LLM Recommender Systems (C3H)**
+   * Affiliation: Nanyang Technological University, College of Computing and Data Science, Singapore — *(Guowei Guan, Yurong Hao, Jiaming Zhang, Fuyao Zhang, Wei Yang Bryan Lim)*
+   * Link: [arxiv.org/abs/2611.32780](https://arxiv.org/abs/2611.32780)
+   * Venue: NeurIPS 2026 (Main Track, Poster); arXiv preprint, cs.CR with cs.AI cross-list announced 25 Nov 2026
+   * TL;DR: C3H shows that multimodal compression and cross-modal consensus, often assumed to be robustness mechanisms, create a decision bias that a seller can exploit with content edits to a single target item.
+   * Key techniques:
+     - Compression-to-consensus (C2C) bias characterization in MLLM recommender ranking decisions
+     - Inference-time, zero-query attack requiring no victim parameters, gradients, training data or feedback
+     - Cross-modal cue selection with public pretrained encoders
+     - Constrained text and image edits with a stealthiness gate for fidelity and image-text coherence
+     - Evaluation on VIP5 and Qwen2-VL-2B-Instruct over MicroLens-100K, Amazon Beauty and Amazon Sports
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — `github.com/GuoweiGuan666/C3H` contains only a README whose own status says "code is not yet publicly available"; a project page is not a reproduction package
+     - **Novelty: 8/10** — reframes compression and cross-modal agreement as the attack surface rather than the defense, and needs no model queries
+     - **Fairness: 3/10** — the attack distorts exposure toward an edited item; no mitigation or fairness audit is offered
+     - **Robustness: 7/10** — transfer across two MLLM architectures and three datasets with a stealthiness constraint, but no adaptive defender evaluation
+     - **Impact: 8/10** — NeurIPS 2026 main-track result directly relevant to content-manipulation risk in multimodal recommenders
+
+7. **RecipeADQA: A User-aware Question-Answering Dataset for Multi-Constraint Recipe Recommendation**
+   * Affiliation: Hiroshima University, Graduate School of Advanced Science and Engineering — *(Haotian Li, Shuai Jiang, Sayaka Kamei, Yasuhiko Morimoto)*
+   * Link: [arxiv.org/abs/2611.31259](https://arxiv.org/abs/2611.31259)
+   * Venue: ADMA 2026 (Full Paper); arXiv preprint, cs.CL with cs.AI cross-list announced 25 Nov 2026 (submitted 19 Oct 2026)
+   * TL;DR: RecipeADQA turns real user queries and reviews into 128,465 natural-language multi-constraint recipe recommendation questions grounded in a knowledge-graph tag schema, with code and model checkpoints released.
+   * Key techniques:
+     - LLM extraction of fine-grained preference signals from real user queries and review data
+     - Mapping extracted preferences onto a knowledge-graph-based recipe tag schema
+     - Greedy constraint selection to control answer-set size
+     - Tag-based reranking to improve question and answer quality
+     - Noise-augmented retrieve-and-rerank baseline with a lightweight parser and a small language model
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 8/10** — [github.com/MorimoLab/RecipeADQA](https://github.com/MorimoLab/RecipeADQA) has 277 files, 130 Python sources, Apache-2.0 / CC-BY-4.0 license texts, released prompts, code and checkpoints plus a release-audit note; deductions: raw Recipe1M and record-level derivatives are intentionally withheld, and the last push predates the paper
+     - **Novelty: 7/10** — behavior-grounded constraint generation is a clear step beyond template-combination recipe benchmarks
+     - **Fairness: 4/10** — user-derived preferences are used, but no bias or exposure-parity analysis is performed
+     - **Robustness: 7/10** — evaluated on data quality, question quality and retrieval-recommendation performance, though the full record-level dataset is not redistributable
+     - **Impact: 6/10** — ADMA 2026 full paper with a usable benchmark, but a narrow recipe domain
 
 ---
 
@@ -263,6 +394,7 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 1. **LM-based Personalized Travel Planner**
    * Affiliation: University of Moratuwa, Sri Lanka — *(Amandi Nimasha)* — with WSO2, Sri Lanka
+   * [Also published on 2026-11-25] — re-hit: 1
    * Link: [arxiv.org/abs/2611.25531](https://arxiv.org/abs/2611.25531)
    * Venue: arXiv preprint, cs.AI, submitted 19 Nov 2026
    * TL;DR: A supervising chatbot orchestrates specialised agents for query formulation, real-time data retrieval, schedule validation and constraint-aware itinerary generation, with a deterministic multi-dimensional score driving iterative refinement instead of free-form LLM self-critique.
@@ -576,7 +708,7 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 2. **CACO: Coverage-Aware Coordinated Optimization for Continuous Generative Retrieval**
    * Affiliation: Hunan University — *(Pan Zhang)* — with Huazhong Agricultural University and Beijing-based collaborators (Nan Zhuang, Yongkang Zhang, Kun Xú, Zhongtao Jiang, Zhiwei Wang, Kun Xǔ, Youhuan Li)
-   * [Also published on 2026-11-24] — re-hit: 1
+   * [Also published on 2026-11-24, 2026-11-25] — re-hit: 2
    * Link: [arxiv.org/abs/2611.25738](https://arxiv.org/abs/2611.25738)
    * Venue: arXiv preprint, cs.IR (submitted 19 Nov 2026; 21 pages, 16 figures, 12 tables)
    * TL;DR: A label-free post-training framework coordinates the multiple queries sampled by frozen flow-matching / diffusion generative retrievers toward complementary ANN neighborhoods, cutting query overlap and lifting set-level recall at almost no extra latency.
@@ -1410,156 +1542,6 @@ We only keep the last 10 days summary below, for the past records before these, 
 
 ---
 
-### Papers November 14
-
-*Saturday, November 14, 2026. The live arXiv 24-hour window is EMPTY: every `/list/<cat>/new` page still reads "Showing new listings for Friday, 13 November 2026" (arXiv announces Mon-Fri), the Atom feed returns 0 entries for `submittedDate:[202611130000 TO 202611142359]` across all categories, and the Friday announcement was already fully indexed by the November 13 run. Per the fallback chain: `date_list = [2026-11-05]` (the only missing date inside the 10-day window; that day's cs.IR submissions are all RAG / dense-retrieval / agent-safety work with no on-topic generative-recommendation preprint), the second date-section title (November 12) through today yielded nothing new, so step 3 drew 8 strictly on-topic papers from the last-3-month pool. All 8 were verified absent from README.md, both docs indexes and every monthly archive (1026-ID master dedup set). **1 is open-source** (DPFR / University of Copenhagen, 7/10), so By Opensource count 251 -> 252 and the 30-leaf mindmap cap was held by dropping the lowest-scored leaf MitiHarm (6/10); all three layers retained. Two advertised code leads were dead or unrelated: MIDA's `github.com/downw/MIDA_Rec` returns 404, and the "PACT" repositories surfaced on GitHub belong to unrelated robotics / agent-protocol projects. Re-hit avoided: PrismRec 2608.26579 surfaced in the diffusion-recommendation sweep but is already archived (2026_08 / 2026_09), so it was not re-added. Excluded as off-topic: the Nov 05 RAG / dense-retrieval cluster, vector-index and LLM-as-a-Judge papers, and medical Semantic-ID coding papers 2610.19301 / 2610.18672.*
-
-1. **WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search**
-   * Affiliation: WeChat Search Group, Tencent Inc., China — *(Kepu Zhang, Yuzhe Cai, Yue Shu, Dawei Chen, Jinhai Zhu, Yuan Xu, Zehua Dai, Tongke Ni, Ziyao Chen, Chen Fu, Jie Shao, Chao Wang, Xiangmin Wang, Ruifeng Zhao, Rongchun Yao, Jie Yin, Weixin Qiu, Nan Song, Junyang Li, Fan Li, Quanchao Hui, Yulong Ou, Qiang Chen, Hao Cao, Sen Yang)*
-   * Link: [arxiv.org/abs/2611.00530](https://arxiv.org/abs/2611.00530)
-   * Venue: arXiv preprint, October 2026 (cs.IR / cs.CL; submitted 31 Oct 2026)
-   * TL;DR: Replaces fixed hierarchical Semantic IDs with query-specific cluster retrieval followed by in-cluster document ranking, giving a billion-scale production semantic retrieval path that refreshes weekly or daily without rebuilding a global identifier tree.
-   * Key techniques:
-     - Argument that fixed hierarchical SIDs assume one coherent semantic path per document, which breaks for multi-topic documents; candidate pruning is decoupled from fine-grained relevance modelling
-     - Retrieve query-relevant clusters first, then rank atomic documents only inside the resulting query-specific candidate space
-     - Relevance-aware training plus compact document representations and incremental index updates enable weekly (or daily) model refreshes on a continuously evolving corpus
-     - Deployed as the primary semantic retrieval path in WeChat Search alongside a lexical syntax tree, on corpora from hundreds of millions to billions of documents
-     - One-month full-traffic A/B: +0.68% CTR, +2.27% per-user article clicks, 41% lower retrieval resource cost and 19 ms lower graphic-text retrieval latency; now serving 100% of production traffic
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (industrial Tencent deployment; arXiv lists no repository)
-     - **Novelty: 7/10** — a direct challenge to the fixed-SID assumption behind generative retrieval, replacing the global identifier tree with a per-query candidate space
-     - **Fairness: 3/10** — no exposure, popularity or group-level analysis; query-conditioned cluster pruning could systematically favour head content
-     - **Robustness: 8/10** — billion-scale corpora, incremental index refreshes, one-week A/B sweeps and a one-month full-traffic A/B with stable gains; no failure-mode or drift analysis
-     - **Impact: 9/10** — fully deployed at 100% of WeChat Search production traffic with measured CTR, cost and latency wins at Tencent scale
-
-2. **PACT: Defending Recommendation against Promotional News Rewriting via Attack-Diverse Score Consistency**
-   * Affiliation: Waseda University, Tokyo, Japan — *(Chongxian Chen, Fan Mo, Xin Fan, Hayato Yamana)* — with ZOZO NEXT, Inc.
-   * Link: [arxiv.org/abs/2611.00972](https://arxiv.org/abs/2611.00972)
-   * Venue: arXiv preprint, October 2026 (cs.IR; 11 pages; submitted 31 Oct 2026)
-   * TL;DR: A model-agnostic training defense that makes a news recommender's relevance score invariant to LLM-rewritten promotional headlines, without any architecture change or test-time filtering.
-   * Key techniques:
-     - Pooled Attack Consistency Training: pools offline, fact-checked rewrites from multiple LLM generators and multiple attack strategies (stylistic prompting through reinforcement feedback)
-     - Samples a constant number of variants per training visit to give an unbiased estimator of the pool-wide consistency objective under a fixed compute budget
-     - Aligns original and rewritten ranking scores inside the same user context, jointly with click supervision; decouples relevance estimation from superficial rhetorical variation
-     - Zero extra latency at serving time, since no test-time filtering or architectural modification is required
-     - Nine experimental settings across three recommendation backbones and three unseen-generator attacks; up to 3.0 points lower promotion rate than the strongest defense, with clean utility essentially intact
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code; the similarly named GitHub "PACT" repositories are unrelated robotics / agent-protocol projects
-     - **Novelty: 7/10** — attack-diverse pooling with an unbiased constant-budget estimator is a cleaner formulation than single-generator adversarial training
-     - **Fairness: 5/10** — suppresses manipulation-driven exposure inflation, which is an exposure-fairness concern, but there is no demographic or provider-group parity analysis
-     - **Robustness: 9/10** — nine settings, three backbones, unseen-generator and unseen-strategy holdouts, adaptive white-box retraining, plus a clean-utility check
-     - **Impact: 7/10** — Waseda / ZOZO NEXT study with a deployable zero-latency recipe, but no production A/B evidence
-
-3. **BrowseFlow: Sparse Event Flow Matching for Generative User Simulation**
-   * Affiliation: Department of Automation, Tsinghua University, Beijing, China — *(Yitian Pang, Jiayi Zhang, Zhenjia Ma, Xiaowei Yue, Dagui Chen, Jian Xu)* — with Taobao & Tmall Group of Alibaba
-   * Link: [arxiv.org/abs/2610.41374](https://arxiv.org/abs/2610.41374)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 30 Oct 2026)
-   * TL;DR: A conditional discrete flow-matching simulator that generates whole browsing responses as a browsing extent plus a sparse ordered set of key events, modelling the stochastic and long-tailed structure that stepwise next-action simulators miss.
-   * Key techniques:
-     - Represents each response by its browsing extent and an ordered sequence of sparse key events (clicks / likes), directly modelling their counts and locations under exposure constraints
-     - Probabilistic extent prediction combined with discrete flow matching over key events; random event retention defines probability paths over partial sequences and transition-rate matching learns stochastic insertion dynamics
-     - Uses the energy score, a proper scoring rule, to evaluate both response fidelity and generated variability, plus Wasserstein distance between key-event count distributions
-     - Introduces TaobaoBrowse, a benchmark pairing real recommendation contexts with fine-grained browsing trajectories
-     - Best distributional performance across three datasets, addressing both stochastic responses to the same feed and sparse key-event supervision
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code; neither the arXiv abstract nor the HTML links a repository or dataset release
-     - **Novelty: 8/10** — discrete flow matching over sparse key events with extent-conditioned probability paths is a genuinely new generative formulation of user simulation for recommender evaluation
-     - **Fairness: 3/10** — no exposure, popularity or demographic fairness analysis; generative fidelity is the only objective
-     - **Robustness: 8/10** — three datasets, a purpose-built industrial benchmark, proper scoring rules and count-distribution distances rather than single-trajectory accuracy
-     - **Impact: 8/10** — Tsinghua / Alibaba Taobao collaboration with a realistic simulator that could underpin closed-loop generative-recommender evaluation
-
-4. **MIDA: Multi-Interest Decoding with Adaptive Aggregation for Session-based Recommendation**
-   * Affiliation: University of Technology Sydney, Sydney, Australia — *(Linjiang Guo, Nitin Bisht, Shiqing Wu, Guandong Xu)* — with City University of Macao, Macao, China and The Education University of Hong Kong, Hong Kong, China
-   * Link: [arxiv.org/abs/2610.34192](https://arxiv.org/abs/2610.34192)
-   * Venue: IEEE Transactions on Knowledge and Data Engineering (TKDE), 2026 — DOI 10.1109/TKDE.2026.3740693; arXiv preprint, October 2026 (cs.IR; submitted 25 Oct 2026)
-   * TL;DR: An encoder-agnostic decoder that fixes the long-session accuracy collapse of session-based recommenders by clustering raw item embeddings into multiple interests and gating persistent versus evolving intent.
-   * Key techniques:
-     - Two-space decoupling: differentiable multi-interest clustering runs on raw item embeddings so semantic groupings are not distorted by encoder relational bias; encoder outputs are reserved for attention-based aggregation
-     - Dynamic clustering with a learnable differentiable similarity threshold, requiring no preset number of interests; dimension subsampling keeps the pairwise estimate cheap
-     - Stability branch over earlier cluster-enhanced items versus plasticity branch anchored on the last item, fused by a gate conditioned on both branch representations and average cluster size
-     - Plug-in decoder replaces only the final aggregation step of any GRU / GNN / Transformer backbone, with a controlled protocol that holds each encoder fixed
-     - Four benchmarks; gains grow on long sessions (16+ items), with up to 2.65x faster inference than AttenMixer-style decoders
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — the paper's `github.com/downw/MIDA_Rec` returns 404, so no public code is available despite the code claim
-     - **Novelty: 7/10** — relocating multi-interest modelling from the encoder to the decoder, with a raw-embedding clustering space, is a clean reframing of the long-session problem
-     - **Fairness: 3/10** — no bias, exposure or popularity analysis; the stability/plasticity split optimizes accuracy only
-     - **Robustness: 8/10** — controlled encoder-held-fixed evaluation across three architecture families, four datasets, explicit session-length bins and an efficiency study
-     - **Impact: 8/10** — published in IEEE TKDE; an encoder-agnostic decoder is unusually easy to adopt in existing session recommenders
-
-5. **Beyond Temporal Proximity: Explanatory World Models for Credit Assignment in Reinforcement Learning**
-   * Affiliation: Spotify — *(Oriol Corcoll, Qiyao Wei, Ciarán Mark Gilligan-Lee)* — with University of Cambridge
-   * Link: [arxiv.org/abs/2610.13504](https://arxiv.org/abs/2610.13504)
-   * Venue: arXiv preprint, October 2026 (cs.LG / cs.AI / cs.IR; submitted 9 Oct 2026)
-   * TL;DR: Replaces time-discounted credit assignment in long-horizon generative recommenders with explanation-based attribution, redistributing reward to the earlier actions that plausibly caused a delayed outcome while preserving the undiscounted episode return.
-   * Key techniques:
-     - Explanatory World Models (EWM): a frontier language model produces explanations identifying which earlier events plausibly contributed to a realized outcome
-     - Conservative hierarchical operator recursively redistributes reward from those explanations while keeping the undiscounted episode return unchanged
-     - Three explanation variants operationalized from Halpern's actual causation, Lombrozo's explanatory simplicity and Deutsch's hard-to-vary explanations
-     - Evaluation on Crafter and WordCraft (long-horizon control), the public KuaiRand sequential-recommendation benchmark, and an industry-scale generative recommender
-     - Beats PPO and LaRe on delayed-reward control, SFT / LaRe offline and A2C online on KuaiRand, and improves Recall plus behavioural proxies in an industrial GR offline evaluation
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code; the only GitHub links in the HTML point to the third-party EasyRL4Rec utilities used for baselines
-     - **Novelty: 8/10** — using LLM explanations as a structured, reusable credit-assignment signal for generative recommenders is a fresh alternative to temporal discounting
-     - **Fairness: 3/10** — no fairness or exposure analysis; reward redistribution targets sample efficiency only
-     - **Robustness: 8/10** — two controlled RL benchmarks, a public rec benchmark with offline and online protocols, an industry-scale GR, and multiple strong RL baselines
-     - **Impact: 8/10** — Spotify-backed work aimed squarely at long-horizon RL for generative recommendation, with an industry-scale evaluation
-
-6. **Agent Memory as Recommendation: Recommender-System Design for Long-Term Memory of LLM Agents (AgentMemRec)**
-   * Affiliation: Fudan University, Shanghai, China — *(Xinyu Zhang, Weiwei Sun)*
-   * Link: [arxiv.org/abs/2610.34673](https://arxiv.org/abs/2610.34673)
-   * Venue: arXiv preprint, October 2026 (cs.IR / cs.AI / cs.CL; 12 pages, 3 figures, 8 tables; submitted 26 Oct 2026)
-   * TL;DR: Formalizes LLM-agent long-term memory selection as budgeted slate recommendation — request as user, stored memories as items, context window as slate — and ports the recommender cascade to it without any LLM call at selection time.
-   * Key techniques:
-     - Recasts memory retrieval into a recommender-cascade design space and factorizes accuracy into the completeness controlled by each stage
-     - Candidate generation, learning-to-rank and slate construction adapted from recommender systems; no per-history note/graph construction with hundreds to thousands of LLM calls
-     - Explicit per-request cost budget and multi-session questions requiring all of their evidence
-     - On LongMemEval multi-session questions, beats A-Mem, HippoRAG 2, DynamicRAG and T-Mem by 10-31 accuracy points; matches a 64-call LLM reranker at 3.2x lower serving cost
-     - On LoCoMo outperforms Mem0 and Zep with no LLM call at write time; the factorization attributes gains to slates that more often hold all required evidence
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (arXiv lists no repository)
-     - **Novelty: 8/10** — the budgeted-slate formalization is a genuinely cross-pollinating move from recommender-system design into LLM agent memory
-     - **Fairness: 3/10** — no bias or exposure analysis; slate completeness is the only objective
-     - **Robustness: 8/10** — two benchmarks, six strong memory baselines, an explicit cost-accuracy comparison and a stage-wise attribution of the gains
-     - **Impact: 7/10** — a Fudan study with a 3.2x serving-cost result, but limited to academic memory benchmarks
-
-7. **Learning Complementary Agent Groups via Task Hypergraphs for Next-POI Recommendation with Missing Modalities (CATH)**
-   * Affiliation: Swinburne University of Technology, Melbourne, VIC, Australia — *(Jinze Wang, Yuze Liu, Liang Yuan, Gaoyuan Du, Xiaohang Xu, Yong Xiang, Jiong Jin)* — with Australian Catholic University, University of Tennessee, University of Tokyo, Deakin University
-   * Link: [arxiv.org/abs/2610.25801](https://arxiv.org/abs/2610.25801)
-   * Venue: arXiv preprint, October 2026 (cs.IR; submitted 19 Oct 2026)
-   * TL;DR: Learns to select complementary LLM-agent groups for next-POI requests with missing text or images, using a task hypergraph to share candidate-linked findings and a cost-aware policy optimization over a fixed base ranking.
-   * Key techniques:
-     - Task hypergraph whose nodes are agents with distinct processing roles; each hyperedge records the selected group, its analysis goal and the target POIs
-     - Request-, task- and already-selected-member-conditioned group selection policy, with candidate-linked result sharing during execution
-     - Completed tasks update candidate states and agent memories within the request; a shared ranking head turns states into corrections to a fixed base ranking
-     - Supervised ranking trains the executor, then policy optimization accounts explicitly for computation cost
-     - Natural-missingness experiments on Gowalla-CA, Foursquare-NYC and Foursquare-TKY give 8.4-9.1% relative NDCG@20 gains over HyperAgent4POI, plus extra-masking and quality-cost analyses
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 0/10** — no public code (arXiv lists no repository)
-     - **Novelty: 8/10** — learning which agents to compose per request through a task hypergraph, rather than a fixed agent ensemble, is a distinctive agentic-rec design
-     - **Fairness: 4/10** — handling missing modalities helps under-documented POIs, but no demographic or exposure-parity analysis is reported
-     - **Robustness: 8/10** — three datasets under natural missingness, additional masking stress tests, group-selection / execution ablations and explicit quality-cost tradeoffs
-     - **Impact: 7/10** — consistent 8-9% NDCG@20 gains over a strong agentic baseline, but academic POI benchmarks only
-
-8. **Robustness Analysis of Pareto-based Joint Evaluation of Fairness and Relevance in Recommender Systems (DPFR)**
-   * Affiliation: University of Copenhagen, Copenhagen, Denmark — *(Theresia Veronika Rampisela, Maria Maistro, Tuukka Ruotsalo, Christina Lioma)* — with LUT University, Lahti, Finland
-   * Link: [arxiv.org/abs/2610.27850](https://arxiv.org/abs/2610.27850)
-   * Venue: ACM Transactions on Recommender Systems (TORS), accepted; arXiv preprint, October 2026 (cs.IR; submitted 20 Oct 2026); extension of the WWW 2025 paper arXiv:2502.11921
-   * TL;DR: Audits the robustness of Distance-to-Pareto-Frontier, a joint fairness-and-relevance evaluator, showing existing single-measure proxies are unreliable and giving guidelines for evaluating both objectives simultaneously.
-   * Key techniques:
-     - DPFR scores a system by its distance from a Pareto frontier built from relevance and fairness measures over user-item interaction data
-     - Frontier generation via the Oracle2Fair algorithm, checked against true frontiers from exhaustive brute-force enumeration using Generational Distance
-     - Modular design: works with existing relevance and fairness measures rather than requiring a bespoke metric
-     - Robustness suite with artificial recommendations, varying fairness-relevance tradeoffs, and agreement analysis against simple measures
-     - Experiments over 4 recommenders, 3 fairness-aware re-rankers and 6 real-world datasets, revealing inconsistent associations between existing measures and DPFR
-   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
-     - **Opensource?: 7/10** — [github.com/theresiavr/robustness-DPFR-recsys-evaluation](https://github.com/theresiavr/robustness-DPFR-recsys-evaluation): MIT, 19 files (7 Python scripts, 9 notebooks, README, LICENSE) with a script-by-script README mapping every analysis in the paper, plus a companion [WWW'25 repo](https://github.com/theresiavr/DPFR-recsys-evaluation) covering data, preprocessing, training, hyperparameter tuning and reranking. Deductions: 0 stars, notebook-driven with no packaged module, pinned requirements, tests or CI, datasets not bundled, last push Jun 2026
-     - **Novelty: 6/10** — a robustness extension of an already published WWW 2025 measure rather than a new evaluation paradigm
-     - **Fairness: 9/10** — joint fairness-relevance evaluation and the unreliability of fairness proxies are the paper's central concern
-     - **Robustness: 9/10** — 4 recommenders x 3 fairness-aware re-rankers x 6 datasets, brute-force frontier validation, artificial recommendations and tradeoff sweeps
-     - **Impact: 7/10** — ACM TORS acceptance plus reproducible code makes this a usable reference methodology, though it is evaluation-only
-
----
-
 ## Papers Classic Must Read
 
 The list's in no particular order.
@@ -1811,6 +1793,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 10/10 | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) |
 | 10/10 | MiniOneRec: An Open-Source Framework for Scaling Generative Recommendation |
 | 10/10 | RecRM-Bench: Benchmarking Multidimensional Reward Modeling for Agentic Recommender Systems |
+| 9/10 | Towards Realistic Evaluation of Uncertainty Quantification for LLM-Based Recommender Systems (RecUQ) — University of Wisconsin-Madison / UCLA / Northwestern University, TMLR 2026, arXiv 2611.33036 — [github.com/haowu0916edisonwu/recuq-benchmark](https://github.com/haowu0916edisonwu/recuq-benchmark)
 | 9/10 | Beyond Knowledge Transfer: How User Overlap Shapes Diversity in Cross-Domain Recommendation (DivCDR) — Hong Kong Baptist University / Shenzhen University, WSDM 2027, arXiv 2611.30156 — [github.com/WeixinChen98/DivCDR](https://github.com/WeixinChen98/DivCDR) |
 | 9/10 | [STATIC] Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators |
 | 9/10 | Beyond Static Best-of-N: Bayesian List-wise Alignment for LLM-based Recommendation (BLADE) |
@@ -1827,6 +1810,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 9/10 | ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through Item Reachability (ReSID) — Alibaba International Digital Commerce Group / Nankai University, arXiv 2611.16404 — [github.com/Gabriel-reina/ReSID](https://github.com/Gabriel-reina/ReSID) |
 | 9/10 | Deal With It: On Better Schedules for Listwise Reranking (DealRank) — Mixedbread / National Institute of Informatics, arXiv 2611.22392 — [github.com/mixedbread-ai/dealrank](https://github.com/mixedbread-ai/dealrank) |
 | 8.5/10 | Factorized Latent Reasoning for LLM-based Recommendation (FLR) |
+| 8/10 | RecipeADQA: A User-aware Question-Answering Dataset for Multi-Constraint Recipe Recommendation (RecipeADQA) — Hiroshima University, ADMA 2026, arXiv 2611.31259 — [github.com/MorimoLab/RecipeADQA](https://github.com/MorimoLab/RecipeADQA)
 | 8/10 | PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University / Xi'an Jiaotong University, EMNLP 2026, arXiv 2611.23236 — [github.com/Shengxiang-Lin/PGPO](https://github.com/Shengxiang-Lin/PGPO) |
 | 8/10 | INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences (INTENT) — KTH AI Society, arXiv 2611.13069 — [github.com/kthaisociety/intent](https://github.com/kthaisociety/intent) |
 | 8/10 | A Standardized Re-evaluation of Conversational Recommender Systems on the ReDial Dataset (APG4RecSim) |
@@ -1879,6 +1863,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 8/10 | What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study (SID-Repro) |
 | 8/10 | From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations (CFX-Narratives) — Czech Technical University in Prague / University of Innsbruck, CIKM 2026, arXiv 2611.13914 — [github.com/vcahlik/from-counterfactual-edits-to-human-narratives](https://github.com/vcahlik/from-counterfactual-edits-to-human-narratives) |
 | 8/10 | SimRec: Learning to Search, Ask, and Recommend from Simulated Interaction (SimRec) — Zhejiang University / Tsinghua University / Hikvision Research Institute, arXiv 2611.15426 — [github.com/ZJU-REAL/SimRec](https://github.com/ZJU-REAL/SimRec) |
+| 7/10 | User-Adaptive Fusion of Multiple Foundation Models for Recommender Systems (UF2O) — KAIST, WSDM 2027, arXiv 2611.31951 — [github.com/kswoo97/UFFO](https://github.com/kswoo97/UFFO)
 | 7/10 | Evidence Before Sampling: Interpretable Implicit Negative Candidate Discovery for Recommendation (Neg-Cand-ID) — Michigan State University / Intuit, WSDM 2027, arXiv 2610.07708 — [github.com/Shreyarajpal12/Neg-Cand-ID](https://github.com/Shreyarajpal12/Neg-Cand-ID) |
 | 7/10 | Cross-Domain Sequential Recommendation with Representation-Level User Transfer (FLADRec) — Skolkovo Institute of Science and Technology / HSE / Sber AI Lab, CIKM 2026, arXiv 2610.35550 — [github.com/aa-samra/fladrec](https://github.com/aa-samra/fladrec) |
 | 7/10 | RELAY: One Query, Two Roles for Sequential Recommendation (RELAY) — University of Chinese Academy of Sciences, arXiv 2610.36000 — [github.com/LIZESHENG13/RELAY](https://github.com/LIZESHENG13/RELAY) |
@@ -2074,7 +2059,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 265 papers as of November 24.
+**Count:** 268 papers as of November 25.
 
 ---
 
@@ -2254,6 +2239,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - CONCORD-Rec: Catalog-Conditioned Modality Utility for Semantic-ID Diffusion Recommendation (CONCORD-Rec) — Tencent / UCAS / BUPT, arXiv 2611.23710 (reliability-gated discrete SID diffusion over exact feasible catalog support)
 - LQ-Rec: Late Quantization for Sequential Recommendation (LQ-Rec) — Toyota Motor North America / UC San Diego, ICDM 2026, arXiv 2611.25256 (output-side residual quantization removes O(bM) beam-search encoder passes; anytime SID-length compression)
 - CACO: Coverage-Aware Coordinated Optimization for Continuous Generative Retrieval (CACO) — Hunan University, arXiv 2611.25738 (coordinated flow-matching / diffusion query generation for complementary parallel ANN coverage)
+- Speculative Decoding for Semantic-ID-Based Generative Recommendations (SIDECAR) — Etsy Inc., arXiv 2611.32855 (tree-attention draft scoring with certified exact top-K and branch-and-bound fallback)
 - Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (whole-page policy improvement generator beats prefix-score beam search at every tested width)
 
 ### RL / Reinforcement Learning
