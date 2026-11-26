@@ -100,6 +100,7 @@
 - SEMPA: Self-Evolving Dual-Role Deliberation for Medication Recommendation from Clinical Records (SEMPA) — Chinese University of Hong Kong / CMU / HK PolyU / Peking University Third Hospital, arXiv 2611.18615 (training-free Proposer-Critic deliberation with molecular retrieval and semantic-anchored contrastive policy evolution)
 - MADRec: Reliable Multi-Agent Reasoning with Evidence-Grounded Debate for Recommendation (MADRec) — Hefei University of Technology / Tongji University — TOIS, arXiv 2611.28604
 - Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents (Weight Coding) — Pinterest, Inc. — arXiv 2611.29613
+- Agentic Waterfall: An Intent-Driven Information Discovery Framework for Reclaiming User Control in the Attention Economy — 2012 Laboratories, Huawei, arXiv 2611.34407 [opensource; LM controller with persistent user state coordinating retrieval, ranking and state updates]
 
 ### Beam Search / Constrained Decoding
 - ReGen: Controllable Generative Recommendation via Guided Token Refinement (ReGen) — XJTLU / U Liverpool / PolyU, arXiv 2610.28642 [opensource]
@@ -257,6 +258,7 @@
 - BGAFlow: Bezier-Guided Adaptive Flow for Cross-domain Sequential Recommendation (BGAFlow) — Anhui University, arXiv 2610.30825
 - Cross-Domain Sequential Recommendation with Representation-Level User Transfer (FLADRec) — CIKM 2026
 - Beyond Knowledge Transfer: How User Overlap Shapes Diversity in Cross-Domain Recommendation (DivCDR) — Hong Kong Baptist University / Shenzhen University — WSDM 2027, arXiv 2611.30156
+- CAMAR: Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation — Hangzhou Dianzi University / NetEase Cloud Music, arXiv 2611.33628 (domain-invariant / domain-specific preference disentanglement with adversarial invariance and orthogonality)
 
 ### CTR Prediction
 - FineSID: Progressive Learning from Content to Relevance to Personalization for CTR Prediction (FineSID) — Alibaba, arXiv 2610.29138
@@ -304,6 +306,8 @@
 - From Head to Tail: LLM-Augmented Sequential Recommendation and Trade-off Optimization (From Head to Tail) — Applied AI Research, Comcast / Carnegie Mellon University — GRAIL 2026, arXiv 2611.31052
 
 - RecipeADQA: A User-aware Question-Answering Dataset for Multi-Constraint Recipe Recommendation (RecipeADQA) — Hiroshima University, ADMA 2026, arXiv 2611.31259 (behavior-driven LLM preference extraction into KG-schema multi-constraint QA pairs)
+- OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding — Xiamen University / Alibaba Group / Harbin Institute of Technology, Shenzhen, WSDM 2027 Findings, arXiv 2611.33653 (synthetic-data augmented joint SFT plus RL alignment)
+
 ### Denoising
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
 - ANCHOR: Agentic Noise Creation Framework for Human Simulation and Denoising Recommendation (ANCHOR)
@@ -345,6 +349,8 @@
 - Beyond Relevance: An Empirical Study of Multimodal LLMs for Diversity-Aware Recommendation Reranking (Beyond Relevance) — Amazon — arXiv 2611.28379
 
 - Towards Realistic Evaluation of Uncertainty Quantification for LLM-Based Recommender Systems (RecUQ) — University of Wisconsin-Madison / UCLA / Northwestern University, TMLR 2026, arXiv 2611.33036 (fixed-ranking protocol reveals backbone-dependent UQ monitor ordering)
+- Learning the Platform, Not the Learner: Sequencing Shortcuts in the Offline Evaluation of Educational Recommender Systems and LLM Rankers — ENSAD / Hassan II University of Casablanca, arXiv 2611.33240 [opensource; structure-only predictors reach a median 95% of best-model accuracy]
+
 ### Diffusion
 - Anatomy of a Decision: Uncertainty-aware Hierarchical Intent Learning via Flow Matching for Multimodal Recommendation (UHIFlow) — Northeastern University, China, arXiv 2609.29609
 - X-Rec Technical Report (X-Rec) — TikTok, arXiv 2609.29180
@@ -479,6 +485,9 @@
 
 - Towards Realistic Evaluation of Uncertainty Quantification for LLM-Based Recommender Systems (RecUQ) — University of Wisconsin-Madison / UCLA / Northwestern University, TMLR 2026, arXiv 2611.33036 (eight UQ signals compared on identical issued rankings)
 - RecipeADQA: A User-aware Question-Answering Dataset for Multi-Constraint Recipe Recommendation (RecipeADQA) — Hiroshima University, ADMA 2026, arXiv 2611.31259 (128,465 natural-language multi-constraint recipe recommendation questions)
+- Learning the Platform, Not the Learner: Sequencing Shortcuts in the Offline Evaluation of Educational Recommender Systems and LLM Rankers — ENSAD / Hassan II University of Casablanca, arXiv 2611.33240 [opensource; syllabus-aware checklist and lift-over-structure package]
+- Agentic Waterfall: An Intent-Driven Information Discovery Framework for Reclaiming User Control in the Attention Economy — 2012 Laboratories, Huawei, arXiv 2611.34407 [opensource; 50 trajectories, 300 checkpoints, replay + blind evaluation]
+
 ### Fairness
 - What Gets Hacked in a Collaborative Reward for LLM Recommenders: The Part That Does Not Depend on the User (LLM4Rec-CF-Bias) — University of California, San Diego, arXiv 2611.07588 [opensource]
 - Algorithmic Harms Associated with Generative Model-Augmented Recommendation Systems — Pinterest, arXiv 2609.33073
@@ -962,6 +971,7 @@
 - From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation (LSER) — Autodesk, arXiv 2611.26096 (LLM session embeddings as auxiliary retrieval-stage user features)
 - Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents (Weight Coding) — Pinterest, Inc. — arXiv 2611.29613
 - PROSPER: LLMs as Sparse Retrievers for First-Stage Product Search (PROSPER) — Institute of Computing Technology, Chinese Academy of Sciences / University of Amsterdam / Taobao & Tmall Group (Alibaba) — WSDM 2027, arXiv 2611.28645
+- OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding — Xiamen University / Alibaba Group, WSDM 2027 Findings, arXiv 2611.33653 (schema-constrained generation for language recognition / spelling correction / translation / tagging)
 
 ### Graph-based Recommendation
 - Adapting Knowledge Graphs for Behavior Denoising in Sequential Recommendation (AdaptedKG)
@@ -995,6 +1005,7 @@
 - PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation (PGPO) — Zhejiang University, EMNLP 2026, arXiv 2611.23236 (static vocabulary-level semantic graph propagates prototype obfuscation anchors)
 - BehaveRec: When Does Long-Term Behavioral History Help Sequential Recommendation? — Walmart Global Tech, arXiv 2610.36239 (GraphSAGE over a user-user graph from behavioral-embedding similarity)
 - Generative Learning on Dynamic Text-Attributed Graphs — SID decoding over dynamic text-attributed graphs
+- MKGE: Grounding User Preferences in Shared Multimodal Concepts for Recommendation — Fudan University, WSDM 2027, arXiv 2611.34436 [opensource; multimodal KG with canonical concept vocabulary and dual-path preference modelling]
 
 ### Group Recommendation
 - AgentGR: Semantic-aware Agentic Group Decision-Making Simulator for Group Recommendation
@@ -1270,6 +1281,10 @@
 
 - LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation (LazUnirec) — Alibaba International Digital Commerce Group, arXiv 2611.32590 (deployed unified retrieval-ranking Transformer with shared/private parameters)
 - MELODI: Similarity-Identity Decoupling for Lightweight Ranking (MELODI) — Amazon International Machine Learning, arXiv 2611.31940 (pooled target-history similarity for low-latency industrial candidate ranking)
+- CAMAR: Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation — Hangzhou Dianzi University / NetEase Cloud Music, arXiv 2611.33628 (online A/B across songs, playlists and podcasts)
+- OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding — Xiamen University / Alibaba Group, WSDM 2027 Findings, arXiv 2611.33653 (deployed in AliExpress search)
+- Agentic Waterfall: An Intent-Driven Information Discovery Framework for Reclaiming User Control in the Attention Economy — 2012 Laboratories, Huawei, arXiv 2611.34407 [opensource; feed controller and benchmark dataset]
+
 ### Inference
 - CompRank: Efficient LLM Reranking via Token-Level Compression and Decoding-Free Scoring (CompRank)
 - Asymmetric Generative Recommendation via Multi-Expert Projection and Multi-Faceted Hierarchical Quantization (AsymRec) 
@@ -1685,6 +1700,9 @@
 - Towards Realistic Evaluation of Uncertainty Quantification for LLM-Based Recommender Systems (RecUQ) — University of Wisconsin-Madison / UCLA / Northwestern University, TMLR 2026, arXiv 2611.33036 (record-level uncertainty monitors on frozen LLM rankings)
 - C3H: Compression-to-Consensus Criteria Hijacking in Multimodal LLM Recommender Systems (C3H) — Nanyang Technological University, NeurIPS 2026, arXiv 2611.32780 (zero-query inference-time item promotion attack)
 - RecipeADQA: A User-aware Question-Answering Dataset for Multi-Constraint Recipe Recommendation (RecipeADQA) — Hiroshima University, ADMA 2026, arXiv 2611.31259 (LLM-extracted user preferences plus small-LM reranking)
+- Agentic Waterfall: An Intent-Driven Information Discovery Framework for Reclaiming User Control in the Attention Economy — 2012 Laboratories, Huawei, arXiv 2611.34407 [opensource; intent-driven LM feed controller]
+- Learning the Platform, Not the Learner: Sequencing Shortcuts in the Offline Evaluation of Educational Recommender Systems and LLM Rankers — ENSAD / Hassan II University of Casablanca, arXiv 2611.33240 [opensource; 0.5B-7B LLM rankers under plausible negatives]
+
 ### Memory Augmentation
 - HEM-Med: A Hierarchical Agentic Memory Framework for Safe Multi-Center Medication Recommendation (HEM-Med) — Qilu University of Technology / UTS, arXiv 2610.20191
 - OMEGA: Collaborative Memory Augmentation for Generative Recommendation (OMEGA)
@@ -1788,6 +1806,8 @@
 - LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation (LazUnirec) — Alibaba International Digital Commerce Group, arXiv 2611.32590 (LoRA-modulated shared attention and task-adaptive sparse MoE)
 - User-Adaptive Fusion of Multiple Foundation Models for Recommender Systems (UF2O) — KAIST, WSDM 2027, arXiv 2611.31951 (separate recommendation views with user-specific fusion weights)
 - MELODI: Similarity-Identity Decoupling for Lightweight Ranking (MELODI) — Amazon International Machine Learning, arXiv 2611.31940 (separate similarity and identity branches for candidate ranking)
+- MKGE: Grounding User Preferences in Shared Multimodal Concepts for Recommendation — Fudan University, WSDM 2027, arXiv 2611.34436 [opensource; concept-grounded user graph plus LightGCN / HeteroGAT encoders]
+
 ### MoE
 - Generative Large-Scale Pre-trained Models for Automated Ad Bidding Optimization
 - L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation
@@ -1913,6 +1933,9 @@
 - Beyond Relevance: An Empirical Study of Multimodal LLMs for Diversity-Aware Recommendation Reranking (Beyond Relevance) — Amazon — arXiv 2611.28379
 
 - C3H: Compression-to-Consensus Criteria Hijacking in Multimodal LLM Recommender Systems (C3H) — Nanyang Technological University, NeurIPS 2026, arXiv 2611.32780 (cross-modal cue selection and constrained text/image edits)
+- MKGE: Grounding User Preferences in Shared Multimodal Concepts for Recommendation — Fudan University, WSDM 2027, arXiv 2611.34436 [opensource; canonical concepts induced from item images and titles]
+- CAMAR: Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation — Hangzhou Dianzi University / NetEase Cloud Music, arXiv 2611.33628 (text / vision / audio residual-quantized semantic IDs)
+
 ### Optimizer
 - MuonRec
 - Robust Fusion of Semantic and Behavioural Signals for LLM Reranking in Personalised Search — Spotify; USRW Workshop @ RecSys 2026, arXiv 2609.25825
@@ -1983,6 +2006,8 @@
 - MELODI: Similarity-Identity Decoupling for Lightweight Ranking (MELODI) — Amazon International Machine Learning, arXiv 2611.31940 (low-latency decoupled candidate ranking)
 - C3H: Compression-to-Consensus Criteria Hijacking in Multimodal LLM Recommender Systems (C3H) — Nanyang Technological University, NeurIPS 2026, arXiv 2611.32780 (compression-to-consensus ranking bias exploited by content edits)
 - RecipeADQA: A User-aware Question-Answering Dataset for Multi-Constraint Recipe Recommendation (RecipeADQA) — Hiroshima University, ADMA 2026, arXiv 2611.31259 (tag-based reranking for QA data quality and retrieve-and-rerank baseline)
+- Agentic Waterfall: An Intent-Driven Information Discovery Framework for Reclaiming User Control in the Attention Economy — 2012 Laboratories, Huawei, arXiv 2611.34407 [opensource; controller coordinates retrieval and ranking with evolving user state]
+
 ### Reasoning
 - Deliberate Latent Reasoning for Sequential Recommendation (DESRec) — Renmin University of China, arXiv 2611.06521
 - From Interests to Semantic IDs: Retrieval-Grounded Credit Assignment for Generative Recommendation (Retrieval-Grounded Credit)
@@ -2123,6 +2148,7 @@
 - Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models — Meta, Inc., arXiv 2611.26531 (agentic trial-based optimization under shared cost constraints)
 - IncVNM: An Interactive Recommender System with Incrementally Learned von Neumann-Morgenstern Utility — Xi'an Jiaotong University, arXiv 2611.01786 (entropy-regularized sampling policy trades exploitation for preference exploration)
 - PEARL: Prediction Error-Adaptive Regularized Learning for Selective Forgetting under Partial Preference Drift (PEARL) — AWS, arXiv 2611.05842 (regret scales with shifted users N_s, not whole population; beats greedy +4.0 pts on PRISM)
+- OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding — Xiamen University / Alibaba Group, WSDM 2027 Findings, arXiv 2611.33653 (multi-task RL alignment after joint single-task and synthetic-data SFT)
 
 ### Retrieval / Representation
 - ARMED: Adaptive Retrieval-Augmented Medication Recommendation (ARMED) — UX Factory / KAIST, ICTAI 2026, arXiv 2610.16440
@@ -2401,6 +2427,8 @@
 - Generative Learning on Dynamic Text-Attributed Graphs — text-derived SIDs with uniqueness/capacity/temporal-stability audit
 
 - Speculative Decoding for Semantic-ID-Based Generative Recommendations (SIDECAR) — Etsy Inc., arXiv 2611.32855 (prefix probability bounds over the semantic-ID trie)
+- CAMAR: Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation — Hangzhou Dianzi University / NetEase Cloud Music, arXiv 2611.33628 (trainable semantic IDs via multimodal residual quantization)
+
 ### Sequential Modeling / RoPE
 - Compote: Collapse-Resistant Multiple Hypothesis Learning for Sequential Recommendation (Compote) — Criteo AI Lab / Sorbonne Université CNRS ISIR, arXiv 2610.37005
 - LSF-SR: Latent Semantic Fusion for Sequential Recommendation via Flow-based Conditional Variational Autoencoders (LSF-SR) — National Yang Ming Chiao Tung University, arXiv 2609.29815
@@ -2515,6 +2543,8 @@
 - From Head to Tail: LLM-Augmented Sequential Recommendation and Trade-off Optimization (From Head to Tail) — Applied AI Research, Comcast / Carnegie Mellon University — GRAIL 2026, arXiv 2611.31052
 
 - User-Adaptive Fusion of Multiple Foundation Models for Recommender Systems (UF2O) — KAIST, WSDM 2027, arXiv 2611.31951 (user-adaptive fusion evaluated in static and sequential recommendation)
+- CAMAR: Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation — Hangzhou Dianzi University / NetEase Cloud Music, arXiv 2611.33628 (multi-domain sequential rec with invariant / specific preference disentanglement)
+
 ### Survey
 - Rethinking Fairness in LLM-Based Recommender Systems: A Survey
 - Trustworthy Recommendation in the Era of Large Language Models: Opportunities and Challenges
