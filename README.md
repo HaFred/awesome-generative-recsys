@@ -33,6 +33,8 @@ mindmap
     Decision Layer: LLM in Recommendation Chain
       Reasoning & RL
         Rank-GRPO -- Netflix
+        REI -- Alibaba Group / Wuhan University
+        CC-Gittins -- Columbia University / Microsoft
         DynamicPO -- USTC
         BLADE -- USTC
         SPRINT -- UTS
@@ -42,7 +44,6 @@ mindmap
         InvariRank -- RMIT
         DealRank -- Mixedbread / NII
         Agentic Waterfall -- 2012 Laboratories, Huawei
-        UF2O -- KAIST
         LLM-as-Judge -- CityU HK
     Representation Layer: Model Training & Optimization
       Frameworks & Benchmarks
@@ -50,11 +51,10 @@ mindmap
         OpenOneRec -- Kuaishou
         RecRM-Bench -- Shenzhen U
         RPCBench -- Jilin University
-        INTENT -- KTH AI Society
         DivCDR -- Hong Kong Baptist University / Shenzhen University
         RecUQ -- UW-Madison / UCLA / Northwestern
+        Finding the Right Balance -- UQTR
         RecipeADQA -- Hiroshima University
-        Beat the Syllabus -- ENSAD / Hassan II University
       Efficient Decoding
         STATIC -- Google
         ReSID -- Alibaba International / Nankai U
@@ -88,6 +88,149 @@ We manage to achieve 22% and 32% boosting for the end-to-end training efficienci
 ## By Date
 
 We only keep the last 10 days summary below, for the past records before these, please see [the archive](docs/archive_by_month).
+
+---
+
+### Papers November 27
+
+*Friday, November 27, 2026. At 23:05 HKT all five `/list/<cat>/new` pages still read Thursday, 26 November 2026 (cs.IR 9 new / 5 cross / 6 replacement; 767 unique IDs across cs.IR/AI/LG/CL/MM), so the strict 24-hour window was already indexed by the Nov 26 run and yielded zero genuinely new on-topic papers. The authoritative fallback chain was applied and is disclosed here: (1) `date_list = [2026-11-19]` (the only missing date section in the current README; that announcement is already represented in the docs indexes), (2) second date-section title (Nov 25) through today (nothing new beyond the Nov 26 batch), (3) last-3-month arXiv Atom / UI search plus WebSearch and curated CTR-scaling pools. Eight strictly on-topic, genuinely new generative-recommendation / LLM-ranking / LLM-agentic-rec / industrial-ranking papers were found, all verified absent from the 1,189-ID master dedup set (README + both docs indexes + all monthly archives). **3 are open-source**: relevance-diversity retrieval / 2610.09412 (9/10), CC-Gittins / 2610.26676 (9/10) and REI / 2611.33183 (6/10, partial SPOD-only release), so By Opensource goes 271 -> 274; the 30-leaf mindmap drops UF2O (7/10), INTENT and Beat the Syllabus (both 8/10), with all three layers surviving (Decision 12 / Representation 11 / Feature 7). Excluded as off-topic: RAG / dense-retrieval / GEO pipelines, generic LLM-agent memory, clinical and voting recommenders, diffusion/quantization fundamentals and legacy archive-only cross-listings.*
+
+1. **REI: Learning Ideation from Repository Evolution**
+   * Affiliation: Alibaba Group / Wuhan University / Mohamed bin Zayed University of Artificial Intelligence — *(Muyu Zou, Xiang Feng, Yufei Xu, Shanshan Ye, Zulong Chen, Lingyu Mu, Jinxin Hu, Jing Zhang)*
+   * Link: [arxiv.org/abs/2611.33183](https://arxiv.org/abs/2611.33183)
+   * Venue: arXiv preprint, cs.LG (submitted 28 Oct 2026; primary new cs.IR listing announced 26 Nov 2026)
+   * TL;DR: REI turns repository evolution into supervision for recommender-engineering ideation, then uses SPOD to stop RL-driven proposals from collapsing into a handful of dominant method families.
+   * Key techniques:
+     - Ideation policy learned from code changes, subsequent revisions, adoption and reuse as implicit utility labels
+     - Industrial corpus of 60,000+ recommender-system evolution samples drawn from 24 repositories, with normalized AST-level code diffs
+     - Semantic Prior Optimization and Debiasing (SPOD): explicit method identity, category-level reward debiasing and top-1 retention per method family
+     - GRPO-style RLVR training with semantic-diversity preservation for cross-task generalization and long-tail method exploration
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 6/10** — [github.com/Gabriel-reina/spod](https://github.com/Gabriel-reina/spod): Apache-2.0, 121 files / 41 Python files, configs, public prompts and datasets, pinned ROLL revision, pushed 28 Oct 2026; this is the SPOD debiasing operator only, not the full repository-evolution ideation pipeline, so reproduction of REI itself is partial
+     - **Novelty: 7/10** — mining repository evolution for reusable engineering ideation priors is fresh; SPOD adds a useful method-level alternative to token-level entropy controls
+     - **Fairness: 6/10** — explicitly counters popularity skew over method families and protects long-tail ideas, though no user-side exposure or demographic audit is reported
+     - **Robustness: 7/10** — public benchmarks plus a large industrial corpus with success/failure annotations and cross-task evaluation; full reproducibility is limited by the partial code release
+     - **Impact: 9/10** — Alibaba recommender-engineering work targeting the real ideation bottleneck of automated experiment loops, with reported gains in method diversity and industrial deployment relevance
+
+2. **Towards Efficient Whole Page Ranking with One-Pass Inference (MIS)**
+   * Affiliation: Meta Platforms, Inc. — *(Qi Xu, Zhigang Hua, Zijie Lei, Yan Xie, Jizhe Zhang, Lynn Lu, Delun Du, Sha Hua, Ren Mao, Ke Pan, Haomin Yu, Sandeep Pandey, Luke Simon)*
+   * Link: [arxiv.org/abs/2611.05542](https://arxiv.org/abs/2611.05542)
+   * Venue: arXiv preprint, cs.AI (submitted 3 Nov 2026)
+   * TL;DR: MIS gives non-autoregressive whole-page generation prefix awareness, matching autoregressive slate quality with 4.07x/3.54x faster CPU decoding and 9.73% lower ranking-service CPU use.
+   * Key techniques:
+     - Multi-Item Scoring with global candidate interactions, localized prefix conditioning and position-aware scoring in one shared representation
+     - Reusable per-request representations plus lightweight prefix-conditioned scoring inside constrained beam search
+     - Joint optimization of ads and organic content under layout and business constraints
+     - KuaiRand-1K / RL4RS offline tests and a randomized large-scale social-video platform evaluation
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; neither the paper, PDF first page nor HTML links a repository
+     - **Novelty: 7/10** - a clean middle path between independent NAR scoring and expensive AR page decoding via compact prefix-conditioned rescoring
+     - **Fairness: 2/10** — no user-group, provider-side or ad-versus-organic exposure fairness analysis beyond business-metric balancing
+     - **Robustness: 8/10** — two public benchmarks, an AR baseline comparison and a randomized online evaluation with latency and CPU measurements
+     - **Impact: 8/10** — Meta-scale whole-page ranking with concrete production metrics (0.104% realization, 0.058% watch time, -9.73% CPU)
+
+3. **GistRank: Gist-Compressed Listwise Ranking with Large Language Models**
+   * Affiliation: Southwest University / Tencent Yuanbao Team / Renmin University of China / Institute of Computing Technology, Chinese Academy of Sciences — *(Guo Chen, Wenhan Liu, Reed Li, Qianwen Ma, Yu Lu, Haibo Shi, Bingbing Xu, Junjie Huang)*
+   * Link: [arxiv.org/abs/2610.39610](https://arxiv.org/abs/2610.39610)
+   * Venue: arXiv preprint, cs.IR (submitted 29 Oct 2026)
+   * TL;DR: GistRank compresses each listwise-ranking candidate to four gist tokens, delivering a 14x speedup with 59.17 average nDCG@10 within 0.89 of the full-context baseline.
+   * Key techniques:
+     - Semi-bidirectional gist encoding so each gist token absorbs its passage more faithfully than strictly causal compression
+     - Pairwise discriminative training that teaches gist representations to expose relative-preference structure
+     - Three-stage training ending in listwise objective adaptation for permutation generation
+     - Evaluation on TREC DL19/20 and five BEIR subsets against one-shot full-text and sliding-window ranking
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; the paper and PDF carry no repository link
+     - **Novelty: 7/10** — soft compression tailored to discrimination rather than generic summarization is a well-targeted fix for costly LLM listwise rankers
+     - **Fairness: 3/10** — no demographic or source-level ranking-bias audit; the study focuses on fidelity and speed
+     - **Robustness: 8/10** — seven TREC/BEIR datasets, explicit comparison with full-context and sliding-window baselines, and a small quality gap under 4-token compression
+     - **Impact: 7/10** — Tencent Yuanbao AI Search setting with a directly deployable inference-cost reduction
+
+4. **Finding the Right Balance: Relevance and Diversity in LLM Retrieval**
+   * Affiliation: Université du Québec à Trois-Rivières, LI2A / INSTINT, Canada — *(Guillaume Brouillette, Faustin Kagabo, Usef Faghihi, Nadia Ghazzali)*
+   * Link: [arxiv.org/abs/2610.09412](https://arxiv.org/abs/2610.09412)
+   * Venue: arXiv preprint, cs.IR (submitted 7 Oct 2026; 36 pages, 8 figures, 13 tables)
+   * TL;DR: Diversification only pays off when the nearest-neighbor pool is redundant, so a query-adaptive rule and a geometric RNG-Score reranker diversify selectively instead of always.
+   * Key techniques:
+     - Controlled near-duplicate injection and production-style overlapping chunking to isolate the redundancy regime
+     - Query-adaptive decision rule comparing effective distinct documents in top-k against the query evidence requirement
+     - RNG-Score geometric reranker with an exact nearest-neighbor fallback whose margin signals duplicate structure
+     - Retrieval, cross-encoder and generation evaluations with cross-dataset and cross-encoder transfer checks
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 9/10** — [github.com/GuillaumeBrouillette/finding-the-right-balance](https://github.com/GuillaumeBrouillette/finding-the-right-balance): Apache-2.0, 573 files / 93 Python files / 350 result-data artifacts, full paper PDF, CPU smoke test and retained-results replay workflow, pushed 22 Sep 2026; strong documentation and reproducibility
+     - **Novelty: 7/10** — reframes a contested MMR-style choice as an observable redundancy/evidence-requirement decision rather than a fixed diversification setting
+     - **Fairness: 5/10** — diversity is over evidence passages, not demographic groups, but the paper directly audits a known exposure-quality trade-off
+     - **Robustness: 9/10** — controlled injections, production-style chunking, multiple encoders and datasets, 13 tables of statistical analysis and an exact-fallback reranker
+     - **Impact: 7/10** — actionable guidance for retrieval and RAG serving where blind diversification can hurt relevance
+
+5. **Who Chooses How Preferences Are Aggregated? Auditing Aggregation-Rule Authority in LLM-Based Group Recommendation**
+   * Affiliation: Independent Researcher — *(Yuxuan Du)*
+   * Link: [arxiv.org/abs/2608.23966](https://arxiv.org/abs/2608.23966)
+   * Venue: arXiv preprint, cs.HC (submitted 25 Aug 2026)
+   * TL;DR: LLMs execute social-choice rules faithfully when told which one to use, but delegation silently gives them discretion over rule choice and produces model-specific collective recommendations.
+   * Key techniques:
+     - Behavioral audit of three LLMs under unspecified, user-retained and model-delegated authority conditions
+     - Synthetic and empirical-rating preference profiles with witness rules that prescribe different actions
+     - Separation of rule-execution capability from aggregation-rule authority at the interaction level
+     - Outcome-distribution analysis across models and preference settings
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; no repository is linked in the paper or PDF
+     - **Novelty: 8/10** — aggregation-rule authority is an underexamined control dimension distinct from executing a given fairness rule
+     - **Fairness: 9/10** — the paper is centered on who controls preference aggregation when users disagree, a core group-recommender fairness question
+     - **Robustness: 6/10** — controlled audit across three LLMs and two profile sources, but no deployed group-recommendation system or large-scale user study
+     - **Impact: 6/10** — cs.HC preprint with clear implications for pluralistic alignment and user control in LLM group recommenders
+
+6. **Which Model for Which Role? Cost-Efficient Pareto Recommendation for LLM Agentic Workflows (CC-Gittins)**
+   * Affiliation: Columbia University / Cornell University / Microsoft / New York University / Shanghai University of Finance and Economics — *(Qian Xie, Yueli He, Wenyue Hua, Sripad Karne, Armaan Agrawal, Nikos Pagonas, Eugene Wu, Kostis Kaffes, Tianyi Peng, Nairen Cao)*
+   * Link: [arxiv.org/abs/2610.26676](https://arxiv.org/abs/2610.26676)
+   * Venue: NeurIPS 2026 Workshop on Resource-Aware Agentic AI (RAAAI); arXiv preprint, cs.LG (submitted 19 Oct 2026)
+   * TL;DR: CC-Gittins recommends Pareto-optimal model-role assignments for LLM agent workflows while recovering much of the frontier at roughly 10% of exhaustive evaluation cost.
+   * Key techniques:
+     - Multi-objective extension of cost-aware Gittins search exploiting the coupling between evaluation and deployment cost
+     - Alternating search for higher quality and lower cost with each evaluation reused by both directions
+     - Uncertainty-adjusted quality-LCB / cost-UCB recommendations of nondominated assignments
+     - Eight frozen quality-cost matrices from 2-5 role workflows up to 1,681 assignments, plus a latency third objective
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 9/10** — [github.com/AgentOptimizer/agentopt-research](https://github.com/AgentOptimizer/agentopt-research): MIT, 290 files / 120 Python files / 105 data artifacts, installable package, pytest suite, Slurm experiment guide and frozen benchmark matrices with replay commands, pushed 15 Nov 2026
+     - **Novelty: 8/10** — the evaluation-deployment cost coupling gives a fresh bandit formulation of a practical model-selection recommendation problem
+     - **Fairness: 3/10** — no user or provider fairness analysis; the objectives are quality, cost and latency
+     - **Robustness: 8/10** — eight benchmarks, up to 1,681 assignments, 20-seed frontier recovery curves and an explicit latency extension
+     - **Impact: 7/10** — NeurIPS 2026 workshop paper with immediately reusable tooling for cost-aware agentic serving
+
+7. **ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling**
+   * Affiliation: Kuaishou Technology — *(Wenhao Li, Qinglin Jia, Chenghou Jin, Zihong Xian, Jiezhou Ji, Yanzhi Liu, Zezheng Wang, Bo Chen, Ruiming Tang, Chaoyi Ma, Zhaojie Liu, Wenwu Ou)*
+   * Link: [arxiv.org/abs/2610.28569](https://arxiv.org/abs/2610.28569)
+   * Venue: arXiv preprint, cs.IR (submitted 20 Oct 2026)
+   * TL;DR: ECHO keeps a distilled subset of raw 100K-length user events and retrieves target-relevant records per candidate, cutting online sequence-branch FLOPs about 160x with live usage-time gains.
+   * Key techniques:
+     - Distilled Selector supervised by a candidate-aware full-history teacher via per-target distillation
+     - Target-aware Fine-grained Retriever that preserves item-level addressability lost in pure latent compression
+     - Shared relevance parameters between retriever and target-attention scorer
+     - Deployment optimizations: common user inputs, compact record encoding and key-side projection absorption
+     - KuaiRand-1K plus Kuaishou / Kuaishou Lite online A/B tests
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; no repository link appears in the paper, HTML or PDF
+     - **Novelty: 7/10** — combining user-level distillation with per-candidate raw-record retrieval is a pragmatic alternative to the compression/addressability trade-off
+     - **Fairness: 3/10** — no demographic or exposure fairness study; the long-history gains are not broken down by user activity group
+     - **Robustness: 9/10** — public and industrial datasets, multiple tasks with 0.113%-1.520% relative GAUC gains and two production A/B tests
+     - **Impact: 8/10** — deployed at Kuaishou scale with 0.240% / 0.373% app usage-time gains and a large serving-cost reduction
+
+8. **Unified Heterogeneous Feature Interaction via Effective-Rank Scaling for Recommender Systems (HiRank)**
+   * Affiliation: Alibaba Group / Renmin University of China / Institute of Automation, Chinese Academy of Sciences — *(Ao Zhang, Haochuan Li, Boya Du, Jian Yang, Qihang Fang, Yulin Xu)*
+   * Link: [arxiv.org/abs/2610.35318](https://arxiv.org/abs/2610.35318)
+   * Venue: arXiv preprint, cs.IR (submitted 26 Oct 2026; 10 pages, 4 figures)
+   * TL;DR: HiRank unifies sequential and non-sequential tokens in one backbone via effective-rank scaling and scenario-aware composite tokens, lifting orders per user by 2.27% online.
+   * Key techniques:
+     - Gated sequential attention coupled with heterogeneous feature interaction for bidirectional fusion
+     - Scenario-aware aggregation compressing low-order heterogeneous tokens into a compact representation
+     - Distinct learned projections producing composite tokens with complementary global views and uniform information density
+     - Effective-rank-guided high-order self-attention and a parameter-scaling study
+   * Scores (Opensource? / Novelty / Fairness / Robustness / Impact):
+     - **Opensource?: 0/10** — no public code available; neither paper nor PDF links a repository
+     - **Novelty: 7/10** — using effective rank to allocate attention across heterogeneous semantic tokens is a principled scaling knob
+     - **Fairness: 3/10** — no user-group or provider-side fairness audit; scenario negative transfer is the only equity-adjacent concern
+     - **Robustness: 8/10** — industrial-scale datasets, favorable parameter-scaling behavior, competitive baselines and online A/B validation
+     - **Impact: 8/10** — Alibaba production ranking with a 2.27% orders-per-user lift
 
 ---
 
@@ -1735,6 +1878,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 10/10 | Expressiveness Limits of Autoregressive Semantic ID Generation in Generative Recommendation (Latte) |
 | 10/10 | MiniOneRec: An Open-Source Framework for Scaling Generative Recommendation |
 | 10/10 | RecRM-Bench: Benchmarking Multidimensional Reward Modeling for Agentic Recommender Systems |
+| 9/10 | Finding the Right Balance: Relevance and Diversity in LLM Retrieval — Université du Québec à Trois-Rivières, arXiv 2610.09412 — [github.com/GuillaumeBrouillette/finding-the-right-balance](https://github.com/GuillaumeBrouillette/finding-the-right-balance)
+| 9/10 | Which Model for Which Role? Cost-Efficient Pareto Recommendation for LLM Agentic Workflows (CC-Gittins) — Columbia University / Cornell University / Microsoft / NYU / SUFE, NeurIPS 2026 RAAAI, arXiv 2610.26676 — [github.com/AgentOptimizer/agentopt-research](https://github.com/AgentOptimizer/agentopt-research)
 | 9/10 | Agentic Waterfall: An Intent-Driven Information Discovery Framework for Reclaiming User Control in the Attention Economy — 2012 Laboratories, Huawei, arXiv 2611.34407 — [github.com/XiaoLuoLYG/Agentic-Waterfall](https://github.com/XiaoLuoLYG/Agentic-Waterfall)
 | 9/10 | Towards Realistic Evaluation of Uncertainty Quantification for LLM-Based Recommender Systems (RecUQ) — University of Wisconsin-Madison / UCLA / Northwestern University, TMLR 2026, arXiv 2611.33036 — [github.com/haowu0916edisonwu/recuq-benchmark](https://github.com/haowu0916edisonwu/recuq-benchmark)
 | 9/10 | Beyond Knowledge Transfer: How User Overlap Shapes Diversity in Cross-Domain Recommendation (DivCDR) — Hong Kong Baptist University / Shenzhen University, WSDM 2027, arXiv 2611.30156 — [github.com/WeixinChen98/DivCDR](https://github.com/WeixinChen98/DivCDR) |
@@ -1924,6 +2069,7 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 7/10 | CascadeRec: Deployed Adaptive LLM Compute Allocation for Multi-Tenant Content Recommendation (CascadeRec) — Workday AI Research, IAAI-27, arXiv 2611.08566 — [github.com/GuilinDev/llm-cascade-reranking](https://github.com/GuilinDev/llm-cascade-reranking) |
 | 6.5/10 | On Efficiency-Effectiveness Trade-off of Diffusion-based Recommenders (TA-Rec) |
 | 6.5/10 | RES-MR: Risk-Aware Reasoning for Explainable and Safe Medication Recommendation (RES-MR) |
+| 6/10 | REI: Learning Ideation from Repository Evolution — Alibaba Group / Wuhan University / MBZUAI, arXiv 2611.33183 — [github.com/Gabriel-reina/spod](https://github.com/Gabriel-reina/spod), partial SPOD-only release
 | 6/10 | LM-based Personalized Travel Planner (TravelPlanner-Agent) — University of Moratuwa / WSO2, arXiv 2611.25531 — [github.com/nimashaklaa/TravelPlanner_Research](https://github.com/nimashaklaa/TravelPlanner_Research) |
 | 6/10 | DualClusterNet: Personalized Pattern-Space Composition for Next-POI Recommendation (DualClusterNet) — Shanghai Jiao Tong University / East China Normal University, arXiv 2611.03726 — [anonymous.4open.science/r/DualClusterNet-F4EE](https://anonymous.4open.science/r/DualClusterNet-F4EE/) |
 | 6/10 | AutoRSE: Evaluating LLM Agents as Recommendation Engineers for Self-Evolving Recommender Systems (AutoRSE) — University of Science and Technology of China / National University of Singapore, arXiv 2610.37228 |
@@ -2004,13 +2150,14 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 | 2/10 | Verifiable Reasoning for LLM-based Generative Recommendation (VRec) |
 | 1/10 | TSPORec: Token Selection via Preference Optimization for LLM-Based Sequential Recommendation (TSPORec) |
 
-**Count:** 271 papers as of November 26.
+**Count:** 274 papers as of November 27.
 
 ---
 
 ## By Keyword
 
 ### Beam Search Decoding
+- Towards Efficient Whole Page Ranking with One-Pass Inference (MIS) — Meta Platforms, Inc., arXiv 2611.05542
 - FedCGR: Federated Cross-Domain Generative Recommendation (FedCGR) — CIKM 2026
 - GenRec / LLM-Backed Ranker — Netflix
 - Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization (PRO)
@@ -2188,6 +2335,8 @@ Papers whose daily entry lists **Opensource?** strictly above **0/10**. Sorted b
 - Learning Generative Ranking Policies for Whole-Page Optimization — Meta Platforms, Inc., arXiv 2611.25527 (whole-page policy improvement generator beats prefix-score beam search at every tested width)
 
 ### RL / Reinforcement Learning
+- REI: Learning Ideation from Repository Evolution (REI) — Alibaba Group, arXiv 2611.33183 (SPOD method-family debiasing in GRPO-style ideation)
+- CC-Gittins: Cost-Efficient Pareto Recommendation for LLM Agentic Workflows (CC-Gittins) — Columbia University / Microsoft, NeurIPS 2026 RAAAI (multi-objective cost-coupled bandit)
 - PEARL: Prediction Error-Adaptive Regularized Learning for Selective Forgetting under Partial Preference Drift (PEARL) — AWS, arXiv 2611.05842 (prediction-error-adaptive neural contextual bandit reverses confidence only along drifted feature directions)
 - G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands (G-CAST) — Alibaba Group, arXiv 2611.17814 (reward-routed self-training + governed reward evolution, deployed on 1688 Yuancai)
 - ShopMind: A Mental World Model for Personalized and Realistic E-commerce User Simulation (ShopMind) — Peking University / Alibaba Group, arXiv 2611.11897 [opensource; Behavior Critic reward model + short-horizon rollouts]
